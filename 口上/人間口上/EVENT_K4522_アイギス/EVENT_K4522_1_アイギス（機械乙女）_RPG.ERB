@@ -1,12 +1,12 @@
 ﻿@ENEMY_BATTLE_EVENT_K4522_1, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;적でのデビルＣＯ－ＯＰ発動時の台詞
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
-;적でのデビルＣＯ－ＯＰ참가時の台詞
+;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -43,7 +43,7 @@ CALL KOJO_COLOR_AEGIS
 IF TFLAG:전투이벤트 == 1 || TFLAG:전투이벤트 == 2
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;아군パーティでのデビルＣＯ－ＯＰ発動、참가時の共通台詞
-	;연모、친애以外
+	;연모, 친애以外
 	IF  (!TALENT:3 || !TALENT:6)
 		IF RAND:6 == 0
 			PRINTFORML ┃%"지금이야말로、총공격입니다！",72,LEFT%┃
@@ -83,7 +83,7 @@ ELSEIF TFLAG:전투이벤트 == 11
 	LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
 		CALL FIGHT_IT_OUT
 		IF FLAG:승리플래그 == 1
-			;연모、친애以外
+			;연모, 친애以外
 			IF  (!TALENT:3 || !TALENT:6)
 				IF RAND:10 == 0
 					PRINTFORML ┃%"전투모드해제、수고하셨습니다",72,LEFT%┃
@@ -131,7 +131,7 @@ ELSEIF TFLAG:전투이벤트 == 11
 		;相手が死んだ
 		;-------------------------------------------------
 		ELSEIF BASE:(ARG:1):ＨＰ <= 0
-			;연모、친애以外
+			;연모, 친애以外
 			IF RAND:6 == 0 && (!TALENT:3 || !TALENT:6)
 				PRINTFORML ┃%"타겟 격파입니다！",72,LEFT%┃
 			ELSEIF RAND:5 == 0
@@ -162,7 +162,7 @@ ELSEIF TFLAG:전투이벤트 == 11
 		;데미지、50パーセント이상
 		;-------------------------------------------------
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
-			;연모、친애以外
+			;연모, 친애以外
 			IF RAND:4 == 0 && (!TALENT:3 || !TALENT:6)
 				PRINTFORML ┃%"견고합니다！！",72,LEFT%┃	
 			ELSEIF RAND:3 == 0
@@ -189,7 +189,7 @@ ELSEIF TFLAG:전투이벤트 == 11
 		;데미지０
 		;-------------------------------------------------
 		ELSEIF 데미지비율(ARG:1, ARG:2) == 0
-		;연모、친애以外
+		;연모, 친애以外
 		IF RAND:3 == 0 && (!TALENT:3 || !TALENT:6)
 				PRINTFORML ┃%"이것은……효과가 없는 것입니까？",72,LEFT%┃
 			ELSEIF RAND:2 == 0
@@ -201,7 +201,7 @@ ELSEIF TFLAG:전투이벤트 == 11
 		;흡수された
 		;-------------------------------------------------
 		ELSEIF ARG:2 < 0
-			;연모、친애以外
+			;연모, 친애以外
 			IF (!TALENT:3 || !TALENT:6)
 				IF RAND:3 == 0
 					PRINTFORML ┃%"적 회복、작전변경을 진언합니다！",72,LEFT%┃
@@ -248,7 +248,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 	;이악물기
 	;-------------------------------------------------
 	ELSEIF BASE:ARG:ＨＰ == 1
-		;연모、친애以外
+		;연모, 친애以外
 		IF  (!TALENT:3 || !TALENT:6)
 			IF RAND:2 == 0
 				PRINTFORML ┃%"칠전팔기입니다！",72,LEFT%┃
@@ -266,7 +266,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 	;체력20％以下
 	;-------------------------------------------------
 	ELSEIF 현HP비율(ARG) < 20
-		;연모、친애以外
+		;연모, 친애以外
 		IF (!TALENT:3 || !TALENT:6)
 			IF RAND:2 == 0
 				PRINTFORML ┃%"이 이상은 장갑이 견딜 수 없습니다！",72,LEFT%┃
@@ -288,7 +288,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 	;大데미지、HPの4割이상
 	;-------------------------------------------------
 	ELSEIF 데미지비율(ARG, ARG:2) > 40
-		;연모、친애以外
+		;연모, 친애以外
 		IF RAND:5 == 0 && (!TALENT:3 || !TALENT:6)
 			PRINTFORML ┃%"아、아직 움직일 수 있습니다…！",72,LEFT%┃
 		ELSEIF RAND:4 == 0
@@ -304,7 +304,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 	;데미지1割以下で現체력7割이상
 	;-------------------------------------------------
 	ELSEIF 데미지비율(ARG, ARG:2) < 10 && 현HP비율(ARG) > 70
-		;연모、친애以外
+		;연모, 친애以外
 		IF (!TALENT:3 || !TALENT:6) && RAND:2 == 0
 			IF RAND:2 == 0
 				PRINTFORML ┃%"각부、이상없음입니다",72,LEFT%┃
@@ -331,7 +331,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 	;흡수
 	;-------------------------------------------------
 	ELSEIF ARG:2 < 0
-		;연모、친애以外
+		;연모, 친애以外
 		IF (!TALENT:3 || !TALENT:6)
 			PRINTFORML ┃%"감사드립니다",72,LEFT%┃
 		ELSE
@@ -550,7 +550,7 @@ SETCOLOR CFLAG:808
 					CALL AEGIS_RPG_SHOOT,ARG
 				ENDIF
 			ENDIF
-		;그외
+		;그 외
 		ELSE
 			;귀뢰포
 			IF EQUIP:(ARG):총 == 2509 && RAND:2 == 0
@@ -580,7 +580,7 @@ SETCOLOR CFLAG:808
 				ELSE
 					PRINTFORML ┃%"풀 버스트！！",72,LEFT%┃
 				ENDIF
-			;그외
+			;그 외
 			ELSE
 				IF RAND:5 == 0 && (!TALENT:3 || !TALENT:6)
 					PRINTFORML ┃%"발사입니다！",72,LEFT%┃
@@ -702,7 +702,7 @@ SELECTCASE RESULT
 		ENDSELECT
 		
 ;-------------------------------------------------
-;그외　取りあえず페르소나って叫んでおけば格好はつくという話
+;그 외　取りあえず페르소나って叫んでおけば格好はつくという話
 ;-------------------------------------------------
 	CASEELSE
 		CALL AEGIS_PERSONACALL,ARG
@@ -718,7 +718,7 @@ LOCAL = CFLAG:ARG:입력행동
 
 SELECTCASE CFLAG:ARG:입력행동
 
-;選択したコマンドにより分岐させたい場合、IF文の조건にコマンドNoを記入すること
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 
 ;-------------------------------------------------
 ;검격	コマンドNo：1～99
@@ -808,7 +808,7 @@ SELECTCASE CFLAG:ARG:입력행동
 			ELSE
 				PRINTFORML ┃%"오늘밤은 초승달이네요…",72,LEFT%┃
 			ENDIF
-		;それ以外の월령
+		;그 이외の월령
 		ELSE
 			IF (!TALENT:3 || !TALENT:6)
 				PRINTFORML ┃%"공이로 때리고 절구로 받습니다！",72,LEFT%┃
@@ -1328,7 +1328,7 @@ ENDSELECT
 ;IF (!TALENT:3 || !TALENT:6) || (CFLAG:XXX && RAND:2 == 0)
 ;ハイブリッド아이기스フラグ用
 
-;연모、친애以外
+;연모, 친애以外
 IF (!TALENT:3 || !TALENT:6)
 	;각성前のロボ子상태
 	CALL AEGIS_PERSONACALL_1,ARG

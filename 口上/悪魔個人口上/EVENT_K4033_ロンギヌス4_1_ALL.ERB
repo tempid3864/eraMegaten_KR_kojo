@@ -7,18 +7,18 @@
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;eraMegaten専用口上テンプレート
-;4033とX2をキャラ番号に置換し、Y1を助手のキャラ番号に置換してください
-;ただし、キャラ番号が一桁のキャラの場合、4033,Y1は1、X2は01のように変えてください
-;そしてコマンド内の適当な条件の下のPRINTFORMWの後ろに半角スペースを置いてセリフを追加してください
-;口上を追加しないコマンドは無記入でも構いませんが、CFLAG:XXXの頭に『;』をつけてコメントアウトすると尚良いでしょう
-;エキストラ構文など、コメントアウトされている構文を使う際には、『;』を外してコメントアウトを解除する必要があります
-;最後にread meにも目を通しておくことをお勧めします
+;eraMegaten전용 구상 템플릿
+;4033와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4033, Y1은 1, X2는 01과 같이 바꿔주세요
+;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
+;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
+;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;汎用口上の作成に使用する場合は、4033→キャラ番号ではなく、
-;K4033→PUB会話タイプ番号　へと変換してご使用ください
+;범용 구상의 작성에 사용하는 경우는, 4033→캐릭터번호가 아니라,
+;K4033→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
@@ -50,31 +50,31 @@
 ;	+----+----+-------------------------------+
 
 ;--------------------------------------------------
-;口上セレクト機能：口上説明
+;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、口上の選択時に選択肢として候補にあがります
-;既に口上のあるキャラや会話タイプの別版の口上を作成する時に利用してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用口上なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K4033 → EVENTTRAIN_K4033_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4033,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
-;;口上名
+;;구상명
 ;PRINTFORML ロンギヌス4（フィーア）（女体化）口上
-;;口上説明文
+;;구상설명문
 ;PRINTFORML  ロンギヌス4をウルフカット長身美女軍人にしてしまう口上
 
 ;--------------------------------------------------
-;EVENTTRAIN関係（4033をキャラ番号に置換）
-;調教開始時のセリフ CFLAG 201～219を使用
+;EVENTTRAIN 관련（4033을 캐릭터번호로 치환）
+;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
 @EVENTTRAIN_K4033
 CALL 구상변수초기화
 ;--------------------------------------------------
-;エキストラモード構文　CFLAG:220を使用
-;はいを選択した時に初調教時に口上設定用の素質に変更できます
-;下記に処女化する場合の構文をサンプルとして載せておきます
+;엑스트라모드 구문　CFLAG:220을 사용
+;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
+;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 IF CFLAG:220 == 0
 	PRINTL 口上想定素質に移行しますか？
@@ -124,7 +124,7 @@ CSTR:타이틀 = ドイツ軍人
 	CFLAG:220 = 1
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL EVENTTRAIN_PY1_K4033
@@ -137,18 +137,18 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;--------------------------------------------------
-;簡易助手口上の発動時に初調教時口上をスキップ（Y1を助手のキャラ番号にする）
-;複数人いる際には、SIF NO:ASSI == Y1 || NO:ASSI == Z1と追加していく
+;간이 조수구상 발동시에 첫조교시 구상을 스킵（Y1을 조수의 캐릭터번호로 한다）
+;여러 명이 있을 경우는, SIF NO:ASSI == Y1 || NO:ASSI == Z1으로 추가해 나간다
 ;--------------------------------------------------
 ;IF CFLAG:201 == 0 && ASSI > 0
 ;	SIF NO:ASSI == Y1
 ;		CFLAG:201 =1
 ;ENDIF
 ;-------------------------------------------------
-;調教開始時（一回のみ） CFLAG201
+;조교 개시시（1회만） CFLAG201
 ;-------------------------------------------------
 DRAWLINE
-;初調教時
+;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	CSTR:일인칭 = 俺
 	CSTR:이인칭 = お前
@@ -187,14 +187,14 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	KSTR:(K++) = どちらにせよ調教する以上は、協力的であるのは大変有難い。あなたはロンギヌス4を抱き寄せる……
 	CFLAG:201 = 1
 	GOTO 表示
-;屈服刻印Lv1
+;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 	KSTR:(K++) = ちょっとはわからせてやったつもりでいたが、当のロンギヌス4はむしろ年甲斐もなくはしゃいでいる。
 	KSTR:(K++) = 「セックス！なかなかいいものじゃないか。得るものがあったな！」
 	KSTR:(K++) = こいつ楽しんでやがる！しかし調教に差し支えなければこれはこれでいいのかもしれない。
 	CFLAG:201 = 2
 	GOTO 表示
-;屈服刻印Lv2
+;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	KSTR:(K++) = 「やるじゃねーか。こんなにいいものだと思わなかったわ！」
 	KSTR:(K++) = きらきらした目でロンギヌス4がこちらを見つめてくる。しかし次の瞬間、彼女の目が獰猛に煌めいた。
@@ -204,7 +204,7 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	KSTR:(K++) = 「闘争を続けよう…互いが満足するまで、満たされるまで、闘争に次ぐ闘争を……」
 	CFLAG:201 = 3
 	GOTO 表示
-;屈服刻印Lv3
+;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	KSTR:(K++) = 「や、やるな！ちょっと籠絡されかけたわ！ちょっとだけな！」
 	KSTR:(K++) = 最近のロンギヌス4は本当に表情がころころ変わって面白い。こちらも思わず笑みを向けてしまう。
@@ -222,7 +222,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:3
 		IF CFLAG:미조교함락 == 1
-			;調教せずに恋慕をつけた場合
+			;조교하지 않고 연모를 단 경우
 			KSTR:(K++) = 義足を作ってやった日に、ロンギヌス4が突然山に登りたいと言いだしてきた。正直これには驚いた。
 			KSTR:(K++) = 彼女と共に戦う中で、何となく卑怯な事はしない女だと分かっていたので許可した……してしまった。
 			KSTR:(K++) = 何だかんだで自分も彼女が好きになってしまったのかもしれない。
@@ -290,7 +290,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ELSEIF TALENT:5
 		WSTR:(K++) = 
 	ENDIF
-	;共通
+	;공통
 	IF !구상유무확인(0)
 		KSTR:(K++) = 
 	ENDIF
@@ -300,35 +300,35 @@ ENDIF
 
 ;-------------------------------------------------
 ;簡易助手口上（Y1を助手のキャラ番号に置換、4033をキャラ番号に変更する) CFLAG203
-;掛け合いをするキャラを増やす場合は、構文をコピー＆ペーストをして、CFLAGの数を204、205と増やす
+;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
-;助手の有無をチェック（いない場合は二回目以降へ飛ぶ）
+;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K4033
 ;助手
 ;ELSEIF NO:ASSI == Y1
-	;初めて
+	;처음
 ;	IF CFLAG:203 == 0
-		;陥落済み＋陥落時初口上が発生済み
+		;함락완료＋함락시 첫 구상이 발생완료
 ;		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 ;			WSTR:(K++) = 
-		;それ以外
+		;그 이외
 ;		ELSE
 ;			KSTR:(K++) = 
 ;		ENDIF
 ;		CFLAG:203 = 1
-	;二回目以降
+	;2번째 이후
 ;	ELSEIF CFLAG:203 < 2 || FLAG:7 ==2
-		;陥落済み
+		;함락완료
 ;		IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 ;			WSTR:(K++) = 
-		;それ以外
+		;그 이외
 ;		ELSE
 ;			KSTR:(K++) = 
 ;		ENDIF
 ;		CFLAG:203 = 2
 ;	ENDIF
-;口上のある助手が居ない場合は、通常の二回目以降の口上へ飛ぶ
+;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
 	CALL EVENTTRAIN_SECOND_K4033
 ENDIF
@@ -347,12 +347,12 @@ ENDIF
 ;調教開始時（2回目以降、4033をキャラ番号に変更する）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K4033
-;反発刻印Lv3
+;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	KSTR:(K++) = 「おや、ヘタクソ殿のお出ましだ」
 	KSTR:(K++) = %CALLNAME%がこちらを馬鹿にしてくる。何だか悔しいぞ。
 	CFLAG:202 = 4
-;屈服刻印Lv0
+;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「おっ、やるか？いいぞー！かかってこい」
@@ -365,7 +365,7 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 			KSTR:(K++) = %CALLNAME%はベッドに悠々と腰かけている。
 		ENDIF
 	CFLAG:202 = 1
-;屈服刻印Lv1
+;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「Gut！（よーしよし）」
@@ -378,7 +378,7 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 			KSTR:(K++) = %CALLNAME%は大きな欠伸をした。
 		ENDIF
 	CFLAG:202 = 2
-;屈服刻印Lv2
+;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「闘争の時間か……最近これが楽し……なんでもない」
@@ -391,7 +391,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 			KSTR:(K++) = %CALLNAME%の身体が熱くほてっている。
 		ENDIF
 	CFLAG:202 = 3
-;屈服刻印Lv3＋陥落素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「Unglaublich...（信じられない）俺がここまで……？」
@@ -404,11 +404,11 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 			KSTR:(K++) = %CALLNAME%は恥ずかしそうに毛布をぎゅっと握りしめた。
 		ENDIF
 	CFLAG:202 = 4
-;陥落済み
+;함락완료
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;ランダムで口上が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			WSTR:(K++) =「あたーらしいあさがきた　じごーくのーあさーが」
 			WSTR:(K++) =「さいれんにーみみふさぎー　おおぞーらーあーおーげー」
@@ -433,9 +433,9 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			WSTR:(K++) =「……それとも嫌だったか？동료」
 			WSTR:(K++) =そんな顔で懇願されるのは卑怯だ。断れるはずがない。
 		ENDIF
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;ランダムで口上が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			WSTR:(K++) =
 		ELSEIF RAND:2 == 0
@@ -443,9 +443,9 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ELSE
 			WSTR:(K++) =
 		ENDIF
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;ランダムで口上が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			WSTR:(K++) =
 		ELSEIF RAND:2 == 0
@@ -454,9 +454,9 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			WSTR:(K++) =
 		ENDIF
 	ENDIF
-	;그외、共通
+	;그 외, 공통
 	IF !구상유무확인(0)
-		;ランダムで口上が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			KSTR:(K++) = 
 		ELSEIF RAND:2 == 0
@@ -470,13 +470,13 @@ ENDIF
 
 
 ;-------------------------------------------------
-;EVENTEND関係（4033をキャラ番号に置換）
-;調教終了時のセリフ
+;EVENTEND 관련（4033을 캐릭터번호로 치환）
+;조교 종료시의 대사
 ;-------------------------------------------------
 @EVENTEND_K4033
 CALL 구상변수초기화
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL EVENTEND_PY1_K4033
@@ -488,67 +488,67 @@ CALL 구상변수초기화
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
-;調教終了時のセリフ
+;조교 종료시의 대사
 ;--------------------------------------------------
 DRAWLINE
-;反発刻印Lv3
+;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	KSTR:(K++) = 「かーっ、つまらん。つまらん奴だなあお前」
 	KSTR:(K++) = 「いくら俺の認めた騎士とはいえ、これでは戦いとしてはあまりにつまらん」
 	KSTR:(K++) = 「本 気 で 闘 争 し ろ」
 	CFLAG:217 = 1
-;屈服刻印Lv1以下
+;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
 	KSTR:(K++) = 「Ja, okey.（こんなもんか）」
 	KSTR:(K++) = %CALLNAME%はそう言うと、喉が渇いたので牛乳を寄こせと言ってきた。
 	CFLAG:219 = 1
-;屈服刻印Lv2
+;굴복각인Lv2
 ELSEIF MARK:2 == 2
 	KSTR:(K++) = 「Na gut！（まあよかったぜ）」
 	KSTR:(K++) = %CALLNAME%は満足げに冷えた牛乳を飲みほしている。
 	CFLAG:219 = 2
-;屈服刻印Lv3＋陥落素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	KSTR:(K++) = 「Du bist nicht schlecht!（やるじゃねーか）」
 	KSTR:(K++) = そう言うと、%CALLNAME%は%CALLNAME:MASTER%に牛乳を投げてよこしてきた。
 	CFLAG:219 = 3
-;陥落済み＋体力500未満
+;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		WSTR:(K++) =「くっ、はぁぁぁ……いい闘争だった。やはりお前とは身体が馴染む」
 		WSTR:(K++) =「じゃ、疲れたんで寝るわ。Gute nacht！（おやすみ）」
 		WSTR:(K++) =そう言うと、%CALLNAME%はいびきをかきながら盛大に眠りこけた。
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		WSTR:(K++) =
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		WSTR:(K++) =
 	ENDIF
-	;共通
+	;공통
 	IF !구상유무확인(0)
 		KSTR:(K++) = 「はぁー！はぁー！運動不足かな？参っちまったぜ」
 		KSTR:(K++) = 「こんな所に幽閉されたから身体なまっちまったかな？後で体操しとくか」
 	ENDIF
 	CFLAG:218 = 1
-;陥落済み
+;함락완료
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		KSTR:(K++) = 「ほれ、동료。牛乳だぞ。闘争した後は水分補給をしっかりする！常識だぜ」
 		KSTR:(K++) = そう言うと、%CALLNAME%は牛乳を冷蔵庫から取りだしてきて貴方に渡してきた。
 		KSTR:(K++) = 「へっへ。いいもんだな。こうやって二人で快楽の空へ昇るのも」
 		KSTR:(K++) = 「お前とはずっと闘争していたい……ずっと。ずっとだ。」
 		KSTR:(K++) = 「毎日とまでは言わないまでも、また俺と一緒に寝てくれよな！頼むぜ相棒！」
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		KSTR:(K++) = 
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		KSTR:(K++) = 
 	ENDIF
-	;共通
+	;공통
 	IF !구상유무확인(0)
 		WSTR:(K++) =「やっぱりセックスはいいな。最高だぜ」
 		WSTR:(K++) =「案外俺って娼婦も天職だったりしてな。HAHAHAHA！」
@@ -566,24 +566,24 @@ IF RESULT == 0
 ENDIF
 
 ;--------------------------------------------------
-;@KOJO_MESSAGE_COM関係（4033をキャラ番号に置換）
-;コマンド実行時に出力されます
+;@KOJO_MESSAGE_COM 관련（4033을 캐릭터번호로 치환）
+;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
 @KOJO_MESSAGE_COM_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;想定外の口上だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_COM_PY1_K4033
@@ -596,17 +596,17 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;関数初期化
+;함수초기화
 ;-------------------------------------------------
 CALL 구상변수초기화
  
 CALLFORM COMTYPE_{SELECTCOM}
 ;-------------------------------------------------
-;コマンド実行時のセリフ CFLAG 300～500
+;커맨드 실행시의 대사 CFLAG 300～500
 ;-------------------------------------------------
 IF 0 == 1
 ;=================================================
-;愛撫系コマンド
+;애무계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("애무계")
 SIF TEQUIP:25 > 0 && ( SELECTCOM == 0 || SELECTCOM == 5 || SELECTCOM == 6 || SELECTCOM == 7 || SELECTCOM == 8 || SELECTCOM == 12 || SELECTCOM == 13 || SELECTCOM == 15 )
@@ -617,34 +617,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 0
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:300 == 0
 			KSTR:(K++) =
 			CFLAG:300 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:300 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:300 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:300 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:300 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:300 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:300 = 2
@@ -655,34 +655,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 1
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:301 == 0
 			KSTR:(K++) =
 			CFLAG:301 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:301 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:301 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:301 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:301 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:301 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:301 = 2
@@ -693,34 +693,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 4
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:304 == 0
 			KSTR:(K++) =
 			CFLAG:304 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:304 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI002
 				ENDIF
 				CFLAG:304 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:304 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:304 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:304 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:304 = 2
@@ -731,34 +731,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 6
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:306 == 0
 			KSTR:(K++) =
 			CFLAG:306 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:306 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:306 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:306 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:306 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:306 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:306 = 2
@@ -769,34 +769,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 9
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:309 == 0
 			KSTR:(K++) =
 			CFLAG:309 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:309 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:309 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:309 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:309 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:309 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:309 = 2
@@ -807,34 +807,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 10
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:310 == 0
 			KSTR:(K++) =
 			CFLAG:310 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:310 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:310 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:310 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:310 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:310 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:310 = 2
@@ -848,32 +848,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;コミュニケーション系コマンド
+;커뮤니케이션계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("커뮤계")
 SELECTCASE SELECTCOM
@@ -882,49 +882,49 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 20
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:312 == 0
 			KSTR:(K++) =
 			CFLAG:312 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:312 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:312 = 4
 			ENDIF
-			;従順Lv3以上
+			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:312 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:312 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:312 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:312 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;24,스킨쉽　연모、親愛のみ
+;24,스킨쉽　연모, 친애만
 ;-------------------------------------------------
 	CASE 24
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:316 == 0
 			KSTR:(K++) =
 			CFLAG:316 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
 			KSTR:(K++) =
 			CFLAG:316 = 2
@@ -934,34 +934,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 28
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:320 == 0
 			KSTR:(K++) =
 			CFLAG:320 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:320 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:320 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:320 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:320 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:320 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:320 = 2
@@ -975,32 +975,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				KSTR:(K++) = 
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				;WSTR:(K++) =
 			ENDIF
 		ENDIF
 ;=================================================
-;道具使用コマンド
+;도구사용 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("도구계")
 SELECTCASE SELECTCOM
@@ -1009,34 +1009,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 40
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:322 == 0
 			KSTR:(K++) =
 			CFLAG:322 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:322 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:322 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:322 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:322 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:322 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:322 = 2
@@ -1047,34 +1047,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 41
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:323 == 0
 			KSTR:(K++) =
 			CFLAG:323 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:323 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:323 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:323 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:323 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:323 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:323 = 2
@@ -1085,34 +1085,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 48
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:330 == 0
 			KSTR:(K++) =
 			CFLAG:330 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:330 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:330 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:330 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:330 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:330 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:330 = 2
@@ -1126,32 +1126,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGIVIB001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL AEGIVIB001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL AEGIVIB001
 			ENDIF
 		ENDIF
 ;=================================================
-;調教者道具系コマンド
+;조교자도구계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("대조교자도구계")
 SELECTCASE SELECTCOM
@@ -1163,32 +1163,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;セックス系コマンド
+;섹스계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("Ｖ성교계")
 SELECTCASE SELECTCOM
@@ -1202,57 +1202,57 @@ ENDSELECT
 			;처녀
 			IF TALENT:0
 				IF 함락( ) > 0
-					;연모、친애
+					;연모, 친애
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 						KSTR:(K++) = 「処女か……別にそれ程大事にしていたって訳でもねェんだが」
 						KSTR:(K++) = 「でも、お前に捧げられるのは……悪くねェ気分だ」
 						KSTR:(K++) = 「……！痛たたたた……乱暴にするな、するなって！しょうがねえなあ！」
-					;음란、창부
+					;음란, 창부
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						KSTR:(K++) = 
-					;복종、예속
+					;복종, 예속
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 						KSTR:(K++) = 
 					ENDIF
-					;陥落済み共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						KSTR:(K++) = 「処女か……まあいいや、呉れてやろう」
 						KSTR:(K++) = かくしてこちらが拍子抜けする程度にはあっさりと処女喪失は終わった。
 					ENDIF
 				ENDIF
-				;それ以外
+				;그 이외
 				IF !구상유무확인(0)
 					KSTR:(K++) = 「処女か……まあいいや、呉れてやろう」
 					KSTR:(K++) = かくしてこちらが拍子抜けする程度にはあっさりと処女喪失は終わった。
 				ENDIF
 			ENDIF
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGISEX001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE002
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE002
 			ENDIF
 		ENDIF
 ;=================================================
-;アナルセックス系コマンド
+;애널섹스계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("Ａ성교계")
 SELECTCASE SELECTCOM
@@ -1261,32 +1261,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGISEX002
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE002
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE002
 			ENDIF
 		ENDIF
 ;=================================================
-;奉仕系コマンド
+;봉사계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("봉사계")
 SELECTCASE SELECTCOM
@@ -1295,34 +1295,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 80
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:344 == 0
 			KSTR:(K++) =
 			CFLAG:344 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:344 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:344 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:344 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:344 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:344 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:344 = 2
@@ -1333,34 +1333,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 81
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:345 == 0
 			KSTR:(K++) =
 			CFLAG:345 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:345 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL KUCHI001
 				ENDIF
 				CFLAG:345 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:345 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:345 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:345 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:345 = 2
@@ -1371,34 +1371,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 82
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:346 == 0
 			KSTR:(K++) =
 			CFLAG:346 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:346 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:346 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:346 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:346 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:346 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:346 = 2
@@ -1409,34 +1409,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 83
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:347 == 0
 			KSTR:(K++) =
 			CFLAG:347 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:347 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:347 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:347 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:347 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:347 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:347 = 2
@@ -1447,34 +1447,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 84
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:348 == 0
 			KSTR:(K++) =
 			CFLAG:348 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:348 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:348 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:348 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:348 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:348 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:348 = 2
@@ -1488,32 +1488,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL HOUSHI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;調教者奉仕系コマンド
+;조교자봉사계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("조교자봉사계")
 SELECTCASE SELECTCOM
@@ -1525,32 +1525,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;SM系コマンド
+;SM계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("ＳＭ계")
 SELECTCASE SELECTCOM
@@ -1559,34 +1559,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 100
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:354 == 0
 			KSTR:(K++) =
 			CFLAG:354 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:354 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:354 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:354 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:354 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:354 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:354 = 2
@@ -1597,34 +1597,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 104
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:358 == 0
 			KSTR:(K++) =
 			CFLAG:358 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:358 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:358 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:358 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:358 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:358 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:358 = 2
@@ -1638,32 +1638,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;助手によるコマンド、及びレズプレイ
+;조수에 의한 커맨드, 및 레즈플레이
 ;=================================================
 ELSEIF RESULT == COMTYPE("조수・레즈계")
 SELECTCASE SELECTCOM
@@ -1672,51 +1672,51 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 124
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:366 == 0
 			KSTR:(K++) =
 			CFLAG:366 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:366 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:366 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:366 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:366 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:366 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:366 = 2
 			ENDIF
 		ENDIF
-		;助手구상호출関数
-		;一緒に気持ちよくしようというセリフ
+		;조수구상 호출 함수
+		;함께 기분 좋아지자는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_1
-		;私のほうが気持ちよくしてるというセリフ
+		;내쪽이 더 기분 좋게 해줄 께 하는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_2
-		;煽りに対してのセリフ
+		;영향에 대한 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_3
-		;いつもより感じてるねというセリフ
+		;평소보다 느끼고 있구나 라는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_4
-		;レズっぽいセリフに対するセリフ
+		;레즈 같은 대사에 대한 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_5
-		;二人のフェラは気持ちいいでしょ？セリフ
+		;둘의 펠라는 기분 좋지？대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_6
  
 ;-------------------------------------------------
@@ -1724,54 +1724,54 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 125
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:367 == 0
 			KSTR:(K++) =
 			CFLAG:367 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:367 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:367 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:367 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:367 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:367 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:367 = 2
 			ENDIF
 		ENDIF
 		
-		;助手구상호출関数
-		;一緒に気持ちよくしようというセリフ
+		;조수구상 호출 함수
+		;함께 기분 좋아지자는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_1
-		;私のほうが気持ちよくしてるというセリフ
+		;내쪽이 더 기분 좋게 해줄 께 하는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_2
-		;煽りに対してのセリフ
+		;영향에 대한 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_3
-		;いつもより感じてるねというセリフ
+		;평소보다 느끼고 있구나 라는 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_4
-		;お互いに乳首がこすれて気持ちいいセリフ
+		;서로 젖꼭지가 스쳐서 기분 좋아 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_5
-		;二人のパイズリで気持ちよくなってセリフ
+		;둘의 파이즈리로 기분 좋아져 줘 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_6
-		;パイズリで感じているの？セリフ
+		;파이즈리로 느끼고 있어？대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_7
  
 	CASEELSE
@@ -1782,32 +1782,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				KSTR:(K++) = 
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				;WSTR:(K++) =
 			ENDIF
 		ENDIF
 ;=================================================
-;ハードな調教コマンド
+;하드한조교 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("하드계")
 SELECTCASE SELECTCOM
@@ -1819,107 +1819,107 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;触手系コマンド
+;촉수계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("촉수계")
 $SHOKUSHU_PLAY
 SELECTCASE SELECTCOM
 ;-------------------------------------------------
-;0,触手愛撫
+;0,촉수애무
 ;-------------------------------------------------
 	CASE 0
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:455 == 0
 			KSTR:(K++) =
 			CFLAG:455 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:455 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:455 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:455 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:455 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:455 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:455 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;6,触手胸揉み
+;6,촉수가슴주무르기
 ;-------------------------------------------------
 	CASE 6
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:456 == 0
 			KSTR:(K++) =
 			CFLAG:456 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:456 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:456 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:456 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:456 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:456 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:456 = 2
@@ -1931,34 +1931,34 @@ SELECTCASE SELECTCOM
 	CASE 160
 		K_CALL:K = TRAIN_MESSAGE
 		IF TEQUIP:25
-			;初めて
+			;처음
 			IF CFLAG:382 == 0
 				KSTR:(K++) =
 				CFLAG:382 = 1
 			ELSE
 				IF 함락( ) > 0 && (CFLAG:382 < 3 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 						KSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						KSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 						KSTR:(K++) = 
 					ENDIF
-					;陥落済み共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						KSTR:(K++) = 
 					ENDIF
 					CFLAG:382 = 4
 				ENDIF
-				;屈服刻印Lv3
+				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:382 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 					KSTR:(K++) = 
 					CFLAG:382 = 3
 				ENDIF
-				;それ以外
+				;그 이외
 				IF (CFLAG:382 || FLAG:7 == 2) && !구상유무확인(0)
 					KSTR:(K++) =
 					CFLAG:382 = 2
@@ -1966,11 +1966,11 @@ SELECTCASE SELECTCOM
 			ENDIF
 		;해제
 		ELSE
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && !구상유무확인(0)
 				KSTR:(K++) =
 			ENDIF
-			;それ以外
+			;그 이외
 			IF !구상유무확인(0)
 				KSTR:(K++) =
 			ENDIF
@@ -1983,32 +1983,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;特殊コマンド
+;특수커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("특수커맨드계") && SELECTCOM < 600
 SELECTCASE SELECTCOM
@@ -2018,34 +2018,34 @@ SELECTCASE SELECTCOM
 	CASE 187
 		K_CALL:K = TRAIN_MESSAGE
 		IF TEQUIP:31
-			;初めて
+			;처음
 			IF CFLAG:399 == 0
 				KSTR:(K++) =
 				CFLAG:399 = 1
 			ELSE
 				IF 함락( ) > 0 && (CFLAG:399 < 3 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 						KSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						KSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 						KSTR:(K++) = 
 					ENDIF
-					;陥落済み共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						KSTR:(K++) = 
 					ENDIF
 					CFLAG:399 = 4
 				ENDIF
-				;屈服刻印Lv3
+				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:399 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 					KSTR:(K++) = 
 					CFLAG:399 = 3
 				ENDIF
-				;それ以外
+				;그 이외
 				IF (CFLAG:399 || FLAG:7 == 2) && !구상유무확인(0)
 					KSTR:(K++) =
 					CFLAG:399 = 2
@@ -2053,26 +2053,26 @@ SELECTCASE SELECTCOM
 			ENDIF
 		;해제
 		ELSE
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && !구상유무확인(0)
 				KSTR:(K++) =
 			ENDIF
-			;それ以外
+			;그 이외
 			IF !구상유무확인(0)
 				KSTR:(K++) =
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;189,새댁플레이　연모、親愛のみ
+;189,새댁플레이　연모, 친애만
 ;-------------------------------------------------
 	CASE 189
 		K_CALL:K = TRAIN_MESSAGE
 		IF TEQUIP:33
-			;初めて
+			;처음
 			IF CFLAG:401 == 0
 				KSTR:(K++) =
 				CFLAG:401 = 1
-			;二回目以降
+			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
 				KSTR:(K++) =
 				CFLAG:401 = 2
@@ -2091,32 +2091,32 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
 		ENDIF
 ;=================================================
-;500番台,派生コマンド
+;500번대,파생커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("派生系") && SELECTCOM < 600
 SELECTCASE SELECTCOM
@@ -2125,34 +2125,34 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 506
 		K_CALL:K = TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:413 == 0
 			KSTR:(K++) =
 			CFLAG:413 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:413 < 3 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:413 = 4
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:413 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) = 
 				CFLAG:413 = 3
 			ENDIF
-			;それ以外
+			;그 이외
 			IF (CFLAG:413 || FLAG:7 == 2) && !구상유무확인(0)
 				KSTR:(K++) =
 				CFLAG:413 = 2
@@ -2166,26 +2166,26 @@ ENDSELECT
 		IF !구상유무확인(0)
 			K_CALL:K = TRAIN_MESSAGE
 			IF 함락( ) > 0 && FLAG:7 == 2
-				;연모、친애
+				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					KSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					KSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					KSTR:(K++) = 
 				ENDIF
-				;陥落済み共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					CALL AEGI001
 				ENDIF
 			ENDIF
-			;屈服刻印Lv3
+			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
-			;それ以外
+			;그 이외
 			IF FLAG:7 == 2 && !구상유무확인(0)
 				CALL YAMETE001
 			ENDIF
@@ -2199,7 +2199,7 @@ SELECTCASE SELECTCOM
 ENDSELECT
 ENDIF
 ;-------------------------------------------------
-;그외、どれ系の調教かわからなかった奴
+;그 외、どれ系の調教かわからなかった奴
 ;-------------------------------------------------
 IF !구상유무확인(0)
 SELECTCASE SELECTCOM
@@ -2207,7 +2207,7 @@ SELECTCASE SELECTCOM
 ENDSELECT
 ENDIF
 ;------------------------------------------------
-;コマンド口上ここまで
+;커맨드구상 여기까지
 ;------------------------------------------------
  
 CALL 구상변수표시
@@ -2221,104 +2221,104 @@ IF RESULT == 0
 ENDIF
 
 ;-------------------------------------------------
-;輪姦時の口上
-;CASE 0 内は必ず通るようになっており
-;RETURNで0を返すと、この後通常の輪姦行動を出します
-;CFLAGは使っていません
-;COMF201_輪姦内でLOCALを使っているので使いません
+;윤간시의 구상
+;CASE 0 안은 반드시 건너뛰게 되어있으며
+;RETURN에서 0을 반환하면, 이후 통상적인 윤간행동을 출력합니다
+;CFLAG는 사용하지 않습니다
+;COMF201_윤간 내에서 LOCAL을 사용하고 있으므로 사용하지 않습니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_RINKAN_K4033, ARG:1 , ARG:2
 CALL 구상변수초기화
 
 SELECTCASE ARG:1
 	CASE 0
-	;CASE 0はオリジナル輪姦口上
-	;C:一回あたりの帰宅人数、D：興奮度増加(及び減少)
-	;CとDはオリジナル輪姦口上内のみ使う
-	;C += 、D += を使う
+	;CASE 0은 오리지널 윤간 구상
+	;C:1회당 귀가 인수 D：흥분도 증가(및 감소)
+	;C와 D는 오리지널 윤간 구상 내에서만 사용
+	;C += 、D += 를 사용
 		IF ARG:2 == 1
-		;ハードON
+		;하드ON
 		
 		ELSE
-		;ハードOFF
+		;하드OFF
 		
 		ENDIF
-	;ハード系
-	;胸を踏まれる（거유・爆乳のみ）
+	;하드계
+	;가슴을 밟힌다（거유・폭유만）
 	CASE 1
 		IF (함락( ) > 0) && FLAG:7 == 2
-			;연모、친애
+			;연모, 친애
 			IF 함락( ) > 0 && RESULTS == "연모"
 				WSTR:(K++) = 
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"
 				WSTR:(K++) = 
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락( ) > 0 && RESULTS == "복종"
 				WSTR:(K++) = 
 			ENDIF
-			;陥落済み共通
+			;함락완료 공통
 			IF KSTR:0 == ""
 				WSTR:(K++) = 
 			ENDIF
 		ENDIF
-		;屈服刻印Lv3
+		;굴복각인Lv3
 		IF MARK:2 == 3 && FLAG:7 == 2 && KSTR:0 == ""
 			WSTR:(K++) = 
 		ENDIF
-		;それ以外
+		;그 이외
 		IF FLAG:7 == 2 && KSTR:0 == ""
 			WSTR:(K++) =
 		ENDIF
-	;頭を踏まれる
+	;머리를 밟힌다
 	CASE 2
 	
-	;暴力を振るわれる
+	;폭력을 당하다
 	CASE 3
 	
-	;タバコの根性焼き
-	;興奮度が低く、반항적、꿋꿋함、프라이드높음、건방짐、抵抗を持っている
+	;담배빵
+	;흥분도가 낮고, 반항적, 꿋꿋함, 프라이드높음, 건방짐, 저항을 가지고 있다
 	CASE 4
 	
-	;地面に垂れた精液舐めとらせる
-	;マゾっ気３以上
+	;지면에 늘어진 정액 핥아먹인다
+	;마조끼 ３이상
 	CASE 5
 	
-	;体に落書きをされて犯される
+	;몸에 낙서를 당하고 범해진다
 	CASE 6
 	
-	;尻突き上げてバックから犯されつつ、頭を踏んづけられて屈辱で涙目状態
+	;엉덩이를 치켜올려 뒤로부터 범해지면서, 머리를 짓밟혀 굴욕으로 글썽이는 상태
 	CASE 7
 	
-	;通常系
-	;淫乱系で目の前に棒並べられて、どれが欲しいか選ばせるとか（음란・娼婦のみ）
+	;통상계
+	;음란계로 눈앞에 장대가 진열되어, 어떤 것을 원하는지 선택하게 하거나（음란・창부만）
 	CASE 8
 	
-	;巨乳以上のキャラだと「その乳は飾りか？遊ばせてるんじゃねえ」とか罵られパイズリする（거유・爆乳のみ）
+	;거유 이상의 캐릭터라면 「그 젖은 장식이냐？ 쉬고 있지 말라고」등등 매도당하며 파이즈리한다（거유・폭유만）
 	CASE 9
 	
-	;挿れられるのだけは回避しようと必死に口と手で群がるチンポにご奉仕する（恋幕・親愛のみ）
+	;삽입만은 피하려고 필사적으로 입과 손으로 몰려드는 자지에 봉사한다（연모・친애만）
 	CASE 10
 	
-	;;両穴突かれながら無理やり笑顔とピースサインとらされて記念撮影
+	;;양구멍을 뚫리면서 억지로 미소와 피스싸인을 취하게 시켜져 기념촬영
 	CASE 11
 	
-	;;輸姦後の後始末描写で、本人精液でどろどろにされてるのに周囲の男達の肉棒を舌で掃除させられてる
+	;;윤간후의 뒷처리 묘사에서, 본인 정액 투성이가 되었는데도 주위 남자들의 육봉을 혀로 청소시키고 있다
 	CASE 12
 	
-	;中に出されても即座にほかの人に交代
+	;안에 사정당해도 즉시 다른 사람으로 교대
 	CASE 13
 	
-	;一斉射精で精液まみれ
+	;일제사정으로 정액투성이
 	CASE 14
 	
-	;;両穴突かれて同時射精
+	;;양구멍 찔리며 동시 사정
 	CASE 15
 	
-	;기승위+両脇コキ
+	;기승위+양겨드랑이잡
 	CASE 16
 	
-	;;입+マンコ
+	;;입+보지
 	CASE 17
 	
 ENDSELECT
@@ -2333,24 +2333,24 @@ IF RESULT == 0
 	
 ENDIF
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG関係（4033をキャラ番号に置換）
-;パラメータ変化などをトリガーにした口上　CFLAG 221～260を使用
+;@KOJO_MESSAGE_PALAMCNG 관련（4033을 캐릭터번호로 치환）
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_A（4033をキャラ番号に置換）
-;調教者の射精をトリガーにした口上
+;@KOJO_MESSAGE_PALAMCNG_A（4033을 캐릭터번호로 치환）
+;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_A_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_A
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4033
@@ -2363,12 +2363,12 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;調教者の射精時のテキスト
+;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 CALL 구상변수초기화
 LOCAL = 0;射精量
 ;-------------------------------------------------
-;射精箇所変更時のテキスト　有効時はここで関数終了
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
 
 
@@ -2376,100 +2376,100 @@ IF CFLAG:106
 	LOCAL = 1
 	K_CALL:K = PALAM_MESSAGE_A
 	IF 1 == 0
-	;顔
+	;얼굴
 	ELSEIF CFLAG:106 == 2				
 		IF (함락( ) > 0) && (CFLAG:222 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:222= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:222= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:222= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL SOTODASI001
 				CFLAG:222= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:222 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:222= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:222 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:222= 1	
 		ENDIF
-	;ゴム
+	;콘돔
 	ELSEIF CFLAG:106 == 9
 		LOCAL = 0
-		;セックスで射精かつ、アナルセックス以外を実行時
+		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)					
 			IF (함락( ) > 0) && (CFLAG:229 < 3 || FLAG:7 == 2)		
-				;연모、친애	
+				;연모, 친애	
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 					WSTR:(K++) = 
 					CFLAG:229= 4
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 					WSTR:(K++) = 
 					CFLAG:229= 3
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 					WSTR:(K++) = 
 					CFLAG:229= 3
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 「出しちまったな！ほれ、お前の敗北の証だぞ？ほれほれ」
 					CFLAG:229= 3
 				ENDIF	
 			ENDIF		
-			;屈服刻印Lv3		
+			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) = 	
 				CFLAG:229= 2	
 			ENDIF		
-			;それ以外		
+			;그 이외		
 			IF (CFLAG:229 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) =
 				CFLAG:229= 1	
 			ENDIF		
 		ELSE					
 			IF (함락( ) > 0) && (CFLAG:230 < 3 || FLAG:7 == 2)		
-				;연모、친애	
+				;연모, 친애	
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 					WSTR:(K++) = 
 					CFLAG:230= 4
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 					WSTR:(K++) = 
 					CFLAG:230= 3
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 					WSTR:(K++) = 
 					CFLAG:230= 3
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 					CFLAG:230= 3
 				ENDIF	
 			ENDIF		
-			;屈服刻印Lv3		
+			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) = 	
 				CFLAG:230= 2	
 			ENDIF		
-			;それ以外		
+			;그 이외		
 			IF (CFLAG:230 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) =
 				CFLAG:230= 1	
@@ -2480,38 +2480,38 @@ ENDIF
 
 
 ;-------------------------------------------------
-;손、口以外で射精
-;対応コマンドはキス、스마타、足コキ、アナル強制奉仕、더블스마타、조수를범하게한다
+;손, 입 이외로 사정
+;대응 커맨드는 키스, 스마타, 풋잡, 애널강제봉사, 더블스마타, 조수를범하게한다
 ;-------------------------------------------------
 IF TFLAG:9 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:230 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:230= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:230= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL SOTODASI001
 				CFLAG:230= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:230= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:230 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:230= 1	
@@ -2521,37 +2521,37 @@ IF TFLAG:9 > 0
 ENDIF
 
 ;-------------------------------------------------
-;조수를범한다로사정
+;조수를범한다로 사정
 ;-------------------------------------------------
 IF TFLAG:7 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:232 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:232= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:232= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:232= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:232 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:232= 1	
@@ -2561,73 +2561,73 @@ IF TFLAG:7 > 0
 ENDIF
 
 ;-------------------------------------------------
-;입으로사정
+;입으로 사정
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	K_CALL:K = PALAM_MESSAGE_A
-	;イラマチオで射精
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF !구상유무확인(0)
 			IF (함락( ) > 0) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-				;연모、친애	
+				;연모, 친애	
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 					WSTR:(K++) = 
 					CFLAG:233= 4
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 					WSTR:(K++) = 
 					CFLAG:233= 3
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 					WSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL SOTODASI001
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
-			;屈服刻印Lv3		
+			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
-			;それ以外		
+			;그 이외		
 			IF (CFLAG:233 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) =
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-	;それ以外の口射精
+	;그 이외の口射精
 	ELSE
 		IF !구상유무확인(0)
 			IF (함락( ) > 0) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-				;연모、친애	
+				;연모, 친애	
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 					WSTR:(K++) = 
 					CFLAG:233= 4
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 					WSTR:(K++) = 
 					CFLAG:233= 3
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 					WSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL SOTODASI001
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
-			;屈服刻印Lv3		
+			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
-			;それ以外		
+			;그 이외		
 			IF (CFLAG:233 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) =
 				CFLAG:233= 1	
@@ -2638,37 +2638,37 @@ IF TFLAG:0 > 0
 ENDIF
 
 ;-------------------------------------------------
-;손으로사정
+;손으로 사정
 ;-------------------------------------------------
 IF TFLAG:1 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:234 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:234= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:234= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:234= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL SOTODASI001
 				CFLAG:234= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:234= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:234 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:234= 1	
@@ -2678,37 +2678,37 @@ IF TFLAG:1 > 0
 ENDIF
 
 ;-------------------------------------------------
-;가슴으로사정
+;가슴으로 사정
 ;-------------------------------------------------
 IF TFLAG:34 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:235 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:235= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:235= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL SOTODASI001
 				CFLAG:235= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:235 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:235= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:235 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:235= 1	
@@ -2718,37 +2718,37 @@ IF TFLAG:34 > 0
 ENDIF
 W:K = 1
 ;-------------------------------------------------
-;오나홀에사정
+;오나홀에 사정
 ;-------------------------------------------------
 IF TFLAG:16 == 1
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:236 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:236= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:236= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL SOTODASI001
 				CFLAG:236= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:236 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:236= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:236 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:236= 1	
@@ -2758,40 +2758,40 @@ IF TFLAG:16 == 1
 ENDIF
 
 ;-------------------------------------------------
-;섹스로사정
+;섹스로 사정
 ;-------------------------------------------------
 IF TFLAG:2 > 0
 	LOCAL = TFLAG:2
 	K_CALL:K = PALAM_MESSAGE_A
-	;アナルセックス系
+	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		IF !구상유무확인(0)
 			IF (함락( ) > 0) && (CFLAG:237 < 3 || FLAG:7 == 2)		
-				;연모、친애	
+				;연모, 친애	
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 					WSTR:(K++) = 
 					CFLAG:237= 4
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 					WSTR:(K++) = 
 					CFLAG:237= 3
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 					WSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL NAKADASI002
 					CFLAG:237= 3
 				ENDIF	
 			ENDIF		
-			;屈服刻印Lv3		
+			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) = 	
 				CFLAG:237= 2	
 			ENDIF		
-			;それ以外		
+			;그 이외		
 			IF (CFLAG:237 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				WSTR:(K++) =
 				CFLAG:237= 1	
@@ -2799,35 +2799,35 @@ IF TFLAG:2 > 0
 		ENDIF
 	;V系セックス
 	ELSE
-		;奥攻めセックス系
+		;안쪽 자극 섹스계
 		IF SELECTCOM == 506 || SELECTCOM == 507
 			IF !구상유무확인(0)
 				IF (함락( ) > 0) && (CFLAG:238 < 3 || FLAG:7 == 2)		
-					;연모、친애	
+					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 						WSTR:(K++) = 
 						CFLAG:238= 4
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 						WSTR:(K++) = 
 						CFLAG:238= 3
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 						WSTR:(K++) = 
 						CFLAG:238= 3
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						CALL NAKADASI001
 						CFLAG:238= 3
 					ENDIF	
 				ENDIF		
-				;屈服刻印Lv3		
+				;굴복각인Lv3		
 				IF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 					WSTR:(K++) = 	
 					CFLAG:238= 2	
 				ENDIF		
-				;それ以外		
+				;그 이외		
 				IF (CFLAG:238 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 					WSTR:(K++) = 	
 					CFLAG:238= 1	
@@ -2835,35 +2835,35 @@ IF TFLAG:2 > 0
 			ENDIF
 		
 		ENDIF
-		;その他セックス系
+		;그 외 섹스계
 		IF !구상유무확인(0)
 			IF !구상유무확인(0)
 				IF (함락( ) > 0) && (CFLAG:239 < 3 || FLAG:7 == 2)		
-					;연모、친애	
+					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 						WSTR:(K++) = 
 						CFLAG:239= 4
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 						WSTR:(K++) = 
 						CFLAG:239= 3
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 						WSTR:(K++) = 
 						CFLAG:239= 3
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						CALL NAKADASI001
 						CFLAG:239= 3
 					ENDIF	
 				ENDIF		
-				;屈服刻印Lv3		
+				;굴복각인Lv3		
 				IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 					WSTR:(K++) = 	
 					CFLAG:239= 2	
 				ENDIF		
-				;それ以外		
+				;그 이외		
 				IF (CFLAG:239 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 					WSTR:(K++) =
 					CFLAG:239= 1	
@@ -2874,38 +2874,38 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;逆レイプで射精させた
+;역강간으로 사정당했다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	LOCAL = TFLAG:10
 	K_CALL:K = PALAM_MESSAGE_A
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:240 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:240= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:240= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				CALL NAKADASI001
 				CFLAG:240= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:240= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:240 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:240= 1	
@@ -2917,31 +2917,31 @@ ENDIF
 ;-------------------------------------------------
 	IF !구상유무확인(0) && LOCAL > 0
 		IF (함락( ) > 0) && (CFLAG:240 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:240= 4
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:240= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) = 	
 			CFLAG:240= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:240 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 			WSTR:(K++) =
 			CFLAG:240= 1	
@@ -2959,20 +2959,20 @@ IF RESULT == 0
 ENDIF
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_E（4033をキャラ番号に置換）
-;触手の射精をトリガーにした口上
+;@KOJO_MESSAGE_PALAMCNG_E（4033을 캐릭터번호로 치환）
+;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_E_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_E
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4033
@@ -2985,40 +2985,40 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;触手の射精時のテキスト
+;촉수의 사정시의 텍스트
 ;-------------------------------------------------
 CALL 구상변수초기화
 ;-------------------------------------------------
-;촉수가사정
+;촉수가 사정
 ;-------------------------------------------------
 IF TFLAG:15 >0
 	K_CALL:K = PALAM_MESSAGE_E			
 	IF (함락( ) > 0) && (CFLAG:241 < 3 || FLAG:7 == 2)		
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
 			CFLAG:241= 4
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
 			CFLAG:241= 3
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 			CFLAG:241= 3
 		ENDIF	
-		;陥落済み共通	
+		;함락완료 공통	
 		IF !구상유무확인(0)	
 			WSTR:(K++) = 
 			CFLAG:241= 3
 		ENDIF	
 	ENDIF		
-	;屈服刻印Lv3		
+	;굴복각인Lv3		
 	IF MARK:2 == 3 && (CFLAG:241 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 		WSTR:(K++) = 	
 		CFLAG:241= 2	
 	ENDIF		
-	;それ以外		
+	;그 이외		
 	IF (CFLAG:241 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 		WSTR:(K++) =
 		CFLAG:241= 1	
@@ -3034,24 +3034,24 @@ IF RESULT == 0
 	
 ENDIF
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_B関係（4033をキャラ番号に置換）
-;奴隷の絶頂をトリガーにした口上
+;@KOJO_MESSAGE_PALAMCNG_B 관련（4033을 캐릭터번호로 치환）
+;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_B_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;想定外の口上だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4033
@@ -3064,11 +3064,11 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;奴隷の絶頂時のテキスト
+;노예의 절정시의 텍스트
 ;-------------------------------------------------
 CALL 구상변수초기화
 ;-------------------------------------------------
-;初めてC絶頂
+;처음 C절정
 ;-------------------------------------------------
 IF NOWEX:0 > 0 && CFLAG:242 == 0
 	WSTR:(K++) =
@@ -3076,7 +3076,7 @@ IF NOWEX:0 > 0 && CFLAG:242 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてV絶頂
+;처음 V절정
 ;-------------------------------------------------
 IF NOWEX:1 > 0 && CFLAG:243 == 0
 	WSTR:(K++) =
@@ -3084,7 +3084,7 @@ IF NOWEX:1 > 0 && CFLAG:243 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてA絶頂
+;처음 A절정
 ;-------------------------------------------------
 IF NOWEX:2 > 0 && CFLAG:244 == 0
 	WSTR:(K++) =
@@ -3092,7 +3092,7 @@ IF NOWEX:2 > 0 && CFLAG:244 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてB絶頂
+;처음 B절정
 ;-------------------------------------------------
 IF NOWEX:3 > 0 && CFLAG:245 == 0
 	WSTR:(K++) =
@@ -3108,34 +3108,34 @@ LOCAL = K
 
 IF TFLAG:29 > 0
 	K_CALL:K = PALAM_MESSAGE_B			
-	;強絶頂
+	;강절정
 	IF TFLAG:29 > 1
 		IF (함락( ) > 0) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(LOCAL)	
 				CALL IKIMASU001
 				CFLAG:246= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 			CALL YAMETE003	
 			CFLAG:246= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:246 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 			CALL YAMETE003	
 			CFLAG:246= 1	
@@ -3144,31 +3144,31 @@ IF TFLAG:29 > 0
 	;절정
 	IF !구상유무확인(LOCAL)
 		IF (함락( ) > 0) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-			;연모、친애	
+			;연모, 친애	
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
-			;음란、창부	
+			;음란, 창부	
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
-			;복종、예속	
+			;복종, 예속	
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 				WSTR:(K++) = 
 				CFLAG:246= 3
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(LOCAL)	
 				CALL IKU001
 				CFLAG:246= 3
 			ENDIF	
 		ENDIF		
-		;屈服刻印Lv3		
+		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 			CALL YAMETE003	
 			CFLAG:246= 2	
 		ENDIF		
-		;それ以外		
+		;그 이외		
 		IF (CFLAG:246 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 			CALL YAMETE003
 			CFLAG:246= 1	
@@ -3178,38 +3178,38 @@ ENDIF
 ;-------------------------------------------------
 ;사정
 ;-------------------------------------------------
-;射精している
+;사정하고 있다
 SIF 구상유무확인(0) && K > 0
 	CALL WSTR기입,K - 1
 LOCAL = K
 
 IF TFLAG:10 > 0				
 	IF (함락( ) > 0) && (CFLAG:247 < 3 || FLAG:7 == 2)		
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
 			CFLAG:247= 4
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
 			CFLAG:247= 3
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 			CFLAG:247= 3
 		ENDIF	
-		;陥落済み共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			WSTR:(K++) = 
 			CFLAG:247= 3
 		ENDIF	
 	ENDIF		
-	;屈服刻印Lv3		
+	;굴복각인Lv3		
 	IF MARK:2 == 3 && (CFLAG:247 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) = 	
 		CFLAG:247= 2	
 	ENDIF		
-	;それ以外		
+	;그 이외		
 	IF (CFLAG:247 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) =
 		CFLAG:247= 1	
@@ -3223,34 +3223,34 @@ SIF 구상유무확인(0) && K > 0
 	CALL WSTR기입,K - 1
 LOCAL = K
 
-;噴乳している
+;분유하고 있다
 IF TFLAG:11 > 0			
 	IF (함락( ) > 0) && (CFLAG:248 < 3 || FLAG:7 == 2)		
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
 			CFLAG:248= 4
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
 			CFLAG:248= 3
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 			CFLAG:248= 3
 		ENDIF	
-		;陥落済み共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			WSTR:(K++) = 
 			CFLAG:248= 3
 		ENDIF	
 	ENDIF		
-	;屈服刻印Lv3		
+	;굴복각인Lv3		
 	IF MARK:2 == 3 && (CFLAG:248 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) = 	
 		CFLAG:248= 2	
 	ENDIF		
-	;それ以外		
+	;그 이외		
 	IF (CFLAG:248 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) =
 		CFLAG:248= 1	
@@ -3260,38 +3260,38 @@ ENDIF
 ;-------------------------------------------------
 ;방뇨
 ;-------------------------------------------------
-;放尿している
+;방뇨하고 있다
 SIF 구상유무확인(0) && K > 0
 	CALL WSTR기입,K - 1
 LOCAL = K
 
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)			
 	IF (함락( ) > 0) && (CFLAG:249 < 3 || FLAG:7 == 2)		
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
 			CFLAG:249= 4
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
 			CFLAG:249= 3
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 			CFLAG:249= 3
 		ENDIF	
-		;陥落済み共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			WSTR:(K++) = 
 			CFLAG:249= 3
 		ENDIF	
 	ENDIF		
-	;屈服刻印Lv3		
+	;굴복각인Lv3		
 	IF MARK:2 == 3 && (CFLAG:249 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) = 	
 		CFLAG:249= 2	
 	ENDIF		
-	;それ以外		
+	;그 이외		
 	IF (CFLAG:249 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)		
 		WSTR:(K++) =
 		CFLAG:249= 1	
@@ -3308,20 +3308,20 @@ IF RESULT == 0
 	
 ENDIF
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_C関係（4033をキャラ番号に置換）
-;調教後の変化をトリガーにした口上
+;@KOJO_MESSAGE_PALAMCNG_C 관련（4033을 캐릭터번호로 치환）
+;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_C_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_C
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4033
@@ -3334,35 +3334,35 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;調教後のテキスト
+;조교 후의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;처녀상실(処女のみ)
+;처녀상실(처녀만)
 ;-------------------------------------------------
 CALL 구상변수초기화
 
 IF TFLAG:3 > 0
 	K_CALL:K = PALAM_MESSAGE_C
-	;恋慕か親愛かつ主人のセックスによる処女喪失
+	;연모나 친애이면서 주인의 섹스에 의한 처녀상실
 	IF TFLAG:20
 		WSTR:(K++) =
-	;それ以外の時に処女喪失
+	;그 이외의 때에 처녀상실
 	ELSE			
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 		ENDIF	
-		;屈服刻印Lv3
+		;굴복각인Lv3
 		IF MARK:2 == 3 && !구상유무확인(0)
 			WSTR:(K++) = 
 		ENDIF
-		;共通	
+		;공통	
 		IF !구상유무확인(0)	
 			WSTR:(K++) =
 		ENDIF	
@@ -3379,20 +3379,20 @@ IF RESULT == 0
 	
 ENDIF
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_D関係（4033をキャラ番号に置換）
-;パラメータ変化をトリガーにした口上
+;@KOJO_MESSAGE_PALAMCNG_D 관련（4033을 캐릭터번호로 치환）
+;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_D_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_D
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4033
@@ -3405,19 +3405,19 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;パラメータ変化時のテキスト
+;파라미터 변화시의 텍스트
 ;-------------------------------------------------
 CALL 구상변수초기화
 ;-------------------------------------------------
-;初めて潤滑がLV3超えた
+;처음 윤활이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:4 + CUP:4
 IF P > PALAMLV:4 && CFLAG:250 == 0
 	K_CALL:K = PALAM_MESSAGE_D
-	;ローションを使った場合
+	;로션을 사용한 경우
 	IF SELECTCOM == 180
 		WSTR:(K++) =
-	;それ以外
+	;그 이외
 	ELSE
 		WSTR:(K++) =
 	ENDIF
@@ -3425,15 +3425,15 @@ IF P > PALAMLV:4 && CFLAG:250 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて欲情がLV2超えた
+;처음 욕정이 LV2를 넘었다
 ;-------------------------------------------------
 P = PALAM:6 + CUP:6
 IF P > PALAMLV:3 && CFLAG:251 == 0
 	K_CALL:K = PALAM_MESSAGE_D
-	;媚薬を使った場合
+	;미약을 사용한 경우
 	IF SELECTCOM == 181
 		WSTR:(K++) =
-	;それ以外
+	;그 이외
 	ELSE
 		WSTR:(K++) =
 	ENDIF
@@ -3441,7 +3441,7 @@ IF P > PALAMLV:3 && CFLAG:251 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて屈服がLV3超えた
+;처음 굴복이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:7 + CUP:7
 IF P > PALAMLV:3 && CFLAG:252 == 0
@@ -3451,15 +3451,15 @@ IF P > PALAMLV:3 && CFLAG:252 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて恭順がLV3超えた
+;처음 복종이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:5 + CUP:5
 IF P > PALAMLV:3 && CFLAG:253 == 0
 	K_CALL:K = PALAM_MESSAGE_D
-	;陥落済み
+	;함락완료
 	IF 함락( ) > 0
 		WSTR:(K++) =
-	;それ以外
+	;그 이외
 	ELSE
 		WSTR:(K++) =
 	ENDIF
@@ -3467,15 +3467,15 @@ IF P > PALAMLV:3 && CFLAG:253 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて恐怖がLV3超えた
+;처음 공포가 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:11 + CUP:11
 IF P > PALAMLV:3 && CFLAG:254 == 0
 	K_CALL:K = PALAM_MESSAGE_D
-	;陥落済み
+	;함락완료
 	IF 함락( ) > 0
 		WSTR:(K++) =
-	;それ以外
+	;그 이외
 	ELSE
 		WSTR:(K++) =
 	ENDIF
@@ -3491,15 +3491,15 @@ IF RESULT == 0
 ENDIF
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_MARKCNG関係（4033をキャラ番号に置換）
-;刻印変動をトリガーにした口上
-;刻印変動後に口上を発動します
+;@KOJO_MESSAGE_MARKCNG 관련（4033을 캐릭터번호로 치환）
+;각인 변동을 트리거로 한 구상
+;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_MARKCNG_K4033
-;助手が調教した時に口上をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;ボールギャグ着用時には地の文を表示して口上をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL MARK_MESSAGE
 	RETURN 0
@@ -3507,7 +3507,7 @@ ENDIF
 
 CALL 구상변수초기화
 ;--------------------------------------------------
-;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定キャラが助手、主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4033
@@ -3520,22 +3520,22 @@ CALL 구상변수초기화
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;苦痛刻印Lv3
+;고통각인Lv3
 ;-------------------------------------------------
 LOCAL = K
 IF TFLAG:22 == 3
 	K_CALL:K = MARK_MESSAGE_A	
-	;연모、친애	
+	;연모, 친애	
 	IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 		WSTR:(K++) = 
-	;음란、창부	
+	;음란, 창부	
 	ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 		WSTR:(K++) = 
-	;복종、예속	
+	;복종, 예속	
 	ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 		WSTR:(K++) = 
 	ENDIF	
-	;共通
+	;공통
 	IF !구상유무확인(LOCAL)
 		WSTR:(K++) = 
 	ENDIF		
@@ -3543,20 +3543,20 @@ IF TFLAG:22 == 3
 		CALL MARK_MESSAGE_A
 ENDIF
 ;-------------------------------------------------
-;快楽刻印Lv3
+;쾌락각인Lv3
 ;-------------------------------------------------
 
 LOCAL = K
 IF TFLAG:23 == 3
 	K_CALL:K = MARK_MESSAGE_P
-	;연모、친애	
+	;연모, 친애	
 	IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 		WSTR:(K++) = 
-	;복종、예속	
+	;복종, 예속	
 	ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 		WSTR:(K++) = 
 	ENDIF	
-	;共通
+	;공통
 	IF !구상유무확인(LOCAL)
 		WSTR:(K++) = 
 	ENDIF		
@@ -3565,18 +3565,18 @@ IF TFLAG:23 == 3
 ENDIF
 
 ;-------------------------------------------------
-;屈服刻印Lv3
+;굴복각인Lv3
 ;-------------------------------------------------
 LOCAL = K
 IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 	K_CALL:K = MARK_MESSAGE_S
-	;快楽による屈服
+	;쾌락에 의한 굴복
 	IF TFLAG:24 == 13
 		WSTR:(K++) = 
-	;恐怖と苦痛による屈服
+	;공포와 고통에 의한 굴복
 	ELSEIF TFLAG:24 == 23
 		WSTR:(K++) = 
-	;屈服と恭順による屈服
+	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
 		WSTR:(K++) = 
 	ENDIF
@@ -3585,29 +3585,29 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 ENDIF
 
 ;-------------------------------------------------
-;反発刻印Lv3
+;반발각인Lv3
 ;-------------------------------------------------
 LOCAL = K
 IF TFLAG:21 == 3
 	K_CALL:K = MARK_MESSAGE_R
-	;陥落済み
+	;함락완료
 	IF 함락( ) > 0
-		;연모、친애	
+		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			WSTR:(K++) = 
-		;음란、창부	
+		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			WSTR:(K++) = 
-		;복종、예속	
+		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			WSTR:(K++) = 
 		ENDIF	
-		;陥落済み共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)
 			WSTR:(K++) = 
 		ENDIF	
 	ENDIF
-	;それ以外
+	;그 이외
 	IF !구상유무확인(LOCAL)
 		WSTR:(K++) = 
 	ENDIF
@@ -3623,12 +3623,12 @@ IF RESULT == 0
 	
 ENDIF
 ;-------------------------------------------------
-;イベント口上集（4033をキャラ番号に置換する） CFLAG 261～299を使用
+;이벤트구상 모음（4033을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
 @KOJO_MESSAGE_EVENT_K4033
 
 ;--------------------------------------------------
-;特定主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033を奴隷のキャラ番号に置換）
+;特定主人時に特殊キャラ口上を呼び出す(Y1を特定キャラ、4033을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_EVENT_PY1_K4033
@@ -3639,7 +3639,7 @@ ENDIF
 CALL 구상변수초기화
 
 SELECTCASE TFLAG:13
-;　　1:朝フェラ
+;　　1:아침펠라
 ;　　2:朝パイズリ
 ;　　3:朝騎乗位
 ;　　4:調教後レズプレイ
@@ -3652,7 +3652,7 @@ SELECTCASE TFLAG:13
 ;　　11:妊娠発覚時
 ;　　12:出産時
 ;　　13:育児室でのイベント口上
-;　　14:親離れ時
+;　　14:자식 독립시
 ;　　15:定食屋台実行時
 ;　　16:娼館でのバイト時
 ;　　17:レンタル実行時
@@ -3661,13 +3661,13 @@ SELECTCASE TFLAG:13
 ;　　20:コンサート実行時
 ;　　21:乱交ライブ実行時
 ;　　22:公衆便所プレイ実行時
-;　　23:ビデオ保有時
+;　　23:비디오 보유시
 ;　　24:朝騎乗位A
 ;　　25:朝キス
 ;　　26:朝食
 ;　　27:起きたら隣で寝てる
 ;　　28:朝の足コキ
-;　　29:朝の搾りたてミルク
+;　　29:아침에 갓 짠 밀크
 ;　　30:おねしょ
 ;　　31:夜這い C/A
 ;　　32:夜這い V/C
@@ -3677,7 +3677,7 @@ SELECTCASE TFLAG:13
 ;　　36:一緒に寝る
 ;　　37:起きたら隣で寝てる
 ;　　38:朝の足コキ
-;　　39:朝の搾りたてミルク
+;　　39:아침에 갓 짠 밀크
 ;　　40:아내・夫取得
 ;　　41:淫魔取得
 ;　　42:玩具取得
@@ -3689,18 +3689,18 @@ SELECTCASE TFLAG:13
 ;　　48:愛系再陥落イベント
 ;　　49:淫系再陥落イベント
 ;　　50:隷系再陥落イベント
-;　　51:ＮＴＲ요바이・乱交パーティ
-;　　52:ＮＴＲ요바이・公園
-;　　53:ＮＴＲ요바이・便器
-;　　54:ＮＴＲ요바이・夜の街
-;　　55:ＮＴＲ요바이・ＮＴＲ前逢引
+;　　51:ＮＴＲ요바이・난교파티
+;　　52:ＮＴＲ요바이・공원
+;　　53:ＮＴＲ요바이・변기
+;　　54:ＮＴＲ요바이・밤의 거리
+;　　55:ＮＴＲ요바이・ＮＴＲ전 밀회
 ;　　56:ＮＴＲ요바이・ＮＴＲ後初夜這い
-;　　57:ＮＴＲ요바이・デート
-;　　58:ＮＴＲ요바이・本番
-;　　59:ＮＴＲ요바이・自慰見せ合い
+;　　57:ＮＴＲ요바이・데이트
+;　　58:ＮＴＲ요바이・본방
+;　　59:ＮＴＲ요바이・자위서로과시
 ;　　60:ＮＴＲ요바이・アナルセックス
 ;　　61:ＮＴＲ요바이・야외플레이
-;　　62:ＮＴＲ요바이・野外調教
+;　　62:ＮＴＲ요바이・야외조교
 ;　　63:娼館で実際に働いたとき
 ;　　65:教会で祈る
 ;　　66:教会で口奉仕
@@ -3716,7 +3716,7 @@ SELECTCASE TFLAG:13
 ;　　78:胸露出(助手)
 ;　　79:ダンジョン内性欲処理：仲魔とセックス(やられる側)
 ;　　80:ダンジョン内性欲処理：仲魔に奉仕してもらう(奉仕側)
-;　　81:ダンジョン内性欲処理：その場で自慰
+;　　81:던전내 성욕처리：그 장소에서 자위
 ;　　82:ダンジョン内性欲処理：物陰で自慰
 ;　　83:ダンジョン内性欲処理：仲魔とセックス(やる側)
 ;　　84:ダンジョン内性欲処理：仲魔とセックス(奉仕させる側)
@@ -3726,23 +3726,23 @@ SELECTCASE TFLAG:13
 ;　　92:맹우
 ;　　93:炭鉱
 		;-------------------------------------------------
-		;朝フェラ
+		;아침펠라
 		;-------------------------------------------------
 	CASE 1
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL KUCHI001
 				ENDIF	
@@ -3750,42 +3750,42 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝パイズリ
+		;아침파이즈리
 		;-------------------------------------------------
 	CASE 2
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
 				;모유체질
 				IF TALENT:149						
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;母乳体質じゃない
+				;모유체질이 아니다
 				IF !구상유무확인(0)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) =
 					ENDIF	
@@ -3794,23 +3794,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝騎乗位
+		;아침기승위
 		;-------------------------------------------------
 	CASE 3
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -3818,23 +3818,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝騎乗位A
+		;아침기승위A
 		;-------------------------------------------------
 	CASE 24
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -3842,7 +3842,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝キス 연모、親愛前提
+		;아침키스 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 25
 			K_CALL:K = EVENT_MESSAGE
@@ -3852,42 +3852,42 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝食
+		;아침식사
 		;-------------------------------------------------
 	CASE 26
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;歌いながら
+				;노래 부르면서
 				IF (TALENT:25 || TALENT:28) && ABL:14 >= 2						
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;歌ってない
+				;노래 부르지 않음
 				IF !구상유무확인(0)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) =
 					ENDIF	
@@ -3896,7 +3896,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;起きたら隣で寝てる 연모、親愛前提
+		;일어나자 곁에서 자고 있다 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 27
 			K_CALL:K = EVENT_MESSAGE
@@ -3906,23 +3906,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝の足コキ
+		;아침풋잡
 		;-------------------------------------------------
 	CASE 28
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -3930,23 +3930,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;朝の搾りたてミルク
+		;;아침에 갓 짠 밀크
 		;-------------------------------------------------
 	CASE 29
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -3954,23 +3954,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;お寝小
+		;;잠자다 실례
 		;-------------------------------------------------
 	CASE 30
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -3978,38 +3978,38 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;調教後レズプレイ
+		;조교 후 레즈플레이
 		;-------------------------------------------------
 	CASE 4
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:264 == 0
 				WSTR:(K++) =
 				CFLAG:264 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:264 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:264 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;調教後セックス
+		;조교 후 섹스
 		;-------------------------------------------------
 	CASE 5
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4017,23 +4017,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;強精神薬の反動
+		;강정신약의 반동
 		;-------------------------------------------------
 	CASE 6
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:266 < 2 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4045,23 +4045,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;調教後搾乳
+		;조교 후 착유
 		;-------------------------------------------------
 	CASE 7
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:267 < 2 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4073,23 +4073,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;調教後自慰
+		;조교 후 자위
 		;-------------------------------------------------
 	CASE 8
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4101,23 +4101,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜這い（主人C 相手V）
+		;요바이（주인C 상대V）
 		;-------------------------------------------------
 	CASE 9
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4125,23 +4125,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜這い（主人C 相手A）
+		;요바이（주인C 상대A）
 		;-------------------------------------------------
 	CASE 31
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4149,23 +4149,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜這い（主人V 相手C）
+		;요바이（주인V 상대C）
 		;-------------------------------------------------
 	CASE 32
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4173,23 +4173,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜這い（主人A 相手C）
+		;요바이（주인A 상대C）
 		;-------------------------------------------------
 	CASE 33
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4197,23 +4197,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜這い（両者C（스마타）・両者C（貝合わせ））
+		;요바이（양쪽C（스마타）・양쪽C（조개맞대기））
 		;-------------------------------------------------
 	CASE 34
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4221,23 +4221,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜自慰
+		;밤 자위
 		;-------------------------------------------------
 	CASE 35
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
@@ -4245,7 +4245,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;一緒に寝る 연모、친애
+		;같이잔다 연모, 친애
 		;-------------------------------------------------
 	CASE 36
 			K_CALL:K = EVENT_MESSAGE
@@ -4255,23 +4255,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;黄色のキャンディ使用時
+		;황색사탕 사용시
 		;-------------------------------------------------
 	CASE 10
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4283,32 +4283,32 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;妊娠発覚時
+		;임신 발각시
 		;-------------------------------------------------
 	CASE 11
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				GOTO 表示
 			K_CALL:K = EVENT_MESSAGE
-			;妊娠対象をTARGETに格納し、父親は奴隷はV、助手はWとする
-			;崩壊してしまった場合
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
+			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				WSTR:(K++) =
-			;父親が主人で母親が恋慕か親愛持ち
+			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 				WSTR:(K++) =「あー……しまった。できちまったかぁ」
 				WSTR:(K++) =「ま、相棒との子なら悪かあねえか。いいぜ。産んでやるさ」
-			;父親が奴隷か助手で母親が淫乱か娼婦持ち
+			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
-				;父親(助手）との相性が125より大きい場合
+				;부친(조수）과의 상성이 125보다 큰 경우
 				IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125
 					WSTR:(K++) =
-			 	;父親(奴隷）との相性が125より大きい場合
+			 	;부친(노예）과의 상성이 125보다 큰 경우
 				ELSEIF CFLAG:102 == 3 && GET_RELATION(TARGET, V) > 125
 					WSTR:(K++) =
 				ELSE
 					WSTR:(K++) =
 				ENDIF
-			;服従か隷属持ち
+			;복종이나 예속 보유
 			ELSEIF (TALENT:5 || TALENT:8)
 				WSTR:(K++) =
 			ELSE
@@ -4317,24 +4317,24 @@ SELECTCASE TFLAG:13
 			CFLAG:271 = 1
 
 		;-------------------------------------------------
-		;出産時
+		;출산시
 		;-------------------------------------------------
 	CASE 12
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)					
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 「俺もついにかーちゃんになってしまったか。ヤキが回ったかな？」
 					WSTR:(K++) = 「でも相棒との愛の結晶か……何だか凄く嬉しいぜ！」
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4350,22 +4350,22 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 13
 			K_CALL:K = EVENT_MESSAGE
-			;出産前
+			;출산전
 			IF TALENT:153
-				;陥落済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 2 || FLAG:7 == 2)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 「育児といってもなー なにをやりゃいいんだか」
 						WSTR:(K++) = 「まあ悩んでいても子供は勝手に育つ。なら大胆に色々教えてやるかね」
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
@@ -4375,22 +4375,22 @@ SELECTCASE TFLAG:13
 					WSTR:(K++) =
 					CFLAG:273 = 1
 				ENDIF
-			;出産後
+			;출산후
 			ELSE
-				;陥落済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 4 || FLAG:7 == 2)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 「よく食え。よく寝ろ。やりたいことは何でもやれ。そうやって人は大きくなるのだ」
 						WSTR:(K++) = 「自分に自信を持って生きろ。自らを価値無しと思う者のみが、真に価値無き人間なのだ！」
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
@@ -4403,24 +4403,24 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;親離れ時
+		;자식 독립시
 		;-------------------------------------------------
 	CASE 14
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:274 < 2 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 「お前にはこれから人生という闘争が待ち受けている。絶対に屈するなよ」
 					WSTR:(K++) = 「この俺と相棒の血を引いたお前に敗北は許されない。最後まで戦い抜くのだ」
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4431,11 +4431,11 @@ SELECTCASE TFLAG:13
 				CFLAG:274 = 1
 			ENDIF
 		;-------------------------------------------------
-		;定食屋台時
+		;정식포장마차시
 		;-------------------------------------------------
 	CASE 15
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:275 == 0
 				WSTR:(K++) = 「やだ」
 				WSTR:(K++) = 話を持ちかけた途端いきなりこれである。彼女の眼付きが益々鋭くなっていく。
@@ -4447,7 +4447,7 @@ SELECTCASE TFLAG:13
 				WSTR:(K++) = 「Da kann man nichts machen.（しょうがねーな）わかったわかった」
 				WSTR:(K++) = 「この露出過多な服で店頭に立ってりゃいいんだろ？しゃーねーなー！」
 				CFLAG:275 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:275 < 1 || FLAG:7 == 2
 				WSTR:(K++) = 「らっしゃーせー」
 				WSTR:(K++) = 「あざぁーす。」
@@ -4467,29 +4467,29 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;娼館でバイト・設定時
+		;창관에서 아르바이트・설정시
 		;-------------------------------------------------
 	CASE 16
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:276 == 0
 				WSTR:(K++) =
 				CFLAG:276 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:276 = 1
 			ENDIF
 		;-------------------------------------------------
-		;娼館でバイト・実行時
+		;창관에서 아르바이트・실행시
 		;-------------------------------------------------
 	CASE 63
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:606 == 0
 				WSTR:(K++) =
 				CFLAG:606 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:606 = 1
@@ -4497,69 +4497,69 @@ SELECTCASE TFLAG:13
 
 
 		;-------------------------------------------------
-		;レンタル時
+		;렌탈시
 		;-------------------------------------------------
 	CASE 17
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:277 == 0
 				WSTR:(K++) =
 				CFLAG:277 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:277 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:277 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;売却時
+		;매각시
 		;-------------------------------------------------
 	CASE 18
 			K_CALL:K = EVENT_MESSAGE
-			;反発刻印Lv3
+			;반발각인Lv3
 			IF MARK:3 == 3
 				WSTR:(K++) = 
 			ENDIF
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && MARK:3 < 3 && !구상유무확인(0)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
 			ENDIF
-			;それ以外
+			;그 이외
 			IF !구상유무확인(0)
 				WSTR:(K++) =
 			ENDIF
 
 		;-------------------------------------------------
-		;ビデオ売却時
+		;비디오 매각시
 		;-------------------------------------------------
 	CASE 19
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:278 < 2 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4571,68 +4571,68 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;コンサート時
+		;콘서트시
 		;-------------------------------------------------
 	CASE 20
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:279 == 0
 				WSTR:(K++) =
 				CFLAG:279 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:279 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:279 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;乱交ライブ時
+		;난교라이브시
 		;-------------------------------------------------
 	CASE 21
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:280 == 0
 				WSTR:(K++) =
 				CFLAG:280 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:280 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:280 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;公衆便所プレイ時
+		;공중변소 플레이시
 		;-------------------------------------------------
 	CASE 22
 			K_CALL:K = EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:281 == 0
 				WSTR:(K++) =
 				CFLAG:281 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:281 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:281 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;ビデオ保有時
+		;비디오 보유시
 		;-------------------------------------------------
 	CASE 23
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:282 < 2 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4644,23 +4644,23 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;記憶消去薬使用時
+		;기억소거약 사용시
 		;-------------------------------------------------
 	CASE 30
 			K_CALL:K = EVENT_MESSAGE
-			;陥落済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 2 || FLAG:7 == 2)
-				;연모、친애	
+				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					WSTR:(K++) = 
-				;음란、창부	
+				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					WSTR:(K++) = 
-				;복종、예속	
+				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					WSTR:(K++) = 
 				ENDIF	
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					WSTR:(K++) = 
 				ENDIF	
@@ -4672,7 +4672,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;[아내][남편]取得時 親愛前提
+		;;[아내][남편]취득시 친애 전제
 		;-------------------------------------------------
 	CASE 40
 			K_CALL:K = EVENT_MESSAGE
@@ -4708,7 +4708,7 @@ SELECTCASE TFLAG:13
 				CFLAG:283 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[음마]取得時 娼婦前提
+		;;[음마]취득시 창부 전제
 		;-------------------------------------------------
 	CASE 41
 			K_CALL:K = EVENT_MESSAGE
@@ -4717,7 +4717,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]取得時 隷属前提
+		;;[전속노예]취득시 예속 전제
 		;-------------------------------------------------
 	CASE 42
 			K_CALL:K = EVENT_MESSAGE
@@ -4726,132 +4726,132 @@ SELECTCASE TFLAG:13
 				CFLAG:285 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;オープン/クローズ・オブ・オッパイ
+		;;오픈/클로즈・오프・가슴
 		;-------------------------------------------------
 	CASE 44
 			K_CALL:K = EVENT_MESSAGE
 			IF TEQUIP:가슴앞열림
-				;胸を出す
-				;陥落済み
+				;가슴을 드러낸다
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;그외
+				;그 외
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
 				CFLAG:285 = 1
 			ELSE
-				;胸をしまう
-				;陥落済み
+				;가슴을 집어넣는다
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
-					;연모、친애	
+					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
 						WSTR:(K++) = 
-					;음란、창부	
+					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
 						WSTR:(K++) = 
-					;복종、예속	
+					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
 						WSTR:(K++) = 
 					ENDIF	
-					;陥落済み共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;그외
+				;그 외
 				IF !구상유무확인(0)	
 					WSTR:(K++) =
 				ENDIF	
 				CFLAG:287 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[愛ＮＴＲ]イベント時
+		;;[애ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 45
 		K_CALL:K = EVENT_MESSAGE
-		;陥落済み
+		;함락완료
 		IF (CFLAG:288 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に陥落しているor誰にも陥落してない状態でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						WSTR:(K++) =
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						WSTR:(K++) =
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						WSTR:(K++) =
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに陥落している状態で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:애ＮＴＲ진행도 == 0
 					WSTR:(K++) =
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 					WSTR:(K++) =
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 					WSTR:(K++) =
 				ENDIF
@@ -4859,65 +4859,65 @@ SELECTCASE TFLAG:13
 			CFLAG:288 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;[淫ＮＴＲ]イベント時
+		;;[음ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 46
 		K_CALL:K = EVENT_MESSAGE
-		;陥落済み
+		;함락완료
 		IF (CFLAG:289 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に陥落しているor誰にも陥落してない状態でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
 				ENDIF
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						WSTR:(K++) =
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						WSTR:(K++) =
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						WSTR:(K++) =
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに陥落している状態で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:음ＮＴＲ진행도 == 0
 					WSTR:(K++) =
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 					WSTR:(K++) =
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 					WSTR:(K++) =
 				ENDIF
@@ -4925,78 +4925,78 @@ SELECTCASE TFLAG:13
 			CFLAG:289 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;[隷ＮＴＲ]イベント時
+		;;[예ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 47
 		K_CALL:K = EVENT_MESSAGE
-		;陥落済み
+		;함락완료
 		IF (CFLAG:290 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に陥落しているor誰にも陥落してない状態でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						WSTR:(K++) = 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						WSTR:(K++) = 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						WSTR:(K++) = 
 					ENDIF
 				ENDIF
-				;陥落済み共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						WSTR:(K++) =
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						WSTR:(K++) =
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						WSTR:(K++) =
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに陥落している状態で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:예ＮＴＲ진행도 == 0
 					WSTR:(K++) =
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 					WSTR:(K++) =
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 					WSTR:(K++) =
 				ENDIF
@@ -5004,249 +5004,249 @@ SELECTCASE TFLAG:13
 			CFLAG:290 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;愛系再陥落時
-		;;主人に対して恋慕系陥落している、もしくは一度愛系ＮＴＲ状態にされたキャラに再び陥落させられる時
+		;;애(愛)계 재함락시
+		;;주인에게 연모계 함락되었거나, 한번 애(愛)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 48
 		K_CALL:K = EVENT_MESSAGE
-		;再陥落前に陥落しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再陥落先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を使用して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 		
 		IF (CFLAG:291 < 1 || FLAG:7 == 2)
-			;主人に対して陥落し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				WSTR:(K++) =
-			;その他のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				WSTR:(K++) =
 			ENDIF
 			CFLAG:291 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;淫系再陥落時
-		;;主人に対して淫乱系陥落している、もしくは一度淫系ＮＴＲ状態にされたキャラに再び陥落させられる時
+		;;음(淫)계 재함락시
+		;;주인에게 음란계 함락되었거나, 한번 음(淫)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 49
 		K_CALL:K = EVENT_MESSAGE
-		;再陥落前に陥落しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再陥落先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を使用して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:292 < 1 || FLAG:7 == 2)
-			;主人に対して陥落し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				WSTR:(K++) =
-			;その他のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				WSTR:(K++) =
 			ENDIF
 			CFLAG:292 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;隷系再陥落時
-		;;主人に対して服従系陥落している、もしくは一度隷系ＮＴＲ状態にされたキャラに再び陥落させられる時
+		;;예(隷)계 재함락시
+		;;주인에게 복종계 함락되었거나, 한번 예(隷)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 50
 		K_CALL:K = EVENT_MESSAGE
-		;再陥落前に陥落しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再陥落先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を使用して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:293 < 1 || FLAG:7 == 2)
-			;主人に対して陥落し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				WSTR:(K++) =
-			;その他のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				WSTR:(K++) =
 			ENDIF
 			CFLAG:293 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・乱交パーティ
-		;;淫ＮＴＲ状態（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・난교파티
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 51
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:294 < 1 || FLAG:7 == 2)				
 			IF (TALENT:3 || TALENT:6)	
-				;以前恋慕ルートだった場合
+				;이전에 연모 루트였던 경우
 				WSTR:(K++) =
 			ELSEIF (TALENT:5 || TALENT:8)	
-				;以前服従ルートだった場合
+				;이전에 복종 루트였던 경우
 				WSTR:(K++) = 
 			ENDIF	
-			;음란、陥落済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:294 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・公園
-		;;淫ＮＴＲ状態（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・공원
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 52
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:295 < 1 || FLAG:7 == 2)				
 			IF (TALENT:3 || TALENT:6)	
-				;以前恋慕ルートだった場合
+				;이전에 연모 루트였던 경우
 				WSTR:(K++) =
 			ELSEIF (TALENT:5 || TALENT:8)	
-				;以前服従ルートだった場合
+				;이전에 복종 루트였던 경우
 				WSTR:(K++) = 
 			ENDIF	
-			;음란、陥落済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:295 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・便器
-		;;淫ＮＴＲ状態（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・변기
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 53
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:296 < 1 || FLAG:7 == 2)				
 			IF (TALENT:3 || TALENT:6)	
-				;以前恋慕ルートだった場合
+				;이전에 연모 루트였던 경우
 				WSTR:(K++) =
 			ELSEIF (TALENT:5 || TALENT:8)	
-				;以前服従ルートだった場合
+				;이전에 복종 루트였던 경우
 				WSTR:(K++) = 
 			ENDIF	
-			;음란、陥落済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:296 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・夜の街
-		;;淫ＮＴＲ状態（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・밤의 거리
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 54
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:296 < 1 || FLAG:7 == 2)				
 			IF (TALENT:3 || TALENT:6)	
-				;以前恋慕ルートだった場合
+				;이전에 연모 루트였던 경우
 				WSTR:(K++) =
 			ELSEIF (TALENT:5 || TALENT:8)	
-				;以前服従ルートだった場合
+				;이전에 복종 루트였던 경우
 				WSTR:(K++) = 
 			ENDIF	
-			;음란、陥落済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:296 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・ＮＴＲ前逢引
-		;;ＮＴＲ状態になる前に逢引する時
+		;;ＮＴＲ요바이・ＮＴＲ전 밀회
+		;;ＮＴＲ상태가 되기 전에 밀회할 때
 		;-------------------------------------------------
 	CASE 55
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:297 < 1 || FLAG:7 == 2)				
 			IF CFLAG:함락캐릭터 != 0
-			;	;主人以外に陥落している場合
+			;	;주인 이외에 함락되어 있는 경우
 				WSTR:(K++) = 
 			ELSEIF (TALENT:3 || TALENT:6)	
-			;	;恋慕ルート
+			;	;연모 루트
 				WSTR:(K++) = 
 			ELSEIF (TALENT:4 || TALENT:7)	
-			;	;淫乱ルート
+			;	;음란 루트
 				WSTR:(K++) = 
 			ELSEIF (TALENT:5 || TALENT:8)	
-			;	;服従ルート
+			;	;복종 루트
 				WSTR:(K++) = 
 			ENDIF	
-			;陥落済み共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:297 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・ＮＴＲ後初逢引
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)になった直後の一日の終了後、一度だけ行う
-		;別のキャラに陥落する度に起こる。同じキャラに再度陥落した場合は起こらない
+		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)가 된 직후 하루 종료 후, 한번만 행한다
+		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
 		;-------------------------------------------------
 	CASE 56
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:298 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:298 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・デート
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;ＮＴＲ요바이・데이트
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 57
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:299 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:299 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・本番
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;女性であれば入れられる側、男性であれば入れる側で固定
+		;;ＮＴＲ요바이・본방
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;여성이라면 삽입당하는 쪽, 남성이라면 삽입하는 쪽으로 고정
 		;-------------------------------------------------
 	CASE 58
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:601 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:601 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・自慰見せ合い
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;愛ＮＴＲ状態の場合、露出癖3か自慰中毒1のどちらかを満たしている事が条件になります。
+		;;ＮＴＲ요바이・자위서로과시
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ상태인 경우, 노출증 3이나 자위중독 1 중 하나를 충족시키는 것이 조건이 됩니다.
 		;-------------------------------------------------
 	CASE 59
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:602 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
@@ -5254,21 +5254,21 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・애널
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;CFLAG:アナル回数が1以上なら入れられている、CFLAG:挿入回数が1以上なら入れています。
-		;両方立っている場合は、地の文では入れられている側が優先されます。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;CFLAG:애널횟수가 1 이상이면 삽입당하고, CFLAG:삽입횟수가 1 이상면 삽입하고 있습니다.
+		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
 		;-------------------------------------------------
 	CASE 60
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:603 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
@@ -5276,40 +5276,40 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・야외플레이
-		;;愛ＮＴＲか隷ＮＴＲ状態(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;愛ＮＴＲの場合、露出癖が4以上でないと発生しません
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ의 경우, 노출증이 4 이상이 아니라면 발생하지 않습니다
 		;-------------------------------------------------
 	CASE 61
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:604 < 1 || FLAG:7 == 2)
 			IF (TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4) ;&& (RAND:2 == 0)
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				WSTR:(K++) = 
 			ELSEIF (TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6) ;&& (RAND:2 == 0)
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				WSTR:(K++) = 
 			ENDIF	
-			;共通	
+			;공통	
 			IF !구상유무확인(0)	
 				WSTR:(K++) =
 			ENDIF	
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・野外調教
-		;;隷ＮＴＲ状態(TALENT:ＮＴＲが 3 か 6)でCFLAG:현ＮＴＲ진행도が6以上の場合１日の終了時に発生。
+		;;ＮＴＲ요바이・야외조교
+		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 62
 		K_CALL:K = EVENT_MESSAGE
 		IF (CFLAG:605 < 1 || FLAG:7 == 2)
-			;隷ＮＴＲ
+			;예ＮＴＲ
 			WSTR:(K++) =
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：仲魔とセックスする
-		;やられちゃう側
-		;PLAYERに実行者の番号が入っています
+		;던전내 성욕처리：동료마와 섹스한다
+		;당하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 79
 		K_CALL:K = EVENT_MESSAGE
@@ -5318,9 +5318,9 @@ SELECTCASE TFLAG:13
 			CFLAG:602 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：仲魔に奉仕させる
-		;奉仕する側
-		;PLAYERに実行者の番号が入っています
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 80
 		K_CALL:K = EVENT_MESSAGE
@@ -5329,8 +5329,8 @@ SELECTCASE TFLAG:13
 			CFLAG:603 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：その場で自慰
-		;奉仕する側
+		;던전내 성욕처리：그 장소에서 자위
+		;봉사하는 쪽
 		;-------------------------------------------------
 	CASE 81
 		K_CALL:K = EVENT_MESSAGE
@@ -5339,8 +5339,8 @@ SELECTCASE TFLAG:13
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：物陰で自慰
-		;奉仕する側
+		;던전내 성욕처리：그늘에서 자위
+		;봉사하는 쪽
 		;-------------------------------------------------
 	CASE 82
 		K_CALL:K = EVENT_MESSAGE
@@ -5349,9 +5349,9 @@ SELECTCASE TFLAG:13
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：仲魔とセックスする
-		;やる側
-		;PLAYERに相手の番号が入っています
+		;던전내 성욕처리：동료마와 섹스한다
+		;하는 쪽
+		;PLAYER에 상대의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 83
 		K_CALL:K = EVENT_MESSAGE
@@ -5360,9 +5360,9 @@ SELECTCASE TFLAG:13
 			CFLAG:606 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：仲魔に奉仕させる
-		;奉仕される側
-		;PLAYERに奉仕する側の番号が入っています
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사받는 쪽
+		;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 84
 		K_CALL:K = EVENT_MESSAGE
@@ -5371,9 +5371,9 @@ SELECTCASE TFLAG:13
 			CFLAG:607 = 1
 		ENDIF
 		;-------------------------------------------------
-		;ダンジョン内性欲処理：輪姦イベント
-		;奉仕する側
-		;PLAYERに実行者=輪姦する悪魔の番号が入っています
+		;던전내 성욕처리：윤간이벤트
+		;봉사하는 쪽
+		;PLAYER에 실행자 = 윤간하는 악마의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 85
 		K_CALL:K = EVENT_MESSAGE
@@ -5384,94 +5384,94 @@ SELECTCASE TFLAG:13
 		
 
 		;-------------------------------------------------
-		;教会で祈る
+		;교회에서 기도
 		;-------------------------------------------------
 	CASE 65
 			K_CALL:K = EVENT_MESSAGE
-			;教会の種類によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
-				;メシア教会
+				;메시아 교회
 				CASE 13
-					;初めて
+					;처음
 					IF CFLAG:609 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:609 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:609 = 1
 					ENDIF
-				;ガイア教会
+				;가이아 교회
 				CASE 14
-					;初めて
+					;처음
 					IF CFLAG:610 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:610 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:610 = 1
 					ENDIF
-				;教会
+				;교회
 				CASE 15
-					;初めて
+					;처음
 					IF CFLAG:611 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:611 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
@@ -5479,94 +5479,94 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;教会で口奉仕
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			K_CALL:K = EVENT_MESSAGE
-			;教会の種類によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
-				;メシア教会
+				;메시아 교회
 				CASE 13
-					;初めて
+					;처음
 					IF CFLAG:612 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:612 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:612 = 1
 					ENDIF
-				;ガイア教会
+				;가이아 교회
 				CASE 14
-					;初めて
+					;처음
 					IF CFLAG:613 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:613 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:613 = 1
 					ENDIF
-				;教会
+				;교회
 				CASE 15
-					;初めて
+					;처음
 					IF CFLAG:614 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:614 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
@@ -5574,94 +5574,94 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;教会で性奉仕
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			K_CALL:K = EVENT_MESSAGE
-			;教会の種類によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
-				;メシア教会
+				;메시아 교회
 				CASE 13
-					;初めて
+					;처음
 					IF CFLAG:615 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:615 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:615 = 1
 					ENDIF
-				;ガイア教会
+				;가이아 교회
 				CASE 14
-					;初めて
+					;처음
 					IF CFLAG:616 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:616 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:616 = 1
 					ENDIF
-				;教会
+				;교회
 				CASE 15
-					;初めて
+					;처음
 					IF CFLAG:617 == 0
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
 						CFLAG:617 = 1
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
-						;ロウ
+						;로우
 						IF ABL:속성LC == 1
 							WSTR:(K++) =
-						;カオス
+						;카오스
 						ELSEIF ABL:속성LC == 3
 							WSTR:(K++) =
-						;ニュートラル
+						;뉴트럴
 						ELSE
 							WSTR:(K++) =
 						ENDIF
@@ -5687,21 +5687,21 @@ ENDIF
 CALL 구상변수초기화
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;オニ＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			K_CALL:K = MESSAGE_LOSE_COLOSSEUM
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				WSTR:(K++) = 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				WSTR:(K++) = 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				WSTR:(K++) = 
 			ENDIF
-			;그외
+			;그 외
 			IF !구상유무확인(0)
 				WSTR:(K++) = 
 			ENDIF
@@ -5717,11 +5717,11 @@ ENDIF
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_ENDING関係(4033、X2をキャラ番号に置換する)
+;@KOJO_MESSAGE_ENDING 관련(4033, X2를 캐릭터 번호로 치환한다)
 ;-------------------------------------------------
 ;-------------------------------------------------
-;エンディング口上の有無を判別する関数
-;記述したエンディングの種類に応じてコメントアウトを解除
+;엔딩구상의 유무를 판별하는 함수
+;기술한 엔딩의 종류에 따라 주석처리를 해제
 ;-------------------------------------------------
 @ENDING_CHECK_K4033
 SELECTCASE TSTR:END종별
@@ -5732,15 +5732,15 @@ SELECTCASE TSTR:END종별
 	;		RETURN 1
 	;	SIF TALENT:노리개
 	;		RETURN 1
-	;CASE "調教師END"
+	;CASE "조교사경영END"
 	;	RETURN 1
-	;CASE "稀代の調教師END"
+	;CASE "희대의조교사END"
 	;	RETURN 1
-	;CASE "食堂経営END"
+	;CASE "식당경영END"
 	;	RETURN 1
-	;CASE "娼館経営END"
+	;CASE "창관경영END"
 	;	RETURN 1
-	;CASE "アイドルEND"
+	;CASE "아이돌END"
 	;	RETURN 1
 ENDSELECT
 RETURN 0
@@ -5931,7 +5931,7 @@ RETURN 0
 			KSTR:(K++) = 「欲しいっ！欲しいっ！大好……らいしゅきぃぃぃぃ！！%UNICODE(0x2661)%」
 		ENDSELECT
 
-;強絶頂する関数、汎用　陥落済
+;강절정する関数、汎用　陥落済
 	@IKIMASU001
 		SELECTCASE RAND:7
 		CASE 0
@@ -6103,14 +6103,14 @@ RETURN 0
 		ENDSELECT
 
 ;-------------------------------------------------
-;エンド本文
+;엔딩 본문
 ;-------------------------------------------------
 @KOJO_MESSAGE_ENDING_K4033
 ;--------------------------------------------------
 CALL 구상변수초기화
 SELECTCASE TSTR:END종별
 	;CASE "개별END"
-		;恋慕単体エンド
+		;연모 1체 엔딩
 		;IF TALENT:아내 || TALENT:남편 && CFLAG:21 == 1
 			;DRAWLINE
 			;WSTR:(K++) = …………
@@ -6120,7 +6120,7 @@ SELECTCASE TSTR:END종별
 
 			;WSTR:(K++) = 
 			;WSTR:(K++) = 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;淫乱単体エンド
+		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;DRAWLINE
 			;WSTR:(K++) = …………
@@ -6130,7 +6130,7 @@ SELECTCASE TSTR:END종별
 
 			;WSTR:(K++) = 
 			;WSTR:(K++) = 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;服従単体エンド
+		;복종 1체 엔딩
 		;ELSEIF TALENT:노리개 && CFLAG:21 == 1
 			;DRAWLINE
 			;WSTR:(K++) = …………
@@ -6141,25 +6141,25 @@ SELECTCASE TSTR:END종별
 			;WSTR:(K++) = 
 			;WSTR:(K++) = 　　　　　　　　―― Extra Ending　（◯◯エンド）
 		;ENDIF
-	;CASE "調教師END"
-	;CASE "稀代の調教師END"
-	;CASE "食堂経営END"
-	;CASE "娼館経営END"
-	;CASE "アイドルEND"
+	;CASE "조교사경영END"
+	;CASE "희대의조교사END"
+	;CASE "식당경영END"
+	;CASE "창관경영END"
+	;CASE "아이돌END"
 ENDSELECT
 CALL 구상변수표시
-;個別ENDの場合ここでRETURN 1すると、その後ゲームは続かず次周に行くかゲーム終了かの選択になります
+;개별END의 경우 여기서 RETURN 1하면, 그 후 게임은 계속되지 않고 다음 주차로 넘어갈지 게임종료할지 선택하게 됩니다
 RETURN 1
 
 @ENEMY_BATTLE_EVENT_K4033, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;敵でのデビルＣＯ－ＯＰ発動時の台詞
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
-;敵でのデビルＣＯ－ＯＰ参加時の台詞
+;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -6167,13 +6167,13 @@ ENDIF
 
 ;@BATTLE_EVENT_K4033, ARG, ARG:1, ARG:2
 ;IF TFLAG:전투이벤트 == 1
-;味方パーティでのデビルＣＯ－ＯＰ発動時の台詞
+;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;ENDIF
 ;IF TFLAG:전투이벤트 == 2
-;味方パーティでのデビルＣＯ－ＯＰ参加時の台詞
+;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -6182,76 +6182,76 @@ ENDIF
 
 ;@BATTLE_MESSAGE_K4033,ARG,ARG:1 = 0
 
-;選択したコマンドにより分岐させたい場合、IF文の条件にコマンドNoを記入すること
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
 ;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;	PRINTFORML ┃%"",72,LEFT%┃
 ;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 ;ELSEIF ARG:1 > 0
-	;忠誠度が上昇する行動をとった場合に表示する口上
+	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
 ;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	;使用したスキルの名前をLOCALSに代入
+;	;사용한 스킬의 이름을 LOCALS에 대입
 ;	LOCALS = %RESULTS%
 
 ;	SELECTCASE ARG:1
-;		;物理ダメージを与える行動で、獰猛持ちの忠誠度が上昇
+;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"영맹")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;魔法ダメージを与える行動で、狡猾持ちの忠誠度が上昇
+;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교활")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;高威力の行動で、残虐持ちの忠誠度が上昇
+;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"잔학")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;相手の弱点を付いた攻撃or行動不能な状態異常の敵に対する攻撃で、賢い持ちの忠誠度が上昇
+;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"현명")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;破魔相性の行動で、天使持ちの忠誠度が上昇
+;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;呪殺相性の行動で、堕天使持ちの忠誠度が上昇
+;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"타천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;회복・状態回復行動では友愛持ちの忠誠度が上昇
+;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"우애")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;状態変化では高慢持ちの忠誠度が上昇
+;		;상태변화로는 교만 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교만")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;特殊では冷静持ちの忠誠度が上昇
+;		;특수로는 냉정 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"냉정")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;愚鈍持ちは主人とのLv差だけ忠誠度が上昇
+;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"우둔")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;虚心持ちは最低２だけ忠誠度が上昇
+;		;허심 보유자는 최저 ２만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"허심")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;	ENDSELECT
 ;ELSE
-;	;システムによらず忠誠度を上げたいとか他があったらここに記載
+;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
 ;ENDIF

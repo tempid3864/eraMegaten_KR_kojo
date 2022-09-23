@@ -1,12 +1,12 @@
 ﻿@ENEMY_BATTLE_EVENT_K4395_2, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;적でのデビルＣＯ－ＯＰ発動時の台詞
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
-;적でのデビルＣＯ－ＯＰ참가時の台詞
+;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -14,7 +14,7 @@ ENDIF
 
 @BATTLE_EVENT_K4395_2, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;아군パーティでのデビルＣＯ－ＯＰ発動時の台詞
+;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 	IF RAND:3 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"終わりだよ！",72,LEFT%┃
@@ -30,7 +30,7 @@ IF TFLAG:전투이벤트 == 1
 	ENDIF
 ENDIF
 IF TFLAG:전투이벤트 == 2
-;아군パーティでのデビルＣＯ－ＯＰ참가時の台詞
+;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
 	IF RAND:3 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"要するに、ぶっ潰しちゃえばいいんでしょう？",72,LEFT%┃
@@ -135,7 +135,7 @@ ENDIF
 IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 	;피탄（死亡）
 	IF BASE:ARG:ＨＰ <= 0
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			IF RAND:3 == 0
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -198,7 +198,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 		ENDIF
 	;残り１５％以下
 	ELSEIF 현HP비율(ARG) < 15
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ハハハ、何だかなぁ。　今更また死にたくないなんて。",72,LEFT%┃
@@ -348,7 +348,7 @@ ENDIF
 @BATTLE_MESSAGE_K4395_2,ARG,ARG:1 = 0
 #LOCALSIZE 2
 
-;사용した스킬の이름をLOCALSに代入
+;사용한 스킬의 이름을 LOCALS에 대입
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 LOCALS = %RESULTS%
 ;사용した스킬の相称번호をLOCALに代入
@@ -361,7 +361,7 @@ LOCAL:1 = RESULT
 
 ;以下공격구상
 
-;選択したコマンドにより分岐させたい場合、IF文の조건にコマンドNoを記入すること
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;통상공격
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:4 == 0
@@ -385,7 +385,7 @@ IF CFLAG:ARG:입력행동 == 0
 ;特別구상のある行動群
 ;롯소・판타즈마
 ELSEIF CFLAG:ARG:입력행동 == 2995
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		SELECTCASE RAND:3
 			CASE 0
@@ -401,7 +401,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、好きなヤツの為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		SELECTCASE RAND:3
 		CASE 0
@@ -417,7 +417,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、アタシの욕망の為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		SELECTCASE RAND:3
 		CASE 0
@@ -433,7 +433,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、罪を償う為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
-	;それ以外
+	;그 이외
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"ちくしょう、またこの마법を使う事になるのかよ…",72,LEFT%┃

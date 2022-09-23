@@ -11,35 +11,35 @@
 ;	+----+----+-------------------------------+
 ;	|   2| ○ | 口上の誤字・脱字の修正         |
 ;	+----+----+-------------------------------+
-;	|   3| ○ | 口上まとめへの収録             |
+;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
-;	|   4| ○ | 口上の新規追加                 |
+;	|   4| ○ | 口上の新規追加                |
 ;	+----+----+-------------------------------+
 ;	|   5| ○ | 既存口上の改変                |
 ;	+----+----+-------------------------------+
-;	|   6| ○ | 改変した口上の自由な再配布   |
+;	|   6| ○ | 改変した口上の自由な再配布    |
 ;	+----+----+-------------------------------+
 ;	|   7| ○ | 口上内容の転載・流用          |
 ;	+----+----+-------------------------------+
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;eraMegaten専用구상テンプレート
-;4570_2と4570_2をキャラ番号に置換し、Y1を조수のキャラ番号に置換してください
-;ただし、キャラ番号が一桁のキャラの場合、4570_2,Y1は1、4570_2は01のように変えてください
-;そしてコマンド内の適当な조건の下のPRINTFORMWの後ろに半角スペースを置いてセリフを추가してください
-;구상を추가しないコマンドは無記入でも構いませんが、CFLAG:XXXの머리に『;』をつけてコメントアウトすると尚良いでしょう
-;エ키스トラ構文など、コメントアウトされている構文を使う際には、『;』を外してコメントアウトを해제する필요があります
-;最後にread meにも눈を通しておくことをお勧めします
+;eraMegaten전용 구상 템플릿
+;4570_2と4570_2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4570_2,Y1は1、4570_2は01のように変えてください
+;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
+;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
+;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;汎用구상の作成に사용する場合は、4570_2→キャラ番号ではなく、
-;K4570_2→PUB회화타입番号　へと変換してご사용ください
+;범용 구상의 작성에 사용하는 경우는, 4570_2→캐릭터번호가 아니라,
+;K4570_2→PUB회화타입番号　로 변경해서 사용해주세요
 ;-------------------------------------------------
 
 ;--------------------------------------------------
-;구상셀렉트기능：구상설명
+;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
 ;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
 ;既に구상のあるキャラや회화타입の別版の구상を作成する時に利用してください
@@ -49,42 +49,42 @@
 @셀렉트구상설명_K4570_2,ARG = 0
 SIF ARG == 1
 	RETURN 0
-;구상名
+;구상명
 ;PRINTFORML
 PRINTFORML 유리아구상Ｂ
-;구상설명文
+;구상설명문
 PRINTFORML 　
 
 ;--------------------------------------------------
-;EVENTTRAIN関係（4570_2をキャラ番号に置換）
+;EVENTTRAIN 관련（4570_2을 캐릭터번호로 치환）
 ;조교開始時のセリフ CFLAG 201〜219を사용
 ;--------------------------------------------------
 @EVENTTRAIN_K4570_2
 ;--------------------------------------------------
-;엑스트라모드構文　CFLAG:220を사용
-;はいを選択した時に初조교時に구상설정用の素質に변경できます
-;下記に처녀化する場合の構文を샘플として載せておきます
+;엑스트라모드 구문　CFLAG:220을 사용
+;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
+;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀モードに移行しますか？
+;	PRINTL 処女モードに移行しますか？
 ;	PRINTL [0] はい
 ;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―처녀モードに素質、能力を변경します―
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―通常モードで조교を開始します―
+;		PRINTFORMW ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
 ;	CFLAG:220 = 1
 ;ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL EVENTTRAIN_PY1_K4570_2
@@ -97,18 +97,18 @@ PRINTFORML 　
 ;	ENDIF
 ;ENDIF
 ;--------------------------------------------------
-;簡易조수구상の発動時に初조교時구상をスキップ（Y1を조수のキャラ番号にする）
-;複数人いる際には、SIF NO:ASSI == Y1 || NO:ASSI == Z1と추가していく
+;간이 조수구상 발동시에 첫조교시 구상을 스킵（Y1을 조수의 캐릭터번호로 한다）
+;여러 명이 있을 경우는, SIF NO:ASSI == Y1 || NO:ASSI == Z1으로 추가해 나간다
 ;--------------------------------------------------
 ;IF CFLAG:201 == 0 && ASSI > 0
 ;	SIF NO:ASSI == Y1
 ;		CFLAG:201 =1
 ;ENDIF
 ;-------------------------------------------------
-;조교開始時（一回のみ） CFLAG201
+;조교 개시시（1회만） CFLAG201
 ;-------------------------------------------------
 DRAWLINE
-;初조교時
+;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	CFLAG:201 = 1
 	RETURN 0
@@ -132,7 +132,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:3
 		IF CFLAG:미조교함락 == 1
-			;조교せずに연모をつけた場合
+			;조교하지 않고 연모를 단 경우
 			PRINTFORMW 
 		ELSE
 			PRINTFORMW 
@@ -150,29 +150,29 @@ ENDIF
 
 ;-------------------------------------------------
 ;簡易조수구상（Y1を조수のキャラ番号に置換、4570_2をキャラ番号に변경する) CFLAG203
-;掛け合いをするキャラを増やす場合は、構文をコピー＆ペーストをして、CFLAGの数を204、205と増やす
+;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
-;조수の有無を체크（いない場合は二回目以降へ飛ぶ）
+;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K4570_2
 ;조수
 ;ELSEIF NO:ASSI == Y1
-	;初めて
+	;처음
 ;	IF CFLAG:203 == 0
-		;함락済み＋함락時初구상が発生済み
+		;함락완료＋함락시 첫 구상이 발생완료
 ;		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 ;			PRINTFORMW 
-		;それ以外
+		;그 이외
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
 ;		CFLAG:203 = 1
-	;二回目以降
+	;2번째 이후
 ;	ELSEIF CFLAG:203 < 2 || FLAG:7 ==2
-		;함락済み
+		;함락완료
 ;		IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 ;			PRINTFORMW 
-		;それ以外
+		;그 이외
 ;		ELSE
 ;			PRINTFORMW 
 ;		ENDIF
@@ -184,7 +184,7 @@ ELSE
 ENDIF
 
 ;-------------------------------------------------
-;조교開始時（2回目以降、4570_2をキャラ番号に변경する）
+;조교 개시시（2번째 이후, 4570_2をキャラ番号に변경する）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K4570_2
 ;반발각인Lv3
@@ -207,9 +207,9 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 	PRINTFORMW 
 	CFLAG:202 = 4
-;함락済み
+;함락완료
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
 		K:1 = RAND:3
@@ -220,7 +220,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
 		K:1 = RAND:3
@@ -231,7 +231,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ELSE
 			PRINTFORMW 
 		ENDIF
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
 		K:1 = RAND:3
@@ -248,12 +248,12 @@ ENDIF
 RETURN 0
 
 ;-------------------------------------------------
-;EVENTEND関係（4570_2をキャラ番号に置換）
+;EVENTEND 관련（4570_2을 캐릭터번호로 치환）
 ;조교終了時のセリフ
 ;-------------------------------------------------
 @EVENTEND_K4570_2
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL EVENTEND_PY1_K4570_2
@@ -272,7 +272,7 @@ DRAWLINE
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	PRINTFORMW 
 	CFLAG:217 = 1
-;굴복각인Lv1以下
+;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
 	PRINTFORMW 
 	CFLAG:219 = 1
@@ -284,28 +284,28 @@ ELSEIF MARK:2 == 2
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORMW 
 	CFLAG:219 = 3
-;함락済み＋체력500未満
+;함락완료＋체력500未満
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORMW 
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORMW 
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 
 	ENDIF
 	CFLAG:218 = 1
-;함락済み
+;함락완료
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORMW 
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORMW 
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 
 	ENDIF
@@ -314,20 +314,20 @@ ENDIF
 RETURN 0
 
 ;--------------------------------------------------
-;@KOJO_MESSAGE_COM関係（4570_2をキャラ番号に置換）
-;コマンド実行時に出力されます
+;@KOJO_MESSAGE_COM 관련（4570_2을 캐릭터번호로 치환）
+;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
 @KOJO_MESSAGE_COM_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_COM_PY1_K4570_2
@@ -343,7 +343,7 @@ ENDIF
 ;コマンド実行時のセリフ CFLAG 300〜500
 ;-------------------------------------------------
 ;=================================================
-;애무계コマンド
+;애무계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;0,애무
@@ -351,21 +351,21 @@ ENDIF
 SELECTCASE SELECTCOM
 	CASE 0
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:300 == 0
 			PRINTFORMW 
 			CFLAG:300 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -374,7 +374,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:300 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:300 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:300 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:300 = 2
@@ -386,21 +386,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 1
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:301 == 0
 			PRINTFORMW 
 			CFLAG:301 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -409,7 +409,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:301 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:301 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:301 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:301 = 2
@@ -420,21 +420,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 2
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:302 == 0
 			PRINTFORMW 
 			CFLAG:302 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -443,7 +443,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:302 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:302 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:302 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:302 = 2
@@ -454,21 +454,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 3
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:303 == 0
 			PRINTFORMW 
 			CFLAG:303 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:303 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -477,7 +477,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:303 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:303 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:303 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:303 = 2
@@ -488,21 +488,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 4
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:304 == 0
 			PRINTFORMW 
 			CFLAG:304 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -511,7 +511,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:304 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:304 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:304 = 2
@@ -522,21 +522,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 5
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:305 == 0
 			PRINTFORMW 
 			CFLAG:305 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -545,7 +545,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:305 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:305 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:305 = 2
@@ -556,21 +556,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 6
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:306 == 0
 			PRINTFORMW 
 			CFLAG:306 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -579,7 +579,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:306 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:306 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:306 = 2
@@ -591,21 +591,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 7
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:307 == 0
 			PRINTFORMW 
 			CFLAG:307 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -614,7 +614,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:307 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:307 = 2
@@ -626,21 +626,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 8
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:308 == 0
 			PRINTFORMW 
 			CFLAG:308 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:308 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -649,7 +649,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:308 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:308 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:308 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:308 = 2
@@ -661,21 +661,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 9
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:309 == 0
 			PRINTFORMW 
 			CFLAG:309 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -684,7 +684,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:309 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:309 = 2
@@ -696,21 +696,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 10
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:310 == 0
 			PRINTFORMW 
 			CFLAG:310 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -719,7 +719,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:310 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:310 = 2
@@ -731,21 +731,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 11
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:311 == 0
 			PRINTFORMW 
 			CFLAG:311 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -754,7 +754,7 @@ SELECTCASE SELECTCOM
 			ELSEIF ABL:0 >= 3 && (CFLAG:311 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:311 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:311 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:311 = 2
@@ -766,21 +766,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 12
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:435 == 0
 			PRINTFORMW 
 			CFLAG:435 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:435 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -789,7 +789,7 @@ SELECTCASE SELECTCOM
 			ELSEIF ABL:0 >= 3 && (CFLAG:435 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:435 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:435 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:435 = 2
@@ -800,21 +800,21 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 13
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:436 == 0
 			PRINTFORMW 
 			CFLAG:436 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:436 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -823,7 +823,7 @@ SELECTCASE SELECTCOM
 			ELSEIF ABL:0 >= 3 && (CFLAG:436 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:436 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:436 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:436 = 2
@@ -833,21 +833,21 @@ SELECTCASE SELECTCOM
 ;14,클리애무
 ;-------------------------------------------------
 CASE 14
-		;初めて
+		;처음
 		IF CFLAG:442 == 0
 			CALL TRAIN_MESSAGE
 			PRINTFORMW 
 			CFLAG:442 = 1
-		;二回目以降
-		;함락済み
+		;2번째 이후
+		;함락완료
 		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:442 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			CFLAG:442 = 4
@@ -856,35 +856,35 @@ CASE 14
 		ELSEIF ABL:0 >= 3 && (CFLAG:442 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:442 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:442 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:442 = 2
 		ENDIF
 
 ;=================================================
-;コミュニケーション系コマンド
+;커뮤니케이션계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;20,키스한다
 ;-------------------------------------------------
 	CASE 20
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:312 == 0
 			PRINTFORMW 
 			CFLAG:312 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -893,7 +893,7 @@ CASE 14
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:312 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:312 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:312 = 2
@@ -905,21 +905,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 21
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:313 == 0
 			PRINTFORMW 
 			CFLAG:313 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:313 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -928,7 +928,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:313 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:313 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:313 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:313 = 2
@@ -936,88 +936,88 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;22,회화　연모、친애のみ
+;22,회화　연모, 친애만
 ;-------------------------------------------------
 	CASE 22
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:314 == 0
 			PRINTFORMW 
 			CFLAG:314 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:314 = 2
 		ENDIF
 ;-------------------------------------------------
-;23,프레젠트　연모、친애のみ
+;23,프레젠트　연모, 친애만
 ;-------------------------------------------------
 	CASE 23
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:315 == 0
 			PRINTFORMW 
 			CFLAG:315 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:315 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;24,스킨쉽　연모、친애のみ
+;24,스킨쉽　연모, 친애만
 ;-------------------------------------------------
 	CASE 24
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:316 == 0
 			PRINTFORMW 
 			CFLAG:316 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:316 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;25,느긋하게있는다　연모、친애のみ
+;25,느긋하게있는다　연모, 친애만
 ;-------------------------------------------------
 	CASE 25
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:317 == 0
 			PRINTFORMW 
 			CFLAG:317 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:317 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;26,가사　연모、친애のみ
+;26,가사　연모, 친애만
 ;-------------------------------------------------
 	CASE 26
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:318 == 0
 			PRINTFORMW 
 			CFLAG:318 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:318 = 2
 		ENDIF
 ;-------------------------------------------------
-;27,노래연습　연모、친애のみ
+;27,노래연습　연모, 친애만
 ;-------------------------------------------------
 	CASE 27
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:319 == 0
 			PRINTFORMW 
 			CFLAG:319 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:319 = 2
@@ -1028,21 +1028,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 28
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:320 == 0
 			PRINTFORMW 
 			CFLAG:320 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:320 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1051,71 +1051,71 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:320 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:320 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:320 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:320 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;29,비디오감상　함락済みのみ
+;29,비디오감상　함락완료만
 ;-------------------------------------------------
 	CASE 29
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:321 == 0
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
 			CFLAG:321 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:321 < 2 || FLAG:7 == 2
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
 			CFLAG:321 = 2
 		ENDIF
 ;-------------------------------------------------
-;30,파후파후　함락済みのみ
+;30,파후파후　함락완료만
 ;-------------------------------------------------
 	CASE 30
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:422 == 0
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
 			CFLAG:422 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:422 < 2 || FLAG:7 == 2
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -1123,27 +1123,27 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;道具사용コマンド
+;도구사용 커맨드
 ;=================================================
 ;40,로터
 ;-------------------------------------------------
 	CASE 40
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:322 == 0
 			PRINTFORMW 
 			CFLAG:322 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:322 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1152,7 +1152,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:322 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:322 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:322 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:322 = 2
@@ -1163,21 +1163,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 41
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:323 == 0
 			PRINTFORMW 
 			CFLAG:323 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:323 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1186,7 +1186,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:323 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:323 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:323 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:323 = 2
@@ -1199,21 +1199,21 @@ CASE 14
 	CASE 42
 		IF TEQUIP:11
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:324 == 0
 				PRINTFORMW 
 				CFLAG:324 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:324 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -1222,7 +1222,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:324 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:324 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:324 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:324 = 2
@@ -1241,21 +1241,21 @@ CASE 14
 	CASE 43
 		IF TEQUIP:12
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:325 == 0
 				PRINTFORMW 
 				CFLAG:325 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:325 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -1264,7 +1264,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:325 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:325 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:325 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:325 = 2
@@ -1283,27 +1283,27 @@ CASE 14
 	CASE 44
 	IF TEQUIP:13
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:326 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:326 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:326 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1312,7 +1312,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:326 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:326 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:326 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:326 = 2
@@ -1331,21 +1331,21 @@ CASE 14
 	CASE 45
 	IF TEQUIP:14
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:327 == 0
 			PRINTFORMW 
 			CFLAG:327 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:327 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1354,7 +1354,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:327 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:327 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:327 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:327 = 2
@@ -1373,21 +1373,21 @@ CASE 14
 	CASE 46
 	IF TEQUIP:15
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:328 == 0
 			PRINTFORMW 
 			CFLAG:328 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:328 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1396,7 +1396,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:328 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:328 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:328 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:328 = 2
@@ -1415,21 +1415,21 @@ CASE 14
 	CASE 47
 		IF TEQUIP:16
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:329 == 0
 				PRINTFORMW 
 				CFLAG:329 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:329 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -1438,7 +1438,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:329 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:329 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:329 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:329 = 2
@@ -1456,21 +1456,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 48
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:330 == 0
 			PRINTFORMW 
 			CFLAG:330 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:330 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1479,7 +1479,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:330 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:330 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:330 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:330 = 2
@@ -1492,21 +1492,21 @@ CASE 14
 	CASE 49
 		IF TEQUIP:17
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:331 == 0
 				PRINTFORMW 
 				CFLAG:331 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:331 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -1515,7 +1515,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:331 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:331 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:331 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:331 = 2
@@ -1528,26 +1528,26 @@ CASE 14
 			ENDIF
 		ENDIF
 ;=================================================
-;섹스系コマンド
+;섹스계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;60,정상위
 ;-------------------------------------------------
 	CASE 60
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:332 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1555,16 +1555,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1574,19 +1574,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:332 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1596,7 +1596,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:332 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:332 = 2
@@ -1608,19 +1608,19 @@ CASE 14
 ;-------------------------------------------------
 	CASE 61
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:333 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1628,16 +1628,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1647,19 +1647,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:333 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1669,7 +1669,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:333 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:333 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:333 = 2
@@ -1681,21 +1681,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 62
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:334 == 0
 			PRINTFORMW 
 			CFLAG:334 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:334 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1704,7 +1704,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:334 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:334 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:334 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:334 = 2
@@ -1716,21 +1716,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 63
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:335 == 0
 			PRINTFORMW 
 			CFLAG:335 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:335 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1739,7 +1739,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:335 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:335 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:335 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:335 = 2
@@ -1751,21 +1751,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 64
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:336 == 0
 			PRINTFORMW 
 			CFLAG:336 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:336 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1774,7 +1774,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:336 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:336 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:336 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:336 = 2
@@ -1786,21 +1786,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 65
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:337 == 0
 			PRINTFORMW 
 			CFLAG:337 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:337 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1809,7 +1809,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:337 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:337 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:337 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:337 = 2
@@ -1821,19 +1821,19 @@ CASE 14
 ;-------------------------------------------------
 	CASE 66
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:338 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1841,16 +1841,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1860,19 +1860,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:338 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1882,7 +1882,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:338 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:338 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:338 = 2
@@ -1894,21 +1894,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 67
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:339 == 0
 			PRINTFORMW 
 			CFLAG:339 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:339 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1917,7 +1917,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:339 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:339 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:339 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:339 = 2
@@ -1929,19 +1929,19 @@ CASE 14
 ;-------------------------------------------------
 	CASE 68
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:340 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1949,16 +1949,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -1968,19 +1968,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:340 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -1990,7 +1990,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:340 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:340 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:340 = 2
@@ -2002,19 +2002,19 @@ CASE 14
 ;-------------------------------------------------
 	CASE 69
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:341 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -2022,16 +2022,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -2041,19 +2041,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:341 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2063,7 +2063,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:341 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:341 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:341 = 2
@@ -2074,21 +2074,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 70
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:342 == 0
 			PRINTFORMW 
 			CFLAG:342 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:342 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2097,7 +2097,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:342 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:342 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:342 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:342 = 2
@@ -2109,21 +2109,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 71
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:343 == 0
 			PRINTFORMW 
 			CFLAG:343 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:343 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2132,7 +2132,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:343 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:343 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:343 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:343 = 2
@@ -2144,19 +2144,19 @@ CASE 14
 ;-------------------------------------------------
 	CASE 72
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:420 == 0
 			;처녀
 			IF TALENT:0
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -2164,16 +2164,16 @@ CASE 14
 					PRINTFORMW 
 					PRINTFORMW 
 				ENDIF
-			;それ以外
+			;그 이외
 			ELSE
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 					PRINTFORMW 
@@ -2183,19 +2183,19 @@ CASE 14
 				ENDIF
 			ENDIF
 			CFLAG:420 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2205,7 +2205,7 @@ CASE 14
 				PRINTFORMW 
 				PRINTFORMW 
 				CFLAG:420 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:420 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:420 = 2
@@ -2216,21 +2216,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 73
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:421 == 0
 			PRINTFORMW 
 			CFLAG:421 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:421 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2239,7 +2239,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:421 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:421 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:421 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:421 = 2
@@ -2247,28 +2247,28 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;봉사계コマンド
+;봉사계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;80,수음
 ;-------------------------------------------------
 	CASE 80
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:344 == 0
 			PRINTFORMW 
 			CFLAG:344 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2277,7 +2277,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:344 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:344 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:344 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:344 = 2
@@ -2289,21 +2289,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 81
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:345 == 0
 			PRINTFORMW 
 			CFLAG:345 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2312,7 +2312,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:345 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:345 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:345 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:345 = 2
@@ -2324,21 +2324,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 82
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:346 == 0
 			PRINTFORMW 
 			CFLAG:346 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2347,7 +2347,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:346 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:346 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:346 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:346 = 2
@@ -2359,21 +2359,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 83
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:347 == 0
 			PRINTFORMW 
 			CFLAG:347 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:347 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2382,7 +2382,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:347 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:347 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:347 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:347 = 2
@@ -2394,21 +2394,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 84
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:348 == 0
 			PRINTFORMW 
 			CFLAG:348 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:348 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2417,7 +2417,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:348 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:348 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:348 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:348 = 2
@@ -2429,21 +2429,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 85
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:349 == 0
 			PRINTFORMW 
 			CFLAG:349 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:349 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2452,7 +2452,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:349 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:349 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:349 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:349 = 2
@@ -2464,21 +2464,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 86
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:350 == 0
 			PRINTFORMW 
 			CFLAG:350 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:350 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2487,7 +2487,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:350 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:350 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:350 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:350 = 2
@@ -2499,21 +2499,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 87
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:351 == 0
 			PRINTFORMW 
 			CFLAG:351 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:351 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2522,7 +2522,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:351 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:351 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:351 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:351 = 2
@@ -2534,21 +2534,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 88
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:352 == 0
 			PRINTFORMW 
 			CFLAG:352 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:352 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2557,7 +2557,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:352 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:352 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:352 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:352 = 2
@@ -2565,32 +2565,32 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;89,모유마시기　함락済みのみ
+;89,모유마시기　함락완료만
 ;-------------------------------------------------
 	CASE 89
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:353 == 0
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
 		CFLAG:353 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:353 < 2 || FLAG:7 == 2
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -2598,28 +2598,28 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;조교자봉사계コマンド
+;조교자봉사계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;수음한다
 ;-------------------------------------------------
 	CASE 90
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:423 == 0
 			PRINTFORMW 
 			CFLAG:423 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:423 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2628,7 +2628,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:423 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:423 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:423 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:423 = 2
@@ -2639,21 +2639,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 91
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:424 == 0
 			PRINTFORMW 
 			CFLAG:424 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:424 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2662,7 +2662,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:424 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:424 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:424 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:424 = 2
@@ -2673,21 +2673,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 92
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:425 == 0
 			PRINTFORMW 
 			CFLAG:425 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:425 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2696,7 +2696,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:425 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:425 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:425 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:425 = 2
@@ -2707,21 +2707,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 93
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:426 == 0
 			PRINTFORMW 
 			CFLAG:426 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:426 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2730,7 +2730,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:426 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:426 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:426 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:426 = 2
@@ -2741,21 +2741,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 94
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:427 == 0
 			PRINTFORMW 
 			CFLAG:427 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:427 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2764,7 +2764,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:427 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:427 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:427 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:427 = 2
@@ -2775,21 +2775,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 95
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:428 == 0
 			PRINTFORMW 
 			CFLAG:428 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:428 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2798,7 +2798,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:428 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:428 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:428 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:428 = 2
@@ -2809,21 +2809,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 96
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:429 == 0
 			PRINTFORMW 
 			CFLAG:429 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:429 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2832,7 +2832,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:429 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:429 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:429 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:429 = 2
@@ -2843,21 +2843,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 97
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:430 == 0
 			PRINTFORMW 
 			CFLAG:430 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:430 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2866,39 +2866,39 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:430 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:430 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:430 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:430 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락済みのみ
+;98,모유飲ませる　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:443 == 0
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
 		CFLAG:443 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:443 < 2 || FLAG:7 == 2
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -2906,28 +2906,28 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;SM系コマンド
+;SM계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;100,스팽킹
 ;-------------------------------------------------
 	CASE 100
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:354 == 0
 			PRINTFORMW 
 			CFLAG:354 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:354 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2936,7 +2936,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:354 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:354 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:354 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:354 = 2
@@ -2948,21 +2948,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 101
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:355 == 0
 			PRINTFORMW 
 			CFLAG:355 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:355 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -2971,7 +2971,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:355 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:355 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:355 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:355 = 2
@@ -2983,21 +2983,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 102
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:356 == 0
 			PRINTFORMW 
 			CFLAG:356 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:356 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3006,7 +3006,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:356 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:356 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:356 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:356 = 2
@@ -3018,21 +3018,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 103
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:357 == 0
 			PRINTFORMW 
 			CFLAG:357 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:357 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3041,7 +3041,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:357 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:357 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:357 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:357 = 2
@@ -3053,21 +3053,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 104
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:358 == 0
 			PRINTFORMW 
 			CFLAG:358 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:358 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3076,7 +3076,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:358 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:358 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:358 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:358 = 2
@@ -3089,21 +3089,21 @@ CASE 14
 	CASE 105
 		IF TEQUIP:18
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:359 == 0
 				PRINTFORMW 
 				CFLAG:359 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:359 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3112,7 +3112,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:359 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:359 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:359 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:359 = 2
@@ -3131,21 +3131,21 @@ CASE 14
 	CASE 106
 		IF TEQUIP:19
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:360 == 0
 				PRINTFORMW 
 				CFLAG:360 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:360 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3154,7 +3154,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:360 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:360 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:360 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:360 = 2
@@ -3173,21 +3173,21 @@ CASE 14
 	CASE 107
 		IF TEQUIP:20
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:361 == 0
 				PRINTFORMW 
 				CFLAG:361 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:361 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3196,7 +3196,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:361 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:361 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:361 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:361 = 2
@@ -3210,28 +3210,28 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;조수によるコマンド、及び레즈プレイ
+;조수에 의한 커맨드, 및 레즈플레이
 ;=================================================
 ;-------------------------------------------------
 ;120,커닐링구스강제
 ;-------------------------------------------------
 	CASE 120
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:362 == 0
 			PRINTFORMW 
 			CFLAG:362 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:362 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3240,7 +3240,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:362 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:362 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:362 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:362 = 2
@@ -3252,21 +3252,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 121
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:363 == 0
 			PRINTFORMW 
 			CFLAG:363 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:363 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3275,7 +3275,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:363 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:363 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:363 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:363 = 2
@@ -3287,21 +3287,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 122
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:364 == 0
 			PRINTFORMW 
 			CFLAG:364 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:364 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3310,7 +3310,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:364 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:364 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:364 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:364 = 2
@@ -3322,21 +3322,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 123
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:365 == 0
 			PRINTFORMW 
 			CFLAG:365 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:365 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3345,7 +3345,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:365 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:365 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:365 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:365 = 2
@@ -3357,21 +3357,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 124
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:366 == 0
 			PRINTFORMW 
 			CFLAG:366 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:366 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3380,7 +3380,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:366 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:366 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:366 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:366 = 2
@@ -3392,21 +3392,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 125
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:367 == 0
 			PRINTFORMW 
 			CFLAG:367 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:367 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3415,7 +3415,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:367 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:367 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:367 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:367 = 2
@@ -3427,21 +3427,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 126
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:368 == 0
 			PRINTFORMW 
 			CFLAG:368 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3450,7 +3450,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:368 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:368 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:368 = 2
@@ -3462,21 +3462,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 127
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:432 == 0
 			PRINTFORMW 
 			CFLAG:432 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3485,7 +3485,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:432 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:432 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:432 = 2
@@ -3493,28 +3493,28 @@ CASE 14
 		ENDIF
 
 ;=================================================
-;ハードな조교コマンド
+;하드한조교 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;140,이라마치오
 ;-------------------------------------------------
 	CASE 140
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:369 == 0
 			PRINTFORMW 
 			CFLAG:369 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:369 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3523,7 +3523,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:369 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:369 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:369 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:369 = 2
@@ -3531,45 +3531,45 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;141,피스트퍽　복종、예속のみ
+;141,피스트퍽　복종, 예속만
 ;-------------------------------------------------
 	CASE 141
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:370 == 0
 			PRINTFORMW 
 			CFLAG:370 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:370 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:370 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;142,애널피스트　복종、예속のみ
+;142,애널피스트　복종, 예속만
 ;-------------------------------------------------
 	CASE 142
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:371 == 0
 			PRINTFORMW 
 			CFLAG:371 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:371 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:371 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;143,양구멍피스트　복종、예속のみ
+;143,양구멍피스트　복종, 예속만
 ;-------------------------------------------------
 	CASE 143
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:372 == 0
 			PRINTFORMW 
 			CFLAG:372 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:372 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:372 = 2
@@ -3580,21 +3580,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 144
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:373 == 0
 			PRINTFORMW 
 			CFLAG:373 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:373 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3603,7 +3603,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:373 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:373 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:373 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:373 = 2
@@ -3615,21 +3615,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 145
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:374 == 0
 			PRINTFORMW 
 			CFLAG:374 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:374 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3638,7 +3638,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:374 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:374 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:374 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:374 = 2
@@ -3651,21 +3651,21 @@ CASE 14
 	CASE 146
 		IF TEQUIP:21
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:375 == 0
 				PRINTFORMW 
 				CFLAG:375 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:375 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3674,7 +3674,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:375 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:375 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:375 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:375 = 2
@@ -3692,21 +3692,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 147
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:376 == 0
 			PRINTFORMW 
 			CFLAG:376 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:376 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3715,7 +3715,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:376 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:376 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:376 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:376 = 2
@@ -3728,21 +3728,21 @@ CASE 14
 	CASE 148
 		IF TEQUIP:22
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:377 == 0
 				PRINTFORMW 
 				CFLAG:377 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:377 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3751,7 +3751,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:377 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:377 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:377 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:377 = 2
@@ -3765,16 +3765,16 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;149,애널전극　복종、예속のみ
+;149,애널전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 149
 		IF TEQUIP:23
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:378 == 0
 				PRINTFORMW 
 				CFLAG:378 = 1
-			;二回目以降
+			;2번째 이후
 			ELSEIF CFLAG:378 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:378 = 2
@@ -3787,16 +3787,16 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;150,유방전극　복종、예속のみ
+;150,유방전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 150
 		IF TEQUIP:24
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:379 == 0
 				PRINTFORMW 
 				CFLAG:379 = 1
-			;二回目以降
+			;2번째 이후
 			ELSEIF CFLAG:379 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:379 = 2
@@ -3808,43 +3808,43 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;151,뱀장어욕탕　복종、예속のみ
+;151,뱀장어욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 151
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:380 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:380 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:380 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:380 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;152,벌레욕탕　복종、예속のみ
+;152,벌레욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 152
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:381 == 0
 			PRINTFORMW 
 			CFLAG:381 = 1
-		;二回目以降
+		;2번째 이후
 		ELSEIF CFLAG:381 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:381 = 2
 		ENDIF
 
 ;=================================================
-;촉수계コマンド
+;촉수계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;160,촉수소환
@@ -3852,21 +3852,21 @@ CASE 14
 	CASE 160
 		IF TEQUIP:25
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:382 == 0
 				PRINTFORMW 
 				CFLAG:382 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:382 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -3875,7 +3875,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:382 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:382 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:382 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:382 = 2
@@ -3893,27 +3893,27 @@ CASE 14
 ;-------------------------------------------------
 	CASE 161
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:383 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:383 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:383 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3922,7 +3922,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:383 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:383 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:383 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:383 = 2
@@ -3934,21 +3934,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 162
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:384 == 0
 			PRINTFORMW 
 			CFLAG:384 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:384 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3957,7 +3957,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:384 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:384 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:384 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:384 = 2
@@ -3969,21 +3969,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 163
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:385 == 0
 			PRINTFORMW 
 			CFLAG:385 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:385 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -3992,7 +3992,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:385 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:385 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:385 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:385 = 2
@@ -4004,21 +4004,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 164
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:386 == 0
 			PRINTFORMW 
 			CFLAG:386 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:386 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4027,7 +4027,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:386 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:386 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:386 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:386 = 2
@@ -4039,21 +4039,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 165
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:387 == 0
 			PRINTFORMW 
 			CFLAG:387 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:387 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4062,7 +4062,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:387 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:387 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:387 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:387 = 2
@@ -4074,21 +4074,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 166
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:388 == 0
 			PRINTFORMW 
 			CFLAG:388 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:388 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4097,7 +4097,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:388 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:388 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:388 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:388 = 2
@@ -4109,21 +4109,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 167
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:389 == 0
 			PRINTFORMW 
 			CFLAG:389 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:389 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4132,7 +4132,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:389 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:389 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:389 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:389 = 2
@@ -4145,21 +4145,21 @@ CASE 14
 	CASE 168
 		IF TEQUIP:36
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:390 == 0
 				PRINTFORMW 
 				CFLAG:390 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:390 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -4168,7 +4168,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:390 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:390 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:390 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:390 = 2
@@ -4186,21 +4186,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 169
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:391 == 0
 			PRINTFORMW 
 			CFLAG:391 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:391 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4209,7 +4209,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:391 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:391 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:391 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:391 = 2
@@ -4224,21 +4224,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 180
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:392 == 0
 			PRINTFORMW 
 			CFLAG:392 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:392 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4247,7 +4247,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:392 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:392 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:392 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:392 = 2
@@ -4259,21 +4259,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 181
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:393 == 0
 			PRINTFORMW 
 			CFLAG:393 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:393 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4282,7 +4282,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:393 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:393 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:393 = 2
@@ -4294,21 +4294,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 182
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:394 == 0
 			PRINTFORMW 
 			CFLAG:394 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:394 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4317,7 +4317,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:394 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:394 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:394 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:394 = 2
@@ -4329,21 +4329,21 @@ CASE 14
 	CASE 183
 		IF TEQUIP:28
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:395 == 0
 				PRINTFORMW 
 				CFLAG:395 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:395 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -4352,7 +4352,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:395 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:395 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:395 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:395 = 2
@@ -4371,27 +4371,27 @@ CASE 14
 	CASE 184
 		IF TEQUIP:29
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:396 == 1
 				PRINTFORMW 
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:396 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:396 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 				ENDIF
@@ -4400,21 +4400,21 @@ CASE 14
 		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
-				;初めて
+				;처음
 				IF CFLAG:396 == 0
 					PRINTFORMW 
 					CFLAG:396 = 1
-				;二回目以降
+				;2번째 이후
 				ELSE
-					;함락済み
+					;함락완료
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:396 < 4 || FLAG:7 == 2)
-						;연모、친애
+						;연모, 친애
 						IF TALENT:3 || TALENT:6
 							PRINTFORMW 
-						;음란、창부
+						;음란, 창부
 						ELSEIF TALENT:4 || TALENT:7
 							PRINTFORMW 
-						;복종、예속
+						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
 							PRINTFORMW 
 						ENDIF
@@ -4423,7 +4423,7 @@ CASE 14
 					ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
 						PRINTFORMW 
 						CFLAG:396 = 3
-					;それ以外
+					;그 이외
 					ELSEIF CFLAG:396 < 2 || FLAG:7 == 2
 						PRINTFORMW 
 						CFLAG:396 = 2
@@ -4437,21 +4437,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 185
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:397 == 0
 			PRINTFORMW 
 			CFLAG:397 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:397 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4460,7 +4460,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:397 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:397 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:397 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:397 = 2
@@ -4473,21 +4473,21 @@ CASE 14
 	CASE 186
 		IF TEQUIP:30
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:398 == 0
 				PRINTFORMW 
 				CFLAG:398 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:398 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -4496,7 +4496,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:398 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:398 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:398 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:398 = 2
@@ -4515,21 +4515,21 @@ CASE 14
 	CASE 187
 		IF TEQUIP:31
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:399 == 0
 				PRINTFORMW 
 				CFLAG:399 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:399 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -4538,7 +4538,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:399 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:399 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:399 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:399 = 2
@@ -4557,21 +4557,21 @@ CASE 14
 	CASE 188
 		IF TEQUIP:32
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:400 == 0
 				PRINTFORMW 
 				CFLAG:400 = 1
-			;二回目以降
+			;2번째 이후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:400 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -4580,7 +4580,7 @@ CASE 14
 				ELSEIF MARK:2 == 3 && (CFLAG:400 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
 					CFLAG:400 = 3
-				;それ以外
+				;그 이외
 				ELSEIF CFLAG:400 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					CFLAG:400 = 2
@@ -4594,16 +4594,16 @@ CASE 14
 		ENDIF
 
 ;-------------------------------------------------
-;189,새댁플레이,　연모、친애のみ
+;189,새댁플레이,　연모, 친애만
 ;-------------------------------------------------
 	CASE 189
 		IF TEQUIP:33
 			CALL TRAIN_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:401 == 0
 				PRINTFORMW 
 				CFLAG:401 = 1
-			;二回目以降
+			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:401 = 2
@@ -4620,21 +4620,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 190
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:402 == 0
 			PRINTFORMW 
 			CFLAG:402 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:402 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4643,7 +4643,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:402 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:402 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:402 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:402 = 2
@@ -4656,21 +4656,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 191 
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:403 == 0
 			PRINTFORMW 
 			CFLAG:403 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:403 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4679,7 +4679,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:403 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:403 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:403 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:403 = 2
@@ -4691,21 +4691,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 192
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:404 == 0
 			PRINTFORMW 
 			CFLAG:404 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:404 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4714,7 +4714,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:404 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:404 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:404 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:404 = 2
@@ -4726,21 +4726,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 193
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:405 == 0
 			PRINTFORMW 
 			CFLAG:405 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:405 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4749,7 +4749,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:405 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:405 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:405 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:405 = 2
@@ -4761,21 +4761,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 194
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:406 == 0
 			PRINTFORMW 
 			CFLAG:406 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:406 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4784,7 +4784,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:406 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:406 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:406 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:406 = 2
@@ -4796,21 +4796,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 195
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:431 == 0
 			PRINTFORMW 
 			CFLAG:431 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4819,7 +4819,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:431 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:431 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:431 = 2
@@ -4830,21 +4830,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 196
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:437 == 0
 			PRINTFORMW 
 			CFLAG:437 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4853,7 +4853,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:437 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:437 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:437 = 2
@@ -4864,21 +4864,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 197
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:438 == 0
 			PRINTFORMW 
 			CFLAG:438 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4887,7 +4887,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:438 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:438 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:438 = 2
@@ -4899,21 +4899,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 200
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:433 == 0
 			PRINTFORMW 
 			CFLAG:433 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:433 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4922,7 +4922,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:433 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:433 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:433 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:433 = 2
@@ -4933,21 +4933,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 201
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:434 == 0
 			PRINTFORMW 
 			CFLAG:434 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:434 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4956,41 +4956,41 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:434 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:434 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:434 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:434 = 2
 			ENDIF
 		ENDIF
 ;=================================================
-;500番台,派生コマンド
+;500번대,파생커맨드
 ;=================================================
 ;-------------------------------------------------
 ;500,３Ｐ
 ;-------------------------------------------------
 	CASE 500
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:407 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:407 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:407 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -4999,7 +4999,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:407 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:407 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:407 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:407 = 2
@@ -5010,21 +5010,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 501
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:408 == 0
 			PRINTFORMW 
 			CFLAG:408 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:408 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5033,7 +5033,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:408 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:408 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:408 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:408 = 2
@@ -5044,21 +5044,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 502
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:409 == 0
 			PRINTFORMW 
 			CFLAG:409 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:409 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5067,7 +5067,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:409 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:409 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:409 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:409 = 2
@@ -5078,21 +5078,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 503
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:410 == 0
 			PRINTFORMW 
 			CFLAG:410 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:410 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5101,7 +5101,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:410 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:410 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:410 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:410 = 2
@@ -5112,27 +5112,27 @@ CASE 14
 ;-------------------------------------------------
 	CASE 504
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:411 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:411 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:411 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5141,7 +5141,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:411 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:411 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:411 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:411 = 2
@@ -5152,27 +5152,27 @@ CASE 14
 ;-------------------------------------------------
 	CASE 505
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:412 == 0
 			;처녀
 			IF TALENT:0
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:412 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:412 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5181,7 +5181,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:412 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:412 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:412 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:412 = 2
@@ -5192,21 +5192,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 506
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:413 == 0
 			PRINTFORMW 
 			CFLAG:413 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:413 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5215,7 +5215,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:413 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:413 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:413 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:413 = 2
@@ -5226,21 +5226,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 507
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:414 == 0
 			PRINTFORMW 
 			CFLAG:414 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5249,7 +5249,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:414 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:414 = 2
@@ -5260,21 +5260,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 508
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:415 == 0
 			PRINTFORMW 
 			CFLAG:415 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:415 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5283,7 +5283,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:415 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:415 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:415 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:415 = 2
@@ -5294,21 +5294,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 509
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:416 == 0
 			PRINTFORMW 
 			CFLAG:416 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:416 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5317,7 +5317,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:416 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:416 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:416 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:416 = 2
@@ -5329,21 +5329,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 510
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:417 == 0
 			PRINTFORMW 
 			CFLAG:417 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:417 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5352,7 +5352,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:417 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:417 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:417 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:417 = 2
@@ -5363,21 +5363,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 511
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:418 == 0
 			PRINTFORMW 
 			CFLAG:418 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:418 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5386,7 +5386,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:418 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:418 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:418 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:418 = 2
@@ -5397,21 +5397,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 512
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:419 == 0
 			PRINTFORMW 
 			CFLAG:419 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:419 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5420,7 +5420,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:419 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:419 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:419 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:419 = 2
@@ -5431,21 +5431,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 513
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:439 == 0
 			PRINTFORMW 
 			CFLAG:439 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:439 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5454,7 +5454,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:439 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:439 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:439 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:439 = 2
@@ -5465,21 +5465,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 514
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:440 == 0
 			PRINTFORMW 
 			CFLAG:440 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:440 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5488,7 +5488,7 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:440 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:440 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:440 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:440 = 2
@@ -5499,21 +5499,21 @@ CASE 14
 ;-------------------------------------------------
 	CASE 515
 		CALL TRAIN_MESSAGE
-		;初めて
+		;처음
 		IF CFLAG:441 == 0
 			PRINTFORMW 
 			CFLAG:441 = 1
-		;二回目以降
+		;2번째 이후
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:441 < 4 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -5522,14 +5522,14 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:441 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:441 = 3
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:441 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:441 = 2
 			ENDIF
 		ENDIF
 ;------------------------------------------------
-;コマンド구상ここまで
+;커맨드구상 여기까지
 ;------------------------------------------------
 	CASEELSE
 		SIF FLAG:6 > 0
@@ -5537,24 +5537,24 @@ CASE 14
 ENDSELECT
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG関係（4570_2をキャラ番号に置換）
+;@KOJO_MESSAGE_PALAMCNG 관련（4570_2을 캐릭터번호로 치환）
 ;パラメータ変化などをトリガーにした구상　CFLAG 221〜260を사용
 ;-------------------------------------------------
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_A（4570_2をキャラ番号に置換）
-;조교자の사정をトリガーにした구상
+;@KOJO_MESSAGE_PALAMCNG_A（4570_2을 캐릭터번호로 치환）
+;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_A_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_A
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4570_2
@@ -5567,7 +5567,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;조교자の사정時のテキスト
+;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;사정개소변경時のテキスト　有効時はここで関数終了
@@ -5576,7 +5576,7 @@ IF CFLAG:106
 	CALL PALAM_MESSAGE_A
 	;머리카락
 	IF CFLAG:106 == 1
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:221 = 3
@@ -5584,14 +5584,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:221 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:221 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:221 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:221 = 1
 		ENDIF
-	;顔
+	;얼굴
 	ELSEIF CFLAG:106 == 2
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:222 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:222 = 3
@@ -5599,14 +5599,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:222 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:222 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:222 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:222 = 1
 		ENDIF
 	;가슴
 	ELSEIF CFLAG:106 == 3
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:223 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:223 = 3
@@ -5614,14 +5614,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:223 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:223 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:223 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:223 = 1
 		ENDIF
-	;腹
+	;배
 	ELSEIF CFLAG:106 == 4
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:224 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:224 = 3
@@ -5629,14 +5629,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:224 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:224 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:224 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:224 = 1
 		ENDIF
-	;腋
+	;겨드랑이
 	ELSEIF CFLAG:106 == 5
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:225 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:225 = 3
@@ -5644,14 +5644,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:225 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:225 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:225 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:225 = 1
 		ENDIF
-	;太腿
+	;허벅지
 	ELSEIF CFLAG:106 == 6
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:226 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:226 = 3
@@ -5659,14 +5659,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:226 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:226 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:226 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:226 = 1
 		ENDIF
-	;割れ눈
+	;가랑이
 	ELSEIF CFLAG:106 == 7
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:227 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:227 = 3
@@ -5674,14 +5674,14 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:227 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:227 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:227 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:227 = 1
 		ENDIF
-	;尻
+	;엉덩이
 	ELSEIF CFLAG:106 == 8
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:228 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:228 = 3
@@ -5689,16 +5689,16 @@ IF CFLAG:106
 		ELSEIF MARK:2 == 3 && (CFLAG:228 < 2 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:228 = 2
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:228 < 1 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:228 = 1
 		ENDIF
-	;ゴム
+	;콘돔
 	ELSEIF CFLAG:106 == 9
-		;섹스로사정かつ、애널섹스以外を実行時
+		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:229 = 3
@@ -5706,13 +5706,13 @@ IF CFLAG:106
 			ELSEIF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:229 = 2
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:229 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:229 = 1
 			ENDIF
 		ELSE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:230 = 3
@@ -5720,7 +5720,7 @@ IF CFLAG:106
 			ELSEIF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:230 = 2
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:230 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:230 = 1
@@ -5732,20 +5732,20 @@ ENDIF
 
 
 ;-------------------------------------------------
-;손、입以外で사정
-;対応コマンドは키스、스마타、발コキ、애널強制봉사、더블스마타、조수를범하게한다
+;손, 입 이외로 사정
+;대응 커맨드는 키스, 스마타, 풋잡, 애널강제봉사, 더블스마타, 조수를범하게한다
 ;-------------------------------------------------
 IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:231 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -5754,7 +5754,7 @@ IF TFLAG:9 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:231 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:231 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:231 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:231 = 2
@@ -5762,11 +5762,11 @@ IF TFLAG:9 > 0
 ENDIF
 
 ;-------------------------------------------------
-;조수를범한다로사정
+;조수를범한다로 사정
 ;-------------------------------------------------
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:232 = 3
@@ -5774,7 +5774,7 @@ IF TFLAG:7 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:232 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:232 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:232 = 1
@@ -5782,21 +5782,21 @@ IF TFLAG:7 > 0
 ENDIF
 
 ;-------------------------------------------------
-;입으로사정
+;입으로 사정
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
 	;이라마치오で사정
 	IF SELECTCOM == 140
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 。
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -5805,22 +5805,22 @@ IF TFLAG:0 > 0
 		ELSEIF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:233 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;それ以外の입사정
+	;그 이외の입사정
 	ELSE
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -5829,7 +5829,7 @@ IF TFLAG:0 > 0
 		ELSEIF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:233 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:233 = 2
@@ -5838,19 +5838,19 @@ IF TFLAG:0 > 0
 ENDIF
 
 ;-------------------------------------------------
-;손으로사정
+;손으로 사정
 ;-------------------------------------------------
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -5859,7 +5859,7 @@ IF TFLAG:1 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:234 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:234 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:234 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:234 = 2
@@ -5867,19 +5867,19 @@ IF TFLAG:1 > 0
 ENDIF
 
 ;-------------------------------------------------
-;가슴으로사정
+;가슴으로 사정
 ;-------------------------------------------------
 IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -5888,26 +5888,26 @@ IF TFLAG:34 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:235 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:235 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:235 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:235 = 2
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;오나홀에사정
+;오나홀에 사정
 ;-------------------------------------------------
 IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:231 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -5916,7 +5916,7 @@ IF TFLAG:16 == 1
 	ELSEIF MARK:2 == 3 && (CFLAG:231 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:236 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:231 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:236 = 2
@@ -5924,21 +5924,21 @@ IF TFLAG:16 == 1
 ENDIF
 
 ;-------------------------------------------------
-;섹스로사정
+;섹스로 사정
 ;-------------------------------------------------
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
-	;애널섹스系
+	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -5947,22 +5947,22 @@ IF TFLAG:2 > 0
 		ELSEIF MARK:2 == 3 && (CFLAG:237 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:237 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:237 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
 	;奥攻め섹스系
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -5971,23 +5971,23 @@ IF TFLAG:2 > 0
 		ELSEIF MARK:2 == 3 && (CFLAG:238 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:238 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:238 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:238 = 2
 		ENDIF
-	;그외섹스系
+	;그 외 섹스계
 	ELSE
-		;함락済み
+		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 4 || FLAG:7 == 2)
-			;연모、친애
+			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 
-			;음란、창부
+			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
 				PRINTFORMW 
-			;복종、예속
+			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
 			ENDIF
@@ -5996,7 +5996,7 @@ IF TFLAG:2 > 0
 		ELSEIF MARK:2 == 3 && (CFLAG:239 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:239 = 3
-		;それ以外
+		;그 이외
 		ELSEIF CFLAG:239 < 2 || FLAG:7 == 2
 			PRINTFORMW 
 			CFLAG:239 = 2
@@ -6005,11 +6005,11 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로사정させた
+;역강간으로 사정당했다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:240 = 3
@@ -6017,7 +6017,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:240 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:240 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:240 = 1
@@ -6026,20 +6026,20 @@ ENDIF
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_E（4570_2をキャラ番号に置換）
-;촉수の사정をトリガーにした구상
+;@KOJO_MESSAGE_PALAMCNG_E（4570_2을 캐릭터번호로 치환）
+;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_E_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_E
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4570_2
@@ -6052,14 +6052,14 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;촉수の사정時のテキスト
+;촉수의 사정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;촉수가사정
+;촉수가 사정
 ;-------------------------------------------------
 IF TFLAG:15 >0
 	CALL PALAM_MESSAGE_E
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:241 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:241 = 3
@@ -6067,7 +6067,7 @@ IF TFLAG:15 >0
 	ELSEIF MARK:2 == 3 && (CFLAG:241 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:241 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:241 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:241 = 1
@@ -6076,20 +6076,20 @@ ENDIF
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_B関係（4570_2をキャラ番号に置換）
-;奴隷の절정をトリガーにした구상
+;@KOJO_MESSAGE_PALAMCNG_B 관련（4570_2을 캐릭터번호로 치환）
+;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_B_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4570_2
@@ -6102,10 +6102,10 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;奴隷の절정時のテキスト
+;노예의 절정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;初めてC절정
+;처음 C절정
 ;-------------------------------------------------
 IF NOWEX:0 > 0 && CFLAG:242 == 0
 	PRINTFORMW 
@@ -6113,7 +6113,7 @@ IF NOWEX:0 > 0 && CFLAG:242 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてV절정
+;처음 V절정
 ;-------------------------------------------------
 IF NOWEX:1 > 0 && CFLAG:243 == 0
 	PRINTFORMW 
@@ -6121,7 +6121,7 @@ IF NOWEX:1 > 0 && CFLAG:243 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてA절정
+;처음 A절정
 ;-------------------------------------------------
 IF NOWEX:2 > 0 && CFLAG:244 == 0
 	PRINTFORMW 
@@ -6129,7 +6129,7 @@ IF NOWEX:2 > 0 && CFLAG:244 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めてB절정
+;처음 B절정
 ;-------------------------------------------------
 IF NOWEX:3 > 0 && CFLAG:245 == 0
 	PRINTFORMW 
@@ -6142,15 +6142,15 @@ ENDIF
 ;強절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -6159,7 +6159,7 @@ IF TFLAG:29 > 1
 	ELSEIF MARK:2 == 3 && (CFLAG:246 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:246 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:246 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:246 = 2
@@ -6167,16 +6167,16 @@ IF TFLAG:29 > 1
 ;절정
 ELSEIF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 4 || FLAG:7 == 2)
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -6185,7 +6185,7 @@ ELSEIF TFLAG:29 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:246 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:246 = 3
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:246 < 2 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:246 = 2
@@ -6195,9 +6195,9 @@ ENDIF
 ;-------------------------------------------------
 ;사정
 ;-------------------------------------------------
-;사정している
+;사정하고 있다
 IF TFLAG:10 > 0
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:247 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:247 = 3
@@ -6205,7 +6205,7 @@ IF TFLAG:10 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:247 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:247 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:247 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:247 = 1
@@ -6215,9 +6215,9 @@ ENDIF
 ;-------------------------------------------------
 ;분유
 ;-------------------------------------------------
-;분유している
+;분유하고 있다
 IF TFLAG:11 > 0
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:248 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:248 = 3
@@ -6225,7 +6225,7 @@ IF TFLAG:11 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:248 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:248 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:248 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:248 = 1
@@ -6235,9 +6235,9 @@ ENDIF
 ;-------------------------------------------------
 ;방뇨
 ;-------------------------------------------------
-;방뇨している
+;방뇨하고 있다
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
-	;함락済み
+	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:249 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:249 = 3
@@ -6245,7 +6245,7 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 	ELSEIF MARK:2 == 3 && (CFLAG:249 < 2 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:249 = 2
-	;それ以外
+	;그 이외
 	ELSEIF CFLAG:249 < 1 || FLAG:7 == 2
 		PRINTFORMW 
 		CFLAG:249 = 1
@@ -6253,20 +6253,20 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 ENDIF
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_C関係（4570_2をキャラ番号に置換）
+;@KOJO_MESSAGE_PALAMCNG_C 관련（4570_2을 캐릭터번호로 치환）
 ;조교後の変化をトリガーにした구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_C_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_C
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4570_2
@@ -6279,25 +6279,25 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;조교後のテキスト
+;조교 후의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;처녀상실(처녀のみ)
+;처녀상실(처녀만)
 ;-------------------------------------------------
 IF TFLAG:3 > 0
 	CALL PALAM_MESSAGE_C
-	;연모か친애かつ主人の섹스による처녀상실
+	;연모나 친애이면서 주인의 섹스에 의한 처녀상실
 	IF TFLAG:20
 		PRINTFORMW 
-	;それ以外の時に처녀상실
+	;그 이외의 때에 처녀상실
 	ELSE
-		;함락済み
+		;함락완료
 		IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 			PRINTFORMW 
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3
 			PRINTFORMW 
-		;それ以外
+		;그 이외
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -6306,20 +6306,20 @@ ENDIF
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_PALAMCNG_D関係（4570_2をキャラ番号に置換）
+;@KOJO_MESSAGE_PALAMCNG_D 관련（4570_2을 캐릭터번호로 치환）
 ;パラメータ変化をトリガーにした구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_D_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_D
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4570_2
@@ -6332,18 +6332,18 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;パラメータ変化時のテキスト
+;파라미터 변화시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;初めて윤활がLV3超えた
+;처음 윤활이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:4 + CUP:4
 IF P > PALAMLV:4 && CFLAG:250 == 0
 	CALL PALAM_MESSAGE_D
-	;로션を使った場合
+	;로션을 사용한 경우
 	IF SELECTCOM == 180
 		PRINTFORMW 
-	;それ以外
+	;그 이외
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -6351,15 +6351,15 @@ IF P > PALAMLV:4 && CFLAG:250 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて욕정がLV2超えた
+;처음 욕정이 LV2를 넘었다
 ;-------------------------------------------------
 P = PALAM:6 + CUP:6
 IF P > PALAMLV:3 && CFLAG:251 == 0
 	CALL PALAM_MESSAGE_D
-	;미약を使った場合
+	;미약을 사용한 경우
 	IF SELECTCOM == 181
 		PRINTFORMW 
-	;それ以外
+	;그 이외
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -6367,7 +6367,7 @@ IF P > PALAMLV:3 && CFLAG:251 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて굴복がLV3超えた
+;처음 굴복이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:7 + CUP:7
 IF P > PALAMLV:3 && CFLAG:252 == 0
@@ -6377,15 +6377,15 @@ IF P > PALAMLV:3 && CFLAG:252 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて복종がLV3超えた
+;처음 복종이 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:5 + CUP:5
 IF P > PALAMLV:3 && CFLAG:253 == 0
 	CALL PALAM_MESSAGE_D
-	;함락済み
+	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		PRINTFORMW 
-	;それ以外
+	;그 이외
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -6393,15 +6393,15 @@ IF P > PALAMLV:3 && CFLAG:253 == 0
 ENDIF
 
 ;-------------------------------------------------
-;初めて공포がLV3超えた
+;처음 공포가 LV3을 넘었다
 ;-------------------------------------------------
 P = PALAM:11 + CUP:11
 IF P > PALAMLV:3 && CFLAG:254 == 0
 	CALL PALAM_MESSAGE_D
-	;함락済み
+	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		PRINTFORMW 
-	;それ以外
+	;그 이외
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -6410,21 +6410,21 @@ ENDIF
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_MARKCNG関係（4570_2をキャラ番号に置換）
-;각인変動をトリガーにした구상
-;각인変動後に구상を発動します
+;@KOJO_MESSAGE_MARKCNG 관련（4570_2을 캐릭터번호로 치환）
+;각인 변동을 트리거로 한 구상
+;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_MARKCNG_K4570_2
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL MARK_MESSAGE
 	RETURN 0
 ENDIF
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4570_2
@@ -6441,13 +6441,13 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:22 == 3
 	CALL MARK_MESSAGE_A
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORMW 
-	;음란、창부
+	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORMW 
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 
 	ELSE
@@ -6460,10 +6460,10 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:23 == 3
 	CALL MARK_MESSAGE_P
-	;연모、친애
+	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORMW 
-	;복종、예속
+	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 
 	ELSE
@@ -6476,13 +6476,13 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 	CALL MARK_MESSAGE_S
-	;쾌락による굴복
+	;쾌락에 의한 굴복
 	IF TFLAG:24 == 13
 		PRINTFORMW 
-	;공포と고통による굴복
+	;공포와 고통에 의한 굴복
 	ELSEIF TFLAG:24 == 23
 		PRINTFORMW 
-	;굴복と복종による굴복
+	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
 		PRINTFORMW 
 	ENDIF
@@ -6493,15 +6493,15 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:21 == 3
 	CALL MARK_MESSAGE_R
-	;함락済み
+	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 
-		;음란、창부
+		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
-		;복종、예속
+		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
 		ENDIF
@@ -6511,12 +6511,12 @@ IF TFLAG:21 == 3
 ENDIF
 
 ;-------------------------------------------------
-;이벤트구상集（4570_2をキャラ番号に置換する） CFLAG 261〜299を사용
+;이벤트구상 모음（4570_2をキャラ番号に置換する） CFLAG 261〜299を사용
 ;-------------------------------------------------
 @KOJO_MESSAGE_EVENT_K4570_2
 
 ;--------------------------------------------------
-;特定主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4570_2を奴隷のキャラ番号に置換）
+;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4570_2을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_EVENT_PY1_K4570_2
@@ -6524,19 +6524,19 @@ ENDIF
 ;ENDIF
 SELECTCASE TFLAG:13
 		;-------------------------------------------------
-		;朝フェラ
+		;아침펠라
 		;-------------------------------------------------
 	CASE 1
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6544,31 +6544,31 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝파이즈리
+		;아침파이즈리
 		;-------------------------------------------------
 	CASE 2
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;모유체질かどうか
+					;모유체질인지 아닌지
 					IF TALENT:149
 						PRINTFORMW 
 					ELSE
 						PRINTFORMW 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;모유체질かどうか
+					;모유체질인지 아닌지
 					IF TALENT:149
 						PRINTFORMW 
 					ELSE
 						PRINTFORMW 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;모유체질かどうか
+					;모유체질인지 아닌지
 					IF TALENT:149
 						PRINTFORMW 
 					ELSE
@@ -6579,19 +6579,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝기승위
+		;아침기승위
 		;-------------------------------------------------
 	CASE 3
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6599,19 +6599,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝기승위A
+		;아침기승위A
 		;-------------------------------------------------
 	CASE 24
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6619,7 +6619,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝키스 연모、친애前提
+		;아침키스 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 25
 			CALL EVENT_MESSAGE
@@ -6629,31 +6629,31 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝食
+		;아침식사
 		;-------------------------------------------------
 	CASE 26
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;歌いながらかどうか
+					;노래 부르면서인지 아닌지
 					IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 						PRINTFORMW 
 					ELSE
 						PRINTFORMW 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;歌いながらかどうか
+					;노래 부르면서인지 아닌지
 					IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 						PRINTFORMW 
 					ELSE
 						PRINTFORMW 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;歌いながらかどうか
+					;노래 부르면서인지 아닌지
 					IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 						PRINTFORMW 
 					ELSE
@@ -6664,7 +6664,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;起きたら隣で寝てる 연모、친애前提
+		;일어나자 곁에서 자고 있다 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -6674,19 +6674,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;朝の발コキ
+		;아침풋잡
 		;-------------------------------------------------
 	CASE 28
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6694,19 +6694,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;朝の搾りたてミルク
+		;;아침에 갓 짠 밀크
 		;-------------------------------------------------
 	CASE 29
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6714,19 +6714,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;お寝小
+		;;잠자다 실례
 		;-------------------------------------------------
 	CASE 30
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6734,34 +6734,34 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;조교後레즈プレイ
+		;조교 후 레즈플레이
 		;-------------------------------------------------
 	CASE 4
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:264 == 0
 				PRINTFORMW 
 				CFLAG:264 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:264 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:264 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;조교後섹스
+		;조교 후 섹스
 		;-------------------------------------------------
 	CASE 5
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6769,19 +6769,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;강정신약の反動
+		;강정신약의 반동
 		;-------------------------------------------------
 	CASE 6
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:266 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6792,19 +6792,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;조교後착유
+		;조교 후 착유
 		;-------------------------------------------------
 	CASE 7
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:267 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6815,19 +6815,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;조교後자위
+		;조교 후 자위
 		;-------------------------------------------------
 	CASE 8
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6838,19 +6838,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（主人C 相手V）
+		;요바이（주인C 상대V）
 		;-------------------------------------------------
 	CASE 9
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6858,19 +6858,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（主人C 相手A）
+		;요바이（주인C 상대A）
 		;-------------------------------------------------
 	CASE 31
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6878,19 +6878,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（主人V 相手C）
+		;요바이（주인V 상대C）
 		;-------------------------------------------------
 	CASE 32
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6898,19 +6898,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（主人A 相手C）
+		;요바이（주인A 상대C）
 		;-------------------------------------------------
 	CASE 33
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6918,19 +6918,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（両者C（스마타）・両者C（貝合わせ））
+		;요바이（양쪽C（스마타）・양쪽C（조개맞대기））
 		;-------------------------------------------------
 	CASE 34
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6938,19 +6938,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;夜자위
+		;밤 자위
 		;-------------------------------------------------
 	CASE 35
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6958,7 +6958,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;一緒に寝る 연모、친애
+		;같이잔다 연모, 친애
 		;-------------------------------------------------
 	CASE 36
 			CALL EVENT_MESSAGE
@@ -6968,19 +6968,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;황색사탕사용時
+		;황색사탕 사용시
 		;-------------------------------------------------
 	CASE 10
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -6991,31 +6991,31 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;임신発깨달음時
+		;임신 발각시
 		;-------------------------------------------------
 	CASE 11
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
 			;임신대상をTARGETに格納し、父親は奴隷はV、조수はWとする
-			;붕괴してしまった場合
+			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				PRINTFORMW 
-			;父親が主人で母親が연모か친애持ち
+			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 				PRINTFORMW 
-			;父親が奴隷か조수で母親が음란か창부持ち
+			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
-				;父親(조수）との相性が125より大きい場合
+				;부친(조수）과의 상성이 125보다 큰 경우
 				IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125
 					PRINTFORMW 
-			 	;父親(奴隷）との相性が125より大きい場合
+			 	;부친(노예）과의 상성이 125보다 큰 경우
 				ELSEIF CFLAG:102 == 3 && GET_RELATION(TARGET, V) > 125
 					PRINTFORMW 
 				ELSE
 					PRINTFORMW 
 				ENDIF
-			;복종か예속持ち
+			;복종이나 예속 보유
 			ELSEIF (TALENT:5 || TALENT:8)
 				PRINTFORMW 
 			ELSE
@@ -7024,19 +7024,19 @@ SELECTCASE TFLAG:13
 			CFLAG:271 = 1
 
 		;-------------------------------------------------
-		;출산時
+		;출산시
 		;-------------------------------------------------
 	CASE 12
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7051,17 +7051,17 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 13
 			CALL EVENT_MESSAGE
-			;출산前
+			;출산전
 			IF TALENT:153
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 2 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -7070,17 +7070,17 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 
 					CFLAG:273 = 1
 				ENDIF
-			;출산後
+			;출산후
 			ELSE
-				;함락済み
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 4 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -7092,19 +7092,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;親離れ時
+		;자식 독립시
 		;-------------------------------------------------
 	CASE 14
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:274 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7114,44 +7114,44 @@ SELECTCASE TFLAG:13
 				CFLAG:274 = 1
 			ENDIF
 		;-------------------------------------------------
-		;定食포장마차時
+		;정식포장마차시
 		;-------------------------------------------------
 	CASE 15
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:275 == 0
 				PRINTFORMW 
 				CFLAG:275 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:275 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:275 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;창관でバイト・설정時
+		;창관에서 아르바이트・설정시
 		;-------------------------------------------------
 	CASE 16
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:276 == 0
 				PRINTFORMW 
 				CFLAG:276 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:276 = 1
 			ENDIF
 		;-------------------------------------------------
-		;창관でバイト・実行時
+		;창관에서 아르바이트・실행시
 		;-------------------------------------------------
 	CASE 63
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:606 == 0
 				PRINTFORMW 
 				CFLAG:606 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:606 = 1
@@ -7159,59 +7159,59 @@ SELECTCASE TFLAG:13
 
 
 		;-------------------------------------------------
-		;렌탈時
+		;렌탈시
 		;-------------------------------------------------
 	CASE 17
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:277 == 0
 				PRINTFORMW 
 				CFLAG:277 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:277 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:277 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;매각時
+		;매각시
 		;-------------------------------------------------
 	CASE 18
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-				;연모、친애+반발각인Lv3未満
+				;연모, 친애+반발각인Lv3未満
 				IF (TALENT:3 || TALENT:6) && MARK:3 < 3
 					PRINTFORMW 
-				;음란、창부+반발각인Lv3未満
+				;음란, 창부+반발각인Lv3未満
 				ELSEIF (TALENT:4 || TALENT:7) && MARK:3 < 3
 					PRINTFORMW 
-				;복종、예속+반발각인Lv3未満
+				;복종, 예속+반발각인Lv3未満
 				ELSEIF (TALENT:5 || TALENT:8) && MARK:3 < 3
 					PRINTFORMW 
 				ENDIF
 			;반발각인Lv3
 			ELSEIF MARK:3 == 3
 				PRINTFORMW 
-			;それ以外
+			;그 이외
 			ELSE
 				PRINTFORMW 
 			ENDIF
 
 		;-------------------------------------------------
-		;ビデオ매각時
+		;비디오 매각시
 		;-------------------------------------------------
 	CASE 19
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:278 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7222,64 +7222,64 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;コンサート時
+		;콘서트시
 		;-------------------------------------------------
 	CASE 20
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:279 == 0
 				PRINTFORMW 
 				CFLAG:279 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:279 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:279 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;乱交라이브時
+		;난교라이브시
 		;-------------------------------------------------
 	CASE 21
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:280 == 0
 				PRINTFORMW 
 				CFLAG:280 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:280 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:280 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;공중변소プレイ時
+		;공중변소 플레이시
 		;-------------------------------------------------
 	CASE 22
 			CALL EVENT_MESSAGE
-			;初めて
+			;처음
 			IF CFLAG:281 == 0
 				PRINTFORMW 
 				CFLAG:281 = 1
-			;それ以外
+			;그 이외
 			ELSEIF CFLAG:281 < 1 || FLAG:7 == 2
 				PRINTFORMW 
 				CFLAG:281 = 1
 			ENDIF
 
 		;-------------------------------------------------
-		;ビデオ保有時
+		;비디오 보유시
 		;-------------------------------------------------
 	CASE 23
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:282 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7290,19 +7290,19 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;기억소거약사용時
+		;기억소거약 사용시
 		;-------------------------------------------------
 	CASE 30
 			CALL EVENT_MESSAGE
-			;함락済み
+			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 2 || FLAG:7 == 2)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7313,7 +7313,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;[아내][남편]取得時 친애前提
+		;;[아내][남편]取得時 친애 전제
 		;-------------------------------------------------
 	CASE 40
 			CALL EVENT_MESSAGE
@@ -7322,7 +7322,7 @@ SELECTCASE TFLAG:13
 				CFLAG:283 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[음마]取得時 창부前提
+		;;[음마]취득시 창부 전제
 		;-------------------------------------------------
 	CASE 41
 			CALL EVENT_MESSAGE
@@ -7331,7 +7331,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]取得時 예속前提
+		;;[전속노예]취득시 예속 전제
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE
@@ -7340,37 +7340,37 @@ SELECTCASE TFLAG:13
 				CFLAG:285 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;オープン/クローズ・オブ・オッパイ
+		;;오픈/클로즈・오프・가슴
 		;-------------------------------------------------
 	CASE 44
 			CALL EVENT_MESSAGE
 			IF TEQUIP:가슴앞열림
-				;가슴を出す
-				;함락済み
+				;가슴을 드러낸다
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
 					CFLAG:285 = 1
 				ENDIF
 			ELSE
-				;가슴をしまう
-				;함락済み
+				;가슴을 집어넣는다
+				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
-					;연모、친애
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-					;음란、창부
+					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
-					;복종、예속
+					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
@@ -7378,77 +7378,77 @@ SELECTCASE TFLAG:13
 				ENDIF
 			ENDIF
 		;-------------------------------------------------
-		;;[愛ＮＴＲ]이벤트時
+		;;[애ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 45
 		CALL EVENT_MESSAGE
-		;함락済み
+		;함락완료
 		IF (CFLAG:288 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に함락しているor誰にも함락してない상태でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그외
+				;그 외
 				ELSE
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに함락している상태で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:애ＮＴＲ진행도 == 0
 					PRINTFORMW 
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:애ＮＴＲ진행도 == 1
 					PRINTFORMW 
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 					PRINTFORMW 
 				ENDIF
@@ -7456,64 +7456,64 @@ SELECTCASE TFLAG:13
 			CFLAG:288 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;[淫ＮＴＲ]이벤트時
+		;;[음ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 46
 		CALL EVENT_MESSAGE
-		;함락済み
+		;함락완료
 		IF (CFLAG:289 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に함락しているor誰にも함락してない상태でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그외
+				;그 외
 				ELSE
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに함락している상태で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:음ＮＴＲ진행도 == 0
 					PRINTFORMW 
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:음ＮＴＲ진행도 == 1
 					PRINTFORMW 
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 					PRINTFORMW 
 				ENDIF
@@ -7521,77 +7521,77 @@ SELECTCASE TFLAG:13
 			CFLAG:289 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;[隷ＮＴＲ]이벤트時
+		;;[예ＮＴＲ]이벤트시
 		;-------------------------------------------------
 	CASE 47
 		CALL EVENT_MESSAGE
-		;함락済み
+		;함락완료
 		IF (CFLAG:290 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
-				;主人に함락しているor誰にも함락してない상태でＮＴＲ
-				;연모、친애
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그외
+				;그 외
 				ELSE
-					;進行度分岐
-					;初回
+					;진행도 분기
+					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
 						PRINTFORMW 
-					;二回目（リーチ）
+					;2번째（리치）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 						PRINTFORMW 
-					;三回目（함락）
+					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
 				ENDIF
 			ELSE
-				;主人以外の誰かに함락している상태で更に別のキャラにＮＴＲ
-				;進行度分岐
-				;初回
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
 				IF CFLAG:예ＮＴＲ진행도 == 0
 					PRINTFORMW 
-				;二回目（リーチ）
+				;2번째（리치）
 				ELSEIF CFLAG:예ＮＴＲ진행도 == 1
 					PRINTFORMW 
-				;三回目（함락）
+				;3번째（함락）
 				ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 					PRINTFORMW 
 				ENDIF
@@ -7599,7 +7599,7 @@ SELECTCASE TFLAG:13
 			CFLAG:290 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;愛系再함락時
+		;;애(愛)계 재함락시
 		;;主人に対して연모系함락している、もしくは一度愛系ＮＴＲ상태にされたキャラに再び함락させられる時
 		;-------------------------------------------------
 	CASE 48
@@ -7609,17 +7609,17 @@ SELECTCASE TFLAG:13
 		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
 		
 		IF (CFLAG:291 < 1 || FLAG:7 == 2)
-			;主人に対して함락し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				PRINTFORMW 
-			;그외のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:291 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;淫系再함락時
+		;;음(淫)계 재함락시
 		;;主人に対して음란系함락している、もしくは一度淫系ＮＴＲ상태にされたキャラに再び함락させられる時
 		;-------------------------------------------------
 	CASE 49
@@ -7629,17 +7629,17 @@ SELECTCASE TFLAG:13
 		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
 					
 		IF (CFLAG:292 < 1 || FLAG:7 == 2)
-			;主人に対して함락し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				PRINTFORMW 
-			;그외のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:292 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;隷系再함락時
+		;;예(隷)계 재함락시
 		;;主人に対して복종系함락している、もしくは一度隷系ＮＴＲ상태にされたキャラに再び함락させられる時
 		;-------------------------------------------------
 	CASE 50
@@ -7649,27 +7649,27 @@ SELECTCASE TFLAG:13
 		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
 					
 		IF (CFLAG:293 < 1 || FLAG:7 == 2)
-			;主人に対して함락し直し
+			;주인에게 다시 함락된다
 			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
 				PRINTFORMW 
-			;그외のキャラ・ＮＰＣにＮＴＲし直し
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				PRINTFORMW 
 			ENDIF
 			CFLAG:293 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・乱交パーティ
-		;;淫ＮＴＲ상태（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・난교파티
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 51
 		CALL EVENT_MESSAGE
 		IF (CFLAG:294 < 1 || FLAG:7 == 2)
 			IF TALENT:연모 || TALENT:친애
-				;以前연모ルートだった場合
+				;이전에 연모 루트였던 경우
 				PRINTFORMW 
 			ELSEIF TALENT:복종 || TALENT:예속
-				;以前복종ルートだった場合
+				;이전에 복종 루트였던 경우
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW
@@ -7677,17 +7677,17 @@ SELECTCASE TFLAG:13
 			CFLAG:294 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・公園
-		;;淫ＮＴＲ상태（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・공원
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 52
 		CALL EVENT_MESSAGE
 		IF (CFLAG:295 < 1 || FLAG:7 == 2)
 			IF TALENT:연모 || TALENT:친애
-				;以前연모ルートだった場合
+				;이전에 연모 루트였던 경우
 				PRINTFORMW 
 			ELSEIF TALENT:복종 || TALENT:예속
-				;以前복종ルートだった場合
+				;이전에 복종 루트였던 경우
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW
@@ -7696,16 +7696,16 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・변기
-		;;淫ＮＴＲ상태（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 53
 		CALL EVENT_MESSAGE
 		IF (CFLAG:296 < 1 || FLAG:7 == 2)
 			IF TALENT:연모 || TALENT:친애
-				;以前연모ルートだった場合
+				;이전에 연모 루트였던 경우
 				PRINTFORMW 
 			ELSEIF TALENT:복종 || TALENT:예속
-				;以前복종ルートだった場合
+				;이전에 복종 루트였던 경우
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW
@@ -7713,17 +7713,17 @@ SELECTCASE TFLAG:13
 			CFLAG:296 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・夜の街
-		;;淫ＮＴＲ상태（TALENT:ＮＴＲ == 2 か TALENT:ＮＴＲ == 5）である時のみ
+		;;ＮＴＲ요바이・밤의 거리
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 54
 		CALL EVENT_MESSAGE
 		IF (CFLAG:296 < 1 || FLAG:7 == 2)
 			IF TALENT:연모 || TALENT:친애
-				;以前연모ルートだった場合
+				;이전에 연모 루트였던 경우
 				PRINTFORMW 
 			ELSEIF TALENT:복종 || TALENT:예속
-				;以前복종ルートだった場合
+				;이전에 복종 루트였던 경우
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW
@@ -7731,23 +7731,23 @@ SELECTCASE TFLAG:13
 			CFLAG:296 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・ＮＴＲ前逢引
-		;;ＮＴＲ상태になる前に逢引する時
+		;;ＮＴＲ요바이・ＮＴＲ전 밀회
+		;;ＮＴＲ상태가 되기 전에 밀회할 때
 		;-------------------------------------------------
 	CASE 55
 		CALL EVENT_MESSAGE
 		IF (CFLAG:297 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 != 0
-				;主人以外に함락している場合
+				;주인 이외에 함락되어 있는 경우
 				PRINTFORMW 
 			ELSEIF TALENT:연모 || TALENT:친애
-				;연모ルート
+				;연모 루트
 				PRINTFORMW 
 			ELSEIF TALENT:음란 || TALENT:창부
-				;음란ルート
+				;음란 루트
 				PRINTFORMW 
 			ELSEIF TALENT:복종 || TALENT:예속
-				;복종ルート
+				;복종 루트
 				PRINTFORMW 
 			ELSE
 				PRINTFORMW
@@ -7755,122 +7755,122 @@ SELECTCASE TFLAG:13
 			CFLAG:297 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・ＮＴＲ後初逢引
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)になった直後の一日の終了後、一度だけ行う
-		;別のキャラに함락する度に起こる。同じキャラに再度함락した場合は起こらない
+		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)になった直後の一日の終了後、一度だけ行う
+		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
 		;-------------------------------------------------
 	CASE 56
 		CALL EVENT_MESSAGE
 		IF (CFLAG:298 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:298 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・デート
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;ＮＴＲ요바이・데이트
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
 		;-------------------------------------------------
 	CASE 57
 		CALL EVENT_MESSAGE
 		IF (CFLAG:299 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:299 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・本番
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;女性であれば入れられる側、男性であれば入れる側で固定
+		;;ＮＴＲ요바이・본방
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;여성이라면 삽입당하는 쪽, 남성이라면 삽입하는 쪽으로 고정
 		;-------------------------------------------------
 	CASE 58
 		CALL EVENT_MESSAGE
 		IF (CFLAG:601 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:601 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・자위見せ合い
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;愛ＮＴＲ상태の場合、노출증3か자위중독1のどちらかを満たしている事が조건になります。
+		;;ＮＴＲ요바이・자위서로과시
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;애ＮＴＲ상태인 경우, 노출증 3이나 자위중독 1 중 하나를 충족시키는 것이 조건이 됩니다.
 		;-------------------------------------------------
 	CASE 59
 		CALL EVENT_MESSAGE
 		IF (CFLAG:602 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:602 = 1
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・애널
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
 		;CFLAG:애널횟수が1以上なら入れられている、CFLAG:삽입횟수が1以上なら入れています。
-		;両方立っている場合は、地の文では入れられている側が優先されます。
+		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
 		;-------------------------------------------------
 	CASE 60
 		CALL EVENT_MESSAGE
 		IF (CFLAG:603 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:603 = 1
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・야외플레이
-		;;愛ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;愛ＮＴＲの場合、노출증が4以上でないと発生しません
+		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;애ＮＴＲの場合、노출증が4以上でないと発生しません
 		;-------------------------------------------------
 	CASE 61
 		CALL EVENT_MESSAGE
 		IF (CFLAG:604 < 1 || FLAG:7 == 2)
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
-				;愛ＮＴＲ
+				;애ＮＴＲ
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
-				;隷ＮＴＲ
+				;예ＮＴＲ
 				PRINTFORMW 
 			ENDIF
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・野外조교
-		;;隷ＮＴＲ상태(TALENT:ＮＴＲが 3 か 6)でCFLAG:현ＮＴＲ진행도が6以上の場合１日の終了時に発生。
+		;;예ＮＴＲ상태(TALENT:ＮＴＲが 3 か 6)でCFLAG:현ＮＴＲ진행도が6以上の場合１日の終了時に発生。
 		;-------------------------------------------------
 	CASE 62
 		CALL EVENT_MESSAGE
 		IF (CFLAG:605 < 1 || FLAG:7 == 2)
-			;隷ＮＴＲ
+			;예ＮＴＲ
 			PRINTFORMW 
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：仲魔と섹스する
-		;やられちゃう側
-		;PLAYERに実行者の番号が入っています
+		;던전내 성욕처리：동료마와 섹스한다
+		;당하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 79
 		CALL EVENT_MESSAGE
@@ -7879,9 +7879,9 @@ SELECTCASE TFLAG:13
 			CFLAG:602 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：仲魔に봉사させる
-		;봉사する側
-		;PLAYERに実行者の番号が入っています
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 80
 		CALL EVENT_MESSAGE
@@ -7890,8 +7890,8 @@ SELECTCASE TFLAG:13
 			CFLAG:603 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：その場で자위
-		;봉사する側
+		;던전내 성욕처리：그 장소에서 자위
+		;봉사하는 쪽
 		;-------------------------------------------------
 	CASE 81
 		CALL EVENT_MESSAGE
@@ -7900,8 +7900,8 @@ SELECTCASE TFLAG:13
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：物陰で자위
-		;봉사する側
+		;던전내 성욕처리：그늘에서 자위
+		;봉사하는 쪽
 		;-------------------------------------------------
 	CASE 82
 		CALL EVENT_MESSAGE
@@ -7910,9 +7910,9 @@ SELECTCASE TFLAG:13
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：仲魔と섹스する
-		;やる側
-		;PLAYERに相手の番号が入っています
+		;던전내 성욕처리：동료마와 섹스한다
+		;하는 쪽
+		;PLAYER에 상대의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 83
 		CALL EVENT_MESSAGE
@@ -7921,9 +7921,9 @@ SELECTCASE TFLAG:13
 			CFLAG:606 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：仲魔に봉사させる
-		;봉사される側
-		;PLAYERに봉사する側の番号が入っています
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사받는 쪽
+		;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 84
 		CALL EVENT_MESSAGE
@@ -7932,9 +7932,9 @@ SELECTCASE TFLAG:13
 			CFLAG:607 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전内성욕처리：윤간이벤트
-		;봉사する側
-		;PLAYERに実行者=윤간する악마の番号が入っています
+		;던전내 성욕처리：윤간이벤트
+		;봉사하는 쪽
+		;PLAYER에 실행자 = 윤간하는 악마의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 85
 		CALL EVENT_MESSAGE
@@ -7950,7 +7950,7 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장패배時구상集（4570_2をキャラ番号に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（4570_2을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K4570_2
 SELECTCASE TFLAG:투기장패배
@@ -7959,15 +7959,15 @@ SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
-			;함락済み
+			;함락완료
 			IF 함락(TARGET)
-				;연모、친애
+				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-				;음란、창부
+				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-				;복종、예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
@@ -7978,11 +7978,11 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_ENDING関係(4570_2、4570_2をキャラ番号に置換する)
+;@KOJO_MESSAGE_ENDING 관련(4570_2、4570_2를 캐릭터 번호로 치환한다)
 ;-------------------------------------------------
 ;-------------------------------------------------
-;エンディング구상の有無を判別する関数
-;記述したエンディングの종류に応じてコメントアウトを해제
+;엔딩구상의 유무를 판별하는 함수
+;기술한 엔딩의 종류에 따라 주석처리를 해제
 ;-------------------------------------------------
 @ENDING_CHECK_K4570_2
 SELECTCASE TSTR:END종별
@@ -7993,7 +7993,7 @@ SELECTCASE TSTR:END종별
 	;		RETURN 1
 	;	SIF TALENT:노리개
 	;		RETURN 1
-	;CASE "조교師END"
+	;CASE "조교사경영END"
 	;	RETURN 1
 	;CASE "희대의조교사END"
 	;	RETURN 1
@@ -8007,7 +8007,7 @@ ENDSELECT
 RETURN 0
 
 ;-------------------------------------------------
-;エンド本文
+;엔딩 본문
 ;-------------------------------------------------
 @KOJO_MESSAGE_ENDING_K4570_2
 ;--------------------------------------------------
@@ -8044,13 +8044,13 @@ SELECTCASE TSTR:END종별
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
 		;ENDIF
-	;CASE "조교師END"
+	;CASE "조교사경영END"
 	;CASE "희대의조교사END"
 	;CASE "식당경영END"
 	;CASE "창관경영END"
 	;CASE "아이돌END"
 ENDSELECT
-;個別ENDの場合ここでRETURN 1すると、その後ゲームは続かず次周に行くかゲーム終了かの選択になります
+;개별END의 경우 여기서 RETURN 1하면, 그 후 게임은 계속되지 않고 다음 주차로 넘어갈지 게임종료할지 선택하게 됩니다
 RETURN 1
 
 
@@ -8179,7 +8179,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
 		PRINTFORML ┃%"炎の海に沈みなさい！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-		;연모、친애
+		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"愛の炎ですわー",72,LEFT%┃
@@ -8194,7 +8194,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
 ENDIF
 
 ;ELSEIF ARG:1 > 0
-	;충성도が上昇する行動をとった場合に표시する구상
+	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
 ;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 ;	;사용した스킬の名前をLOCALSに代入
@@ -8211,7 +8211,7 @@ ENDIF
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;高위력の行動で、잔학持ちの충성도が上昇
+;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"잔학")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
@@ -8231,7 +8231,7 @@ ENDIF
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;회복・상태회복行動では우애持ちの충성도が上昇
+;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"우애")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
@@ -8241,23 +8241,23 @@ ENDIF
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;特殊では냉정持ちの충성도が上昇
+;		;특수로는 냉정 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"냉정")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;우둔持ちは主人とのLv差だけ충성도が上昇
+;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"우둔")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;허심持ちは최저２だけ충성도が上昇
+;		;허심 보유자는 최저 ２만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"허심")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;	ENDSELECT
 ;ELSE
-;	;システムによらず충성도を上げたいとか他があったらここに記載
+;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
 ;ENDIF
 

@@ -1,9 +1,9 @@
 ﻿;--------------------------------------------------
-;@KOJO_MESSAGE_COM関係（をキャラ번호に置換）
-;コマンド実行時に출력されます
+;@KOJO_MESSAGE_COM 관련（을 캐릭터번호로 치환）
+;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
 @KOJO_MESSAGE_COM_K4518
-;조수が조교した時に구상をスキップする（好みに応じて使う、行머리の;を消すとスキップするようになる）
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 IF ASSIPLAY
 	CALL TRAIN_MESSAGE
 	RETURN 0
@@ -13,7 +13,7 @@ IF TEQUIP:촉수
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;볼재갈着用時には地の文を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:볼재갈 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
@@ -26,7 +26,7 @@ IF SELECTCOM >= VARSIZE("SELECTCOM")
 ENDIF
 
 ;--------------------------------------------------
-;特定キャラが조수、主人時に特殊キャラ구상を呼び出す(Y1を特定キャラ、4518を奴隷のキャラ번호に置換）
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4518을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_COM_PY1_K4518
@@ -58,13 +58,13 @@ ENDIF
 ;コマンド実行時のセリフ
 ;-------------------------------------------------
 ;=================================================
-;애무계コマンド
+;애무계 커맨드
 ;=================================================
 ;키스한다まで키스させないことに
 SELECTCASE TRAINNAME:SELECTCOM
 	CASE "애무"
 		;CALL TRAIN_MESSAGE
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			PRINTFORMW %CALLNAME:MASTER%를 노려보는 %CALLNAME:TARGET%를 깔고 누른 채, 그 몸에 손을 뻗었다…
 			PRINTFORMW 「앗…! 잠깐 어디 만지는 거야!?」
@@ -142,7 +142,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 		ENDIF
 	CASE "커닐링구스"
 		CALL TRAIN_MESSAGE
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			PRINTFORMW 「엣… 무슨 짓을 할 생각!?」
 			PRINTFORMW 「싫엇…! 말도 안 돼!?」
@@ -192,7 +192,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 		ENDIF
 	CASE "애널애무", "애널핥기"
 		CALL TRAIN_MESSAGE
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			IF TRAINNAME:SELECTCOM == "애널애무"
 				IF GET_COMFLAG(GETNUM(TRAINNAME, "애널애무")) || GET_COMFLAG(GETNUM(TRAINNAME, "애널바이브"))
@@ -314,7 +314,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 		ENDIF
 	CASE "가슴애무", "유두자극", "가슴주무르기"
 		CALL TRAIN_MESSAGE
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			PRINTFORML 「싫엇…! 잠깐 뭐할 생각이야!?」
 			PRINTFORMW %CALLNAME:TARGET%는 가슴을 손으로 가리고, %CALLNAME:MASTER%에게서 도망치듯 뒷걸음질쳤다
@@ -385,18 +385,18 @@ SELECTCASE TRAINNAME:SELECTCOM
 		ENDIF
 	CASE "자위", "가슴자위"
 		;CALL TRAIN_MESSAGE
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			PRINTFORMW 자위하라고 명령하자 %CALLNAME:TARGET%는 깜짝 놀라 눈을 희번덕거렸다…
 			PRINTFORMW 「자위이ー?」
 			PRINTFORMW 「아, 알고는 있지만, 해본 적은…… 에, 해보라니」
 			PRINTFORMW 「싫어! 그런 짓 하는 것도 부끄러운데…!」
-			;음란ルート
+			;음란 루트
 			IF MARK:굴복각인 && GET_MARK_WAY(MARK:굴복각인) == 2
 				PRINTFORMW %CALLNAME:MASTER%는 %CALLNAME:TARGET%에게 자위의 기분 좋음을 설명했다…
 				PRINTFORMW 「우ー… 그런 거 말해도…」
 				PRINTFORMW 「그래도, 너한테 당하는 거라면…」
-			;복종ルート
+			;복종 루트
 			ELSEIF MARK:굴복각인 && GET_MARK_WAY(MARK:굴복각인) == 3
 				PRINTFORMW %CALLNAME:MASTER%는 %CALLNAME:TARGET%를 향해 손을 치켜 들었다…
 				PRINTFORMW 「꺅… 그만해…」
@@ -453,7 +453,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;コミュニケーション系コマンド
+;커뮤니케이션계 커맨드
 ;=================================================
 ;実際は애무でまず키스されてんだけど
 	CASE "키스한다"
@@ -512,11 +512,11 @@ SELECTCASE TRAINNAME:SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;道具사용コマンド
+;도구사용 커맨드
 ;=================================================
 
 ;=================================================
-;섹스系コマンド
+;섹스계 커맨드
 ;=================================================
 	CASE "정상위", "후배위", "대면좌위", "배면좌위", "기승위"
 		CALL TRAIN_MESSAGE
@@ -550,7 +550,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 					PRINTFORMW 「싫어어… 앗…으흑…」
 				ENDIF
 			ENDIF
-		;初回
+		;초회
 		ELSEIF !GET_COMFLAG(SELECTCOM)
 			IF TRAINNAME:SELECTCOM == "정상위"
 				IF MARK:굴복각인 == 3
@@ -867,7 +867,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 						ENDIF
 					ENDIF
 				ENDIF
-			;共通
+			;공통
 			ELSE
 				IF MARK:굴복각인 == 3
 					IF ABL:Ｖ감각 > 2
@@ -917,10 +917,10 @@ SELECTCASE TRAINNAME:SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;봉사계コマンド
+;봉사계 커맨드
 ;=================================================
 	CASE "수음"
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			IF MARK:굴복각인 == 3
 				PRINTFORMW %CALLNAME:TARGET%는 머뭇머뭇 %CALLNAME:MASTER%의 가랑이로 손을 뻗었다…
@@ -975,7 +975,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 			ENDIF
 		ENDIF
 	CASE "펠라치오"
-		;初回
+		;초회
 		IF !EXP:펠라경험
 			IF MARK:굴복각인 == 3
 				PRINTFORMW 「에, 입으로?」
@@ -1045,7 +1045,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 		;想定してないサイズが来た場合ははじく
 		SIF !TALENT:빈유
 			RETURN 0
-		;初回
+		;초회
 		IF !GET_COMFLAG(SELECTCOM)
 			IF MARK:굴복각인 == 3
 				PRINTFORMW 「에, 가슴으로…? 그치만, 아카리 거는……하아……」
@@ -1086,19 +1086,19 @@ SELECTCASE TRAINNAME:SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;SM系コマンド
+;SM계 커맨드
 ;=================================================
 
 ;=================================================
-;조수によるコマンド、及び레즈プレイ
+;조수에 의한 커맨드, 및 레즈플레이
 ;=================================================
 
 ;=================================================
-;ハードな조교コマンド
+;하드한조교 커맨드
 ;=================================================
 
 ;=================================================
-;촉수계コマンド
+;촉수계 커맨드
 ;=================================================
 
 ;=================================================
@@ -1106,7 +1106,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 ;=================================================
 
 ;=================================================
-;500番台,派生コマンド
+;500번대,파생커맨드
 ;=================================================
 	CASEELSE
 		CALL TRAIN_MESSAGE
