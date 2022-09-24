@@ -227,7 +227,7 @@ ELSE
 ENDIF
 
 ;-------------------------------------------------
-;조교 개시시（2回目以降、X1をキャラ番号に변경する）
+;조교 개시시（2번째 이후, X1をキャラ番号に변경する）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K3501_12
 ;반발각인Lv3
@@ -7702,7 +7702,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -8987,7 +8987,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -9011,7 +9011,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -9130,7 +9130,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -9496,7 +9496,7 @@ IF NOWEX:2 > 0 && CFLAG:244 == 0
 	IF TEQUIP:애널바이브 || TEQUIP:애널비즈
 		PRINTFORMW 속의 넣어진 장난감을 손으로 잡고、한층 더 큰 자극을 보내기 시작했다。
 	;애널계 명령
-	ELSEIF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	ELSEIF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		PRINTFORM 에 꼿은채의 
 		SIF TALENT:PLAYER:후타나리 == 0 && TALENT:PLAYER:남자 == 0
 			PRINTFORM 유사

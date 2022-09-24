@@ -42,7 +42,7 @@
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;872_1と872_1をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;872_1と872_1를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 872_1,Y1は1、872_1は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -501,7 +501,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 부끄러운 기색도 없는 태도에、%조사처리(CALLNAME:MASTER,"는")% 빨려가듯 %조사처리(CALLNAME,"를")% 쓰러뜨리고 있었다。
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW 「……%CSTR:이인칭%%UNICODE(0x2661)%」
@@ -560,7 +560,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW ……태연하게 거짓말하는 버릇은 언제 생긴 걸까。
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW 팟、하고 가슴에 가벼운 감촉을 깨닫고、시선을 내리자 %조사처리(CALLNAME,"가")% 껴안고 있었다。
@@ -605,7 +605,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 「%CSTR:일인칭%……아기……좋아해%UNICODE(0x2661)%」
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW 「…………오늘은、뭘、하는 거야？」
@@ -649,7 +649,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 어느 쪽을 골라도 즐길 수 있을 것 같은 느낌이 들었다。
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW 「기다리고……있었、어요……」
@@ -2190,7 +2190,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………행복해%UNICODE(0x2661)%」
 					;통상
 					ELSE
-						;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+						;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 						Local:1 = RAND:3
 						IF Local:1 == 0
 							PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 손을 잡았다。
@@ -2225,7 +2225,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……재미、없……어」
 					;통상
 					ELSE
-						;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+						;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 						Local:1 = RAND:3
 						IF Local:1 == 0
 							PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 옆에 허리를 내렸다。
@@ -8666,7 +8666,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		;해제(종료)時？場所변경時？
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -10348,7 +10348,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -10399,7 +10399,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 그냥 두면、스스로 목을 뚫고 자살할 수 있다。
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -10577,7 +10577,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || SELECTCOM == 515
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -10626,7 +10626,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 그 자리에 웅크린、%조사처리(CALLNAME,"는")% 덮친 변의에、끈적끈적한 땀을 흘렸다。
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -10976,7 +10976,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -15369,7 +15369,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"……강화、해",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) && CFLAG:800 >= 2
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"수행에 명하니……물이 불에게 이기는 이치로、불길을 꺼트려라",72,LEFT%┃

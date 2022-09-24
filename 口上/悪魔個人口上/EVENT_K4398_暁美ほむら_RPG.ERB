@@ -308,7 +308,7 @@ SIF ARG < 0 && NO:ARG != 4518
 LOCAL:1 = 1
 LOCALS = EMPTY
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = 자, 한방에 끝낼게
@@ -329,7 +329,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = 안녕, 더 이상 만날 일도 없겠지만.
@@ -345,10 +345,10 @@ SELECTCASE TFLAG:전투이벤트
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 큭, 단단하네!
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF RAND:2
 				LOCALS = 공략할게!
@@ -385,7 +385,7 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = 미안해……용서해줘…….
@@ -396,7 +396,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = 마도……카……。
 				ENDIF
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
 				LOCALS = 아직이야, 아직 쓰러질 순 없어!

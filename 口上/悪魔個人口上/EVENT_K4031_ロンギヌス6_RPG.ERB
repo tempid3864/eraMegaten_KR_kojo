@@ -382,7 +382,7 @@ SIF ARG < 0 && NO:ARG != 4518
 LOCAL:1 = 1
 LOCALS = EMPTY
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = ……코호ｰ……처、리……종…료……
@@ -403,7 +403,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = 또 한사람 처리……ㅊ오통께서도 기뻐하신다……
@@ -414,15 +414,15 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = S　t　i　r　b（죽어라）
 				ENDIF
 			ENDIF
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 어리석은 자가……이 자리를 제압하는 것은……오직 총통뿐……
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF RAND:2
 				LOCALS = Feind wacht...lebt...（놈이 일어나고 있다…살아 있다…）방심、하지 말라……
@@ -459,7 +459,7 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = Mild....und leise...wie er lachelt...(온화하게…조용하게…그 사람이 미소짓는다…）
@@ -470,7 +470,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = 아무것도 모르고……
 				ENDIF
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
 				LOCALS = Heil...Heil...HeilHeilHeilHeilHeilHeilHeilHeilHeil....

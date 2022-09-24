@@ -489,7 +489,7 @@ ELSEIF CFLAG:201 < 6 && TALENT:6
 				PRINTFORML 「히토미는 이제 더이상 없지만… %CSTR:11%에겐 %CSTR:12%가 있어！」
 				PRINTFORML 이젠 %CALLNAME%는 울지 않는것 같다。태연한 척한다는건 알고있다。허나…
 				PRINTFORML 그래도 웃으려고 하고있는 %CALLNAME%를 상냥하게 끌어안는 %CALLNAME:MASTER%였다。
-			;非처녀
+			;비처녀
 			;完全にキャラ붕괴だ…やりすぎた…反省はしてない。
 			ELSE
 				PRINTFORMW 이 사람에게…%CALLNAME:MASTER%에게 처녀 줘버렸어%ハート()%」
@@ -1085,7 +1085,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		CFLAG:810 = 0
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -1096,7 +1096,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -1651,7 +1651,7 @@ SELECTCASE SELECTCOM
 								PRINTFORML %CALLNAME%がゴニョゴニョと何か言っている…
 								PRINTFORML 聞こえなかった、と言ってやると顔を真っ赤にしてそっぽ向かれた…。
 							ENDIF
-						;非처녀
+						;비처녀
 						ELSE
 							IF RAND:2 == 0
 								PRINTFORML （%CSTR:11%も%CSTR:12%のおちんちん舐めてる時、そうだもん%ハート()% すごく美味しいし…舐めるの%CSTR:11%も好きなんだよ…）
@@ -1754,7 +1754,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:0
 				PRINTFORML 「ちょっ…馬鹿っっ！！！ 優しくって言ってるでしょうがっ！！」
 				PRINTFORML 「あっダメっ！！ 乱暴にするなっ！ 破れるっ！ 처녀膜破れちゃうでしょっ！！！！」
-			;非처녀 と思ったらこっちもネタだった
+			;비처녀 と思ったらこっちもネタだった
 			ELSE
 				PRINTFORML 「あッ、あ～そこ…っ、その辺… も少し右……んっ、それそれ♪ …気持ち好い、かも…」
 				PRINTFORML エステのマッサージ師にでもなった気分になって泣けてきた。やはりどちらが上か身体に叩き込もう…。
@@ -2437,7 +2437,7 @@ SELECTCASE SELECTCOM
 							PRINTFORML 「%CSTR:12%、その時は……そのっ、優しく… お、お願いします…%ハート()%」
 							PRINTFORML 膣입を晒したまま、真っ赤な顔でお願いされてしまった…
 						ENDIF
-					;非처녀
+					;비처녀
 					ELSE
 						PRINTFORM 「ほら… これで奥まで見えてるわよね…
 						;デレモード
@@ -2668,7 +2668,7 @@ SELECTCASE SELECTCOM
 				;처녀
 				IF TALENT:0
 					PRINTFORML (처녀膜…、見られちゃったかな…%ハート()% %CSTR:12%が破る気なら…っ%ハート()%）
-				;非처녀
+				;비처녀
 				ELSE
 					PRINTFORML （ほらほら…%CSTR:12%に捧げた穴…奥まで見える？ またされちゃうかな…%ハート()%）
 				ENDIF
@@ -5158,7 +5158,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 고통から泣きわめく%CALLNAME%を押さえつける様に覆いかぶさり、파과혈に濡れる秘裂を穢していった…
 					PRINTFORMW
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -10423,7 +10423,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -12849,7 +12849,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -12908,7 +12908,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -13130,7 +13130,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || SELECTCOM == 515
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -13179,7 +13179,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「えぇっ！？ これ…お尻で……出て…る……っ、そんなっ！ 抜いてよっっ！！」
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -13465,7 +13465,7 @@ ENDIF
 ;せっかくだから思い切り기합い入れてみた。
 ;함락前だと鬼畜風味、함락後はラブラブを意識して…
 ;-------------------------------------------------
-;強절정
+;강절정
 ;初절정で強は無理だろうって安心してたら、テストプレイで強になった…
 ;どうやら、同時절정絡むと初でも強の판정が出る事があるみたい…
 IF TFLAG:29 > 1

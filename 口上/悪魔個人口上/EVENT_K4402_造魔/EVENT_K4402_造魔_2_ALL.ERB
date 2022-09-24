@@ -60,9 +60,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_KX1 → EVENTTRAIN_KX1_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4402_2,ARG = 0
@@ -388,7 +388,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML 「기다리고, 있었습니다。 오늘은, %CSTR:11%의 차례」
@@ -400,7 +400,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -411,7 +411,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;●期待してるよーにッてのは意外と……うーむ
 		K:1 = RAND:3
 		IF K:1 == 0
@@ -553,13 +553,13 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:300 == 0
-			;거유、폭유
+			;거유, 폭유
 			IF TALENT:111 || TALENT:112
 				PRINTFORML %CALLNAME%의 굴곡이 큰 풍만하고 매력적인 몸에 손가락을 대고 더듬었다。
 				PRINTFORML 「……？」
 				PRINTFORMW 무엇을 하고 있는지 도통 이해를 못하겠다는 표정이다。
 				PRINTFORMW 이제부터 차분하게 철저히 가르쳐주지。
-			;빈유、절벽
+			;빈유, 절벽
 			ELSEIF TALENT:109 || TALENT:110
 				PRINTFORML %CALLNAME%의 굴곡이 적은 슬렌더한 날씬한 몸에 손가락을 대고 더듬었다
 				PRINTFORML 「……？」
@@ -3778,7 +3778,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -5302,7 +5302,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -6693,7 +6693,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6730,7 +6730,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 乱暴な입内사정に耐え切れず、%CALLNAME%は咳き込んで정액を零してしまった
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6874,7 +6874,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6926,7 +6926,7 @@ IF TFLAG:2 > 0
 			ENDIF
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -7182,7 +7182,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -9618,7 +9618,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"강해지게、합니다",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) && CFLAG:800 >= 3
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"약하게、만듭、니다",72,LEFT%┃

@@ -13398,7 +13398,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -17838,7 +17838,7 @@ IF TFLAG:0 > 0
 				ENDIF
 				CFLAG:233 = 2
 			ENDIF
-		;이라마치오で사정
+		;이라마치오로 사정
 		ELSEIF SELECTCOM == 140
 			;CALL PALAM_MESSAGE_A
 			;조수
@@ -17913,7 +17913,7 @@ IF TFLAG:0 > 0
 					CFLAG:233 = 2
 				ENDIF
 			ENDIF
-		;그 이외の입사정
+		;그 이외의 입사정
 		ELSE
 			CALL PALAM_MESSAGE_A
 			;조수
@@ -19116,7 +19116,7 @@ IF TFLAG:2 > 0
 				ENDIF
 			ENDIF
 		;애널섹스계
-		ELSEIF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+		ELSEIF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 			CALL PALAM_MESSAGE_A
 			;조수
 			IF ASSI > 0 && ASSIPLAY
@@ -19193,7 +19193,7 @@ IF TFLAG:2 > 0
 					CFLAG:237 = 2
 				ENDIF
 			ENDIF
-		;奥攻め섹스系
+		;안쪽 자극 섹스계
 		ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 			CALL PALAM_MESSAGE_A
 			;性知識フラグ、真実教えた
@@ -20038,7 +20038,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	;CALL PALAM_MESSAGE_B
 	;붕괴
@@ -22300,7 +22300,7 @@ SELECTCASE TFLAG:13
 						;PRINTFORMW 泣き崩れる%CALLNAME:TARGET%を放置し部屋を後にした……
 					ENDIF
 				ENDIF
-			;父親が奴隷か조수
+			;父親が奴隷か助手
 			ELSEIF CFLAG:102 == 2 || CFLAG:102 == 3
 				;함락완료
 				IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
@@ -22517,7 +22517,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 					ENDIF
 				ENDIF
-			;父親が主人、조수、奴隷以外
+			;父親が主人、助手、奴隷以外
 			ELSE
 				;함락완료
 				IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
@@ -22550,7 +22550,7 @@ SELECTCASE TFLAG:13
 							PRINTFORML 「그럼、그때……。」
 							PRINTFORMW %CALLNAME:MASTER%로부터 전해들은 올바른 지식을 기억하려는듯이 중얼거린다。
 							;主人以外が一番。
-							;とりあえずＮＴＲ相手の아이を임신と仮定。
+							;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 							IF FAVORITE_1(TARGET) != MASTER
 								;愛隷ＮＴＲ
 								IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -22581,7 +22581,7 @@ SELECTCASE TFLAG:13
 							PRINTFORMW 가르칠 필요는 없다고 생각하여、이대로 두기로 했다。
 							PRINTFORML 　
 							;主人以外が一番。
-							;とりあえずＮＴＲ相手の아이を임신と仮定。
+							;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 							IF FAVORITE_1(TARGET) != MASTER
 								;愛隷ＮＴＲ
 								IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -22612,7 +22612,7 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:803 == 1
 						CALL EVENT_MESSAGE
 						;主人以外が一番。
-						;とりあえずＮＴＲ相手の아이を임신と仮定。
+						;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 						IF FAVORITE_1(TARGET) != MASTER
 							;愛隷ＮＴＲ
 							IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -22666,7 +22666,7 @@ SELECTCASE TFLAG:13
 							PRINTFORML 「그럼、그때……。」
 							PRINTFORMW %CALLNAME:MASTER%로부터 전해들은 올바른 지식을 기억하려는듯이 중얼거린다。
 							;主人以外が一番。
-							;とりあえずＮＴＲ相手の아이を임신と仮定。
+							;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 							IF FAVORITE_1(TARGET) != MASTER
 								;愛隷ＮＴＲ
 								IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -22698,7 +22698,7 @@ SELECTCASE TFLAG:13
 							PRINTFORMW 가르칠 필요는 없다고 생각하여、이대로 두기로 했다。
 							PRINTFORML 　
 							;主人以外が一番。
-							;とりあえずＮＴＲ相手の아이を임신と仮定。
+							;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 							IF FAVORITE_1(TARGET) != MASTER
 								;愛隷ＮＴＲ
 								IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -22728,7 +22728,7 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:803 == 1
 						CALL EVENT_MESSAGE
 						;主人以外が一番。
-						;とりあえずＮＴＲ相手の아이を임신と仮定。
+						;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 						IF FAVORITE_1(TARGET) != MASTER
 							;愛隷ＮＴＲ
 							IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4 || TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
@@ -24006,7 +24006,7 @@ SELECTCASE TFLAG:13
 					
 					
 ;-------------------------------------------------
-				;非처녀
+				;비처녀
 				ELSE
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
@@ -24343,7 +24343,7 @@ SELECTCASE TFLAG:13
 					
 					
 ;-------------------------------------------------
-				;非처녀
+				;비처녀
 				ELSE
 					;매춘경험６００이상か음란, 창부、淫ＮＴＲのいずれか
 					;매춘慣れで行為中は全部統合
@@ -28407,7 +28407,7 @@ IF ASSI > 0 && ASSIPLAY
 							PRINTFORMW 그 모습에 흥분한 %CALLNAME:PLAYER%는、단단해진 페니스를 에널에 꽉 누르고 천천히 삽입해 갔다。
 						ENDIF
 					ENDIF
-				;非처녀
+				;비처녀
 				ELSE
 					;性知識真実
 					IF CFLAG:803 == 1
@@ -28529,7 +28529,7 @@ IF ASSI > 0 && ASSIPLAY
 						PRINTFORMW 그 모습에 흥분한 %CALLNAME:PLAYER%는、단단해진 페니스를 에널에 꽉 누르고 천천히 삽입해 갔다。
 					ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;性知識真実
 				IF CFLAG:803 == 1
@@ -29016,7 +29016,7 @@ ELSE
 						PRINTFORMW 그 닫힌 에널로 페니스를 꽉 누르고 천천히 삽입해 갔다。
 					ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;性知識真実
 				IF CFLAG:803 == 1
@@ -29232,7 +29232,7 @@ IF ASSI > 0 && ASSIPLAY
 		ENDIF
 		
 		;애널섹스계
-		IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+		IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 			IF RAND:2 == 0
 				PRINTFORM 엉덩이、뜨거워……아앗！　싫어！　가앗　응으ー읏
 			ELSE
@@ -29288,7 +29288,7 @@ IF ASSI > 0 && ASSIPLAY
 		
 		
 		;애널섹스계か애널바이브、애널비즈장비時の애널애무
-		IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+		IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 			IF RAND:2 == 0
 				PRINTFORMW 엉덩이 안、문지르면……앗……아으읏！」
 			ELSE
@@ -29326,7 +29326,7 @@ IF ASSI > 0 && ASSIPLAY
 			ENDIF
 			
 			;애널섹스계か애널바이브、애널비즈장비時の애널애무
-			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 				IF RAND:2 == 0
 					;P4주인공が조수で조교자
 					IF ASSI > 0 && ASSIPLAY && NO:ASSI == 4573
@@ -29373,7 +29373,7 @@ IF ASSI > 0 && ASSIPLAY
 			ENDIF
 			
 			;애널섹스계か애널바이브、애널비즈장비時の애널애무
-			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 				IF RAND:2 == 0
 					;P4주인공が조수で조교자
 					IF ASSI > 0 && ASSIPLAY && NO:ASSI == 4573
@@ -29506,7 +29506,7 @@ ELSE
 			ENDIF
 			
 			;애널섹스계
-			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 				IF RAND:2 == 0
 					PRINTFORM %CSTR:이인칭%에게……엉덩이、푹푹 박혀서어、가버려어！　앗
 				ELSE
@@ -29568,7 +29568,7 @@ ELSE
 			ENDIF
 			
 			;애널섹스계
-			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 				IF RAND:2 == 0
 					PRINTFORM 엉덩이、뜨거워……아앗！　싫어！　가앗　응으ー읏
 				ELSE
@@ -29618,7 +29618,7 @@ ELSE
 				ENDIF
 				
 				;애널섹스계か애널바이브、애널비즈장비時の애널애무
-				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 					IF RAND:2 == 0
 						PRINTFORMW 엉덩이 안、비벼지는거어……기분좋아아……햐으읏！」
 					ELSE
@@ -29658,7 +29658,7 @@ ELSE
 			ENDIF
 			
 			;애널섹스계か애널바이브、애널비즈장비時の애널애무
-			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+			IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 				IF RAND:3 == 0
 					PRINTFORMW 어쩐지……이상해……우앗……싫어！」
 				ELSEIF RAND:2 == 0
@@ -29693,7 +29693,7 @@ ELSE
 				ENDIF
 				
 				;애널섹스계か애널바이브、애널비즈장비時の애널애무
-				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 					IF RAND:2 == 0
 						PRINTFORMW 엉덩이、괴로워……앗……으읏……。」
 					ELSE
@@ -29719,7 +29719,7 @@ ELSE
 				ENDIF
 				
 				;애널섹스계か애널바이브、애널비즈장비時の애널애무
-				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 					IF RAND:3 == 0
 						PRINTFORMW %CSTR:일인칭%에겐……무리……큿……아……。」
 					ELSEIF RAND:2 == 0
@@ -29750,7 +29750,7 @@ ELSE
 				ENDIF
 				
 				;애널섹스계か애널바이브、애널비즈장비時の애널애무
-				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 					IF RAND:2 == 0
 						PRINTFORMW 엉덩이、괴로워……그만해！　구해줘……히끅！」
 					ELSE
@@ -29776,7 +29776,7 @@ ELSE
 				ENDIF
 				
 				;애널섹스계か애널바이브、애널비즈장비時の애널애무
-				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
+				IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || (SELECTCOM == 5 && TEQUIP:14) || (SELECTCOM == 5 && TEQUIP:15)
 					IF RAND:3 == 0
 						PRINTFORMW 이거……무리……으윽……앗……。」
 					ELSEIF RAND:2 == 0

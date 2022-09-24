@@ -4828,7 +4828,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -7467,7 +7467,7 @@ IF (TEQUIP:20 &&  SELECTCOM != 107) || (ASSI > 0 && ASSIPLAY)
 	CALL PALAM_MESSAGE_A
 	RETURN 0
 ENDIF
-;強절정中は회화불능だが逆レ사정中は喋る
+;강절정中は회화불능だが逆レ사정中は喋る
 IF TFLAG:29 > 1
 	IF SELECTCOM == 64 && TFLAG:10 > 0
 	ELSE
@@ -7795,7 +7795,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF 함락(TARGET) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7819,7 +7819,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF 함락(TARGET) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -8000,7 +8000,7 @@ IF TFLAG:2 > 0
 				CFLAG:237 = 2
 			ENDIF
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;욕정一定以下か처녀상실で引き抜く
 		;けど奥攻めで喪失ないよな
@@ -8220,7 +8220,7 @@ ENDIF
 ;-------------------------------------------------
 ;△절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -10775,7 +10775,7 @@ ENDSELECT
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K1204_1
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -10912,7 +10912,7 @@ SIF TALENT:ARG:9 || MARK:ARG:3 == 3
 	RETURN 0
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = ハッハ！
@@ -10944,7 +10944,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = オラオラ邪魔だどけェ！
 			ENDIF
 		ENDIF
-	;被召喚時
+	;피소환시
 	CASE 3
 		IF RAND:3 == 0
 			LOCALS = %CSTR:일인칭%に出番をよこせェ！
@@ -10961,22 +10961,22 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 				IF RAND:2
 					LOCALS = 火葬はいらねえな
 				ELSE
 					LOCALS = ヒャハハ！
 				ENDIF
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = ッざけんなコラァ！
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			LOCALS = まだ燃えたりねえか？
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
@@ -10987,10 +10987,10 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			LOCALS = テメッ……
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
 				LOCALS = %CSTR:일인칭%が先に倒れちゃカッコつかねえだろうが！
@@ -11016,21 +11016,21 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = 労ってんじゃねえぞ
 			ENDIF
 		ENDIF
-	;반사された
+	;반사당했다
 	CASE 15
 		IF RAND:2 == 0
 			LOCALS = あ！？
 		ELSE
 			LOCALS = ヤロウ！
 		ENDIF
-	;반사した
+	;반사했다
 	CASE 16
 		IF RAND:2 == 0
 			LOCALS = ハン！
 		ELSE
 			LOCALS = 効かねえーぜ
 		ENDIF
-	;회피された
+	;회피당했다
 	CASE 17
 		IF RAND:8 == 0
 			LOCALS = あ
@@ -11221,7 +11221,7 @@ ELSEIF RANGE(LOCAL,501, 599)
 		ELSE
 			LOCALS = ちまちまやってんのはシュミじゃねえ
 		ENDIF
-	;弱体系
+	;약체계
 	ELSEIF RANGE(LOCAL,506, 509) || LOCAL == 520
 		IF RAND:2
 			LOCALS = イヤガラセじゃねえか

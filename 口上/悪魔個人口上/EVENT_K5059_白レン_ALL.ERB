@@ -5,7 +5,7 @@
 
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;4502と4502をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4502と4502를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4502,Y1は1、4502は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -193,7 +193,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:4
 		IF K:1 == 0
 			PRINTFORMW 「……뭐야」
@@ -780,7 +780,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;非처녀
+					;비처녀
 					IF TALENT:처녀 == 0
 						;질내사정されている場合
 						IF GET_STAIN("질내", "정액", TARGET) 
@@ -5772,7 +5772,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			PRINTFORMW 

@@ -56,9 +56,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;既に구상のあるキャラや회화타입の別版の구상を作成する時に利用してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K5311 → EVENTTRAIN_K5311_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K5311,ARG = 0
@@ -3653,7 +3653,7 @@ ENDIF
 IF TFLAG:0 > 0
 	LOCAL = TFLAG:0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
@@ -3687,7 +3687,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
@@ -3944,7 +3944,7 @@ IF TFLAG:2 > 0
 			ENDIF		
 		ENDIF
 	ELSE
-		;奥攻め섹스系
+		;안쪽 자극 섹스계
 		IF !구상유무확인(0) && (SELECTCOM == 506 || SELECTCOM == 507)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -4248,7 +4248,7 @@ SIF 구상유무확인(0) && K > 0
 LOCAL = K
 
 
-;強절정
+;강절정
 SIF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B
 IF TFLAG:29 > 1
@@ -6541,7 +6541,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
@@ -6636,7 +6636,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -6891,7 +6891,7 @@ CALL 구상변수표시
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K5311
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -6997,7 +6997,7 @@ SIF ARG < 0 && NO:ARG != 5311
 VARSET LOCALS
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:2 == 0
 			LOCALS:10 = みんな！今だよ！
@@ -7006,7 +7006,7 @@ SELECTCASE TFLAG:전투이벤트
 		ENDIF
 	;COOP참가
 	CASE 2
-		;主人がCOOP発動
+		;주인이 COOP발동
 		;IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 		;	LOCALS:10 = 
 		;그 이외
@@ -7017,17 +7017,17 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = %CSTR:ARG:일인칭%も行くよ！
 			ENDIF
 		;ENDIF
-	;被召喚時
+	;피소환시
 	CASE 3
 			LOCALS:10 = 
 	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			LOCALS:10 = よしっ　倒したよ！
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			;IF CFLAG:(ARG:1):방어플래그
 			;	LOCALS:10 = 
@@ -7038,7 +7038,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = うん　いい손応え！
 				ENDIF
 			;ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF RAND:2 == 0
 				LOCALS:10 = どうだい　痛いでしょ？
@@ -7067,14 +7067,14 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF RAND:2 == 0
 				LOCALS:10 = ここまで…かあ…
 			ELSE
 				LOCALS:10 = ああ…ダメか…
 			ENDIF
-		;大데미지
+		;대 데미지
 		;ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 		;	LOCALS:10 = 
 		;無効
@@ -7110,17 +7110,17 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 아이てっ
 			ENDIF
 		ENDIF
-	;반사された
+	;반사당했다
 	CASE 15
 			LOCALS:10 = 痛っ！반사された！？
-	;반사した
+	;반사했다
 	CASE 16
 			IF RAND:2 == 0
 				LOCALS:10 = 残念だったね！
 			ELSE
 				LOCALS:10 = 効かないよ！
 			ENDIF
-	;회피された
+	;회피당했다
 	CASE 17
 			IF RAND:10 == 0
 				LOCALS:10 = この세계は회피があるんだった…
@@ -7138,7 +7138,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS:10 = 甘いよ！　공격が見えてる！
 			ENDIF
-	;バトルに勝利した
+	;배틀에서 승리했다
 	CASE 90
 			IF 현HP비율(ARG) < 25
 				LOCALS:10 = か…회복希望…
@@ -7180,7 +7180,7 @@ SELECTCASE TFLAG:전투이벤트
 		IF FLAG:선제공격플래그
 			LOCALS:10 = 油断は禁物だよ！
 		ELSEIF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = タイミングが悪いな…
 		ELSE
 			IF RAND:2 == 0
@@ -7189,10 +7189,10 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = いいよ！皆凍らせてあげる！
 			ENDIF
 		ENDIF
-	;バックアタックを受けた
+	;백어택을 당했다
 	CASE 95
 		IF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = こ…こんな時に…
 		ELSEIF RAND:2 == 0
 			LOCALS:10 = 隊列まで変えるのは反則だよ…
@@ -7202,7 +7202,7 @@ SELECTCASE TFLAG:전투이벤트
 	;적の先制공격を受けた
 	CASE 96
 		IF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = タイミングが悪すぎるな…
 		ELSE
 			LOCALS:10 = ここで奇襲か〜
@@ -7225,25 +7225,25 @@ LOCALS = %RESULTS%
 ;	RETURN 0
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
-;コメントアウトしやすいように
+;주석처리하기 쉽도록
 IF 1 == 0
 ;-------------------------------------------------
 ;상태이상時
 ;-------------------------------------------------
-;魅了時
+;매료시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
-	;행동불능（ムラムラしている）
+	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = 가랑이がムズムズする〜
 	ELSE
 		LOCALS:10 = %CSTR:ARG:일인칭%　당신についていきま〜す%UNICODE(0x2661)%
 	ENDIF
-;混乱時
+;혼란시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 	;금전뿌리기
 	IF CFLAG:ARG:입력행동 == 2315
 		LOCALS:10 = あはは〜もってけもってけ〜%CSTR:ARG:일인칭%のおごりだ〜い
-	;행동불능（ぼんやりしている）
+	;행동불능（멍하니 멈춰 있다）
 	ELSEIF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = ああ〜눈が〜回ってる〜？
 	ELSE
@@ -7376,7 +7376,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 ;	LOCALS:10 = 
 ;;전술
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
-;	;噛み付き系
+;	;물어뜯기계
 ;	IF RANGE(CFLAG:ARG:입력행동,321, 326)
 ;		LOCALS:10 = 
 ;	;그 외
@@ -7419,7 +7419,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;베어내기
 	ELSEIF CFLAG:ARG:입력행동 == 534
 		LOCALS:10 = 次の공격は外さないよ
-;	;弱体系
+;	;약체계
 ;	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 ;		LOCALS:10 = 
 ;	;도발
@@ -7499,10 +7499,10 @@ ELSE
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;真・그외
+;진・그 외
 ;-------------------------------------------------
 IF LOCALS:10 == ""
-	;必ず何か喋る
+	;반드시 무언가 말한다
 	LOCALS:10 = 
 ENDIF
 

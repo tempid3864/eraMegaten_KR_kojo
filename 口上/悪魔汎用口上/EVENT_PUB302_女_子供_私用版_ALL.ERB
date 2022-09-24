@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;여자・아이 대사（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;女・子供口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;。
-;ひらがな多様とですですぅ입調とか難しいなオイ。
-;途中で힘尽きた。だれかこの志を受け継いでくれ…
+;ひらがな多様とですですぅ口調とか難しいなオイ。
+;途中で力尽きた。だれかこの志を受け継いでくれ…
 ;초회なにするですかは俺の中では鉄板。
 ;
-;別人A(確か7/15なんとか引き継いでいきたいが早くも힘尽きそうだわ。
-;別人A(7/19ポツポツ微加筆수정。従属のところ「ごしゅじんさま」とか書いてしまったがやっぱり%CSTR:12%で書いた方がいいのかな？
+;別人A(確か7/15なんとか引き継いでいきたいが早くも力尽きそうだわ。
+;別人A(7/19ポツポツ微加筆修正。従属のところ「ごしゅじんさま」とか書いてしまったがやっぱり%CSTR:12%で書いた方がいいのかな？
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
@@ -30,7 +30,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용 여자・아이 대사
+PRINTFORML 범용 여・아이 대사
 ;구상설명문
 PRINTFORML 　 
 
@@ -141,7 +141,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			;조교하지 않고 연모를 단 경우の分岐
 		;	PRINTFORMW 
 		;ELSE
-		;何も無いと寂しいので추가。改変は권장します
+		;何も無いと寂しいので追加。改変は推奨します
 			PRINTFORMW 분명히 언제나처럼 불러낸 %조사처리(CALLNAME,"지만")%、오늘은 어딘가 기색이 이상하다。
 			PRINTFORMW 고개를 숙인 채、얼굴을 새빨갛게 하고 있었지만、이윽고 띄엄띄엄 이야기했다
 			PRINTFORMW 「저、저기요。에、저기、그。요새、%조사처리(CSTR:11,"는")% 무엇인가 이상합니다。」
@@ -249,7 +249,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「에헤헤、오늘은 뭐하는 거예요ー?」
@@ -261,7 +261,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「에헤헤、오늘도 %CSTR:11%의 로리로리 보지 찔꺽찔꺽해주세요오」
@@ -279,7 +279,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「낼름、할짝、발가락의、응、하나하나까지、츗 츄、반짝반짝하게 할게요오」
@@ -2549,7 +2549,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 허리를 찔린 이후 좌우로 몸을 흔들며、%조사처리(CALLNAME,"는")% 정신 없이 엉덩이를 흔들었다。
 				PRINTFORM %CALLNAME:MASTER%에게 붙잡히듯이 단단하게 안겼다
 			IF TALENT:100
-				PRINT 小さな
+				PRINT 작은 
 			ENDIF
 				PRINTFORMW 몸은 완전히 힘이 빠져、그 일체를 %CALLNAME:MASTER%에게 맡기며 계속 헐떡였다……
 				CFLAG:341 = 3
@@ -2643,7 +2643,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「%CSTR:12%…너무 좋아요오♡」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 「%CSTR:11%의 엉덩이、계속 계속 %CSTR:12%의 자지가 갖고 싶어 갖고 싶어 라고、말했어요?」
+					PRINTFORMW 「%CSTR:11%의 엉덩이、계속 계속 %CSTR:12%의 자지가 갖고 싶어 갖고 싶어 라고、말했어요?」
 					PRINTFORMW %조사처리(CALLNAME,"는")% 완전히 녹아버린 암컷의 얼굴을 하며 자신의 엉덩이를 넓히고 %CALLNAME:MASTER% 유혹한다。
 					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 꿀꺽하고 마른침을 삼키며、갖고 싶다는 듯이 감겨붙는 엉덩이에 페니스를 찔러 넣었다。
 					PRINTFORMW 「히야아아아앙♪%CSTR:12%의 자지 굉장해요오♪%CSTR:11% 속에서 날뛰고 있어요오♪」
@@ -6408,7 +6408,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6432,7 +6432,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6530,7 +6530,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || SELECTCOM == 515
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6558,7 +6558,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「흑… 기분나빠요오…후에에에엥…」
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6752,7 +6752,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -7310,7 +7310,7 @@ CASE 26
 	ENDIF
 
 ;-------------------------------------------------
-
+;일어나자 곁에서 자고 있다
 ;-------------------------------------------------
 CASE 27
 	CALL EVENT_MESSAGE
@@ -7947,7 +7947,7 @@ CASE 22
 				ELSE
 					PRINTFORMW 「응、크、후으…앗」
 					PRINTFORMW 처음에는 몸이 뻣뻣했지만、남자를 알고 있는 %CALLNAME%의 몸은 곧 페니스를 받아들이려 꿀단지를 이슬로 적시기 시작했다
-					;主人は必ず奴隷より先に횟수を計算している
+					;主人は必ず奴隷より先に回数を計算している
 					IF CFLAG:MASTER:본방횟수 || CFLAG:MASTER:애널횟수
 						PRINTFORMW 옆으로 눈을 돌리면、남근을 받아들여 기쁨의 소리를 지르는 %CALLNAME:MASTER%의 모습이 눈에 들어왔다
 						PRINTFORMW （%CSTR:이인칭%…언제나보다、예뻐……거기다、기분 좋아보여요오…）
@@ -8570,32 +8570,32 @@ IF ARG:1 > 0
 	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	사용した스킬の이름をLOCALSに代入
+;	使用したスキルの名前をLOCALSに代入
 	LOCALS = %RESULTS%
 
 	SELECTCASE ARG:1
-;		물리데미지を与える行動で、영맹持ちの충성도が上昇
+;		物理ダメージを与える行動で、獰猛持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"영맹")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "！　네엣！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		마법데미지を与える行動で、교활持ちの충성도が上昇
+;		魔法ダメージを与える行動で、狡猾持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"교활")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"캬하핫！　" + LOCALS + "！！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		高위력の行動で、잔학持ちの충성도が上昇
+;		高威力の行動で、残虐持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"잔학")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "(으)로 가버리세요♪",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		相手の약점を付いた공격or行動不能な상태이상の적に対する공격で、현명持ちの충성도が上昇
+;		相手の弱点を付いた攻撃or行動不能な状態異常の敵に対する攻撃で、賢い持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"현명")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "(으)로 울려줄게요",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		파마相性의 行動で、천사持ちの충성도が上昇
-;		この後COOPに繋げれば…とか妄想してたが、この구상適用される천사いなかったよ…
+;		破魔相性の行動で、天使持ちの忠誠度が上昇
+;		この後COOPに繋げれば…とか妄想してたが、この口上適用される天使いなかったよ…
 		CASE GETNUM(TALENT,"천사")
 			IF RAND:2 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8606,27 +8606,27 @@ IF ARG:1 > 0
 				PRINTFORML ┃%"천벌을 받아라……　　　　　　" + LOCALS + "！！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-;		주살相性의 行動で、타천사持ちの충성도が上昇
+;		呪殺相性の行動で、堕天使持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"타천사")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "！　" + LOCALS + "！！　" + LOCALS + "！！！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		회복・상태회복行動では우애持ちの충성도が上昇
+;		回復・状態回復行動では友愛持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"우애")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "！이것으로 안심이에요",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		상태변화では교만持ちの충성도が上昇
+;		状態変化では高慢持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"교만")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "(으)로 괴로해 줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		特殊では냉정持ちの충성도が上昇
+;		特殊では冷静持ちの忠誠度が上昇
 		CASE GETNUM(TALENT,"냉정")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"여기서 " + LOCALS + "(이)가 당연한 선택이에요",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		우둔持ちは主人とのLv差だけ충성도が上昇
+;		愚鈍持ちは主人とのLv差だけ忠誠度が上昇
 		CASE GETNUM(TALENT,"우둔")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "？　알았어요",72,LEFT%┃
@@ -8638,5 +8638,5 @@ IF ARG:1 > 0
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDSELECT
 ;ELSE
-;	システムによらず충성도を上げたいとか他があったらここに記載
+;	システムによらず忠誠度を上げたいとか他があったらここに記載
 ENDIF

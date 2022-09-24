@@ -709,7 +709,7 @@ ELSE
 				PRINTFORMW 「아이가 있다고 요괴 퇴치를 멈출 순 없지. 좋아! 하앗!… 역시 움직이기 어렵네」
 			ENDIF
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			IF RAND:4 == 0
 				PRINTFORMW 방에 들어가자마자, 보이는 세상이 빙글빙글 도는 것만 같았다.
 				PRINTFORMW 견디지 못하고 쓰러져버린 당신 위에 레이무가 올라탔다.
@@ -744,7 +744,7 @@ ELSE
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		 IF RAND:3 == 0
 			PRINTFORMW 「하앗… 아, 후우… 아… 와 주었구나 …」
 			PRINTFORMW 레이무는 당신을 눈치채자, 눈물을 글썽였다.
@@ -771,7 +771,7 @@ ELSE
 		ENDIF
 	;복종, 예속
 	;ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;IF RAND:3 == 0
 		;	PRINTFORMW 
 		;ELSEIF RAND:2 == 0
@@ -781,7 +781,7 @@ ELSE
 		;ENDIF
 	;그 외, 공통
 	ELSE
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			PRINTFORMW 
 		ELSEIF RAND:2 == 0
@@ -2071,7 +2071,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「우, 우… 훌쩍… 이, 이 자식… 반드시 후회하게 해주겠어…!」
 					ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;바이브挿入時
 				IF TEQUIP:바이브 == 1
@@ -3632,7 +3632,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「그렇지만, 아직 모르는 것이 있는걸… 제일 중요한, 소중한 것…」
 						PRINTFORMW 「봐, 나의 여기, 아직 아무것도 안 들어갔다고…? 저기, 당신이 부여잡은 그 자지를 넣고 싶어…?」
 						PRINTFORMW 「후후, 안~돼♪ 여기는 벌써, 예약 완료야…♪」
-					;非처녀
+					;비처녀
 					ELSE
 						PRINTFORMW 「스, 스스로 열어서 조른다… 그거 정말 야하네…」
 						PRINTFORMW 비패개장을 명하자, 레이무는 흐리멍텅한 얼굴로 들어앉아, 가랑이를 크게 열어 주저 없게 카메라 앞에 질구를 드러냈다.
@@ -11002,7 +11002,7 @@ CASE 15
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -11787,7 +11787,7 @@ CASE 15
 				CFLAG:364 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;조수が気持ちよくて感じているセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;조수がこっちに来てと言うセリフ
@@ -11879,7 +11879,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -11888,7 +11888,7 @@ CASE 15
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;레즈っぽいセリフに対するセリフ
+		;레즈 같은 대사에 대한 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
 		;둘의 펠라는 기분 좋지？대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
@@ -11935,7 +11935,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -11944,11 +11944,11 @@ CASE 15
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;お互いに유두がこすれて気持ちいいセリフ
+		;서로 젖꼭지가 스쳐서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
-		;二人の파이즈리で気持ちよくなってセリフ
+		;둘의 파이즈리로 기분 좋아져 줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
-		;파이즈리で感じているの？セリフ
+		;파이즈리로 느끼고 있어？대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(7)
 		
 		;대사가 없었을시의 보험(1행)
@@ -14678,7 +14678,7 @@ CASE 15
 				PRINTFORMW 싫어하는 레이무를 당신은 억지로 밖으로 끌어냈다…
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE				
 				IF ((TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) || ABL:노출증 >= 3) && (CFLAG:396 < 3 || FLAG:7 == 2)			
@@ -14757,7 +14757,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;범해져서 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;우리들, 정말 사이 좋지？대사
@@ -15119,8 +15119,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;정액とてもおいしいセリフ
+		;조수구상 호출 함수
+		;정액이 무척 맛있어 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;이건 내꺼야！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -15513,8 +15513,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -16489,7 +16489,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -16541,7 +16541,7 @@ CASE 15
 				CFLAG:418 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
@@ -16631,8 +16631,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -16682,8 +16682,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -18107,7 +18107,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;사정を初めて間近で観察
 		;初사정が이라마치오とか당신マジ鬼畜
@@ -18119,7 +18119,7 @@ IF TFLAG:0 > 0
                 IF EXP:정액경험 == 0
                     PRINTFORMW 「~~~!? 크, 크학, 쿨럭, 켈록, 콜록, 무, 뭐…!? 쿨럭, 우에에…」
                     PRINTFORMW 목 깊숙이 들어간 정체 불명의 액체에 레이무는 숨막혀 하며, 열심히 토해내고 있다
-                    ;연모または봉사정신5이상 연모付けるまで사정せず,付いたとたん이라마치오で사정とかやる人いるのだろうか?
+                    ;연모または봉사정신5이상 연모付けるまで사정せず,付いたとたん이라마치오로 사정とかやる人いるのだろうか?
                     IF (TALENT:연모 || TALENT:친애) || ABL:봉사정신 >= 5
                         PRINTFORMW 잔뜩 사정한 뒤, 당신은 정액과 그 역할에 대해 간단히 설명했다…
                         PRINTFORMW 「저, 정자…? 이게…?」
@@ -18246,7 +18246,7 @@ IF TFLAG:0 > 0
 				CFLAG:233 = 2
 			ENDIF
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		 ;처음입内사정
         IF CFLAG:233 == 0
@@ -19346,7 +19346,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		IF ((TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 			;通す	
 			IF 0 == ((TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)) && (CFLAG:237 < 3 || FLAG:7 == 2)	
@@ -19384,7 +19384,7 @@ IF TFLAG:2 > 0
 			ENDIF
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 1806 || SELECTCOM == 1807
 		IF ((TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -21146,7 +21146,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	IF ((TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
@@ -23895,7 +23895,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
@@ -23990,7 +23990,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -24092,12 +24092,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（X1をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K4800_1
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM

@@ -35,9 +35,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K4625 → EVENTTRAIN_K4625_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4625,ARG = 0
@@ -1129,7 +1129,7 @@ ELSEIF NO:ASSI == 4583
 			ENDIF
 		;그 이외
 		ELSE
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 			IF RAND:3 == 0
 				PRINTFORMW 
@@ -1505,7 +1505,7 @@ ELSEIF TALENT:9
 			PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の方へふらふらと近寄ってきた。
 		ENDIF
 	ELSE
-	;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW %CALLNAME:TARGET%は何も言わない。
@@ -1820,7 +1820,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORML 「……パンツ返してくれない？」
 				PRINTFORMW %CALLNAME:TARGET%は顔を覆っている。
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:4
 			IF K:1 == 0
 				PRINTFORML %CALLNAME:TARGET%はうとうとしていたらしい。
@@ -1890,7 +1890,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW …%CALLNAME:TARGET%は結構ノリノリだ。
 			ENDIF
 		ELSE
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:4
 			IF K:1 == 0
 				PRINTFORMW 「もー、来るの遅いよ%CSTR:이인칭%」
@@ -1970,7 +1970,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 上손い具合に発情させられた分、反応を楽しむとしよう…。
 			ENDIF
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:3
 			IF K:1 == 0
 				PRINTFORMW 「おかえりなさい。今日は何をすればいい？」
@@ -2000,7 +2000,7 @@ DRAWLINE
 IF TALENT:9
 	;반발각인Lv3
 	IF MARK:3 == 3
-	;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW %CALLNAME:TARGET%から눈潰しを喰らいそうになった。
@@ -2010,7 +2010,7 @@ IF TALENT:9
 			PRINTFORMW %CALLNAME:TARGET%を撫でるとその손に噛みつかれた。
 		ENDIF
 	ELSEIF MARK:2 == 3
-	;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML %CALLNAME:TARGET%의 불결た身体を拭いてやった。
@@ -2023,7 +2023,7 @@ IF TALENT:9
 			PRINTFORMW ……げほげほと咳きこんでいる。
 		ENDIF
 	ELSE
-	;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML %CALLNAME:TARGET%의 불결た身体を拭いてやった。
@@ -6006,7 +6006,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -7721,7 +7721,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -9432,7 +9432,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -9499,7 +9499,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW %CALLNAME:TARGET%は불쾌感に耐えきれなかったのか、膝をついて嘔吐を繰り返している。
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -9655,7 +9655,7 @@ ENDIF
 IF TFLAG:2 > 1
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -9702,7 +9702,7 @@ IF TFLAG:2 > 1
 			PRINTFORMW 「ひぃッ！？　あ、熱……」
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -9942,7 +9942,7 @@ IF TFLAG:2 > 1
 ELSEIF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -9971,7 +9971,7 @@ ELSEIF TFLAG:2 > 0
 			PRINTFORMW 「ひぃッ！？　あ、熱……」
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -10268,7 +10268,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -11367,7 +11367,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML %CALLNAME:B%は困っているようだが、%CALLNAME:MASTER%が起きたことに気付くと面倒なことになりそうなので
 						PRINTFORMW しばらく寝たふりを続行することに決めた。
 					ENDIF
-				;거유、폭유の場合
+				;거유, 폭유の場合
 				ELSEIF TALENT:111 || TALENT:112
 					PRINTFORML 朝、눈が깨달음めると同時に下腹部に違和感があるのに気づいた
 					PRINTFORM 눈をやると%CALLNAME:B%が
@@ -12950,12 +12950,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（X1をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K4625
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -13154,7 +13154,7 @@ LOCALS = EMPTY
 SIF TALENT:ARG:9 || MARK:ARG:3 == 3
 	RETURN 0
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = 見縊って貰っちゃ困るよ

@@ -21,7 +21,7 @@
 ;-------------------------------------------------
 ;eraMegaten専用　조교時及び공격時구상テンプレート
 
-;5070と5070をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;5070と5070를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 5070,Y1は1、5070は01のように変えてください
 ;また、特定個人の구상ではなく、회화타입別に対応させたい場合は
 ;K4302_1をPUB(회화타입の번호)に置き換えてください。
@@ -452,7 +452,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -6393,7 +6393,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			PRINTFORMW 「뒷구멍인데도… 더러운 구멍인데도…느끼고 말았습니다……」
@@ -8650,12 +8650,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（X1をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K5070_1
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -8989,7 +8989,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"결착(決着)의 때다!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"저 자들에게 시련을",72,LEFT%┃

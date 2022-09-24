@@ -40,9 +40,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_K1404 → EVENTTRAIN_K1404_12
 ;--------------------------------------------------
 @셀렉트구상설명_K1404,ARG = 0
@@ -11388,7 +11388,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -13984,7 +13984,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -14039,7 +14039,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%에게 오물을 먹이려고 했던건가！？ 웃기지 마라…」
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -14428,7 +14428,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			CALL AA_start_K1404
@@ -15752,7 +15752,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	PRINTL 
 	CALL PALAM_MESSAGE_B
@@ -19801,7 +19801,7 @@ IF (TFLAG:전투이벤트 == 11 || TFLAG:전투이벤트 == 13 )
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"무신의 힘、깨달았는가！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;大데미지
+	;대 데미지
 	ELSEIF 데미지비율(ARG:1, ARG:2) > 30
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"무신의 힘、꺠닫도록 하라！",72,LEFT%┃
@@ -19859,7 +19859,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"아직…쓰러질 수는…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;大데미지
+	;대 데미지
 	ELSEIF 데미지비율(ARG, ARG:2) > 20
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"나무삼！",72,LEFT%┃
@@ -19992,7 +19992,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"비사문천의 가호가 있으리！" + LOCALS + "！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"우선 이기고（이기고 본다）그 후에 싸운다…" + LOCALS + "！",72,LEFT%┃

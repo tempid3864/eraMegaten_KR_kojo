@@ -16,7 +16,7 @@
 
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;4557と4557をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4557と4557를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4557,Y1は1、4557は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -542,7 +542,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORML 今の%CALLNAME%は조교の成果もあり、身持ちが固かった頃の彼女に比べれば、性行為への嫌悪も薄らいでいる。
 				PRINTFORMW それでも今日が위험일にあたっているとあっては、やはり理性の歯止めが働くようだ……
 			ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 				IF RAND:5 == 0
 					PRINTFORML 「ぁっ、@\@ RAND:2 == 0 ? 待って # ダメ \@っ…！」
 					PRINTFORML 息を切らして現れた%CALLNAME%を抱き締めると、팔の中で狼狽した声が上がった。
@@ -583,7 +583,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORML 今の%CALLNAME%は조교の成果もあり、身持ちが固かった頃の彼女に比べれば、性行為への嫌悪も薄らいでいる。
 				PRINTFORMW それでも今日が위험일にあたっているとあっては、やはり理性の歯止めが働くようだ……
 			ELSE
-				;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+				;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 				IF RAND:5 == 0
 					PRINTFORML 「늦어서、미안…！」
 					PRINTFORML 숨을 헐떡이며 나타난 %CALLNAME%의 머리카락은 아직도 촉촉한 채로、말리지도 못한 것 같다。
@@ -8912,7 +8912,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -8943,7 +8943,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW %조사처리(CALLNAME,"는")% 싫어하는 표정으로、독이라도 입에 넣은 듯이 입안의 백탁액을 토해내 버렸다……
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -9081,7 +9081,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -9140,7 +9140,7 @@ IF TFLAG:2 > 0
 		ENDIF
 		;조교時今回の肛射횟수
 		CFLAG:802 += 1
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -9575,7 +9575,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -10440,7 +10440,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		
+		;일어나자 곁에서 자고 있다
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -10902,7 +10902,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 「뭐…%CSTR:일인칭%도、남말할 처지는 아\@ RAND:2 == 0 ? 니지만 # 닌가 \@……」
 			;母親が음란か창부持ち
 			ELSEIF TALENT:4 || TALENT:7
-				;	父親が奴隷か조수
+				;	父親が奴隷か助手
 				IF CFLAG:102 == 2 || CFLAG:102 == 3
 					;부친(조수）과의 상성이 125보다 큰 경우
 					IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125

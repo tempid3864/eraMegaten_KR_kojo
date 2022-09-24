@@ -149,7 +149,7 @@ ENDIF
 ;식당、宿、렌탈、공중변소그외のＮＴＲ系이벤트で처녀상실したときを想定。
 ;당신の知る状況で상실してないとＮＴＲ처녀상실とする。
 ;-------------------------------------------------
-;非처녀
+;비처녀
 IF TALENT:0 == 0
 	PRINTFORMW 
 	;당신이 아는 상황으로 상실하고 있다
@@ -4302,7 +4302,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -4906,7 +4906,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -5844,7 +5844,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -6469,7 +6469,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -6947,7 +6947,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -7701,7 +7701,7 @@ CASE 14
 					;처녀 상실 상황을 당신에게
 					CFLAG:800 = 1
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;조수
 				IF ASSI > 0 && ASSIPLAY
@@ -11358,7 +11358,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -11483,7 +11483,7 @@ CASE 14
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 얼굴을 붉히면서、%조사처리(CALLNAME:MASTER,"가")% %조사처리(CALLNAME:ASSI,"를")% 범하는 모습을 바라보고 있다。
 					ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;ＮＴＲ済み
 				IF TALENT:162 == 1 || TALENT:162 == 4 || TALENT:162 == 2 || TALENT:162 == 5 || TALENT:162 == 3 || TALENT:162 == 6
@@ -15325,7 +15325,7 @@ IF TFLAG:2 > 0
 	PRINTL 
 	CALL PALAM_MESSAGE_A
 	;애널 섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;162가 끝난 상태
 		IF TALENT:162 == 1 || TALENT:162 == 4 || TALENT:162 == 2 || TALENT:162 == 5 || TALENT:162 == 3 || TALENT:162 == 6
 			;愛、隷ＮＴＲ
@@ -19404,8 +19404,8 @@ SELECTCASE TFLAG:13
 		CFLAG:285 = 1
 
 		;-------------------------------------------------
-		;;上司이벤트（預けた場合の夜이벤트）
-		;;연모・친애キャラのみ（ＮＴＲ상태の場合はダメ）
+		;;상사이벤트（맡겼을 경우의 밤 이벤트）
+		;;연모・친애 캐릭터만（ＮＴＲ상태인 경우는 안됨）
 		;-------------------------------------------------
 	CASE 64
 		CALL EVENT_MESSAGE
@@ -20934,7 +20934,7 @@ SELECTCASE TFLAG:13
 					CFLAG:800 = 3
 					;당신이 햄자를 비처녀라고 생각하고 있는 フラグ 오프
 					CFLAG:801 = 0
-				;非처녀
+				;비처녀
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -20995,7 +20995,7 @@ SELECTCASE TFLAG:13
 					CFLAG:800 = 3
 					;당신이 햄자를 비처녀라고 생각하고 있는 フラグ 오프
 					CFLAG:801 = 0
-				;非처녀
+				;비처녀
 				ELSE
 					PRINTFORMW 「이 못되먹은 암캐를 주인님의 씨로 임신시켜 주세요・・・응、하앙」
 					PRINTFORMW %조사처리(CALLNAME,"가")% 말을 끝냄과 동시에 %NTRNAME(CFLAG:함락캐릭터)%의 페니스가 %CALLNAME%의 비밀의 장소를 단숨에 관통했다

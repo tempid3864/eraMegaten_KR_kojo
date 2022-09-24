@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;男・소년구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;男・少年口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -24,7 +24,7 @@
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;314と314をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;314と314를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 314,Y1は1、314は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -40,16 +40,16 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_PUB314 → EVENTTRAIN_PUB314_12
 ;--------------------------------------------------
 @셀렉트구상설명_PUB314,ARG = 0
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용남・소년구상
+PRINTFORML 범용 남・소년 구상
 ;구상설명문
 PRINTFORML    
 
@@ -108,7 +108,7 @@ PRINTFORML
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 
-	PRINTFORMW 「요 %CSTR:12%、%CSTR:11%에게 뭔가 용건이 있는건가？ 들어주지」
+	PRINTFORMW 「여 %CSTR:12%、%CSTR:11%에게 뭔가 용건이 있는건가？ 들어주지」
 	PRINTL
 	PRINTFORMW 「……하？ 조교？ ……%조사처리(CSTR:11,"를")%？」
 	IF TALENT:MASTER:오토코노코 == 1 && TALENT:소인체형
@@ -143,7 +143,7 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	RETURN 0
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	;의존도プラスまたはゼロ
+	;依存度プラスまたはゼロ
 	IF CFLAG:2 >= 0
 		PRINTFORMW 「정말이지、%조사처리(CSTR:12,"는")% 진짜로 색마네」
 		PRINTFORMW 「이제 맘대로 하라구」
@@ -256,7 +256,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
-	;의존도プラスまたはゼロ
+	;依存度プラスまたはゼロ
 	IF CFLAG:2 >= 0
 		PRINTFORMW 「이젠、어떻게든 된다 라는 느낌이야～」
 		PRINTFORMW 「이제 이 조교에 대한 불만은 안 할게」
@@ -268,7 +268,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML 「%조사처리(CSTR:11,"를")% 만나러 왔어? 역시 인기있는 남자는 어려워～♪」
@@ -283,7 +283,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML 「제대로 말 잘들으면……좋은 보상 줄거야？」
@@ -295,7 +295,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「이、이제 이런 일은 하고싶지 않지만……」
@@ -348,7 +348,7 @@ ELSEIF MARK:2 == 2
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	;의존도プラスまたはゼロ
+	;依存度プラスまたはゼロ
 	IF CFLAG:2 >= 0
 		PRINTFORMW 「……응～？ 오늘은 여기까지인가ー？」
 		PRINTFORMW 「이런이런、정말이지 %CSTR:12%의 정신 상태에는 이 %CSTR:11%도 기가 막혀버려ー」
@@ -2326,7 +2326,7 @@ CASE 14
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 4 || FLAG:7 == 2)
-				;연모, 친애또는음란, 창부
+				;연모, 친애もしくは淫乱、娼婦
 				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
 					PRINTFORMW 「헤에에ー、젖먹던 힘까지 낼게ー」
 				;복종, 예속
@@ -2931,7 +2931,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -4389,7 +4389,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -5754,7 +5754,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -5778,7 +5778,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -5897,7 +5897,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -5920,7 +5920,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6107,7 +6107,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -6909,7 +6909,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;노출증で分岐
+			;露出癖で分岐
 				IF ABL:B:8 >= 5
 					PRINTFORMW 「……앙、이것、멈출수가…없、하고싶지 않은데……아항…！」
 				ELSE
@@ -7903,12 +7903,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（314をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（314을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_PUB314
 ;SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 ;	CASE 1
 ;			CALL MESSAGE_LOSE_COLOSSEUM
@@ -8114,7 +8114,7 @@ ENDIF
 ;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
 		CASE GETNUM(TALENT,"우애")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS +"！ 제대로 해줘-！",72,LEFT%┃
+			PRINTFORML ┃%LOCALS +"！ 제대로 하라고-！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;상태변화로는 교만 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교만")

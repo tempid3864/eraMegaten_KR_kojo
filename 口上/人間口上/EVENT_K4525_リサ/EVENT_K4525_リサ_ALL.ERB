@@ -7148,7 +7148,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7172,7 +7172,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 「！？　げほっ…　げほっ…」
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7276,7 +7276,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -7299,7 +7299,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系（子宮口責め、Gスポ）
+	;안쪽 자극 섹스계（子宮口責め、Gスポ）
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -7934,7 +7934,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -9218,7 +9218,7 @@ SELECTCASE TFLAG:13
 			CFLAG:285 = 1
 
 ;-------------------------------------------------
-;;[専属奴隷]취득時
+;;[전속노예]취득시
 ;-------------------------------------------------
 	CASE 42
 		CALL EVENT_MESSAGE
@@ -9327,7 +9327,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7

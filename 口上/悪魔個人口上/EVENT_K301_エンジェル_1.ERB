@@ -43,7 +43,7 @@
 ;	+----+----+-------------------------------+
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;301と301をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;301と301를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 301,Y1は1、301は01のように変えてください
 ;그리고コマンド内の適当な조건の下のPRINTFORMWの後ろに半角スペースを置いてセリフを추가してください
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -376,7 +376,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW "%CSTR:일인칭%는 너무 가지고 싶습니다%UNICODE(0x2661)%"
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW "%CSTR:이인칭%.. 더욱…더…사랑하세요%UNICODE(0x2661)%"
@@ -402,7 +402,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW "%CSTR:일인칭%..…외롭고 힘들었습니다….."
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW "이대로 죽어도 좋을 정도로 사랑을 나눠 볼까요…."
@@ -428,7 +428,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW "가능하면 %CSTR:이인칭%의 아기가 좋습니다만..…%UNICODE(0x2661)%오늘은 가득 안에 내주세요..…%UNICODE(0x2661)%"
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW "%CSTR:이인칭%, 가득 가득 기분 좋은 일 합시다. 기대하고 있어요."
@@ -456,7 +456,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW "하고 싶어요..…하나가 되고 싶어요..…저를 봐주세요..…%CSTR:이인칭%！"
 		;통상
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			Local:1 = RAND:3
 			IF Local:1 == 0
 				PRINTFORMW "너덜너덜하게 만들어주세요. 하나가 되어서、%CSTR:이인칭%"
@@ -6409,7 +6409,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		;해제 (종료)시? 위치 변경시?
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -7817,7 +7817,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7844,7 +7844,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7979,7 +7979,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -8008,7 +8008,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -8250,7 +8250,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -10615,7 +10615,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7

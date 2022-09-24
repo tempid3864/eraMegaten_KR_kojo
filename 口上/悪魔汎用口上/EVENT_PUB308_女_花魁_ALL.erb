@@ -1,18 +1,18 @@
 ﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_PUB308_女_花魁_ALL.ERB
-;	Facility	:회화타입：女・花魁구상
+;	Facility	:회화타입：女・花魁口上
 ;
 ;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2012/05/13		----					新規作成　汎用女・大人구상をベースに改変
-;	002		2012/05/20		ネトリス				창관에서 아르바이트・실행시の연모・친애を4箇所加筆
-;	003		2012/05/25		ネトリス				[愛ＮＴＲ]연모・친애の이벤트時三回目（함락）、ＮＴＲ요바이・ＮＴＲ후 첫 밀회愛ＮＴＲ
-;													임신発깨달음時연모・친애の愛ＮＴＲ、임신発깨달음時、출산시、창관에서 아르바이트・실행시、ＮＴＲ요바이・데이트
-;													ＮＴＲ요바이・본방、に加筆
+;	001		2012/05/13		----					新規作成　汎用女・大人口上をベースに改変
+;	002		2012/05/20		ネトリス				娼館でバイト・実行時の恋慕・親愛を4箇所加筆
+;	003		2012/05/25		ネトリス				[愛ＮＴＲ]恋慕・親愛のイベント時三回目（陥落）、ＮＴＲ夜這い・ＮＴＲ後初逢引愛ＮＴＲ
+;													妊娠発覚時恋慕・親愛の愛ＮＴＲ、妊娠発覚時、出産時、娼館でバイト・実行時、ＮＴＲ夜這い・デート
+;													ＮＴＲ夜這い・本番、に加筆
 
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;-------------------------------------------------
@@ -36,8 +36,8 @@
 ;	+----+----+-------------------------------+
 ;
 ;-------------------------------------------------
-;	◆구상コンセプト
-;汎用女・大人구상をベースに改変させて頂いておりんす。
+;	◆口上コンセプト
+;汎用女・大人口上をベースに改変させて頂いておりんす。
 ;言葉遣いのおかしな所は好きに直してくんなまし
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
@@ -57,21 +57,21 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_PUB308 → EVENTTRAIN_PUB308_12
 ;--------------------------------------------------
 @셀렉트구상설명_PUB308,ARG = 0
 SIF ARG == 1
 	RETURN 0
-;구상명 汎用女・花魁구상
-PRINTFORML 범용녀・오이란(기생)구상
+;구상명 汎用女・花魁口上
+PRINTFORML 범용 여・오이란(기생) 구상
 ;구상설명문
 PRINTFORML 　 
 
-;	◆사용CFLAGに関して
-;800	연모, 친애持ちの愛ＮＴＲでの再조교フラグ
+;	◆使用CFLAGに関して
+;800	恋慕、親愛持ちの愛ＮＴＲでの再調教フラグ
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -264,7 +264,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「%조사처리(CSTR:12,"와")% 눈을 맞추는 것만으로도 이 못난 가슴이 죄어오는 것을 아시옵니까…」
@@ -277,7 +277,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「하아……%CSTR:12%의 뜨거운 것 주시와요……」
@@ -292,7 +292,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「%CSTR:이인칭%…기다리고 있었사옵니다」
@@ -505,8 +505,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 				CFLAG:300 = 3
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
-			;굴복각인無しで
-			;C감각とB감각が３이상의 時
+			;屈服刻印無しで
+			;C感覚とB感覚が３以上の時
 			ELSEIF ABL:3 >= 3 && ABL:6>=3 && (CFLAG:300 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
 					PRINTFORMW 「으읏…후우……읏……으응……크웃……」
@@ -594,8 +594,8 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:301 = 3
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
-			;굴복각인無しで
-			;C감각が３이상의 時
+			;屈服刻印無しで
+			;C感覚が３以上の時
 			ELSEIF ABL:3 >= 3 && (CFLAG:301 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
 					PRINTFORMW 「크읏…아, 아파…조금만 더 상냥하게 다루어주시면 안 되겠습니까……」
@@ -712,8 +712,8 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:303 = 3
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
-			;굴복각인無しで
-			;V감각が３이상의 時
+			;屈服刻印無しで
+			;V感覚が３以上の時
 			ELSEIF ABL:4 >= 3 && (CFLAG:303 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
 					PRINTFORMW 「읏……흐읏……손길이……하아…하아……잠,아앗……」
@@ -792,8 +792,8 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:304 = 3
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
-			;굴복각인無しで
-			;A감각が３이상의 時
+			;屈服刻印無しで
+			;A感覚が３以上の時
 			ELSEIF ABL:5 >= 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
 					PRINTFORMW 「앗…하아……ㅅ…아앗！　……읏……！」
@@ -878,8 +878,8 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:305 = 3
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
-			;굴복각인無しで
-			;A감각が３이상의 時
+			;屈服刻印無しで
+			;A感覚が３以上の時
 			ELSEIF ABL:5 >= 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
 					PRINTFORMW 「읏....하읏....크....」
@@ -2316,7 +2316,7 @@ CASE 14
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
-				;거유、폭유
+				;거유, 폭유
 				IF TALENT:111 || TALENT:112
 					PRINT 출렁이는 풍만한 유방을 주무르면서 
 				ELSE
@@ -2648,8 +2648,8 @@ CASE 14
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					IF RAND:5 == 0
-						PRINTFORML %조사처리(CALLNAME,"는")% 격렬한 허리놀림을 보인다。
-						PRINTFORMW 젖은 질의 육벽이 남근을 강하게 감싸고, 짜내듯이 밀착해간다。
+					PRINTFORML %조사처리(CALLNAME,"는")% 격렬한 허리놀림을 보인다。
+					PRINTFORMW 젖은 질의 육벽이 남근을 강하게 감싸고, 짜내듯이 밀착해간다。
 					ELSEIF RAND:4 == 0
 						PRINTFORML %CALLNAME%의 허리가 크게 휜다.
 						PRINTFORMW 순간, 단번에 내려와, 원을 그리듯이 허리를 흔들어온다。
@@ -2836,14 +2836,14 @@ CASE 14
 						PRINTFORMW 「이것 또한, 운명이라는 것일까요....」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-							PRINTFORML 「악마의 순결을 받은 인간이 얼마나 될는지요, 후후....」
+						PRINTFORML 「악마의 순결을 받은 인간이 얼마나 될는지요, 후후....」
 						PRINTFORMW 「그리고, 인간의 여자로는 맛볼 수 없는 극상의 쾌락도.....%UNICODE(0x2661)%」
 					;복종, 예속
 					ELSE
 						PRINTFORMW 
 					ENDIF
 				ELSE
-						PRINTFORMW 「이런 일이 되어버리다니....%CSTR:11%의 처음을....당신..따위에게」
+					PRINTFORMW 「이런 일이 되어버리다니....%CSTR:11%의 처음을....당신..따위에게」
 					PRINTFORMW 조교 당하기 시작 할 때부터 알고는 있었을 것이다。
 					PRINTFORML 그러나 인간이 악마를 성노예로 부릴 수는 없다 라는 오만한 고정관념이
 					PRINTFORMW %CALLNAME%에게서 그 결의를 잊게 했다。
@@ -2854,7 +2854,7 @@ CASE 14
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-							PRINTFORMW 「%조사처리(CSTR:11,"가")% 인간에게 안기다니....」
+						PRINTFORMW 「%조사처리(CSTR:11,"가")% 인간에게 안기다니....」
 						PRINTFORMW 「이것 또한, 운명이라는 것일까요....」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
@@ -4134,7 +4134,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -4338,7 +4338,7 @@ CASE 14
 					PRINTFORMW 입을 굳게 다물고 눈을 감은 채로 바늘을 기다린다....원하는 보상을 받으려면 몇 번을 참아야 되는 지도 모른 채로....
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;暫定で굴복３と同じ文を사용
+					;暫定で屈服３と同じ文を使用
 					PRINTFORMW 「바늘은 싫어....그만...무엇이든...무엇이든 하겠사와요...제발」
 					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")%) 바늘을 들자 부들부들 떨기 시작했다.
 					PRINTFORMW 뺨은 공포로 일그러져 있고, 눈에서는 쉴 새 없이 눈물이 흐른다...%조사처리(CALLNAME,"는")% 양팔로 몸을 감싸 안고 그 자리에 주저 앉았다.
@@ -4346,7 +4346,7 @@ CASE 14
 					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 몸을 가리지 말라고 명령하고 %CALLNAME%에게 공포와 고통을 새긴다.
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;暫定で굴복３と同じ文を사용
+					;暫定で屈服３と同じ文を使用
 					PRINTFORMW 「바늘은 싫어....그만...무엇이든...무엇이든 하겠사와요...제발」
 					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")%) 바늘을 들자 부들부들 떨기 시작했다.
 					PRINTFORMW  뺨은 공포로 일그러져 있고, 눈에서는 쉴 새 없이 눈물이 흐른다...%조사처리(CALLNAME,"는")% 양팔로 몸을 감싸 안고 그 자리에 주저 앉았다.
@@ -4357,10 +4357,10 @@ CASE 14
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:358 < 3 || FLAG:7 == 2)
 				PRINTFORMW 「바늘은 싫어....그만...무엇이든...무엇이든 하겠사와요...제발」
-					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")%) 바늘을 들자 부들부들 떨기 시작했다.
-					PRINTFORMW  뺨은 공포로 일그러져 있고, 눈에서는 쉴 새 없이 눈물이 흐른다...%조사처리(CALLNAME,"는")% 양팔로 몸을 감싸 안고 그 자리에 주저앉았다.
-					PRINTFORMW 「제발...용서해주시와요...싫어...싫어어」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 몸을 가리지 말라고 명령하고 %CALLNAME%에게 공포와 고통을 새긴다.
+				PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")%) 바늘을 들자 부들부들 떨기 시작했다.
+				PRINTFORMW 뺨은 공포로 일그러져 있고, 눈에서는 쉴 새 없이 눈물이 흐른다...%조사처리(CALLNAME,"는")% 양팔로 몸을 감싸 안고 그 자리에 주저앉았다.
+				PRINTFORMW 「제발...용서해주시와요...싫어...싫어어」
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 몸을 가리지 말라고 명령하고 %CALLNAME%에게 공포와 고통을 새긴다.
 				CFLAG:358 = 3
 			;그 이외
 			ELSEIF CFLAG:358 < 2 || FLAG:7 == 2
@@ -5684,7 +5684,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -7324,7 +7324,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 				IF RAND:4 == 0
@@ -7566,7 +7566,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -8486,7 +8486,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「
 					ENDIF
 				ENDIF
-			;父親が奴隷か조수
+			;父親が奴隷か助手
 			ELSEIF CFLAG:102 == 2 || CFLAG:102 == 3
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -8506,10 +8506,10 @@ SELECTCASE TFLAG:13
 				ELSE
 					PRINTFORML 
 				ENDIF
-			;父親が主人、조수、奴隷以外
+			;父親が主人、助手、奴隷以外
 			ELSE
 				;主人以外が一番。
-				;とりあえずＮＴＲ相手の아이を임신と仮定。
+				;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 				IF FAVORITE_1(TARGET) != MASTER
 					;애ＮＴＲ
 					IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
@@ -8541,7 +8541,7 @@ SELECTCASE TFLAG:13
 								PRINTFORML 
 								PRINTFORMW 그렇다면, 다시 조교를 시작할 것이라고 말하자 %조사처리(CALLNAME,"는")% 절망해서 그 자리에 쓰러졌다.
 								PRINTFORML 
-								;再조교フラグ
+								;再調教フラグ
 								CFLAG:800 = 1
 							
 							CASE 2
@@ -8559,7 +8559,7 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORML 
 					ENDIF
-				;당신が一番
+				;あなたが一番
 				ELSE
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
@@ -8613,7 +8613,7 @@ SELECTCASE TFLAG:13
 					CFLAG:272 = 1
 				ENDIF
 			ENDIF
-		;父親が奴隷か조수
+		;父親が奴隷か助手
 		ELSEIF CFLAG:102 == 2 || CFLAG:102 == 3
 			CALL EVENT_MESSAGE
 			;함락완료
@@ -8633,10 +8633,10 @@ SELECTCASE TFLAG:13
 					PRINTFORML 
 				CFLAG:272 = 1
 			ENDIF
-		;父親が主人、조수、奴隷以外
+		;父親が主人、助手、奴隷以外
 		ELSE
 			;主人以外が一番。
-			;とりあえずＮＴＲ相手の아이を임신と仮定。
+			;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 			IF FAVORITE_1(TARGET) != MASTER
 				;애ＮＴＲ
 				IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
@@ -8661,7 +8661,7 @@ SELECTCASE TFLAG:13
 					PRINTFORML 
 				ENDIF
 				CFLAG:272 = 2
-			;당신が一番
+			;あなたが一番
 			ELSE
 				CALL EVENT_MESSAGE
 				;함락완료
@@ -8798,29 +8798,29 @@ SELECTCASE TFLAG:13
 						SELECTCASE RAND:8
 						;挨拶
 						CASE 0
-							PRINTFORML 淫ＮＴＲ挨拶
+							;PRINTFORML 淫ＮＴＲ挨拶
 						;知り合い
 						CASE 1
-							PRINTFORMW 淫ＮＴＲ知り合い
+							;PRINTFORMW 淫ＮＴＲ知り合い
 						;フェラ
 						CASE 2
-							PRINTFORML 淫ＮＴＲフェラ
+							;PRINTFORML 淫ＮＴＲフェラ
 						;대면좌위
 						CASE 3
-							PRINTFORML 
-							PRINTFORML 淫ＮＴＲ대면좌위
+							;PRINTFORML 
+							;PRINTFORML 淫ＮＴＲ대면좌위
 						CASE 4
 						;정상위
-							PRINTFORML 淫ＮＴＲ정상위
+							;PRINTFORML 淫ＮＴＲ정상위
 						CASE 5
 						;기승위
-							PRINTFORML 淫ＮＴＲ기승위
+							;PRINTFORML 淫ＮＴＲ기승위
 						;배면좌위
 						CASE 6
-							PRINTFORML 淫ＮＴＲ배면좌위
+							;PRINTFORML 淫ＮＴＲ배면좌위
 						CASEELSE
 						;후배위
-							PRINTFORML 淫ＮＴＲ후배위
+							;PRINTFORML 淫ＮＴＲ후배위
 						ENDSELECT
 					;통상
 					ELSE
@@ -8949,62 +8949,62 @@ SELECTCASE TFLAG:13
 							PRINTFORMW 
 						CASEELSE
 						;후배위
-							PRINTFORML 후배위
+							;PRINTFORML 후배위
 						ENDSELECT
 					ENDIF
 				ELSEIF TALENT:음란 || TALENT:창부 || TALENT:복종 || TALENT:예속
 					SELECTCASE RAND:8
 					;挨拶
 					CASE 0
-						PRINTFORML 인사
+						;PRINTFORML 인사
 					;知り合い
 					CASE 1
-						PRINTFORMW 지인
+						;PRINTFORMW 지인
 					;フェラ
 					CASE 2
-						PRINTFORML 펠라
+						;PRINTFORML 펠라
 					;대면좌위
 					CASE 3
-						PRINTFORML 대면좌위
+						;PRINTFORML 대면좌위
 					CASE 4
 					;정상위
-						PRINTFORML 정상위
+						;PRINTFORML 정상위
 					CASE 5
 					;기승위
-						PRINTFORML 기승위
+						;PRINTFORML 기승위
 					;배면좌위
 					CASE 6
-						PRINTFORML 배면좌위
+						;PRINTFORML 배면좌위
 					CASEELSE
 					;후배위
-						PRINTFORML 후배위
+						;PRINTFORML 후배위
 					ENDSELECT
 				ELSE
 					SELECTCASE RAND:8
 					;挨拶
 					CASE 0
-						PRINTFORML 인사
+						;PRINTFORML 인사
 					;知り合い
 					CASE 1
-						PRINTFORMW 지인
+						;PRINTFORMW 지인
 					;フェラ
 					CASE 2
-						PRINTFORML 펠라
+						;PRINTFORML 펠라
 					;대면좌위
 					CASE 3
-						PRINTFORML 대면좌위
+						;PRINTFORML 대면좌위
 					CASE 4
 					;정상위
-						PRINTFORML 정상위
+						;PRINTFORML 정상위
 					CASE 5
 					;기승위
-						PRINTFORML 기승위
+						;PRINTFORML 기승위
 					;
 					CASE 7
-						PRINTFORML 배면좌위
+						;PRINTFORML 배면좌위
 					CASEELSE
 					;후배위
-						PRINTFORML 후배위
+						;PRINTFORML 후배위
 					ENDSELECT
 				ENDIF
 				CFLAG:606 = 1
@@ -9709,13 +9709,13 @@ SELECTCASE TFLAG:13
 			;애ＮＴＲ
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
 				;CALL EVENT_MESSAGE
-				;再조교フラグ
+				;再調教フラグ
 				IF RAND:2 == 0 && CFLAG:800 == 1
 					SELECTCASE RAND:7
 					;挨拶
 					CASE 0
 						;PRINTFORML 
-						;PRINTFORML 再조교
+						;PRINTFORML 再調教
 					;フェラ
 					CASE 1
 						PRINTFORML 
@@ -9736,19 +9736,19 @@ SELECTCASE TFLAG:13
 					;대면좌위
 					CASE 2
 						;PRINTFORML 
-						;PRINTFORML 再조교대면좌위
+						;PRINTFORML 再調教대면좌위
 					;정상위
 					CASE 3
-						;PRINTFORML 再조교정상위
+						;PRINTFORML 再調教정상위
 					;기승위
 					CASE 4
-						;PRINTFORML 再조교기승위
+						;PRINTFORML 再調教기승위
 					;배면좌위
 					CASE 5
-						;PRINTFORML 再조교배면좌위
+						;PRINTFORML 再調教배면좌위
 					CASEELSE
 					;후배위
-						;PRINTFORML 再조교후배위
+						;PRINTFORML 再調教후배위
 					ENDSELECT
 					;お互い以外への호감도減少処理
 					PRINTFORML {CFLAG:TARGET:본방횟수}
@@ -10078,7 +10078,7 @@ ELSEIF TFLAG:전투이벤트 == 2
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CSTR:ARG:일인칭 + "! 함께 할 수 있어서 기쁘답니다！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;공격
+;攻撃
 ;勝利時
 ELSEIF TFLAG:전투이벤트 == 11
 	CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
@@ -10093,14 +10093,14 @@ ELSEIF TFLAG:전투이벤트 == 11
 		ENDIF
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-;피데미지　ARGが仲魔、ARG:1が적、ARG:2が데미지量
+;피데미지　ARGが仲魔、ARG:1が敵、ARG:2がダメージ量
 ELSEIF TFLAG:전투이벤트 == 12
 	;死亡
 	IF BASE:ARG:ＨＰ <= 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CSTR:ARG:일인칭 + "、매우 피곤하네요…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;大데미지、HPの4割이상
+	;대 데미지、HPの4割以上
 	ELSEIF 데미지비율(ARG, ARG:2) > 40
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		IF RAND:2 == 0
@@ -10115,7 +10115,7 @@ ELSEIF TFLAG:전투이벤트 == 12
 			PRINTFORML ┃%"어머나, 빨아들이겠사와요",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;회피された
+;회피당했다
 ELSEIF TFLAG:전투이벤트 == 17
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"어머머… 봐드릴 수 없겠사와요",72,LEFT%┃
@@ -10159,7 +10159,7 @@ IF ARG:1 > 0
 ;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 		CASE GETNUM(TALENT,"현명")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "！ 과연 " + CSTR:일인칭 + "이시와요♪",72,LEFT%┃
+			PRINTFORML ┃%LOCALS + "！　과연 " + CSTR:일인칭 + "이시와요♪",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
 		CASE GETNUM(TALENT,"천사")

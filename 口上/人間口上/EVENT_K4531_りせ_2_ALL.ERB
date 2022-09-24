@@ -33,7 +33,7 @@
 
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;4531と4531をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4531と4531를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4531,Y1は1、4531は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -14009,7 +14009,7 @@ IF TFLAG:0 > 0
 	;本当は소질分岐で台詞표시조건をもっと厳しくしたいところだが리세はバニラにする
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
-		;이라마치오で사정
+		;이라마치오로 사정
 		IF SELECTCOM == 140
 			IF RAND:2 == 0
 ;OriginalString : 「んぅ…
@@ -14372,7 +14372,7 @@ IF TFLAG:0 > 0
 		CFLAG:233 = 3
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2)
-		;이라마치오で사정
+		;이라마치오로 사정
 		IF SELECTCOM == 140
 			IF RAND:2 == 0
 ;OriginalString : 「んぅ…ん……」
@@ -14546,7 +14546,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			;연모, 친애
@@ -15008,7 +15008,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료

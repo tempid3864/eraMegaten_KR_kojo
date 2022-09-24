@@ -70,9 +70,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K4522 → EVENTTRAIN_K4522_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4603_2,ARG = 0
@@ -249,7 +249,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 		PRINTFORMW 너를 별로 돕고 싶어서 한 일이 아니다.
 		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%에게 그리 말하고선, %CALLNAME:TARGET%의 옷에 손을 댔다……
 		CFLAG:201 = 1
-	;非처녀
+	;비처녀
 	ELSE
 		PRINTFORMW 「아… %CSTR:이인칭%, 저기… %CSTR:일인칭%에게 무슨, 용건이신가요…?」
 		PRINTFORML %타겟은% 낯선 기구들이 놓인 살풍경한 방에 당황하면서도 
@@ -3391,7 +3391,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;非처녀
+					;비처녀
 					IF TALENT:처녀 == 0
 						;질내사정されている場合
 						IF GET_STAIN("질내", "정액", TARGET) 
@@ -4418,7 +4418,7 @@ CASE 14
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;ス마이ル
+			;スマイル
 			IF TFLAG:17 == 0
 				PRINTFORMW 「…후후, %조사처리(CSTR:이인칭,"가")% 웃으니까… 왠지 %CSTR:일인칭%도 기뻐지네」
 				PRINTFORMW %CALLNAME:MASTER%의 웃는 얼굴에 이끌린 것인지, %CALLNAME:TARGET%도 얼굴을 붉히고 헤헤거리는 웃음을 짓고 있다.
@@ -5571,7 +5571,7 @@ CASE 14
 					PRINTFORML %마스터가% 허리를 흔들고 있는 동안, %타겟은% 아픔을 참으면서
 					PRINTFORMW 처녀를 빼앗긴 슬픔에 눈물과 콧물로 얼굴을 엉망진창으로 적시고 목놓아 울었다……
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애かつ他の体位での行為경험なしかつ지프스국원による처녀상실경험がある場合
 				IF TALENT:3 || TALENT:6 & CFLAG:333 == 0 && CFLAG:338 == 0 && CFLAG:340 == 0 && CFLAG:341 == 0 && CFLAG:이벤트가입 >= 5
@@ -6151,7 +6151,7 @@ CASE 14
 				SETFONT "DotumChe"
 			ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애かつ他の体位での行為경험なしかつ지프스국원による처녀상실경험がある場合
 				IF TALENT:3 || TALENT:6 & CFLAG:332 == 0 && CFLAG:338 == 0 && CFLAG:340 == 0 && CFLAG:341 == 0 && CFLAG:이벤트가입 >= 5
@@ -6812,7 +6812,7 @@ CASE 14
 					PRINTFORMW 아무래도, 지나친 아픔에 실신해버린 것 같다.
 					PRINTFORMW 한숨을 쉰 %조사처리(CALLNAME:MASTER,"는")% 밑쪽에서 %타겟을% 밀어울려 억지로 눈을 뜨게 만들기로 했다……
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애かつ他の体位での行為경험なしかつ지프스국원による처녀상실경험がある場合
 				IF TALENT:3 || TALENT:6 & CFLAG:332 == 0 && CFLAG:333 == 0 && CFLAG:340 == 0 && CFLAG:341 == 0 && CFLAG:이벤트가입 >= 5
@@ -7090,7 +7090,7 @@ CASE 14
 					PRINTFORMW 무엇인가 횡설수설 해명하고 있지만, %CALLNAME:MASTER%의 귀엔 들리지 않는다.
 					PRINTFORMW %타겟은% 그 지나친 처사와, 조금이라도 %마스터를% 동정해버린 자신을 원망했다……
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애かつ他の体位での行為경험なしかつ지프스국원による처녀상실경험がある場合
 				IF TALENT:3 || TALENT:6 & CFLAG:332 == 0 && CFLAG:333 == 0 && CFLAG:340 == 0 && CFLAG:341 == 0 && CFLAG:이벤트가입 >= 5
@@ -9080,7 +9080,7 @@ CASE 14
 				SETFONT "DotumChe"
 			ENDIF
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -9227,7 +9227,7 @@ CASE 14
 					;처녀
 					IF TALENT:0
 						PRINTFORMW 「그치만… 이걸론 안타까워져서… 빨리 여기도 %CSTR:이인칭%의 것으로 해줘어…」
-					;非처녀
+					;비처녀
 					ELSE
 						;行為경험なしかつ지프스국원による처녀상실경험がある場合
 						IF CFLAG:332 == 0 && CFLAG:333 == 0 && CFLAG:338 == 0 && CFLAG:340 == 0 && CFLAG:341 == 0 && CFLAG:이벤트가입 >= 5
@@ -9361,7 +9361,7 @@ CASE 14
 					PRINTW 　　　　　　　　　　　　| 　 ‘，　 　 　 「　/ﾆﾆ７ニニニニニｱ
 				SETFONT "DotumChe"
 			ENDIF
-				;非처녀
+				;비처녀
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11630,7 +11630,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -13463,7 +13463,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -13487,7 +13487,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -13606,7 +13606,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -13629,7 +13629,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -13954,7 +13954,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -15236,7 +15236,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「
 					ENDIF
 				ENDIF
-			;父親が奴隷か조수
+			;父親が奴隷か助手
 			ELSEIF CFLAG:102 == 2 || CFLAG:102 == 3
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -15256,10 +15256,10 @@ SELECTCASE TFLAG:13
 				ELSE
 					PRINTFORML 
 				ENDIF
-			;父親が主人、조수、奴隷以外
+			;父親が主人、助手、奴隷以外
 			ELSE
 				;主人以外が一番。
-				;とりあえずＮＴＲ相手の아이を임신と仮定。
+				;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 				IF FAVORITE_1(TARGET) != MASTER
 					;애ＮＴＲ
 					IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
@@ -15284,7 +15284,7 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORML 
 					ENDIF
-				;당신が一番
+				;あなたが一番
 				ELSE
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
@@ -16848,7 +16848,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7

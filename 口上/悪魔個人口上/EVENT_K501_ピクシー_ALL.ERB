@@ -711,7 +711,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		PRINTFORMW 「오늘은 어떤 일을 하는 거야?」
 		IF RAND:4 == 0 && TALENT:처녀 && TALENT:남자 == 0 && TALENT:오토코노코 == 0
 			PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 이제 %CSTR:이인칭% 것이니까 처녀 같은 것은 맘대로 해도 되지않아?」
@@ -9449,7 +9449,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSEIF SELECTCOM == 184 && TEQUIP:29 == 1
-			;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+			;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -11946,7 +11946,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「최악…」
 			CFLAG:238 = 1
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;経験豊富な픽시の場合
 		IF NO:E == 4999 && EXP:PLAYER:사정경험 == 0 && CFLAG:이벤트가입 == 2
@@ -14031,7 +14031,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 
 ;-------------------------------------------------
-;교회で입봉사
+;교회에서 입봉사
 ;-------------------------------------------------
 	CASE 65
 		CALL EVENT_MESSAGE
@@ -14043,7 +14043,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 
 ;-------------------------------------------------
-;교회で性봉사
+;교회에서 성봉사
 ;-------------------------------------------------
 	CASE 65
 		CALL EVENT_MESSAGE

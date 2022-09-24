@@ -4560,7 +4560,7 @@ IF PALAM:욕정 >= PALAMLV:9 &&  ABL:5 >= 3
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)                                   
-                                                        ;거유、폭유
+                                                        ;거유, 폭유
 				IF TALENT:111 || TALENT:112
 					PRINT 출렁 출렁 흔들리는 풍만한 가슴을 주무르면서、
 				ELSE
@@ -7425,7 +7425,7 @@ IF PALAM:욕정 >= PALAMLV:9 &&  ABL:5 >= 3
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:444 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-                                                                        ;거유、폭유
+                                                                        ;거유, 폭유
 				IF TALENT:111 || TALENT:112
 					PRINT 출렁 출렁 흔들리는 풍만한 가슴을 주무르면서、
 				ELSE
@@ -12022,7 +12022,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -12308,7 +12308,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -14843,12 +14843,12 @@ LOCAL:1 = 1
 LOCALS = EMPTY
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		LOCALS = 너무 번거롭게 만들지 말아줘
 	;COOP참가
 	CASE 2
-		;主人がCOOP発動
+		;주인이 COOP발동
 		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			;연모
 			IF TALENT:3 || TALENT:6
@@ -14867,7 +14867,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			LOCALS = 승부가 났네
 		;약점をついた。つまりCOOP
@@ -14875,10 +14875,10 @@ SELECTCASE TFLAG:전투이벤트
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 당신은 나에게 패배할 거야, 그것이 내가 예지한 미래！
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-;		;大데미지
+;		;대 데미지
 ;		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 ;			LOCALS = 
 ;		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
@@ -14889,14 +14889,14 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = 키리카……%CSTR:이인칭%……미안해요……。
 			ELSE
 				LOCALS = 쓰러질 순……。
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			LOCALS = 꺄아앗！
 		;무효
@@ -14906,13 +14906,13 @@ SELECTCASE TFLAG:전투이벤트
 		ELSEIF ARG:2 < 0
 			LOCALS = 자신의 어리석음을 깨닫도록 해！
 		ENDIF
-	;반사された
+	;반사당했다
 	CASE 15
 			LOCALS = 어、어째서……
-	;반사した
+	;반사했다
 	CASE 16
 			LOCALS = 자신의 어리석음을 깨닫도록 해！
-	;회피された
+	;회피당했다
 	CASE 17
 			LOCALS = 내 예지에…일그러짐이 생기기 시작했어…？
 	;회피した

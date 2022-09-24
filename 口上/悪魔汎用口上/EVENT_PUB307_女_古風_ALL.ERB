@@ -1,7 +1,24 @@
 ﻿;-------------------------------------------------
-;○○구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;能○可愛いよ、○登
 ;能○ボイスでお読みください
+;-------------------------------------------------
+;2020/05/25以前の更新履歴は不明
+;名無しの別人がやった加筆だけ記載しておきます
+;=====================================================================
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:EVENT_PUB307_女_古風
+;	Facility	:회화타입・古風の女悪魔の調教口上
+;
+;	Modification Data:
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		Ｎ鳥					新規作成
+;   002		2020/05/25      名無しの別人			人間がいいそうにない、仲魔用台詞を、ランダム奴隷キャラが言わないように追加・修正。
+;													服従後初調教時の台詞を追加、調教開始時、調教終了時の台詞を修正。
+;													したらなぜかセリフを言わなくなった。
+;	003		2020/05/26		名無しの別人			修正しました。チェックして原因を教えてくれたDISCORD鯖のみなさま、ありがとうございました。
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;-------------------------------------------------
 ;	◆ライセンスについて
 ;	+----+----+-------------------------------+
@@ -24,14 +41,14 @@
 ;
 
 ;-------------------------------------------------
-;eraMegaten専用　조교時及び공격時구상テンプレート
+;eraMegaten専用　調教時及び攻撃時口上テンプレート
 
 ;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
-;また、特定個人の구상ではなく、회화타입別に対応させたい場合は
-;KX1をPUB(회화타입の번호)に置き換えてください。
-;例）픽시の구상を作りたいならX1⇒X1に置き換え
-;　　회화타입：女、淑女ならKX1⇒KX1に置き換え
+;また、特定個人の口上ではなく、会話タイプ別に対応させたい場合は
+;KX1をPUB(会話タイプの番号)に置き換えてください。
+;예）ピクシーの口上を作りたいならX1⇒X1に置き換え
+;　　会話タイプ：女、淑女ならKX1⇒KX1に置き換え
 
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -46,7 +63,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용녀·고풍구상
+PRINTFORML 범용 여·고풍 구상
 ;구상설명문
 PRINTFORML    
 
@@ -126,12 +143,22 @@ ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 	PRINTFORMW 「흠……」
 	PRINTFORMW 「%CSTR:12%여、%조사처리(CSTR:11,"와")%의 만남이 마음에 드는 모양이구나」
 	PRINTFORMW 「허나、%조사처리(CSTR:11,"는")% %CSTR:12%만큼 한가하지 않다」
-	PRINTFORMW 「%조사처리(CSTR:11,"를")% 지루하게 만든다면、그 목을 뜯어먹어도 좋겠지？」
+		;ランダム奴隷キャラの場合
+		IF ABL:종족 == 0
+			PRINTFORML 「%조사처리(CSTR:11,"를")% 지루하게 만든다면、그 목을 잘라내도 좋겠지？」
+		ELSE
+			PRINTFORMW 「%조사처리(CSTR:11,"를")% 지루하게 만든다면、그 목을 뜯어먹어도 좋겠지？」
+	    ENDIF
 	CFLAG:201 = 2
 	RETURN 0
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
-	PRINTFORMW 「인간이여、그대는 쌓아둔 업이 깊어보이는구나」
+		;ランダム奴隷キャラの場合
+		IF ABL:종족 == 0
+			PRINTFORMW 「%이인칭은% 쌓아둔 업이 깊어보이는구나」
+		ELSE
+			PRINTFORMW 「인간이여、그대는 쌓아둔 업이 깊어보이는구나」
+	    ENDIF
 	PRINTFORMW 「무엇 때문에 그리 정욕에 빠졌느냐？」
 	PRINTFORMW 「……%CSTR:11%으로서는 %CSTR:12%의 마음을 헤아리지 못하겠구나」
 	CFLAG:201 = 3
@@ -150,15 +177,22 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			;조교하지 않고 연모를 단 경우の分岐
 		;	PRINTFORMW 
 		;ELSE
+		;ランダム奴隷キャラの場合
+		IF ABL:종족 == 0
+			PRINTFORMW 「……%CSTR:12%をなめておった」
+			PRINTFORMW 「完全に籠絡されてしもうたわ。もはや%CSTR:12%に逆らおうとも思えぬ」
+			PRINTFORMW 「%CSTR:12%にとって%CSTR:11%はただの奴隷なのだということはわかっておる」
+			PRINTFORMW 「……それでもかまわぬ。だから、どうか、%CSTR:12%のそばにおいてくれぬだろうか」
+		ELSE
 			PRINTFORMW 「%CSTR:12%여……」
 			PRINTFORMW 「찰나의 시간을 살아가는 강인한 자여」
-			PRINTFORMW 「그대가 사람의 몸을 버리지 않는 한、%조사처리(CSTR:11,"는")% 같은 생을 살아갈 수는 없느니라」
+			PRINTFORMW 「그대가 사람의 몸을 버리지 않는 한、%조사처리(CSTR:12,"는")% 같은 생을 살아갈 수는 없느니라」
 			PRINTFORMW 「%조사처리(CSTR:11,"가")% 지금 정도로 자신의 몸을 저주한 적은 없었으니、바라 마지않으나 %조사처리(CSTR:11,"는")% %조사처리(CSTR:12,"와")% 같은 생을 살아갈 수는 없느니라…」
 			PRINTFORMW 「……그러니、」
 			PRINTFORMW 「그러니 지금 말한 시간을 함께 보내겠느니라」
 			PRINTFORMW 「후후……이것은 허언이 아니다」
 			PRINTFORMW 「이 생명이 다하는 그날까지、%조사처리(CSTR:12,"는")% %조사처리(CSTR:11,"가")% 지켜주겠노라」
-		;ENDIF
+		ENDIF
 	;음란
 	ELSEIF TALENT:4
 		PRINTFORMW 「기다리고 있었다、%CSTR:12%여」
@@ -167,12 +201,15 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 「더욱 더、%조사처리(CSTR:11,"를")% 음란하게 흐트러지게 만들어 보거라」
 	;복종
 	ELSEIF TALENT:5
-		PRINTFORMW 
+		PRINTFORMW 「恐ろしい御方じゃ……」
+		PRINTFORMW %CALLNAME%の瞳には、%CALLNAME:MASTER%に対する恐怖と被虐的な劣情が宿っていた。
+		PRINTFORMW どうやら%CALLNAME:MASTER%の調教は、%CALLNAME%の心をへし折ったようだ。
+		PRINTFORMW 身も心も奴隷へ堕ちた%CALLNAME%をさらに堕とすべく、%CALLNAME:MASTER%は躾をはじめた。
 	ENDIF
 	CFLAG:201 = 5
-	RETURN 0
 
-;함락+네코미미카츄샤　一回だけ
+
+;함락+ネコミミカチューシャ　一回だけ
 ELSEIF CFLAG:201 < 6 && (TALENT:3 || TALENT:4 || TALENT:5) && TEQUIP:모자 == [[아이템:네코미미카츄샤]]
 	PRINTFORMW 「오늘도 조교다 냐☆앙」
 	PRINTFORML …………
@@ -233,7 +270,12 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 	IF RAND:2 == 0
 		PRINTFORMW 「흠…」
 		PRINTFORMW 「%CSTR:12%의 명이라면 별 수 없겠구나…」
-		PRINTFORMW 「우리들 악마에게 있어서 계약자의 명이란 절대적인 것」
+		;ランダム奴隷キャラの場合
+		IF ABL:종족 == 0
+			PRINTFORMW 「지금의 %일인칭은% %CSTR:12%의 노예이기 때문이니」
+		ELSE
+			PRINTFORMW 「우리들 악마에게 있어서 계약자의 명이란 절대적인 것」
+		ENDIF
 	ELSE
 		PRINTFORMW 「이토록 초라한 장소에 불러내다니…」
 		PRINTFORMW 「%CSTR:11%에게 불만이라도 있는가?」
@@ -283,7 +325,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 				ENDIF
 			ENDIF
 		ENDIF
-	;겉옷블레이저교복、옷세일러복、하의스커트
+	;겉옷 블레이저교복、옷 세일러복、하의 스커트
 	ELSEIF (TEQUIP:겉옷 == 1003 || TEQUIP:옷 == 102) && TEQUIP:하의 == 201 && RAND:2 == 0
 		IF RAND:3 == 0
 			PRINTFORMW 「건네주기에 입어보았다만……」
@@ -304,12 +346,12 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 		ENDIF
 	ENDIF
 	CFLAG:202 = 4
-;CFLAGの指定が間違っていたので수정
+;CFLAGの指定が間違っていたので修正
 ;함락
-ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
+ELSEIF (TALENT:3 || TALENT:4 || TALENT:5) && (CFLAG:202 < 5 || FLAG:7 == 2)
 	;연모＆친애
 	IF TALENT:3 || TALENT:6
-		;겉옷블레이저교복、옷세일러복、하의스커트
+		;겉옷 블레이저교복、옷 세일러복、하의 스커트
 		IF (TEQUIP:겉옷 == 1003 || TEQUIP:옷 == 102) && TEQUIP:하의 == 201 && RAND:2 == 0
 			IF RAND:2 == 0
 				PRINTFORMW 「응……」
@@ -376,11 +418,21 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW %조사처리(CALLNAME,"는")% 소환된 후、멍한 표정으로 %조사처리(CALLNAME:MASTER,"를")% 보고 있다。
 				PRINTFORMW 왜 그러는지 묻자、%조사처리(CALLNAME,"는")% 후후후 하며 미소 지었다。
 				PRINTFORMW 「잠시 %CSTR:12%의 멋진 모습에 시선을 빼앗겼노라」
-				PRINTFORMW 「%CSTR:12% 같은 소환자를 가진 것이 %CSTR:11%의 행운이라고 생각되는구나」
+				;ランダム奴隷キャラの場合
+				IF ABL:종족 == 0
+					PRINTFORMW 「%이인칭과% 만난 내 행운을 기뻐하던 참이었다」
+				ELSE
+					PRINTFORMW 「%CSTR:12% 같은 소환자를 가진 것이 %CSTR:11%의 행운이라고 생각되는구나」
+				ENDIF
 				PRINTFORMW 「……음、말하고 나니 왠지 부끄럽구나」
 			ELSE
 				PRINTFORMW 「자、잠시만 기다리거라！」
-				PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 소환되자 당황하며 COMP 안으로 들어갔다。
+				;ランダム奴隷キャラの場合
+				IF ABL:종족 == 0
+					PRINTFORMW %타겟은%、황급히 방안으로 들어가 버렸다。
+				ELSE
+					PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 소환되자 당황하며 COMP 안으로 들어갔다。
+				ENDIF
 				PRINTFORMW ……。
 				PRINTFORMW …………。
 				PRINTFORMW ………………。
@@ -392,7 +444,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ELSEIF TALENT:4 || TALENT:7
 		IF 위험일() == 2 || 위험일() == 3
 			PRINTFORMW 「%조사처리(CSTR:11,"를")% 품는 것이 좋으냐……」
-			PRINTFORMW 소환된 %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 뺨을 어루만지며 귓가에 감미롭게 속삭였다。
+				;ランダム奴隷キャラの場合
+				IF ABL:종족 == 0
+					PRINTFORMW %타겟은% %CALLNAME:MASTER%의 뺨을 어루만지며 귓가에 감미롭게 속삭였다。
+				ELSE
+					PRINTFORMW 소환된 %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 뺨을 어루만지며 귓가에 감미롭게 속삭였다。
+				ENDIF
 			PRINTFORMW 「아니면…%CSTR:11%에게 안기는 것을 원하느냐？」
 			PRINTFORMW %조사처리(CALLNAME,"는")% 풀어헤쳤던 옷을 벗고 먹이를 노리는 짐승의 미소로 입술을 핥으며
 			IF RAND:2 == 0
@@ -402,7 +459,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ENDIF
 		ELSE
 			PRINTFORMW 「주인의 호출을 기다렸노라」
-			PRINTFORMW 소환된 순간、%조사처리(CALLNAME,"는")% 음란한 미소를 지으며 몸을 흔들었다。
+				;ランダム奴隷キャラの場合
+				IF ABL:종족 == 0
+					PRINTFORMW %타겟은% 음란한 미소를 지으며 몸을 흔들었다。
+				ELSE
+					PRINTFORMW 소환된 순간、%조사처리(CALLNAME,"는")% 음란한 미소를 지으며 몸을 흔들었다。
+				ENDIF
 			PRINTFORMW 잘 조교한 여체는 특유의 남자를 유혹하는 향기를 뿌리고있다。
 			PRINTFORMW 「보거라……%조사처리(CSTR:12,"를")% 본 것만으로도 몸이 욱신거려 말을 듣지 않는구나」
 			PRINTFORMW 「%CSTR:11%도 결국은 암캐에 지나지 않았던 것이다」
@@ -458,7 +520,12 @@ ENDIF
 DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「세상에는 악마의 저주를 받고도 아무렇지 않은 인간은 없다」
+			;ランダム奴隷キャラの場合
+			IF ABL:종족 == 0
+				PRINTFORMW 「세상에는、악마 이상으로 악마다운 인간이 있지 않은가」
+			ELSE
+				PRINTFORMW 「세상에는 악마의 저주를 받고도 아무렇지 않은 인간은 없다」
+			ENDIF
 	PRINTFORMW 「……네놈도 그러할지니。썩 물러가거라」
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
@@ -533,7 +600,12 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 		ELSEIF RAND:3 == 0
 			PRINTFORMW 「수고하였노라。느긋이 휴식을 취하는 것이 좋겠구나」
 			PRINTFORMW 「쉬는 동안、악마에게 정력을 빼앗기지 않도록 조심하거라……」
-			PRINTFORMW 「물론 빼앗는 건 %조사처리(CSTR:11,"가")%지만%UNICODE(0x2661)%」
+			;ランダム奴隷キャラの場合
+			IF ABL:종족 == 0
+				PRINTFORMW 「뭐 짜내는 건 악마가 아니라 %일인칭이%지만%UNICODE(0x2661)%」
+			ELSE
+				PRINTFORMW 「물론 빼앗는 건 %조사처리(CSTR:11,"가")%지만%UNICODE(0x2661)%」
+			ENDIF
 			PRINTFORMW 대범한 범행 예고다……。
 		ELSEIF RAND:2 == 0
 			PRINTFORMW 「피로했느냐？　느긋이 휴식을 취하는 것이 좋겠구나」
@@ -1135,7 +1207,7 @@ SELECTCASE SELECTCOM
 					ELSEIF RAND:2 == 0
 						PRINTFORMW 「후후……%CALLNAME:MASTER%、사랑한다。그러니 좀 더 입맞춤을 나눠다오……%UNICODE(0x2661)%」
 					ELSE
-					;普通입調からコピペさせてもらいましたぞ
+					;普通口調からコピペさせてもらいましたぞ
 						PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 달라붙어、몇 번이고 혀를 격렬하게 얽혔다。
 					ENDIF
 				;음란, 창부
@@ -2196,41 +2268,37 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					IF RAND:5 == 0
-						PRINTFORMW 「후훗♪　좋지 않은가、%CSTR:12%！　함께 기분 좋아지자꾸나♪」
+						PRINTFORMW 「후훗♪　좋지 않은가、%CALLNAME:MASTER%！　함께 기분 좋아지자꾸나♪」
 						PRINTFORMW 「응、하앙、아항、하응……！」
 					ELSEIF RAND:4 == 0
-						PRINTFORMW 「%CSTR:12%……손을 잡아다오 사랑해다오%UNICODE(0x2661)%」
-;普通구상ぱーくーりー
+						PRINTFORMW 「%CALLNAME:MASTER%……손을 잡아다오 사랑해다오%UNICODE(0x2661)%」
+;普通口上ぱーくーりー
 ;俺のぱくりは天を突くぱくりだっ！！　オマージュだ！！
-;힘入れて加筆したのに5分岐中の1分岐と気がついて全俺が泣いた！！
+;力入れて加筆したのに5分岐中の1分岐と気がついて全俺が泣いた！！
 					ELSEIF RAND:3 == 0
-						IF TEQUIP:주도권
-							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 격렬한 공세에 얼굴을 붉히면서 헐떡였다.
-						ELSE
-							IF TALENT:111 || TALENT:112
-								IF RAND:2 == 0
-									PRINT 머리 위에서 크게 흔들리는 풍만한 가슴을 주무르며、
-								ELSE
-									PRINT 손에 흘러넘칠 정도로 풍만한 가슴을 즐기며、
-								ENDIF
-							ELSEIF TALENT:109 || TALENT:110
-								IF RAND:2 == 0
-									PRINT 땀 맺힌 납작한 가슴에 손을 대고、
-								ELSE
-									PRINT 작은 가슴에 손을 대고、사랑스러운 유두를 자극하며
-								ENDIF
-							ELSE
-								IF RAND:2 == 0
-									PRINT 흔들리는 가슴을 움켜쥐고、
-								ELSE
-									PRINTFORM %조사처리(CALLNAME,"가")% 허리를 흔들 때마다 이리저리 흔들리는 가슴을 주무르며、
-								ENDIF
-							ENDIF
+						IF TALENT:111 || TALENT:112
 							IF RAND:2 == 0
-								PRINTFORMW %조사처리(CALLNAME:MASTER,"는")%) %CALLNAME%의 허리를 잡고、질내 깊은 곳까지 강하게 밀어올렸다。
+								PRINT 머리 위에서 크게 흔들리는 풍만한 가슴을 주무르며、
 							ELSE
-								PRINTFORMW %조사처리(CALLNAME:MASTER,"는")%) %CALLNAME%의 음란한 허리 놀림을 마음껏 감상했다。
+								PRINT 손에 흘러넘칠 정도로 풍만한 가슴을 즐기며、
 							ENDIF
+						ELSEIF TALENT:109 || TALENT:110
+							IF RAND:2 == 0
+								PRINT 땀 맺힌 납작한 가슴에 손을 대고、
+							ELSE
+								PRINT 작은 가슴에 손을 대고、사랑스러운 유두를 자극하며
+							ENDIF
+						ELSE
+							IF RAND:2 == 0
+								PRINT 흔들리는 가슴을 움켜쥐고、
+							ELSE
+								PRINTFORM %조사처리(CALLNAME,"가")% 허리를 흔들 때마다 이리저리 흔들리는 가슴을 주무르며、
+							ENDIF
+						ENDIF
+						IF RAND:2 == 0
+							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")%) %CALLNAME%의 허리를 잡고、질내 깊은 곳까지 강하게 밀어올렸다。
+						ELSE
+							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")%) %CALLNAME%의 음란한 허리 놀림을 마음껏 감상했다。
 						ENDIF
 					ELSEIF RAND:2 == 0
 						PRINTFORMW 「하아、하아、하아、하아……」
@@ -2549,7 +2617,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「이런 곳에서 이런 모습으로 드러눕게 될 줄이야、누군가가 보게 되면 어찌하겠느냐？」
 					ENDIF
 				ELSE
-					;간호사복が105、너스캡が2
+					;ナース服が105、ナースキャップが2
 					IF TEQUIP:옷 == 105 && TEQUIP:모자 == 2
 						IF RAND:2 == 0
 							PRINTFORMW 「선생님、%조사처리(CSTR:11,"로")%는 안 되니 주사를 놔주었으면 하네」
@@ -2557,7 +2625,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「%조사처리(CSTR:11,"는")% 선생님의 주사를 잊을 수 없었느니라…」
 							PRINTFORMW 「이걸로 좋은가？」
 						ENDIF
-					;메이드복が308、프렌치메이드복が309、화이트브림が1
+					;メイド服が308、フレンチメイド服が309、ホワイトブリムが1
 					ELSEIF (TEQUIP:전신복 == 308 || TEQUIP:전신복 == 309) && TEQUIP:모자 == 1
 						IF RAND:2 == 0
 							PRINTFORMW 「주인님、글러먹은 메이드인 %CSTR:11%에게 징계를 내려주시면 안 될까요」
@@ -2751,7 +2819,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:346 == 0
-			;貧しき乳と반항적、프라이드높음、교만중 하나がある時
+			;貧しき乳と反抗的、プライド高い、高慢のどれかがある時
 				IF TALENT:109 || TALENT:110 && TALENT:11 || TALENT:15 || TALENT:204
 					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")%) 가슴으로 봉사하라고 요구하자、%조사처리(CALLNAME,"는")% 의아한 표정을 짓는다。
 					PRINTFORML 「뭐냐、그것은。%CSTR:11%에게 그런 것이……」
@@ -6281,7 +6349,7 @@ IF TFLAG:1 > 0
 ENDIF
 ;-------------------------------------------------
 ;가슴으로 사정
-;大分普通구상からパクってます
+;大分普通口上からパクってます
 ;-------------------------------------------------
 IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A
@@ -6345,7 +6413,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			;연모, 친애
@@ -7448,7 +7516,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「
 					ENDIF
 				ENDIF
-			;父親が奴隷か조수
+			;父親が奴隷か助手
 			ELSEIF CFLAG:102 == 2 || CFLAG:102 == 3
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -7468,10 +7536,10 @@ SELECTCASE TFLAG:13
 				ELSE
 					PRINTFORML 
 				ENDIF
-			;父親が主人、조수、奴隷以外
+			;父親が主人、助手、奴隷以外
 			ELSE
 				;主人以外が一番。
-				;とりあえずＮＴＲ相手の아이を임신と仮定。
+				;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 				IF FAVORITE_1(TARGET) != MASTER
 					;애ＮＴＲ
 					IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
@@ -7495,7 +7563,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「아버지도 모르는 아이를 잉태할 줄은、어째서……크흑…흑흑…」
 						PRINTFORML 
 					ENDIF
-				;당신が一番
+				;あなたが一番
 				ELSE
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
@@ -8876,8 +8944,8 @@ CASE 42
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;上司이벤트（預けた場合の夜이벤트）
-		;;연모・친애キャラのみ（ＮＴＲ상태の場合はダメ）
+		;;상사이벤트（맡겼을 경우의 밤 이벤트）
+		;;연모・친애 캐릭터만（ＮＴＲ상태인 경우는 안됨）
 		;-------------------------------------------------
 	CASE 64
 		CALL EVENT_MESSAGE
@@ -8889,7 +8957,7 @@ CASE 42
 			PRINTFORML 한층 더 강하게 찍어누르는 허리의 충격에 순간、순결한 %CALLNAME%의 질내에 하얀 백탁의 점액이 토하듯이 내뿜어진다。
 			PRINTFORMW 「으아앗！？ 무슨、나왔어！！」
 			PRINTFORMW 「그만、뽑아줘！ 뽑으라고！！ 적어도 처음만은 %CALLNAME:MASTER%에게에에에엣！！」
-		;非처녀
+		;비처녀
 		ELSE
 			;위험일
 			IF CFLAG:위험일 == FLAG:월령
@@ -9156,7 +9224,7 @@ IF ARG:1 > 0
 	ENDSELECT
 ;;ボイコット
 ;ELSEIF ARG:2 > 0
-;	;ボイコットした場合に표시する구상
+;	;ボイコットした場合に表示する口上
 ;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 ;;	;사용한 스킬의 이름을 LOCALS에 대입
 ;	LOCALS = %RESULTS%

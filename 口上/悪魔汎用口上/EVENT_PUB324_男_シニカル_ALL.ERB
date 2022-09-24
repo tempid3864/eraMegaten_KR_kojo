@@ -1,22 +1,22 @@
 ﻿;-------------------------------------------------
-;男・シニカル구상
+;男・シニカル口上
 ;%CSTR:11%＝俺、%CSTR:12%＝きみ を前提にしています。
-;作者はTSは邪道だと考えてる인간なので、TS구상は精々辻褄あわせ程度にしか実装しない予定です。
+;作者はTSは邪道だと考えてる人間なので、TS口上は精々辻褄あわせ程度にしか実装しない予定です。
 ;期待していた方には申し訳ない。
 ;
 ;コレジャナイ感満載につき、過度の期待は禁物。
 ;
-;*各조교단계別コンセプト(予定)
-;굴복Lv2以下：気持ちいいのは嫌いじゃないけど、いいように弄ばれるのは嫌。
-;굴복Lv3：당신さんの事を認めた感じ？　いくらか솔직함に。
+;*各調教段階別コンセプト(予定)
+;屈服Lv2以下：気持ちいいのは嫌いじゃないけど、いいように弄ばれるのは嫌。
+;屈服Lv3：あなたさんの事を認めた感じ？　いくらか素直に。
 ;
-;연모：ヤンデレ予備軍。통상운行＋とにかくひたすら依存しきってる感じ？
-;음란（未実装）：짐승。ちょいSっぽい？
-;복종（未実装）：オス豚ド음란마조奴隷。Megatenには豚成分が발りないと思います。
+;恋慕：ヤンデレ予備軍。通常運行＋とにかくひたすら依存しきってる感じ？
+;淫乱（未実装）：ケダモノ。ちょいSっぽい？
+;服従（未実装）：オス豚ド淫乱マゾ奴隷。Megatenには豚成分が足りないと思います。
 ;				かなりキモチワルイというか、すごく虐め甲斐のある感じにしたい。
 ;
 ;ライセンスフリー。
-;加筆・수정大歓迎でございます。
+;加筆・修正大歓迎でございます。
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -37,16 +37,16 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_PUB324 → EVENTTRAIN_PUB324_12
 ;--------------------------------------------------
 @셀렉트구상설명_PUB324,ARG = 0
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용남・냉소 구상
+PRINTFORML 범용 남・시니컬 구상
 ;구상설명문
 PRINTFORML 　
 
@@ -61,18 +61,18 @@ PRINTFORML 　
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀모드로 전환하시겠습니까？
-;	PRINTL [0] 예
-;	PRINTL [1] 아니요
+;	PRINTL 処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―처녀모드로 소질,능력을 변경합니다―
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―일반 모드로 조교를 시작합니다―
+;		PRINTFORMW ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -106,8 +106,8 @@ DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「불렀어、서머너？　……헤에、조교。」
-	PRINTFORMW 「악마인 %조사처리(CSTR:11,"를")%、그런식으로 생각하면」
-	PRINTFORMW 「그 머리、진심으로 걱정 된다… 요즘 많이 심심한가？」
+	PRINTFORMW 「악마인 %조사처리(CSTR:11,"를")%、그런식으로 생각하면
+	PRINTFORMW 　그 머리、진심으로 걱정 된다… 요즘 많이 심심한가？」
 	PRINTFORMW 「…뭐、노력은 해봐？　어차피、무리겠지만.」
 	CFLAG:201 = 1
 	RETURN 0
@@ -228,8 +228,8 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	PRINTFORMW 「또 나랑 있는 거야？」
-	PRINTFORMW 「이곳에 온건、정말로 귀찮지만」
-	PRINTFORMW 「%CSTR:12%에게 그런 티를 내는건、왠지 미안하니까.」
+	PRINTFORMW 「이곳에 온건、정말로 귀찮지만
+	PRINTFORMW 　%CSTR:12%에게 그런 티를 내는건、왠지 미안하니까.」
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
@@ -245,7 +245,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「%ANATANAME("서머너" , "")%… 기다렸어.」
@@ -261,12 +261,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ELSE
 			PRINTFORMW 「아ー아. 또 이런다、%CSTR:11%。」
 			PRINTFORMW 「%CSTR:12% 탓에、처음부터 끝까지 바보가 됐어.」
-			PRINTFORMW 「이제 %조사처리(CSTR:12,"가")% 없으면 살아갈수 없어…」
-			PRINTFORMW 「책임을 지고、평생 %CSTR:11%、소중히 해줘.」
+			PRINTFORMW 「이제 %조사처리(CSTR:12,"가")% 없으면 살아갈수 없어…
+			PRINTFORMW 　책임을 지고、평생 %CSTR:11%、소중히 해줘.」
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -277,7 +277,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -314,8 +314,8 @@ RETURN 0
 DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「이 다음부터、%조사처리(CSTR:11,"를")% 학대할 경우」
-	PRINTFORMW 「나중에 반드시 죽일 거야. 아니、진심으로」
+	PRINTFORMW 「이 다음부터、%조사처리(CSTR:11,"를")% 학대할 경우
+	PRINTFORMW 　나중에 반드시 죽일 거야. 아니、진심으로」
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
@@ -325,14 +325,14 @@ ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
 	PRINTFORMW 「…으、으으. 이제야 끝나는건가――」
-	PRINTFORMW 「응？　뭘、보고있어. %조사처리(CSTR:11,"는")%、아무 말도 안했는데…」
-	PRINTFORMW 「뭐、진심으로」
+	PRINTFORMW 「응？　뭘、보고있어. %조사처리(CSTR:11,"는")%、아무 말도 안했는데…
+	PRINTFORMW 　뭐、진심으로」
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORMW 「바보」
-	PRINTFORMW 「기다려 줄 수 있으니까、다음에 또 와도 좋아.」
-	PRINTFORMW 「진심으로.」
+	PRINTFORMW 「기다려 줄 수 있으니까、다음에 또 와도 좋아.
+	PRINTFORMW 　진심으로.」
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
@@ -872,7 +872,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:435 == 0
 			PRINTFORMW 「%CSTR:12% 이런건 만지지마.」
 			PRINTFORMW 「하지마앗」
-			PRINTFORMW  날개를 손에서 때내려고 눈을 앏게 뜨면서 저항하고 있다.
+			PRINTFORMW 날개를 손에서 때내려고 눈을 앏게 뜨면서 저항하고 있다.
 			CFLAG:435 = 1
 		;2번째 이후
 		ELSE
@@ -2949,7 +2949,7 @@ CASE 14
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -4475,7 +4475,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -5864,7 +5864,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -5888,7 +5888,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6007,7 +6007,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6030,7 +6030,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6216,7 +6216,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -6448,7 +6448,7 @@ ENDIF
 P = PALAM:7 + CUP:7
 IF P > PALAMLV:3 && CFLAG:252 == 0
 	CALL PALAM_MESSAGE_D
-	PRINTFORMW 「…！　흐、흥、…이정도로、우쭐대지마…」
+	PRINTFORMW 「읏…！　흐、흥、…이정도로、우쭐대지마…」
 	PRINTFORMW %조사처리(CALLNAME:TARGET,"는")%、분한 듯이 얼굴을 외면하고 있다…
 	CFLAG:252 = 1
 ENDIF
@@ -6464,7 +6464,7 @@ IF P > PALAMLV:3 && CFLAG:253 == 0
 		PRINTFORMW 
 	;그 이외
 	ELSE
-		PRINTFORMW 「%ANATANAME("서머너" , "")%」
+		PRINTFORMW 「%ANATANAME("서머너" , "")%.」
 		PRINTFORMW 「%CSTR:12%의 것、싫지 않아 아니、진심으로」
 	ENDIF
 	CFLAG:253 = 1
@@ -6482,7 +6482,7 @@ IF P > PALAMLV:3 && CFLAG:254 == 0
 	;그 이외
 	ELSE
 	;きめぇ丸
-		PRINTFORMW 「오、무서워……」
+		PRINTFORMW 「오오、무서워무서워……」
 		PRINTFORMW 「%CSTR:12%、정말로 인간맞아…？　아닌것 같아」
 	ENDIF
 	CFLAG:254 = 1
@@ -6564,7 +6564,7 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 		PRINTFORMW 
 	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
-		PRINTFORMW 「……꽤 하잖아」
+		PRINTFORMW 「……꽤 하잖아.」
 		PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 시선을 허공에 둔 채 나직히 중얼 거렸다.
 	ENDIF
 ENDIF
@@ -6578,7 +6578,7 @@ IF TFLAG:21 == 3
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「%조사처리(CSTR:12,"는")%、실망했어」
+			PRINTFORMW 「%조사처리(CSTR:12,"는")%、실망했어.」
 			PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 쓰레기를 보는듯한 눈으로 %조사처리(CALLNAME:MASTER,"를")% 내려다 보면서 중얼거렸다.
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
@@ -8032,12 +8032,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（X1をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_PUB324
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -8160,7 +8160,7 @@ ENDIF
 IF TFLAG:전투이벤트 == 2
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"邪魔するから、참가してやる。 いやいやまじで。",72,LEFT%┃
+			PRINTFORML ┃%"邪魔するから、参加してやる。 いやいやまじで。",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
@@ -8180,7 +8180,7 @@ IF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 12
-;피탄した時の구상
+;被弾した時の口上
 	IF BASE:ARG:ＨＰ <= 0
 	;死亡した
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8219,7 +8219,7 @@ IF TFLAG:전투이벤트 == 12
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		IF RAND:3 == 0
-			PRINTFORML ┃%"ひじょーに、악마소환センスが悪いね、" + CSTR:12 + "。",72,LEFT%┃
+			PRINTFORML ┃%"ひじょーに、悪魔召喚センスが悪いね、" + CSTR:12 + "。",72,LEFT%┃
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┃%"後で、倍返しにしてやらないこともない。",72,LEFT%┃
 		ELSE
@@ -8229,13 +8229,13 @@ IF TFLAG:전투이벤트 == 12
 	ENDIF
 ENDIF
 IF TFLAG:전투이벤트 == 15
-;반사された
+;반사당했다
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"あーあ。情けないな、" + CSTR:11 + "。",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 16
-;반사した
+;반사했다
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"因果応報って言葉、知ってるかい。",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -8252,7 +8252,7 @@ IF TFLAG:전투이벤트 == 18
 	IF RAND:2 == 0
 		PRINTFORML ┃%"ばーか、どこ見てる。",72,LEFT%┃
 	ELSE
-		PRINTFORML ┃%"きみの눈は節穴かい。",72,LEFT%┃
+		PRINTFORML ┃%"きみの目は節穴かい。",72,LEFT%┃
 	ENDIF
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
@@ -8287,7 +8287,7 @@ ELSEIF ARG:1 > 0
 		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
 		CASE GETNUM(TALENT,"잔학")
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"派손にブチ撒けなッ！　" + LOCALS + "ッ！",72,LEFT%┃
+			PRINTFORML ┃%"派手にブチ撒けなッ！　" + LOCALS + "ッ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 		CASE GETNUM(TALENT,"현명")

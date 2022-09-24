@@ -956,7 +956,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			IF CFLAG:딸성격 == 1
 				IF HAVE_PENIS(TARGET) && HAVE_VAGINA(TARGET)
 				ELSEIF HAVE_VAGINA(TARGET)
@@ -14545,7 +14545,7 @@ ENDIF
 ;입으로 사정
 ;-------------------------------------------------
 IF TFLAG:0 > 0
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -14630,7 +14630,7 @@ IF TFLAG:0 > 0
 			ENDIF
 	;펠라한다で사정
 	ELSEIF SELECTCOM == 2
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -14841,7 +14841,7 @@ IF TFLAG:2 > 0
 	;애널섹스계
 	;■　工事中
 	;정상위애널、후배위애널、기승위애널、대면좌위애널、배면좌위애널、下着ズラシ挿入애널、애널기승유방자위
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		IF RAND:3 == 0
 			IF HAVE_PENIS(TARGET)
 				PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME:TARGET%의 페니스를 훑어내면서, 엉덩이구멍에 정액을 쏟았다…
@@ -14910,7 +14910,7 @@ IF TFLAG:2 > 0
 				PRINTFORMW %조사처리(CALLNAME:ASSI,"는")% 동생의 국문으로부터 페니스를 뽑아냈다…
 			ENDIF
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -15453,7 +15453,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -18691,7 +18691,7 @@ SELECTCASE TFLAG:13
 					CALL MUSUME_TOILET
 					CALL MUSUME_TOILET_2
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME:TARGET,"와")% 함께 공중변소로 왔다…
 				PRINT 부모와의 단란한 시간을 즐기는 아무것도 모르는 딸의 모습은 
@@ -19684,7 +19684,7 @@ SELECTCASE TFLAG:13
 	CFLAG:284 = 1
 
 ;-------------------------------------------------
-;;[専属奴隷]취득時
+;;[전속노예]취득시
 ;-------------------------------------------------
 	CASE 42
 		CALL EVENT_MESSAGE

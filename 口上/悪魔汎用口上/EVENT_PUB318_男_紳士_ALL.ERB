@@ -1,7 +1,7 @@
 ﻿;-------------------------------------------------
-;男（신사）汎用구상
-;気付いたら천사구상になってた。연모になっても偉そうなのが천사クオリティ
-;汎用구상ですし気が向いた方はガンガン加筆していってください
+;男（紳士）汎用口上
+;気付いたら天使口上になってた。恋慕になっても偉そうなのが天使クオリティ
+;汎用口上ですし気が向いた方はガンガン加筆していってください
 ;-------------------------------------------------
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -46,7 +46,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용 남자・신사구상
+PRINTFORML 범용 남・신사 구상
 ;구상설명문
 PRINTFORML    
 ;--------------------------------------------------
@@ -104,7 +104,7 @@ PRINTFORML
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	;종족명変数
+	;種族名変数
 	LOCAL = ABL:80
 	PRINTFORMW 「%STR:LOCAL%%NAME:TARGET%、맹약에 따라 찾아뵈었습니다. 뭐든 명령을………
 	PRINTFORMW 　……허？ 조교？」
@@ -249,7 +249,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ELSEIF TALENT:5
 		;천사
 		IF ABL:80 == 4
-			;이인칭が서머너とかニンゲンだと微妙にニュアンスがおかしくなるので당신固定で
+			;二人称がサマナーとかニンゲンだと微妙にニュアンスがおかしくなるのであなた固定で
 			PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% ……신의 좋은 종이었습니다」
 			PRINTFORMW 바닥에 무릎을 꿇은 %조사처리(CALLNAME,"가")% 툭하고 입을 열었다.
 			PRINTFORMW 「신의 영광을 믿고、자신의 정의를 믿고、올바른 행동은 반드시 보답받는다고……그렇게 믿고 있었습니다. 그런데도」
@@ -276,7 +276,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 「%CSTR:이인칭%에게 밟히면……기분、좋습니다……」
 			PRINTFORMW ――단순한 아첨은 아닌 것 같고、발 뒤로 %CALLNAME%의 성기가 점점 딱딱해지는 것이 감지된다……。
 		ENDIF
-		CSTR:이인칭 = ご主人様
+		CSTR:이인칭 = 주인님
 	ENDIF
 	CFLAG:201 = 5
 	RETURN 0
@@ -331,7 +331,7 @@ IF FLAG:300 == 8
 ;반발각인Lv3
 ELSEIF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	PRINTFORMW 「수고스럽겠지만、눈가리개를 해주시겠습니까？%CSTR:이인칭%의 얼굴을 보면 구토할 것 같아지므로」
-;	PRINTFORMW 그건 큰일이다、볼재갈을 하자.
+;	PRINTFORMW それは大変だ、ボールギャグで栓をしよう。
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
@@ -373,7 +373,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 행운아입니다. 잠깐이라고는해도、%조사처리(CSTR:이인칭,"를")% 독점할 수 있으니」
@@ -395,7 +395,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「기다리고 있었습니다……。후후、오싹오싹합니다」
@@ -409,7 +409,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「오、오늘은 뭘 하시겠습니까……？」
@@ -4535,7 +4535,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -5820,7 +5820,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -5844,7 +5844,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -5963,7 +5963,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -5986,7 +5986,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6173,7 +6173,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료

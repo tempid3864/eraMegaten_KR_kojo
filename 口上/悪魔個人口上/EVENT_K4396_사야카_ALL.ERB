@@ -55,7 +55,7 @@
 ;-------------------------------------------------
 ;eraMegaten専用　조교時及び공격時구상テンプレート
 
-;4396_1と4396_1をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4396_1と4396_1를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4396_1,Y1は1、4396_1は01のように変えてください
 ;また、特定個人の구상ではなく、회화타입別に対応させたい場合は
 ;K4396_1をPUB(회화타입の번호)に置き換えてください。
@@ -2342,7 +2342,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 
-			;거유、폭유
+			;거유, 폭유
 			PRINTFORM %CALLNAME:MASTER%의 뒤에서 
 			IF TALENT:111 || TALENT:112
 				IF RAND:2 == 0
@@ -3417,7 +3417,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:444 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-                                                                        ;거유、폭유
+                                                                        ;거유, 폭유
 				IF TALENT:111 || TALENT:112
 					PRINT 출렁 출렁 흔들리는 풍만한 가슴을 주무르면서、
 				ELSE
@@ -7349,7 +7349,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			;연모, 친애
@@ -7380,7 +7380,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 1
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)
@@ -7601,7 +7601,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료

@@ -101,9 +101,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_K4509 → EVENTTRAIN_K4509_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4509,ARG = 0
@@ -538,7 +538,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			CFLAG:850 = 0
 			CFLAG:855 = 0			
 		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:3
 			IF K:1 == 0
 				PRINTFORML
@@ -576,7 +576,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML
@@ -607,7 +607,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORML
@@ -3080,7 +3080,7 @@ SELECTCASE SELECTCOM
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;ス마이ル
+			;スマイル
 			IF TFLAG:17 == 0
 				PRINTFORML 
 				PRINTFORML 에게 미소를 지어주자、%조사처리(CALLNAME:TARGET,"는")% 고개를 갸웃거리면서 미소를 보내왔다。
@@ -11539,7 +11539,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -15183,7 +15183,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -15644,7 +15644,7 @@ IF TFLAG:0 > 0
 				ENDIF
 			ENDIF
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -16337,7 +16337,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -16406,7 +16406,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		;▲工事予定
@@ -17845,7 +17845,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -19819,7 +19819,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		
+		;일어나자 곁에서 자고 있다
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -23309,7 +23309,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]취득時
+		;;[전속노예]취득시
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE
@@ -24197,7 +24197,7 @@ IF RAND:100 >= CFLAG:858
 				PRINTFORML ┃%"…나중에 손톱을 깨끗이 하지 않으면 안되겠군요",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-		;噛み付き系
+		;물어뜯기계
 		ELSEIF RANGE(CFLAG:ARG:입력행동,321, 326)
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"그럼…받아주세요",72,LEFT%┃
@@ -24255,7 +24255,7 @@ IF RAND:100 >= CFLAG:858
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%LOCALS + "지원해 드리겠습니다",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		;弱体系
+		;약체계
 		ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"조금만 정숙해주시길 바랍니다。" + LOCALS + "！",72,LEFT%┃

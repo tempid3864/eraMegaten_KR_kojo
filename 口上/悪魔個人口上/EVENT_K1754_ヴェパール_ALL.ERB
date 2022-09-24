@@ -764,7 +764,7 @@ ENDIF
 @EVENTTRAIN_SECOND_K1754
 ;광기
 IF TALENT:141 && (CFLAG:202 < 6 || FLAG:7 == 2)
-	;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	K:1 = RAND:3
 	IF K:1 == 0
 		PRINTFORMW 「……『声』が聞こえるわ。もうすぐ復活されるのね……」
@@ -810,7 +810,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「ウフフ、いらっしゃい、%CSTR:이인칭%♪
@@ -829,7 +829,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「ずいぶん焦らしてくれるのね。待ってる間だけでもう%CSTR:일인칭%、애액塗れになっちゃったわ」
@@ -856,7 +856,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 「인간の欲って恐ろしいわね。すべてを손にしないと気が済まないのかしら？
@@ -1622,7 +1622,7 @@ SELECTCASE SELECTCOM
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;ス마이ル
+			;スマイル
 			IF TFLAG:17 == 0
 				PRINTFORMW 「ど、どうしたの？　そんな笑顔珍しいね？　でも、スゴクステキよ……
 				PRINTFORMW 　え、えと、そんなにじっと見られるとなんだか照れちゃってじっと見てられないよ……」
@@ -5371,7 +5371,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -6617,7 +6617,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6641,7 +6641,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6732,7 +6732,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6755,7 +6755,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6942,7 +6942,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -7580,7 +7580,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		
+		;일어나자 곁에서 자고 있다
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -8724,7 +8724,7 @@ SELECTCASE TFLAG:13
 			CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]취득時
+		;;[전속노예]취득시
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE

@@ -56,9 +56,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K657_12 → EVENTTRAIN_K657_12_12
 ;--------------------------------------------------
 @셀렉트구상설명_K657_12,ARG = 0
@@ -294,11 +294,11 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	IF 1== 0
 	;연모, 친애
 	ELSEIF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			PRINTFORMW 
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			PRINTFORML 「%CSTR:이인칭%의 자지、이 음란 노예에게 팍팍 찔러주세요%UNICODE(0x2661)%」
 			PRINTFORMW %CALLNAME%는 납작히 엎드려 애액을 줄줄 흘리고 있는 질구를 보여주었다…
@@ -311,7 +311,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	;ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;IF RAND:3 == 0
 		;	PRINTFORMW 
 		;ELSEIF RAND:2 == 0
@@ -2916,7 +2916,7 @@ CASE 15
 	CASE 97
 		CALL TRAIN_MESSAGE
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -4508,7 +4508,7 @@ CASE 15
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -5620,7 +5620,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -5647,7 +5647,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -5779,7 +5779,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 			;通す	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)	
@@ -5809,7 +5809,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -6070,7 +6070,7 @@ ELSEIF TFLAG:29 > 2
 		PRINTFORML 
 		CFLAG:245 = 2
 	ENDIF
-;強절정
+;강절정
 ELSEIF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
@@ -7601,12 +7601,12 @@ SELECTCASE TFLAG:13
 	CASE 65
 			CALL EVENT_MESSAGE
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -7618,12 +7618,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（X1をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K657_12
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -7792,7 +7792,7 @@ IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 		ENDIF
 
 ELSEIF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 50
-;大데미지
+;대 데미지
 	IF RAND:2 == 0
 		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"칫…조금 부족했군",72,LEFT%┃
@@ -7825,7 +7825,7 @@ IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 15
-;瀕死
+;빈사
 	IF RAND:3 == 0
 		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"아직…죽을 수는…！",72,LEFT%┃
@@ -7842,19 +7842,19 @@ ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 15
 ENDIF
 
 IF TFLAG:전투이벤트 == 15
-;반사された
+;반사당했다
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"제길…돌파 할 수 없다…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 ELSEIF TFLAG:전투이벤트 == 16
-;반사した
+;반사했다
 		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"그건 듣지 않는다고！　바보 녀석！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 ELSEIF TFLAG:전투이벤트 == 17
-;회피された
+;회피당했다
 	IF RAND:2 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"…읏　피했나",72,LEFT%┃
@@ -7970,7 +7970,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"일어서라！　전사여！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"나의 적에게 저주를！",72,LEFT%┃

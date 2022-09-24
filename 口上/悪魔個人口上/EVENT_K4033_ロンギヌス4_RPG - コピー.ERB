@@ -317,7 +317,7 @@ ELSEIF LOCAL == 1905
 	CASEELSE
 		LOCALS = ジェリコの喇叭を吹き鳴らさん！
 	ENDSELECT
-;リンケージ
+;링케이지
 ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 	PRINTFORMW Now's the time for Fuhrer!（今こそ総統の時代来たれり！）
 	PRINTFORMW Fuhrer's Back!（総統は戻られた！）
@@ -346,7 +346,7 @@ SIF ARG < 0 && NO:ARG != 4518
 LOCAL:1 = 1
 LOCALS = 出撃！出撃！そして爆撃だ！
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = 我ら天駆ける黒騎兵……空を駆け下り敵を討つ！
@@ -363,11 +363,11 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS = 黒鷲が出で来る所、敵はたちまち敗走す！
 		ENDIF
-	;공격　ARGが攻撃をする仲魔、ARG:1が敵、ARG:2がダメージ量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = 俺の戦果はゼロだ。そうファントムに報告しておけ。
@@ -378,15 +378,15 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = こうも激戦では、誰が奴を倒したか分からないではないか！な？
 				ENDIF
 			ENDIF
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = このまま帰投する気持ちになれるものか！
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF RAND:2
 				LOCALS = Bomben! Bomben!（爆撃せよ！爆撃せよ！）
@@ -420,10 +420,10 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = 我ながら情けない。拳を耳につめこみたくなる。
 			ENDIF
 		ENDIF
-	;被ダメージ
-	;ARGが攻撃を受ける仲魔、ARG:1が敵、ARG:2がダメージ量
+	;피데미지
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = ファン…トム、に……報復出撃の…申請を……出して、お、け……
@@ -434,7 +434,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = 何も知らずに……
 				ENDIF
 			ENDIF
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
 				LOCALS = 

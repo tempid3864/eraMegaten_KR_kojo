@@ -408,7 +408,7 @@ ELSEIF MARK:굴복각인 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 방에 들어가니、치에는 환한 웃음으로 맞이했다.
@@ -451,7 +451,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		PRINTFORMW 
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:4
 		IF K:1 == 0
 			PRINTFORML 「아、와줬어…기뻐」
@@ -493,7 +493,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -5878,7 +5878,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -7235,7 +7235,7 @@ ENDIF
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
 	PRINTFORML 
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7263,7 +7263,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7405,7 +7405,7 @@ IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	PRINTFORML 
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORMW 「뜨거워♡ 후와아♡ 엉덩이에 나와♡ 후아아아♡ 따뜻해서 나도 기분 좋아아…♡ 」
@@ -7455,7 +7455,7 @@ IF TFLAG:2 > 0
 		ELSE
 			PRINTFORMW 「우……응……시러、뭐야、나오고 있어……!?」
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
@@ -7741,7 +7741,7 @@ IF TFLAG:29 > 0
 				PRINTFORMW 「앗♡ 후아앗♡ 안데♡ 안데에♡」
 				PRINTFORMW 「우 오오오오 오오 오오오 오오오오 오오오오……」
 				PRINTFORMW 짐승같은 소리로 끝없이 울부짖으며 무엇보다 높은 쾌락을 맞이하고、실이 끊어진 인형처럼 쓰러졌다
-			;強절정処理をこっちに入れてみるテスト　強절정の処理が確立されたらそちらへ移す予定
+			;강절정処理をこっちに入れてみるテスト　強절정の処理が確立されたらそちらへ移す予定
 			ELSEIF TCVAR:2 >=2
 				PRINTFORMW 「아앗♡ 히아♡ 온다♡ 아앙♡」
 				PRINTFORMW 너무 큰 쾌락에 머리카락을 흐트러트리며 고개를 좌우로 흔든다.

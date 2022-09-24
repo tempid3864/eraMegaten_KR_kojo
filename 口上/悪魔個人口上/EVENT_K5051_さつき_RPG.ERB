@@ -21,7 +21,7 @@ LOCAL:1 = 1
 LOCALS = 숨 좀 고르고~
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:2
 			LOCALS = 좋~아！　모두들、해치웠어！
@@ -31,7 +31,7 @@ SELECTCASE TFLAG:전투이벤트
 		
 	;COOP참가
 	CASE 2
-		;主人がCOOP発動
+		;주인이 COOP발동
 		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			LOCALS = 응。점점 연계에 익숙해져가는、걸까나？
 		;그 이외
@@ -49,18 +49,18 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			LOCALS = 후으、어떻게든 됐네.
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 후후、왜 그러니？　방어만 하고 있다간 죽는다구우？
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-;		;大데미지
+;		;대 데미지
 ;		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 ;			LOCALS = 
 ;		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
@@ -71,14 +71,14 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF RAND:2
 				LOCALS = 미안-해…
 			ELSE
 				LOCALS = （아――――）
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF RAND:2
 				LOCALS = 꺄아아아아！？
@@ -92,13 +92,13 @@ SELECTCASE TFLAG:전투이벤트
 		ELSEIF ARG:2 < 0
 			LOCALS = 와와와！　회복시켜 준 건 절대 아닌거지…?
 		ENDIF
-	;반사された
+	;반사당했다
 	CASE 15
 			LOCALS = 에―――에에에！？
-	;반사した
+	;반사했다
 	CASE 16
 			LOCALS = 학습능력이 없는거야? 당신、과거에 내가 그랬던 것 이상으로 멍청이네!
-	;회피された
+	;회피당했다
 	CASE 17
 			LOCALS = 어라아？
 	;회피した
@@ -155,7 +155,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 	ELSE
 		LOCALS = 엄청 화내고 있다구！
 	ENDIF
-;噛み付き系
+;물어뜯기계
 ELSEIF RANGE(CFLAG:ARG:입력행동,321, 326)
 	LOCALS = 목이 마르네……　하지만 참지 않으면…
 ;회복
@@ -171,7 +171,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;강화系
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		LOCALS = 활기차게 해나가자~！
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		LOCALS = 엣또、이런 때는… 약간 실례할게요…
 	;도발

@@ -304,7 +304,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			;前は처녀　後ろは開通済み
 			PRINT 스스로 애널을 넓히고 휘저으면서、
 		ELSEIF ABL:Ｖ감각 && ABL:Ａ감각 == 0
-			;非처녀後ろセーフ
+			;비처녀後ろセーフ
 			PRINT 육단지에 손가락을 두개나 넣고 쯔읍쯔읍 소리를 내면서、
 		ELSE
 			;どちらも처녀
@@ -505,7 +505,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 
 		ELSE
 			;그 이외
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:3
 			IF K:1 == 0
 				PRINTFORMW 「가끔 믿을 수 없어요、너무 행복해서」
@@ -556,7 +556,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 「자위만으로는 참을 수 없어요！　빨리、빨리 해줘어어어！！」
 		ELSE
 			;그 이외
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:3
 			IF K:1 == 0
 				PRINTFORMW 「죽을 만큼 기분 좋게 해 주세요」
@@ -568,7 +568,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -4965,7 +4965,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -6347,7 +6347,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6375,7 +6375,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW %CALLNAME%는 눈물을 글썽이며 정액을 삼키고 있다。
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6505,7 +6505,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6529,7 +6529,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「아으으、배、배가 뜨거워어」
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -6703,7 +6703,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -8053,7 +8053,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]취득時
+		;;[전속노예]취득시
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE

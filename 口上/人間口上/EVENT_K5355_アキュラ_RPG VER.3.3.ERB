@@ -82,7 +82,7 @@ VARSET LOCALS
 CALL 구상변수초기화
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF CFLAG:ARG:803 == 1
 			LOCALS:10 = 약점까지 완전히 똑같아…… 이상한 흉내나 내고！
@@ -105,7 +105,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 2
 		IF CFLAG:ARG:803 == 3
 			LOCALS:10 = 마지막 전언이다……！
-		;主人がCOOP発動
+		;주인이 COOP발동
 		ELSEIF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
@@ -139,7 +139,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 이것으로……！
 			ENDSELECT
 		ENDIF
-	;被召喚時
+	;피소환시
 	CASE 3
 		;LOCALS:10 = 
 	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2がダメージ量
@@ -148,7 +148,7 @@ SELECTCASE TFLAG:전투이벤트
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
 		;아군に공격した
 		;IF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF CFLAG:ARG:803 == 2
 				IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
@@ -199,15 +199,15 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = 이런 걸로 좋아할 수는 없어
 				ENDSELECT
 			ENDIF
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS:10 = 약점이 막혔다, 다시 한번 가겠나？
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 			ELSEIF RAND:2 == 0
@@ -289,7 +289,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = 시간이 걸릴 것 같은데
 				ENDSELECT
 			ENDIF
-		;無効された
+		;무효되었다
 		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
 			IF CFLAG:ARG:803 == 2
 				LOCALS:10 = 이런 곳에서 시간을 낭비할 수는 없어……！
@@ -322,10 +322,10 @@ SELECTCASE TFLAG:전투이벤트
 				ENDSELECT
 			ENDIF
 		ENDIF
-	;被ダメージ
+	;피데미지
 	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2がダメージ量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF CFLAG:ARG:803 == 2 || CFLAG:ARG:803 == 3
 				LOCALS:10 = 미틸…… 나는……！
@@ -335,7 +335,7 @@ SELECTCASE TFLAG:전투이벤트
 		;아군に공격された
 		ELSEIF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 			LOCALS:10 = ……어딜 노리고 있나
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 			ELSEIF RAND:2 == 0
@@ -581,7 +581,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 수가 줄어들었으니만큼 나은 거겠지
 			ENDSELECT
 		ENDIF
-	;反射された
+	;반사당했다
 	CASE 15
 		LOCAL = RAND:3
 		SELECTCASE LOCAL
@@ -592,7 +592,7 @@ SELECTCASE TFLAG:전투이벤트
 		CASE 2
 			LOCALS:10 = 건방지게
 		ENDSELECT
-	;反射した
+	;반사했다
 	CASE 16
 		IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 		ELSEIF RAND:2 == 0
@@ -630,7 +630,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 그건…… 통하지 않아！
 			ENDSELECT
 		ENDIF
-	;회피された
+	;회피당했다
 	CASE 17
 		LOCAL = RAND:3
 		SELECTCASE LOCAL
@@ -711,7 +711,7 @@ SELECTCASE TFLAG:전투이벤트
 			;그 외の상태이상
 			;CASEELSE
 		ENDSELECT
-	;バトルに勝利した
+	;배틀에서 승리했다
 	CASE 90
 		IF CFLAG:ARG:803 == 1
 			LOCALS:10 = 적어도 그 혼이, 신의 곁으로 돌아갈 수 있기를……
@@ -830,7 +830,7 @@ SELECTCASE TFLAG:전투이벤트
 				SIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 					SETCOLOR 0x33ffcc
 			ENDIF
-			;瀕死
+			;빈사
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -871,7 +871,7 @@ SELECTCASE TFLAG:전투이벤트
 				ENDSELECT
 			ENDIF
 		ENDIF
-	;バックアタックを受けた
+	;백어택을 당했다
 	CASE 95
 		IF 현HP비율(ARG) < 25
 			IF RAND:2 == 0
@@ -886,7 +886,7 @@ SELECTCASE TFLAG:전투이벤트
 				SIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 					SETCOLOR 0x33ffcc
 			ENDIF
-			;瀕死
+			;빈사
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -934,7 +934,7 @@ SELECTCASE TFLAG:전투이벤트
 				SIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 					SETCOLOR 0x33ffcc
 			ENDIF
-			;瀕死
+			;빈사
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -1026,25 +1026,25 @@ LOCALS:1 = 포지션{(CFLAG:ARG:타겟)}
 ;	RETURN 0
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
-;コメントアウトしやすいように
+;주석처리하기 쉽도록
 IF 1 == 0
 ;-------------------------------------------------
 ;상태이상時
 ;-------------------------------------------------
-;魅了時
+;매료시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
-	;행동불능（ムラムラしている）
+	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = 이 감각은…… 얼마만인, 거지……？
 	ELSE
 		LOCALS:10 = %CSTR:ARG:일인칭%는…… 홀리거나, 하지 않아！
 	ENDIF
-;混乱時
+;혼란시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 	;금전뿌리기
 	IF CFLAG:ARG:입력행동 == 2315
 		LOCALS:10 = 어쨌거나 강화다, 돈이라면 얼마든지 있어！
-	;행동불능（ぼんやりしている）
+	;행동불능（멍하니 멈춰 있다）
 	ELSEIF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = ……여기는 어디지？　%CSTR:ARG:일인칭%는 도대체 뭘 하고 있는거지……？
 	ELSE

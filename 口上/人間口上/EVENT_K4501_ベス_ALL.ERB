@@ -14,7 +14,7 @@
 ;編集と構文の微訂正だけ
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;4501と4501をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4501と4501를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4501,Y1は1、4501は01のように変えてください
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -420,7 +420,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ENDIF
 		;그 외
 		ELSE
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 			IF K:1 == 0
 				PRINTFORML %조사처리(CALLNAME:MASTER,"가")% 조교실에 오자 베스는 곧 바로 당신에게 안겨 들었다。
@@ -6635,7 +6635,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			PRINTFORML 「우아！…아아…아하아…」
@@ -8196,7 +8196,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7

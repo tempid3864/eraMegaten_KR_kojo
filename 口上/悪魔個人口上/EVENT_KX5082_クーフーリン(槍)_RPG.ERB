@@ -8226,7 +8226,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;속이 무척 기분 좋아 대사
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -8854,7 +8854,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;속이 무척 기분 좋아 대사
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -8906,7 +8906,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;속이 무척 기분 좋아 대사
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -8958,7 +8958,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;600番台,非戦闘員コマンド
+;600번대,비전투원 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;600,기초훈련
@@ -9013,10 +9013,10 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		IF TALENT:페르소나구사자 && !TALENT:비전투원
 			PRINTFORML 
-;			;初期ペルソナ追加
+;			;초기페르소나추가
 			;ABL:초기페르소나 =
 			
-;			;初期ペルソナ能力変更
+;			;초기페르소나능력변경
 			;ABL:페르소나1데이터／스킬1 =
 			
 			;ABL:페르소나1데이터／습득스킬1 =
@@ -9813,7 +9813,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-	;그 이외の口射精
+	;그 이외의 입사정
 	ELSE
 		;대량사정						
 		IF TFLAG:0 > 1
@@ -13219,19 +13219,19 @@ ENDIF
 
 @BATTLE_EVENT_K5082, ARG, ARG:1, ARG:2
 #DIM スキル相性
-;■台詞の行数を増やしたいときは
-;			LOCALS:10 = 一行目
-;			LOCALS:11 = 二行目
-;			LOCALS:12 = 三行目
-;			LOCALS:13 = 四行目
-;			LOCALS:14 = 五行目
-;と増やしていく
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
 SIF ARG < 0 && NO:ARG != 5082
 	RETURN 0
 VARSET LOCALS
 
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS:10 = そこで安心していいのか？　間抜け
@@ -13240,9 +13240,9 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS:10 = 遅せぇよ、余所見してる暇はねぇぜ？
 		ENDIF
-	;COOP参加
+	;COOP참가
 	CASE 2
-		;主人がCOOP発動
+		;주인이 COOP발동
 		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			IF RAND:2 == 0
 				LOCALS:10 = ﾊｯ、上等だ！
@@ -13257,39 +13257,39 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = よっしゃ、後ぁ任せときな！
 			ENDIF
 		ENDIF
-	;被召喚時
+	;피소환시
 	CASE 3
 		LOCALS:10 = おっとお呼びかい？
-	;공격　ARGが攻撃をする仲魔、ARG:1が敵、ARG:2がダメージ量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			LOCALS:10 = 楽しかったぜ、縁があればまたやろうや
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS:10 = 
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			LOCALS:10 = ﾁｯ……仕留めるにゃ届かんか
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
 			LOCALS:10 = そらそらどうしたっ。　まだまだいくぜぇ！
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
 			LOCALS:10 = ﾁｯ、相手さんもやりやがる
-		;無効された
+		;무효되었다
 		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
 			LOCALS:10 = ｯｶ～、めんどくせぇなあおい！
 		ENDIF
-	;被ダメージ
-	;ARGが攻撃を受ける仲魔、ARG:1が敵、ARG:2がダメージ量
+	;피데미지
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG)
 				LOCALS:10 = くそっ、しくじっちまった
@@ -13299,7 +13299,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS:10 = 抜かった……ぜ……
 			ENDIF
-		;大ダメージ
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			LOCALS:10 = ﾊｯ、そうこなくちゃよ……！
 		;무효
@@ -13309,16 +13309,16 @@ SELECTCASE TFLAG:전투이벤트
 		ELSEIF ARG:2 < 0
 			LOCALS:10 = 
 		ENDIF
-	;反射された
+	;반사당했다
 	CASE 15
 			LOCALS:10 = 
-	;反射した
+	;반사했다
 	CASE 16
 			LOCALS:10 = 
-	;回避された
+	;회피당했다
 	CASE 17
 			LOCALS:10 = ﾁｨｯ、俺の槍を躱すたぁやるじゃねぇか！
-	;回避した
+	;회피했다
 	CASE 18
 			TRYCALLFORM SKILL_TYPE_{CFLAG:(FLAG:행동순1):입력행동},FLAG:행동순1
 			スキル相性 = RESULT
@@ -13329,14 +13329,14 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS:10 = そんなんじゃ当たってやれねぇな！
 			ENDIF
-	;反撃スキル発動した
+	;반격스킬 발동했다
 	CASE 20
 			IF RAND:2 == 0
 				LOCALS:10 = そらそら、お返しだ！
 			ELSE
 				LOCALS:10 = ――――吹っ飛べ
 			ENDIF
-	;バトルに勝利した
+	;배틀에서 승리했다
 	CASE 90
 			SELECTCASE RAND:5
 				CASE 4
@@ -13355,7 +13355,7 @@ SELECTCASE TFLAG:전투이벤트
 					SIF RAND:2 == 0
 						LOCALS:12 = さあて、ってなわけで飲むか！
 			ENDSELECT
-	;レベルアップした
+	;레벨 업했다
 	CASE 91
 			SELECTCASE RAND:5
 				CASE 4
@@ -13370,22 +13370,22 @@ SELECTCASE TFLAG:전투이벤트
 				CASEELSE
 					LOCALS:10 = 体のキレが良くなったな。イケるイケる！
 			ENDSELECT
-	;逃走に成功した
+	;도주에 성공했다
 	CASE 92
 			IF RAND:2 == 0
 				LOCALS:10 = 糞がっ、この屈辱は必ず灌ぐ……っ
 			ELSE
 				LOCALS:10 = ﾁｯ……あんたの指示に従うぜ
 			ENDIF
-	;逃走に失敗した
+	;도주에 실패했다
 	CASE 93
 			LOCALS:10 = 相手も早えな……ここは覚悟の決めどきかもしれねぇぞ、マスター
-	;戦闘開始時
+	;전투개시시
 	CASE 94
 		IF FLAG:선제공격플래그
 			LOCALS:10 = っしゃあ！　一気呵成に打ち破れってな！
 		ELSEIF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = ﾁｯ、やるしかねぇか……っ
 		ELSEIF SKILLGAGE_F_GET((ARG),PU_SKILLNUM_GET((ARG),"ゲッシュ")) == -1
 			;ゲッシュを破った時
@@ -13400,18 +13400,18 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = おう、かかってきな
 			ENDSELECT
 		ENDIF
-	;バックアタックを受けた
+	;백어택을 당했다
 	CASE 95
 		IF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = ﾁｨｯ、いやらしいタイミングで来やがる！
 		ELSE
 			LOCALS:10 = しくじったか……っ
 		ENDIF
-	;敵の先制攻撃を受けた
+	;적에게 선제공격을 당했다
 	CASE 96
 		IF 현HP비율(ARG) < 25
-			;瀕死
+			;빈사
 			LOCALS:10 = いいぜ……こいよ！
 		ELSE
 			LOCALS:10 = マズった……っ
@@ -13422,55 +13422,55 @@ SIF !(LOCALS:10 == "")
 
 
 @BATTLE_MESSAGE_K5082,ARG,ARG:1 = 0
-;■台詞の行数を増やしたいときは
-;			LOCALS:10 = 一行目
-;			LOCALS:11 = 二行目
-;			LOCALS:12 = 三行目
-;			LOCALS:13 = 四行目
-;			LOCALS:14 = 五行目
-;と増やしていく
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
 VARSET LOCALS
 ;사용한 스킬의 이름을 LOCALS에 대입
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 LOCALS = %RESULTS%
 ;FLAG:ARG:타겟
 
-;崩壊してる場合は口上表示しないようにもできる
+;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
 ;SIF TALENT:ARG:9
 ;	RETURN 0
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
-;コメントアウトしやすいように
+;주석처리하기 쉽도록
 IF 1 == 0
 ;-------------------------------------------------
-;状態異常時
+;상태이상시
 ;-------------------------------------------------
-;魅了時
+;매료시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
-	;행동불능（ムラムラしている）
+	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = 
 	ELSE
 		LOCALS:10 = 
 	ENDIF
-;混乱時
+;혼란시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 	;금전뿌리기
 	IF CFLAG:ARG:입력행동 == 2315
 		LOCALS:10 = 
-	;행동불능（ぼんやりしている）
+	;행동불능（멍하니 멈춰 있다）
 	ELSEIF CFLAG:ARG:입력행동 == 2314
 		LOCALS:10 = 
 	ELSE
 		LOCALS:10 = 
 	ENDIF
 ;-------------------------------------------------
-;特定スキル
+;특정스킬
 ;-------------------------------------------------
-;これは通常攻撃
+;이쪽은 통상공격
 ELSEIF CFLAG:ARG:입력행동 == 0
 	LOCALS:10 = 
-;ELSEIF CFLAG:ARG:입력행동 == (スキル番号)
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
 ;	LOCALS:10 = 
 ;刺し穿つ刺棘の槍
 ELSEIF CFLAG:ARG:입력행동 == 3906
@@ -13488,18 +13488,18 @@ ELSEIF CFLAG:ARG:입력행동 == 3907
 ENDIF
 
 ;-------------------------------------------------
-;총공격（特殊弾丸含む）
+;총공격（특수탄환 포함）
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2200)
 	;GUN
 	IF CFLAG:ARG:입력행동 == 2101
 		LOCALS:10 = 
-	;그 외（特殊弾丸）
+	;그 외（특수탄환）
 	ELSE
 		LOCALS:10 = 
 	ENDIF
 ;-------------------------------------------------
-;基本行動
+;기본행동
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 	;ＣＨＡＮＧＥ
@@ -13509,18 +13509,18 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 		LOCALS:10 = 
 	ENDIF
 ;-------------------------------------------------
-;アイテム
+;아이템
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3500)
 	LOCALS:10 = 
 ;-------------------------------------------------
-;リンケージ
+;링케이지
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 	;메시아라이저
 	IF CFLAG:ARG:입력행동 == 4160
 		LOCALS:10 = 
-	;Lヒートライザ
+	;L히트라이저
 	ELSEIF CFLAG:ARG:입력행동 == 4200
 		LOCALS:10 = 
 	;사망유희
@@ -13530,7 +13530,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 		LOCALS:10 = 
 	ENDIF
 ;-------------------------------------------------
-;汎用スキル
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -13543,7 +13543,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 	LOCALS:10 = 
 ;전술
 ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
-	;噛み付き系
+	;물어뜯기계
 	IF RANGE(CFLAG:ARG:입력행동,321, 326)
 		LOCALS:10 = 
 	;그 외
@@ -13552,7 +13552,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
 	ENDIF
 ;회복
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
-	;全体回復
+	;전체회복
 	IF CFLAG:ARG:타겟 > 6
 		LOCALS:10 = 
 	ELSE
@@ -13560,10 +13560,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;強化系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 558
 		LOCALS:10 = 
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
 		LOCALS:10 = 
 	;도발
@@ -13617,13 +13617,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
 	LOCALS:10 = 
 ;만능
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-	;自爆系
+	;자폭계
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 		LOCALS:10 = 
 	ELSE
 		LOCALS:10 = 
 	ENDIF
-;魔法少女系
+;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	LOCALS:10 = 
 ;-------------------------------------------------
@@ -13633,10 +13633,10 @@ ELSE
 	LOCALS:10 = 
 ENDIF
 ;-------------------------------------------------
-;真・그외
+;진・그 외
 ;-------------------------------------------------
 IF LOCALS:10 == ""
-	;必ず何か喋る
+	;반드시 무언가 말한다
 	LOCALS:10 = 
 ENDIF
 

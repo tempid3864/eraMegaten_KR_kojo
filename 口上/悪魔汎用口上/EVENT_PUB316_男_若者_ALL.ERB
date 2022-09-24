@@ -1,43 +1,11 @@
 ﻿;-------------------------------------------------
-;男・大人구상
-;既にあった男・若者구상を一部ベースにさせてもらっています（土下座）
-;
-;조교最初だけやたらびっしりと書いてるけど下の方は割と穴あき
-;主に연모メイン？な気がします
-;
-;奇特な人がいたら改変とか추가とかドーゾ
-;
-;あくまで조교대상が「남자」소질持ちの구상です
-;道具で「オンナ」「후타나리」にした場合は多分変になる
-;
-;対応악마（CSVより）
-;마왕：로키/라바나/오르커스/타나토스
-;귀신：토르/후토미미/토나티우/하리・하라　　　　　　　　　　　　증장천/광목천/지국천/ビジャモンテン
-;마신：미샤구지님/　　　　　　　　　　　　브라흐마/
-;타천사：오세
-;
-;調べたら意外と少なかった……というか少なッ！
-;かつ意外なのが対応してた
+;男・若者口上
+;♀キャラでスサノオに抱かれて何かが目覚めた。
+;今のところ恋慕ルートのみ
+;若者っていうより熱血っぽいですよねこれ
+;男、または男の娘専用の口上も少しだけですが存在します
 ;-------------------------------------------------
-;ライセンスについて
-;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
-;	+----+----+-------------------------------+
-;	|番号|許可|ライセンス内容                 |
-;	+----+----+-------------------------------+
-;	|   1| ○ | 処理上のバグ修正              |
-;	+----+----+-------------------------------+
-;	|   2| ○ | 口上の誤字・脱字の修正        |
-;	+----+----+-------------------------------+
-;	|   3| ○ | 口上まとめへの収録            |
-;	+----+----+-------------------------------+
-;	|   4| ○ | 口上の新規追加                |
-;	+----+----+-------------------------------+
-;	|   5| ○ | 既存口上の改変                |
-;	+----+----+-------------------------------+
-;	|   6| ○ | 改変した口上の自由な再配布    |
-;	+----+----+-------------------------------+
-;	|   7| × | 口上内容の転載                |
-;	+----+----+-------------------------------+
+
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
 ;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
@@ -50,23 +18,24 @@
 
 ;-------------------------------------------------
 ;범용 구상의 작성에 사용하는 경우는, X1→캐릭터번호가 아니라,
-;PUB317→PUB회화타입번호　로 변경해서 사용해주세요
+;KX1→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-@셀렉트구상설명_PUB317,ARG = 0
+@셀렉트구상설명_PUB316,ARG = 0
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 범용 남자・대인배구상
+PRINTFORML 범용 남・젊은이 구상
 ;구상설명문
 PRINTFORML    
+
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_PUB317
+@EVENTTRAIN_PUB316
 ;--------------------------------------------------
 ;엑스트라모드 구문　CFLAG:220을 사용
 ;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
@@ -94,12 +63,12 @@ PRINTFORML
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_PUB317
+;	CALL EVENTTRAIN_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_PUB317
+;		CALL EVENTTRAIN_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -112,52 +81,54 @@ PRINTFORML
 ;		CFLAG:201 =1
 ;ENDIF
 ;-------------------------------------------------
-;조교 개시시（1회만） CFLAG201　%CSTR:11%　%CSTR:12%
+;조교 개시시（1회만） CFLAG201
 ;-------------------------------------------------
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0
-	PRINTFORMW 「뭐야、서머너. 싸움은 아닌 것 같은데……%CSTR:11%에게 무슨 용건이지？」
-	PRINTFORMW 「……%조사처리(CSTR:11,"를")% 조교한다고？」
+	PRINTFORMW 「여어、%CSTR:12%。뭔가 용건이 있어？」
+	PRINTFORMW 「아앙？　%조사처리(CSTR:11,"를")% 조교한다고오？」
 		IF TALENT:MASTER:오토코노코 == 1
-			PRINTFORMW 「%CSTR:12% 같은 연약한 남자가……조교의 의미는 알고 있는 건가？」
-			PRINTFORMW 「농담도 정도껏 했으면 좋겠군」
+			PRINTFORMW 「아니、너、일단은 남자잖아……」
+			PRINTFORMW 「뭐、겉보기에는 거의 여자나 다름없으니까 범하기에는 별로 상관없으려나」
 		ELSEIF TALENT:MASTER:남자 == 1
-			PRINTFORMW 「농담도 정도껏 해줘. %CSTR:11%도 그 정도로 한가하지 않아」
-			PRINTFORMW %타겟은% 기막힌 듯한 표정을 하고 있다.
+			PRINTFORMW 「어이어이、%CSTR:11%한테 그런 말은 하지 말라고…여자라면 또 몰라도」
+			PRINTFORMW %타겟은% 기가 막힌 듯한、허탈한 웃음을 짓고 있다.
 		ELSE
-			PRINTFORMW 「조교해주었으면 한다, 를 잘못 말한 것 아닌가？」
-			PRINTFORMW %타겟은% 다가와、%CALLNAME:MASTER%의 턱을 손으로 들어올리고 진지한 얼굴로 가만히 응시해온다.
-			PRINTFORMW %마스터가% 그 손을 팍 쳐내면、%타겟은% 「기세는 좋군」 이라고、
-			PRINTFORMW 바보 취급하는 것처럼 흥하고 코웃음을 치면서 손을 거뒀다.
+			PRINTFORMW 「조교해줬으면 한다、라는 걸 잘못 말한 거 아냐？」
+			PRINTFORMW %타겟은% 조롱하듯이、%CALLNAME:MASTER%의 한쪽 가슴을 주물러댔다.
+			PRINTFORML %마스터가% 그 손을 팍 밀어내자、%타겟은% 「오ー、무서워라」 하고、
+			PRINTFORMW 바보 취급 하는 듯한 말투로 손을 쥐었다.
 		ENDIF
-	PRINTFORMW 「뭐 좋아、%CSTR:12%의 놀이에 어울려주지」
-	PRINTFORMW 「%조사처리(CSTR:12,"가")% %조사처리(CSTR:11,"를")% 굴복시킬 수 있을지 어떨지……지켜봐 주지」
-	PRINTFORMW %타겟은% 위험해보이는 미소를 띠며 씩씩한 나신을 %CALLNAME:MASTER% 앞에 드러냈다…
+	PRINTFORMW 「흥……뭐 좋아、심심풀이 정도는 될지도 모르니까」
+	PRINTFORMW 「반대로 %CSTR:11%의 노예가 되지 않게、열심히 노력해보라고」
+	PRINTFORMW %타겟은% 겁 없이 웃으며、씩씩한 나신을 %CALLNAME:MASTER% 앞에 드러냈다…
 	CFLAG:201 = 1
 	RETURN 0
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
-	PRINTFORMW 「……또인가. 적당히 해줬으면 좋겠군」
-	PRINTFORMW 「하지만 뭐、심심풀이 정도는 될지도」
-	PRINTFORMW 강한 미소를 띠고 있는 %타겟은%、허세를 부리는 것처럼 보이지는 않는다…
-	PRINTFORMW 몸과 마음을 전부 굴복시키려면、아직 시간이 걸릴 것 같다…
+	PRINTFORMW 「…흥、나름 열심인 것 같지만」
+	PRINTFORMW 「이 정도로는、%CSTR:12%에게 복종할 수 없어」
+	PRINTFORMW 「우물쭈물하면、내가 조교해버린다？」
+	PRINTFORMW 대담한 미소를 띄우고 있는 %타겟은%、허세를 부리는 것처럼 보이지는 않는다…
+	PRINTFORMW 심신을 모두 굴복시키려면、아직 시간이 걸릴 것 같다.
 	CFLAG:201 = 2
 	RETURN 0
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
-	PRINTFORMW 「오늘도인가. 질리지도 않는군」
-	PRINTFORMW 「%조사처리(CSTR:11,"가")% 완전히 굴복할 때까지, 인가. 별나기도 하군」
-	PRINTFORMW 기분 탓인지、%NAME:TARGET%에게서 동요가 보일 듯 말 듯 하는 것 같다……
+	PRINTFORMW 「오、오우」
+	PRINTFORMW 「전보다는 좀 나아진 것 같지만、아직도 어설퍼」
+	PRINTFORMW 밉살스런 소릴 하고 있지만、%타겟은% 명백히 낭패스러운 기색이다.
+	PRINTFORMW 떨어지는 것도、시간 문제인가……
 	CFLAG:201 = 3
 	RETURN 0
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORMW 「……」
-	PRINTFORMW 「정말이지……」
-	PRINTFORMW 「정말 끈질긴데、%조사처리(CSTR:12,"는")%……」
-	PRINTFORMW %타겟은% 한숨을 토하면서 체념이 섞인 표정을 %CALLNAME:MASTER%에게 향했다.
-	PRINTFORMW 「알았다、%조사처리(CSTR:12,"를")% 인정해주지.……어느 정도의 일에는 따르겠어」
+	PRINTFORMW 「……칫」
+	PRINTFORMW 「별 수 없구만、%CSTR:12%한테는. 솔직히 여기까지 할 줄이야…」
+	PRINTFORMW %타겟은% 체념이 깃든 표정으로 혀를 찼다.
+	PRINTFORMW 「어이、뭐든지 명령해. 웬만한 건 따를 테니까」
 	PRINTFORMW %NAME:TARGET%의 패배 선언에、%조사처리(CALLNAME:MASTER,"는")% 눈을 가늘게 떴다……
 	CFLAG:201 = 4
 	RETURN 0
@@ -165,105 +136,43 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:3
-		PRINTFORMW 「…………뭐야、%CSTR:12%인가」
-		PRINTFORMW 기분 탓일까……%NAME:TARGET%의 태도가 어딘지 평소와 다르다.
-		PRINTFORMW 「왜 그래、%CALLNAME:MASTER%」
-		PRINTFORMW 기분 탓일까……%타겟이% 자신을 이름으로 부르고 있다.
-		PRINTFORMW 「……아무것도 아니라면 %조사처리(CSTR:11,"는")% 이대로 돌아가겠어」
-		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 정신을 차리고 당황해서 %타겟을% 만류했다……
-		CFLAG:201 = 5
-		RETURN 0
+		PRINTFORMW 「여어、%CSTR:12%……」
+		PRINTFORMW %마스터가% 방에 들어가자、%타겟은% 침대에서 일어나 이쪽으로 다가왔다.
+		PRINTFORMW 「실은 말야……아ー、그、뭐냐……%CSTR:11%、%CSTR:12%에게 반해버린 것 같아」
+		PRINTFORMW %타겟은% 엉뚱한 곳을 보며、긁적긁적 머리를 만진다.
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「처음에는 남자 상대인가……라고 생각했지만、너는、그 나름대로 귀엽고」
+				PRINTFORMW 「뭐랄까、지켜주고 싶어진다고 할까、보호본능이 일어난다고 할까」
+				PRINTFORMW 「뭐、이런 것도 있을 수 있지、라고 생각해버려서」
+				PRINTFORMW 「%조사처리(CSTR:12,"는")%、내가 계속 지켜주겠어」
+				PRINTFORMW 강하게 선언해、%타겟은% %마스터를% 꽉 껴안았다.
+				PRINTFORMW 「보지가 없는 건 유감이지만……」
+				PRINTFORMW %타겟이% 중얼거린 것을 %조사처리(CALLNAME:MASTER,"는")% 못 들은 체 하지 않았다.
+				PRINTFORMW 쓸데없는 말을 한마디 덧붙였으니까、%조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 코 끝을 손가락으로 때려주었다……
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「솔직히 남자한테 범해지는 것 따윈 진심으로 용서하지 않으려고 생각했는데」
+				PRINTFORMW 「뭐라고 할까、뭐……눈을 떠버린 거야」
+				PRINTFORMW 「지금의 %조사처리(CSTR:11,"는")%、%CSTR:12% 이외에는、생각할 수 없어……」
+				PRINTFORMW 「책임져、달라고……？」
+			ELSE
+				PRINTFORMW 「처음 만났을 때부터 좋은 몸을 하고 있다고는 생각했지만」
+				PRINTFORMW 「완전히 빠져버렸다니까……무서운 여자야」
+				PRINTFORMW 「%CSTR:11%의 모든 것은 전부 %CSTR:12%에게 주겠어」
+				PRINTFORMW 「그러니까──%CSTR:11%의 것이 되어、줘」
+			ENDIF
+		PRINTFORMW 「%CSTR:12%、%NAME:TARGET%의 이름에 걸고 맹세하지」
+		PRINTFORMW 「%CSTR:12%의 적을 섬멸하고、몸을 지키는 방패가 되어」
+		PRINTFORMW 「싫다고 말해도 평생 따르겠어、잘 부탁해、%CALLNAME:MASTER%」
+		PRINTFORMW %마스터가% 대답 대신 살짝 입술을 겹치고 미소짓자、%타겟은% 아이처럼 웃었다.
 	;음란
 	ELSEIF TALENT:4
-		PRINTFORMW 「%CSTR:12%、인가……」
-		PRINTFORMW %타겟은% 이쪽을 강하게 노려보고 있다.
-		PRINTFORMW 「뭘 보고 있지. 용건이 없으면 돌아갔으면 하는데」
-		PRINTFORMW 정욕에 쑤시는 몸을 이성으로 견디며, 허세를 부리고 있는 것이다.
-		PRINTFORMW 그 모습은 %CALLNAME:MASTER%으로서는 우스꽝스럽기만 하다.
-		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 미소를 띠면서 %NAME:TARGET%에게로 가까워졌다……
-		CFLAG:201 = 5
-		RETURN 0
+		PRINTFORMW 
 	;복종
 	ELSEIF TALENT:5
-		PRINTFORMW 「……%CSTR:12%、인가」
-		PRINTFORMW %타겟은% 이쪽을 강하게 노려보고 있다.
-		PRINTFORMW 「뭔가 용건이 있나」
-		PRINTFORMW 손을 뻗자 %NAME:TARGET%의 몸은 순간、꿈틀하고 공포에 떨린다.
-		PRINTFORMW 「%조사처리(CSTR:12,"는")%、이 이상 %CSTR:11%에게、뭘……」
-		PRINTFORMW 몸에 주입된 공포에 두려워하며 저항하는 모습은 어딘지 우습다.
-		PRINTFORMW ……아직 완전하진 않다. 지금부터 천천히 가르치면 된다.
-		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 차가운 미소를 띠면서、%NAME:TARGET%의 뺨을 천천히 어루만졌다……
-		CFLAG:201 = 5
-		RETURN 0
+		PRINTFORMW 
 	ENDIF
-;함락その2
-ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
-	;친애
-	IF TALENT:6
-		PRINTFORMW 「%CALLNAME:MASTER%、인가……」
-		PRINTFORMW %마스터가% %타겟을% 불러내자, 기분 탓인지 평소와 모습이 차이가 난다.
-		PRINTFORMW %타겟은% 가만히 %마스터를% 응시한 후, 이쪽으로 천천히 가까워져온다.
-		PRINTFORMW 「이상한 일이야. %조사처리(CSTR:12,"와")% 같은 인간이……」
-		PRINTFORMW %타겟이% %CALLNAME:MASTER%의 턱을 살짝 들어올려, 갑작스럽게 키스해왔다.
-		PRINTFORMW 비집고 들어오는 혀를 받아들이며, 같이 혀를 섞는다.
-		PRINTFORMW 길게 느껴진 그 키스가 끝나고、둘의 얼굴이 떨어진 후、%타겟은% 다시 입을 열었다.
-			IF TALENT:MASTER:오토코노코 == 1
-				PRINTFORMW 「인간 남자인 주제에 여자 같다고 경시하고 있던 것은 %CSTR:11%쪽이었나……」
-				PRINTFORMW 결국 어떤 의미냐고 되묻는 %CALLNAME:MASTER%에게、%타겟은% 히죽 미소를 띠었다.
-				PRINTFORMW 「이 세상에서 살아남을 수 있을지 어떨지, 지켜봐주지」
-				PRINTFORMW 그리고 %타겟은% %CALLNAME:MASTER%의 머리를 툭툭 어루만지며 작게 웃었다.
-			ELSEIF TALENT:MASTER:남자 == 1
-				PRINTFORMW 「설마 악마와 인간이라고는해도、동성에게 이 정도까지 할 줄은……」
-				PRINTFORMW 즉 어떤 의미냐고 되묻는 %CALLNAME:MASTER%에게、%타겟은% 히죽 미소를 띠었다.
-				PRINTFORMW 「글쎄. ……%CSTR:11%에게 끝까지 전부 말하게 하고 싶다면 물론」
-				PRINTFORMW 「취해야 할 책임이라는 것이 있으니까 말이야?」
-				PRINTFORMW %타겟은% 즐거운듯이 웃으면서 %CALLNAME:MASTER%의 머리를 툭툭 어루만졌다.
-			ELSE
-				PRINTFORMW 「……하아, 실패했군. %CSTR:11%의 패배인 것 같다」
-				PRINTFORMW 즉 어떤 의미냐고 되묻는 %CALLNAME:MASTER%에게、%타겟은% 히죽 미소를 띠었다.
-				PRINTFORMW 「%CSTR:11%에게 그런 기분이 들게 했어. 당연히, 책임은 지겠지?」
-				PRINTFORMW 「그러니까──%CSTR:11%의 것이 돼라、%CALLNAME:MASTER%」
-				PRINTFORMW 대답에 고민하는 %CALLNAME:MASTER%의 머리를、%타겟은% 톡톡 매만진다.
-			ENDIF
-		PRINTFORMW 「그럼……뭐、다시 한 번 선언해둘까」
-		PRINTFORMW 말하면서、%타겟은% 갑자기 진지한 얼굴이 되어、%CALLNAME:MASTER%의 손을 잡고、손등에 키스했다.
-		PRINTFORMW 「%조사처리(CALLNAME:MASTER,"가")%여. 지금 여기서、%조사처리(CSTR:12,"를")% 지키는 것을 이 %NAME:TARGET%의 이름에 걸고 맹세하지」
-		PRINTFORMW （하지만 이 감정은 결국、%CSTR:11%으로서는……）
-		PRINTFORMW 어딘지 기쁜 듯한, 어딘지 외로운 듯한 얼굴을 하고 있는 %NAME:TARGET%에게 %조사처리(CALLNAME:MASTER,"는")% 왜 그래？하고 말을 건다.
-		PRINTFORMW 「아니、아무것도 아냐」
-		PRINTFORMW 「……앞으로도 잘 부탁해、%CALLNAME:MASTER%」
-		CFLAG:201 = 6
-		RETURN 0
-	;창부
-	ELSEIF TALENT:7
-			PRINTFORMW 「하아、하아、하、으……우웃」
-			PRINTFORMW %마스터가% %타겟을% 호출하자、이미 이전의 %타겟은% 거기에는 없었다.
-			PRINTFORMW 숨결은 난폭하고、몸을 떨며 아무것도 하지 않았는데도 페니스를 아플 정도로 발기시키고 있다.
-			PRINTFORMW %NAME:TARGET%의 그 공허한 눈은 지금의 상황을 잊고 싶은 것인지, 허공을 응시하고 있다.
-			PRINTFORMW %CALLNAME:MASTER%의 눈에는 그것이 마치 공기로 가득찬 풍선처럼 보인다.
-			PRINTFORMW 슬슬인가 하고 %조사처리(CALLNAME:MASTER,"는")% %NAME:TARGET%에게 가까워져、살그머니 그 귓가에 속삭였다.
-			PRINTFORMW ……참지 않아도 괜찮아, 좀 더 기분 좋아지자.
-			PRINTFORMW 천천히、확실히 %NAME:TARGET%의 그 단단한 몸을 어루만져간다.
-			PRINTFORMW 「앗……크아아아아앗！！」
-			PRINTFORMW 그 자극이 발단이 되었는지、%타겟은% 그 자리에서 기세 좋게 대량으로 사정했다.
-			PRINTFORMW 온몸에, 그리고 스스로의 얼굴에까지 닥친 정액을 %타겟은% 혀로 빤다.
-			PRINTFORMW 미소 짓는 %CALLNAME:MASTER%에게로 향한 그 얼굴은、이미 정욕에 빠진 육노예 그 자체였다……
-		CFLAG:201 = 6
-		RETURN 0
-	;예속
-	ELSEIF TALENT:8
-			PRINTFORMW %마스터가% %타겟을% 호출하면、이제 이전의 %타겟은% 거기에 없었다.
-			PRINTFORMW 거기에 있는 것은 악마의 형태를 했을 뿐인 인형이다.
-			PRINTFORMW 남아있던 허무한 저항조차도 전부 헛되이 끝나、몸도 마음도 %CALLNAME:MASTER%에게 굴복한、단순한 인형.
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 거기에 여어, 하고 말을 건다.
-			PRINTFORMW 「……부르셨습니까, 주인님」
-			PRINTFORMW 그 말에는 어떤 감정도 깃들지 않았다. 설령 조금 남아 있었다고 해도 그런 것은 곧바로 사라질 것이다.
-			PRINTFORMW 이것으로 겨우, 스타트 라인에 섰다.
-			PRINTFORMW 이대로의 상태로는 확실히 더할 나위 없지만、모처럼이고 한가지를 더 덧붙여볼까？
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 조속히, 마무리에 착수했다……
-		CFLAG:201 = 6
-		RETURN 0
-	ENDIF
+	CFLAG:201 = 5
+	RETURN 0
 ENDIF
 
 ;-------------------------------------------------
@@ -272,7 +181,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_PUB317
+	CALL EVENTTRAIN_SECOND_PUB316
 ;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
@@ -298,186 +207,171 @@ IF ASSI < 0
 ;	ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_PUB317
+	CALL EVENTTRAIN_SECOND_PUB316
 ENDIF
 
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_PUB317
+@EVENTTRAIN_SECOND_PUB316
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
-	PRINTFORMW 「뜻대로 된다고 우쭐대는 것도 적당히 해라、인간」
-	PRINTFORMW %타겟은% 그렇게 분명하게 %CALLNAME:MASTER%에게 고한다.
-	PRINTFORMW 무형의 굉장한、살기라는 중압이 방 안에 가득한 것에 %조사처리(CALLNAME:MASTER,"는")% 전율했다……
+	PRINTFORMW 「인간 따위가……죽인다、쳐죽이겠어……！」
+	PRINTFORMW %타겟은% 당장이라도 죽일듯한 표정으로、%마스터를% 노려보고 있다……
+	PRINTFORMW 굉장한 무형의 중압감에、%조사처리(CALLNAME:MASTER,"는")% 자신이 마스터인 것도 잊고 전율했다……
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「……뭐야、또인가」
-	PRINTFORMW %타겟은% 어쩐지 재미없다는 듯한 얼굴을 하고 있다.
+	PRINTFORMW 「범하는 건 취미지만 범해지는 건 취미가 아냐」
+	PRINTFORMW 「그러니까 그만둬、응？……알겠냐、빌어먹을 놈아！」
+	PRINTFORMW %타겟은% 일단 따라주고는 있는 것 같지만、언제 발작을 일으킬지 모르는 상태다.
+	PRINTFORMW 좀 더 조교가 필요하다……%조사처리(CALLNAME:MASTER,"는")% 그런 생각을 되뇌었다.
 	CFLAG:202 = 1
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
-	PRINTFORMW 「오늘도인가……질리지도 않는군」
-	PRINTFORMW %타겟은% 질렸다고 말하고 싶기라도 한 듯 크게 하품을 토했다.
+	PRINTFORMW 「어이어이、또 하는 거냐」
+	PRINTFORMW 「이 이상은 말 안 하겠어、여기선 하나만、%CSTR:11%에게 맡겨서 범해지라고……」
+	PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %NAME:TARGET%의 입술을 자신의 입술로 막아、침대 위로 밀어 넘어뜨렸다……
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	PRINTFORMW 「%CSTR:12%도 별난 인간이군……그렇게 즐거운가？」
-	PRINTFORMW %타겟은% 진심으로 기막혀하고 있는 것 같지만、저항할 생각이 약해진 것도 확실한 것 같다.
+	PRINTFORMW 「지긋지긋하다……%CSTR:12%……」
+	PRINTFORMW %타겟은% 마음 속 깊이 기가 막히다는 듯한 태도를 보이고 있지만、저항할 마음이 약해진 것도 확실한 것 같다.
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
-		PRINTFORMW 「오늘도인가……하、마음대로 해라」
-		PRINTFORMW 상쾌할 정도로 시원스럽게 말하면서 %타겟은% 침대 위에 몸을 내던졌다.
-		PRINTFORMW 완전히 저항하는 것을 단념해、조교되는 것을 기다리고 있는 것 같다.
+	PRINTFORMW 「어이、멋대로 해라……」
+	PRINTFORMW %타겟은% 침대 위에 몸을 던지고、조교되는 것을 기다리고 있다.
 	CFLAG:202 = 4
 ;함락완료
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
-	;연모
-	IF TALENT:3
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
-		IF RAND:2 == 0
-			PRINTFORMW 「%CALLNAME:MASTER%인가」
-			PRINTFORMW 「오늘도인가？　질리지도 않는 놈이군」
-			PRINTFORMW %타겟은% 조교의 시간인데도 어딘지 즐거워보인다.
-		ELSE
-			PRINTFORMW 「그래서……%CALLNAME:MASTER%、오늘은 뭘 할 생각이지？」
-			PRINTFORMW %타겟은% 침대에 드러누워、%CALLNAME:MASTER%의 얼굴을 똑바로 응시하며 물었다.
-		ENDIF
-	;음란
-	ELSEIF TALENT:4
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
-		IF RAND:2 == 0
-			PRINTFORMW 「큿……%CSTR:11%에게 손대지 마라！」
-			PRINTFORMW %타겟은% 다가온 %마스터를% 강하게 노려보고 있다.
-			PRINTFORMW 필사적으로 정욕을 견디고 있는 모습도 좋지만, 아직 부족하다.
-			PRINTFORMW 그 겉으로만 보이는 이성을 제거하기 위해、%조사처리(CALLNAME:MASTER,"는")% 조교를 시작했다……
-		ELSE
-			PRINTFORMW 「……하、앗」
-			PRINTFORMW %CALLNAME:MASTER%의 손이 %NAME:TARGET%의 몸에 살며시 닿는다.
-			PRINTFORMW 「큿……」
-			PRINTFORMW 달콤한 숨을 쉬어버린 것을 후회하고 있는지、%타겟은% %마스터를% 노려본다.
-			PRINTFORMW 완전히 타락할 때까지 아직、조금 더 시간이 걸릴 것 같다……
-		ENDIF
-	;복종
-	ELSEIF TALENT:5
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
-		IF RAND:2 == 0
-			PRINTFORMW 「……인간 따위가」
-			PRINTFORMW 그렇게, 중얼거리는 %NAME:TARGET%의 소리가 귀에 들려온다. 변함없이 말투가 문제다.
-			PRINTFORMW 마른 미소를 띤 %조사처리(CALLNAME:MASTER,"는")% 다가서면서 그렇게 지적했다.
-			PRINTFORMW 「……큿」
-			PRINTFORMW 시선을 피하는 %타겟을% 보고、그 목을 상냥하게 어루만지면서 %조사처리(CALLNAME:MASTER,"는")% 조교를 시작했다……
-		ELSE
-			PRINTFORMW 「주、주인……니……」
-			PRINTFORMW 말을 더듬는 %타겟을% 내려다보면서、%조사처리(CALLNAME:MASTER,"는")% 한숨을 쉰다.
-			PRINTFORMW 아직 불필요한 프라이드가 방해하고 있는 것 같다.
-			PRINTFORMW 오늘은 어떻게 할까. %조사처리(CALLNAME:MASTER,"는")% 그렇게 생각하면서 혀로 입술을 핥았다……
-		ENDIF
-	;친애
-	ELSEIF TALENT:6
-		;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-		IF TALENT:6 && MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-			PRINTFORMW %CALLNAME:TARGET%의 態度は何処か冷たい……。
-		ELSE
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+	;연모, 친애
+	IF TALENT:3 || TALENT:6
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
+		IF TALENT:MASTER:오토코노코 == 1
 			K:1 = RAND:4
 			IF K:1 == 0
-				PRINTFORMW 「불렀나、%CALLNAME:MASTER%」
-				PRINTFORMW 호출한 %타겟은% 악마에게 어울리지 않아 보이는 부드러운 미소를 띠고 있다.
-				PRINTFORMW 「……왜 그래、몸이라도 안 좋은 건가？」
-				PRINTFORMW 뭔가 이상한 얼굴이라도 하고 있었던 건가, 하고 되묻는다.
-				PRINTFORMW 「이상한 녀석」
+				PRINTFORMW 「야、%CSTR:12%」
+				PRINTFORMW %타겟은% %CALLNAME:MASTER%의 얼굴을 보자、활짝 웃었다.
+				PRINTFORMW 평상시에는 무서운 악마지만、웃는 모습은 의외로 귀엽다.
+				PRINTFORMW 「그런데、오늘은 어쩔래？」
 			ELSEIF K:1 == 1
-				PRINTFORMW 「%CALLNAME:MASTER%인가、오늘도 상태는 좋은가？」
-				PRINTFORMW 변함없다고 대답하고、%타겟은%？이라고 되묻자 %타겟은% 기쁜 듯이 웃었다.
-				PRINTFORMW 「%조사처리(CSTR:11,"를")% 걱정해주는건가、하하하」
-				PRINTFORMW 「당연히、평소대로다. 자、오늘은 뭘 할 거지？」
+				PRINTFORMW 「기다렸어、%CSTR:12%」
+				PRINTFORMW %타겟은% %마스터가% 방에 들어오자마자、%CALLNAME:MASTER%의 몸을 만지기 시작했다.
+				PRINTFORMW 난폭한 애무지만、이제는 이미 익숙해져있다. %CALLNAME:MASTER%도 반대로、%NAME:TARGET%의 단단한 육체를 애무한다.
+				PRINTFORMW 「처음에는 조금 저항감이 있었지만、지금은 신경 쓰이지 않는데」
+				PRINTFORMW 「%조사처리(CSTR:12,"는")% 틀림없이 최고의 여자、아니 남자……어느 쪽이야！？」
+				PRINTFORMW %타겟은% 어느 한 곳을 제외하고는 여자와 조금도 다를 바 없는 용모의 %마스터를% 응시해、혼란스러워하고 있다.
+				PRINTFORMW 「뭐 어느 쪽이든 상관없어！　하자고！」
 			ELSEIF K:1 == 2
-				IF TALENT:MASTER:남자 == 1
-					PRINTFORMW 「너무 늦게 부르는군、%CALLNAME:MASTER%」
-					PRINTFORMW %타겟은% 어딘가 삐져있는 것처럼 보인다.
-					PRINTFORMW 「혹시 다른 놈에게 빠져있는 건가？」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 어느 쪽이라고 생각해？라고 심술궂게 물어보았다.
-					PRINTFORMW 「……뭐、나쁘지는 않아」
-					PRINTFORMW 「그럼、시작할까？」
-				ELSE
-					PRINTFORMW 「너무 늦게 부르는군、%CALLNAME:MASTER%」
-					PRINTFORMW %타겟은% 어딘가 삐져있는 것처럼 보인다.
-					PRINTFORMW 「혹시 다른 놈에게 빠져있는 건가？」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 어느 쪽이라고 생각해？라고 심술궂게 물어보았다.
-					PRINTFORMW 「너무 %조사처리(CSTR:11,"를")% 놀리지 마」
-					PRINTFORMW %타겟은% 그렇게 말하며、%마스터를% 침대에 밀어 넘어뜨렸다……
-				ENDIF
+				PRINTFORMW 「……」
+				PRINTFORMW %타겟이% 물끄러미 %마스터를% 바라보고 있어서、왜 그러냐고 물었다.
+				PRINTFORMW 「아니……아무리 봐도 여자로밖에 안 보이는데、싶어서……」
+				PRINTFORMW 그렇게 여자를 좋아하면、제대로 된 여자를 찾아가면 되잖아、하고 %조사처리(CALLNAME:MASTER,"는")% 얼굴을 돌렸다.
+				PRINTFORMW 「아、아니！　별로 %조사처리(CSTR:12,"가")% 싫다던가 그런 게 아냐！　그、뭐냐……！　아～……」
+				PRINTFORMW 강대한 악마가 횡설수설하며 해명하고 있는 모습은 매우 익살스럽다.
+				PRINTFORMW 그 모습이 너무 유쾌해서、%조사처리(CALLNAME:MASTER,"는")% 화난듯한 분위기를 계속 가장하며、마음 속으로만 혀를 내밀었다……
 			ELSE
-				IF TALENT:MASTER:남자 == 1
-					PRINTFORMW 「……그렇다곤 해도 별 일이군」
-					PRINTFORMW %타겟이% 의미심장하게 중얼거려서 무슨 일인지 %조사처리(CALLNAME:MASTER,"는")% 물어본다.
-					PRINTFORMW 「악마와 인간이라고는해도……동성끼리 괜찮은 건가、하고 생각한 것뿐이다」
-					PRINTFORMW %NAME:TARGET%의 말에 %조사처리(CALLNAME:MASTER,"는")% 살짝、진심이야？라고 귓가에 속삭였다.
-					PRINTFORMW 「……뭐、나쁘진 않겠지. 그런데、시작할까？」
-				ELSE
-					PRINTFORMW 불러내자마자、%조사처리(CALLNAME:MASTER,"는")% %NAME:TARGET%의 팔 안으로 이끌려갔다.
-					PRINTFORMW 대체 왜냐고 물어도 %조사처리(NAME:TARGET,"는")% 능글능글 웃고 있을 뿐이다.
-					PRINTFORMW 그러는 사이 %타겟은% %마스터를% 침대에 끌어들여、그대로 밀어 넘어뜨려지는 형태가 된다.
-					PRINTFORMW 「저항해주는 것이 편하다는 건 아니지만……」
-					PRINTFORMW 밀어 넘어뜨려져 억지로 되는 건가 생각했더니, 뭔가 다른 걸 기대하고 있었던 것 같다.
-					PRINTFORMW 그래서 키스를 졸라보자、%타겟은% 히죽 웃으면서 %CALLNAME:MASTER%에게 얼굴을 가까이했다……
-				ENDIF
+				PRINTFORMW 「여어、잘 지냈어？　파트너」
+				PRINTFORMW 변함없다고 대답하고、%타겟은% 어때？　하고 물어주자、%타겟은% 기쁜 듯이 웃었다.
+				PRINTFORMW 「오우、고마워. %조사처리(CSTR:11,"는")% 엄청 상태가 좋아！」
+				PRINTFORMW 「……뭐、악마가 병에 걸리는지 어떤지는 잘 모르는데」
+			ENDIF
+		ELSEIF TALENT:MASTER:남자 == 1
+			K:1 = RAND:4
+			IF K:1 == 0
+				PRINTFORMW 「여、%CSTR:12%」
+				PRINTFORMW %타겟은% %CALLNAME:MASTER%의 얼굴을 보자、활짝 웃었다.
+				PRINTFORMW 평상시에는 무서운 악마지만、웃는 모습은 의외로 귀엽다.
+				PRINTFORMW 「그런데、오늘은 어쩔래？」
+			ELSEIF K:1 == 1
+				PRINTFORMW 「……」
+				PRINTFORMW %타겟이% 물끄러미 %마스터를% 바라보고 있어서、왜 그러냐고 물었다.
+				PRINTFORMW 「아니……익숙해진다는 건 무섭다고 생각해서……」
+				PRINTFORMW 「남자끼리 하는 것도 의외로 나쁘지 않은데. 아니、%조사처리(CSTR:12,"와")% 하기 때문이야！」
+				PRINTFORMW 솔직한 말에、%조사처리(CALLNAME:MASTER,"는")% 무심코 얼굴을 붉혔다.
+			ELSEIF K:1 == 2
+				PRINTFORMW 「여、기다렸어」
+				PRINTFORMW 「오늘은 내가 공격해줄까？　아니면 %조사처리(CSTR:12,"가")% 봉사해줄래？」
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 『어느 쪽을 원해？』 라고 웃으며、%타겟과% 몸을 겹쳤다……
+			ELSE
+				PRINTFORMW 「여어、잘 지냈어？　파트너」
+				PRINTFORMW 변함없다고 대답하고、%타겟은% 어때？　하고 물어주자、%타겟은% 기쁜 듯이 웃었다.
+				PRINTFORMW 「오우、고마워. %조사처리(CSTR:11,"는")% 엄청 상태가 좋아！」
+				PRINTFORMW 「……뭐、악마가 병에 걸리는지 어떤지는 잘 모르는데」
+			ENDIF
+		ELSE
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORMW 「여、%CSTR:12%」
+				PRINTFORMW %타겟은% %CALLNAME:MASTER%의 얼굴을 보자、활짝 웃었다.
+				PRINTFORMW 평상시에는 무서운 악마지만、웃는 모습은 의외로 귀엽다.
+				PRINTFORMW 「그런데、오늘은 어쩔래？」
+			ELSEIF K:1 == 1
+				PRINTFORMW 「기다렸어、%CSTR:12%」
+				PRINTFORMW %타겟은% 웃는 얼굴로 %마스터를% 마중 나와、꼭 껴안았다.
+				PRINTFORMW 「이제 참을 수 없어、빨리 하자구、응、응？」
+				PRINTFORMW 말한 대로、%NAME:TARGET%의 양물은 혈관이 드러난 채로 하늘을 향해 솟아있어、%CALLNAME:MASTER%의 복부를 움찔움찔 때리고 있다.
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 쓴웃음을 지으면서、%NAME:TARGET%의 뺨에 살며시 키스했다.
+			ELSEIF K:1 == 2
+				PRINTFORMW 「%CSTR:12%～～～～～～～～～～～！　범하게 해～～～～～～～～～～！！」
+				PRINTFORMW %마스터가% 방에 들어오자마자、%타겟은% 힘껏 껴안아왔다.
+				PRINTFORMW %타겟은%、아직 전희도 하지 않았는데、우뚝 솟은 양물을 %CALLNAME:MASTER%의 사타구니에 꾹꾹 눌러온다.
+				PRINTFORMW 발정기의 짐승이냐！라고、%조사처리(CALLNAME:MASTER,"는")% %NAME:TARGET%의 머리를 딱 때린다.
+				PRINTFORMW 「뭐、뭐하는 거야……」
+				PRINTFORMW 그다지 아프지는 않을 텐데、%타겟은% 맞은 곳을 누르고 약한 소리를 흘렸다.
+				PRINTFORMW 그 갭에、%CALLNAME:MASTER%의 분노는 흩어져 버려、무심코 뿜어버린다.
+				PRINTFORMW 「뭐、뭐야……웃지 마……」
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 화난듯하기도 하고、부끄러워하는 것처럼 보이기도 하는 %NAME:TARGET%의 머리를 쓰다듬어주었다.
+			ELSE
+				PRINTFORMW 「여어、잘 지냈어？　파트너」
+				PRINTFORMW 변함없다고 대답하고、%타겟은% 어때？　하고 물어주자、%타겟은% 기쁜 듯이 웃었다.
+				PRINTFORMW 「오우、고마워. %조사처리(CSTR:11,"는")% 엄청 상태가 좋아！」
+				PRINTFORMW 「……뭐、악마가 병에 걸리는지 어떤지는 잘 모르는데」
 			ENDIF
 		ENDIF
-	;창부
-	ELSEIF TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
-		IF RAND:2 == 0
-			PRINTFORMW 「아、하아……」
-			PRINTFORMW 호출한 %타겟은% %CALLNAME:MASTER%의 모습을 보자, 요염한 소리를 지른다.
-			PRINTFORMW 지금 %NAME:TARGET%의 눈은 채워지지 않는 욕망을 만족시켜준다는 기대로 가득 차있다.
-			PRINTFORMW 「부탁이다……부탁해……」
-			PRINTFORMW 스스로의 몸을 만지작거리면서 애원하는 그를、%조사처리(CALLNAME:MASTER,"는")% 곧바로 밀어 넘어뜨렸다……
+	;음란, 창부
+	ELSEIF TALENT:4 || TALENT:7
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
+		K:1 = RAND:3
+		IF K:1 == 0
+			PRINTFORMW 
+		ELSEIF K:1 == 1
+			PRINTFORMW 
 		ELSE
-			PRINTFORMW 「빨리……빨리 해、줘……！」
-			PRINTFORMW 호출한 %타겟은% 쑤시는 몸을 참지 못하는 것인지, %CALLNAME:MASTER%에게 애원한다.
-			PRINTFORMW 그것을 심술궂게 초조하게 만들면서、%조사처리(CALLNAME:MASTER,"는")% 개를 내려다보는 듯한 눈으로 내려다본다.
-			PRINTFORMW 「%CSTR:11%……%CSTR:11%에게 손 대줘……희롱해줘……부탁한다……！」
-			PRINTFORMW 눈물을 흘리고 필사적으로 애원하는 것을 보며、%조사처리(CALLNAME:MASTER,"는")% 상냥하게 미소 지었다……
+			PRINTFORMW 
 		ENDIF
-	;예속
-	ELSEIF TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
-		IF RAND:2 == 0
-			PRINTFORMW 「부르셨습니까、주인님……」
-			PRINTFORMW 호출한 %타겟은% %CALLNAME:MASTER%의 눈앞에 무릎 꿇었다.
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 숙인 %NAME:TARGET%의 얼굴을 그 손으로 들어올린다.
-			PRINTFORMW %NAME:TARGET%의 눈에는 특별한 의사가 없다.
-			PRINTFORMW 지금 눈앞에 있는 것은 모든 명령을 충실히 실행할 뿐인 단순한 고기 인형이니까……
+	;복종, 예속
+	ELSEIF TALENT:5 || TALENT:8
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
+		K:1 = RAND:3
+		IF K:1 == 0
+			PRINTFORMW 
+		ELSEIF K:1 == 1
+			PRINTFORMW 
 		ELSE
-			PRINTFORMW 「……부디 명령을」
-			PRINTFORMW 호출한 %타겟은% %CALLNAME:MASTER%의 눈앞에 무릎 꿇었다.
-			PRINTFORMW 강대한 악마가 완전히 굴복해 무릎 꿇어, 뜻대로 되는 노예……아니 인형이 된다.
-			PRINTFORMW 이 정도로 재미있는 일도 없을 것이다. 웃음을 씹어 삼키면서、%조사처리(CALLNAME:MASTER,"는")% 상냥하게 미소지었다……
+			PRINTFORMW 
 		ENDIF
 	ENDIF
 	CFLAG:202 = 5
-	RETURN 0
 ENDIF
+RETURN 0
 
 ;-------------------------------------------------
 ;EVENTEND 관련（X1을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_PUB317
+@EVENTEND_PUB316
 ;--------------------------------------------------
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTEND_PY1_PUB317
+;	CALL EVENTEND_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	SIF NO:ASSI == Y1
-;	CALL EVENTEND_PY1_PUB317
+;	CALL EVENTEND_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -486,93 +380,52 @@ ENDIF
 DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「두 번 다시 부르지 마라」
-	PRINTFORMW %NAME:TARGET%의 눈동자에는, 분노의 불길이 소용돌이치고 있다……
+	PRINTFORMW 「다음에 올 때는、그냥은 안 끝나……」
+	PRINTFORMW %NAME:TARGET%의 눈동자에는、분노의 불길이 타오르고 있다……
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「시시하군」
-	PRINTFORMW %타겟은% 크게 하품을 내쉬고 있다.
+	PRINTFORMW 「이 정도로 %조사처리(CSTR:11,"를")% 굴복시킬 수 있다고는 생각하지 마」
+	PRINTFORMW （의외로、나쁘지는 않았지만……）
 	CFLAG:219 = 1
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
-	PRINTFORMW 「왜 그래……이 정도인가？　너무 미지근해서 하품이 나오는군」
-	PRINTFORMW 「아니면 %CSTR:12%에게는 너무 과중한 일이었나？」
-	PRINTFORMW 미소를 띤 %타겟은%、허세를 부리는 것처럼 보이지는 않는다…
-	PRINTFORMW 심신을 전부 굴복시키려면、아직 시간이 걸릴 것 같다…
+	PRINTFORMW 「……뭐야、빨리 나가」
+	PRINTFORMW %마스터가% 방을 나오려고 하자、갑자기 %타겟이% 불러세웠다.
+	PRINTFORMW 「……그래서、다음엔 언제 오는데？」
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORMW 「용무는 끝났나? ……이제 이런 일로 부르는 건 그만뒀으면 한다」
-	PRINTFORMW %타겟은% 어딘지 지친 얼굴로 그렇게 말했다.
+	PRINTFORMW 「또 오는 건가？　어、어이、뭐라고 말 좀 해봐」
 	CFLAG:219 = 3
-;함락완료＋체력 500미만　スルー
-;ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
-;	;연모
-;	IF TALENT:3
-;		PRINTFORMW 
-;	;음란
-;	ELSEIF TALENT:4
-;		PRINTFORMW 
-;	;복종
-;	ELSEIF TALENT:5
-;		PRINTFORMW 
-;	;친애
-;	ELSEIF TALENT:6
-;		PRINTFORMW 
-;	;창부
-;	ELSEIF TALENT:7
-;		PRINTFORMW 
-;	;예속
-;	ELSEIF TALENT:8
-;		PRINTFORMW 
-;	ENDIF
-;	CFLAG:218 = 1
+;함락완료＋체력 500미만
+ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
+	;연모, 친애
+	IF TALENT:3 || TALENT:6
+		PRINTFORMW 「진짠가……이、이 %타겟이%、졌다고……」
+		PRINTFORMW 「기、기다려어……벌써 나가지 않아도……」
+	;음란, 창부
+	ELSEIF TALENT:4 || TALENT:7
+		PRINTFORMW 
+	;복종, 예속
+	ELSEIF TALENT:5 || TALENT:8
+		PRINTFORMW 
+	ENDIF
+	CFLAG:218 = 1
 ;함락완료
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
-	;연모
-	IF TALENT:3
-		IF RAND:2 == 0
-			PRINTFORMW 「뭐야、휴식인가？　뭐 무리하면 나중까지 영향을 주니까」
-			PRINTFORMW %타겟은% 그렇게 말하면서 스스로의 몸을 풀고 있다.
-			PRINTFORMW 「또 무슨 일이 있으면 불러라、%CALLNAME:MASTER%」
-		ELSE
-			PRINTFORMW 「아아……벌써 마지막인가」
-			PRINTFORMW 기분 탓인지, %타겟은% 어딘지 아쉬운 것 같은 얼굴을 하고 있다.
-		ENDIF
-	;음란
-	ELSEIF TALENT:4
-			PRINTFORMW 「하아、하아……크읏」
-			PRINTFORMW %타겟은% 숨을 헐떡이면서 쑤시는 몸을 필사적으로 억제하려 하고 있다……
-	;복종
-	ELSEIF TALENT:5
-			PRINTFORMW 「젠장……！」
-			PRINTFORMW 심하게 욕을 해대는 %타겟을% 거들떠보지도 않고、%조사처리(CALLNAME:MASTER,"는")% 방에서 나갔다……
-	;친애
-	ELSEIF TALENT:6
-		;고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-		IF MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-			PRINTFORMW %CALLNAME:TARGET%의 태도는 어딘지 차갑다……。
-		ELSE
-			IF RAND:2 == 0
-				PRINTFORMW 「벌써 끝났나」
-				PRINTFORMW 아까운 듯한 %NAME:TARGET%에게 %조사처리(CALLNAME:MASTER,"는")% 또 다음에、라고 가볍게 키스했다.
-				PRINTFORMW 「으음……별 수 없지」
-			ELSE
-				PRINTFORMW 「%조사처리(CSTR:11,"는")% 좀 더 함께 있고 싶은데……안 되나？」
-				PRINTFORMW 아까운 듯이 끌어안는 %NAME:TARGET%의 뺨에、%조사처리(CALLNAME:MASTER,"는")% 가볍게 키스한다.
-				PRINTFORMW 「%CALLNAME:MASTER%……또 불러줘？」
-			ENDIF
-		ENDIF
-	;창부
-	ELSEIF TALENT:7
-			PRINTFORMW 「이제、마지막인가？」
-			PRINTFORMW %타겟은% 쾌락에 녹아내린 얼굴로 응시하고 있다.
-			PRINTFORMW 「%조사처리(CSTR:11,"는")% 아직……」
-	;예속
-	ELSEIF TALENT:8
-			PRINTFORMW 「……감사합니다、주인님」
-			PRINTFORMW %타겟은% 무릎 꿇었다……
+	;연모, 친애
+	IF TALENT:3 || TALENT:6
+		PRINTFORMW 「응、이제 끝이야？」
+		PRINTFORMW 「%조사처리(CSTR:11,"는")% 아직도 할 수 있다구、자、봐」
+		PRINTFORMW %NAME:TARGET%의 말대로、페니스는 전혀 수그러들지 않고、꿈틀꿈틀 움직이고 있다.
+		PRINTFORMW 「어이、좀 더 %조사처리(CSTR:12,"와")% 함께 하게 해줘、응……?」
+	;음란, 창부
+	ELSEIF TALENT:4 || TALENT:7
+		PRINTFORMW 
+	;복종, 예속
+	ELSEIF TALENT:5 || TALENT:8
+		PRINTFORMW 
 	ENDIF
 	CFLAG:219 = 4
 ENDIF
@@ -582,7 +435,7 @@ RETURN 0
 ;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_PUB317
+@KOJO_MESSAGE_COM_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
@@ -595,12 +448,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_PUB317
+;	CALL KOJO_MESSAGE_COM_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_PUB317
+;		CALL KOJO_MESSAGE_COM_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -608,7 +461,7 @@ ENDIF
 ;커맨드 실행시의 대사 CFLAG 300～500
 ;-------------------------------------------------
 ;=================================================
-;애무계 커맨드　%CALLNAME:MASTER%　%CALLNAME:PLAYER%　%CALLNAME:TARGET%
+;애무계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;0,애무
@@ -618,13 +471,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:300 == 0
-			IF TALENT:PLAYER:남자 == 1 || TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「왜 남자끼리 이런 일을……」
-				PRINTFORMW %타겟은% 불만스러운 듯이 혀를 차고 있다.
-			ELSE
-				PRINTFORMW 「그 정도인가？」
-				PRINTFORMW %타겟은% 힐쭉 웃고 있다.
-			ENDIF
+			PRINTFORMW 
 			CFLAG:300 = 1
 		;2번째 이후
 		ELSE
@@ -632,48 +479,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「%CALLNAME:MASTER%……으으」
-						PRINTFORMW 「좋아、%CALLNAME:PLAYER%……」
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「응、하아……」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「큿、응……」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:300 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:300 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「응、크읏……」
+				PRINTFORMW 
 				CFLAG:300 = 3
 			;그 이외
 			ELSEIF CFLAG:300 < 2 || FLAG:7 == 2
-				PRINTFORMW 「왜 그래, 전혀 효과가 없다고？」
+				PRINTFORMW 
 				CFLAG:300 = 2
 			ENDIF
 		ENDIF
@@ -716,17 +537,19 @@ SELECTCASE SELECTCOM
 ;2,펠라한다
 ;-------------------------------------------------
 	CASE 2
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:302 == 0
-			IF TALENT:PLAYER:남자 == 1 || TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「참아줄까보냐……제대로 봉사해라」
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 그런데도 %타겟은% 납득은 할 수 없는 것인지, 불만스럽다는 듯 혀를 차고 있다.
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「%CSTR:12%、일단、남자지…」
+				PRINTFORMW %타겟은% 복잡한 표정을 하고 있었지만、%마스터가% 가련한 입술로 양물을 삼키자、따뜻하고 끈적한 감촉에 표정을 풀었다.
+				PRINTFORMW 「으……기분 좋으면、아무래도 상관없나……」
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「설마、사내자식한테 빨게 할 줄이야……」
+				PRINTFORMW 「웃……의외로、하잖아……」
 			ELSE
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「스스로 봉사한다니 좋은 마음가짐이다」
-				PRINTFORMW %타겟은% 작은 웃음소리를 흘리면서 %마스터를% 내려다보고 있다.
+				PRINTFORMW 「%CSTR:11%의 자지는 엄청 굵으니까、전부 삼킬 수 있겠어？」
+				PRINTFORMW 「우、오……이건、꽤……하잖아」
 			ENDIF
 			CFLAG:302 = 1
 		;2번째 이후
@@ -735,55 +558,50 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:3 == 0
+						PRINTFORMW 「아아……역시、%CSTR:12%의 입안은 최고야……크으읏……！」
+						PRINTFORMW %CALLNAME:MASTER%의 작은 입안에서、%NAME:TARGET%의 것은 완전히 커져있다.
+						PRINTFORMW 「우……슬슬 나온다……전부 마셔줘……！」
+						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 입안에서 페니스가 팽창해가는 것을 느끼며 피스톤 운동을 빠르게 했다……
+					ELSEIF RAND:2 == 0
+						PRINTFORMW 「웃、우옷、우오옷！」
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 머리를 잡고、무아지경으로 허리를 흔들고 있다.
+						PRINTFORMW %마스터가% 숨 막혀하면、%타겟은% 자신을 되찾고、당황해서 페니스를 뽑아냈다.
+						PRINTFORMW 「미、미안……%CSTR:12%의 입이 기분 좋아서……」
+						PRINTFORMW 면목없다는듯한 %NAME:TARGET%에게、%조사처리(CALLNAME:MASTER,"는")% 괜찮아、라고 미소짓고、다시 성난 자지를 삼켰다.
 					ELSE
-						CALL TRAIN_MESSAGE
-						PRINTFORMW 「응、좋아 %CALLNAME:PLAYER%……」
-						PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 머리를 어루만지면서 혀와 입의 감촉을 만끽하고 있다……
+						PRINTFORMW 「쿠…오……오……！」
+						PRINTFORMW %CALLNAME:MASTER%의 뜨겁고 촉촉한 입술이 %CALLNAME%의 페니스를 끈적하게 감싸고 있다.
+						PRINTFORMW 때로는 혀로 쪽쪽、때로는 츄웁、츄웃、하고 천박한 소리를 내면서、멈추지 않고 육봉에 쾌락을 계속해서 준다.
+						PRINTFORMW %타겟은% 입술을 떨고、입 가장자리에 침을 흘리면서도、절정을 참고 있다.
+						PRINTFORMW 하지만、질내와 같은 입안에서、%타겟은% 한계를 맞이하려 하고 있었다.
+						PRINTFORMW 「하아、하아……안 됏、이제……！」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CALL TRAIN_MESSAGE
-					PRINTFORMW 「하아、하아、우、오오……」
-					PRINTFORMW %타겟은% 숨을 헐떡이면서 혀와 입의 감촉을 만끽하고 있다……
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CALL TRAIN_MESSAGE
-					PRINTFORMW 「응、크읏……」
-					PRINTFORMW %타겟은% 숨을 헐떡이면서 혀와 입의 감촉을 만끽하고 있다……
+					PRINTFORMW 
 				ENDIF
 				CFLAG:302 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:302 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「으응……좋아、좀 더다……」
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %NAME:TARGET%의 양물에 끈적하게 혀를 놀리며、소리를 내며 귀두를 빨았다.
+				PRINTFORMW 실내에 쯉、쮸릅、츄르르…하고 음탕한 소리가 울려 퍼진다.
+				PRINTFORMW 「우오옷、좋아、좀 더다、좀 더、해 줘…」
 				CFLAG:302 = 3
 			;그 이외
 			ELSEIF CFLAG:302 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「그래、혀를 능숙하게 사용해라」
+				IF RAND:2 == 0
+					PRINTFORMW 「그래……좀 더 혀를 써서……응、좋아……」
+					PRINTFORMW %타겟은% %CALLNAME:MASTER%에게 지시를 내리며、열락에 잠겨있다.
+					PRINTFORMW 이래서야、어느쪽이 주인인지……
+				ELSE
+					PRINTFORMW 「가하하하！　좀 더 안쪽까지 삼켜라！」
+					PRINTFORMW %타겟은% %CALLNAME:MASTER%의 뒷머리를 붙잡고、격렬하게 앞뒤로 움직였다.
+					PRINTFORMW 귀두가 %CALLNAME:MASTER%의 목구멍을 찔러、무심코 구토기가 올라오지만、%타겟은% 신경쓰지 않고 스스로의 쾌락을 탐내고 있다.
+				ENDIF
 				CFLAG:302 = 2
 			ENDIF
 		ENDIF
@@ -828,13 +646,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:304 == 0
-			IF TALENT:PLAYER:남자 == 1 || TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「%CSTR:12%……무슨 생각을 하고 있는 거지」
-				PRINTFORMW %타겟은% 뭔가를 눈치챘는지、%마스터를% 노려보고 있다……
-			ELSE
-				PRINTFORMW 「이런 곳까지 만지는 건가？」
-				PRINTFORMW 「……흥、뭐 좋아」
-			ENDIF
+			PRINTFORMW 「호오、엉덩이 구멍까지 빤다니、기특한 마음가짐이야」
+			PRINTFORMW 「크흣、어쩐지、간지러워……！」
 			CFLAG:304 = 1
 		;2번째 이후
 		ELSE
@@ -842,23 +655,30 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「……으응！？　그、그만둬、혀를 넣지 마！」
-					PRINTFORMW %CALLNAME:TARGET%의 장내에 혀를 넣어 움직여주자、%타겟은% 비명 같은 소리를 질렀다.
+					IF RAND:2 == 0
+						PRINTFORMW 「그런 곳까지 빨고……%조사처리(CSTR:12,"는")%、정말、기특하다니까……」
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 봉사하는 모습에 감동하고 있는 것 같다.
+					ELSE
+						PRINTFORMW 「우、오오……항문 안에서、혀갓、우오옷！？」
+						PRINTFORMW %NAME:TARGET%의 장내에 혀를 꽂아 넣고、슬슬 움직여주자、%타겟은% 소리를 질렀다.
+					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:304 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「응……빤다면, 제대로 해라」
+				PRINTFORMW 「우웃…　봉사시키고 있는 건데、어째서엇、이 굴욕감 같은 건……크읏」
+				PRINTFORMW 이전의 강경한 모습은 어디로 갔는지、%타겟은% 항문을 젖은 혀로 유린당해、음경을 발기시키며 신음하고 있다.
 				CFLAG:304 = 3
 			;그 이외
 			ELSEIF CFLAG:304 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……（간지럽다）」
+				PRINTFORMW 「어이、주름 하나하나까지 열심히 빨라고」
+				PRINTFORMW %NAME:TARGET%의 오만한 말에、손가락이라도 하나 찔러 넣을까 하는 기분을 간신히 억제하며、%조사처리(CALLNAME:MASTER,"는")% 지시대로、항문 주변을 혀로 애무하기 시작했다……
 				CFLAG:304 = 2
 			ENDIF
 		ENDIF
@@ -866,19 +686,18 @@ SELECTCASE SELECTCOM
 ;5,애널애무
 ;-------------------------------------------------
 	CASE 5
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:305 == 0
-				PRINTFORMW 「무、무슨 짓을……머、멈춰라！　크읏！？」
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%의 제지를 무시하고、
-				;애널바이브
-				IF TEQUIP:14 == 1
-					PRINTFORMW 항문에 애널 바이브를 천천히 꽂아 넣었다.
-				;그 이외
-				ELSE
-					PRINTFORMW 손가락을 천천히 항문에 삽입했다.
-				ENDIF
-				PRINTFORMW %타겟은% 이물의 침입에 얼굴을 불쾌감으로 삐뚤어지게 하고 있다.
+			PRINTFORMW 「자、자、잠깐、뭘 하는 거……」
+			PRINTFORML %NAME:TARGET%의 항의를 무시한 채、항문에 억지로  
+			;애널바이브
+			IF TEQUIP:14 == 1
+				PRINTFORMW 애널 바이브를 찔러 넣고、넣고 빼고를 반복하자 %타겟은% 괴로운 듯한 표정을 띠었다.
+			;그 이외
+			ELSE
+				PRINTFORMW 손가락을 찔러 넣고、직장 내에서 휘젓자 %타겟은% 괴로운 듯한 표정을 띠었다.
+			ENDIF
 			CFLAG:305 = 1
 		;2번째 이후
 		ELSE
@@ -886,44 +705,36 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					CALL TRAIN_MESSAGE
 					IF RAND:3 == 0
-						PRINTFORMW 「응……좀 더、상냥하게 말이야……」
-						PRINTFORMW 「우……읏、옷！」
+						PRINTFORMW 「웃……어쩐지、이상한 기분이야……」
+						PRINTFORMW 「오、오웃、오오옷！？」
 					ELSEIF RAND:2 == 0
-						PRINTFORMW 「그、렇겟、격렬하게 움직이면……！」
+						PRINTFORMW 「앗…！　우옷…！？　그、그렇게、격렬하게 휘젓지 않아도……앗！」
 						PRINTFORMW 괴로운 듯한 어조와는 정반대로、%CALLNAME%의 애널은 음란한 소리를 내고 있다.
 					ELSE
-						PRINTFORMW 「응、큿……하아……읏」
+						PRINTFORMW 「응、하앗……！　엉덩이로 가버려……아아ーーーーー！！」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CALL TRAIN_MESSAGE
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CALL TRAIN_MESSAGE
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:305 = 4
+			;A감각Lv3이상
+			ELSEIF ABL:5 >= 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
+				PRINTFORMW 「크으읏……그、그만해……그만해줘……」
+				PRINTFORMW 장벽을 문질러주자、%타겟은% 몸을 꿈틀하고 떨었다.
+				PRINTFORMW 거기에 호응하듯、융기한 페니스가 발딱 솟아오른다.
+				PRINTFORMW 새어나온 말과는 정반대로、%NAME:TARGET%의 신체는 민감하게 반응하고 있다……
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				;A감각Lv3이상
-				IF ABL:5 >= 3
-					PRINTFORMW 「크읏、그、그만둬……크앗！？」
-					PRINTFORMW 장벽을 문질러주자、%타겟은% 몸을 움찔 떤다.
-					PRINTFORMW 거기에 호응하듯、발기한 페니스가 튀어오른다.
-					PRINTFORMW 새어나온 말과는 정반대로、%CALLNAME:TARGET%의 몸은 자극에 민감하게 반응하고 있는 것 같다……
-				ELSE
-					PRINTFORMW 「크읏、그、그만둬라……크읏！？」
-					PRINTFORMW %타겟은% 침입해오는 이물에 몸을 떨고 있다……
-				ENDIF
+				PRINTFORMW 「그、그만둬……만지작거리는 건 좋아하지만、만지작거려지는 건 취향이 아냐……」
 				CFLAG:305 = 3
 			;그 이외
 			ELSEIF CFLAG:305 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「크앗！？　저、적당히 해라！」
+				PRINTFORMW 「바、바보 자식！　그런 곳에 넣지 마！」
 				CFLAG:305 = 2
 			ENDIF
 		ENDIF
@@ -931,11 +742,11 @@ SELECTCASE SELECTCOM
 ;6,가슴주무르기
 ;-------------------------------------------------
 	CASE 6
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:306 == 0
-			PRINTFORMW 「왜 그래？　%CSTR:11%의 가슴에 흥미가 있나？　흥……좋아、손대봐라」
-			PRINTFORMW 말한 대로 %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%의 단단한 가슴을 만지기 시작했다……
+			PRINTFORMW 「뭐야？　%CSTR:11%의 단단한 가슴에 흥미가 있는 건가？」
+			PRINTFORMW 「좋아, 손 대게 해줄 테니 고맙게 생각해라.　갓하하하!」
 			CFLAG:306 = 1
 		;2번째 이후
 		ELSE
@@ -943,52 +754,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						CALL TRAIN_MESSAGE
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						CALL TRAIN_MESSAGE
-						PRINTFORMW 「……그렇게 %CSTR:11%의 가슴이 좋은가？」
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「응、크웃……」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CALL TRAIN_MESSAGE
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:306 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「응……언제까지 만질 셈이지……？」
+				PRINTFORMW 
 				CFLAG:306 = 3
 			;그 이외
 			ELSEIF CFLAG:306 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「그렇게 %CSTR:11%의 가슴이 좋은가？」
+				PRINTFORMW 「어때 %CSTR:11%의 가슴은？　대단하지」
 				CFLAG:306 = 2
 			ENDIF
 		ENDIF
@@ -1000,7 +781,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:307 == 0
-			PRINTFORMW 「어、어이、젖은 나오지 않는다고？」
+			PRINTFORMW 「그런 곳보다, 좀 더 다른 곳에 봉사해줘」
+			PRINTFORMW 「간지러울 뿐이야」
 			CFLAG:307 = 1
 		;2번째 이후
 		ELSE
@@ -1008,47 +790,30 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「응……크、아……읏」
-					ENDIF
+						PRINTFORMW 「흐읏……아아……」
+						PRINTFORMW %CALLNAME%의 유두는 딱딱하게 굳어져있다.
+							IF TALENT:MASTER:남자 == 1
+								PRINTFORMW 『느끼고 있는 건가？』라고 장난스레 귓가에 속삭이자、%타겟은% 얼굴을 붉혔다.
+							ELSE
+								PRINTFORMW 『느끼는 거야？』라고 장난스레 귓가에 속삭이자、%타겟은% 얼굴을 붉혔다.
+							ENDIF
+						PRINTFORMW 「바、바보 자식！　그럴 리가 없……힛、앗！！」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「하아、응、아……칫！」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:307 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「크읏……어、언제까지 만질 셈이냐……」
+				PRINTFORMW 「
 				CFLAG:307 = 3
 			;그 이외
 			ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
-				PRINTFORMW 「（……가、간지러워）」
+				PRINTFORMW 「오홋、우힛、우히히히힛！」
+				PRINTFORMW %타겟은% 기분 좋음 반、간지러움 반이라는 느낌인 것 같다.
 				CFLAG:307 = 2
 			ENDIF
 		ENDIF
@@ -1060,13 +825,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:308 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「흥、자기보다 단단한 남자의 가슴에 흥미가 있는 건가？」
-				PRINTFORMW %타겟은% 조금 질려있는 것 같다……
-			ELSE
-				PRINTFORMW 「그렇게 가슴만……%CSTR:11%의 가슴에 안기고 싶은 건가？」
-				PRINTFORMW %타겟은% 능글능글 미소를 띠고 있다……
-			ENDIF
+			PRINTFORMW 
 			CFLAG:308 = 1
 		;2번째 이후
 		ELSE
@@ -1074,35 +833,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:308 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「……그렇게 %CSTR:11%의 가슴이 좋은가？」
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「응、크읏……아、으응……읏」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -1110,11 +844,11 @@ SELECTCASE SELECTCOM
 				CFLAG:308 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:308 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「으응……언제까지 만질 셈이지……？」
+				PRINTFORMW 
 				CFLAG:308 = 3
 			;그 이외
 			ELSEIF CFLAG:308 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……그렇게 %CSTR:11%의 가슴이 좋은가？」
+				PRINTFORMW 
 				CFLAG:308 = 2
 			ENDIF
 		ENDIF
@@ -1161,8 +895,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:310 == 0
-			PRINTFORMW 「……크읏、왜 %조사처리(CSTR:11,"가")% 이런 일을」
-			PRINTFORMW %타겟은% 마지못해 명령에 따르고 있다……
+			PRINTFORMW 
 			CFLAG:310 = 1
 		;2번째 이후
 		ELSE
@@ -1170,47 +903,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「너、너무……빤히 보지 말아줬으면 좋겠군」
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「으응、하아앗……」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:310 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「너무……빤히 보지 말아줬으면 하는데……？」
+				PRINTFORMW 
 				CFLAG:310 = 3
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……너무 빤히 보지 말아줬으면 한다만？」
+				PRINTFORMW 
 				CFLAG:310 = 2
 			ENDIF
 		ENDIF
@@ -1219,18 +927,17 @@ SELECTCASE SELECTCOM
 ;11,자위
 ;-------------------------------------------------
 	CASE 11
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:311 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「백보 양보해서 명령은 듣는다고 해도……」
-				PRINTFORMW 「%조사처리(CSTR:12,"를")% 재료로 하라니 대체 무슨 속셈이지?」
-				PRINTFORMW 「……알았다、하면 되는 거지？　……정말이지」
-				CALL TRAIN_MESSAGE
+			PRINTFORMW 「하아？　혼자서 하라고？」
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「어쩔 수 없구만……해줄 테니 %CSTR:12%, 반찬이 되라」
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「어이어이、%조사처리(CSTR:12,"를")% 반찬으로 하라는 거냐？」
+				PRINTFORMW 「최악이야……」
 			ELSE
-				PRINTFORMW 「……별 수 없지、해 주지」
-				PRINTFORMW 「하지만 %조사처리(CSTR:12,"가")% %조사처리(CSTR:11,"를")% 흥분 시킬 수 있는 포즈라도 취해줬으면 좋겠는데」
-				CALL TRAIN_MESSAGE
+				PRINTFORMW 「어쩔 수 없구만……해줄 테니 %CSTR:12%, 에로한 포즈라도 하나 취해봐」
 			ENDIF
 			CFLAG:311 = 1
 		;2번째 이후
@@ -1239,52 +946,30 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						CALL TRAIN_MESSAGE
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORMW 「헤헤、%CSTR:12%、%CSTR:11%의 자위를 보고 흥분하는 거야?　얼굴이 빨갛다고……」
+						PRINTFORMW 「크……좀 더다、내가 가는 걸 분명하게 봐……」
 					ELSE
-						CALL TRAIN_MESSAGE
-						PRINTFORMW 「너、너무 빤히 보지 마 %CALLNAME:MASTER%……」
+						PRINTFORMW 「스스로 하는 것도 나쁘진 않지만……」
+						PRINTFORMW 「%CSTR:12%의 손과 입으로 하는 것엔 비교할 수 없지……저기、손 대줘……」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CALL TRAIN_MESSAGE
-					PRINTFORMW 「하앗、으응、응……！」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:311 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:311 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「……응、큿、으」
+				PRINTFORMW 「이 %타겟이% %CSTR:12%의 부탁으로 훑어주고 있다고」
+				PRINTFORMW 「끝까지 지켜봐라」
 				CFLAG:311 = 3
 			;그 이외
 			ELSEIF CFLAG:311 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 그다지 내키지 않는 것인지 미적지근하게 하고 있다……
+				PRINTFORMW 「어이……왠지 시시해、이거」
+				PRINTFORMW 「모처럼이니까、%CSTR:12%의 얼굴에 뿌려줄까?」
 				CFLAG:311 = 2
 			ENDIF
 		ENDIF
@@ -1299,12 +984,15 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:312 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「웃기지 마！」
-				PRINTFORMW 「누가 남자끼리 입맞춤 따윌……으읍！？」
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「%CSTR:12%의 입술, 생각했던 것보다 부드럽구만」
+				PRINTFORMW 「헤헤、나쁘지 않은 맛이야」
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「겍、남자끼리라고！？」
+				PRINTFORMW 「좀 봐주라、%CSTR:11%…무리……으읍!」
 			ELSE
-				PRINTFORMW 「응、꽤……」
-				PRINTFORMW %타겟은% %마스터와%의 키스를 즐기고 있다……
+				PRINTFORMW 「츄웃、츕、낼름……」
+				PRINTFORMW 「크큿、나쁘지 않은 맛이야」
 			ENDIF
 			CFLAG:312 = 1
 		;2번째 이후
@@ -1313,32 +1001,13 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 양손을 살며시 잡고、%CALLNAME:MASTER%의 입술에 달라붙어、혀를 섞어왔다.
+						PRINTFORMW 「푸하앗……잔뜩 즐겼다구」
+						PRINTFORMW 「하지만、아직 부족해……좀 더 해도、괜찮지……？」
 					ELSE
-						PRINTFORMW 「응、후……으응……」
-						PRINTFORMW %타겟은% %마스터와%의 키스를 즐기고 있다……
+						PRINTFORMW %마스터와% %타겟은% 적극적으로 혀를 감으며、서로의 입안에 타액을 흘려넣는다.
+						PRINTFORMW 「응…후……하아」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -1350,11 +1019,19 @@ SELECTCASE SELECTCOM
 				CFLAG:312 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW %타겟은% 단념했는지、특별히 저항하지 않고 %마스터와% 혀를 섞었다.
 				CFLAG:312 = 3
 			;그 이외
 			ELSEIF CFLAG:312 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				IF TALENT:MASTER:남자 == 1
+					PRINTFORMW 「그、그만둿！　멈춰엇！」
+					PRINTFORMW 날뛰는 %NAME:TARGET%의 입술을 억지로 붙잡아、혀를 넣어주었다.
+				ELSE
+					PRINTFORMW 「츕、츄릅……%CSTR:12%의 타액、꽤 좋잖아」
+					PRINTFORMW 「자、좀 더 혀를 써서……」
+					PRINTFORMW 조교 되고 있어야 할 %타겟이%、%CALLNAME:MASTER%에게 지시를 내린다.
+					PRINTFORMW 조금 더、그 몸에 누가 주인인지 철저히 가르쳐줘야 할 것 같다…
+				ENDIF
 				CFLAG:312 = 2
 			ENDIF
 		ENDIF
@@ -1366,7 +1043,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:313 == 0
-			PRINTFORMW 「……뭐야、휴식인가？」
+			PRINTFORMW 「아무것도 안 하는 건가……」
+			PRINTFORMW 「그럼、%조사처리(CSTR:11,"를")% 해방시켜줘. 안 돼？　칫……」
 			CFLAG:313 = 1
 		;2번째 이후
 		ELSE
@@ -1374,47 +1052,32 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:313 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「……뭐야、휴식인가？」
-					ENDIF
+					PRINTFORMW 「저기、%CSTR:12%、이쪽으로 와」
+					PRINTFORMW 「내가 끌어안고 싶으니까」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:313 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:313 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「……뭐야、휴식인가？」
+				PRINTFORMW 「뭐야、휴식인가. 그럼 천천히 쉬겠어」
+				PRINTFORMW %타겟은% 벌러덩 드러누웠다.
 				CFLAG:313 = 3
 			;그 이외
 			ELSEIF CFLAG:313 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……뭐야、휴식인가？」
+				IF TALENT:MASTER:오토코노코 == 1
+					PRINTFORMW %타겟은% 물끄러미 %CALLNAME:MASTER%의 몸을 바라보고 있다.
+					PRINTFORMW 그 표정은 뭐라고도 하기 어려운 복잡한 얼굴이다.
+				ELSEIF TALENT:MASTER:남자 == 1
+					PRINTFORMW %타겟은% 가늘게 뜬 눈으로 %마스터를% 노려보고있다……
+				ELSE
+					PRINTFORMW %타겟은% 천한 눈초리로 %CALLNAME:MASTER%의 몸을 바라보고 있다.
+					PRINTFORMW 대체 어떤 식으로 범해줄까 하고 가늠하고 있는 것이겠지……
+				ENDIF
 				CFLAG:313 = 2
 			ENDIF
 		ENDIF
@@ -1426,60 +1089,31 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:314 == 0
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 
-			ENDIF
+			PRINTFORMW 「저기、이것저것 얘기하자구」
+			PRINTFORMW 「%조사처리(CSTR:12,"가")% 올 때까지、이쪽은 지루했으니까」
 			CFLAG:314 = 1
 		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
+		K:1 = RAND:4
+			IF K:1 == 0
+				PRINTFORMW 「예전에 대사가라는 인간과 그런 얘기를 한 적이 있는데」
+				PRINTFORMW 「eraMegaten을 만나기 전에 도쿄묵시록을 팔아버린 걸 후회하고 있다고 하더군」
+				PRINTFORMW 「그럼 헌 책방에 가봐라、라고 했었지」
+			ELSEIF K:1 == 1
+				PRINTFORMW 「세상에는、1M를 넘는 대사가 있다는 것 같더라」
+				PRINTFORMW 「그걸 만든 놈、악마에게 영혼을 판 거나 다름없어」
+			ELSEIF K:1 == 2
+				PRINTFORMW 「어이 %CSTR:12%、네가 좋아하는 타입이 뭔지 맞혀볼까?」
+				PRINTFORMW 「%CSTR:11%처럼 강한 놈일 거다、가하핫!」
+			ELSEIF K:1 == 3
+				PRINTFORMW 「최근 악마들 사이에서 유행하고 있는 게 『ＡＫＭ６６６』이라는 여자 악마뿐인 그룹이야」
+				PRINTFORMW 「멤버가 666명이나 있다고 하더라고」
+				PRINTFORMW 「인간들 중엔 당연히 그런 그룹은 없지？」
 			ELSE
-				PRINTFORMW 
+				PRINTFORMW 「예전에 대사가라는 인간과 그런 얘기를 한 적이 있는데」
+				PRINTFORMW 「노예에게 관장한 후、배를 차는 게 취미인 놈한테는 『너 농후한 성벽이 있군』이라고 말한다는 것 같아」
+				PRINTFORMW 「내가 『개개인의 취향은 적당히 넘어가줘』라고 설교하자、눈물을 흘렸다던가」
+				PRINTFORMW 「뭐、악마에게 설교될 정도면 끝이지」
 			ENDIF
 			CFLAG:314 = 2
 		ENDIF
@@ -1490,71 +1124,21 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:315 == 0
-				PRINTFORMW 「……선물、인가. 고마워」
-				PRINTFORMW %CALLNAME:TARGET%의 반응이 왠지 부족한 것 같은 생각이 들었다.
-				PRINTFORMW 또 기회가 생기면 줘보자……
+			PRINTFORMW 「%CSTR:12%의 마음、%CSTR:11%의 마음에 닿았다구」
+			PRINTFORMW 「고마워」
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;主人公が조교
-			IF ASSIPLAY == 0
-				;친애、순종Lv7이상、고통각인がLv3、반발각인がLv0、[반항적]もち、[（性別）嫌い]もち
-				IF TALENT:6 && ABL:0 >= 7 && MARK:0 == 3 && MARK:3 == 0 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-					IF TFLAG:17 == 5
-						PRINTFORMW 노력해서 %타겟을% 위해 사왔지만
-						PRINTFORMW 「…………」
-						PRINTFORMW %CALLNAME:TARGET%의 침묵이 괴롭다.
-						PRINTFORMW 어떻게든 취향에 맞춰보려 했지만 역시 무리였던 걸까.
-						PRINTFORMW 「…………흥」
-						PRINTFORMW 그럴 때 %타겟이% 술을 따르라고 말없이 재촉했다.
-						PRINTFORMW 사온 술을 따르자、%타겟은% 그것을 쭈욱 단숨에 남김없이 삼킨다.
-						PRINTFORMW 입안에 퍼지는 술의 맛을 확인하고 있는지、입을 움직이고 있다.
-						PRINTFORMW %마스터가% 가만히 그 모습을 바라보고 있자 
-						PRINTFORMW 「칫」
-						PRINTFORMW 혀를 찬다.
-						PRINTFORMW 「……또 한 잔」
-						PRINTFORMW 당황해서 %조사처리(CALLNAME:MASTER,"는")% 술을 따른다.
-						PRINTFORMW 그것을 몇 회째 반복하고 있으면 %타겟은% 갑자기 푸념하기 시작했다.
-						PRINTFORMW ……………
-						PRINTFORMW ………
-						PRINTFORMW …
-						PRINTFORMW 정신이 들자、%조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%의 팔 안에 있었다.
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 완전히 비워버린 술병을 안은 채로, %CALLNAME:TARGET%에게 성희롱 당하고 있었다.
-						PRINTFORMW 푸념은 어느덧 %CALLNAME:MASTER%에 대한 이런저런 이야기로 변한다.
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 완전히 가버린 %타겟을% 보면서、
-						PRINTFORMW %타겟이% 일단 매우 기분 좋아하는 것을 확인하고 안심했다…….
-						;[반항적][남성혐오][여성혐오]の소거
-						TALENT:11 = 0
-						TALENT:82 = 0
-						TALENT:88 = 0
-					ELSE
-						PRINTFORMW 하지만 %CALLNAME:TARGET%의 태도는 차갑다……
-					ENDIF
-				ELSE
-					IF TFLAG:17 == 0
-						PRINTFORMW 
-					ELSEIF TFLAG:17 == 1
-						PRINTFORMW 
-					ELSEIF TFLAG:17 == 2
-						PRINTFORMW 
-					ELSEIF TFLAG:17 == 3
-						PRINTFORMW 
-					ELSEIF TFLAG:17 == 4
-						IF RAND:4 == 0
-							PRINTFORMW 
-						ELSEIF RAND:3 == 0
-							PRINTFORMW 
-						ELSEIF RAND:2 == 0
-							PRINTFORMW 
-						ELSE
-							PRINTFORMW 
-						ENDIF
-					ELSEIF TFLAG:17 == 5
-						PRINTFORM 
-					ENDIF
-				ENDIF
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORMW 「오、고마워」
+			ELSEIF K:1 == 1
+				PRINTFORMW 「병에 걸리는 것 빼곤 뭐든 받겠어」
+			ELSEIF K:1 == 2
+				PRINTFORMW 「브라보-、오오、브라보-！」
 			ELSE
-				PRINTFORMW 「……선물、인가. 고마워」
+				PRINTFORMW 「헤에、이런 물건이 있군」
+				PRINTFORMW 「마음에 들었어、고마워」
 			ENDIF
 			CFLAG:315 = 2
 		ENDIF
@@ -1566,63 +1150,20 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:316 == 0
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW %마스터가% 왠지 모르게 %CALLNAME:TARGET%의 머리를 매만지면、
-				PRINTFORMW 「……왜 그래 %CALLNAME:MASTER%」
-				PRINTFORMW %CALLNAME:TARGET%도 왠지 모르게 %마스터를% 쓰다듬었다……
-			ENDIF
+			PRINTFORMW 「%CSTR:12%、어깨 주물러줄 테니까 앞에 앉아」
+			PRINTFORMW 악마의 힘으로 주물러지면 부서지지 않을까 걱정했지만、의외로 기분 좋다.
+				IF TALENT:MASTER:남자 == 1 || TALENT:MASTER:오토코노코 == 1
+					PRINTFORMW 「다음엔 %CSTR:11%의 어깨도 주물러줘」
+					PRINTFORMW ……악마에게도 어깨 결림 같은 게 있는 걸까?
+				ELSE
+					PRINTFORMW 복잡한 틈을 타 %타겟이% 가슴을 주물러서、손등을 꼬집어주었다.
+					PRINTFORMW 「아파아아아앗！　미안！　미안했어！！　무심코 흑심이 생겨서！」
+				ENDIF
 			CFLAG:316 = 1
 		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"와")% %조사처리(CALLNAME:TARGET,"는")% 왠지 모르게 서로에게 손을 댄다……
-			ENDIF
+			PRINTFORMW 「%CSTR:12%의 머리카락은、만지면 기분 좋은데」
+			PRINTFORMW 「좀 더 만지게 해줘」
 			CFLAG:316 = 2
 		ENDIF
 
@@ -1633,61 +1174,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:317 == 0
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;			ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 
-			ENDIF
+			PRINTFORMW 
 			CFLAG:317 = 1
 		;2번째 이후
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;			ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 
-			ENDIF
+			PRINTFORMW 
 			CFLAG:317 = 2
 		ENDIF
 
@@ -1698,63 +1189,15 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:318 == 0
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 「가사일을 도우라고？……정말이지、어쩔 수 없는 녀석이군」
-				PRINTFORMW %타겟은% 불평하면서도 도와주고 있다……
-			ENDIF
+			PRINTFORMW 「응、이걸 저쪽에 정리하면 되는 거야？」
+			PRINTFORMW 「미안 %CSTR:12%、힘이 남아돌아서 부숴버렸어、가하핫！」
+			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 이마에 손을 대고 한숨을 내쉬었다. 일단、힘을 가감하는 것부터 가르쳐야 할 것 같다……
 			CFLAG:318 = 1
 		;2번째 이후
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 「으음……」
-				PRINTFORMW %타겟은% %마스터와%는 다른 장소에서、가사일을 하고 있다……
-			ENDIF
+			PRINTFORMW 「어때？　전보다 능숙해졌지？」
+			PRINTFORMW %타겟이% 말하는 대로、정리할 때 물건을 부수는 일도 없어진 것 같다.
+			PRINTFORMW 하지만、강대한 악마가 정리를 하고 있는 모습은 조금 애교스럽게 보인다.
 			CFLAG:318 = 2
 		ENDIF
 ;-------------------------------------------------
@@ -1764,63 +1207,14 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:319 == 0
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW 「노래？……뭐、조금이라면」
-				PRINTFORMW %타겟은% 크흠하고 소리를 낸다.
-				PRINTFORMW 가볍게 귀를 막고 싶어지는 게 이상한 건가 고민하게 된다……
-			ENDIF
+			PRINTFORMW 「그건 누구일까、누구일까～ 누구일까～」
+			PRINTFORMW 「그건 %CSTR:11%、%CSTR:11%～%CSTR:11%～～」
+			PRINTFORMW 당신의 춉은 펀치력、이군요、압니다.
 			CFLAG:319 = 1
 		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
-			;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-			IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-				PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-			;친애
-;				ELSEIF TALENT:6
-;				K:1 = RAND:4
-;				IF K:1 == 0
-;					PRINTFORMW 
-;				ELSEIF K:1 == 1
-;					PRINTFORMW 
-;				ELSEIF K:1 == 2
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ELSE
-;					IF TALENT:MASTER:남자 == 1
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-;				ENDIF
-			ELSE
-				PRINTFORMW %타겟은% 발성 연습을 하고 있다……
-			ENDIF
+			PRINTFORMW 「악마가 와서 헤비 메탈～♪」
+			PRINTFORMW 스모를 좋아하는 각하입니까.
 			CFLAG:319 = 2
 		ENDIF
 
@@ -1831,8 +1225,14 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:320 == 0
-			PRINTFORMW 「뭣……%CSTR:12%、너무 %조사처리(CSTR:11,"를")% 얕보지 마……？」
-			PRINTFORMW %타겟은% %마스터를% 노려보고 있다……
+			PRINTFORMW 「뭐、뭐라고……」
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「다시 한 번 말해봐라、이 계집애 같은 놈……！」
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「다시 한 번 말해봐라、이 자식……！」
+			ELSE
+				PRINTFORMW 「다시 한 번 말해봐라、이 빌어먹을 아마추어……！」
+			ENDIF
 			CFLAG:320 = 1
 		;2번째 이후
 		ELSE
@@ -1840,32 +1240,8 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:320 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 「어이어이、너무해、%CSTR:12%……」
+					PRINTFORMW %타겟은% 슬퍼보이는 표정으로 %마스터를% 보고 있다.
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -1876,11 +1252,16 @@ SELECTCASE SELECTCOM
 				CFLAG:320 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:320 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「큿……참을 수 없어……！」
+				PRINTFORMW 「크……이、이……！」
+				PRINTFORMW %타겟은% 뭔가 말대답하려고 한 것 같지만、아무것도 말하지 못했다.
 				CFLAG:320 = 3
 			;그 이외
 			ELSEIF CFLAG:320 < 2 || FLAG:7 == 2
-				PRINTFORMW 「이쪽이 참아주고 있다고 뻔뻔스럽게……적당히 해라」
+				IF RAND:2 == 0
+					PRINTFORMW 「네놈……그 말、잊지 않을 테니까……！」
+				ELSE
+					PRINTFORMW 「%조사처리(CSTR:11,"는")% 엄청 화났다고！！」
+				ENDIF
 				CFLAG:320 = 2
 			ENDIF
 		ENDIF
@@ -1893,32 +1274,8 @@ SELECTCASE SELECTCOM
 		IF CFLAG:321 == 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-				IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-					PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-				;친애
-;				ELSEIF TALENT:6
-;					K:1 = RAND:4
-;					IF K:1 == 0
-;						PRINTFORMW 
-;					ELSEIF K:1 == 1
-;						PRINTFORMW 
-;					ELSEIF K:1 == 2
-;						IF TALENT:MASTER:남자 == 1
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
-;					ELSE
-;						IF TALENT:MASTER:남자 == 1
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
-;					ENDIF
-				ELSE
-					PRINTFORMW 
-				ENDIF
+				PRINTFORMW 「어이어이、봐、%CSTR:12%、저렇게 되어버려서…오옷…!」
+				PRINTFORMW %타겟은% 둘의 치태를 보고 크게 기뻐하고 있다.
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -1931,32 +1288,7 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:321 < 2 || FLAG:7 == 2
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-				IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-					PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-				;친애
-;				ELSEIF TALENT:6
-;					K:1 = RAND:4
-;					IF K:1 == 0
-;						PRINTFORMW 
-;					ELSEIF K:1 == 1
-;						PRINTFORMW 
-;					ELSEIF K:1 == 2
-;						IF TALENT:MASTER:남자 == 1
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
-;					ELSE
-;						IF TALENT:MASTER:남자 == 1
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
-;					ENDIF
-				ELSE
-					PRINTFORMW 
-				ENDIF
+				PRINTFORMW 「오、오오옷……이렇게 나중에 두 명이 하는 걸 다시 본다는 것도 나쁘지 않아」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -2096,32 +1428,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:325 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-						IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-							PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-						;친애
-;						ELSEIF TALENT:6
-;							K:1 = RAND:4
-;							IF K:1 == 0
-;								PRINTFORMW 
-;							ELSEIF K:1 == 1
-;								PRINTFORMW 
-;							ELSEIF K:1 == 2
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ELSE
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ENDIF
-						ELSE
-							PRINTFORMW 
-						ENDIF
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -2203,8 +1510,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:327 == 0
-			PRINTFORMW 「수상한 소리를 내는 걸 들이밀지 마……뭐、뭐야 그건、설마！　그、그만둿」
-			PRINTFORMW 실내에 %CALLNAME%의 비명이 울려 퍼진다.
+			PRINTFORMW 「무、무리야……！　그런 거 안 들어가앗ー！」
+			PRINTFORMW 실내에 %CALLNAME%의 비명이 울려 퍼졌다.
 			CFLAG:327 = 1
 		;2번째 이후
 		ELSE
@@ -2212,10 +1519,11 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:327 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「그걸 사용하는 건 적당히……으、크읏……」
+					PRINTFORMW 「그쪽 계열의 도구……뭐라고 할까 이상한 기분이 들어」
+					PRINTFORMW 「초조해진다ー고 할까」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「하아、으응……으으읏！」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -2223,11 +1531,11 @@ SELECTCASE SELECTCOM
 				CFLAG:327 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:327 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「으、크으……크앗……！」
+				PRINTFORMW 「크、오오……%조사처리(CSTR:11,"는")% 악마라고、이 정도는 아무렇지도오오옷……！」
 				CFLAG:327 = 3
 			;그 이외
 			ELSEIF CFLAG:327 < 2 || FLAG:7 == 2
-				PRINTFORMW 「또、또 그건가！　그、그만……！」
+				PRINTFORMW 「어잇、%CSTR:12%、설마、또 그거ー」
 				CFLAG:327 = 2
 			ENDIF
 		ENDIF
@@ -2413,19 +1721,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2433,18 +1741,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2455,25 +1763,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:332 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:332 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:332 = 3
 			;그 이외
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:332 = 2
 			ENDIF
 		ENDIF
@@ -2490,19 +1798,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2510,18 +1818,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2532,25 +1840,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:333 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:333 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:333 = 3
 			;그 이외
 			ELSEIF CFLAG:333 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:333 = 2
 			ENDIF
 		ENDIF
@@ -2559,12 +1867,10 @@ SELECTCASE SELECTCOM
 ;62,정상위애널
 ;-------------------------------------------------
 	CASE 62
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:334 == 0
-			PRINTFORMW 「어、어이、설마라고는 생각하지만……」
-			CALL TRAIN_MESSAGE
-			PRINTFORMW 「큿、으으！？　크흡……지、지금 당장 뽑아라！　우、움직이지 마！！」
+			PRINTFORMW 「어이이！？　어디에 뭘 넣는 거얏……으아앗---！！」
 			CFLAG:334 = 1
 		;2번째 이후
 		ELSE
@@ -2572,52 +1878,35 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:334 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						CALL TRAIN_MESSAGE
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						CALL TRAIN_MESSAGE
-						PRINTFORMW 「아、으응……」
-					ENDIF
+					PRINTFORMW 「좋아……%CSTR:12%、안에 와……」
+					PRINTFORMW %타겟은% %마스터가% 넣기 쉽도록 엉덩이를 들어올리고、손가락으로 애널을 좌우로 벌려보였다.
+					PRINTFORMW 「%CSTR:12% 전용 구멍이다……마음대로 해줘」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CALL TRAIN_MESSAGE
-					PRINTFORMW 「으읏、크、하아앗！
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CALL TRAIN_MESSAGE
+					PRINTFORMW 
 				ENDIF
 				CFLAG:334 = 4
+			;A감각Lv3이상
+			ELSEIF ABL:5 >= 3 && (CFLAG:334 < 3 || FLAG:7 == 2)
+				PRINTFORMW 「오、오오오……들어오고 있어……！」
+				PRINTFORMW %타겟은% 애널로 느끼고 있는 것에 곤혹스러워하고 있는 것 같다.
+				PRINTFORMW 「어、어째서 항문으로 느껴버리는 거야、%조사처리(CSTR:11,"는")% 앗……」
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:334 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「크으……이、이제 그만해줘……읏！」
+				PRINTFORMW 「벼, 별 수 없구만……너무 억지로 하진 마……」
+				PRINTFORMW %타겟은% 위로 향한 채、양 다리를 벌리고 삽입을 기다렸다.
 				CFLAG:334 = 3
 			;그 이외
 			ELSEIF CFLAG:334 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「크앗！？　크、저、적당힛……으읏！？」
+				IF TALENT:MASTER:남자 == 1 || TALENT:MASTER:오토코노코 == 1
+					PRINTFORMW 「바、바보 자식아아앗、%조사처리(CSTR:11,"는")% 이렇게 보여도 노멀……우하아아아앗！」
+				ELSE
+					PRINTFORMW 「빠、빨리 빼라……생각했던 것보다 아프다고！」
+					PRINTFORMW 「젠장、움직이지 마아！」
+				ENDIF
 				CFLAG:334 = 2
 			ENDIF
 		ENDIF
@@ -2629,7 +1918,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:335 == 0
-			PRINTFORMW 「크읏！？　무、무슨！！」
+			PRINTFORMW 「바、바보 자식앗！　그딴 거 넣지 마！」
 			CFLAG:335 = 1
 		;2번째 이후
 		ELSE
@@ -2637,35 +1926,16 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:335 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORMW 「우、우으……완전히 이쪽 구멍에 맛들렸다고……」
+						PRINTFORMW 「좀 더다……좀 더、휘저어줘、응……?」
 					ELSE
-						PRINTFORMW 「으、아……그、움직이지 마……앗！」
+						PRINTFORMW 「짐승처럼 섹스하자구……」
+						PRINTFORMW 「우、아아……굉장해……안에서、꿈틀대고 있어……앗！」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「으하앗、아아앗！」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -2673,11 +1943,12 @@ SELECTCASE SELECTCOM
 				CFLAG:335 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:335 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「큿、우읏……！」
+				PRINTFORMW 「으、힘들어……크으으」
+				PRINTFORMW %NAME:TARGET%의 애널은 %CALLNAME:MASTER%의 것을 삼킨 채 달라붙는다.
 				CFLAG:335 = 3
 			;그 이외
 			ELSEIF CFLAG:335 < 2 || FLAG:7 == 2
-				PRINTFORMW 「크으！？　카……크、으……읏！」
+				PRINTFORMW 「그、그만둬……！　날려버린다아아아……」
 				CFLAG:335 = 2
 			ENDIF
 		ENDIF
@@ -2689,9 +1960,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:336 == 0
-			PRINTFORMW 「우옷！？왜、왜 그래？」
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%에게 달콤한 목소리로 졸랐다……
-			PRINTFORMW 「흥、그렇게 굶주렸나？뭐 그렇다면야 %CSTR:11%도 제대로 만족시켜보라고……」
+			PRINTFORMW 「뭐야？　봉사해준다는 건가？」
+			PRINTFORMW 「아-、편하구만、편해」
 			CFLAG:336 = 1
 		;2번째 이후
 		ELSE
@@ -2699,38 +1969,11 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:336 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「응……크읏！꽤 좋아 %CALLNAME:PLAYER%의 안은……」
-						PRINTFORMW %마스터가% %CALLNAME%의 페니스를 질내에서 단속적으로 조여주자、%타겟은% 지나친 쾌락에 미간을 찌푸렸다.
-						PRINTFORMW 「오오……좋아……크읏！」
-					ENDIF
+					PRINTFORMW 「우、옷、우오오……%CSTR:12%의 보지는 역시 최고야」
+					PRINTFORMW 「잠、갑자기 그렇게 격렬하게、위、위험햇……！」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「하앗、조、좋아……」
-					PRINTFORMW %타겟은% 주어지는 쾌락에 만취해있다……
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -2738,14 +1981,13 @@ SELECTCASE SELECTCOM
 				CFLAG:336 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:336 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「응、크읏！？」
-				PRINTFORMW %마스터가% %CALLNAME%의 페니스를 질내에서 단속적으로 조여주자、%타겟은% 지나친 쾌락에 미간을 찌푸렸다.
-				PRINTFORMW 「큿……하지만、아직이다！」
+				PRINTFORMW 「우、우앗、바보、그렇게 꽉 조이면……」
+				PRINTFORMW %마스터가% %CALLNAME%의 페니스를 질내에서 연달아 조여주자、%타겟은% 지나친 쾌락에 미간을 찌푸렸다.
 				CFLAG:336 = 3
 			;그 이외
 			ELSEIF CFLAG:336 < 2 || FLAG:7 == 2
-				PRINTFORMW 「후웃、격렬한데……하지만 이것만으로 만족하는 건가？」
-				PRINTFORMW %타겟은%씨익 웃음을 띠면서 허리를 흔드는 %마스터를% 바라보고 있다……
+				PRINTFORMW 「범해지는 시추에이션도 나쁘진 않지만」
+				PRINTFORMW 「역시 %조사처리(CSTR:11,"는")% 범하는 편이 어울린다고」
 				CFLAG:336 = 2
 			ENDIF
 		ENDIF
@@ -2797,19 +2039,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2817,18 +2059,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2839,25 +2081,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:338 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:338 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:338 = 3
 			;그 이외
 			ELSEIF CFLAG:338 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:338 = 2
 			ENDIF
 		ENDIF
@@ -2869,8 +2111,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:339 == 0
-			PRINTFORMW 「설마、%CSTR:11% 스스로 허리를 흔들라고 말하는 건……」
-			PRINTFORMW 「크읏！？　가、갑자기、움직이지 마……！」
+			PRINTFORMW 「진짜로……위에서 흔들라는、건가」
+			
 			CFLAG:339 = 1
 		;2번째 이후
 		ELSE
@@ -2878,36 +2120,15 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:339 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORMW 「어이어이、기다려、당황하지말고……」
+						PRINTFORMW 「내가 움직여줄 테니까……으읏」
 					ELSE
-						PRINTFORMW 「갑자기、움직이거나……으으읏！？」
-						PRINTFORMW 「하앗、응……저、적당히 해라、읏！」
+						PRINTFORMW 「우웃…으읏…아、안 돼……%CSTR:12%……」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「응、아앗！？　하앗、응、으으……읏！」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -2915,13 +2136,11 @@ SELECTCASE SELECTCOM
 				CFLAG:339 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:339 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「어、어때……！」
-				PRINTFORMW 「이걸로 만족……크읏……!？」
+				PRINTFORMW 「큿……깊은 곳까지、들어와서……」
 				CFLAG:339 = 3
 			;그 이외
 			ELSEIF CFLAG:339 < 2 || FLAG:7 == 2
-				PRINTFORMW 「큭、아직……」
-				PRINTFORMW 「그、그러니까 움직이지 말라고！　카앗！？」
+				PRINTFORMW 「또 위에서 허리를 흔들라는 건가？　일일이 잘난 척 지시해대긴……」
 				CFLAG:339 = 2
 			ENDIF
 		ENDIF
@@ -2938,19 +2157,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2958,18 +2177,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2980,25 +2199,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:340 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:340 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:340 = 3
 			;그 이외
 			ELSEIF CFLAG:340 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:340 = 2
 			ENDIF
 		ENDIF
@@ -3015,19 +2234,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -3035,18 +2254,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -3057,25 +2276,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:341 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:341 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:341 = 3
 			;그 이외
 			ELSEIF CFLAG:341 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:341 = 2
 			ENDIF
 		ENDIF
@@ -3094,32 +2313,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:342 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3154,32 +2348,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:343 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3211,19 +2380,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -3231,18 +2400,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -3253,25 +2422,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:420 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:420 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:420 = 3
 			;그 이외
 			ELSEIF CFLAG:420 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:420 = 2
 			ENDIF
 		ENDIF
@@ -3290,32 +2459,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:421 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3345,8 +2489,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:344 == 0
-			PRINTFORMW 「%조사처리(CSTR:11,"가")%、손으로 하라고？」
-			PRINTFORMW 「큭、왜 %조사처리(CSTR:11,"가")% 이딴……」
+			PRINTFORMW 「손으로 문지르는 건가？」
+			PRINTFORMW 「%CSTR:12% 보다、%CSTR:11%의 것을 만져줬으면 하는데……」
 			CFLAG:344 = 1
 		;2번째 이후
 		ELSE
@@ -3354,33 +2498,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「훗、어때、기분 좋나？　참지 말라고、자아！」
-						PRINTFORMW %마스터가% 괴로워하는 것을 보고、%타겟은% 더욱 공격에 박차를 가한다……
-					ENDIF
+					PRINTFORMW 「%CSTR:12%의 자지、질척질척 소리 내고 있어……굉장한데」
+					PRINTFORMW 「가고 싶어졌다면 가라、좋아하는 곳에 싸」
+					PRINTFORMW %타겟은% 손목 스냅을 사용하면서、%CALLNAME:MASTER%의 페니스를 문지르고 있다.
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3391,13 +2511,13 @@ SELECTCASE SELECTCOM
 				CFLAG:344 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:344 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「……여기가 좋은 건가？　흠、이런 식으로？」
-				PRINTFORMW %마스터가% 괴로워하는 것을 보고、%타겟은% 더욱 공격에 박차를 가한다……
+				PRINTFORMW 「기분 좋지……？　참지말고 가버려、응？」
+				PRINTFORMW %타겟은% 쿠퍼액이 흐르고 있는 페니스를 격렬하게 문지르고 있다.
 				CFLAG:344 = 3
 			;그 이외
 			ELSEIF CFLAG:344 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……정말이지 어째서 %조사처리(CSTR:11,"가")% 이런 일을」
-				PRINTFORMW %타겟은% 마지못해 명령에 따르고 있다……
+				PRINTFORMW 「오、이게 기분 좋은 건가？　흐럅、흐랴흐럇」
+				PRINTFORMW %마스터가% 느끼고 있다는 것을 간파한 %타겟은% 오버해서 귀두를 중심으로 격렬하게 몰아붙였다.
 				CFLAG:344 = 2
 			ENDIF
 		ENDIF
@@ -3409,8 +2529,19 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:345 == 0
-			PRINTFORMW 「큭、%조사처리(CSTR:11,"가")% 이런 굴욕을……」
-			PRINTFORMW %타겟은% %마스터를% 노려보면서 혀를 움직이고 있다……
+			IF TALENT:MASTER:오토코노코 == 1 || TALENT:MASTER:남자 == 1
+				IF RAND:2 == 0
+					PRINTFORMW 「자、잠깐만、왜 내가 남자놈 자지를 빨아야하는 건데！？」
+					PRINTFORMW 저항하는 %CALLNAME%의 입에、발기한 페니스를 억지로 밀어넣자、%타겟은% 매우 당황했다.
+				ELSE
+					PRINTFORMW 「입으로 봉사라고오오？　악마 같은 놈、이 자식잇！」
+					PRINTFORMW 시끄러운 입에 페니스를 억지로 찔러 넣어 입다물게 해주었다.
+				ENDIF
+			ELSE
+				PRINTFORMW 「여자 주제에 훌륭한 걸 달고선」
+				PRINTFORMW 「사내놈이라면 거절했겠지만、좀처럼 없는 기회고、즐겨주겠어」
+				PRINTFORMW %타겟은% 히죽 웃으며、%CALLNAME:MASTER%의 발기한 페니스를 단숨에 삼켰다.
+			ENDIF
 			CFLAG:345 = 1
 		;2번째 이후
 		ELSE
@@ -3418,31 +2549,19 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORML %조사처리(CALLNAME,"는")% 막대 부분을 혀로 핥아내리며、
+							IF TALENT:MASTER:남자 == 1 || TALENT:MASTER:오토코노코 == 1
+								PRINTFORMW 한 손으로는 불알을 주물럭거리고 있다. 
+							ELSE
+								PRINTFORMW 보지에 손가락을 넣어 움직이고 있다. 
+							ENDIF
+						PRINTFORMW 「츄、츄릅……%CSTR:12%의 자지、움찔움찔 떨리고 있어서 에로한데……」
+						PRINTFORMW 「괜찮다구、입안에다 싸도……전부、마셔줄게」
 					ELSE
-						PRINTFORMW 
+						PRINTFORMW 「츄웁、츄、츄릅……」
+						PRINTFORMW 난폭한 콧김을 뿜으며、%타겟은% 정열적으로 %CALLNAME:MASTER%의 페니스를 빨고 있다.
+						PRINTFORMW 「%CSTR:12%、좀 더、좋은 소릴 들려줘……」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -3458,7 +2577,17 @@ SELECTCASE SELECTCOM
 				CFLAG:345 = 3
 			;그 이외
 			ELSEIF CFLAG:345 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				IF TALENT:MASTER:오토코노코 == 1 || TALENT:MASTER:남자 == 1
+					PRINTFORMW %타겟은% 마지못해、라는 느낌으로 %CALLNAME:MASTER%의 페니스에 혀를 움직이고 있다.
+					PRINTFORMW 「%CSTR:12%의 물건이 딱딱해지고 있는데……기분 좋아？」
+					PRINTFORMW 「악마에게、그것도 남자한테 빨리면서 느끼고 있다니、어처구니 없는 변태 주인이구만」
+					PRINTFORMW %타겟이% 해주기 때문에 느끼고 있다、라고 대답하자、%타겟은% 예상치 못한 대답이었는지、당황하기 시작했다.
+					PRINTFORMW 「밧、바보 자식！　이상한 소리 하지 마……」
+				ELSE
+					PRINTFORMW 「느끼고 있나？　좋은 소리로 울잖아……」
+					PRINTFORMW %NAME:TARGET%의 혀로 자극받아、%조사처리(CALLNAME:MASTER,"는")% 자기도 모르게 허리를 들어올린다.
+					PRINTFORMW 「자、MAG 뱉어내보라고……」
+				ENDIF
 				CFLAG:345 = 2
 			ENDIF
 		ENDIF
@@ -3513,32 +2642,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:347 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3573,32 +2677,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:348 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3633,32 +2712,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:349 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3685,7 +2739,9 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:350 == 0
-			PRINTFORMW 
+			PRINTFORMW 「발을 핥으라고오？」
+			PRINTFORMW 「%조사처리(CSTR:11,"는")% 누구한테도 아첨 따윈 안 하거든、이 자식！」
+			PRINTFORMW 이러쿵저러쿵 시끄러운 %CALLNAME%의 입에 발가락을 꽉 눌러주었다.
 			CFLAG:350 = 1
 		;2번째 이후
 		ELSE
@@ -3693,32 +2749,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:350 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 「%CSTR:11%의 몸이라면、어디라도 핥아주지」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3729,11 +2760,13 @@ SELECTCASE SELECTCOM
 				CFLAG:350 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:350 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW 「%조사처리(CSTR:11,"를")% 바보 취급 하다니……츄릅、츄웃……」
+				PRINTFORMW 입으로는 중얼중얼 불평하면서도、열심히 핥고 있다.
 				CFLAG:350 = 3
 			;그 이외
 			ELSEIF CFLAG:350 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「크……굴욕、이야……」
+				PRINTFORMW 「언젠가 네놈을 처리해줄 테니까……！」
 				CFLAG:350 = 2
 			ENDIF
 		ENDIF
@@ -3817,24 +2850,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:353 == 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-				IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-					PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-				;친애
-;				ELSEIF TALENT:6
-;					K:1 = RAND:4
-;					IF K:1 == 0
-;						PRINTFORMW 
-;					ELSEIF K:1 == 1
-;						PRINTFORMW 
-;					ELSEIF K:1 == 2
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-				ELSE
-					PRINTFORMW 
-				ENDIF
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -3847,24 +2863,7 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:353 < 2 || FLAG:7 == 2
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-				IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-					PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-				;친애
-;				ELSEIF TALENT:6
-;					K:1 = RAND:4
-;					IF K:1 == 0
-;						PRINTFORMW 
-;					ELSEIF K:1 == 1
-;						PRINTFORMW 
-;					ELSEIF K:1 == 2
-;						PRINTFORMW 
-;					ELSE
-;						PRINTFORMW 
-;					ENDIF
-				ELSE
-					PRINTFORMW 
-				ENDIF
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -3885,10 +2884,12 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:423 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「응……남자 걸 만지는 건 즐겁나？……조심히 다뤄라」
+			IF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「어쩐지 이상한 기분이야……여자에게 훑어지고 있는 것 같아……윽」
+			ELSEIF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「어잇、남자가 자지 문지르면서 즐겁냐？　으읏…」
 			ELSE
-				PRINTFORMW 「널 범하기 위한 물건이다……조심히 다루라고？」
+				PRINTFORMW 「지금부터 그게 네 보지에 들어갈 거야、정중히 다루라고？」
 			ENDIF
 			CFLAG:423 = 1
 		;2번째 이후
@@ -3897,38 +2898,16 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF TALENT:MASTER:오토코노코 == 1
+						PRINTFORMW %CALLNAME:MASTER%의 손가락이 페니스 위를 조심조심 더듬어가며、%타겟을% 몰아붙인다.
+						PRINTFORMW 「큭……이런、손놀림이라니……」
+					ELSEIF TALENT:MASTER:남자 == 1
+						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 가장 민감한 부분을 만지작거리고 있다.
+						PRINTFORMW 쿠퍼액이 새어나오고 있는 걸 지적하자、%타겟은% 수치심에 얼굴을 일그러트렸다.
+						PRINTFORMW 「뭐、뭐 잘못 됐냐……%CSTR:12% 탓이잖아……」
 					ELSE
-						IF TALENT:PLAYER:남자 == 1
-							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%의 가장 민감한 부분을 만지작거리고 있다.
-							PRINTFORMW 쿠퍼액이 나오는 것을 지적하자、%타겟은% 수치심에 얼굴을 일그러뜨렸다.
-							PRINTFORMW 「응、큿……벼、별 수 없잖아……？」
-						ELSE
-							PRINTFORMW 「응、하아……기분 좋다、고……？」
-							PRINTFORMW %타겟은% 타액과 쿠퍼액으로 끈적끈적해진 페니스를 훑어내려져、황홀한 듯한 표정을 하고 있다……
-						ENDIF
+						PRINTFORMW 「아아……좋아、%CSTR:12%……」
+						PRINTFORMW %타겟은% 타액과 쿠퍼액으로 끈적끈적해진 페니스를 훑어져、황홀한 듯한 표정을 하고 있다.
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -3940,22 +2919,19 @@ SELECTCASE SELECTCOM
 				CFLAG:423 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				IF TALENT:PLAYER:남자 == 1
-					PRINTFORMW 완급을 조절해 페니스를 훑어주자、%타겟은% 쾌락에 몸을 비틀기 시작했다……
-					PRINTFORMW 「큿……조、좀 더 정중하게 다뤄라……크읏！」
-				ELSE
-					PRINTFORMW 「하아、하아……좋아……으읏！」
-					PRINTFORMW 막대 전체와 귀두를 주무르면서 그 사이를 문질러주자、%타겟은% 만족스러운 듯한 표정을 띠었다……
-				ENDIF
+				PRINTFORMW 
 				CFLAG:423 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				IF TALENT:PLAYER:남자 == 1
-					PRINTFORMW 완급을 조절해 페니스를 훑어주자、%조사처리(CALLNAME,"는")% 쾌락에 몸을 비틀기 시작했다……
-					PRINTFORMW 「후웃……이 정도로……」
+				IF TALENT:MASTER:오토코노코 == 1
+					PRINTFORMW %CALLNAME:MASTER%의 소녀처럼 가느다란 손가락이 거대한 페니스 주위를 자극하며、천천히 절정까지 이끌어간다……
+					PRINTFORMW 「겉모습은 여자라도 내용은 역시 사내자식이군……남자가 느끼는 곳을 잘 알고 있어……크읏」
+				ELSEIF TALENT:MASTER:남자 == 1
+					PRINTFORMW 완급을 조절해 페니스를 훑어주자、%타겟은% 쾌락에 몸을 비틀기 시작했다.
+					PRINTFORMW 「젠장……익숙해지질 않는구만……크으읏」
 				ELSE
-					PRINTFORMW 「응、후우……」
-					PRINTFORMW 막대 전체와 귀두를 주무르면서 그 사이를 문질러주자、%타겟은% 만족스러운듯한 표정을 띠었다……
+					PRINTFORMW 「그래……그쪽도 문질러봐……」
+					PRINTFORMW 손바닥으로 귀두를 문질러주자、%타겟은% 만족스러운 표정을 띠었다.
 				ENDIF
 				CFLAG:423 = 2
 			ENDIF
@@ -3968,13 +2944,13 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:424 == 0
 			IF TALENT:MASTER:빈유 == 1 || TALENT:MASTER:절벽 == 1
-				PRINTFORMW 「어이어이、그런 가슴으로 %CSTR:11%의 물건을 감쌀 수 있겠어？」
-				PRINTFORMW 「대기만 한다고 파이즈리가 아니라고？　……뭐、그런 걸로 해두지」
+				PRINTFORMW 「어이어이、그런 젖으로 %CSTR:11%의 걸 감쌀 수나 있는 거냐」
+				PRINTFORMW 「감싸기만 한다고 파이즈리가 아니라고？　……뭐、그런 걸로 해줄게」
 			ELSEIF TALENT:MASTER:거유 == 1 || TALENT:MASTER:폭유 == 1 
-				PRINTFORMW 「오오、부드러운데……그 크기는 폼이 아니란 건가？」
-				PRINTFORMW 「%CSTR:11%의 물건이 완전히 감싸여있다고……」
+				PRINTFORMW 「오오、좋은데……딱 봐도 큰 걸 달고 있잖아」
+				PRINTFORMW 「%CSTR:11%의 자지가 푹 감싸여 있다고」
 			ELSE
-				PRINTFORMW 「좋아……그 상태다」
+				PRINTFORMW 「좋아……그런 식으로 하면 돼」
 			ENDIF
 			CFLAG:424 = 1
 		;2번째 이후
@@ -3983,39 +2959,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
-					ELSE
-						IF TALENT:MASTER:빈유 == 1 || TALENT:MASTER:절벽 == 1
-							PRINTFORMW 「해주는 건 기쁘지만……」
-							PRINTFORMW 「응、기분 좋냐고？　아아、기분 좋아……」
-						ELSEIF TALENT:MASTER:거유 == 1 || TALENT:MASTER:폭유 == 1 
-							IF RAND:2 == 0
-								PRINTFORMW 풍만한 가슴으로 남근을 감싸주면、%타겟은% 멍한 표정을 지었다.
-								PRINTFORMW 「으응、부드럽고 좋아……」
-							ELSE
-								PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 두 개의 언덕을 교대로 상하시키며、%CALLNAME%의 페니스를 문지르고 있다.
-								PRINTFORMW 육봉에 닿아 형태를 바꾸는 젖가슴은 한눈에 봐도 대단히 음란하다.
-								PRINTFORMW 「핫、좋은 광경이야 %CALLNAME:MASTER%」
-							ENDIF
-						ELSE
-							PRINTFORMW %CALLNAME:MASTER%의 부드러운 유방에 감싸이는 기분에、%타겟은% 스스로 허리를 흔들며 쾌락을 추구하고 있다.
-							PRINTFORMW 「좋아、%CALLNAME:MASTER%……혀도 사용해……」
-						ENDIF
-					ENDIF
+			IF TALENT:MASTER:빈유 == 1 || TALENT:MASTER:절벽 == 1
+				PRINTFORMW 「%CSTR:12%의 마음、기뻐……」
+				PRINTFORMW 「기분 좋냐고？　당연하잖아」
+			ELSEIF TALENT:MASTER:거유 == 1 || TALENT:MASTER:폭유 == 1 
+				IF RAND:2 == 0
+					PRINTFORMW 풍만한 가슴으로 남근을 감싸주자、%타겟은% 흐트러진 표정을 띠었다.
+					PRINTFORMW 「으으……못 참겠어……%CSTR:12%의 가슴은 최고야……」
+				ELSE
+					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 두 개의 언덕을 교대로 상하시키며、%CALLNAME%의 페니스를 문지르고 있다.
+					PRINTFORMW 육봉에 닿아 형태를 바꾸어가는 젖가슴은 매우 음란해보인다.
+					PRINTFORMW 「우、으으……%CSTR:12%……」
+				ENDIF
+			ELSE
+				PRINTFORMW %CALLNAME:MASTER%의 부드러운 유방에 감싸지는 기분 좋음에、%타겟은% 스스로 허리를 흔들며 쾌락을 요구하고 있다.
+				PRINTFORMW 「좋아、%CSTR:12%……끝 부분도 빨아줘……」
+			ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4026,21 +2985,22 @@ SELECTCASE SELECTCOM
 				CFLAG:424 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「하아、읏……좋아……」
+				PRINTFORMW 
 				CFLAG:424 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				IF TALENT:MASTER:빈유 == 1 || TALENT:MASTER:절벽 == 1
-					PRINTFORMW %타겟은% %마스터가% 유두며 가슴 전체를 사용해 페니스를 문지르고 있는 것을 물끄러미 바라보고 있다.
-					PRINTFORMW 「흥……그렇게까지 해서 %CSTR:11%에게 봉사하고 싶은가？」
-				ELSEIF TALENT:MASTER:거유 == 1 || TALENT:MASTER:폭유 == 1 
-					PRINTFORMW %타겟은% 페니스를 부드러운 유방으로 감싸여、작게 허덕이고 있다.
-					PRINTFORMW 「역시 가슴은 큰 편이 좋은데……우오옷！？」
-					PRINTFORMW 두 개의 언덕에서 삐져나온 귀두를 혀로 쪽쪽 빨아주자、%타겟은% 소리를 질렀다.
-				ELSE
-					PRINTFORMW 「……꽤」
-					PRINTFORMW 「아니、좋은 가슴 사용법이야……」
-				ENDIF
+			IF TALENT:MASTER:빈유 == 1 || TALENT:MASTER:절벽 == 1
+				PRINTFORMW %타겟은% %마스터가% 유두며 가슴 전체를 사용해 페니스를 문지르는 것을 물끄러미 바라보고 있다.
+				PRINTFORMW 「뭐랄까……」
+				PRINTFORMW 「악마인 내가 말하는 것도 그렇지만……%조사처리(CSTR:12,"는")% 기특하구만……」
+			ELSEIF TALENT:MASTER:거유 == 1 || TALENT:MASTER:폭유 == 1 
+				PRINTFORMW %타겟은% 페니스를 부드러운 유방으로 감싸여、작게 허덕이고 있다.
+				PRINTFORMW 「파이즈리는 역시 큰 젖이라니까……우옷」
+				PRINTFORMW 두 개의 언덕에서 빠져나온 귀두를 혀로 쪽쪽 빨아주자、%타겟은% 소리를 질렀다.
+			ELSE
+				PRINTFORMW 「꽤……하잖、아……」
+				PRINTFORMW 「좋은 젖을 갖고 있잖아……」
+			ENDIF
 				CFLAG:424 = 2
 			ENDIF
 		ENDIF
@@ -4048,14 +3008,11 @@ SELECTCASE SELECTCOM
 ;정상위시킨다
 ;-------------------------------------------------
 	CASE 92
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:425 == 0
-			PRINTFORMW 「……스스로 다리를 벌리는 건가. 그야말로 지조가 없군」
-			PRINTFORMW 「그것도 좋겠지、범해주지. 이제와서 싫다고 해도 멈추진 않는다고？」
-			CALL TRAIN_MESSAGE
-			PRINTFORMW 「훗、꽤 좋잖아……！」
-			PRINTFORMW %타겟은% %CALLNAME:MASTER%의 질내를 마음껏 만끽하고 있다……
+			PRINTFORMW 「악마에게까지 다리를 벌리다니、그야말로 지조가 없구만」
+			PRINTFORMW 「좋아……인간 따위는 맛볼 수 없는 쾌락을 알려줄게……」
 			CFLAG:425 = 1
 		;2번째 이후
 		ELSE
@@ -4063,51 +3020,41 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						CALL TRAIN_MESSAGE
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
+					K:1 = RAND:4
+					IF K:1 == 0
+						PRINTFORMW 「%CSTR:12%、아프지 않아？　%CSTR:11%의 물건은 인간보다 굵으니까……」
+						PRINTFORMW 「괜찮아？　그럼、좀 더 기분 좋게 해줄게」
+					ELSEIF K:1 == 1
+						PRINTFORMW 「위험……크、너무 조여……」
+						PRINTFORMW 「이대로는、금방 가버리겠어……큿」
+					ELSEIF K:1 == 2
+						PRINTFORMW 「위험하구만……슬슬」
+						PRINTFORMW %CALLNAME%의 한계가 가까워진 것을 감지한 %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 허리에 양 다리를 감고、허리가 떨어지지 않게 했다.
+						PRINTFORMW 「조、좋앗、이대로、싼다앗！」
 					ELSE
-						CALL TRAIN_MESSAGE
-						PRINTFORMW 「큿、후웃……어때？　%조사처리(CALLNAME:MASTER,"는")% 여기가 좋은건가？」
+						PRINTFORMW 「어때？　%조사처리(CSTR:12,"는")% 여길 문질러지는 걸 좋아하지」
 						PRINTFORMW %타겟은% 끈질기게、질내의 한 부분을 귀두로 조금씩 문질러온다.
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME:TARGET%의 목에 양손을 감고、한층 더 쾌락을 요구했다……
+						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 목에 양손을 감고、한층 더 쾌락을 요구했다……
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CALL TRAIN_MESSAGE
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CALL TRAIN_MESSAGE
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:425 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				CALL TRAIN_MESSAGE
-				PRINTFORMW %타겟은% 교묘하게 허리를 움직이며、%CALLNAME:MASTER%의 민감한 부분을 찔러온다.
-				PRINTFORMW 「평소에 좋을 대로 하고 있는 걸 돌려주는 거、다」
-				PRINTFORMW 「응？　왜 그래？　좀 더 허덕이라고……」
+				PRINTFORMW %타겟은% 교묘하게 허리를 돌리며、%마스터가% 느끼는 장소를 찔러온다.
+				PRINTFORMW 「여기가 기분 좋은 건가？　으응～？」
+				PRINTFORMW 「평상시 좋을 대로 당하고 있기만 하는 만큼、충분히 가게 해주겠어」
 				CFLAG:425 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %타겟과% 연결된 채로 허리를 음란하게 움직이며 한층 더 쾌락을 바라고 있다……
-				PRINTFORMW 「큿……어때、좀 더 %조사처리(CSTR:11,"를")% 요구해봐라……바란다면 더 찔러 넣어、휘저어주마！」
-				PRINTFORMW 「하앗、하앗……하하、어때！？　기분 좋은가……응！？」
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %타겟과% 연결된 자세로 허리를 음란하게 흔들며、한층 더 쾌락을 요구했다.
+				PRINTFORMW 「헤헷、스스로 허리를 흔들어대고……좋다구」
+				PRINTFORMW 「으럇、가길 원한다면 좀 더 허리를 흔들어서 졸라봐」
 				CFLAG:425 = 2
 			ENDIF
 		ENDIF
@@ -4118,8 +3065,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:426 == 0
-			PRINTFORMW 「그렇게 바란다면 범해주지」
-			PRINTFORMW 「이 정도로 망가지지 마？」
+			PRINTFORMW 「짐승처럼 뒤에서 팍팍 박아줄게」
+			PRINTFORMW 「악마와의 섹스가 너무 기분 좋아서、오줌 싸버리면 안 된다고？」
 			CFLAG:426 = 1
 		;2번째 이후
 		ELSE
@@ -4127,24 +3074,11 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
+					IF RAND:2 == 0
+						PRINTFORMW %타겟은% 유방을 주물럭거리며、%CALLNAME:MASTER%의 부드러운 엉덩이에 허리를 부딪히고 있다.
 					ELSE
-						PRINTFORMW 좀 더 가득 찔러줬으면 한다고  %CALLNAME:TARGET%에게 조르자、%타겟은% 기쁜 듯이 허리를 격렬하게 움직이기 시작했다.
-						PRINTFORMW 「그렇게、갖고 싶다면！소망대로 해주지！」
+						PRINTFORMW 좀 더 가득 찔렀으면 좋겠다고 %CALLNAME%에게 조르자、%타겟은% 기쁜 듯이 허리를 격렬하게 흔들기 시작했다.
+						PRINTFORMW 「기쁜 말을 하잖아、좀 더 기분 좋게 해주지！」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -4156,13 +3090,13 @@ SELECTCASE SELECTCOM
 				CFLAG:426 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「큿、꽤……좀 더 꽉 조여라！」
-				PRINTFORMW %타겟은% 스스로의 쾌락만을 추구해, 격렬하게 허리를 흔들어대고 있다.
+				PRINTFORMW 「인간치고는、꽤 좋은 보지를 갖고 있잖아……」
+				PRINTFORMW 「앞으로도 내가 계속 사용해주지……감사하라고」
 				CFLAG:426 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				PRINTFORMW 「……크큿、그렇게 간단히 기분 좋아질 수 있을거라고、생각、했나！？」
-				PRINTFORMW 이쪽의 상황 따윈 신경쓰지 않고、%타겟은% 스스로의 쾌락만을 추구해, 격렬하게 허리를 흔들어대고 있다.
+				PRINTFORMW 「으랏、으랴、어때、%CSTR:11%의 자지는 기분 좋지？」
+				PRINTFORMW 이쪽의 상황 따위는 신경 쓰지 않고、%타겟은% 스스로의 쾌락만을 추구해 격렬하게 허리를 흔들어대고 있다.
 				CFLAG:426 = 2
 			ENDIF
 		ENDIF
@@ -4173,8 +3107,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:427 == 0
-			PRINTFORMW 「스스로 봉사하는 건가……열심이군」
-			PRINTFORMW %타겟은% 머리 뒤에 팔을 대고、느긋한 표정으로 %마스터가% 허리를 흔드는 것을 바라보고 있다.
+			PRINTFORMW 「이거 좋은데……아무것도 안해도 가게 해준다니」
+			PRINTFORMW %타겟은% 머리 뒤로 팔을 받치고、느긋한 표정으로 %마스터가% 허리를 흔드는 모습을 바라보고 있다.
 			CFLAG:427 = 1
 		;2번째 이후
 		ELSE
@@ -4182,24 +3116,16 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							PRINTFORMW 
-;						ELSE
-;							PRINTFORMW 
-;						ENDIF
+				K:1 = RAND:3
+					IF K == 0
+						PRINTFORMW 「읏、아아……그거、안 돼、우우읏……」
+						PRINTFORMW %마스터가% M자로 다리를 벌린 채로 앉아、격렬하게 훑어주자、%타겟은% 쾌락에 몸부림쳤다.
+					ELSEIF K == 1
+						PRINTFORMW 「이、이거、굉장한데……어디서 배운 거야、이런 건」
+						PRINTFORMW %NAME:TARGET%의 상반신에 밀착해、%조사처리(CALLNAME:MASTER,"는")% 허리만을 격렬하게 상하로 흔들고 있다.
 					ELSE
-						PRINTFORMW 「크、오옷！좋아……그거다、좀 더 음란하게！！」
-						PRINTFORMW %CALLNAME:MASTER%의 부드러운 가슴을 주무르며、%타겟은% %CALLNAME:MASTER%의 허리 움직임에 맞춰 아래에서부터 찔러올리고 있다……
+						PRINTFORMW 「헤헷、%CSTR:12%의 보지、최고야…！」
+						PRINTFORMW %CALLNAME:MASTER%의 부드러운 가슴을 주물럭거리며、%타겟은% %CALLNAME:MASTER%의 허리 움직임에 맞춰、아래에서 찔러올리고 있다.
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -4211,13 +3137,13 @@ SELECTCASE SELECTCOM
 				CFLAG:427 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「훗、꽤 하잖아……우웃！」
-				PRINTFORMW %마스터가% 허리를 앞뒤로 흔들어대면、%타겟은% 밀어닥치는 쾌락에 얼굴을 찡그렸다……
+				PRINTFORMW 「이、이 정도로、질 것 같냐아아……！」
+				PRINTFORMW %마스터가% 허리를 흔들며 엉덩이를 앞뒤로 움직이자、%타겟은% 밀어닥치는 쾌락을 견디려고 얼굴을 찡그렸다.
 				CFLAG:427 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				PRINTFORMW 「그 정도인가？부족한데……이런 식으로 하는 거다！」
-				PRINTFORMW %타겟은% %CALLNAME:MASTER%의 허리를 양손으로 붙잡고、아래에서 몇 번이나 격렬하게 찔러올렸다……
+				PRINTFORMW 「핫하！　%조사처리(CSTR:11,"를")% 항복시키고 싶다면 이 정도로는 움직여줘야지！」
+				PRINTFORMW %타겟은% %CALLNAME:MASTER%의 허리를 양손으로 붙잡고、아래에서 몇 번이나 격렬하게 찔러올렸다.
 				CFLAG:427 = 2
 			ENDIF
 		ENDIF
@@ -4228,13 +3154,17 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:428 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW 「남자를 범하라고？그런 취미는 없다！」
-				PRINTFORMW 「……뭐、겁먹었느냐고！？이잇、%조사처리(CSTR:11,"를")% 무시하지마라！！」
-				PRINTFORMW %타겟은% 격분해、%CALLNAME:PLAYER%의 애널에 성난 자지를 찔러 넣었다……
+			IF TALENT:MASTER:남자 == 1 && TALENT:MASTER:오토코노코 == 0
+				PRINTFORMW 「사내자식 엉덩이에 %CSTR:11%의 자지를 삽입하라고！？」
+				PRINTFORMW 「말도 안 되는 취향이야……겁먹었냐고？　웃기지 마、악마를 얕보는 거냐！！」
+				PRINTFORMW %타겟은% 격분해、%CALLNAME:MASTER%의 아누스에 성난 자지를 푸욱 삽입해갔다……
+			ELSEIF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「보지 대신 쓰란 건가、기특한 배려야」
+				PRINTFORMW 「헐렁헐렁해질 때까지 사용해줄 테니까、고맙게 생각하라고！」
 			ELSE
-				PRINTFORMW 「바로 윗쪽에 본래 구멍이 있는데도……그렇게 이 쪽이 좋은 건가？」
-				PRINTFORMW 불평하면서도、%타겟은% 이 행위가 흥미진진한 것 같다……
+				PRINTFORMW 「바로 위에는 보지가 기다리고 있는데……엉덩이 쪽이 좋은 건가？」
+				PRINTFORMW 「변태 마스터가 있으면 큰일이구만……읏챠」
+				PRINTFORMW 불평하면서도、%타겟은% 이 행위가 흥미진진한 것 같다.
 			ENDIF
 			CFLAG:428 = 1
 		;2번째 이후
@@ -4243,33 +3173,8 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「엉덩이도 꽤……큿、좋아、좀 더 꽉 물어라！」
-						PRINTFORMW %타겟은% 휘감겨오는 %CALLNAME:PLAYER%의 장벽을 만끽하면서 격렬하게 허리를 부딪혔다……
-					ENDIF
+					PRINTFORMW 「%CSTR:12%의 엉덩이 보지、못 참겠다고」
+					PRINTFORMW 「좀 더 엉망진창으로、실컷 해주겠어……으랴앗！」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4280,20 +3185,19 @@ SELECTCASE SELECTCOM
 				CFLAG:428 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「핫、하앗……응、크읏……조、조이지마！」
-				PRINTFORMW %타겟은% 격렬하게 허리를 흔들고 있다……
+				PRINTFORMW 「악마를 상대로 항문이 망가지지 않다니 조금은 다시 봤어」
+				PRINTFORMW 「이대로 안에 싸겠어……입으로 역류한다거나、가하하하！」
 				CFLAG:428 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				IF TALENT:PLAYER:남자 == 1
-					PRINTFORMW 「남자가 엉덩이 구멍으로 범해지면서 허덕이는 건가、이 변태 자식이！」
-					PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 항문을 자포자기한 듯한 느낌으로 범하고 있다……
-				ELSE
-					PRINTFORMW 「엉덩이 구멍을 범해지는 기분은 어때？」
-					PRINTFORMW %CALLNAME:TARGET%의 두꺼운 귀두가 아누스를 출입할 때마다、%조사처리(CALLNAME:MASTER,"는")% 허덕이는 소리를 지른다.
-					PRINTFORMW 「핫、상당히 좋은 것 같은데、이 변태가！」
-					PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 교성에 더욱 흥분했는지, 한층 더 격렬하게 허리를 움직이기 시작했다……
-				ENDIF
+				PRINTFORMW 「으랴으랴으럇、어때？　항문으로 느껴버리지！　좀 더 좋은 소리로 울어라！」
+					IF TALENT:MASTER:남자 == 1
+						PRINTFORMW 「……그렇다곤 해도、역시 사내놈 구멍으로는、말야……」
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 항문을 범하면서도、뭐라고 말하기 힘든 표정을 하고 있다.
+					ELSE
+						PRINTFORMW %CALLNAME%의 두꺼운 귀두가 아누스를 출입할 때마다、%조사처리(CALLNAME:MASTER,"는")% 비명과 신음을 질렀다……
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 교성으로 더 흥분했는지、한층 더 격렬하게 허리를 붙잡고 움직이기 시작했다.
+					ENDIF
 				CFLAG:428 = 2
 			ENDIF
 		ENDIF
@@ -4304,12 +3208,16 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:429 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW %타겟은% 불평하지만、
-				PRINTFORMW 말해도 쓸데없다고 생각했는지、그저 묵묵히 허리를 흔들고 있다……
+			IF TALENT:MASTER:남자 == 1 && TALENT:MASTER:오토코노코 == 0
+				PRINTFORMW 「저기 말야……」
+				PRINTFORMW 「아무리 그렇게、귀엽게 엉덩이 흔들어도、안 되는 건 안 된다고……」
+				PRINTFORMW %타겟은% 마지못해、라는 느낌으로 %CALLNAME:MASTER%의 엉덩이에 페니스를 댔다……
+			ELSEIF TALENT:MASTER:오토코노코 == 1
+				PRINTFORMW 「귀여운 엉덩이 하고 있잖아、사내놈이라곤 해도、범하는 보람이 있는 구멍이야……」
+				PRINTFORMW 「힘 빼、안 그러면 찢어질지도 몰라、갸하하핫！」
 			ELSE
-				PRINTFORMW 「왜 일부러 항문을……앞은 안 되나？　으음」
-				PRINTFORMW 불평하면서도、%타겟은% 흥미진진한 기색이다……
+				PRINTFORMW 「%조사처리(CSTR:11,"로")%서는、보지에 쳐넣고 싶지만」
+				PRINTFORMW 「좋아、짐승처럼 항문을 범하고 범하고 범해서 채워주겠어！」
 			ENDIF
 			CFLAG:429 = 1
 		;2번째 이후
@@ -4318,40 +3226,19 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF TALENT:MASTER:남자 == 1 && TALENT:MASTER:오토코노코 == 0
+						PRINTFORMW 「%CSTR:11%만을 사랑하도록、이걸로 묶어주지……」
+						PRINTFORMW %타겟은% 딱딱하게 선 자신의 심볼을、%CALLNAME:MASTER%의 엉덩이 구멍에 삽입해간다.
+						PRINTFORMW 「%CSTR:12%에게 인을 새겨도 되는 건、%CSTR:11%뿐이야……알겠지？」
+					ELSEIF TALENT:MASTER:오토코노코 == 1
+						PRINTFORMW 「너밖에 생각할 수 없어……이건、%CSTR:11%만의 것이야……알겠지？」
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 항문 내벽을 느끼듯이、천천히 페니스를 삽입하고 빼고를 반복하고 있다.
+						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 마치 황홀한 암컷 같은 표정으로、자극에 견디고 있다.
+						PRINTFORMW 무의식 중에、%CALLNAME:MASTER%의 오른손은 스스로의 페니스로 뻗어간다……
 					ELSE
-						IF TALENT:PLAYER:남자 == 1
-							PRINTFORMW 「핫、하앗……어때、%CSTR:11%의 건 기분 좋나！？」
-							PRINTFORMW %CALLNAME:TARGET%의 그 격렬함에 %마스터가% 허덕여대면、
-							PRINTFORMW 그것이 마음에 들었는지 %타겟은% 한층 더 격렬하게 허리를 흔들기 시작했다……
-						ELSE
-							PRINTFORMW 「핫、하앗……어때、기분 좋은가！？」
-							PRINTFORMW %CALLNAME:TARGET%의 두꺼운 귀두가 아누스를 들낙거릴때、%조사처리(CALLNAME:MASTER,"는")% 신음을 지른다.
-							PRINTFORMW 「응、크읏……조、조인다！　우오오옷！！」
-							PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 교성에 더욱 흥분했는지, 한층 더 격렬하게 허리를 흔들기 시작했다……
-						ENDIF
+						PRINTFORMW 「%조사처리(CSTR:12,"는")% 보지도 항문도 일품이야」
+						PRINTFORMW %타겟은% 애널의 조임에 괴로워하며、%CALLNAME:MASTER%의 유방과 클리토리스를 등 뒤에서 잡아당기고 있다.
+						PRINTFORMW %마스터가% 뒤돌아보며 젖은 혀를 내밀면、%CALLNAME%도 혀를 내밀어、끈적끈적하게 서로 얽히기 시작한다……
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -4363,20 +3250,13 @@ SELECTCASE SELECTCOM
 				CFLAG:429 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「핫、하앗……응、크읏……우오옷！」
-				PRINTFORMW %타겟은% 격렬하게 허리를 부딪히고 있다……
+				PRINTFORMW 「엉덩이 구멍、질퍽질퍽 범해지는 게 그렇게 기분 좋아？」
+				PRINTFORMW 「좀 더 해줄 테니까 말야、좀 더 느끼라고？」
 				CFLAG:429 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				IF TALENT:PLAYER:남자 == 1
-					PRINTFORMW 「핫, 남자가 엉덩이 구멍으로 범해지면서 허덕이는 건가、이 변태 자식이！」
-					PRINTFORMW 그 격렬함에 %마스터가% 허덕이는 소리를 지르자、%타겟은% 한층 더 흥분했는지 격렬하게 움직이기 시작했다……
-				ELSE
-					PRINTFORMW 「엉덩이 구멍을 범해지는 기분은 어때？」
-					PRINTFORMW %CALLNAME:TARGET%의 두꺼운 귀두가 아누스를 출입할 때마다、%조사처리(CALLNAME:MASTER,"는")% 허덕이는 소리를 지른다.
-					PRINTFORMW 「핫、상당히 좋은 것 같은데、이 변태가！」
-					PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 교성에 더욱 흥분했는지, 한층 더 격렬하게 허리를 움직이기 시작했다……
-				ENDIF
+				PRINTFORMW 「엉덩이 구멍、질퍽질퍽 범해지는 게 그렇게 기분 좋아？」
+				PRINTFORMW 「%조사처리(CSTR:11,"로")%서는 울며 소리치는 편이 더 불타오르지만」
 				CFLAG:429 = 2
 			ENDIF
 		ENDIF
@@ -4387,13 +3267,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:430 == 0
-			IF TALENT:PLAYER:남자 == 1
-				PRINTFORMW %타겟은% 불평했지만、
-				PRINTFORMW 말해도 쓸데없다고 생각했는지、그저 %CALLNAME:PLAYER%의 행위를 바라보고만 있다……
-			ELSE
-				PRINTFORMW 「왜 일부러 항문을……앞은 안 되나？　으음」
-				PRINTFORMW 불평하면서도、%타겟은% 항문으로 봉사하는 것에 흥미진진해하고 있는 것 같다……
-			ENDIF
+			PRINTFORMW 
 			CFLAG:430 = 1
 		;2번째 이후
 		ELSE
@@ -4401,42 +3275,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						IF TALENT:PLAYER:남자 == 1
-							PRINTFORMW 「큿、하앗……왜 그래、움직임이 느려지고 있다고？」
-							PRINTFORMW %CALLNAME:TARGET%의 지적에、%조사처리(CALLNAME:MASTER,"는")% 페니스를 조이며
-							PRINTFORMW 장벽에 문지르듯이 허리를 흔들기 시작했다.
-							PRINTFORMW 「크옷！？　……크윽、좋아！」
-						ELSE
-							PRINTFORMW 「핫、하앗……어때、%CSTR:11%의 물건은 기분 좋나？」
-							PRINTFORMW %CALLNAME:TARGET%의 두꺼운 귀두가 아누스를 출입할 때마다、%조사처리(CALLNAME:MASTER,"는")% 허덕이는 소리를 지른다
-							PRINTFORMW 「완전히 맘에 든 것 같은데……맘껏 맛봐라！」
-							PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 교성에 흥분했는지, 한층 더 격렬하게 아래에서부터 허리를 찔러올리기 시작했다……
-						ENDIF
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4447,20 +3286,11 @@ SELECTCASE SELECTCOM
 				CFLAG:430 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「응、큭……왜、왜 그래、이 정도인가……？」
-				PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 공격에 견디고 있다……
+				PRINTFORMW 
 				CFLAG:430 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
-				IF TALENT:PLAYER:남자 == 1
-					PRINTFORMW 「흥、좀 더 열심히 허리를 흔들어라、이런 식으로 말이야！」
-					PRINTFORMW %CALLNAME:PLAYER%의 행위가 만족스럽지 않았는지、%타겟은% 격렬하게 아래에서부터 허리를 찔러올려왔다……
-				ELSE
-					PRINTFORMW 「크읍！　좋아、그 상태다……」
-					PRINTFORMW %CALLNAME:TARGET%의 두꺼운 귀두가 아누스를 출입할 때마다、%조사처리(CALLNAME:MASTER,"는")% 허덕이는 소리를 지른다.
-					PRINTFORMW 「어이어이 왜 그래、뭘 쉬고 있는 거야！　좀 더 허리를 써라！」
-					PRINTFORMW %타겟은% %CALLNAME:PLAYER%의 교성에 더 흥분했는지, 아래에서부터 격렬하게 허리를 찔러올리기 시작했다……
-				ENDIF
+				PRINTFORMW 
 				CFLAG:430 = 2
 			ENDIF
 		ENDIF
@@ -4474,8 +3304,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:354 == 0
-			PRINTFORMW 「무、뭘하는 거야！　멈춰라！」
-			PRINTFORMW 광분하는 %타겟을% 무시해、%조사처리(CALLNAME:MASTER,"는")% 계속해서 때렸다……
+			PRINTFORMW 「뭐하는 거얏！　진짜로 화낸다 임마！」
+			PRINTFORMW 광분하는 %타겟을% 무시한 채、%조사처리(CALLNAME:MASTER,"는")% 계속해서 때렸다……
 			CFLAG:354 = 1
 		;2번째 이후
 		ELSE
@@ -4483,31 +3313,15 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:354 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					K:1 = RAND:4
+					IF K:1 == 0
+						PRINTFORMW 「몸 속 깊이까지 울리는데、네 일격은……！」
+					ELSEIF K:1 == 1
+						PRINTFORMW 「좀 더 와라！　좀 더 와랏！！　크윽！」
+					ELSEIF K:1 == 2
+						PRINTFORMW 「그 손목 스냅……으으　좋아！」
 					ELSE
-						PRINTFORMW 「저、적당히 하지 않으면、크읏、이제 그만해라！」
+						PRINTFORMW 「좀 더……때려줘！」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -4519,11 +3333,11 @@ SELECTCASE SELECTCOM
 				CFLAG:354 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:354 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「크、읏、적당히……크아앗！？」
+				PRINTFORMW 「기、기합 들어가 있구만……상당히、강하……！」
 				CFLAG:354 = 3
 			;그 이외
 			ELSEIF CFLAG:354 < 2 || FLAG:7 == 2
-				PRINTFORMW 「얻어맞는 정도로、%조사처리(CSTR:11,"가")% 굴복할 거라고 생각하는 건가！？」
+				PRINTFORMW 「엉덩이를 얻어맞는 정도로、%조사처리(CSTR:11,"는")% 누구도 따르지 않아！」
 				CFLAG:354 = 2
 			ENDIF
 		ENDIF
@@ -4535,8 +3349,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:355 == 0
-			PRINTFORMW 「읏！？　……어이、뭘 하는 거냐」
-			PRINTFORMW %타겟은% 기분이 나빠진 것 같다…
+			PRINTFORMW 
 			CFLAG:355 = 1
 		;2번째 이후
 		ELSE
@@ -4544,32 +3357,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:355 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 「으응！　……%CALLNAME:PLAYER%、나중에 깨달아도……크읏！？」
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4580,11 +3368,11 @@ SELECTCASE SELECTCOM
 				CFLAG:355 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:355 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「으읏！　……저기 말야……크읏！？」
+				PRINTFORMW 
 				CFLAG:355 = 3
 			;그 이외
 			ELSEIF CFLAG:355 < 2 || FLAG:7 == 2
-				PRINTFORMW 「윽！？　……적당히 해라！」
+				PRINTFORMW 
 				CFLAG:355 = 2
 			ENDIF
 		ENDIF
@@ -4604,32 +3392,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:356 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4664,32 +3427,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:357 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4724,32 +3462,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:358 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -4785,32 +3498,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:359 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
 						PRINTFORMW 
-					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -4852,32 +3540,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:360 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
 						PRINTFORMW 
-					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -4919,32 +3582,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:361 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
 						PRINTFORMW 
-					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -4988,32 +3626,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:362 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5083,32 +3696,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:364 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5143,32 +3731,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:365 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5203,32 +3766,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:366 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5263,32 +3801,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:367 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5358,32 +3871,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5421,32 +3909,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:369 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5553,7 +4016,12 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:374 == 0
-			PRINTFORMW 
+			IF TALENT:MASTER:남자 == 1
+				PRINTFORMW 「이 %CSTR:11%에게 사내자식 구멍 따위를 빨게 하다니……！」
+			ELSE
+				PRINTFORMW 「뭐야、항문으로 가게 해줬으면 좋겠어？」
+				PRINTFORMW 「%CSTR:11%의 혀 기술로 실신해버리면 안 돼」
+			ENDIF
 			CFLAG:374 = 1
 		;2번째 이후
 		ELSE
@@ -5561,31 +4029,16 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:374 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
+					IF TALENT:MASTER:오토코노코 == 1
+						PRINTFORMW 「%CSTR:12%의 엉덩이 보지、벌써 질퍽거려」
+						PRINTFORMW 「%CSTR:11%의 혀로 느끼고 있는 거지？　자지 세우고 부정해도、설득력 없다고」
+						PRINTFORMW %타겟은% %CALLNAME:MASTER%의 항문을 혀로 핥으면서、페니스 끝에서 배어나오는 쿠퍼액을 손가락 끝으로 떠올렸다.
+					ELSEIF TALENT:MASTER:남자 == 1
+						PRINTFORMW 「완전히 구멍으로 느끼고 있구만」
+						PRINTFORMW 「%CSTR:12%의 자지、발딱 서버렸는데」
 					ELSE
-						PRINTFORMW 
+						PRINTFORMW 「으응～？　항문으로 느끼고 있는 거야？」
+						PRINTFORMW 「보지에서 국물이 떨어지고 있는데……변태네、%CALLNAME:MASTER%」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -5597,11 +4050,13 @@ SELECTCASE SELECTCOM
 				CFLAG:374 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:374 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW 「%조사처리(CSTR:12,"는")% 여길 빨리는 걸 좋아하지」
+				PRINTFORMW 「엉덩이 구멍으로 가게 해줄게」
 				CFLAG:374 = 3
 			;그 이외
 			ELSEIF CFLAG:374 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「이 내가 인간의 구멍 따위를 빨게 될 줄이야……」
+				PRINTFORMW 「열 받는데」
 				CFLAG:374 = 2
 			ENDIF
 		ENDIF
@@ -5622,32 +4077,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:375 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-						IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-							PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-						;친애
-;						ELSEIF TALENT:6
-;							K:1 = RAND:4
-;							IF K:1 == 0
-;								PRINTFORMW 
-;							ELSEIF K:1 == 1
-;								PRINTFORMW 
-;							ELSEIF K:1 == 2
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ELSE
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ENDIF
-						ELSE
-							PRINTFORMW 
-						ENDIF
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -5688,32 +4118,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:376 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5749,32 +4154,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:377 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-						IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-							PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-						;친애
-;						ELSEIF TALENT:6
-;							K:1 = RAND:4
-;							IF K:1 == 0
-;								PRINTFORMW 
-;							ELSEIF K:1 == 1
-;								PRINTFORMW 
-;							ELSEIF K:1 == 2
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ELSE
-;								IF TALENT:MASTER:남자 == 1
-;									PRINTFORMW 
-;								ELSE
-;									PRINTFORMW 
-;								ENDIF
-;							ENDIF
-						ELSE
-							PRINTFORMW 
-						ENDIF
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -5890,7 +4270,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:382 == 0
-				PRINTFORMW 「뭐、뭐야 이건！！　젠장、놔！」
+				PRINTFORMW 
 				CFLAG:382 = 1
 			;2번째 이후
 			ELSE
@@ -5898,32 +4278,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:382 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
 						PRINTFORMW 
-					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -5970,32 +4325,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:383 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6030,32 +4360,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:384 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6125,32 +4430,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:386 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6220,32 +4500,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:388 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6280,32 +4535,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:389 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-						PRINTFORMW 
-					ENDIF
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6341,39 +4571,14 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:390 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-						IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-							PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-							ENDIF
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
 						PRINTFORMW 
-					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
+					ENDIF
 					CFLAG:390 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:390 < 3 || FLAG:7 == 2)
@@ -6407,32 +4612,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:391 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、고통각인がLv3、[반항적]もち、[（性別）嫌い]もち
-					IF TALENT:6 &&  MARK:0 == 3 && TALENT:11 == 1 && (TALENT:82 == 1 || TALENT:88 == 1)
-						PRINTFORMW %CALLNAME:TARGET%의 태도가 어쩐지 차갑다……。
-					;친애
-;					ELSEIF TALENT:6
-;						K:1 = RAND:4
-;						IF K:1 == 0
-;							PRINTFORMW 
-;						ELSEIF K:1 == 1
-;							PRINTFORMW 
-;						ELSEIF K:1 == 2
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ELSE
-;							IF TALENT:MASTER:남자 == 1
-;								PRINTFORMW 
-;							ELSE
-;								PRINTFORMW 
-;							ENDIF
-;						ENDIF
-					ELSE
-					PRINTFORMW
-					ENDIF 
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6462,7 +4642,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:392 == 0
-			PRINTFORMW 
+			PRINTFORMW 「뭐야 이거？　엄청 미끈거리네……」
+			PRINTFORMW 「슬라임인가？　응？　아니라고？」
 			CFLAG:392 = 1
 		;2번째 이후
 		ELSE
@@ -6470,7 +4651,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:392 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「이걸 바르고 %조사처리(CSTR:12,"와")% 몸을 서로 문지르면 기분 좋을 것 같네」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6485,7 +4666,7 @@ SELECTCASE SELECTCOM
 				CFLAG:392 = 3
 			;그 이외
 			ELSEIF CFLAG:392 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「미끈미끈거리는 건 좋다고쳐도、좀 차가운 것 같아、이거……」
 				CFLAG:392 = 2
 			ENDIF
 		ENDIF
@@ -6494,12 +4675,10 @@ SELECTCASE SELECTCOM
 ;181,미약,
 ;-------------------------------------------------
 	CASE 181
-		;CALL TRAIN_MESSAGE
+		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:393 == 0
-			CALL TRAIN_MESSAGE
-			PRINTFORMW 「읏、뭐、뭐야 이건……！？　%CSTR:12%、뭐、뭘 먹였어！」
-			PRINTFORMW %타겟은% 재밌을 정도로 낭패하고 있다.
+			PRINTFORMW 
 			CFLAG:393 = 1
 		;2번째 이후
 		ELSE
@@ -6507,25 +4686,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:393 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-;					PRINTFORMW 
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:393 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「약 따위에 의지하다니……아아 알았어、마시면 되잖아？」
-				PRINTFORMW 거부해도 쓸데없다는 것을 깨달았는지、%타겟은% 단숨에 약을 삼켰다……
+				PRINTFORMW 
 				CFLAG:393 = 3
 			;그 이외
 			ELSEIF CFLAG:393 < 2 || FLAG:7 == 2
-				CALL TRAIN_MESSAGE
-				PRINTFORMW 「악마에게 이런 게 효과가 있을 리가……으읏」
-				PRINTFORMW 몸에 손을 대자 %타겟은% 움찔하고 몸을 떨었다……
+				PRINTFORMW 
 				CFLAG:393 = 2
 			ENDIF
 		ENDIF
@@ -6537,8 +4713,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:394 == 0
-			PRINTFORMW 「읏、뭐、뭐야 이건……！？　%CSTR:12%、뭐、뭘 먹였어！」
-			PRINTFORMW %타겟은% 재밌을 정도로 낭패하고 있다.
+			PRINTFORMW 「가득 채워서……네놈 얼굴에 뿌려줄까……！」
 			CFLAG:394 = 1
 		;2번째 이후
 		ELSE
@@ -6546,24 +4721,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:394 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-;					PRINTFORMW 
+					PRINTFORMW 「이 몸의 소변이라도 마시고 싶어진 거야？」
+					PRINTFORMW 「이런 거 먹이지 않아도、언제라도 먹여줄……어、아냐？」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-;					PRINTFORMW 
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-;					PRINTFORMW 
+					PRINTFORMW 
 				ENDIF
 				CFLAG:394 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:394 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「큿、또 이걸 마시라는 건가？　……어쩔 수 없지」
-				PRINTFORMW 거부해도 쓸데없다는 것을 깨달았는지、%타겟은% 단숨에 약을 삼켰다……
+				PRINTFORMW 「어차피 거절해도 억지로 먹일 거지？」
+				PRINTFORMW 「언젠가 %CSTR:12%에게도 물통 하나를 먹여주지……」
 				CFLAG:394 = 3
 			;그 이외
 			ELSEIF CFLAG:394 < 2 || FLAG:7 == 2
-				PRINTFORMW 「악마에게 이런 게 효과가 있을 리가……으읏」
-				PRINTFORMW 「그、그만둬엇、배를 누르지 마……！」
+				PRINTFORMW 「악마에게 이런 게 효과가 있을……웃」
+				PRINTFORMW 「그、그만햇、누르지 맛……！」
 				CFLAG:394 = 2
 			ENDIF
 		ENDIF
@@ -6616,15 +4792,18 @@ SELECTCASE SELECTCOM
 		IF TEQUIP:29
 			CALL TRAIN_MESSAGE
 			;처음
-			IF CFLAG:396 == 1
-				PRINTFORMW 
+			IF CFLAG:396 == 0
+				PRINTFORMW 「오、밖에서 하는 건가」
+				PRINTFORMW 「%조사처리(CSTR:12,"가")% 범해지는 걸、차분히 보여주자구、가하핫！」
+				CFLAG:396 = 1
 			;2번째 이후
 			ELSE
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:396 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
+						PRINTFORMW 「어이、%CSTR:12%、다른 녀석들한테 우리들이 하는 걸 보여주자구」
+						PRINTFORMW 「%CSTR:12%에게는 손 대게 하지 않지만」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -6632,47 +4811,21 @@ SELECTCASE SELECTCOM
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
 					ENDIF
+					CFLAG:396 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
 					PRINTFORMW 
+					CFLAG:396 = 3
 				;그 이외
 				ELSEIF CFLAG:396 < 2 || FLAG:7 == 2
 					PRINTFORMW 
+					CFLAG:396 = 2
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
-				;처음
-				IF CFLAG:396 == 0
-					PRINTFORMW 
-					CFLAG:396 = 1
-				;2번째 이후
-				ELSE
-					;함락완료
-					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:396 < 4 || FLAG:7 == 2)
-						;연모, 친애
-						IF TALENT:3 || TALENT:6
-							PRINTFORMW 
-						;음란, 창부
-						ELSEIF TALENT:4 || TALENT:7
-							PRINTFORMW 
-						;복종, 예속
-						ELSEIF TALENT:5 || TALENT:8
-							PRINTFORMW 
-						ENDIF
-						CFLAG:396 = 4
-					;굴복각인Lv3
-					ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
-						PRINTFORMW 
-						CFLAG:396 = 3
-					;그 이외
-					ELSEIF CFLAG:396 < 2 || FLAG:7 == 2
-						PRINTFORMW 
-						CFLAG:396 = 2
-					ENDIF
-				ENDIF
+				PRINTFORMW 
 			ENDIF
 		ENDIF
 
@@ -6719,7 +4872,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:398 == 0
-				PRINTFORMW 「뭐、뭐야 이 거울은……」
+				PRINTFORMW 
 				CFLAG:398 = 1
 			;2번째 이후
 			ELSE
@@ -6803,8 +4956,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:400 == 0
-				PRINTFORMW 「욕실인가、딱 좋은데」
-				PRINTFORMW %타겟은% 천천히 샤워를 즐기고 있다……
+				PRINTFORMW 
 				CFLAG:400 = 1
 			;2번째 이후
 			ELSE
@@ -6812,29 +4964,29 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:400 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW %타겟은% 느긋하게 샤워를 즐기고 있다.
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW %타겟은% 몸에 닿는 물줄기의 감촉에 괴로워하고 있다……
+						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-;						PRINTFORMW 
+						PRINTFORMW 
 					ENDIF
 					CFLAG:400 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:400 < 3 || FLAG:7 == 2)
-					PRINTFORMW %타겟은% 느긋하게 샤워를 즐기고 있다.
+					PRINTFORMW 
 					CFLAG:400 = 3
 				;그 이외
 				ELSEIF CFLAG:400 < 2 || FLAG:7 == 2
-					PRINTFORMW %타겟은% 느긋하게 샤워를 즐기고 있다.
+					PRINTFORMW 
 					CFLAG:400 = 2
 				ENDIF
 			ENDIF
 		ELSE
 			IF CFLAG:400 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
-				PRINTFORMW 「후우……」
+				PRINTFORMW 
 			ENDIF
 		ENDIF
 
@@ -6846,27 +4998,24 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:401 == 0
-				IF TALENT:MASTER:남자 == 1 || TALENT:PLAYER:남자 == 1
-					PRINTFORMW 「%조사처리(CSTR:11,"가")% 신부 역……？」
-					PRINTFORMW 「잠깐 기다려 %CALLNAME:MASTER%、납득할 수 없다」
-					PRINTFORMW 그치만 봐、일단 조교하고 있는 거고、라고 말한다.
-					PRINTFORMW 「으으음……」
+				IF TALENT:MASTER:남자 == 1
+					PRINTFORMW 「내가 신부 역할이야……헤헷」
+					PRINTFORMW 「라던가 아니아니아니 그건 어때？」
 				ELSE
-					PRINTFORMW 「……보통、입는 거 반대 아닌가？」
-					PRINTFORMW %타겟은% 조금 당황하고 있다. 재밌다.
-					PRINTFORMW 괜찮아、문제없다고 말하자.
+					PRINTFORMW 「저기……」
+					PRINTFORMW 「보통、입는 건 반대 아냐？　뭔가 이상하지 않아？」
+					PRINTFORMW 괜찮아、문제 없다.
 				ENDIF
 				CFLAG:401 = 1
 			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
-				PRINTFORMW 「별 수 없지……%CALLNAME:MASTER%의 부탁이니까、말이야」
+				PRINTFORMW 「%조사처리(CSTR:12,"가")% 제발 부탁、이라고 하니까 입을게……」
 				CFLAG:401 = 2
 			ENDIF
 		ELSE
 			IF CFLAG:401 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
-				PRINTFORMW 「다음은 %CALLNAME:MASTER% 차례다……」
-				PRINTFORMW 나중에、라고 슬쩍 흘려넘겼다.
+				PRINTFORMW 「뭐랄까、역시 닮았다니까ー라고 생각하는데……」
 			ENDIF
 		ENDIF
 
@@ -7017,7 +5166,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:406 == 0
-			PRINTFORMW 
+			PRINTFORMW 「으겍……뭘 먹이는 거얏！？」
 			CFLAG:406 = 1
 		;2번째 이후
 		ELSE
@@ -7025,7 +5174,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:406 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「%CSTR:12%의 맛、나쁘지는 않아……」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -7036,11 +5185,11 @@ SELECTCASE SELECTCOM
 				CFLAG:406 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:406 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW %타겟은% 정액의 맛에 얼굴을 찌푸리면서도、%마스터와% 서로 혀를 휘감는다……
 				CFLAG:406 = 3
 			;그 이외
 			ELSEIF CFLAG:406 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「으겍、뭐、하는 거야……！」
 				CFLAG:406 = 2
 			ENDIF
 		ENDIF
@@ -7198,7 +5347,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:408 == 0
-			PRINTFORMW 
+			PRINTFORMW 「뭐야、나한테도 봉사시키고 싶은 건가」
+			PRINTFORMW 「해줄테니 제대로 %CSTR:11%의 걸 빨라고」
 			CFLAG:408 = 1
 		;2번째 이후
 		ELSE
@@ -7206,7 +5356,8 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:408 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「%조사처리(CSTR:12,"는")%、여기가 약하지……헤헷」
+					PRINTFORMW 「왜 그래？　%CSTR:11%、입이 비어있어」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -7221,7 +5372,14 @@ SELECTCASE SELECTCOM
 				CFLAG:408 = 3
 			;그 이외
 			ELSEIF CFLAG:408 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				IF TALENT:MASTER:오토코노코 == 1
+					PRINTFORMW 「이 상태로 눈앞에 있는 게 보지였다면 최고였겠지만……」
+				ELSEIF TALENT:MASTER:남자 == 1
+					PRINTFORMW 「왜 내가 남자한테 자지를 빨리면서 빨아주지 않으면 안 되는 거야……」
+				ELSE
+					PRINTFORMW 「흥……보지가 질퍽질퍽이라고. %CSTR:11%의 자지를 빤 것만으로도 흥분해버렸어？」
+					PRINTFORMW 「얼마나 음란한 거야、가하핫！」
+				ENDIF
 				CFLAG:408 = 2
 			ENDIF
 		ENDIF
@@ -7626,7 +5784,7 @@ ENDSELECT
 ;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_PUB317
+@KOJO_MESSAGE_PALAMCNG_A_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -7639,12 +5797,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_PUB317
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_PUB317
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -7867,76 +6025,52 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				IF RAND:2 == 0
-					PRINTFORMW 「으읍！！　……쿨럭、가、갑자기 하지 마……！！」
-				ELSE
-					PRINTFORMW 「후웁、읏、쿠훕！？　……쿨럭、쿨럭！」
-				ENDIF
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				IF TALENT:7
-					IF RAND:2 == 0
-						PRINTFORMW 「으응、음、으으……！！」
-					ELSE
-						PRINTFORMW 「으으응！！　푸핫……좀 더、좀 더 줘……」
-					ENDIF
-				ELSE
-					PRINTFORMW 「응、크읏……푸핫……」
-				ENDIF
+				PRINTFORMW 。
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-;				PRINTFORMW 
+				PRINTFORMW 
 			ENDIF
 			CFLAG:233 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「크、으응……」
+			PRINTFORMW 
 			CFLAG:233 = 3
 		;그 이외
 		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
-			PRINTFORMW 「으으음！！？」
+			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				IF RAND:2 == 0
-					PRINTFORMW 「으응、음……잔뜩 냈군……」
-				ELSE
-					PRINTFORMW 「응、크읏！　후아……왜 그래、이 정도야……？」
-				ENDIF
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				IF TALENT:7
-					IF RAND:2 == 0
-						PRINTFORMW 「으응、음、으음……」
-					ELSE
-						PRINTFORMW 「나왔어……좀 더、좀 더 줘……」
-					ENDIF
-				ELSE
-					PRINTFORMW 「으응、후아……푸하……」
-				ENDIF
+				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-;				PRINTFORMW 
+				PRINTFORMW 
 			ENDIF
 			CFLAG:233 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「응、크으……」
+			PRINTFORMW 
 			CFLAG:233 = 3
 		;그 이외
 		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
-			PRINTFORMW 「큽、쿨럭、쿨럭！！」
+			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
 	ENDIF
@@ -7951,34 +6085,22 @@ IF TFLAG:1 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			IF RAND:2 == 0
-				PRINTFORMW 「오오、나왔어……참을 수 없었나？」
-			ELSE
-				PRINTFORMW 「어、어잇、낸다면 얘기 정도는……」
-			ENDIF
+			PRINTFORMW 
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			IF TALENT:7
-				IF RAND:2 == 0
-					PRINTFORMW 「아아……아까워……」
-				ELSE
-					PRINTFORMW 「손에 낼 정도라면 처음부터 입으로……으음」
-				ENDIF
-			ELSE
-				PRINTFORMW 「큿……」
-			ENDIF
+			PRINTFORMW 
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-;			PRINTFORMW 
+			PRINTFORMW 
 		ENDIF
 		CFLAG:234 = 4
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:234 < 3 || FLAG:7 == 2)
-		PRINTFORMW 「으으음！？」
+		PRINTFORMW 
 		CFLAG:234 = 3
 	;그 이외
 	ELSEIF CFLAG:234 < 2 || FLAG:7 == 2
-		PRINTFORMW 「낸다면 그렇다고 말하고서 해라……」
+		PRINTFORMW 
 		CFLAG:234 = 2
 	ENDIF
 ENDIF
@@ -8018,48 +6140,30 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				IF TALENT:6
-					IF RAND:3 == 0
-						PRINTFORMW 「크오오……느、느껴져、%CSTR:12%의 MAG가 %CSTR:11%의 안에……」
-					ELSEIF RAND:2 == 0
-						PRINTFORMW 「좀 더다、좀 더 내줘 %CALLNAME:PLAYER%！」
-					ELSE
-						PRINTFORMW 「참지 마、좀 더……！」
-					ENDIF
-				ELSE
-					PRINTFORMW 「크읏……느、느껴져、%CSTR:12%의 MAG가 %CSTR:11%의 안에……」
-				ENDIF
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				IF TALENT:6
-					IF RAND:2 == 0
-						PRINTFORMW 「좀 더、좀 더 내라！　좀 더 줘어어엇！！」
-					ELSE
-						PRINTFORMW 「히이이잇！！　나왔어、%CALLNAME:PLAYER%의 정액이 들어와아아！！」
-					ENDIF
-				ELSE
-					PRINTFORMW 「우、크아아아……！
-				ENDIF
+				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-;				PRINTFORMW 
+				PRINTFORMW 
 			ENDIF
 			CFLAG:237 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:237 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「아아、크읏……！」
+			PRINTFORMW 
 			CFLAG:237 = 3
 		;그 이외
 		ELSEIF CFLAG:237 < 2 || FLAG:7 == 2
-			PRINTFORMW 「서、설마！　그、그만둿、안에 하지 마！！」
+			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -8118,7 +6222,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)
-		PRINTFORMW 
+		PRINTFORMW 「우오옷、착취당한다아……！」
 		CFLAG:239 = 3
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2)
@@ -8126,7 +6230,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 		CFLAG:239 = 2
 	;그 이외
 	ELSEIF CFLAG:239 < 1 || FLAG:7 == 2
-		PRINTFORMW 
+		PRINTFORMW 「싼다、잔뜩 싼다아아！！」
 		CFLAG:239 = 1
 	ENDIF
 ENDIF
@@ -8135,7 +6239,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_PUB317
+@KOJO_MESSAGE_PALAMCNG_E_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -8148,12 +6252,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_PUB317
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_PUB317
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -8171,11 +6275,11 @@ IF TFLAG:15 >0
 		CFLAG:240 = 3
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2)
-		PRINTFORMW 「아아、크읏……！」
+		PRINTFORMW 
 		CFLAG:240 = 2
 	;그 이외
 	ELSEIF CFLAG:240 < 1 || FLAG:7 == 2
-		PRINTFORMW 「서、설마！　그、그만둿、안에 하지 마！！」
+		PRINTFORMW 
 		CFLAG:240 = 1
 	ENDIF
 ENDIF
@@ -8184,7 +6288,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_PUB317
+@KOJO_MESSAGE_PALAMCNG_B_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -8197,12 +6301,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_PUB317
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_PUB317
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -8229,7 +6333,7 @@ ENDIF
 ;처음 A절정
 ;-------------------------------------------------
 IF NOWEX:2 > 0 && CFLAG:243 == 0
-	PRINTFORMW 
+	PRINTFORMW 「우앗、앗아앗、구멍으로…가버려어……！」
 	CFLAG:243 = 1
 ENDIF
 
@@ -8244,7 +6348,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -8304,34 +6408,15 @@ ENDIF
 IF TFLAG:10 > 0
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)
-		;연모, 친애
-		IF TALENT:3 || TALENT:6
-			IF TALENT:6
-					IF RAND:3 == 0
-						PRINTFORMW 「우、오、……나、나온닷！」
-					ELSEIF RAND:2 == 0
-						PRINTFORMW 「큿……%CALLNAME:MASTER%！　내겠어！」
-					ELSE
-						PRINTFORMW 「응、으읏……가、간다、앗！！」
-					ENDIF
-			ELSE
-				PRINTFORMW 「으、아、……나、나와！」
-			ENDIF
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「큿、가！　간닷！　크앗、아아아앗！」
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「……으、크으읏！」
-		ENDIF
+		PRINTFORMW 「안 됏、%CSTR:12%、이제 나와앗……！」
 		CFLAG:246 = 3
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2)
-		PRINTFORMW 「후、큿、우오오옷……！」
+		PRINTFORMW 「우오옷、큿、우오옷……！」
 		CFLAG:246 = 2
 	;그 이외
 	ELSEIF CFLAG:246 < 1 || FLAG:7 == 2
-		PRINTFORMW 「큭、내겠어！」
+		PRINTFORMW 「으럇、싼다아앗！！」
 		CFLAG:246 = 1
 	ENDIF
 ENDIF
@@ -8371,7 +6456,7 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 		CFLAG:248 = 2
 	;그 이외
 	ELSEIF CFLAG:248 < 1 || FLAG:7 == 2
-		PRINTFORMW 
+		PRINTFORMW 「후웃、후우우우우우웃、오줌、나와버렸다구……」
 		CFLAG:248 = 1
 	ENDIF
 ENDIF
@@ -8380,7 +6465,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_PUB317
+@KOJO_MESSAGE_PALAMCNG_C_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -8393,12 +6478,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_PUB317
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_PUB317
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -8432,7 +6517,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_PUB317
+@KOJO_MESSAGE_PALAMCNG_D_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -8445,12 +6530,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_PUB317
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_PUB317
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -8542,7 +6627,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_PUB317
+@KOJO_MESSAGE_MARKCNG_PUB316
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -8555,12 +6640,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_PUB317
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_PUB317
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_PUB316
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -8573,43 +6658,16 @@ IF TFLAG:22 == 3
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW ………
-			PRINTFORMW ……
-			PRINTFORMW …
-			PRINTFORMW 「……이걸로、만족하나」
-			PRINTFORMW 위험하다.
-			PRINTFORMW %CALLNAME:MASTER%의 처사에 %타겟은% 분노와 슬픔을 노골적으로 드러내고 있다.
-			PRINTFORMW 마치 방심한 자신이 바보였다는 듯이 %CALLNAME:MASTER%에게서 시선을 피하는 %CALLNAME:TARGET%.
-			PRINTFORMW ……조금 분위기를 타버려서、무심코、너무、해버렸다.
-			PRINTFORMW 해버렸다、어쩌지.
-			PRINTFORMW 　
-			PRINTFORMW %CALLNAME:TARGET%의 기분을 완전히 망쳐버렸다.
-			PRINTFORMW 순종Lv이 떨어졌다.
-			PRINTFORMW 태도가 반항적이 되었다.
-			;[남성혐오][여성혐오]の취득
-			IF TALENT:MASTER:남자 == 1 || TALENT:MASTER:오토코노코 == 1
-				PRINTFORMW %타겟은% %CALLNAME:MASTER%에게 분노를 안고 있다……
-				TALENT:82 = 1
-			ELSE
-				PRINTFORMW %타겟은% %CALLNAME:MASTER%에게 분노를 안고 있다……
-				TALENT:88 = 1
-			ENDIF
-			;복종の球が0、부정の球が2万5千、순종をLv0、반발각인Lv3、[반항적]の취득
-			JUEL:4 = 0
-			JUEL:100 = 25000
-			ABL:0 = 0
-			MARK:3 = 3
-			TALENT:11 = 1
-			PRINTFORMW 나중에 뭔가 기분을 풀만한 걸 준비하지 않으면 용서해주지 않을 것이다……
+			PRINTFORMW 
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-;			PRINTFORMW 
+			PRINTFORMW 
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-;			PRINTFORMW 
+			PRINTFORMW 
 		ENDIF
 	ELSE
-;		PRINTFORMW 
+		PRINTFORMW 
 	ENDIF
 ENDIF
 
@@ -8622,13 +6680,13 @@ IF TFLAG:23 == 3
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「앗、하앗、크아아아아앗！！」
+			PRINTFORMW 「우옷、옷！！　우오오오오옷！！」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「으、크오오오오！！！」
+			PRINTFORMW 
 		ENDIF
 	ELSE
 		PRINTFORMW 「우옷、옷！！　우오오오오옷！！」
@@ -8674,18 +6732,15 @@ IF TFLAG:21 == 3
 	ENDIF
 ENDIF
 
-
-
-
 ;-------------------------------------------------
 ;이벤트구상 모음（X1、X2을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_PUB317
+@KOJO_MESSAGE_EVENT_PUB316
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_PUB317
+;	CALL KOJO_MESSAGE_EVENT_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 SELECTCASE TFLAG:13
@@ -8840,7 +6895,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		
+		;일어나자 곁에서 자고 있다
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -9532,7 +7587,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]취득時
+		;;[전속노예]취득시
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE
@@ -9550,6 +7605,148 @@ SELECTCASE TFLAG:13
 				ENDIF
 				CFLAG:285 = 1
 			ENDIF
+
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마와 섹스한다
+		;당하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
+		;-------------------------------------------------
+	CASE 79
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:602 < 1 || FLAG:7 == 2)
+			PRINTFORML 「히힛、시켜줄 거야？」
+			PRINTFORMW 「그럼、사양 않고……。」
+			
+			CALL EVENT_MESSAGE
+			PRINTFORML 
+			
+			PRINTFORML 「꽤 좋았다구。」
+			PRINTFORMW 「다시、하고 싶어지면 상대해줄게。」
+			CFLAG:602 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
+		;-------------------------------------------------
+	CASE 80
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:603 < 1 || FLAG:7 == 2)
+			IF HAVE_PENIS(PLAYER)
+				PRINTFORML 「어이어이、그다지 취미가 아닌데……。」
+				PRINTFORMW 「칫……、어쩔 수 없나。」
+				
+				CALL EVENT_MESSAGE
+				PRINTFORML 
+				
+			ELSE
+				IF RAND:2 == 0
+					PRINTFORMW 「%CSTR:일인칭%의 혀놀림으로 앙앙거리게 해주지。」
+				ELSE
+					PRINTFORMW 「%CSTR:일인칭%에게 핥아지면、다음은 자지를 원하게 된다고。」
+				ENDIF
+				
+				CALL EVENT_MESSAGE
+				PRINTFORML 
+				
+			ENDIF
+			CFLAG:603 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：그 장소에서 자위
+		;봉사하는 쪽
+		;-------------------------------------------------
+	CASE 81
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:604 < 1 || FLAG:7 == 2)
+			IF RAND:2 == 0
+				PRINTFORML 「어이어이、이런 곳에서 자위하라고、정말이냐？」
+				PRINTFORMW 「이런이런、어쩔 수 없나。그쪽으로 튀어도 불평하지마。」
+			ELSE
+				PRINTFORML 「칫、곤란한데……、참을 수 없다고……。」
+				PRINTFORMW 「%CSTR:일인칭%의 왕똘똘이 보고、발정하지 마。」
+			ENDIF
+			CALL EVENT_MESSAGE
+			PRINTFORML 
+			
+			CFLAG:604 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：그늘에서 자위
+		;봉사하는 쪽
+		;-------------------------------------------------
+	CASE 82
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:605 < 1 || FLAG:7 == 2)
+			PRINTFORML 「잠깐 기다려。」
+			PRINTFORMW 「말해두지만、엿보지 말라고。」
+			
+			CALL EVENT_MESSAGE
+			PRINTFORML 
+			
+			CFLAG:605 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마와 섹스한다
+		;하는 쪽
+		;PLAYER에 상대의 번호가 들어있습니다
+		;-------------------------------------------------
+	CASE 83
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:606 < 1 || FLAG:7 == 2)
+			PRINTFORML 「흥분해버렸어……가라앉질 않는다구。」
+			PRINTFORMW 「잠깐……하게 해줘。」
+			
+			CALL EVENT_MESSAGE
+			PRINTFORML 
+			
+			IF RAND:2 == 0
+				PRINTFORML 「기분 좋아서、대량으로 싸버렸어。」
+				PRINTFORMW 「다시、하고 싶어지면 맡기라고。」
+			ELSE
+				PRINTFORML 「히힛、기분 좋았다구。」
+				PRINTFORMW 「너도 좋았지？　그럼、불만 없는 거지？」
+			ENDIF
+			CFLAG:606 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사받는 쪽
+		;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
+		;-------------------------------------------------
+	CASE 84
+		;CALL EVENT_MESSAGE
+		IF (CFLAG:607 < 1 || FLAG:7 == 2)
+			PRINTFORML 「흥분해버렸어……가라앉질 않는다구。」
+			PRINTFORMW 「잠깐……하게 해줘。」
+			
+			CALL EVENT_MESSAGE
+			PRINTFORML 
+			
+			IF RAND:3 == 0
+				PRINTFORML 「그래 그래、확실하게 남은 것도 빨아줘。」
+				PRINTFORMW 「자지가 끈적끈적한 채로 다니고 싶진 않으니까。」
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「히힛、기분 좋아서 대량으로 싸버렸다구。」
+				PRINTFORMW 「전부 마셨어？　이봐、입 벌려봐。」
+			ELSE
+				PRINTFORML 「%CSTR:일인칭%의 정액、맛있었지？」
+				PRINTFORMW 「마시고 싶어지면、언제든 맛보게 해주니깐。」
+			ENDIF
+			CFLAG:607 = 1
+		ENDIF
+		;-------------------------------------------------
+		;던전내 성욕처리：윤간이벤트
+		;봉사하는 쪽
+		;PLAYER에 실행자 = 윤간하는 악마의 번호가 들어있습니다
+		;-------------------------------------------------
+	CASE 85
+		CALL EVENT_MESSAGE
+		IF (CFLAG:608 < 1 || FLAG:7 == 2)
+			PRINTFORMW 
+			CFLAG:608 = 1
+		ENDIF
+
 	CASEELSE
 		SIF FLAG:6 > 0
 			CALL EVENT_MESSAGE
@@ -9560,7 +7757,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;조건설정
 ;-------------------------------------------------
-@EVENTTURNEND_PUB317
+@EVENTTURNEND_PUB316
 ;#LATER
 ;SIF TARGET < 0
 ;	RETURN 0
@@ -9581,7 +7778,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7
@@ -9591,12 +7788,12 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_PUB317
+@KOJO_MESSAGE_ENDING_PUB316
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_ENDING_PY1_PUB317
+;	CALL KOJO_MESSAGE_ENDING_PY1_PUB316
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -9648,7 +7845,7 @@ ENDSELECT
 ;RETURN 0
 
 
-@ENEMY_BATTLE_EVENT_PUB317, ARG, ARG:1, ARG:2
+@ENEMY_BATTLE_EVENT_PUB316, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9662,7 +7859,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-@BATTLE_EVENT_PUB317, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_PUB316, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9677,15 +7874,8 @@ IF TFLAG:전투이벤트 == 2
 ENDIF
 
 
-@BATTLE_MESSAGE_PUB317,ARG,ARG:1 = 0
-
-;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-;IF CFLAG:ARG:입력행동 == 
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;	PRINTFORML ┃%"",72,LEFT%┃
-;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-;ELSEIF ARG:1 > 0
+@BATTLE_MESSAGE_PUB316,ARG,ARG:1 = 0
+IF ARG:1 > 0
 	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
 ;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
@@ -9696,12 +7886,12 @@ ENDIF
 ;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"영맹")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "……이해했다",72,LEFT%┃
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교활")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "이、보고 있다고！",72,LEFT%┃
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"잔학")
@@ -9751,5 +7941,6 @@ ENDIF
 ;	ENDSELECT
 ;ELSE
 ;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
-;ENDIF
+ENDIF
+
 

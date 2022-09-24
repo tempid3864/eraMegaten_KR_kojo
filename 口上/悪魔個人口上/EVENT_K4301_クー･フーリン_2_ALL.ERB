@@ -125,7 +125,7 @@
 ;-------------------------------------------------
 ;eraMegaten専用　조교時及び공격時구상テンプレート
 
-;4301_2と4301_2をキャラ번호に置換し、Y1を조수のキャラ번호に置換してください
+;4301_2と4301_2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4301_2,Y1は1、4301_2は01のように変えてください
 ;また、特定個人の구상ではなく、회화타입別に対応させたい場合は
 ;K4301_2をPUB(회화타입の번호)に置き換えてください。
@@ -545,7 +545,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -7712,7 +7712,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료　「」
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 			IF RAND:2 == 0
@@ -7734,7 +7734,7 @@ IF TFLAG:2 > 0
 		ENDIF
 		CFLAG:802 += 1
 		CFLAG:803 += 1
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -10084,7 +10084,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 			PRINTFORML ┃%"재정비합니다.",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;弱体系
+	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

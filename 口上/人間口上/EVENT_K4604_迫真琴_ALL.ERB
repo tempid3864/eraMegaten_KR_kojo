@@ -326,7 +326,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 침대 끝에 앉자, %CALLNAME:TARGET%가 뒤에서 살포시 안았다.
@@ -374,7 +374,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -385,7 +385,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
 			PRINTFORMW 
@@ -1396,7 +1396,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:315 == 0
-			;ス마이ル
+			;スマイル
 			IF TFLAG:17 == 0
 				PRINTFORMW 「선물… %CSTR:일인칭%에게 주는 건가?」
 				PRINTFORMW 자신이 생각하는, 최고의 스마일을 %CALLNAME:TARGET%에게 지어준다.
@@ -1414,7 +1414,7 @@ SELECTCASE SELECTCOM
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;ス마이ル
+			;スマイル
 			IF TFLAG:17 == 0
 				PRINTFORMW 
 			;お酒
@@ -3428,7 +3428,7 @@ SELECTCASE SELECTCOM
 			CFLAG:345 = 1
 		;2번째 이후
 		ELSE
-			;お掃除フェラ
+			;청소펠라
 			IF CFLAG:800 == 1
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
@@ -5908,7 +5908,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -7184,7 +7184,7 @@ IF CFLAG:106
 			ENDIF
 		ENDIF
 	ENDIF
-	;お掃除フェラフラグオン
+	;청소펠라フラグオン
 	CFLAG:800 = 1
 	RETURN 0
 ENDIF
@@ -7218,7 +7218,7 @@ IF TFLAG:9 == 1
 		PRINTFORMW 
 		CFLAG:231 = 2
 	ENDIF
-	;お掃除フェラフラグオン
+	;청소펠라フラグオン
 	CFLAG:800 = 1
 ENDIF
 
@@ -7247,7 +7247,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7299,7 +7299,7 @@ IF TFLAG:0 > 0
 			CFLAG:233 = 2
 			ENDIF
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -7400,7 +7400,7 @@ IF TFLAG:1 > 0
 		ENDIF
 		CFLAG:234 = 2
 	ENDIF
-	;お掃除フェラフラグオン
+	;청소펠라フラグオン
 	CFLAG:800 = 1
 ENDIF
 
@@ -7433,7 +7433,7 @@ IF TFLAG:34 > 0
 		PRINTFORMW 
 		CFLAG:235 = 2
 	ENDIF
-	;お掃除フェラフラグオン
+	;청소펠라フラグオン
 	CFLAG:800 = 1
 ENDIF
 ;-------------------------------------------------
@@ -7471,7 +7471,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -7495,7 +7495,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -7608,7 +7608,7 @@ IF TFLAG:2 > 0
 			CFLAG:239 = 2
 		ENDIF
 	ENDIF
-	;お掃除フェラフラグオン
+	;청소펠라フラグオン
 	CFLAG:800 = 1
 ENDIF
 
@@ -7766,7 +7766,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -9715,7 +9715,7 @@ ENDSELECT
 ;REND
 ;SIF A && A+B >= XXX
 ;	CFLAG:21 = 2
-;１체エンド用分岐フラグ、１체エンドのある上位함락소질のみコメントアウトを해제する
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
 ;SIF TALENT:6
 ;	CFLAG:21 = 1
 ;SIF TALENT:7

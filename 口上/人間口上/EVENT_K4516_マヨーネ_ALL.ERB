@@ -372,7 +372,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 								ENDIF
 						ENDIF
 					ENDIF
-				;非처녀
+				;비처녀
 				ELSE
 					;ヤりマン
 					IF EXP:MASTER:Ｖ경험 >= 100
@@ -1166,7 +1166,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		IF TALENT:유아체형 == 1
-			;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			K:1 = RAND:10
 			IF K:1 == 0
 				PRINTFORMW 「%CSTR:12%~~~!」
@@ -1547,7 +1547,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 					ENDIF
 				ENDIF
 			ELSE
-				;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+				;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 				K = RAND:8
 				IF K == 0
 					PRINTFORMW 「응, ,  아아!　%CSTR:12%, %CSTR:12%~!」
@@ -1981,7 +1981,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;마조끼Lv9이상
 		IF ABL:9 >= 9
 			PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME%を呼び出した。
@@ -4508,7 +4508,7 @@ SELECTCASE SELECTCOM
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			;ス마이ルを프레젠트
+			;スマイルを프레젠트
 			IF TFLAG:17 == 0
 				IF ASSIPLAY > 0
 					IF ASSI > 0 && 근친체크(TARGET, ASSI) && RESULTS == "딸"
@@ -13294,7 +13294,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSEIF TEQUIP:29 >= 1
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -14640,7 +14640,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -14700,7 +14700,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 과연 마요네조차도, 핏줄 선 페니스로 목을 직접 부딪히는 충격과 대량의 정액에는 견디지 못하고 못하고, 기침을 하며 토해내 버렸다.
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 5 || FLAG:7 == 2)
@@ -14986,7 +14986,7 @@ IF TFLAG:2 > 0
 		ENDIF
 		CFLAG:802 += 1
 		CFLAG:803 += 1
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
@@ -15561,7 +15561,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	;함락완료
@@ -16279,7 +16279,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		
+		;일어나자 곁에서 자고 있다
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -16857,7 +16857,7 @@ SELECTCASE TFLAG:13
 				;父親が主人以外
 				ELSE
 					;主人以外が一番。
-					;とりあえずＮＴＲ相手の아이を임신と仮定。
+					;とりあえずＮＴＲ相手の子供を妊娠と仮定。
 					IF FAVORITE_1(TARGET) != MASTER
 						;애ＮＴＲ
 						IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
@@ -16890,7 +16890,7 @@ SELECTCASE TFLAG:13
 						ELSE
 							PRINTFORML 
 						ENDIF
-					;당신が一番
+					;あなたが一番
 					ELSE
 						;연모, 친애
 						IF TALENT:3 || TALENT:6
@@ -18002,7 +18002,7 @@ SELECTCASE TFLAG:13
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[専属奴隷]취득時
+		;;[전속노예]취득시
 		;-------------------------------------------------
 	CASE 42
 			CALL EVENT_MESSAGE

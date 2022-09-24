@@ -50,9 +50,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に이용してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;例： EVENTTRAIN_K4999 → EVENTTRAIN_K4999_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4999,ARG = 0
@@ -223,7 +223,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			LOCALS:0 = 
 		ELSEIF RAND:2 == 0
@@ -233,7 +233,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			LOCALS:0 = 
 		ELSEIF RAND:2 == 0
@@ -243,7 +243,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			LOCALS:0 = 
 		ELSEIF RAND:2 == 0
@@ -254,7 +254,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ENDIF
 	;그 외, 공통
 	IF LOCALS:0 == ""
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			PRINTFORML 
 		ELSEIF RAND:2 == 0
@@ -1676,7 +1676,7 @@ SELECTCASE SELECTCOM
 						PRINTFORML 
 						LOCALS:0 =
 					ENDIF
-				;非처녀
+				;비처녀
 				ELSE
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 						;연모, 친애
@@ -2725,7 +2725,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -2816,7 +2816,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3079,7 +3079,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3216,7 +3216,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3307,7 +3307,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3490,7 +3490,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3627,7 +3627,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3713,7 +3713,7 @@ SELECTCASE SELECTCOM
 				IF LOCALS:0 == ""
 					PRINTFORML 
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -5513,7 +5513,7 @@ SELECTCASE SELECTCOM
 				CFLAG:364 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;조수が気持ちよくて感じているセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;조수がこっちに来てと言うセリフ
@@ -5610,7 +5610,7 @@ SELECTCASE SELECTCOM
 				CFLAG:366 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -5619,7 +5619,7 @@ SELECTCASE SELECTCOM
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;레즈っぽいセリフに対するセリフ
+		;레즈 같은 대사에 대한 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
 		;둘의 펠라는 기분 좋지？대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
@@ -5669,7 +5669,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -5678,11 +5678,11 @@ SELECTCASE SELECTCOM
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;お互いに유두がこすれて気持ちいいセリフ
+		;서로 젖꼭지가 스쳐서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
-		;二人の파이즈리で気持ちよくなってセリフ
+		;둘의 파이즈리로 기분 좋아져 줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
-		;파이즈리で感じているの？セリフ
+		;파이즈리로 느끼고 있어？대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(7)
 		
 		;대사가 없었을시의 보험(1행)
@@ -6309,7 +6309,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -6866,7 +6866,7 @@ SELECTCASE SELECTCOM
 						PRINTFORML 
 						LOCALS:0 =
 					ENDIF
-				;非처녀
+				;비처녀
 				ELSE
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 						;연모, 친애
@@ -8236,7 +8236,7 @@ SELECTCASE SELECTCOM
 				CFLAG:397 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;범해져서 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;우리들, 정말 사이 좋지？대사
@@ -8641,8 +8641,8 @@ SELECTCASE SELECTCOM
 				CFLAG:405 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
-		;정액とてもおいしいセリフ
+		;조수구상 호출 함수
+		;정액이 무척 맛있어 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;이건 내꺼야！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -9057,8 +9057,8 @@ SELECTCASE SELECTCOM
 				CFLAG:407 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -9221,7 +9221,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -9306,7 +9306,7 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 					LOCALS:0 =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -9561,7 +9561,7 @@ SELECTCASE SELECTCOM
 				CFLAG:417 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -9617,7 +9617,7 @@ SELECTCASE SELECTCOM
 				CFLAG:418 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
@@ -9713,8 +9713,8 @@ SELECTCASE SELECTCOM
 				CFLAG:439 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -9767,8 +9767,8 @@ SELECTCASE SELECTCOM
 				CFLAG:440 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -10606,7 +10606,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140			
 		;大量사정						
 		IF TFLAG:0 > 1
@@ -10674,7 +10674,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;大量사정						
 		IF TFLAG:0 > 1
@@ -11036,7 +11036,7 @@ IF TFLAG:2 > 0
 				CFLAG:237= 1	
 			ENDIF		
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;大量사정						
 		IF TFLAG:2 > 1
@@ -11412,7 +11412,7 @@ FOR COUNT,0,51
 	LOCAL:COUNT = 0
 NEXT
 
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B			
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)		
@@ -14848,7 +14848,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
@@ -14943,7 +14943,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -15056,12 +15056,12 @@ NEXT
 SIF LOCAL:COUNT == 0
 	PRINTW
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（4999をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（4999을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K4999
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM

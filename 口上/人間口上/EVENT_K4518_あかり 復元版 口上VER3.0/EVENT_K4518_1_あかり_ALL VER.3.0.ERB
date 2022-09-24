@@ -50,9 +50,9 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-;この関数のコメントアウトを外すと、구상の選択時に選択肢として候補にあがります
+;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;既に구상のあるキャラや회화타입の別版の구상を作成する時に利用してください
-;その際、この関数を含めたこのファイル内の関数名すべてに_任意の1-49(汎用구상なら1-9)の数字を加えてください
+;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_K4518_1 → EVENTTRAIN_K4518_1_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4518_1,ARG = 0
@@ -1728,7 +1728,7 @@ SELECTCASE SELECTCOM
 				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -1871,7 +1871,7 @@ SELECTCASE SELECTCOM
 				;그 이외
 				IF KSTR:0 == ""
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -2101,7 +2101,7 @@ SELECTCASE SELECTCOM
 					W:K = 1
 					KSTR:(K++) = %CALLNAME:TARGET%は逆らっても無駄なことを悟ると泣きながら、命令に従った…、
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -2247,7 +2247,7 @@ SELECTCASE SELECTCOM
 				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -2396,7 +2396,7 @@ SELECTCASE SELECTCOM
 				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF
-			;非처녀
+			;비처녀
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
@@ -3947,7 +3947,7 @@ W:K = 1
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140			
 		;大量사정						
 		IF TFLAG:0 > 1
@@ -4015,7 +4015,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		;大量사정						
 		IF TFLAG:0 > 1
@@ -4381,7 +4381,7 @@ IF TFLAG:2 > 0
 				CFLAG:237= 1	
 			ENDIF		
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;大量사정						
 		IF TFLAG:2 > 1
@@ -4762,7 +4762,7 @@ K = 0
 VARSET KSTR
 VARSET W
 
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B			
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)		
@@ -7076,7 +7076,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
@@ -7171,7 +7171,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -7291,7 +7291,7 @@ SIF W:K == 0
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K4518_1
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
@@ -7408,7 +7408,7 @@ SIF ARG < 0 && NO:ARG != 4518
 LOCAL:1 = 1
 LOCALS = EMPTY
 SELECTCASE TFLAG:전투이벤트
-	;COOP発動 ARGは発動者
+	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = チョメチョメターイム！
@@ -7426,7 +7426,7 @@ SELECTCASE TFLAG:전투이벤트
 		ENDIF
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;相手が死んだ
+		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = %CSTR:ARG:이인칭%っ、やったよ！　みててくれたっ！？
@@ -7437,7 +7437,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = 転生전사이슈킥の힘、思い知ったかー！
 				ENDIF
 			ENDIF
-		;弱点をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				IF RAND:2
@@ -7446,10 +7446,10 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = あー、せっかくのチョメチョメタイムなのに방어なんかしてずるいぞー！
 				ENDIF
 			ELSE
-				;こっちはCOOP発動に回すためにカット
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
 			IF RAND:2
 				LOCALS = どーだ！　これが転生전사の힘だ！
@@ -7484,7 +7484,7 @@ SELECTCASE TFLAG:전투이벤트
 	;피데미지
 	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
 	CASE 12
-		;死んだ
+		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = %CSTR:ARG:이인칭%…ごめんね…아카리、もうダメみたい…
@@ -7495,7 +7495,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = ま…、まだ아카리は…うぐぅ…
 				ENDIF
 			ENDIF
-		;大데미지
+		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
 				LOCALS = 助けて…、%CSTR:ARG:이인칭%

@@ -411,7 +411,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDSELECT
 	;음란, 창부
 	;ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;IF RAND:3 == 0
 		;	PRINTFORMW 
 		;ELSEIF RAND:2 == 0
@@ -421,7 +421,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		;ENDIF
 	;복종, 예속
 	;ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		;IF RAND:3 == 0
 		;	PRINTFORMW 
 		;ELSEIF RAND:2 == 0
@@ -431,7 +431,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		;ENDIF
 	;그 외, 共通
 	ELSE
-		;랜덤で구상が변화する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			PRINTFORMW 
 		ELSEIF RAND:2 == 0
@@ -4416,7 +4416,7 @@ CASE 15
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -5059,7 +5059,7 @@ CASE 15
 				CFLAG:364 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;조수が気持ちよくて感じているセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;조수がこっちに来てと言うセリフ
@@ -5152,7 +5152,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -5161,7 +5161,7 @@ CASE 15
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;레즈っぽいセリフに対するセリフ
+		;레즈 같은 대사에 대한 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
 		;二人のフェラは気持ちいいでしょ? セリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
@@ -5208,7 +5208,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -5217,9 +5217,9 @@ CASE 15
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;평소보다 느끼고 있구나 라는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
-		;お互いに유두がこすれて気持ちいいセリフ
+		;서로 젖꼭지가 스쳐서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
-		;二人の파이즈리で気持ちよくなってセリフ
+		;둘의 파이즈리로 기분 좋아져 줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(6)
 		;파이즈리で感じているの? セリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(7)
@@ -6770,7 +6770,7 @@ CASE 15
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ구상が出るように변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -6821,7 +6821,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과		
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:397 < 4 || FLAG:7 == 2)	
@@ -6853,7 +6853,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;범해져서 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;私たち, とっても仲がいいでしょ? セリフ
@@ -7160,7 +7160,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:405 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:405 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:405 < 4 || FLAG:7 == 2)	
@@ -7186,8 +7186,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;정액とてもおいしいセリフ
+		;조수구상 호출 함수
+		;정액이 무척 맛있어 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;これはあたしのものよ! セリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -7556,7 +7556,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:407 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:407 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:407 < 4 || FLAG:7 == 2)	
@@ -7582,8 +7582,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;どんどんイキなさい! セリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -7953,7 +7953,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:417 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:417 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:417 < 4 || FLAG:7 == 2)	
@@ -7979,7 +7979,7 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;함께 기분 좋아지자는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;내쪽이 더 기분 좋게 해줄 께 하는 대사
@@ -8031,7 +8031,7 @@ CASE 15
 				CFLAG:418 = 2
 			ENDIF
 		ENDIF
-		;조수구상호출関数
+		;조수구상 호출 함수
 		;무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
@@ -8121,8 +8121,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -8172,8 +8172,8 @@ CASE 15
 			ENDIF
 		ENDIF
 		
-		;조수구상호출関数
-		;속이 무척 기분 좋아 대사
+		;조수구상 호출 함수
+		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;입がとても気持ちいいセリフ
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
@@ -8754,7 +8754,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
-	;이라마치오で사정
+	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -8781,7 +8781,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외の입사정
+	;그 이외의 입사정
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -8914,7 +8914,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 78 || SELECTCOM == 79 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 			;通す	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)	
@@ -8940,7 +8940,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
-	;奥攻め섹스系
+	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 			;通す	
@@ -9140,7 +9140,7 @@ ENDIF
 ;-------------------------------------------------
 ;절정
 ;-------------------------------------------------
-;強절정
+;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
@@ -11384,7 +11384,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で입봉사
+		;교회에서 입봉사
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
@@ -11479,7 +11479,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;교회で性봉사
+		;교회에서 성봉사
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
@@ -11757,12 +11757,12 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;투기장 패배시 구상 모음（3118をキャラ번호に置換する） 기본的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（3118을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K3118
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
-		;오니＆蔦
+		;오니＆덩굴
 		;-------------------------------------------------
 	CASE 1
 			CALL MESSAGE_LOSE_COLOSSEUM
