@@ -29,10 +29,10 @@
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
 ;201와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 201, Y1은 1, X2는 01과 같이 바꿔주세요
-;そしてコマンド内の適当な조건の下のPRINTFORMW の後ろに半角スペースを置いてセリフを추가してください
+;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
 ;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
-;最後にread meにも눈を通しておくことをお勧めします
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -1081,7 +1081,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;中に사정されました
+					;中に射精されました
 					IF TCVAR:TARGET:101 > 0
 						IF RAND:2 == 0
 							PRINTFORML 크게 벌려진 %CALLNAME%의 음순 속에서는、부어졌던 %CALLNAME:MASTER%의 정액이 끝없이 흘러내린다
@@ -1128,7 +1128,7 @@ SELECTCASE SELECTCOM
 				CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
-				;中に사정されました
+				;中に射精されました
 				IF TCVAR:TARGET:101 > 0
 					PRINTFORML 펼쳐진 %CALLNAME%의 사타구니에서는、부어졌던 %CALLNAME:MASTER%의 정액이 흘러내리고 있었다
 					PRINTFORML 「정말이지、사양 말고 내줘서 말이지」
@@ -1197,7 +1197,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;二穴바이브オナニー
+					;二穴バイブオナニー
 					IF TEQUIP:13 == 1 && TEQUIP:14 == 1
 						IF RAND:2 == 0
 							PRINTFORML 「아아앗%UNICODE(0x2661)%　앞도 뒤도 가득해에%UNICODE(0x2661)%」
@@ -1207,7 +1207,7 @@ SELECTCASE SELECTCOM
 							PRINTFORML 「아아앗%UNICODE(0x2661)%　응하아아아앗%UNICODE(0x2661)%」
 							PRINTFORMW %조사처리(CALLNAME,"는")% 짐승 같은 소리를 지르면서、앞뒤 구멍을 점령한 바이브를 격렬하게 찔러대고 있다
 						ENDIF
-					;바이브オナニー
+					;バイブオナニー
 					ELSEIF TEQUIP:13 == 1
 						IF RAND:2 == 0
 							PRINTFORMW 「이 바이브으%UNICODE(0x2661)%　좋은 곳에 닿았어엇%UNICODE(0x2661)%」
@@ -1216,7 +1216,7 @@ SELECTCASE SELECTCOM
 							PRINTFORML 「%CSTR:11% 말이지、장난감 같은 것보다 날것이 더 좋은데에%UNICODE(0x2661)%」
 							PRINTFORMW %조사처리(CALLNAME,"는")% 질에 물린 바이브를 움직이면서、%CALLNAME:MASTER%의 사타구니를 향해 뜨거운 시선을 던졌다
 						ENDIF
-					;애널바이브オナニー
+					;アナルバイブオナニー
 					ELSEIF TEQUIP:14 == 1
 						IF RAND:2 == 0
 							PRINTFORML 「히이이잉%UNICODE(0x2661)%　어、엉덩이가 뜨거워엇%UNICODE(0x2661)%」
@@ -1227,7 +1227,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 완전 마음에 드는 것 같다
 						ENDIF
 					ELSE
-						;中に사정されました
+						;中に射精されました
 						IF TCVAR:TARGET:101 > 0
 							IF RAND:2 == 0
 								PRINTFORML 「봐봐、%CSTR:12%%UNICODE(0x2661)%　%조사처리(CSTR:12,"가")% 내준 게 이렇게 나와%UNICODE(0x2661)%」
@@ -7262,7 +7262,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A

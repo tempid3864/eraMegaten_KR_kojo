@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;【데빌서바이버２/柳谷乙女구상】
+;【デビルサバイバー２/柳谷乙女口上】
 ;柳谷乙女
 ;-------------------------------------------------
 
@@ -93,7 +93,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORML ……
 	PRINTFORML …
 	PRINTFORMW 「%CSTR:이인칭%의 제안에 따르겠습니다」
-	;縁이벤트
+	;縁イベント
 	;IF DB:XX == 1
 	;	PRINTFORMW 「그 대신에… 딸한테는 손대지 않겠다고 약속해 주세요」
 	;	PRINTFORMW %CALLNAME:MASTER%와 마주보고 있는 연분홍색의 간호사복을 입고 백의를 두른 여자,
@@ -107,10 +107,10 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 불안감을 드러내듯 살짝 고개를 숙인 웨이브진 금발이 흔들린다.
 	PRINTFORMW %CALLNAME%에게는 노예로서의 입장을 앞으로 충분히 가르쳐주지 않으면 안 될 것이다.
 	PRINTFORMW %CALLNAME:MASTER%은 말없이 가녀린 여성의 손목을 잡고, 억지로 침대에 밀어 넘어뜨렸다.
-;	これもう필요한いでしょ。인간の場合は-1で加入して조교종료後に전투참가できなくなるし、악마は本来この処理ないし
+;	これもう必要ないでしょ。人間の場合は-1で加入して調教終了後に戦闘参加できなくなるし、悪魔は本来この処理ないし
 ;	IF CFLAG:전투참가불가능 == 0
 ;		DRAWLINE
-;		PRINTFORMW ※%NAME:TARGET%는 %NAME:MASTER%에 대한 신뢰를 잃어, 전투에 참가하지 않게 됩니다.※
+;		PRINTFORMW ※%NAME:TARGET%は%NAME:MASTER%への信頼を失い、戦闘に参加しなくなります※
 ;		SIF CFLAG:포지션 > 0
 ;			CALL REMOVE_POSITION,CFLAG:포지션
 ;		CFLAG:전투참가불가능 = 1
@@ -118,12 +118,12 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	CFLAG:201 = 1
 	RETURN 0
 ;-------------------------------------------------
-;임신後初回の開始이벤트
-;主人か그외の조수が父親 CFLAG5210
-;特定の조수が父親 CFLAG6011-6015
+;妊娠後初回の開始イベント
+;主人かその他の助手が父親 CFLAG5210
+;特定の助手が父親 CFLAG6011-6015
 ;-------------------------------------------------
 ELSEIF TALENT:임신 == 1 && CFLAG:810 == 0 
-	;당신による임신
+	;あなたによる妊娠
 	IF CFLAG:부친의고유번호부모 == 0
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
@@ -183,7 +183,7 @@ ELSEIF TALENT:임신 == 1 && CFLAG:810 == 0
 		PRINTFORMW 「%CSTR:일인칭%는… %CSTR:일인칭%는, 어쩌면 좋지……」
 		PRINTFORMW 웅크린 자세로 %CALLNAME%는 계속 한탄하고 있다.
 	ENDIF
-	;☆출산で리셋する様に仕込む
+	;☆出産でリセットする様に仕込む
 	CFLAG:810 = 1
 	
 ;반발각인Lv3
@@ -1743,7 +1743,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					IF TEQUIP:유방노출 != -1
-						;覆っているものの종류표시
+						;覆っているものの種類表示
 						PRINTFORM %CLOTHESNAMEF(TARGET,TEQUIP:TARGET:유방노출)%
 						;0 = 伝わらない 1 = 何もない 2 = 上から伝わる 4 = 潜り込ませられる
 						;6=2+4　上から伝わるor潜り込ませられる場合||上から伝わる
@@ -1873,7 +1873,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「좀 더… 하아아… 으응… 기분 좋아%ハート()%」
 					ELSE
 						IF TEQUIP:유방노출 != -1
-							;覆っているものの종류표시
+							;覆っているものの種類表示
 							PRINTFORM %CLOTHESNAMEF(TARGET,TEQUIP:TARGET:유방노출)%
 							;0 = 伝わらない 1 = 何もない 2 = 上から伝わる 4 = 潜り込ませられる
 							;6=2+4　上から伝わるor潜り込ませられる場合||上から伝わる
@@ -4396,7 +4396,7 @@ SELECTCASE SELECTCOM
 							CASE IS < 100
 								PRINTFORM 마주본 자세로 끌어안은 %CALLNAME%의 
 								IF TEQUIP:유방노출 != -1
-								;覆っているものの종류
+								;覆っているものの種類
 								PRINTFORM %CLOTHESNAMEF(TARGET,TEQUIP:TARGET:유방노출)%
 								;0 = 伝わらない 1 = 何もない 2 = 上から伝わる 4 = 潜り込ませられる
 								;6=2+4　上から伝わるor潜り込ませられる　上から伝わる
@@ -6051,15 +6051,15 @@ SELECTCASE SELECTCOM
 			ELSE
 				PRINTFORMW 「크윽… 아ㅍ, 아아아!!, , 이, 힉, 꺄아아아아악!!」
 				;0 = 伝わらない 1 = 何もない 2 = 上から伝わる 4 = 潜り込ませられる
-				;1+2　何も着てないor옷の上から伝わる場合
+				;1+2　何も着てないor服の上から伝わる場合
 				IF TEQUIP:유방촉각 == 3
 					PRINTFORMW %CALLNAME:PLAYER%에게 난폭하게 쥐어진 %CALLNAME%의 부드러운 유방은 손가락 형상대로 짓눌려진다.
 					PRINTFORMW 쥐어짜듯 유방을 잡아당겨, 스치듯 채찍을 때리는 것과 동시에 손을 놓는다.
 					PRINTFORMW 탄력 있는 유방이 부들부들 떨리며, 몇 번이고 몇 번이고 계속되는 행위에 %CALLNAME%의 도자기 같은 얇은 피부는 붉게 부어올랐다.
 				ELSEIF TEQUIP:둔부노출 == 1
 					PRINTFORM %CALLNAME:PLAYER%이 휘두르는 채찍이 %CALLNAME%의 엉덩이살에 수 줄기의 붉은 자욱을 만들어갔다.
-				;全身겉옷、上半身겉옷
-				;유방触感を超えて来る厚손の物に対応
+				;全身上着、上半身上着
+				;乳房触感を超えて来る厚手の物に対応
 				ELSEIF TEQUIP:옷 > 0 || TEQUIP:전신복 > 0 || TEQUIP:겉옷 > 0
 					IF TEQUIP:옷 > 0
 						LOCAL = 1
@@ -6070,7 +6070,7 @@ SELECTCASE SELECTCOM
  					ENDIF
 					CALL CLOTHES_NAME,LOCAL,TARGET
 					PRINTFORMW 의 위에서 %CALLNAME:PLAYER%은 %CALLNAME%의 몸을 세게 후려친다.
-				;전라？　本来ここまで来ないはずだが保険
+				;全裸？　本来ここまで来ないはずだが保険
 				ELSE
 					PRINTFORMW 색기 있는 등, 가는 허리, 토실토실한 엉덩이에 사정없이 %CALLNAME:PLAYER%이 휘두른 채찍이 내리쳐졌다.
 					PRINTFORMW %CALLNAME%는 비통한 소리를 내며 몸을 아픔에 작게 떨고 있다.
@@ -6724,7 +6724,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:371 == 0
-			;밧줄無し
+			;縄無し
 			IF TEQUIP:19 == 0 && TEQUIP:속옷（상） == 520 && TEQUIP:속옷（하） == 620
 			;&& (TEQUIP:양말 == 803 || TEQUIP:양말 == 804 || TEQUIP:양말 == 805 || TEQUIP:양말 == 807 )
 				PRINTFORMW 「%CSTR:이인칭%… %CSTR:일인칭%는 괴롭힘을 당하고 느껴버리는 음란한 변태입니다」
@@ -9173,7 +9173,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A

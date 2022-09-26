@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;도리 대사（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;ドリー口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;	◆ライセンスについて
 ;	+----+----+-------------------------------+
 ;	|番号|許可|ライセンス内容                 |
@@ -91,8 +91,42 @@
 ;조교 개시시（1회만） CFLAG201
 ;-------------------------------------------------
 DRAWLINE
+;첫조교시　２０日以上経過で加入
+IF CFLAG:201 == 0 && TALENT:연모 == 0 && CFLAG:이벤트가입 >= 1
+	PRINTFORMW 자료에 따르면 노예의 이름은 코마키 미도리
+	PRINTFORMW COMPを使用している所を見つけた組織の人間によって拉致
+	;ふたなり改造
+	IF CFLAG:이벤트가입 == 2 || CFLAG:이벤트가입 == 4
+		PRINTFORMW 淫核改造手術後、組織の幹部の命で性欲処理用便器に就任
+	ELSE
+		PRINTFORMW しばらく監禁されていたが、組織の幹部の命で性欲処理用便器に就任
+	ENDIF
+
+	PRINTFORML そして組織内での貢献著しいサマナーである%CALLNAME:MASTER%に贈与
+	PRINTFORMW と、ある
+	PRINTFORML  
+
+	;６０日以上経過して加入
+	IF CFLAG:이벤트가입 == 3 || CFLAG:이벤트가입 == 4
+		PRINTFORMW 扉を開くと、ロングヘアにメガネの少女が、自らを慰めていた
+		PRINTFORML 「あ～、あたらしいごしゅじんさまだ～」
+		PRINTFORMW こちらに声をかけるが自慰を止める様子はない
+		PRINTFORMW 「はやく、エッチなことしよ♪」
+	ELSE
+		PRINTFORMW 문을 열자、롱헤어에 안경을 낀 청초한 소녀가 손에 자물쇠가 채워진 채 묶여있었다
+		PRINTFORMW 어려서인지 아직 살집이 남아있는 귀여운 모습이지만 둥글게 부풀어오른 풍만하고 매력적인 유방의 곡선은 도저히 15살이라는 나이를 느낄 수 없었다
+		PRINTFORMW 「ファントムソサエティ！」
+		PRINTFORMW 「レ……」
+		PRINTFORMW 「酷い事されたって」
+		PRINTFORMW 「저, 정의는, 절대로 지지 않아！！」
+		PRINTFORMW 口だけはずいぶんと威勢が良いが、十分怯えていることは見て取れる
+		PRINTFORML  
+	PRINTFORMW …………그나저나 이 팔랑팔랑거리는 의상은 뭐랄까 농담이겠지?
+	ENDIF
+	CFLAG:201 = 1
+	RETURN 0
 ;첫조교시
-IF CFLAG:201 == 0 && TALENT:연모 == 0
+ELSEIF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 자료에 따르면 노예의 이름은 코마키 미도리
 	PRINTFORMW COMP를 이용해 사람들을 돕고 있었는데、조직의 다크 서머너에게 납치된 것 같다.
 	PRINTFORMW 악마 따위에 관련되지 않는 편이 행복했을 텐데, 유별난 인간이었던 모양이다
@@ -2570,7 +2604,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-			;전회が主人への펠라치오
+			;前回が主人へのフェラチオ
 				IF PREVCOM == 81 && (ASSIPLAY == 0 && TFLAG:50 == 0)
 					IF RAND:2 == 0
 						PRINTFORML 
@@ -2611,7 +2645,7 @@ SELECTCASE SELECTCOM
 				ENDIF 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-			;전회が主人への펠라치오
+			;前回が主人へのフェラチオ
 				IF PREVCOM == 81 && (ASSIPLAY == 0 && TFLAG:50 == 0)
 					IF RAND:2 == 0
 						PRINTFORML 
@@ -6014,7 +6048,7 @@ IF TFLAG:0 > 0
 				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
+				PRINTFORMW 。
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
@@ -6209,7 +6243,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7094,17 +7128,25 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「あれだけシてもらったのに……」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
+					PRINTFORMW 「カラダが疼いて止まらないよぉ…」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
 				CFLAG:268 = 2
 			ELSEIF CFLAG:268 < 1 || FLAG:7 == 2
+				IF CFLAG:이벤트가입 == 1 || CFLAG:이벤트가입 == 2
+					PRINTFORMW 「あんだけ酷い事されて」
+					PRINTFORMW 「また酷い事されたのに」
+					PRINTFORMW 「身体が疼いちゃうなんて……」
+				ELSEIF CFLAG:이벤트가입 == 3 || CFLAG:이벤트가입 == 4
+					PRINTFORMW 「生殺しとかヒドイよ……」
+				ELSE
 				PRINTFORMW 
+				ENDIF
 				CFLAG:268 = 1
 			ENDIF
 
@@ -8686,7 +8728,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 	CASE 63
 		;-------------------------------------------------
-		;;창관매춘内容
+		;;娼館売春内容
 		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
 		;-------------------------------------------------
 		IF TALENT:음란 || TALENT:창부 || TALENT:복종 || TALENT:예속
@@ -8929,6 +8971,8 @@ ENDIF
 ;	PRINTFORML ┃%"",72,LEFT%┃
 ;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+
+
 IF CFLAG:ARG:입력행동 >= 701 && CFLAG:ARG:입력행동 < 707
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 ;아기구상
@@ -8968,7 +9012,7 @@ ENDIF
 IF CFLAG:ARG:입력행동 == 1202 || CFLAG:ARG:입력행동 == 1212
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 ;해피스텝、섹시댄스구상
-;ヒーローの名乗り구상をイメージ
+;ヒーローの名乗り口上をイメージ
 	IF RAND:3 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"사랑의 전사 매지컬☆도리! 나쁜 녀석에게는 천벌☆결정♪",72,LEFT%┃

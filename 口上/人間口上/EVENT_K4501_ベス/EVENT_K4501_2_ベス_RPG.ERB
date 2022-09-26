@@ -1,17 +1,17 @@
 ﻿;-------------------------------------------------
-;真２베스전투구상
+;真２ベス戦闘口上
 ;テンプレより作成。ライセンスフリー
 ;-------------------------------------------------
 ;
 ;
 
 ;-------------------------------------------------
-;■台詞の行数を増やしたいときは
+;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCAL:1 = 行数
-;			LOCALS = 一行目
-;			LOCALS:1 = 二行目
-;			LOCALS:2 = 三行目
-;と増やしていく
+;			LOCALS = 1행째
+;			LOCALS:1 = 2행째
+;			LOCALS:2 = 3행째
+;로 늘려나간다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -28,7 +28,7 @@ SELECTCASE TFLAG:전투이벤트
 		IF RAND:2
 			LOCALS = 今です、追撃を！
 		ELSE
-			LOCALS = 방어を崩しました、後はお願いします！！
+			LOCALS = 防御を崩しました、後はお願いします！！
 		ENDIF
 	;COOP참가
 	CASE 2
@@ -43,10 +43,10 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = この距離なら追撃できるはず！
 			ENDIF
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 			LOCALS = 
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -57,7 +57,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS = Et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris…
 			ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 ;				LOCALS = 
@@ -74,7 +74,7 @@ SELECTCASE TFLAG:전투이벤트
 ;			LOCALS = 
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -83,7 +83,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS = （あ…　私、もうダメみたい…）
 			ENDIF
-		;이악물기
+		;食いしばり
 		ELSEIF BASE:ARG:ＨＰ == 1
 			LOCALS = まだ倒れるわけには、いかないっ！
 		;대 데미지
@@ -109,7 +109,7 @@ SELECTCASE TFLAG:전투이벤트
 ;	;회피당했다
 ;	CASE 17
 ;			LOCALS = 
-;	;회피した
+;	;회피했다
 ;	CASE 18
 ;			LOCALS = 
 ENDSELECT
@@ -123,15 +123,15 @@ SIF LOCALS != "EMPTY"
 LOCAL:1 = 1
 LOCALS = えいッ！
 
-;붕괴してる場合は구상표시しない
+;崩壊してる場合は口上表示しない
 SIF TALENT:ARG:9
 	RETURN 0
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは통상공격
+;이쪽은 통상공격
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:2
 		LOCALS = それッ！
@@ -144,14 +144,14 @@ IF CFLAG:ARG:입력행동 == 0
 ;ELSEIF LOCAL == 2301
 ;	LOCALS = 
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
 		IF RAND:2
 			LOCALS = せいッ！！
 		ELSE
-			LOCALS = 템플나이트の검技、甘く見ないで！
+			LOCALS = テンプルナイトの剣技、甘く見ないで！
 		ENDIF
 ;;비구
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
@@ -177,18 +177,18 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499) || RANGE(CFLAG:ARG:입력행동,30
 		IF RAND:2
 			LOCALS = 『きよくなれ』！
 		ELSE
-			LOCALS = 大丈남편、치료なら任せて
+			LOCALS = 大丈夫、治療なら任せて
 		ENDIF
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599) || CFLAG:ARG:입력행동 == 3040 || CFLAG:ARG:입력행동 == 3115
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 3037
-		LOCALS = 지원術式を使います！
+		LOCALS = 支援術式を使います！
 	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 3038
 		LOCALS = これで行動が阻害されるはず…
-	;도발、시아귀미
+	;도발、施餓鬼米
 	ELSEIF CFLAG:ARG:입력행동 == 515 || CFLAG:ARG:입력행동 == 3115
 		LOCALS = かわいそうなのね、アナタたち
 	;그 외
@@ -206,13 +206,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699) || RANGE(CFLAG:ARG:입력행동,30
 	ELSE
 		LOCALS = 今は様子見ね…
 	ENDIF
-;화염（화염병と네이팜탄は除外）
+;화염（火炎瓶とナパーム弾は除外）
 ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799) || RANGE(CFLAG:ARG:입력행동,3103, 3104) || CFLAG:ARG:입력행동 == 2115
 	LOCALS = 浄罪の炎よ！
 ;빙결
 ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899) || RANGE(CFLAG:ARG:입력행동,3105, 3106) || CFLAG:ARG:입력행동 == 2116
 	LOCALS = 凍れッ！
-;전격、스턴그레네이드
+;전격、スタングレネード
 ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999) || RANGE(CFLAG:ARG:입력행동,3107, 3108) || CFLAG:ARG:입력행동 == 2113 || CFLAG:ARG:입력행동 == 3119
 	LOCALS = 痺れなさい！
 ;충격
@@ -229,7 +229,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399) || CFLAG:ARG:입력행동 == 311
 	IF RAND:2
 		LOCALS = “土は土に、灰は灰に、塵は塵に”ッ！！
 	ELSE
-		LOCALS = 在るべき세계へ還りなさい、악마よ！
+		LOCALS = 在るべき世界へ還りなさい、悪魔よ！
 	ENDIF
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499) || CFLAG:ARG:입력행동 == 3116 || CFLAG:ARG:입력행동 == 3118 || CFLAG:ARG:입력행동 == 3120 || CFLAG:ARG:입력행동 == 2106
@@ -249,15 +249,15 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
 ;;핵열
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
 ;	LOCALS = 
-;만능、벼랑끝분말
+;만능、崖っ縁粉末
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099) || RANGE(CFLAG:ARG:입력행동,3110, 3112) || CFLAG:ARG:입력행동 == 3016 || CFLAG:ARG:입력행동 == 2114
-	;자폭系
+	;자폭계
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007) || CFLAG:ARG:입력행동 == 3016
 		LOCALS = まだ一つだけ、役に立てるわ…！
 	ELSE
-		LOCALS = この공격なら、通用するはず！
+		LOCALS = この攻撃なら、通用するはず！
 	ENDIF
-;;마법소녀系
+;;마법소녀계
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 ;	LOCALS = 
 ;-------------------------------------------------
@@ -265,7 +265,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099) || RANGE(CFLAG:ARG:입력행동,
 ;-------------------------------------------------
 ;메시아라이저
 ELSEIF CFLAG:ARG:입력행동 == 4160
-	LOCALS = 大丈남편。%CSTR:ARG:이인칭%達なら、どんな試練だって乗り越えられるわ
+	LOCALS = 大丈夫。%CSTR:ARG:이인칭%達なら、どんな試練だって乗り越えられるわ
 ;L히트라이저
 ELSEIF CFLAG:ARG:입력행동 == 4200
 	LOCALS = …大罪に惑え
@@ -283,9 +283,9 @@ ELSEIF CFLAG:ARG:입력행동 == 4800
 ;加筆分
 ;-------------------------------------------------
 
-;GUN＋残りの총공격系
+;GUN＋残りの銃攻撃系
 ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2199) || CFLAG:ARG:입력행동 == 138
-	LOCALS = 저항するなら、撃ちます！
+	LOCALS = 抵抗するなら、撃ちます！
 
 ;-------------------------------------------------
 ;그 외

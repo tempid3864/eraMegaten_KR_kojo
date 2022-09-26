@@ -1,15 +1,15 @@
 ﻿;-------------------------------------------------
-;if 유미 전투 대사
+;ifユミ戦闘口上
 ;テンプレより作成。ライセンスフリー
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;■台詞の行数を増やしたいときは
+;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCAL:1 = 行数
-;			LOCALS = 一行目
-;			LOCALS:1 = 二行目
-;			LOCALS:2 = 三行目
-;と増やしていく
+;			LOCALS = 1행째
+;			LOCALS:1 = 2행째
+;			LOCALS:2 = 3행째
+;로 늘려나간다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -33,17 +33,17 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS = 그럼 한 방 더 가봐？
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 			LOCALS = 
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
 		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			LOCALS = 그대로 얌전히 있으라고！
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 ;				LOCALS = 
@@ -60,7 +60,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = 아아 진짜、꽤 딱딱한데…！
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -84,7 +84,7 @@ SELECTCASE TFLAG:전투이벤트
 ;	;회피당했다
 ;	CASE 17
 ;			LOCALS = 
-;	;회피した
+;	;회피했다
 ;	CASE 18
 ;			LOCALS = 
 ENDSELECT
@@ -104,9 +104,9 @@ SIF TALENT:ARG:9
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは통상공격
+;이쪽은 통상공격
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:3 == 0
 		LOCALS = 하압！
@@ -121,7 +121,7 @@ IF CFLAG:ARG:입력행동 == 0
 ;ELSEIF LOCAL == 2301
 ;	LOCALS = 
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -145,7 +145,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		LOCALS = 다들、다시 기합 넣어줄게！
 	;약체계
@@ -202,13 +202,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
 	LOCALS = 숯덩이로 변하시라고！
 ;;만능
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-;	;자폭系
+;	;자폭계
 ;	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 ;		LOCALS = 
 ;	ELSE
 ;		LOCALS = 
 ;	ENDIF
-;마법소녀系
+;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	LOCALS = （요즘 마법소녀란 여러모로 약 빨았구만―…）
 

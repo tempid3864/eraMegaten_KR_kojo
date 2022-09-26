@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;○○구상（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;
 ;-------------------------------------------------
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;5311とX2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;5311과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 5311, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -16,25 +16,26 @@
 
 ;-------------------------------------------------
 ;범용 구상의 작성에 사용하는 경우는, 5311→캐릭터번호가 아니라,
-;K5311→PUB회화타입番号　로 변경해서 사용해주세요
+;K5311→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K5311_ASSI.ERB
-;	Facility	:회화타입：조수時구상
+;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		Jガン					新規作成
+;	002		2020/10/24		　名無し				単純な記述ミスの修正
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
-;	・기본항목(許可する항목を"○"に、許可しない항목を"×"に변경してください。)
+;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
 ;	+----+----+-------------------------------+
 ;	|番号|許可|ライセンス内容                 |
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 口上の誤字・脱字の修正         |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
 ;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
@@ -47,8 +48,10 @@
 ;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 ;
-;CFLAG:801 조교開始　가슴
-;CFLAG:830 恋幕ラブラ부흐ラグ
+;CFLAG:801 調教開始　胸
+;CFLAG:830 恋幕ラブラブフラグ
+;CFLAG:897 交流イベント進行フラグ
+;CFLAG:898 交流イベント(甘フラグ無、恋慕)
 ;CFLAG:899 交流関連
 ;
 ;
@@ -57,21 +60,21 @@
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に利用してください
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K5311 → EVENTTRAIN_K5311_12
+;예： EVENTTRAIN_K5311 → EVENTTRAIN_K5311_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K5311,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な説明や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（5311을 캐릭터번호로 치환）
-;조교開始時のセリフ CFLAG 201〜219を사용
+;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
 @EVENTTRAIN_K5311
 CALL 구상변수초기화
@@ -127,41 +130,41 @@ DRAWLINE
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	WSTR:(K++) = %CALLNAME%を薬で寝かせ部屋まで連れてきた
 	WSTR:(K++) = 「う…ん…どこだいここは」
-	WSTR:(K++) = 당신は%CALLNAME%の조교部屋だと言った
+	WSTR:(K++) = あなたは%CALLNAME%の調教部屋だと言った
 	WSTR:(K++) = 「え…どう言うこと…？」
-	WSTR:(K++) = 自分の正体を明かし、상품としてな조교と言う事も明かした
+	WSTR:(K++) = 自分の正体を明かし、商品としてな調教と言う事も明かした
 	WSTR:(K++) = 「と言う事はあの飲み物に…」
-	WSTR:(K++) = 他にも힘がでなくなる術もかけてある
-	WSTR:(K++) = %CALLNAME%は一切の저항もできない
+	WSTR:(K++) = 他にも力がでなくなる術もかけてある
+	WSTR:(K++) = %CALLNAME%は一切の抵抗もできない
 	WSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%を押し倒す
 	WSTR:(K++) = 「や、やめろっ！」
 	CFLAG:201 = 1
-	GOTO 표시
+	GOTO 表示
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 	KSTR:(K++) = 
 	CFLAG:201 = 2
-;	GOTO 표시
+;	GOTO 表示
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	WSTR:(K++) = 「あ…あのさ、%CSTR:일인칭%は男と間違われる事あるんだ」
 	WSTR:(K++) = 「だから、売ってもあまりいい値段にならないと思うんだ」
 	IF BUST(TARGET) > 2
-		WSTR:(K++) = 가슴があるから、男と間違われることはない
+		WSTR:(K++) = 胸があるから、男と間違われることはない
 		WSTR:(K++) = 「…ぐう…」
-		WSTR:(K++) = 조교を始めた
+		WSTR:(K++) = 調教を始めた
 	ELSE
-		WSTR:(K++) = そんな事は関係ない、조교を始めた
+		WSTR:(K++) = そんな事は関係ない、調教を始めた
 	ENDIF
 	CFLAG:201 = 3
-	GOTO 표시
+	GOTO 表示
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	WSTR:(K++) = %CALLNAME%はすんなりと%CALLNAME:MASTER%に体を差し出す。
 	WSTR:(K++) = 「…今日はなにをするの？」
-	WSTR:(K++) = %CALLNAME%が함락するまでもう少しだ
+	WSTR:(K++) = %CALLNAME%が陥落するまでもう少しだ
 	CFLAG:201 = 4
-	GOTO 표시
+	GOTO 表示
 ;함락
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
@@ -175,12 +178,12 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			WSTR:(K++) = %CALLNAME%は顔を赤らめて少し戸惑っている
 			WSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%を押し倒した
 			WSTR:(K++) = 「きゃっ…！ちょっ、ちょっと…こ…心の準備が…」
-			WSTR:(K++) = %CALLNAME%はびっくりして珍しくか弱い소녀のような声を発した
+			WSTR:(K++) = %CALLNAME%はびっくりして珍しくか弱い少女のような声を発した
 			WSTR:(K++) = 「や…優しくしてね…_／／／_」
-			WSTR:(K++) = 今の상태なら何をしても大丈남편そうだ
+			WSTR:(K++) = 今の状態なら何をしても大丈夫そうだ
 		ELSE
 			WSTR:(K++) = 「これまでひどい事いっぱいされてきたはずなんだけどさ…」
-			WSTR:(K++) = 「なんでだろう、%CSTR:이인칭%といると가슴がドキドキするんだ…」
+			WSTR:(K++) = 「なんでだろう、%CSTR:이인칭%といると胸がドキドキするんだ…」
 			WSTR:(K++) = 「人を平気で売るような奴にさ…」
 			WSTR:(K++) = 「なぜだか、%CSTR:이인칭%になにをされても体が嬉しいと感じてしまうような気がする…」
 			WSTR:(K++) = 「だからさ、その…」
@@ -190,8 +193,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;음란
 	ELSEIF TALENT:4
 		WSTR:(K++) = 「%CSTR:일인칭%、%CSTR:이인칭%に色々されてさ…体が変になっちゃった」
-		WSTR:(K++) = 「最近、オナニーする횟수も増えてきたし、この部屋にいるときもエッチな事されるの楽しみで濡れてるんだ…」
-		WSTR:(K++) = 「今から조교するんだよね」
+		WSTR:(K++) = 「最近、オナニーする回数も増えてきたし、この部屋にいるときもエッチな事されるの楽しみで濡れてるんだ…」
+		WSTR:(K++) = 「今から調教するんだよね」
 		WSTR:(K++) = 「このグチョグチョに濡れたおマンコ、いっぱい触って欲しいな_H_」
 	;복종
 	ELSEIF TALENT:5
@@ -199,8 +202,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		WSTR:(K++) = 「い、今までは…失礼な態度をとってしまって、ごめん…ごめんなさい」
 		WSTR:(K++) = 「も、もう逆らわないから…逃げないから…」
 		WSTR:(K++) = 「%CSTR:일인칭%の言うこと聞くから…」
-		WSTR:(K++) = %CALLNAME%はもう奴隷として함락してることがわかる
-		WSTR:(K++) = もっと奴隷らしくするため조교を続けよう
+		WSTR:(K++) = %CALLNAME%はもう奴隷として陥落してることがわかる
+		WSTR:(K++) = もっと奴隷らしくするため調教を続けよう
 		WSTR:(K++) = 
 	ENDIF
 	;공통
@@ -208,21 +211,21 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		KSTR:(K++) = 
 	ENDIF
 	CFLAG:201 = 5
-	GOTO 표시
+	GOTO 表示
 ELSEIF CFLAG:201 < 5 && (TALENT:6); || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:6
 		IF CFLAG:830 == 1
-			;ラブラ부흐ラグ
+			;ラブラブフラグ
 			WSTR:(K++) = 「あ…あのさ、%CSTR:일인칭%達、結構付き合って来たよね」
-			WSTR:(K++) = 「お互いにどう言う인간かも分かってきたしさ」
+			WSTR:(K++) = 「お互いにどう言う人間かも分かってきたしさ」
 			WSTR:(K++) = 「だから…%CSTR:일인칭%…%CSTR:이인칭%となら…」
 			WSTR:(K++) = %CALLNAME%の顔はさらに赤面して言葉を止めた
 			WSTR:(K++) = 「と、とりあえずいつものように愛し合おうか」
 			WSTR:(K++) = 「今日は何する_H_」
 			WSTR:(K++) = どうやら緊張で最後まで言葉を言えなかったようだ
 		ELSE
-			WSTR:(K++) = 「%CSTR:이인칭%は상품として%CSTR:일인칭%を조교してるって言ってたけどさ」
+			WSTR:(K++) = 「%CSTR:이인칭%は商品として%CSTR:일인칭%を調教してるって言ってたけどさ」
 			WSTR:(K++) = 「ここまで優しくされると%CSTR:이인칭%を嫌いになるとこができないよ…」
 			WSTR:(K++) = 「はっきり言うとさ…%CSTR:이인칭%と一緒に居たいんだ…」
 			WSTR:(K++) = 「ずっと…これからもさ…」
@@ -232,21 +235,21 @@ ELSEIF CFLAG:201 < 5 && (TALENT:6); || TALENT:4 || TALENT:5)
 		ENDIF
 	ENDIF
 	CFLAG:201 = 6
-	GOTO 표시
+	GOTO 表示
 ENDIF
 IF CFLAG:801 < 2 && BUST(TARGET) == 5 && !TALENT:임신
 	;연모, 친애 & 甘
 	IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
-		WSTR:(K++) = 「%CSTR:이인칭%ってさこれだけ가슴が大きいのが好みなの？」
+		WSTR:(K++) = 「%CSTR:이인칭%ってさこれだけ胸が大きいのが好みなの？」
 		WSTR:(K++) = 「まあ…ちょっと不自由なとこもあるけど、%CSTR:이인칭%の好みならこのままでもいいかな」
 		WSTR:(K++) = 「でも、いっぱい愛してくれないと承知しないからね_H_」
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		WSTR:(K++) = 「おお〜でかい」
-		WSTR:(K++) = 「こんなにでかいとどんなに大きなチンチンでも파이즈리できちゃうね」
-		WSTR:(K++) = 「他にも、両耳に파후파후もできちゃうよね」
+		WSTR:(K++) = 「おお～でかい」
+		WSTR:(K++) = 「こんなにでかいとどんなに大きなチンチンでもパイズリできちゃうね」
+		WSTR:(K++) = 「他にも、両耳にぱふぱふもできちゃうよね」
 		WSTR:(K++) = 「%CSTR:이인칭%で試してあげよっか？」
-		WSTR:(K++) = 「柔らかさには自信があるよ〜_H_」
+		WSTR:(K++) = 「柔らかさには自信があるよ～_H_」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		WSTR:(K++) = 「お、おっぱいが重い…」
@@ -256,46 +259,46 @@ IF CFLAG:801 < 2 && BUST(TARGET) == 5 && !TALENT:임신
 	;그 외
 	ELSE
 		WSTR:(K++) = 「な、何なんだよこれ…大きすぎる…」
-		WSTR:(K++) = 「발元も見えなくなるし…無駄に前の方に重心がかかる…」
+		WSTR:(K++) = 「足元も見えなくなるし…無駄に前の方に重心がかかる…」
 		WSTR:(K++) = 「流石に変態だよ…%CSTR:이인칭%…」
 	ENDIF
 	
 	CFLAG:801 = 2
-	GOTO 표시
+	GOTO 表示
 ELSEIF CFLAG:801 < 1 && BUST(TARGET) == 4 && !TALENT:임신
 	;연모, 친애 & 甘
 	IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
-		WSTR:(K++) = 「가슴がおっきくなってる…」
-		WSTR:(K++) = 「%CSTR:이인칭%って、가슴が大きい方が好みなんだね_H_」
+		WSTR:(K++) = 「胸がおっきくなってる…」
+		WSTR:(K++) = 「%CSTR:이인칭%って、胸が大きい方が好みなんだね_H_」
 		WSTR:(K++) = 「じゃあ、この大きくなったおっぱいを早速揉む？」
 		WSTR:(K++) = 「遠慮しなくていいよ。それとも、他のことやってあげよっか？」
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		WSTR:(K++) = 「お〜、本当に大きくなってる。これって%CSTR:일인칭%の好み？」
+		WSTR:(K++) = 「お～、本当に大きくなってる。これって%CSTR:일인칭%の好み？」
 		WSTR:(K++) = 「それとも、色んなエッチな事を教えるために%CSTR:일인칭%の体をいやらしくしたの？」
 		WSTR:(K++) = 「まあ、エッチしやすくなるならこの体も悪くなさそうだね」
 		WSTR:(K++) = 「うふ、楽しみ_H_」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		WSTR:(K++) = 「가슴が大きくなってる…」
+		WSTR:(K++) = 「胸が大きくなってる…」
 		WSTR:(K++) = 「体が変わってちょっと違和感あるけど…」
 		WSTR:(K++) = 「%CSTR:일인칭%のためなら…我慢する…」
-		WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%に유방を差し出す
-		WSTR:(K++) = 「どうぞ、この가슴を好きにしてください…」
+		WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%に乳房を差し出す
+		WSTR:(K++) = 「どうぞ、この胸を好きにしてください…」
 	;그 외
 	ELSE
-		WSTR:(K++) = 「む、가슴が大きくなってる…」
+		WSTR:(K++) = 「む、胸が大きくなってる…」
 		WSTR:(K++) = 「大きくなったのはいいけどこれって%CSTR:일인칭%が売れやすくするためだよね…」
 		WSTR:(K++) = 「…何か複雑だ…」
 	ENDIF
 	
 	CFLAG:801 = 1
-	GOTO 표시
+	GOTO 表示
 ENDIF
 ;IF CFLAG:801 < 1
 
 ;-------------------------------------------------
-;簡易조수구상（Y1を조수のキャラ番号に置換、5311をキャラ番号に변경する) CFLAG203
+;간이 조수구상（Y1을 조수의 캐릭터번호로 치환, 5311을 캐릭터번호로 변경한다) CFLAG203
 ;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
@@ -324,16 +327,16 @@ IF ASSI < 0
 ;		ENDIF
 ;		CFLAG:203 = 2
 ;	ENDIF
-;구상のある조수が居ない場合は、通常の二回目以降の구상へ飛ぶ
+;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
 	CALL EVENTTRAIN_SECOND_K5311
 ENDIF
 
-$표시
+$表示
 
 CALL 구상변수표시
 ;-------------------------------------------------
-;조교 개시시（2번째 이후, 5311をキャラ番号に변경する）
+;조교 개시시（2번째 이후, 5311을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K5311
 CALL 구상변수초기화
@@ -344,7 +347,7 @@ IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
-	KSTR:(K++) = 「また조교するの？…はあ…」
+	KSTR:(K++) = 「また調教するの？…はあ…」
 	CFLAG:202 = 1
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
@@ -352,9 +355,9 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	KSTR:(K++) = 「조교だね…分かってるよ」
+	KSTR:(K++) = 「調教だね…分かってるよ」
 	CFLAG:202 = 3
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 	KSTR:(K++) = 「…今日はどんな事するの？」
 	CFLAG:202 = 4
@@ -365,27 +368,27 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		IF CFLAG:830 == 1
 			IF RAND:2 == 0
 				WSTR:(K++) = 「今日もいっぱい愛し合おうね_H_」
-				WSTR:(K++) = 「ん〜_H_」
-				WSTR:(K++) = %CALLNAME%は키스待ちしてる
+				WSTR:(K++) = 「ん～_H_」
+				WSTR:(K++) = %CALLNAME%はキス待ちしてる
 			ELSE
 				WSTR:(K++) = 「今日もベッドの上だなんて…_H_」
 				WSTR:(K++) = 「いいよ_H_来て…_H_」
 			ENDIF
 		ELSE
 			IF RAND:3 == 0
-				WSTR:(K++) = 「今日も조교してくれるんだね」
+				WSTR:(K++) = 「今日も調教してくれるんだね」
 				WSTR:(K++) = 「できるだけ長く%CSTR:이인칭%と一緒にいたいな」
 			ELSEIF RAND:2 == 0
 				WSTR:(K++) =「今日は%CSTR:일인칭%を選んでくれてありがと」
 				WSTR:(K++) =「%CSTR:이인칭%と恋人だったら…いや、何でもないよ」
 			ELSE
-				WSTR:(K++) =「조교するんだよね、いいよ」
+				WSTR:(K++) =「調教するんだよね、いいよ」
 				WSTR:(K++) =「今の%CSTR:일인칭%は%CSTR:이인칭%に逆らいないしさ…」
 			ENDIF
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			WSTR:(K++) = 「待ちくたびれたよ」
 			WSTR:(K++) = 「今日もいっぱいエッチしよ_H_」
@@ -398,10 +401,10 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			WSTR:(K++) = 「お、お待ちしておりました…」
-			WSTR:(K++) = 「%CSTR:일인칭%を好きに조교してください…」
+			WSTR:(K++) = 「%CSTR:일인칭%を好きに調教してください…」
 		ELSEIF RAND:2 == 0
 			WSTR:(K++) = 「お、お待ちしておりました…」
 			WSTR:(K++) = 「%CSTR:일인칭%の体を好きにしてください…」
@@ -412,7 +415,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ENDIF
 	;그 외, 공통
 	IF !구상유무확인(0)
-		;란다ムで구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			KSTR:(K++) = 
 		ELSEIF RAND:2 == 0
@@ -427,7 +430,7 @@ ENDIF
 
 ;-------------------------------------------------
 ;EVENTEND 관련（5311을 캐릭터번호로 치환）
-;조교終了時のセリフ
+;조교 종료시의 대사
 ;-------------------------------------------------
 @EVENTEND_K5311
 CALL 구상변수초기화
@@ -444,7 +447,7 @@ CALL 구상변수초기화
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
-;조교終了時のセリフ
+;조교 종료시의 대사
 ;--------------------------------------------------
 DRAWLINE
 ;반발각인Lv3
@@ -468,7 +471,7 @@ ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
 ELSEIF MARK:2 == 2
 	KSTR:(K++) = 「うう…慣れていってるのが悔しい…」
 	CFLAG:219 = 2
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「…はあ…今日も良かったよ…」
@@ -476,7 +479,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 			KSTR:(K++) = 「…また、待ってるよ…」
 		ENDIF
 	CFLAG:219 = 3
-;함락완료＋체력500未満
+;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
@@ -504,16 +507,16 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 				WSTR:(K++) = 「次もエッチな事してね_H_」
 			ELSE
 				WSTR:(K++) = 「ふぅ…気持ちよかった…_H_」
-				WSTR:(K++) = 「もう満발だよ…ありがと_H_」
+				WSTR:(K++) = 「もう満足だよ…ありがと_H_」
 			ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 			IF RAND:2 == 0
 				WSTR:(K++) = 「はぁ…はぁ……」
-				WSTR:(K++) = 「本日の조교…ありがとうざいました」
+				WSTR:(K++) = 「本日の調教…ありがとうざいました」
 			ELSE
 				WSTR:(K++) = 「ふぅ…」
-				WSTR:(K++) = 「今日も조교していただきありがとうございました…」
+				WSTR:(K++) = 「今日も調教していただきありがとうございました…」
 			ENDIF
 	ENDIF
 	;공통
@@ -527,16 +530,16 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	IF TALENT:3 || TALENT:6
 		IF CFLAG:830 == 1
 			IF RAND:2 == 0
-				WSTR:(K++) = 「え〜もう終わり〜」
-				WSTR:(K++) = 「焦らしプレイは望んでないよ〜」
+				WSTR:(K++) = 「え～もう終わり～」
+				WSTR:(K++) = 「焦らしプレイは望んでないよ～」
 			ELSE
-				WSTR:(K++) = 「え〜遠慮しなくていいのにさ〜」
+				WSTR:(K++) = 「え～遠慮しなくていいのにさ～」
 				WSTR:(K++) = 「ちょっと寂しーよー」
 			ENDIF
 		ELSE
 			IF RAND:2 == 0
 				WSTR:(K++) = 「今日はここまでなんだね」
-				WSTR:(K++) = 「%CSTR:일인칭%的にはちょっと物발りないかな…」
+				WSTR:(K++) = 「%CSTR:일인칭%的にはちょっと物足りないかな…」
 			ELSE
 				WSTR:(K++) = 「もう終わりなの？」
 				WSTR:(K++) = 「もうちょっと%CSTR:이인칭%と一緒にいたかったな…」
@@ -545,19 +548,19 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 			IF RAND:2 == 0
-				WSTR:(K++) = 「え〜もう終わり〜%CSTR:일인칭%は満발してないよ〜」
-				WSTR:(K++) = 「そんなんじゃだめだよ〜」
+				WSTR:(K++) = 「え～もう終わり～%CSTR:일인칭%は満足してないよ～」
+				WSTR:(K++) = 「そんなんじゃだめだよ～」
 			ELSE
-				WSTR:(K++) = 「え〜遠慮しなくていいのにさ〜もっとしてよ〜」
+				WSTR:(K++) = 「え～遠慮しなくていいのにさ～もっとしてよ～」
 				WSTR:(K++) = 「ちぇっ、帰ってオナニーでもしよっと」
 			ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 			IF RAND:2 == 0
 				WSTR:(K++) = 「もう終わりなんですね…」
-				WSTR:(K++) = 「本日の조교、ありがとうざいました」
+				WSTR:(K++) = 「本日の調教、ありがとうざいました」
 			ELSE
-				WSTR:(K++) = 「今日も조교していただきありがとうございました…」
+				WSTR:(K++) = 「今日も調教していただきありがとうございました…」
 				WSTR:(K++) = 「お部屋のお掃除しておきます…」
 			ENDIF
 	ENDIF
@@ -689,7 +692,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;想定外の구상だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -707,19 +710,19 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;関数초기化
+;함수초기화
 ;-------------------------------------------------
 CALL 구상변수초기화
 
 CALLFORM COMTYPE_{SELECTCOM}
 ;-------------------------------------------------
-;コマンド実行時のセリフ CFLAG 300〜500
+;커맨드 실행시의 대사 CFLAG 300～500
 ;-------------------------------------------------
 ;=================================================
 ;애무계 커맨드
 ;=================================================
 IF RESULT == COMTYPE("애무계")
-;촉수あり
+;촉수있음
 SIF (SELECTCOM == 0 || SELECTCOM == 5 || SELECTCOM == 6 || SELECTCOM == 7 || SELECTCOM == 8 || SELECTCOM == 12 || SELECTCOM == 13 || SELECTCOM == 15) && TEQUIP:25 > 0
 	GOTO SHOKUSHU_PLAY
 SELECTCASE SELECTCOM
@@ -778,7 +781,7 @@ SELECTCASE SELECTCOM
 						CALL siano_aegi
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					IF RAND:2
 						CALL siano_aegi
@@ -871,7 +874,7 @@ SELECTCASE SELECTCOM
 						CALL siano_aegi
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -958,7 +961,7 @@ SELECTCASE SELECTCOM
 						CALL siano_aegi
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -989,8 +992,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;가슴系애무
-;6가슴주무르기,7유두자극,8가슴애무
+;가슴系愛撫
+;6胸揉み,7乳首責め,8胸愛撫
 ;-------------------------------------------------
 	CASE 6,7,8
 		CALL TRAIN_MESSAGE
@@ -1050,7 +1053,7 @@ SELECTCASE SELECTCOM
 						CALL siano_aegi
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1063,8 +1066,8 @@ SELECTCASE SELECTCOM
 					CALL siano_aegi
 				ELSEIF RAND:3 == 0 && BUST(TARGET) > 2
 					CALL siano_aegi
-					KSTR:(K++) = 「て…손つきがいつもよりいやらしい…」
-					KSTR:(K++) = 「가슴が大きいと揉みやすいんだね…」
+					KSTR:(K++) = 「て…手つきがいつもよりいやらしい…」
+					KSTR:(K++) = 「胸が大きいと揉みやすいんだね…」
 				ELSEIF RAND:2
 					CALL siano_aegi
 					KSTR:(K++) = 「はぁ……_H_気持ちいい……_H_」
@@ -1112,7 +1115,7 @@ SELECTCASE SELECTCOM
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					IF RAND:2 == 0 && TCVAR:TARGET:101  > 0
-						KSTR:(K++) = 「あはぁ_H_おマンコから정액出てるぅ_H_」
+						KSTR:(K++) = 「あはぁ_H_おマンコから精液出てるぅ_H_」
 					ELSEIF RAND:2 == 0
 						KSTR:(K++) = 「はい_H_ねえ早くぅ_H_見るだけじゃないでしょ_H_」
 					ELSE
@@ -1126,7 +1129,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「どうぞ…見てください…未成年のおマンコです」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1152,8 +1155,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;자위共通
-;10가슴자위,11자위
+;自慰共通
+;10胸自慰,11自慰
 ;-------------------------------------------------
 	CASE 10,11
 		CALL TRAIN_MESSAGE
@@ -1205,7 +1208,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「%CSTR:일인칭%は人にオナニーを見られて興奮する変態です……_H_」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1228,7 +1231,7 @@ SELECTCASE SELECTCOM
 					CALL siano_aegi
 					KSTR:(K++) = 「絶対に人前じゃやれないよ」
 				ELSE
-					KSTR:(K++) = 「う〜わかったよ！」
+					KSTR:(K++) = 「う～わかったよ！」
 					CALL siano_aegi
 				ENDIF
 				CFLAG:310 = 2
@@ -1240,7 +1243,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;애무계 커맨드그외
+;애무계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -1254,7 +1257,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					IF 함락(TARGET) > 0
 						CALL siano_aegi
@@ -1305,7 +1308,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:312 == 0
 			KSTR:(K++) = 「な、なに？むぐっ！？」
-			KSTR:(K++) = %CALLNAME:MASTER%はいきなり%CALLNAME%の唇に키스した
+			KSTR:(K++) = %CALLNAME:MASTER%はいきなり%CALLNAME%の唇にキスした
 			CFLAG:312 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 3 || FLAG:7 == 2)
@@ -1315,17 +1318,17 @@ SELECTCASE SELECTCOM
 					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 「はぁ…_H_…もっと…したいな…_H_」
 					ELSEIF (TALENT:4 || TALENT:7)
-						KSTR:(K++) = 「はぁ_H_やっぱ키스って最高だね！」
+						KSTR:(K++) = 「はぁ_H_やっぱキスって最高だね！」
 					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 「はぁ…_H_」
-						KSTR:(K++) = どこか満발げだがまだ物발りないようにも見える
+						KSTR:(K++) = どこか満足げだがまだ物足りないようにも見える
 					ENDIF
 				ELSEIF !RAND:2 && ABL:키스중독 > 3
 					KSTR:(K++) = 「ん……はぁ_H_………ちゅ_H_」
-					WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%にもう一度키스をして来た
+					WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%にもう一度キスをして来た
 					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 「んちゅ…_H_ちゅぷ…_H_はぁ…_H_」
-						KSTR:(K++) = 「えへ_H_もっと、たくさん키스したいな_H_」
+						KSTR:(K++) = 「えへ_H_もっと、たくさんキスしたいな_H_」
 					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 「ねえ、まだ終わりじゃないよね_H_」
 						KSTR:(K++) = 
@@ -1348,9 +1351,9 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:4 || TALENT:7)
 					WSTR:(K++) = 「んちゅ…ふう…」
 					IF RAND:2 == 0
-						KSTR:(K++) = 「키스も悪くないね」
+						KSTR:(K++) = 「キスも悪くないね」
 					ELSE
-						KSTR:(K++) = 「%CSTR:일인칭%の키스も気持ちいいでしょ？」
+						KSTR:(K++) = 「%CSTR:일인칭%のキスも気持ちいいでしょ？」
 					ENDIF
 					
 				;복종, 예속	
@@ -1358,19 +1361,19 @@ SELECTCASE SELECTCOM
 					WSTR:(K++) = 「んちゅ…ふう…」
 					IF RAND:2 == 0
 						KSTR:(K++) = 「んちゅ…ふう…」
-						KSTR:(K++) = 「どう？%CSTR:일인칭%の키스…」
+						KSTR:(K++) = 「どう？%CSTR:일인칭%のキス…」
 					ELSE
 						KSTR:(K++) = 「んちゅ…ふう…」
 						KSTR:(K++) = 「言われた通りに舌を奥まで入れたよ…」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:312 = 4
 			ENDIF
-			;순종Lv3以上
+			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:312 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
 					KSTR:(K++) = 「ん……これでいいかな？」
@@ -1381,7 +1384,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:312 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) = 「〜……」
+				KSTR:(K++) = 「～……」
 				KSTR:(K++) = %CALLNAME%は唇を内側にしている
 				CFLAG:312 = 2
 			ENDIF
@@ -1393,7 +1396,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:314 == 0
-			KSTR:(K++) = 「ここに来て회화…ちょっと変わってるね」
+			KSTR:(K++) = 「ここに来て会話…ちょっと変わってるね」
 			CFLAG:314 = 1
 		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
@@ -1402,18 +1405,18 @@ SELECTCASE SELECTCOM
 				KSTR:(K++) = 「常識っていうのも、持ってないと困る道具だよ」
 				KSTR:(K++) = 「%CSTR:일인칭%みたいに持ってないと…ま、嫌なこともあったね」
 			ELSEIF RAND:13 == 0
-				KSTR:(K++) = 「変わり者に生まれてしまったら、普通の인간として振る舞うか、変人を通すことになる」
+				KSTR:(K++) = 「変わり者に生まれてしまったら、普通の人間として振る舞うか、変人を通すことになる」
 				WSTR:(K++) = 「どちらも難しいのが困り者だけど…」
-				KSTR:(K++) = 「정령指定都市のいいところは、変人しかいないから、自分で変人であることを気にしなくていいところだね」
+				KSTR:(K++) = 「精霊指定都市のいいところは、変人しかいないから、自分で変人であることを気にしなくていいところだね」
 			ELSEIF RAND:12 == 0
-				KSTR:(K++) = 「僕の住んでた정령指定都市？」
+				KSTR:(K++) = 「僕の住んでた精霊指定都市？」
 				KSTR:(K++) = 「物騒な所だけど、前住んでたとこよりはマシだよ」
 			ELSEIF RAND:11 == 0
-				WSTR:(K++) = 「普通の所で、他人と仲良くできなかった人でも、정령指定都市でならうまくいくかもね」
-				KSTR:(K++) = 「%CSTR:일인칭%がそうだった、힘があるってだけで、自分には他人とは相いれない存在じゃないかって気がしてさ」
+				WSTR:(K++) = 「普通の所で、他人と仲良くできなかった人でも、精霊指定都市でならうまくいくかもね」
+				KSTR:(K++) = 「%CSTR:일인칭%がそうだった、力があるってだけで、自分には他人とは相いれない存在じゃないかって気がしてさ」
 			ELSEIF RAND:10 == 0
 				KSTR:(K++) = 「偽氷でフルスクラッチかぁ」
-				KSTR:(K++) = 「う〜ん、できなくはないなぁ」
+				KSTR:(K++) = 「う～ん、できなくはないなぁ」
 			ELSEIF RAND:9 == 0
 				KSTR:(K++) = 「瞬間接着剤はちょっとした怪我の応急処置にも使えるんだよ」
 				KSTR:(K++) = 「一度蓋を開けると、月日が経てば硬化するから注意してね」
@@ -1421,7 +1424,7 @@ SELECTCASE SELECTCOM
 				KSTR:(K++) = 「接着剤は薄く塗って貼り付けるといいよ」
 				KSTR:(K++) = 「いっぱいつけると逆に剥がれやすくなるから」
 			ELSEIF RAND:7 == 0
-				KSTR:(K++) = 「う〜ん、次はやっぱりキングヒドラを作ろうかな」
+				KSTR:(K++) = 「う～ん、次はやっぱりキングヒドラを作ろうかな」
 				KSTR:(K++) = 「でもモスガも捨てがたい…」
 			ELSEIF RAND:6 == 0
 				KSTR:(K++) = 「フィギュアは買うのも楽しいけど作るのも楽しいよ」
@@ -1431,14 +1434,14 @@ SELECTCASE SELECTCOM
 				KSTR:(K++) = 「フィギュアとかも集めてるんだけど、なんか引かれることが多くて」
 			ELSEIF RAND:4 == 0
 				KSTR:(K++) = 「%CSTR:일인칭%、この能力があったから人より変わっててさ」
-				KSTR:(K++) = 「정령指定都市に住む前は、皆から白い눈で見られてたんだ…」
+				KSTR:(K++) = 「精霊指定都市に住む前は、皆から白い目で見られてたんだ…」
 			ELSEIF RAND:3 == 0
 				KSTR:(K++) = 「接着剤集めるのが趣味なんだよね」
 				KSTR:(K++) = 「この辺に変わった接着剤売ってないかな」
 			ELSEIF RAND:2 == 0
 				KSTR:(K++) = 「ねえ知ってる？ご飯から接着剤ってできるんだよ」
 			ELSE
-				KSTR:(K++) = 「%CSTR:일인칭%、怪짐승のフィギュア集めるのが趣味なんだ」
+				KSTR:(K++) = 「%CSTR:일인칭%、怪獣のフィギュア集めるのが趣味なんだ」
 			ENDIF
 			CFLAG:314 = 2
 		ENDIF
@@ -1449,17 +1452,17 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:316 == 0
-			KSTR:(K++) = 「え…そ、そんな、스킨쉽なんて…」
+			KSTR:(K++) = 「え…そ、そんな、スキンシップなんて…」
 			CFLAG:316 = 1
 		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
 			IF CFLAG:830
 				IF RAND:3 == 0
-					KSTR:(K++) = 「じゃあ、お言葉に甘えて…いっぱい甘えちゃおうかな〜_H_」
+					KSTR:(K++) = 「じゃあ、お言葉に甘えて…いっぱい甘えちゃおうかな～_H_」
 				ELSEIF RAND:2 == 0
-					KSTR:(K++) = 「遠慮なく抱きついてやるもんね〜_H_え〜い_H_」
+					KSTR:(K++) = 「遠慮なく抱きついてやるもんね～_H_え～い_H_」
 				ELSE
-					KSTR:(K++) = 「%CALLNAME:PLAYER%…好き好き〜_H_」
+					KSTR:(K++) = 「%CALLNAME:PLAYER%…好き好き～_H_」
 				ENDIF
 				
 			ELSE
@@ -1501,10 +1504,10 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
 			IF RAND:2 == 0
 				IF EXP:가사경험 >= 100
-					KSTR:(K++) = 「どう？結構上손になったでしょ？」
+					KSTR:(K++) = 「どう？結構上手になったでしょ？」
 					KSTR:(K++) = 「%CSTR:이인칭%の部屋も綺麗にしてあげようか？」
 				ELSEIF EXP:가사경험 >= 50
-					KSTR:(K++) = 「ここで가사してたらさ、片付けが上손くなったんだ」
+					KSTR:(K++) = 「ここで家事してたらさ、片付けが上手くなったんだ」
 					KSTR:(K++) = 「おかげで部屋のスペースが広くなったんだ」
 				ELSE
 					KSTR:(K++) = 「%CSTR:일인칭%の部屋は結構物が多くてさ」
@@ -1512,12 +1515,12 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ELSE
 				IF ABL:요리기능 >= 6
-					KSTR:(K++) = 「最近、外で食べるより%CSTR:일인칭%が요리作ったほうが美味しいような気がするんだ」
+					KSTR:(K++) = 「最近、外で食べるより%CSTR:일인칭%が料理作ったほうが美味しいような気がするんだ」
 				ELSEIF ABL:요리기능 >= 3
-					KSTR:(K++) = 「요리っていいね、安い素材で美味しいのができるようになったよ」
+					KSTR:(K++) = 「料理っていいね、安い素材で美味しいのができるようになったよ」
 					KSTR:(K++) = 「節約できるからお金が減らなくなったんだ」
 				ELSE
-					KSTR:(K++) = 「요리はあまりやったとこないかな」
+					KSTR:(K++) = 「料理はあまりやったとこないかな」
 					KSTR:(K++) = 「いつも外で食べてたからね」
 				ENDIF
 			ENDIF
@@ -1545,7 +1548,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
@@ -1567,7 +1570,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;커뮤니케이션계 커맨드그외
+;커뮤니케이션계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -1581,7 +1584,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;KSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;KSTR:(K++) = 
 				ENDIF
@@ -1621,7 +1624,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1659,7 +1662,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1697,7 +1700,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1720,7 +1723,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;도구사용 커맨드그외
+;도구사용 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -1734,7 +1737,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -1749,7 +1752,7 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;조교자도구계コマンド
+;조교자도구계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("대조교자도구계")
 SELECTCASE SELECTCOM
@@ -1758,7 +1761,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조교자도구계コマンド그외
+;조교자도구계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -1772,7 +1775,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -1812,7 +1815,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1850,7 +1853,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -1872,7 +1875,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;섹스계 커맨드그외(역강간、젖성교以外)
+;섹스계 커맨드 그 외(逆レイプ、乳ファック以外)
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			;처녀
@@ -1897,7 +1900,7 @@ ENDSELECT
 						WSTR:(K++) = %CALLNAME:MASTER%はそのまま%CALLNAME%の恥部を貫く
 						WSTR:(K++) = 「痛…！」
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						WSTR:(K++) = 「どうぞ…」
 						WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%を受け入れている
@@ -1908,7 +1911,7 @@ ENDSELECT
 				;그 이외
 				IF !구상유무확인(0)
 					WSTR:(K++) = 「や、やめろ…あっ」
-					WSTR:(K++) = %CALLNAME%は저항するがそんなことも構わず처녀を貫く
+					WSTR:(K++) = %CALLNAME%は抵抗するがそんなことも構わず処女を貫く
 					WSTR:(K++) = 「うっ…痛い…最悪だ」
 				ENDIF
 			ENDIF
@@ -1941,7 +1944,7 @@ ENDSELECT
 						KSTR:(K++) = 「ダメェ…ダメェ！これ以上すると…ああ_H_」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -1971,7 +1974,7 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;애널섹스계コマンド
+;애널섹스계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("Ａ성교계")
 SELECTCASE SELECTCOM
@@ -1980,7 +1983,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;애널섹스계コマンド그외
+;애널섹스계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0) && ABL:Ａ감각 < 3
 			IF RAND:2 == 0
@@ -2021,7 +2024,7 @@ ENDSELECT
 						KSTR:(K++) = 「ダメェ…ダメェ！これ以上すると…ああ_H_」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -2069,7 +2072,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
 					IF RAND:2 == 0
-						KSTR:(K++) = 「いいよ_H_%CSTR:일인칭%の입で気持ちよくしてあげる_H_」
+						KSTR:(K++) = 「いいよ_H_%CSTR:일인칭%の口で気持ちよくしてあげる_H_」
 					ELSE
 						KSTR:(K++) = 「うふ、どんどん固くなってる_H_」
 					ENDIF
@@ -2080,13 +2083,13 @@ SELECTCASE SELECTCOM
 					ELSEIF RAND:2 == 0
 						KSTR:(K++) = 「しこしこ…今日はどれだけ出るかな？」
 					ELSE
-						KSTR:(K++) = 「いっぱい정액出ろー！しこしこしこ…」
+						KSTR:(K++) = 「いっぱい精液出ろー！しこしこしこ…」
 					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2097,7 +2100,7 @@ SELECTCASE SELECTCOM
 				IF RAND:2 == 0
 					KSTR:(K++) = 「どう？気持ちいい？」
 				ELSE
-					KSTR:(K++) = 「%CSTR:일인칭%の손で気持ちよくなってね」
+					KSTR:(K++) = 「%CSTR:일인칭%の手で気持ちよくなってね」
 				ENDIF
 				CFLAG:344 = 3
 			ENDIF
@@ -2112,8 +2115,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;펠라치오系
-;81펠라치오,88파이즈리펠라,211亀머리攻め(受)
+;フェラチオ系
+;81フェラチオ,88パイズリフェラ,211亀頭攻め(受)
 ;-------------------------------------------------
 	CASE 81,88,211
 		CALL TRAIN_MESSAGE
@@ -2121,9 +2124,9 @@ SELECTCASE SELECTCOM
 		IF CFLAG:345 == 0
 			IF 함락(TARGET) > 0
 				CALL siano_fera
-				KSTR:(K++) = %CALLNAME%は何のためらいもなく페니스をしゃぶっている
+				KSTR:(K++) = %CALLNAME%は何のためらいもなくペニスをしゃぶっている
 			ELSE
-				KSTR:(K++) = 「う、う〜〜…」
+				KSTR:(K++) = 「う、う～～…」
 				KSTR:(K++) = 「わ、分かった…舐めるよ…」
 			ENDIF
 			CFLAG:345 = 1
@@ -2132,7 +2135,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
 					IF RAND:2 == 0
-						KSTR:(K++) = 「いいよ_H_%CSTR:일인칭%の입で気持ちよくしてあげる_H_」
+						KSTR:(K++) = 「いいよ_H_%CSTR:일인칭%の口で気持ちよくしてあげる_H_」
 						CALL siano_fera
 					ELSE
 						CALL siano_fera
@@ -2143,9 +2146,9 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:4 || TALENT:7)
 					IF RAND:3 == 0
 						CALL siano_fera
-						KSTR:(K++) = （早く정액、정액たくさん사정してぇ_H_）
+						KSTR:(K++) = （早く精液、精液たくさん射精してぇ_H_）
 					ELSEIF RAND:2 == 0
-						KSTR:(K++) = 「がまんしないでいいんだよ_H_いっぱい사정して_H_」
+						KSTR:(K++) = 「がまんしないでいいんだよ_H_いっぱい射精して_H_」
 						CALL siano_fera
 					ELSE
 						CALL siano_fera
@@ -2155,13 +2158,13 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					IF RAND:2 == 0
 						CALL siano_fera
-						KSTR:(K++) = （チンポが입の中でびくびくしてる…）
+						KSTR:(K++) = （チンポが口の中でびくびくしてる…）
 					ELSE
 						CALL siano_fera
 						KSTR:(K++) = （ああ…チンポの味好きぃ…_H_）
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2183,7 +2186,7 @@ SELECTCASE SELECTCOM
 			IF (CFLAG:345 || FLAG:7 == 2) && !구상유무확인(0)
 				CALL siano_fera
 				IF RAND:2 == 0
-					KSTR:(K++) = （う〜腐ったチーズの匂いがする…）
+					KSTR:(K++) = （う～腐ったチーズの匂いがする…）
 				ELSE
 					KSTR:(K++) = （うえ…気分最悪だよ…）
 				ENDIF
@@ -2191,8 +2194,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;파이즈리系
-;82파이즈리,87세로파이즈리
+;パイズリ系
+;82パイズリ,87縦パイズリ
 ;-------------------------------------------------
 	CASE 82,87
 		CALL TRAIN_MESSAGE
@@ -2201,7 +2204,7 @@ SELECTCASE SELECTCOM
 			IF BUST(TARGET) > 2
 				KSTR:(K++) = 「まあ、これくらい大きければできるね」
 			ELSE
-				KSTR:(K++) = 「はあ！？この가슴でやれって？」
+				KSTR:(K++) = 「はあ！？この胸でやれって？」
 				KSTR:(K++) = %CALLNAME:MASTER%はやり方を教える
 				KSTR:(K++) = 「あー…そのやり方ならできなくはないね…」
 			ENDIF
@@ -2217,24 +2220,24 @@ SELECTCASE SELECTCOM
 		    				KSTR:(K++) = 「ふふ、%CSTR:이인칭%のチンポを抱いてるみたい_H_」
 		    			ENDIF
 					ELSE
-						KSTR:(K++) = 「いいよ、%CSTR:일인칭%の가슴で気持ちよくしてあげる_H_」
+						KSTR:(K++) = 「いいよ、%CSTR:일인칭%の胸で気持ちよくしてあげる_H_」
 					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					IF BUST(TARGET) > 2
-	    				KSTR:(K++) = 「%CSTR:일인칭%の거유でいっぱい정액出させてあげるね」
+	    				KSTR:(K++) = 「%CSTR:일인칭%の巨乳でいっぱい精液出させてあげるね」
 	    			ELSE
-	    				KSTR:(K++) = 「%CSTR:일인칭%の빈유파이즈리テクを見せてあげる_H_」
+	    				KSTR:(K++) = 「%CSTR:일인칭%の貧乳パイズリテクを見せてあげる_H_」
 	    			ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					IF RAND:2 == 0
-						KSTR:(K++) = 「%CSTR:일인칭%の파이즈리気持ちいいですか?」
+						KSTR:(K++) = 「%CSTR:일인칭%のパイズリ気持ちいいですか?」
 					ELSE
-						KSTR:(K++) = 「ん…_H_파이즈리で感じちゃいます…_H_」
+						KSTR:(K++) = 「ん…_H_パイズリで感じちゃいます…_H_」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2243,12 +2246,12 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:346 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:3 == 0
-					KSTR:(K++) = 「どう？파이즈리気持ちいい？」
+					KSTR:(K++) = 「どう？パイズリ気持ちいい？」
 				ELSEIF RAND:2 == 0
 					IF BUST(TARGET) > 2
-	    				KSTR:(K++) = 「파이즈리好きだね、%CSTR:이인칭%ってさ…」
+	    				KSTR:(K++) = 「パイズリ好きだね、%CSTR:이인칭%ってさ…」
 	    			ELSE
-	    				KSTR:(K++) = 「これってほぼ손と肋뼈だよね…」
+	    				KSTR:(K++) = 「これってほぼ手と肋骨だよね…」
 	    			ENDIF
 				ELSE
 					KSTR:(K++) = 「んしょ、んしょ」
@@ -2262,7 +2265,7 @@ SELECTCASE SELECTCOM
 					IF BUST(TARGET) > 2
 	    				KSTR:(K++) = 「大きいおっぱいに挟まれてうしいんだろうな、%CSTR:이인칭%は」
 	    			ELSE
-	    				KSTR:(K++) = 「これ、ほぼ가슴使ってないよな…」
+	    				KSTR:(K++) = 「これ、ほぼ胸使ってないよな…」
 	    			ENDIF
 				ELSE
 					KSTR:(K++) = 「んしょ、んしょ」
@@ -2290,7 +2293,7 @@ SELECTCASE SELECTCOM
 					ELSEIF RAND:2 == 0
 						KSTR:(K++) = 「はぁ_H_%CSTR:이인칭%のチンポがすれて気持ちいい_H_」
 					ELSE
-						KSTR:(K++) = 「스마타で遠慮しなくていいのに…」
+						KSTR:(K++) = 「素股で遠慮しなくていいのに…」
 					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2304,12 +2307,12 @@ SELECTCASE SELECTCOM
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					IF RAND:2 == 0
-						KSTR:(K++) = 「스마타もうまくなってきたよ」
+						KSTR:(K++) = 「素股もうまくなってきたよ」
 					ELSE
 						KSTR:(K++) = （クリトリス擦れて気持ちいいよ…_H_）
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2329,7 +2332,7 @@ SELECTCASE SELECTCOM
 				IF RAND:2 == 0
 					KSTR:(K++) = 「…」
 				ELSE
-					KSTR:(K++) = 「どう？満발？」
+					KSTR:(K++) = 「どう？満足？」
 				ENDIF
 				CFLAG:347 = 2
 			ENDIF
@@ -2358,19 +2361,19 @@ SELECTCASE SELECTCOM
 					IF RAND:3 == 0
 						KSTR:(K++) = 「体だけじゃなくてチンポも洗うよ」
 					ELSEIF RAND:2 == 0
-						KSTR:(K++) = 「팔に体に…それとチンポも…_H_」
+						KSTR:(K++) = 「腕に体に…それとチンポも…_H_」
 					ELSE
-						KSTR:(K++) = 「あ…_H_유두もクリトリスも擦れてる_H_」
+						KSTR:(K++) = 「あ…_H_乳首もクリトリスも擦れてる_H_」
 					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					IF RAND:2 == 0
 						KSTR:(K++) = 「かゆいところがあったら言ってね」
 					ELSE
-						KSTR:(K++) = 「유두とクリトリスが擦れて%CSTR:일인칭%も気持ちいい…_H_」
+						KSTR:(K++) = 「乳首とクリトリスが擦れて%CSTR:일인칭%も気持ちいい…_H_」
 					ENDIF
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2390,7 +2393,7 @@ SELECTCASE SELECTCOM
 				IF RAND:2 == 0
 					KSTR:(K++) = 「…」
 				ELSE
-					KSTR:(K++) = 「どう？満발？」
+					KSTR:(K++) = 「どう？満足？」
 				ENDIF
 				CFLAG:348 = 2
 			ENDIF
@@ -2401,7 +2404,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;봉사계 커맨드그외
+;봉사계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2415,7 +2418,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2440,7 +2443,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조교자봉사계 커맨드그외
+;조교자봉사계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2454,7 +2457,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2474,8 +2477,8 @@ ENDSELECT
 ELSEIF RESULT == COMTYPE("ＳＭ계")
 SELECTCASE SELECTCOM
 ;-------------------------------------------------
-;채찍打系
-;100스팽킹,101젖스팽킹,102채찍
+;鞭打系
+;100スパンキング,101乳スパンキング,102鞭
 ;-------------------------------------------------
 	CASE 100,101,102
 		CALL TRAIN_MESSAGE
@@ -2495,7 +2498,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2533,7 +2536,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2556,7 +2559,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;SM계 커맨드그외
+;SM계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2570,7 +2573,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2610,7 +2613,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2649,7 +2652,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2673,7 +2676,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조수에 의한 커맨드, 및 레즈플레이그외
+;조수에 의한 커맨드, 및 레즈플레이 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2687,7 +2690,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2712,7 +2715,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;하드한조교 커맨드그외
+;하드한조교 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2726,7 +2729,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2767,7 +2770,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						;WSTR:(K++) = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						;WSTR:(K++) = 
 					ENDIF
@@ -2798,7 +2801,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -2824,7 +2827,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;촉수계 커맨드그외
+;촉수계 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2838,7 +2841,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -2865,7 +2868,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:392 == 0
 			WSTR:(K++) = 「ぴ！？な、なに掛けたの！」
-			KSTR:(K++) = 「え？로션？ちょ、ちょっと、そんな所に塗らないでよ！」
+			KSTR:(K++) = 「え？ローション？ちょ、ちょっと、そんな所に塗らないでよ！」
 			CFLAG:392 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:392 < 3 || FLAG:7 == 2)
@@ -2875,14 +2878,14 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「このまま体を絡み合わせてもいいよ_H_」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					WSTR:(K++) = 「えへへ_H_このぬるぬるの손でどこ触ってほしい？」
-					KSTR:(K++) = 「유두？애널？それとも¥@HAVE_PENIS(PLAYER) ? おチンポ # おマンコ ¥@？」
+					WSTR:(K++) = 「えへへ_H_このぬるぬるの手でどこ触ってほしい？」
+					KSTR:(K++) = 「乳首？アナル？それとも\@HAVE_PENIS(PLAYER) ? おチンポ # おマンコ \@？」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					WSTR:(K++) = 「この로션の体でいっぱい봉사するよ」
-					KSTR:(K++) = 「どこ触ってほしいですか？¥@HAVE_PENIS(PLAYER) ? おチンポ # おマンコ ¥@でもどこでもいいですよ」
+					WSTR:(K++) = 「このローションの体でいっぱい奉仕するよ」
+					KSTR:(K++) = 「どこ触ってほしいですか？\@HAVE_PENIS(PLAYER) ? おチンポ # おマンコ \@でもどこでもいいですよ」
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					KSTR:(K++) = 
 				ENDIF
@@ -2890,7 +2893,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:392 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				WSTR:(K++) = 「また로션塗るの？」
+				WSTR:(K++) = 「またローション塗るの？」
 				KSTR:(K++) = 「まあ、痛い思いするよりましだよね…」
 				CFLAG:392 = 3
 			ENDIF
@@ -2925,9 +2928,9 @@ SELECTCASE SELECTCOM
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 「%CSTR:일인칭%の体で綺麗にしてほしいんだね…」
-						KSTR:(K++) = 「どこから洗ってほしい？¥@HAVE_PENIS(PLAYER) ? チンポでも # ¥@どこでも洗うよ」
+						KSTR:(K++) = 「どこから洗ってほしい？\@HAVE_PENIS(PLAYER) ? チンポでも # \@どこでも洗うよ」
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF !구상유무확인(0)
 						;WSTR:(K++) = 
 					ENDIF
@@ -2936,7 +2939,7 @@ SELECTCASE SELECTCOM
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:399 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 					KSTR:(K++) = 「また、%CSTR:일인칭%の体で洗いたいの？」
-					KSTR:(K++) = 「ソープは本職じゃないんだけど…ま아이っか」
+					KSTR:(K++) = 「ソープは本職じゃないんだけど…まあいっか」
 					CFLAG:399 = 3
 				ENDIF
 				;그 이외
@@ -2961,7 +2964,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					KSTR:(K++) = 「…ふう…」
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) =
 				ENDIF
@@ -3002,7 +3005,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;특수커맨드그외
+;특수커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -3016,7 +3019,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -3031,13 +3034,13 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;派生コマンド
+;파생 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("派生系")
 SELECTCASE SELECTCOM
 ;-------------------------------------------------
 ;奥責め共通
-;506,삽입음부자극　507,삽입자궁구자극
+;506,삽입음부자극　507,挿入子宮口責め
 ;-------------------------------------------------
 	CASE 506,507
 		CALL TRAIN_MESSAGE
@@ -3057,7 +3060,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -3080,7 +3083,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;派生コマンド그외
+;파생 커맨드 그 외
 ;-------------------------------------------------
 		IF !구상유무확인(0)
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -3094,7 +3097,7 @@ ENDSELECT
 				ELSEIF (TALENT:5 || TALENT:8)
 					;WSTR:(K++) = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF !구상유무확인(0)
 					;WSTR:(K++) = 
 				ENDIF
@@ -3110,7 +3113,7 @@ ENDSELECT
 		ENDIF
 ENDIF
 ;-------------------------------------------------
-;그 외、どれ系の조교かわからなかった奴(「CALL TRAIN_MESSAGE」は使わないでおく)
+;그 외, 어느 계통의 조교인지 몰랐던 녀셕(「CALL TRAIN_MESSAGE」は使わないでおく)
 ;-------------------------------------------------
 IF !구상유무확인(0)
 SELECTCASE SELECTCOM
@@ -3126,21 +3129,21 @@ CALL 구상변수표시
 
 
 ;-------------------------------------------------
-;윤간時の구상
-;CASE 0 内は必ず通るようになっており
-;RETURNで0を返すと、この後通常の윤간行動を出します
-;CFLAGは使っていません
-;COMF201_윤간内でLOCALを使っているので使いません
+;윤간시의 구상
+;CASE 0 안은 반드시 건너뛰게 되어있으며
+;RETURN에서 0을 반환하면, 이후 통상적인 윤간행동을 출력합니다
+;CFLAG는 사용하지 않습니다
+;COMF201_윤간 내에서 LOCAL을 사용하고 있으므로 사용하지 않습니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_RINKAN_K5311, ARG:1 , ARG:2
 CALL 구상변수초기화
 
 SELECTCASE ARG:1
 	CASE 0
-	;CASE 0はオリジナル윤간구상
-	;C:一回あたりの帰宅人数、D：興奮度増加(及び減少)
-	;CとDはオリジナル윤간구상内のみ使う
-	;C += 、D += を使う
+	;CASE 0은 오리지널 윤간 구상
+	;C:1회당 귀가 인수 D：흥분도 증가(및 감소)
+	;C와 D는 오리지널 윤간 구상 내에서만 사용
+	;C += 、D += 를 사용
 		IF ARG:2 == 1
 		;하드ON
 		
@@ -3149,7 +3152,7 @@ SELECTCASE ARG:1
 		
 		ENDIF
 	;하드계
-	;가슴を踏まれる（거유・폭유のみ）
+	;가슴을 밟힌다（거유・폭유만）
 	CASE 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
 			;연모, 친애
@@ -3162,7 +3165,7 @@ SELECTCASE ARG:1
 			ELSEIF (TALENT:5 || TALENT:8)
 				;WSTR:(K++) = 
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF KSTR:0 == ""
 				;WSTR:(K++) = 
 			ENDIF
@@ -3175,49 +3178,49 @@ SELECTCASE ARG:1
 		IF FLAG:7 == 2 && KSTR:0 == ""
 			;WSTR:(K++) =
 		ENDIF
-	;머리を踏まれる
+	;머리를 밟힌다
 	CASE 2
 	
 	;폭력을 당하다
 	CASE 3
 	
 	;담배빵
-	;興奮度が低く、반항적、꿋꿋함、프라이드높음、건방짐、저항を持っている
+	;흥분도가 낮고, 반항적, 꿋꿋함, 프라이드높음, 건방짐, 저항을 가지고 있다
 	CASE 4
 	
-	;地面に垂れた정액舐めとらせる
-	;마조끼３以上
+	;지면에 늘어진 정액 핥아먹인다
+	;마조끼３이상
 	CASE 5
 	
 	;몸에 낙서를 당하고 범해진다
 	CASE 6
 	
-	;尻突き上げてバックから犯されつつ、머리を踏んづけられて屈辱で涙눈상태
+	;엉덩이를 치켜올려 뒤로부터 범해지면서, 머리를 짓밟혀 굴욕으로 글썽이는 상태
 	CASE 7
 	
 	;통상계
-	;음란系で눈の前に棒並べられて、どれが欲しいか選ばせるとか（음란・창부のみ）
+	;음란계로 눈앞에 장대가 진열되어, 어떤 것을 원하는지 선택하게 하거나（음란・창부만）
 	CASE 8
 	
-	;거유以上のキャラだと「その乳は飾りか？遊ばせてるんじゃねえ」とか罵られ파이즈리한다（거유・폭유のみ）
+	;거유 이상의 캐릭터라면 「그 젖은 장식이냐？ 쉬고 있지 말라고」등등 매도당하며 파이즈리한다（거유・폭유만）
 	CASE 9
 	
-	;挿れられるのだけは회피しようと必死に입と손で群がるチンポにご봉사する（恋幕・친애のみ）
+	;삽입만은 피하려고 필사적으로 입과 손으로 몰려드는 자지에 봉사한다（연모・친애만）
 	CASE 10
 	
-	;;両穴突かれながら無理やり笑顔とピースサインとらされて記念촬영
+	;;양구멍을 뚫리면서 억지로 미소와 피스싸인을 취하게 시켜져 기념촬영
 	CASE 11
 	
-	;;輸姦後の後始末描写で、本人정액でどろどろにされてるのに周囲の男達の肉棒を舌で掃除させられてる
+	;;윤간후의 뒷처리 묘사에서, 본인 정액 투성이가 되었는데도 주위 남자들의 육봉을 혀로 청소시키고 있다
 	CASE 12
 	
 	;안에 사정당해도 즉시 다른 사람으로 교대
 	CASE 13
 	
-	;一斉사정で정액まみれ
+	;일제사정으로 정액투성이
 	CASE 14
 	
-	;;両穴突かれて同時사정
+	;;양구멍 찔리며 동시 사정
 	CASE 15
 	
 	;기승위+양겨드랑이잡
@@ -3231,7 +3234,7 @@ ENDSELECT
 CALL 구상변수표시
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG 관련（5311을 캐릭터번호로 치환）
-;パラメータ変化などをトリガーにした구상　CFLAG 221〜260を사용
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_A（5311을 캐릭터번호로 치환）
@@ -3265,7 +3268,7 @@ ENDIF
 CALL 구상변수초기화
 LOCAL = 0
 ;-------------------------------------------------
-;사정개소변경時のテキスト　有効時はここで関数終了
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
 
 IF CFLAG:106
@@ -3287,7 +3290,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:221= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:221= 3
@@ -3319,7 +3322,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:222= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:222= 3
@@ -3351,7 +3354,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:223= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:223= 3
@@ -3383,7 +3386,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:224= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:224= 3
@@ -3415,7 +3418,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:225= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:225= 3
@@ -3447,7 +3450,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:226= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:226= 3
@@ -3479,7 +3482,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:227= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:227= 3
@@ -3511,7 +3514,7 @@ IF CFLAG:106
 				;WSTR:(K++) = 
 				CFLAG:228= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:228= 3
@@ -3545,7 +3548,7 @@ IF CFLAG:106
 					;WSTR:(K++) = 
 					CFLAG:229= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:229= 3
@@ -3576,7 +3579,7 @@ IF CFLAG:106
 					;WSTR:(K++) = 
 					CFLAG:230= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:230= 3
@@ -3618,7 +3621,7 @@ IF TFLAG:9 > 0
 				;WSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:230= 3
@@ -3670,7 +3673,7 @@ IF TFLAG:0 > 0
 					;WSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:233= 3
@@ -3704,12 +3707,12 @@ IF TFLAG:0 > 0
 					;WSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					IF ABL:정액중독 > 2
 						IF ABL:정액중독 > 8 && RAND:4 == 0
 	    					KSTR:(K++) = 「ぐちゅぐちゅ…ごくん_H_」
-	    					KSTR:(K++) = 「ねえ、もっと美味しい정액飲ませて_H_」
+	    					KSTR:(K++) = 「ねえ、もっと美味しい精液飲ませて_H_」
 	    				ELSEIF ABL:정액중독 > 4 && RAND:3 == 0
 	    					KSTR:(K++) = 「じゅるる…ぐちゅぐちゅ…ごくん…」
 	    					KSTR:(K++) = 「はぁ…美味しい…_H_」
@@ -3765,7 +3768,7 @@ IF TFLAG:1 > 0
 				IF RAND:3 == 0
 					KSTR:(K++) = 「うわあ、いっぱい出てる」
 				ELSEIF RAND:2 == 0
-					KSTR:(K++) = 「%CSTR:일인칭%の손でたくさん感じてくれたんだね」
+					KSTR:(K++) = 「%CSTR:일인칭%の手でたくさん感じてくれたんだね」
 				ELSE
 					KSTR:(K++) = 「今度は中に出して欲しいな…_H_」
 				ENDIF
@@ -3789,12 +3792,12 @@ IF TFLAG:1 > 0
 				ELSEIF RAND:2 == 0
 					KSTR:(K++) = 「相変わらず凄い量…顔にもかかっちゃった…」
 				ELSE
-					KSTR:(K++) = 「ああ…정액の匂い…_H_」
+					KSTR:(K++) = 「ああ…精液の匂い…_H_」
 				ENDIF
 				
 				CFLAG:234= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:234= 3
@@ -3803,7 +3806,7 @@ IF TFLAG:1 > 0
 		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 			IF RAND:3 == 0
-				KSTR:(K++) = 「손にいっぱいついちゃった…」
+				KSTR:(K++) = 「手にいっぱいついちゃった…」
 			ELSEIF RAND:2 == 0
 				KSTR:(K++) = 「相変わらず白いね…」
 			ELSE
@@ -3844,7 +3847,7 @@ IF TFLAG:34 > 0
 				;WSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:235= 3
@@ -3884,7 +3887,7 @@ IF TFLAG:16 == 1
 				;WSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) = 
 				CFLAG:236= 3
@@ -3926,7 +3929,7 @@ IF TFLAG:2 > 0
 					;WSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:237= 3
@@ -3960,7 +3963,7 @@ IF TFLAG:2 > 0
 					;WSTR:(K++) = 
 					CFLAG:238= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:238= 3
@@ -3985,11 +3988,11 @@ IF TFLAG:2 > 0
 					IF RAND:2 == 0
 						KSTR:(K++) = 「ああ_H_中にたくさん出てる…_H_」
 					ELSEIF !TALENT:임신
-						KSTR:(K++) = 「そんなに%CSTR:일인칭%に아이を生んでほしいの？」
+						KSTR:(K++) = 「そんなに%CSTR:일인칭%に子供を生んでほしいの？」
 						IF EXP:출산경험
-							KSTR:(K++) = 「いいよ、{EXP:출산경험 + 1}人눈生んであげる_H_」
+							KSTR:(K++) = 「いいよ、{EXP:출산경험 + 1}人目生んであげる_H_」
 						ELSEIF 함락(TARGET) > 2
-							KSTR:(K++) = 「いいよ、%CSTR:이인칭%の아이生んであげる_H_」
+							KSTR:(K++) = 「いいよ、%CSTR:이인칭%の子供生んであげる_H_」
 						ELSEIF 함락(TARGET) > 1
 							KSTR:(K++) = 「できたら%CSTR:이인칭%と%CSTR:일인칭%でデキ婚しちゃうかも…なんちゃって_H_」
 						ELSE
@@ -4002,12 +4005,12 @@ IF TFLAG:2 > 0
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
 					IF RAND:3 == 0 && EXP:출산경험 && !TALENT:임신
-						KSTR:(K++) = 「ああ_H_ {EXP:출산경험 + 1}人눈できちゃいそう_H_」
+						KSTR:(K++) = 「ああ_H_ {EXP:출산경험 + 1}人目できちゃいそう_H_」
 					ELSEIF RAND:2 == 0
 						KSTR:(K++) = 「ああ_H_中に熱いの出てるぅ…_H_」
 					ELSEIF !TALENT:임신
 							KSTR:(K++) = 「ああ_H_すごい出てるよ」
-							KSTR:(K++) = 「%CSTR:일인칭%임신しちゃう_H_」
+							KSTR:(K++) = 「%CSTR:일인칭%妊娠しちゃう_H_」
 					ELSE
 						KSTR:(K++) = 「おなかに赤ちゃんいるのに遠慮なさすぎだよ_H_」
 					ENDIF
@@ -4017,7 +4020,7 @@ IF TFLAG:2 > 0
 					;WSTR:(K++) = 
 					CFLAG:239= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 					CFLAG:239= 3
@@ -4026,7 +4029,7 @@ IF TFLAG:2 > 0
 			;굴복각인Lv3		
 			IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && !구상유무확인(0)		
 				IF RAND:2 == 0
-					KSTR:(K++) = 「아이ができちゃうよ…」
+					KSTR:(K++) = 「子供ができちゃうよ…」
 				ELSE
 					KSTR:(K++) = 「ああ…出てる…中に出されてる…」
 				ENDIF
@@ -4035,7 +4038,7 @@ IF TFLAG:2 > 0
 			;그 이외		
 			IF (CFLAG:239 < 1 || FLAG:7 == 2) && !구상유무확인(0)		
 				IF RAND:2 == 0
-					KSTR:(K++) = 「%CSTR:이인칭%って최저だね…」
+					KSTR:(K++) = 「%CSTR:이인칭%って最低だね…」
 				ELSE
 					KSTR:(K++) = 「…」
 				ENDIF
@@ -4057,15 +4060,15 @@ ENDIF
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					IF ABL:정액중독 > 2
 						IF ABL:정액중독 > 8 && RAND:4 == 0
 	    					KSTR:(K++) = 「じゅるじゅる…ごくん_H_」
-	    					KSTR:(K++) = 「ねえ、もっと美味しい정액いっぱいかけて_H_」
+	    					KSTR:(K++) = 「ねえ、もっと美味しい精液いっぱいかけて_H_」
 	    				ELSEIF ABL:정액중독 > 4 && RAND:3 == 0
 	    					KSTR:(K++) = 「ぺろぺろ…」
-	    					KSTR:(K++) = 「へへ…정액の味も結構好きなんだ_H_」
+	    					KSTR:(K++) = 「へへ…精液の味も結構好きなんだ_H_」
 	    				ELSEIF RAND:2 == 0
 	    					KSTR:(K++) = 「この匂い好きになっちゃった_H_」
 	    				ELSE
@@ -4151,7 +4154,7 @@ IF TFLAG:15 >0
 			;WSTR:(K++) = 
 			CFLAG:241= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(0)	
 			;WSTR:(K++) = 
 			CFLAG:241= 3
@@ -4183,7 +4186,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;想定外の구상だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
@@ -4266,7 +4269,7 @@ IF TFLAG:29 > 1
 			;WSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			IF RAND:3 == 0
 				KSTR:(K++) = 「お_H_ お_H_ おほほぉぉぉぉぉ！」
@@ -4307,7 +4310,7 @@ IF TFLAG:29 > 0 && !구상유무확인(LOCAL)
 			;WSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			IF RAND:2 == 0
 				KSTR:(K++) = 「あ_H_　イ、イうううくぅぅぅぅぅ！」
@@ -4378,7 +4381,7 @@ IF TFLAG:10 > 0
 			;WSTR:(K++) = 
 			CFLAG:247= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			;WSTR:(K++) = 
 			CFLAG:247= 3
@@ -4420,7 +4423,7 @@ IF TFLAG:11 > 0
 			;WSTR:(K++) = 
 			CFLAG:248= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			;WSTR:(K++) = 
 			CFLAG:248= 3
@@ -4462,7 +4465,7 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 			;WSTR:(K++) = 
 			CFLAG:249= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(LOCAL)	
 			;WSTR:(K++) = 
 			CFLAG:249= 3
@@ -4483,7 +4486,7 @@ ENDIF
 CALL 구상변수표시
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（5311을 캐릭터번호로 치환）
-;조교後の変化をトリガーにした구상
+;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_C_K5311
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
@@ -4547,7 +4550,7 @@ CALL 구상변수표시
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（5311을 캐릭터번호로 치환）
-;パラメータ変化をトリガーにした구상
+;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_D_K5311
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
@@ -4645,7 +4648,7 @@ IF P > PALAMLV:3 && CFLAG:254 == 0
 	;그 이외
 	;ELSE
 		WSTR:(K++) = 「う…」
-		WSTR:(K++) = 次の조교の準備に入ると%CALLNAME%は少しのけぞった
+		WSTR:(K++) = 次の調教の準備に入ると%CALLNAME%は少しのけぞった
 	;ENDIF
 	CFLAG:254 = 1
 ENDIF
@@ -4693,7 +4696,7 @@ IF TFLAG:22 == 3
 		;WSTR:(K++) = 
 	;음란, 창부	
 	ELSEIF (TALENT:4 || TALENT:7)	
-		WSTR:(K++) = 「あ゛_H_…痛い…新しい쾌락に目覚めちゃいそう…_H_」
+		WSTR:(K++) = 「あ゛_H_…痛い…新しい快楽に目覚めちゃいそう…_H_」
 	;복종, 예속	
 	ELSEIF (TALENT:5 || TALENT:8)	
 		;WSTR:(K++) = 
@@ -4759,7 +4762,7 @@ IF TFLAG:21 == 3
 		ELSEIF (TALENT:5 || TALENT:8)	
 			;WSTR:(K++) = 
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF !구상유무확인(0)
 			;WSTR:(K++) = 
 		ENDIF	
@@ -4772,7 +4775,7 @@ ENDIF
 
 CALL 구상변수표시
 ;-------------------------------------------------
-;이벤트구상 모음（5311をキャラ番号に置換する） CFLAG 261〜299を사용
+;이벤트구상 모음（5311을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
 @KOJO_MESSAGE_EVENT_K5311
 
@@ -4795,21 +4798,54 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
-				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
-				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
-				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
-				ENDIF	
-				;함락완료共通	
+				IF !RAND:2 && ABL:정액중독 > 2
+					CALL siano_fera
+					WSTR:(K++) = 「ぐちゅぐちゅ…ごくん…、はあ…_H_」
+					WSTR:(K++) = 「まだ勃ってる…、これだけ勃ってたら、また射精せるよね、もっと飲ませて_H_」
+					CALL siano_fera
+					
+				ENDIF
+				IF !구상유무확인(0)
+					;연모, 친애	
+					IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+						IF !RAND:2
+							WSTR:(K++) = 「ジュル…ごくん…ふう…」
+							WSTR:(K++) = 「あ、あんなに射精したのにまだ勃ってる。」
+							WSTR:(K++) = 「もう一回、射精させてあげるね_H_」
+							CALL siano_fera
+						ELSE
+							WSTR:(K++) = 「とっても固くなってる…楽にしてあげるね_H_」
+							CALL siano_fera
+						ENDIF
+					;음란, 창부	
+					ELSEIF (TALENT:4 || TALENT:7)	
+						IF !RAND:2
+							WSTR:(K++) = 「ジュルル…ごくん…」
+							WSTR:(K++) = 「えへへ、%CSTR:이인칭%の勃起チンポ、ふにゃふにゃになるまでしゃぶってあげるね」
+							CALL siano_fera
+						ELSE
+							CALL siano_fera
+							WSTR:(K++) = 「%CSTR:이인칭%のチンポ、ここまでカチカチだとしゃぶりたくなっちゃう_H_」
+							CALL siano_fera
+						ENDIF
+						
+					;복종, 예속	
+					ELSEIF (TALENT:5 || TALENT:8)	
+						;WSTR:(K++) = 
+					ENDIF	
+					;함락완료 공통	
+				ENDIF
 				IF !구상유무확인(0)	
-					CALL siano_fera
-					WSTR:(K++) = 「あ、おはよう。朝勃ちしてたからつい」
-					CALL siano_fera
+						IF !RAND:2
+							CALL siano_fera
+							WSTR:(K++) = 「あ、おはよう。朝勃ちしてたからつい」
+							CALL siano_fera
+						ELSE
+							CALL siano_fera
+							WSTR:(K++) = 「あ、おはよう。これは、%CSTR:이인칭%が喜ぶと思って…」
+							WSTR:(K++) = 「スッキリするまで射精してあげるよ_H_」
+							CALL siano_fera
+						ENDIF
 				ENDIF	
 				CFLAG:261 = 1
 			ENDIF
@@ -4833,26 +4869,41 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;모유체질じゃない
+				;모유체질이 아니다
 				IF !구상유무확인(0)
-					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
-						;WSTR:(K++) = 
-					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
-						;WSTR:(K++) = 
-					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
-						;WSTR:(K++) = 
-					ENDIF	
-					;함락완료共通	
+					IF !RAND:3 && ABL:정액중독 > 5
+						WSTR:(K++) = 「朝勃ちチンポ精液たくさん出てる…いい匂い…幸せぇ_H_」
+						WSTR:(K++) = 「ねえ、もっと%CSTR:일인칭%に精液かけてえ_H_」
+						WSTR:(K++) = %CALLNAME%は再びパイズリを始めた
+					ELSEIF !RAND:2 && ABL:정액중독 > 2
+						WSTR:(K++) = 「あは_H_精液がたくさんかかった_H_」
+						WSTR:(K++) = 「ねえ、もっと精液まみれにして_H_」
+						WSTR:(K++) = そう言って%CALLNAME%はもう一度パイズリを始めた
+					ENDIF
+					IF !구상유무확인(0)
+						;연모, 친애	
+						IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+							WSTR:(K++) = 「えへへ…気持ちよかった？」
+							WSTR:(K++) = 「パイズリの練習。%CSTR:이인칭%をもっと気持ちよくさせたいからね_H_」
+						;음란, 창부	
+						ELSEIF (TALENT:4 || TALENT:7)	
+							WSTR:(K++) = 「たくさん射精たね、%CSTR:일인칭%のパイズリも悪くないでしょ？」
+							WSTR:(K++) = 「どう？もう一回パイズリしてあげよっか？」
+						;복종, 예속	
+						ELSEIF (TALENT:5 || TALENT:8)	
+							WSTR:(K++) = 「あっ、えっと、これは…」
+							WSTR:(K++) = 「ちょうど勃起してたからパイズリの練習を…」
+						ENDIF	
+					ENDIF
+					;함락완료 공통	
 					IF !구상유무확인(0)	
-						;WSTR:(K++) =
+						WSTR:(K++) = 「あ、おはよう。朝勃ちしてたからつい」
+						WSTR:(K++) = 「どう？%CSTR:일인칭%のおっぱい気持ちいい？」
 					ENDIF	
 				ENDIF
 				CFLAG:262 = 1
@@ -4866,16 +4917,23 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					CALL siano_sex
+					WSTR:(K++) = 「あ、えへへ…起きた？」
+					WSTR:(K++) = 「%CSTR:이인칭%のチンポ勃起してたから挿入れたくなっちゃった_H_」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「朝勃ちチンポ気持ちいいっ_H_あんっ_H_」
+					CALL siano_sex
+					WSTR:(K++) = 「あ、起きた？でも、もうちょっと…もうちょっとでイくから…_H_」
+					CALL siano_sex
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「%CSTR:이인칭%の朝勃ちチンポ%CSTR:일인칭%のおマンコで気持ちよくしてあげる_H_」
+					CALL siano_sex
+					WSTR:(K++) = 「い…いつもより太い…_H_」
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL siano_sex
 					WSTR:(K++) = 「はぁ…はぁ…あ、おはよう。朝勃ちしてたからつい…」
@@ -4889,18 +4947,26 @@ SELECTCASE TFLAG:13
 	CASE 24
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					CALL siano_sex
+					WSTR:(K++) = 「あ、えへへ…起きた？」
+					WSTR:(K++) = 「%CSTR:이인칭%のチンポ勃起してたから挿入れたくなっちゃった_H_」
+					WSTR:(K++) = 「お尻の穴に入れてるけどいいよね」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「朝勃ちチンポ気持ちいいっ_H_あんっ_H_」
+					CALL siano_sex
+					WSTR:(K++) = 「あ、起きた？でも、もうちょっと…もうちょっとでイくから…_H_」
+					CALL siano_sex
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「%CSTR:이인칭%の朝勃ちチンポ%CSTR:일인칭%のおマンコで気持ちよくしてあげる_H_」
+					CALL siano_sex
+					WSTR:(K++) = 「い…いつもより太い…_H_」
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					CALL siano_sex
 					WSTR:(K++) = 「はぁ…はぁ…あ、おはよう。朝勃ちしてたからつい…」
@@ -4915,7 +4981,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			IF CFLAG:263 < 1 || FLAG:7 == 2
 				KSTR:(K++) = 「んちゅ…_H_ちゅぷ…_H_はぁ…_H_」
-				KSTR:(K++) = 「えへへ…、눈、깨달음めた？おはよ」
+				KSTR:(K++) = 「えへへ…、目、覚めた？おはよ」
 				CFLAG:263 = 1
 			ENDIF
 
@@ -4938,7 +5004,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
@@ -4946,18 +5012,30 @@ SELECTCASE TFLAG:13
 				;노래 부르지 않음
 				IF !구상유무확인(0)
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
-						;WSTR:(K++) = 
+					IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+						WSTR:(K++) = 「あ、おはよ、%CSTR:이인칭%が寝てる間に朝食作っておいたよ」
+						WSTR:(K++) = 「さあ、こっち来て。あーんしてあげる_H_口移しでもいいよ_H_」
+						IF !RAND:2 || (CFLAG:MASTER:(2100 + GETCHARA(5311)) > 1000 && RAND:3)
+							WSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%に口移しを頼むことにした
+							WSTR:(K++) = 「え、じょ…冗談だったんだけど…」
+							WSTR:(K++) = 「わ、分かったよ…ちょっと待ってね…」
+							WSTR:(K++) = %CALLNAME%は口に食べ物を含み咀嚼する
+							WSTR:(K++) = その後、%CALLNAME:MASTER%にキスをし、口の中の食べ物を移した
+							WSTR:(K++) = 「ど…どうだった…？_／／／_」
+						ENDIF
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)	
-						;WSTR:(K++) = 
+						WSTR:(K++) = 「あ、おはよ。起きるの待つの暇だから朝食作ってたよ」
+						WSTR:(K++) = 「朝勃ちしてくれたら遊べたのになー」
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)	
-						;WSTR:(K++) = 
+						WSTR:(K++) = 「あ、おはよ、朝食作ってたんだ」
+						WSTR:(K++) = 「口に合えばいいんだけど…」
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
-						;WSTR:(K++) =
+						WSTR:(K++) = 「あ、おはよ、朝食作ってたんだ」
+						WSTR:(K++) = 「口に合えばいいんだけど…」
 					ENDIF	
 				ENDIF
 				CFLAG:263 = 1
@@ -4970,7 +5048,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			IF CFLAG:263 < 1 || FLAG:7 == 2
 				KSTR:(K++) = 「すぅー…すぅー…」
-				KSTR:(K++) = ゆっくりと눈が開いた
+				KSTR:(K++) = ゆっくりと目が開いた
 				KSTR:(K++) = 「うん……？おはよ…」
 				CFLAG:263 = 1
 			ENDIF
@@ -4981,20 +5059,24 @@ SELECTCASE TFLAG:13
 	CASE 28
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					WSTR:(K++) = 「足でもイっちゃうんだ…この変態_H_」
+					WSTR:(K++) = 「その変態さんにはご褒美にもう一回足でイかせてあげる_H_」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「ほれほれ～朝勃ちチンポにお仕置き_H_」
+					WSTR:(K++) = 「こんなに勃起させてエッチな夢でも見てたんでしょ～？」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「あっ、えっと、これは…」
+					WSTR:(K++) = 「ちょうど勃起してたから足コキの練習を…」
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
-					WSTR:(K++) =
+					WSTR:(K++) = 「あっ、えっと、これは…」
+					WSTR:(K++) = 「ちょうど勃起してたから足コキの練習を…」
 				ENDIF	
 				CFLAG:263 = 1
 			ENDIF
@@ -5008,15 +5090,18 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
 				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「はい、%CSTR:일인칭%のおっぱいミルク_H_」
+					WSTR:(K++) = 「%CSTR:이인칭%だけに特別だよ」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「はいこれ、%CSTR:일인칭%の母乳、なんか沢山出てくるからもったいなくてさ」
+					WSTR:(K++) = 「美少女の母乳飲めるなんて、幸せ者だね_H_」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					WSTR:(K++) = 「あっ、えっと、これは…」
+					WSTR:(K++) = 「ちょうど勃起してたから足コキの練習を…」
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5040,7 +5125,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5079,7 +5164,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5103,7 +5188,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5131,7 +5216,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5159,7 +5244,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5176,18 +5261,42 @@ SELECTCASE TFLAG:13
 	CASE 9
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「あ、ごめん…我慢できなくて、エッチしに来ちゃった…_H_」
+						WSTR:(K++) = 「もうちょっとエッチしようよ…_H_」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「二人でこっそりエッチするのもたまにはいいよね…」
+						WSTR:(K++) = 「皆には内緒だよ_H_」
+					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「えへへ…夜のサプライズエッチ…_H_」
+						WSTR:(K++) = 「%CSTR:일인칭%のおマンコで気持ちよくさせてあげる_H_」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「ああ…_H_夜にこっそりエッチするのも気持ちいい…_H_」
+						WSTR:(K++) = 「これだけやっても起きないなんて意外と鈍感だな_H_」
+					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「はあ…はあ…これは…夜這いセックスが好きだって聞いたから…」
+						WSTR:(K++) = 「それに…%CSTR:이인칭%がまだ物足りなさそうだったから」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「お願い…起きないで…起きないで…」
+						CALL siano_sex
+					ENDIF
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5202,16 +5311,42 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「あ、ごめん…我慢できなくて、エッチしに来ちゃった…_H_」
+						WSTR:(K++) = 「もうちょっとエッチしようよ…_H_」
+						WSTR:(K++) = 「今日はお尻の穴でやりたい気分だけどね…」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「二人でこっそりアナルエッチするのもたまにはいいよね…」
+						WSTR:(K++) = 「皆には内緒だよ_H_」
+					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「えへへ…夜のサプライズエッチ…_H_」
+						WSTR:(K++) = 「%CSTR:일인칭%のアナルで気持ちよくさせてあげる_H_」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「ああ…_H_夜にこっそりエッチするのも気持ちいい…_H_」
+						WSTR:(K++) = 「これだけやっても起きないなんて意外と鈍感だな_H_」
+						WSTR:(K++) = 「入ってるのがアナルってことも気付いてなさそうだし_H_」
+					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_sex
+						WSTR:(K++) = 「はあ…はあ…これは…夜這いセックスが好きだって聞いたから…」
+						WSTR:(K++) = 「それに…%CSTR:이인칭%がまだ物足りなさそうだったから」
+					ELSE
+						CALL siano_sex
+						WSTR:(K++) = 「お願い…起きないで…起きないで…」
+						CALL siano_sex
+					ENDIF
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5235,7 +5370,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5259,7 +5394,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5283,7 +5418,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5298,16 +5433,38 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					;WSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6) && CFLAG:830 == 1
+					IF !RAND:2
+						CALL siano_aegi
+						WSTR:(K++) = 「寝顔見るだけだったのに…」
+						WSTR:(K++) = 「指が勝手に動いちゃうよぉ…_H_んんっ…_H_」
+					ELSE
+						CALL siano_aegi
+						WSTR:(K++) = 「だ、だめぇ_H_%CSTR:이인칭%の寝顔を見ると指が止まらなくなっちゃうぅ_H_」
+						CALL siano_aegi
+					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_aegi
+						WSTR:(K++) = 「こんな美少女が近くでオナニーにしてるのに見れないなんて不幸だねー」
+						CALL siano_aegi
+					ELSE
+						CALL siano_aegi
+						WSTR:(K++) = 「オナニーの音で起きちゃう？起きちゃうかなー？」
+						WSTR:(K++) = 「このハラハラ感が興奮しちゃう_H_」
+					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
-					;WSTR:(K++) = 
+					IF !RAND:2
+						CALL siano_aegi
+						WSTR:(K++) = 「やっちゃ駄目なことしてるのに…指が止まらない…_H_」
+					ELSE
+						WSTR:(K++) = 「はあ…_H_はあ…_H_オナニーくらいならいいよね…」
+						CALL siano_aegi
+					ENDIF
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) =
 				ENDIF	
@@ -5320,7 +5477,15 @@ SELECTCASE TFLAG:13
 	CASE 36
 			CALL EVENT_MESSAGE
 			IF CFLAG:269 < 1 || FLAG:7 == 2
-				;WSTR:(K++) =
+				IF CFLAG:830 == 1
+					WSTR:(K++) = 「えへ…こっそり来ちゃった_H_」
+					WSTR:(K++) = 「今日は%CSTR:이인칭%と一緒に寝たい気分なんだ…」
+					WSTR:(K++) = 「\@ TALENT:아내 || TALENT:남편 ? 夫婦 # 恋人同士 \@だからいいよね_H_」
+				ELSE
+					WSTR:(K++) = 「ねえ、今日は一緒に寝ない…？」
+					WSTR:(K++) = 「なんか、%CSTR:이인칭%と一緒じゃないとなんか落ち着かないんだ…」
+					WSTR:(K++) = 「だ、だめかな…_H_」
+				ENDIF
 				CFLAG:269 = 1
 			ENDIF
 
@@ -5341,7 +5506,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5359,7 +5524,7 @@ SELECTCASE TFLAG:13
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
-			;임신대상をTARGETに格納し、父親は奴隷はV、조수はWとする
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				;WSTR:(K++) =
@@ -5402,7 +5567,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5414,7 +5579,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;育児室
+		;육아실
 		;-------------------------------------------------
 	CASE 13
 			CALL EVENT_MESSAGE
@@ -5432,7 +5597,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
@@ -5456,7 +5621,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
@@ -5485,7 +5650,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5576,7 +5741,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5603,7 +5768,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5618,15 +5783,102 @@ SELECTCASE TFLAG:13
 		;콘서트시
 		;-------------------------------------------------
 	CASE 20
-			CALL EVENT_MESSAGE
 			;처음
 			IF CFLAG:279 == 0
-				;WSTR:(K++) =
+				WSTR:(K++) = %CALLNAME%はコンサート用の衣装に着替えた
+				WSTR:(K++) = 「思ったより露出のない衣装で良かったけど…」
+				WSTR:(K++) = 「大勢の前でちゃんと歌うのは初めてだな…」
+				WSTR:(K++) = 「まあ…できるだけ頑張ってみるよ」
+				KSTR:(K++) = 　　
+				KSTR:(K++) = 　　
+				WSTR:(K++) = 「えーと、初めまして。ライブは初めてだけど頑張って歌うね」
 				CFLAG:279 = 1
 			;그 이외
 			ELSEIF CFLAG:279 < 1 || FLAG:7 == 2
-				;WSTR:(K++) =
+				IF ABL:14 < 3 && EXP:라이브경험 < 4
+					WSTR:(K++) = 「はい、アイドル%CALLNAME%です」 
+					WSTR:(K++) = 「皆の為に一生懸命、歌いま～す」
+				;ELSEIF ABL:14 < 6 && EXP:라이브경험 < 9
+				;	WSTR:(K++) = 「～♪～～♪」
+				;	WSTR:(K++) = %CALLNAME%は慣れたように歌を歌っている
+				ELSE
+					IF !RAND:3
+						WSTR:(K++) = 「こんばんは、皆のアイドル%CALLNAME%だよ～」
+						WSTR:(K++) = 「ここにいる皆の為に、この歌を歌うよ～」
+					ELSEIF !RAND:2
+						WSTR:(K++) = 「皆～%CSTR:이인칭%のライブに来てくれてありがと～」
+						WSTR:(K++) = 「今日はこの歌を歌うよ！皆聴いてね～！」
+					ELSE
+						WSTR:(K++) = 「は～い、皆お待たせ～、%CALLNAME%だよ～」
+						WSTR:(K++) = 「%CSTR:이인칭%の歌を聴きに来てくれてありがと～」
+					ENDIF
+				ENDIF
 				CFLAG:279 = 1
+			ENDIF
+			KSTR:(K++) = 　　
+			KSTR:(K++) = 　　
+			;ライブ成功
+			IF F
+				IF ABL:14 < 3
+					WSTR:(K++) = 「～♪」
+					WSTR:(K++) = %CALLNAME%はぎこちないながらも何とか歌えた
+				ELSEIF ABL:14 < 6
+					WSTR:(K++) = 「～♪～～♪」
+					WSTR:(K++) = %CALLNAME%は慣れたように歌を歌っている
+				ELSE
+					WSTR:(K++) = 「～～♪～～♪♪～～～♪♪♪」
+					WSTR:(K++) = %CALLNAME%はとても上手に歌っている
+				ENDIF
+			;ライブ失敗
+			ELSE
+				IF !RAND:2
+					WSTR:(K++) = 「にゃぎっ」
+					WSTR:(K++) = 歌ってる途中で噛んでしまった
+				ELSE
+					WSTR:(K++) = 「おんっ…ごほっごぼっ」
+					WSTR:(K++) = …蒸せてしまった
+				ENDIF
+			ENDIF
+			K_CALL:K = EVENT_MESSAGE
+			;ライブ成功
+			IF F
+				IF ABL:14 < 3
+					IF !RAND:2
+						WSTR:(K++) = 「はあ…何とかなるもんだね…」
+						WSTR:(K++) = 「もっと歌の練習すれば自信が出るんだけど…」
+					ELSE
+						WSTR:(K++) = 「ふう…歌いきった～」
+						WSTR:(K++) = 「やっぱりもうちょっと練習しないとね」
+					ENDIF
+				ELSEIF ABL:14 < 6
+					IF !RAND:2
+						WSTR:(K++) = 「大成功だったよ、見ててくれた？」
+						WSTR:(K++) = 「え？大ほどじゃないって？判定厳しいなあ…」
+					ELSE
+						WSTR:(K++) = 「うまくいったよ、まさか%CSTR:이인칭%がアイドルみたいな事してるなんてね」
+						WSTR:(K++) = 「びっくりする人多いだろうね、冗談抜きで」
+					ENDIF
+				ELSE
+					IF !RAND:2
+						WSTR:(K++) = 「今日のライブも成功したよ！あ～気持ちいい～」
+						WSTR:(K++) = 「上手くいくって本当に気持ちいいよね！」
+					ELSE
+						WSTR:(K++) = 「あ～気持ちよかった～。ライブって最高だね！」
+						WSTR:(K++) = 「観客もすごく満足してくれたみたいだしね！」
+					ENDIF
+				ENDIF
+			;ライブ失敗
+			ELSE
+				IF ABL:14 < 3
+					WSTR:(K++) = 「やっぱり失敗しちゃったなー…」
+					WSTR:(K++) = 「あまり歌の練習もしてない%CSTR:일인칭%じゃ無理だよ…」
+				ELSEIF !RAND:2
+					WSTR:(K++) = 「あ～ごめんごめん」
+					WSTR:(K++) = 「ちょっと緊張しちゃってたかな…」
+				ELSE
+					WSTR:(K++) = 「いやあ、ごめんまさかあそこで失敗しちゃうなんて」
+					WSTR:(K++) = 「今度は失敗しないからさ、心配しないで」
+				ENDIF
 			ENDIF
 
 		;-------------------------------------------------
@@ -5676,7 +5928,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5704,7 +5956,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					;WSTR:(K++) = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;WSTR:(K++) = 
 				ENDIF	
@@ -5716,13 +5968,13 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;;[아내][남편]取得時 친애 전제
+		;;[아내][남편]취득시 친애 전제
 		;-------------------------------------------------
 	CASE 40
 			CALL EVENT_MESSAGE
 			IF CFLAG:283 < 1 || FLAG:7 == 2
 				IF CFLAG:830 == 1
-					WSTR:(K++) = 「え…これって、け、結婚반지…？」
+					WSTR:(K++) = 「え…これって、け、結婚指輪…？」
 					WSTR:(K++) = 「そ、そんな…%CSTR:일인칭%と結婚するの…」
 					WSTR:(K++) = 「いやいやいや、そ、そんな%CSTR:일인칭%なんて、まだ未成年だし、変わってるし…」
 					WSTR:(K++) = それでもいい、それに%CALLNAME%は結婚できる年齢だ
@@ -5730,7 +5982,7 @@ SELECTCASE TFLAG:13
 					WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%に抱きついてきた
 					WSTR:(K++) = 「今日から一緒にいられるんだね…これからも…ずっと…」
 				ELSE
-					WSTR:(K++) = 「え…これって…結婚반지！？」
+					WSTR:(K++) = 「え…これって…結婚指輪！？」
 					WSTR:(K++) = 「い、いいの？%CSTR:일인칭%って奴隷のはずじゃ…」
 					WSTR:(K++) = %CALLNAME%には今からは奴隷じゃないとこを伝えた
 					WSTR:(K++) = 「そうなんだ…嬉しい…」
@@ -5740,13 +5992,13 @@ SELECTCASE TFLAG:13
 					WSTR:(K++) = 「ごめん…あまりにも嬉しかったからさ…」
 					WSTR:(K++) = 「これからはずっと一緒だね」
 					WSTR:(K++) = %CALLNAME%は抱きついてきた
-					WSTR:(K++) = 「これからは遠慮なく愛し合えるって事だよね〜_H_」
-					WSTR:(K++) = 「%CALLNAME:PLAYER%だ〜い好き_H_」
+					WSTR:(K++) = 「これからは遠慮なく愛し合えるって事だよね～_H_」
+					WSTR:(K++) = 「%CALLNAME:PLAYER%だ～い好き_H_」
 					WSTR:(K++) = 
 					WSTR:(K++) = 
 					CFLAG:830 = 1
 				ENDIF
-					;WSTR:(K++) = しばらくすると%CALLNAME%が全速힘でこっちに来た
+					;WSTR:(K++) = しばらくすると%CALLNAME%が全速力でこっちに来た
 					;WSTR:(K++) = 「ど、どどどど、どういう事だよ！」
 					;WSTR:(K++) = 「%CSTR:일인칭%以外に結婚してる人がいたの？」
 					;WSTR:(K++) = %CALLNAME:MASTER%は軽く肯定する
@@ -5785,7 +6037,7 @@ SELECTCASE TFLAG:13
 				;가슴을 드러낸다
 				;초회
 				IF CFLAG:285 < 1
-					KSTR:(K++) = 가슴元を開くと素早く손で隠した
+					KSTR:(K++) = 胸元を開くと素早く手で隠した
 					KSTR:(K++) = 「あ…あまり見ないでよ…」
 				ENDIF
 				;함락완료
@@ -5800,7 +6052,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
@@ -5824,7 +6076,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						;WSTR:(K++) = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF !구상유무확인(0)	
 						;WSTR:(K++) = 
 					ENDIF	
@@ -5884,7 +6136,7 @@ SELECTCASE TFLAG:13
 						;WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;진행도 분기
 					;초회
@@ -5950,7 +6202,7 @@ SELECTCASE TFLAG:13
 						;WSTR:(K++) = 
 					ENDIF
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;진행도 분기
 					;초회
@@ -6029,7 +6281,7 @@ SELECTCASE TFLAG:13
 						;WSTR:(K++) = 
 					ENDIF
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF !구상유무확인(0)	
 					;진행도 분기
 					;초회
@@ -6061,13 +6313,13 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;애(愛)계 재함락시
-		;;主人に対して연모系함락している、もしくは一度愛系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 연모계 함락되었거나, 한번 애(愛)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 48
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 		
 		IF (CFLAG:291 < 1 || FLAG:7 == 2)
 			;주인에게 다시 함락된다
@@ -6081,13 +6333,13 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;음(淫)계 재함락시
-		;;主人に対して음란系함락している、もしくは一度淫系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 음란계 함락되었거나, 한번 음(淫)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 49
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:292 < 1 || FLAG:7 == 2)
 			;주인에게 다시 함락된다
@@ -6101,13 +6353,13 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;예(隷)계 재함락시
-		;;主人に対して복종系함락している、もしくは一度隷系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 복종계 함락되었거나, 한번 예(隷)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 50
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
-		;やや煩雑になるのでLOCAL、あるいは#DIM等を사용して分かりやすくする事を推奨します
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:293 < 1 || FLAG:7 == 2)
 			;주인에게 다시 함락된다
@@ -6133,15 +6385,15 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
-				WSTR:(K++) = %CALLNAME%は애널と바기나の両方を犯されてる
+				WSTR:(K++) = %CALLNAME%はアナルとヴァギナの両方を犯されてる
 				WSTR:(K++) = 「あっ_H_あぁっ_H_お兄さんたち、気持ちいいよぉ_H_」
-				WSTR:(K++) = %CALLNAME%を犯していた二人は同時に%CALLNAME%の体内へ사정する
+				WSTR:(K++) = %CALLNAME%を犯していた二人は同時に%CALLNAME%の体内へ射精する
 				WSTR:(K++) = 「んひいいぃぃぃ！同時に入ってくりゅうぅぅぅ_H_H_！！」
-				WSTR:(K++) = 二人は페니스を引き抜くと%CALLNAME%の両穴から정액がドロリと出てきた
+				WSTR:(K++) = 二人はペニスを引き抜くと%CALLNAME%の両穴から精液がドロリと出てきた
 				WSTR:(K++) = 「はあ…はあ…ねぇ、%CSTR:일인칭%のお尻の穴とおマンコ、いっぱい犯して_H_」
-				WSTR:(K++) = そう言って%CALLNAME%は정액を出してる下の穴を유혹するように広げた
+				WSTR:(K++) = そう言って%CALLNAME%は精液を出してる下の穴を誘惑するように広げた
 			ENDIF	
 			CFLAG:294 = 1
 		ENDIF
@@ -6159,7 +6411,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) =
 			ENDIF	
@@ -6179,7 +6431,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) =
 			ENDIF	
@@ -6199,7 +6451,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) =
 			ENDIF	
@@ -6225,7 +6477,7 @@ SELECTCASE TFLAG:13
 			;	;복종 루트
 				;WSTR:(K++) = 
 			ENDIF
-			;함락완료共通	
+			;함락완료 공통	
 			IF !구상유무확인(0)	
 				;WSTR:(K++) =
 			ENDIF	
@@ -6233,7 +6485,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)になった直後の一日の終了後、一度だけ行う
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)가 된 직후 하루 종료 후, 한번만 행한다
 		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
 		;-------------------------------------------------
 	CASE 56
@@ -6254,7 +6506,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・데이트
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 57
 		CALL EVENT_MESSAGE
@@ -6274,7 +6526,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・본방
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;여성이라면 삽입당하는 쪽, 남성이라면 삽입하는 쪽으로 고정
 		;-------------------------------------------------
 	CASE 58
@@ -6295,7 +6547,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・자위서로과시
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;애ＮＴＲ상태인 경우, 노출증 3이나 자위중독 1 중 하나를 충족시키는 것이 조건이 됩니다.
 		;-------------------------------------------------
 	CASE 59
@@ -6316,8 +6568,8 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・애널
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;CFLAG:애널횟수が1以上なら入れられている、CFLAG:삽입횟수が1以上なら入れています。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;CFLAG:애널횟수가 1 이상이면 삽입당하고, CFLAG:삽입횟수가 1 이상면 삽입하고 있습니다.
 		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
 		;-------------------------------------------------
 	CASE 60
@@ -6338,8 +6590,8 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・야외플레이
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;애ＮＴＲの場合、노출증が4以上でないと発生しません
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ의 경우, 노출증이 4 이상이 아니라면 발생하지 않습니다
 		;-------------------------------------------------
 	CASE 61
 		CALL EVENT_MESSAGE
@@ -6358,8 +6610,8 @@ SELECTCASE TFLAG:13
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・野外조교
-		;;예ＮＴＲ상태(TALENT:ＮＴＲが 3 か 6)でCFLAG:현ＮＴＲ진행도が6以上の場合１日の終了時に発生。
+		;;ＮＴＲ요바이・야외조교
+		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 62
 		CALL EVENT_MESSAGE
@@ -6450,7 +6702,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 65
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -6545,7 +6797,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -6640,7 +6892,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -6731,28 +6983,28 @@ SELECTCASE TFLAG:13
 					ENDIF
 			ENDSELECT
 		;-------------------------------------------------
-		;交流する
+		;교류한다
 		;-------------------------------------------------
 	CASE 94
 			IF CFLAG:899 > 0
 				IF (TALENT:3 || TALENT:6) && (CFLAG:830 > 0 || (CFLAG:피조교횟수 < 1 && EXP:주인과의교류경험 > 10 ))
 					IF RAND:3
 						CALL PRINT_STRW( @"「あ、来た来た」" )
-						PRINTFORMW %CALLNAME%はこちらの姿を確認すると走ってきてそのまま키스した
+						PRINTFORMW %CALLNAME%はこちらの姿を確認すると走ってきてそのままキスした
 						CALL PRINT_STRW( @"「えへ_H_不意打ち_H_」" )
 						CALL PRINT_STRW( @"「さあ、デートしよ_H_」" )
 					ELSEIF RAND:2
 						CALL PRINT_STRW( @"「ねえ、ねえ、今日どこ行く？」" )
-						CALL PRINT_STRW( @"「映画館行く？怪짐승映画やってるといいな」" )
+						CALL PRINT_STRW( @"「映画館行く？怪獣映画やってるといいな」" )
 					ELSE
 						CALL PRINT_STRW( @"「ねえねえ！くっつきながら歩いてもいい？」" )
-						PRINTFORMW %CALLNAME%は팔を絡ませ寄り添った
+						PRINTFORMW %CALLNAME%は腕を絡ませ寄り添った
 						CALL PRINT_STRW( @"「大好きだよ_H_」" )
 					ENDIF
 				ELSEIF TALENT:3 && CFLAG:피조교횟수 < 1
 					IF RAND:3
 						CALL PRINT_STRW( @"「え…えと…ど…どこ行こっか」" )
-						CALL PRINT_STRW( @"「映画館で怪짐승映画とか……ムード無いかな？」" )
+						CALL PRINT_STRW( @"「映画館で怪獣映画とか……ムード無いかな？」" )
 					ELSEIF RAND:2
 						CALL PRINT_STRW( @"「まず…行くところは…喫茶店とか…？」" )
 						CALL PRINT_STRW( @"「一つのコップに二つのストローで…」" )
@@ -6767,7 +7019,7 @@ SELECTCASE TFLAG:13
 						CALL PRINT_STRW( @"「この前の交流少し楽しかったけど…」" )
 						CALL PRINT_STRW( @"「期待はしないからね」" )
 					ELSEIF RAND:2
-						CALL PRINT_STRW( @"「正直言うと…%CSTR:일인칭%は상품だし…」" )
+						CALL PRINT_STRW( @"「正直言うと…%CSTR:일인칭%は商品だし…」" )
 						CALL PRINT_STRW( @"「こういうのやめてほしいかな…」" )
 					ELSE
 						CALL PRINT_STRW( @"「今度はどこに連れて行くの？」" )
@@ -6782,7 +7034,7 @@ SELECTCASE TFLAG:13
 						CALL PRINT_STRW( @"「一緒にラブホテルに行くの？嬉しい_H_」" )
 						CALL PRINT_STRW( @"「え？違う？…そう」" )
 					ELSE
-						CALL PRINT_STRW( @"「え〜また交流なの〜新손の焦らしプレイ？」" )
+						CALL PRINT_STRW( @"「え～また交流なの～新手の焦らしプレイ？」" )
 						CALL PRINT_STRW( @"「まあ、いいや楽しいとこ行こうよ」" )
 					ENDIF
 				ELSE 
@@ -6806,7 +7058,7 @@ SELECTCASE TFLAG:13
 				ELSEIF TALENT:3 && CFLAG:피조교횟수 < 1
 					CALL PRINT_STRW( @"「や…やあ_／／／_」" )
 					PRINTFORMW %CALLNAME%は少しぎこちない様子だ
-					PRINTFORMW 緊張しているみたいで顔が赤く눈も合わせていない
+					PRINTFORMW 緊張しているみたいで顔が赤く目も合わせていない
 					PRINTFORML [1]緊張してる？　[2]どうしたの？　[3]トイレ？　[4]風邪ひいた？　
 					INPUT
 					IF RESULT == 1
@@ -6835,8 +7087,8 @@ SELECTCASE TFLAG:13
 						CALL PRINT_STRW( @"「ま…まずは落ち着ける場所に行こっか」" )
 					ENDIF
 				ELSEIF (TALENT:3 || TALENT:6)
-					CALL PRINT_STRW( @"「交流か…それって奴隷に필요な事なの？」" )
-					PRINTFORMW 필요かそうじゃないかはこっちの判断だ
+					CALL PRINT_STRW( @"「交流か…それって奴隷に必要な事なの？」" )
+					PRINTFORMW 必要かそうじゃないかはこっちの判断だ
 					PRINTFORMW こっちがやりたいから%CALLNAME%と交流をしていることを伝えた
 					CALL PRINT_STRW( @"「そ…そう」" )
 					CALL PRINT_STRW( @"「ま…まあご主人がやりたいというなら…_／／／_」" )
@@ -6844,14 +7096,125 @@ SELECTCASE TFLAG:13
 					CFLAG:898 ++
 				ELSEIF (TALENT:4 || TALENT:7)	
 					CALL PRINT_STRW( @"「えへへ、待ってたよ_H_」" )
-					CALL PRINT_STRW( @"「本当は交流に見せかけた야외플레이でしょ_H_」" )
+					CALL PRINT_STRW( @"「本当は交流に見せかけた野外プレイでしょ_H_」" )
 					CALL PRINT_STRW( @"「え、違うの？ちぇー」" )
-					CALL PRINT_STRW( @"「ま아이いや、どこ行くー？」" )
+					CALL PRINT_STRW( @"「まあいいや、どこ行くー？」" )
 				ELSE 
 					PRINTFORMW 「やあ、%CSTR:일인칭%と二人きりで交流したいなんて変わってるね」
 					PRINTFORMW 「じゃあ、どこ行く？できるだけ静かな場所がいいな」
 				ENDIF
 				CFLAG:899 = 1
+			ENDIF
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			IF 1 == 0
+			ELSEIF CFLAG:897 < 1 && ((BASE:충성도+TCVAR:획득충성도) >= 8000 || EXP:주인과의교류경험 >= 2 )
+				PRINTFORMW 「ふ～、こういう時間も悪くはないね、のびのびできるよ」
+				PRINTFORMW 「ちなみにさ、%CSTR:이인칭%って静かなところと賑やかなところとどっちが好き？」
+				PRINTFORML [1]静かなところ
+				PRINTFORML [2]賑やかなところ
+				PRINTFORML [3]中くらい
+				INPUT
+				$INEVLP1_0
+				IF RESULT == 1
+					PRINTFORMW 「%CSTR:일인칭%も静か派かなぁ。%CSTR:이인칭%とは気が合いそうだ」
+					PRINTFORMW %CALLNAME%は気を良くしたようだ
+					R += 1
+				ELSEIF RESULT == 2
+					PRINTFORMW 「%CSTR:일인칭%は賑やかなところは苦手かな…」
+					PRINTFORMW 「静かなところのほうが羽伸ばせるしね」
+				ELSEIF RESULT == 3
+					PRINTFORMW 「中くらい？そういえば、少しくらい音があった落ち着くって人いるよね」
+					PRINTFORMW 「%CSTR:이인칭%ってもしかしてそんな感じ？」
+					PRINTFORMW %CALLNAME%は少し興味を持った
+					R += 1
+				ELSE
+					CLEARLINE 1
+					GOTO INEVLP1_0
+				ENDIF
+				PRINTFORMW 「%CSTR:일인칭%と二人きりで交流したいなんてホント変わってるよね」
+				PRINTFORMW 「どうして%CSTR:일인칭%みたいなのと交流するの？」
+				PRINTFORML [1]変人の話を聞くのは面白いから
+				PRINTFORML [2]%CALLNAME%が可愛いから
+				PRINTFORML [3]共に戦う仲だからお互いの事を知っておくため
+				PRINTFORML [4]%CALLNAME%とは趣味が合いそうだから
+				INPUT
+				$INEVLP1_1
+				IF RESULT == 1
+					PRINTFORMW 「あっそ、%CSTR:이인칭%もかなり変人だね」
+					PRINTFORMW 「常識が無いって言われたことある？なかったら人付き合い少なそうだね」
+				ELSEIF RESULT == 2
+					IF TALENT:MASTER:남자
+						PRINTFORMW 「ありがと。誉め言葉として受け取っていいのかな」
+						PRINTFORMW 「女の子と付き合う上で定番のセリフって感じだね」
+					ELSE
+						PRINTFORMW 「ああ、よく言われるよ。よく見ると肌がきれいだってさ」
+						PRINTFORMW 「でも、明確な理由がイマイチ分かんないから説明してくれって言われてもめんどくさいんだよね」
+					ENDIF
+				ELSEIF RESULT == 3
+					PRINTFORMW 「まっとうな理由だね。わかるよそういうの」
+					PRINTFORMW 「一緒に戦う上にある程度のコミュニケーションは必要だからね」
+					PRINTFORMW %CALLNAME%は気を良くしたようだ
+					R += 1
+				ELSEIF RESULT == 4
+					PRINTFORMW 「え？そうなの？君も怪獣好きなの？フィギュアとか集めちゃう人？」
+					PRINTFORMW 「%CSTR:이인칭%ってそういう趣味あったんだね」
+					PRINTFORMW %CALLNAME%はとても嬉しそうだ
+					R += 3
+				ELSE
+					CLEARLINE 1
+					GOTO INEVLP1_1
+				ENDIF
+				PRINTFORMW 「一緒に戦っていく仲だからね、お互いの事色々と知っておきたいし」
+				PRINTFORMW 「その辺でゆっくりしながら話そうよ」
+				
+				CFLAG:897 = 1
+			ELSE
+				IF 1 == 0
+				ELSEIF RAND:14 == 0
+					PRINTFORMW 「常識っていうのも、持ってないと困る道具だよ」
+					PRINTFORMW 「%CSTR:일인칭%みたいに持ってないと…ま、嫌なこともあったね」
+				ELSEIF RAND:13 == 0
+					PRINTFORMW 「変わり者に生まれてしまったら、普通の人間として振る舞うか、変人を通すことになる」
+					PRINTFORMW 「どちらも難しいのが困り者だけど…」
+					PRINTFORMW 「精霊指定都市のいいところは、変人しかいないから、自分で変人であることを気にしなくていいところだね」
+				ELSEIF RAND:12 == 0
+					PRINTFORMW 「僕の住んでた精霊指定都市？」
+					PRINTFORMW 「物騒な所だけど、前住んでたとこよりはマシだよ」
+				ELSEIF RAND:11 == 0
+					PRINTFORMW 「普通の所で、他人と仲良くできなかった人でも、精霊指定都市でならうまくいくかもね」
+					PRINTFORMW 「%CSTR:일인칭%がそうだった、力があるってだけで、自分には他人とは相いれない存在じゃないかって気がしてさ」
+				ELSEIF RAND:10 == 0
+					PRINTFORMW 「偽氷でフルスクラッチかぁ」
+					PRINTFORMW 「う～ん、できなくはないなぁ」
+				ELSEIF RAND:9 == 0
+					PRINTFORMW 「瞬間接着剤はちょっとした怪我の応急処置にも使えるんだよ」
+					PRINTFORMW 「一度蓋を開けると、月日が経てば硬化するから注意してね」
+				ELSEIF RAND:8 == 0
+					PRINTFORMW 「接着剤は薄く塗って貼り付けるといいよ」
+					PRINTFORMW 「いっぱいつけると逆に剥がれやすくなるから」
+				ELSEIF RAND:7 == 0
+					PRINTFORMW 「う～ん、次はやっぱりキングヒドラを作ろうかな」
+					PRINTFORMW 「でもモスガも捨てがたい…」
+				ELSEIF RAND:6 == 0
+					PRINTFORMW 「フィギュアは買うのも楽しいけど作るのも楽しいよ」
+					PRINTFORMW 「一つ買っただけで、そう思ってたらどんどん増えちゃう」
+				ELSEIF RAND:5 == 0
+					PRINTFORMW 「ガジラが好きって言ったら、笑われるかな？」
+					PRINTFORMW 「フィギュアとかも集めてるんだけど、なんか引かれることが多くて」
+				ELSEIF RAND:4 == 0
+					PRINTFORMW 「%CSTR:일인칭%、この能力があったから人より変わっててさ」
+					PRINTFORMW 「精霊指定都市に住む前は、皆から白い目で見られてたんだ…」
+				ELSEIF RAND:3 == 0
+					PRINTFORMW 「接着剤集めるのが趣味なんだよね」
+					PRINTFORMW 「この辺に変わった接着剤売ってないかな」
+				ELSEIF RAND:2 == 0
+					PRINTFORMW 「ねえ知ってる？ご飯から接着剤ってできるんだよ」
+				ELSE
+					PRINTFORMW 「%CSTR:일인칭%、怪獣のフィギュア集めるのが趣味なんだ」
+				ENDIF
+				PRINTFORMW %CALLNAME%と他愛ない会話を楽しんだ
 			ENDIF
 		
 			IF CFLAG:피조교횟수 > 0 && (TALENT:3 || TALENT:6) && CFLAG:830 < 1 && EXP:주인과의교류경험 > 9 && CFLAG:898 > 3 && CFLAG:898 < 10
@@ -6860,7 +7223,7 @@ SELECTCASE TFLAG:13
 				PRINTFORML 
 				CALL PRINT_STRW( @"「あ、あのさ…」" )
 				CALL PRINT_STRW( @"「%CSTR:일인칭%とこうして交流してくれてるんだけどさ…」" )
-				CALL PRINT_STRW( @"「やっぱ%CSTR:일인칭%って、%CSTR:이인칭%にとっての상품なのかな…」" )
+				CALL PRINT_STRW( @"「やっぱ%CSTR:일인칭%って、%CSTR:이인칭%にとっての商品なのかな…」" )
 				PRINTFORML [0]沈黙する　[1]恋人だ
 				INPUT
 				IF RESULT == 1
@@ -6877,7 +7240,94 @@ SELECTCASE TFLAG:13
 				ENDIF
 				CFLAG:898 = 10
 			ENDIF
-			
+		;-------------------------------------------------
+		;集会する
+		;-------------------------------------------------
+	CASE 95
+		VARSET LOCAL
+		LOCAL:10 ++
+		;古代がいて、掛け合いイベント1を見てる
+		SIF MATCH(T,GETCHARA([[キャラ:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,6)
+			LOCAL:(LOCAL:10 ++) = 1
+		;古代がいて、掛け合いイベント3を見てる
+		SIF MATCH(T,GETCHARA([[キャラ:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,8)
+			LOCAL:(LOCAL:10 ++) = 2
+		SIF LOCAL:10 > 0
+			LOCAL:11 = LOCAL:(RAND:(LOCAL:10))
+		IF LOCAL:11 == 0
+				IF 1 == 0
+				;ELSEIF RAND:13 == 0
+				;	PRINTFORMW 「変わり者に生まれてしまったら、普通の人間として振る舞うか、変人を通すことになる」
+				;	PRINTFORMW 「どちらも難しいのが困り者だけど…」
+				;	PRINTFORMW 「精霊指定都市のいいところは、変人しかいないから、自分で変人であることを気にしなくていいところだね」
+				;ELSEIF RAND:12 == 0
+				;	PRINTFORMW 「僕の住んでた精霊指定都市？」
+				;	PRINTFORMW 「物騒な所だけど、前住んでたとこよりはマシだよ」
+				;ELSEIF RAND:11 == 0
+				;	PRINTFORMW 「普通の所で、他人と仲良くできなかった人でも、精霊指定都市でならうまくいくかもね」
+				;	PRINTFORMW 「%CSTR:일인칭%がそうだった、力があるってだけで、自分には他人とは相いれない存在じゃないかって気がしてさ」
+				ELSEIF RAND:10 == 0
+					PRINTFORMW 「偽氷でフルスクラッチかぁ」
+					PRINTFORMW 「う～ん、できなくはないなぁ」
+				ELSEIF RAND:9 == 0
+					PRINTFORMW 「瞬間接着剤はちょっとした怪我の応急処置にも使えるんだよ」
+					PRINTFORMW 「一度蓋を開けると、月日が経てば硬化するから注意してね」
+				ELSEIF RAND:8 == 0
+					PRINTFORMW 「接着剤は薄く塗って貼り付けるといいよ」
+					PRINTFORMW 「いっぱいつけると逆に剥がれやすくなるから」
+				ELSEIF RAND:7 == 0
+					PRINTFORMW 「う～ん、次はやっぱりキングヒドラを作ろうかな」
+					PRINTFORMW 「でもモスガも捨てがたい…」
+				ELSEIF RAND:6 == 0
+					PRINTFORMW 「フィギュアは買うのも楽しいけど作るのも楽しいよ」
+					PRINTFORMW 「一つ買っただけで、そう思ってたらどんどん増えちゃう」
+				ELSEIF RAND:5 == 0
+					PRINTFORMW 「ガジラが好きって言ったら、笑われるかな？」
+					PRINTFORMW 「フィギュアとかも集めてるんだけど、なんか引かれることが多くて」
+				ELSEIF RAND:4 == 0
+					PRINTFORMW 「%CSTR:일인칭%、この能力があったから人より変わっててさ」
+					PRINTFORMW 「精霊指定都市に住む前は、皆から白い目で見られてたんだ…」
+				ELSEIF RAND:3 == 0
+					PRINTFORMW 「接着剤集めるのが趣味なんだよね」
+					PRINTFORMW 「この辺に変わった接着剤売ってないかな」
+				ELSEIF RAND:2 == 0
+					PRINTFORMW 「ねえ知ってる？ご飯から接着剤ってできるんだよ」
+				ELSE
+					PRINTFORMW 「%CSTR:일인칭%、怪獣のフィギュア集めるのが趣味なんだ」
+				ENDIF
+		ELSEIF LOCAL:11 == 1
+			LOCAL:12 = GETCHARA([[キャラ:코시로]])
+			IF !RAND:2
+				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
+				PRINTFORMW %CALLNAME%「君のその能力っていつからできるようになったの」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「強いて言えば生まれつきですね。お母さんがアクマでしたから」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「ボクの変身能力は護符の力で変身できるんです。この護符を使ってるんですよ」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%は%CALLNAME%に護符を見せる
+				PRINTFORMW %CALLNAME%「へー、護符を使うんだ」
+			ELSE
+				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「シアノちゃんのその能力も何か特別な道具を使ってるんですか？」
+				PRINTFORMW %CALLNAME%「いや、僕は道具無しで出してるよ。こんな風にね」
+				PRINTFORMW %CALLNAME%は偽氷剣を作り出した
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「おーすごい」
+			ENDIF
+		ELSEIF LOCAL:11 == 2
+			LOCAL:12 = GETCHARA([[キャラ:코시로]])
+			IF !RAND:2
+				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「シアノちゃんの水着姿、本当に可愛かったですよね」
+				PRINTFORMW %CALLNAME%「ま、まあ注目されすぎちゃったけどね」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「ボクの選んだ水着がよかったっていうのもありますけどね」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「SNSに投稿されるレベルですよ！コメントも綺麗とか美人とか色々言われてますね！」
+				PRINTFORMW %CALLNAME%「ちょ、ちょっと！恥ずかしいからその話はやめて…」
+			ELSE
+				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「今度は半袖とか試してみます？それとも、ホットパンツとかしてみます？」
+				PRINTFORMW %CALLNAME%「ホットパンツって…ほぼ下着じゃないかあれ…」
+				PRINTFORMW %CALLNAME:(LOCAL:12)%「ホットパンツもちゃんとした服なんですけどね。じゃあ、スパッツだけにしてみます？」
+				PRINTFORMW %CALLNAME%「やだよ！股間の形がくっきり見えちゃうじゃないか！」
+			ENDIF
+		ENDIF
 	CASEELSE
 		SIF FLAG:6 > 0
 			CALL EVENT_MESSAGE
@@ -6947,7 +7397,7 @@ RETURN 0
 ;--------------------------------------------------
 SELECTCASE TSTR:END종별
 	;CASE "개별END"
-		;연모1체エンド
+		;연모 1체 엔딩
 		;IF TALENT:아내 || TALENT:남편 && CFLAG:21 == 1
 			;DRAWLINE
 			;PRINTFORMW …………
@@ -6957,7 +7407,7 @@ SELECTCASE TSTR:END종별
 
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;음란1체エンド
+		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;DRAWLINE
 			;PRINTFORMW …………
@@ -6967,7 +7417,7 @@ SELECTCASE TSTR:END종별
 
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;복종1체エンド
+		;복종 1체 엔딩
 		;ELSEIF TALENT:노리개 && CFLAG:21 == 1
 			;DRAWLINE
 			;PRINTFORMW …………
@@ -7020,7 +7470,7 @@ SELECTCASE TFLAG:전투이벤트
 	;피소환시
 	CASE 3
 			LOCALS:10 = 
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -7035,7 +7485,7 @@ SELECTCASE TFLAG:전투이벤트
 				IF RAND:2 == 0
 					LOCALS:10 = どうだい　痛いでしょ？
 				ELSE
-					LOCALS:10 = うん　いい손応え！
+					LOCALS:10 = うん　いい手応え！
 				ENDIF
 			;ENDIF
 		;대 데미지
@@ -7043,17 +7493,17 @@ SELECTCASE TFLAG:전투이벤트
 			IF RAND:2 == 0
 				LOCALS:10 = どうだい　痛いでしょ？
 			ELSE
-				LOCALS:10 = うん　いい손応え！
+				LOCALS:10 = うん　いい手応え！
 			ENDIF
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
 			IF RAND:2 == 0
-				LOCALS:10 = 명중！
+				LOCALS:10 = 命中！
 			ELSE
-				LOCALS:10 = 손ごたえあり！
+				LOCALS:10 = 手ごたえあり！
 			ENDIF
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
 			IF RAND:2 == 0
-				LOCALS:10 = 명중！
+				LOCALS:10 = 命中！
 			ELSE
 				LOCALS:10 = 当たった！！
 			ENDIF
@@ -7061,11 +7511,11 @@ SELECTCASE TFLAG:전투이벤트
 			IF RAND:2 == 0
 				LOCALS:10 = あれ　効いてない？
 			ELSE
-				LOCALS:10 = 当たった！　けど…손応え無い…
+				LOCALS:10 = 当たった！　けど…手応え無い…
 			ENDIF
 		ENDIF
 	;피데미지
-	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -7077,7 +7527,7 @@ SELECTCASE TFLAG:전투이벤트
 		;대 데미지
 		;ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 		;	LOCALS:10 = 
-		;無効
+		;무효
 		ELSEIF ARG:2 == 0
 			IF RAND:2 == 0
 				LOCALS:10 = 残念だったね！
@@ -7101,18 +7551,18 @@ SELECTCASE TFLAG:전투이벤트
 			IF RAND:2 == 0
 				LOCALS:10 = う…ちょっと苦しいかな…
 			ELSE
-				LOCALS:10 = か…회복希望…
+				LOCALS:10 = か…回復希望…
 			ENDIF
 		ELSE
 			IF RAND:2 == 0
 				LOCALS:10 = 痛たたた…
 			ELSE
-				LOCALS:10 = 아이てっ
+				LOCALS:10 = あいてっ
 			ENDIF
 		ENDIF
 	;반사당했다
 	CASE 15
-			LOCALS:10 = 痛っ！반사された！？
+			LOCALS:10 = 痛っ！反射された！？
 	;반사했다
 	CASE 16
 			IF RAND:2 == 0
@@ -7123,25 +7573,25 @@ SELECTCASE TFLAG:전투이벤트
 	;회피당했다
 	CASE 17
 			IF RAND:10 == 0
-				LOCALS:10 = この세계は회피があるんだった…
+				LOCALS:10 = この世界は回避があるんだった…
 			ELSEIF RAND:2 == 0
 				LOCALS:10 = 外しちゃった…
 			ELSE
 				LOCALS:10 = あっ　避けられた！？
 			ENDIF
-	;회피した
+	;회피했다
 	CASE 18
 			IF RAND:10 == 0
-				LOCALS:10 = この세계は회피があるんだよね
+				LOCALS:10 = この世界は回避があるんだよね
 			ELSEIF RAND:2 == 0
-				LOCALS:10 = おっと　その공격は当たらないよ
+				LOCALS:10 = おっと　その攻撃は当たらないよ
 			ELSE
-				LOCALS:10 = 甘いよ！　공격が見えてる！
+				LOCALS:10 = 甘いよ！　攻撃が見えてる！
 			ENDIF
 	;배틀에서 승리했다
 	CASE 90
 			IF 현HP비율(ARG) < 25
-				LOCALS:10 = か…회복希望…
+				LOCALS:10 = か…回復希望…
 			ELSEIF 현HP비율(ARG) < 50
 				LOCALS:10 = ちょっときつかったかな…
 			ELSEIF RAND:3 == 0
@@ -7149,18 +7599,18 @@ SELECTCASE TFLAG:전투이벤트
 			ELSEIF RAND:2 == 0
 				LOCALS:10 = どうってことないね
 			ELSE
-				LOCALS:10 = ふ〜楽勝楽勝♪
+				LOCALS:10 = ふ～楽勝楽勝♪
 			ENDIF
-	;레벨アップした
+	;레벨 업했다
 	CASE 91
 			IF RAND:10 == 0
-				LOCALS:10 = この세계では레벨は戻らないんだよね
+				LOCALS:10 = この世界ではレベルは戻らないんだよね
 			ELSEIF RAND:2 == 0
 				LOCALS:10 = 偽氷の調子が上がったね！
 			ELSE
 				LOCALS:10 = 何か見えた気がするよ！
 			ENDIF
-	;도주に성공した
+	;도주에 성공했다
 	CASE 92
 			IF RAND:2 == 0
 				LOCALS:10 = じゃあね、また明日
@@ -7168,14 +7618,14 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = キミらに構ってる暇はないよ
 				LOCALS:11 = じゃ！
 			ENDIF
-	;도주に실패した
+	;도주에 실패했다
 	CASE 93
 			IF RAND:2 == 0
 				LOCALS:10 = おおっと！まじかー
 			ELSE
-				LOCALS:10 = 100％도주とはいかないかー
+				LOCALS:10 = 100％逃走とはいかないかー
 			ENDIF
-	;전투開始時
+	;전투 개시시
 	CASE 94
 		IF FLAG:선제공격플래그
 			LOCALS:10 = 油断は禁物だよ！
@@ -7199,13 +7649,13 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS:10 = え！？背後！？
 		ENDIF
-	;적の先制공격を受けた
+	;적에게 선제공격을 당했다
 	CASE 96
 		IF 현HP비율(ARG) < 25
 			;빈사
 			LOCALS:10 = タイミングが悪すぎるな…
 		ELSE
-			LOCALS:10 = ここで奇襲か〜
+			LOCALS:10 = ここで奇襲か～
 		ENDIF
 ENDSELECT
 SIF !(LOCALS:10 == "")
@@ -7215,12 +7665,12 @@ SIF !(LOCALS:10 == "")
 @BATTLE_MESSAGE_K5311,ARG,ARG:1 = 0
 ;-------------------------------------------------
 VARSET LOCALS
-;사용した스킬の名前をLOCALSに代入
+;사용한 스킬의 이름을 LOCALS에 대입
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 LOCALS = %RESULTS%
 ;FLAG:ARG:타겟
 
-;붕괴してる場合は구상표시しないようにもできる
+;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
 ;SIF TALENT:ARG:9
 ;	RETURN 0
 
@@ -7228,31 +7678,31 @@ CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;주석처리하기 쉽도록
 IF 1 == 0
 ;-------------------------------------------------
-;상태이상時
+;상태이상시
 ;-------------------------------------------------
 ;매료시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
-		LOCALS:10 = 가랑이がムズムズする〜
+		LOCALS:10 = 股間がムズムズする～
 	ELSE
-		LOCALS:10 = %CSTR:ARG:일인칭%　당신についていきま〜す%UNICODE(0x2661)%
+		LOCALS:10 = %CSTR:ARG:일인칭%　あなたについていきま～す%UNICODE(0x2661)%
 	ENDIF
 ;혼란시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 	;금전뿌리기
 	IF CFLAG:ARG:입력행동 == 2315
-		LOCALS:10 = あはは〜もってけもってけ〜%CSTR:ARG:일인칭%のおごりだ〜い
+		LOCALS:10 = あはは～もってけもってけ～%CSTR:ARG:일인칭%のおごりだ～い
 	;행동불능（멍하니 멈춰 있다）
 	ELSEIF CFLAG:ARG:입력행동 == 2314
-		LOCALS:10 = ああ〜눈が〜回ってる〜？
+		LOCALS:10 = ああ～目が～回ってる～？
 	ELSE
-		LOCALS:10 = これか〜？そりゃあ〜！
+		LOCALS:10 = これか～？そりゃあ～！
 	ENDIF
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは通常공격
+;이쪽은 통상공격
 ELSEIF CFLAG:ARG:입력행동 == 0
 	IF RAND:2 == 0
 		LOCALS:10 = それっ！
@@ -7287,7 +7737,7 @@ ELSEIF CFLAG:ARG:입력행동 == 3506
 	ELSE
 		LOCALS:10 = とっておきを…　くれてやるーー！
 	ENDIF
-;ELSEIF CFLAG:ARG:입력행동 == (스킬番号)
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
 ;	LOCALS:10 = 
 ;섹시댄스
 ELSEIF CFLAG:ARG:입력행동 == 1212 || CFLAG:ARG:입력행동 == 1213
@@ -7321,18 +7771,18 @@ ELSEIF CFLAG:ARG:입력행동 == 1213
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;총공격（특수탄丸含む）
+;총공격（특수탄환 포함）
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2200)
 	IF RAND:100 == 0
-		LOCALS:10 = （別세계でよく使ってる気がする…）
+		LOCALS:10 = （別世界でよく使ってる気がする…）
 	ELSEIF RAND:2 == 0
 		LOCALS:10 = 撃つよっ！
 	ELSE
 		LOCALS:10 = 鉛玉を喰らえっ！
 	ENDIF
 ;-------------------------------------------------
-;기본行動
+;기본행동
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 	;ＣＨＡＮＧＥ
@@ -7360,10 +7810,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 	ELSEIF CFLAG:ARG:입력행동 == 4800
 		LOCALS:10 = わかりました　一掃するよ！
 	ELSE
-		LOCALS:10 = みんなで힘を合わせるよ！
+		LOCALS:10 = みんなで力を合わせるよ！
 	ENDIF
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;;검격
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -7392,33 +7842,33 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	;	LOCALS:10 = 
 	;ENDIF
 	IF RAND:2 == 0
-		LOCALS:10 = 회복するよ！
+		LOCALS:10 = 回復するよ！
 	ELSE
 		LOCALS:10 = 【%LOCALS%】！
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;위협
+	;威嚇
 	IF CFLAG:ARG:입력행동 == 560
 		IF RAND:2 == 0
-			LOCALS:10 = %CSTR:ARG:일인칭%の偽氷검は鋭いよ！おりゃー！
+			LOCALS:10 = %CSTR:ARG:일인칭%の偽氷剣は鋭いよ！おりゃー！
 		ELSE
 			PRINTFORML 偽氷で恐ろしいお面を作り威嚇した
 			LOCALS:10 = うがー！！！
 		ENDIF
-	;강화系
+	;강화계
 	ELSEIF CFLAG:ARG:입력행동 == 504 || CFLAG:ARG:입력행동 == 558
 		IF RAND:2 == 0
 			LOCALS:10 = みんな固くするよ！
 		ELSE
 			LOCALS:10 = 【%LOCALS%】！
 		ENDIF
-	;기합、컨센트레이트
+	;気合、コンセントレイト
 	ELSEIF RANGE(CFLAG:ARG:입력행동,511, 512)
-		LOCALS:10 = 次の공격は痛いよ
-	;베어내기
+		LOCALS:10 = 次の攻撃は痛いよ
+	;切り落とし
 	ELSEIF CFLAG:ARG:입력행동 == 534
-		LOCALS:10 = 次の공격は外さないよ
+		LOCALS:10 = 次の攻撃は外さないよ
 ;	;약체계
 ;	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 ;		LOCALS:10 = 
@@ -7479,13 +7929,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
 ;	LOCALS = 
 ;;만능
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-;	;자폭系
+;	;자폭계
 ;	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 ;		LOCALS = 
 ;	ELSE
 ;		LOCALS = 
 ;	ENDIF
-;魔法소녀系
+;마법소녀계
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 ;	LOCALS = 
 ;-------------------------------------------------

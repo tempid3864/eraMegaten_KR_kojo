@@ -1,21 +1,21 @@
 ﻿;-------------------------------------------------
-;진２ 베스 전투 대사
+;真２ベス戦闘口上
 ;テンプレより作成。ライセンスフリー
 ;-------------------------------------------------
 ;
 ;
 
 ;-------------------------------------------------
-;■台詞の行数を増やしたいときは
+;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCAL:1 = 行数
-;			LOCALS = 一行目
-;			LOCALS:1 = 二行目
-;			LOCALS:2 = 三行目
-;と増やしていく
+;			LOCALS = 1행째
+;			LOCALS:1 = 2행째
+;			LOCALS:2 = 3행째
+;로 늘려나간다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-@BATTLE_EVENT_K4501_1, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_K4501, ARG, ARG:1, ARG:2
 ;-------------------------------------------------
 SIF ARG < 0 && NO:ARG != 4501
 	RETURN 0
@@ -43,10 +43,10 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = 이 거리라면 공격을 더 할 수 있을 터！
 			ENDIF
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 			LOCALS = 
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -57,7 +57,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS = Et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris…
 			ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 ;				LOCALS = 
@@ -74,7 +74,7 @@ SELECTCASE TFLAG:전투이벤트
 ;			LOCALS = 
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -106,7 +106,7 @@ SELECTCASE TFLAG:전투이벤트
 ;	;회피당했다
 ;	CASE 17
 ;			LOCALS = 
-;	;회피した
+;	;회피했다
 ;	CASE 18
 ;			LOCALS = 
 ENDSELECT
@@ -114,21 +114,21 @@ SIF LOCALS != "EMPTY"
 	CALL MESSAGE_BL(LOCAL:1, LOCALS, LOCALS:1, LOCALS:2, LOCALS:3, LOCALS:4)
 
 ;-------------------------------------------------
-@BATTLE_MESSAGE_K4501_1,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_K4501,ARG,ARG:1 = 0
 ;-------------------------------------------------
 
 LOCAL:1 = 1
 LOCALS = "EMPTY"
 
-;붕괴してる場合は구상표시しない
+;崩壊してる場合は口上表示しない
 SIF TALENT:ARG:9
 	RETURN 0
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは통상공격
+;이쪽은 통상공격
 IF CFLAG:ARG:입력행동 == 0
 	LOCALS = 이얍！
 ;;-------------------------------------------------
@@ -137,7 +137,7 @@ IF CFLAG:ARG:입력행동 == 0
 ;ELSEIF LOCAL == 2301
 ;	LOCALS = 
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -173,7 +173,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		LOCALS = 지원 술식을 쓰겠습니다！
 	;약체계
@@ -234,13 +234,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
 ;	LOCALS = 
 ;만능
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-	;자폭系
+	;자폭계
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 		LOCALS = 아직 딱 하나、도움이 될 수 있어…！
 	ELSE
 		LOCALS = 이 공격이라면 통할 터！
 	ENDIF
-;;마법소녀系
+;;마법소녀계
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 ;	LOCALS = 
 ;-------------------------------------------------

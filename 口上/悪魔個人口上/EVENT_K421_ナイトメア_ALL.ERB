@@ -38,7 +38,7 @@
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -57,7 +57,7 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K421 → EVENTTRAIN_K421_12
+;예： EVENTTRAIN_K421 → EVENTTRAIN_K421_12
 ;--------------------------------------------------
 @셀렉트구상설명_K421,ARG = 0
 SIF ARG == 1
@@ -371,7 +371,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;아내
 	IF TALENT:170
-		;임신中
+		;妊娠中
 		IF TALENT:153
 			;父親が당신
 			IF CFLAG:102 == 1
@@ -466,7 +466,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음마
 	ELSEIF TALENT:172
-		;임신中
+		;妊娠中
 		IF TALENT:153
 			;父親が당신
 			IF CFLAG:102 == 1
@@ -593,7 +593,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;임신中
+		;妊娠中
 		IF TALENT:153
 			PRINTFORMW 「하아…하아…%UNICODE(0x2661)%　%CSTR:이인칭%…기、기쁘지만…아기가…」
 			PRINTFORMW 조금 무리하게 했을까、그렇게 생각해 %CALLNAME%에게 솔직하게 사과하고 태아와 %CALLNAME%의 몸을 걱정한다
@@ -618,7 +618,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;임신中
+		;妊娠中
 		IF TALENT:153
 			PRINTFORMW 「어、벌써 그만두시게요？」
 			PRINTFORMW 배의 아기도 생각해 이것으로 끝내려고 하자、%조사처리(CALLNAME,"는")% 상당히 쓸쓸한 것 같다。
@@ -6568,7 +6568,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다 ;여기부터
+;역강간으로 사정시켰다 ;여기부터
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7317,7 +7317,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;임신中
+					;妊娠中
 					IF TALENT:153
 						PRINTFORMW 「응읏…힛…%UNICODE(0x2661)%　아…조、좋은 아침인거에요오…%UNICODE(0x2661)%」
 						PRINTFORMW 「죄、죄송해요오… 하지만、하지만… 아기에게 나쁘다고… 알고 있지만서도…%UNICODE(0x2661)%」
@@ -7642,7 +7642,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;임신中
+					;妊娠中
 					;らぶちゅちゅでもがまんできない子
 					IF TALENT:153
 						PRINTFORMW （%CSTR:이인칭%…%UNICODE(0x2661)%…%CSTR:이인칭%、%CSTR:이인칭%…%UNICODE(0x2661)%）
@@ -7676,7 +7676,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-				;임신中
+				;妊娠中
 				;らぶちゅちゅでもがまんできない子
 					IF TALENT:153
 						PRINTFORMW （%CSTR:이인칭%…%UNICODE(0x2661)%…%CSTR:이인칭%、%CSTR:이인칭%…%UNICODE(0x2661)%）
@@ -7777,7 +7777,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;임신中
+					;妊娠中
 					IF TALENT:153
 						PRINTFORMW （%CSTR:이인칭%…%UNICODE(0x2661)%…%CSTR:이인칭%、%CSTR:이인칭%…%UNICODE(0x2661)%）
 						PRINTFORMW 「응、아으…%UNICODE(0x2661)%　응으읏%UNICODE(0x2661)%…응읏%UNICODE(0x2661)%」
@@ -8327,7 +8327,7 @@ SELECTCASE TFLAG:13
 			ELSEIF CFLAG:281 < 1 || FLAG:7 == 2
 				;음마
 				IF TALENT:172
-					;임신中
+					;妊娠中
 					IF TALENT:임신
 						PRINTFORMW 「앗…이렇게…잔뜩…%UNICODE(0x2661)%」
 						PRINTFORMW 어떤 이용자가 와도 그 눈은 음욕에 젖어、기쁜 듯이 녹고 있다。

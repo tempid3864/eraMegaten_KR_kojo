@@ -1,18 +1,18 @@
 ﻿;作業環境ver0.301　最終更新:2013/04/24
 ;-------------------------------------------------
-;%CALLNAME%구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;ライセンスフリー　改変・流用も可（허가不要）
-;勝손に陰毛（やや濃い）という妄想要素を부여。
+;%CALLNAME%口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;ライセンスフリー　改変・流用も可（許可不要）
+;勝手に陰毛（やや濃い）という妄想要素を付与。
 ;
 ;2011/11/23 別人加筆
 ;-------------------------------------------------
 
-;	◆ 사용している個別のCFLAGフラグについて
+;	◆ 使用している個別のCFLAGフラグについて
 ;800  破瓜血フラグ
-;810  음란モード？판정用
-;811  今回조교時の질사횟수
-;812　肛内사정횟수フラグ
-;900  절정횟수판정用
+;810  淫乱モード？判定用
+;811  今回調教時の膣射回数
+;812　肛内射精回数フラグ
+;900  絶頂回数判定用
 ;
 ;
 ;-------------------------------------------------
@@ -370,7 +370,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			PRINTFORMW 「하아앗…하앗…하아…。 아, %CSTR:일인칭%의 몸…사용해 주셔서…대단히, 감사합니다……」
 		ENDIF
 	ENDIF
-	;今回조교時の膣、肛内射횟수
+	;今回調教時の膣、肛内射回数
 	IF CFLAG:811 > 0 && CFLAG:812 > 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 질과 애널에서
 		IF CFLAG:811 == 1 && CFLAG:812 == 1
@@ -379,7 +379,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			PRINTFORMW 하얗고 탁한 액체가 질퍽질퍽하게 넘쳐 나왔다……
 		ENDIF
 	ENDIF
-	;今回조교時の질내射횟수
+	;今回調教時の膣内射回数
 	IF CFLAG:811 > 0 && CFLAG:812 == 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 질 입구에서
 		IF CFLAG:811 == 1
@@ -388,7 +388,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			PRINTFORMW 하얗고 탁한 액체가 질퍽질퍽하게 넘쳐 나왔다……
 		ENDIF
 	ENDIF
-	;조교時今回の肛内사정횟수
+	;調教時今回の肛内射精回数
 	IF CFLAG:811 == 0 && CFLAG:812 > 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 애널에서
 		IF CFLAG:812 == 1
@@ -416,7 +416,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 「네…수고하셨습니다…。 또, %CSTR:일인칭%를 사용해 주십시오……」
 	ENDIF
-;今回조교時の질내射횟수
+;今回調教時の膣内射回数
 	IF CFLAG:811 > 0 && CFLAG:812 == 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 질 입구에서
 		IF CFLAG:811 == 1
@@ -425,7 +425,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 하얗고 탁한 액체가 질퍽질퍽하게 넘쳐 나왔다……
 		ENDIF
 	ENDIF
-;조교時今回の肛内사정횟수
+;調教時今回の肛内射精回数
 	IF CFLAG:812 > 0 && CFLAG:811 == 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 애널에서
 		IF CFLAG:812 == 1
@@ -434,7 +434,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 하얗고 탁한 액체가 질퍽질퍽하게 넘쳐 나왔다……
 		ENDIF
 	ENDIF
-;今回조교時の膣、肛内射횟수
+;今回調教時の膣、肛内射回数
 	IF CFLAG:811 > 0 && CFLAG:812 > 0
 		PRINTFORM %CALLNAME%의 호홉에 따라, 질과 애널에서
 		IF CFLAG:811 == 1 && CFLAG:812 == 1
@@ -445,15 +445,15 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	ENDIF
 	CFLAG:219 = 4
 ENDIF
-;CFLAG:800　질내の破瓜血フラグ리셋
+;CFLAG:800　膣内の破瓜血フラグリセット
 	CFLAG:800 = 0
-;CFLAG:811　질내사정횟수フラグ리셋
+;CFLAG:811　膣内射精回数フラグリセット
 	CFLAG:811 = 0
-;CFLAG:812　肛内사정횟수フラグ리셋
+;CFLAG:812　肛内射精回数フラグリセット
 	CFLAG:812 = 0
-;음란モード？판정用　리셋
+;음란モード？判定用　リセット
 	CFLAG:810 = 0
-;절정횟수판정用　리셋
+;절정回数判定用　リセット
 	CFLAG:900 = 0
 
 RETURN 0
@@ -1186,7 +1186,7 @@ SELECTCASE SELECTCOM
 						ENDIF
 						PRINTFORML 「…윽…보입니까…？ %CSTR:이인칭% 덕분에, %CSTR:일인칭%…윽…버진, 졸업했습니다…！」
 						PRINTFORMW %CALLNAME%의 점점 입이 벌어지는 점액 투성이의 질 입구로부터, 애액에 섞여 붉은 파과의 피가 촉촉히 배어 나오고 있다……
-					;中出し2回이상
+					;中出し2回以上
 					ELSEIF CFLAG:811 > 1
 						;야외플레이
 						IF TEQUIP:29
@@ -1693,11 +1693,11 @@ CASE 14
 				CFLAG:320 = 3
 			;그 이외
 			ELSEIF CFLAG:320 < 2 || FLAG:7 == 2
-				;전회コマンドが조개젖히기
+				;前回コマンドが秘貝開帳
 				IF PREVCOM == 9
 					PRINTFORML 「모……몰라요…！」
 					PRINTFORMW 「다른 여자 것을 본 적도 없는데…。 마음에 들지 않으면 돌려 보내 줘」
-				;전회コマンドが자위
+				;前回コマンドが自慰
 				ELSEIF PREVCOM:10 || PREVCOM:11
 					PRINTFORML 「자, 잠깐…！ %CSTR:이인칭%가 하라고 말해서, 한거잖아…！」
 					PRINTFORMW 「평상시에는 그러고 다니지 않아…！」
@@ -3519,7 +3519,7 @@ CASE 14
 							ENDIF
 						ENDIF
 					ENDIF
-					;사정直後を리셋
+					;사정直後をリセット
 					CFLAG:811 = 0
 
 					IF TEQUIP:아이마스크 == 1 && ABL:16 >= 3
@@ -3747,8 +3747,8 @@ CASE 14
 		;처음
 		IF CFLAG:350 == 0
 			IF CFLAG:312 == 0
-			;키스未경험
-			;키스未경험フラグも折ります
+			;キス未経験
+			;キス未経験フラグも折ります
 				IF TALENT:5 || TALENT:8
 					PRINTFORML 
 					PRINTFORML 「저기…시, 싫어……히익……죄, 죄송합니다！」
@@ -7299,13 +7299,13 @@ IF TFLAG:9 == 1
 			PRINTFORMW 
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			;키스로사정
+			;キスで射精
 			IF SELECTCOM == 20
-				PRINTFORMW 「키스로사정」
-			;스마타で사정
+				PRINTFORMW 「キスで射精」
+			;素股で射精
 			ELSEIF SELECTCOM == 83
-				PRINTFORMW 「스마타で사정」
-			;애널強制봉사で사정
+				PRINTFORMW 「素股で射精」
+			;アナル強制奉仕で射精
 			ELSEIF SELECTCOM == 145
 				PRINTFORMW 
 			ENDIF
@@ -7576,7 +7576,7 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「…하앗…하앗…하아…큭…제기랄…！」
 			CFLAG:238 = 2
 		ENDIF
-		;今回조교時の질내사정횟수
+		;今回調教時の膣内射精回数
 		CFLAG:811 += 1
 	;그 외 섹스계
 	ELSE
@@ -7638,13 +7638,13 @@ IF TFLAG:2 > 0
 			PRINTFORMW 「여자 안에 싸버리다니…용도를 만족하는 정도로 밖에, 생각하지 않는 거냐…！」
 			CFLAG:238 = 2
 		ENDIF
-		;今回조교時の질내사정횟수
+		;今回調教時の膣内射精回数
 		CFLAG:811 += 1
 	ENDIF
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7868,7 +7868,7 @@ IF TFLAG:29 > 1
 					PRINTFORMW 
 				ENDIF
 		CFLAG:245 = 4
-;절정の連続횟수を記録
+;절정の連続回数を記録
 
 IF TFLAG:절정강도 > 0
 CFLAG:900 += 1
@@ -7921,8 +7921,8 @@ ELSEIF TFLAG:29 > 0
 				PRINTFORMW 「앗……더, 더……이상은…아아 안에 흘려 넣어 주세요！…간다～…아아앗」
 				PRINTFORML 「…하앗…하아…네…질내에,…아아……아직도 나오고 있어……」
 				ENDIF
-			;그 이외の절정
-;전회절정
+			;그 이외の絶頂
+;前回絶頂
 			ELSEIF CFLAG:900 % 3 == 1
 				IF CFLAG:810 == 1
 				PRINTFORML 「아……안 돼……%CSTR:일인칭%……더, 더는 갈 것 같아아아아…………！」
@@ -7962,8 +7962,8 @@ ELSEIF TFLAG:29 > 0
 			ENDIF
 	ENDIF
 		CFLAG:245 = 4
-;前々回の절정記録を移す
-;절정の連続횟수を記録
+;前々回の絶頂記録を移す
+;절정の連続回数を記録
 IF TFLAG:절정강도 > 0
 CFLAG:900 += 1
 ELSE
@@ -8178,7 +8178,7 @@ IF TFLAG:3 > 0
 			ENDIF
 		ENDIF
 	ENDIF
-	;今回조교時の질내の破瓜血
+	;今回調教時の膣内の破瓜血
 	CFLAG:800 = 1
 ENDIF
 
@@ -10168,7 +10168,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2101
 	ENDSELECT
 
 ELSEIF CFLAG:ARG:입력행동 > 0 && CFLAG:ARG:입력행동 <= 2100
-;검격스킬から만능스킬まで사용時
+;검격スキルから万能スキルまで使用時
 	IF RAND:7 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"오너라！　페르소나！",72,LEFT%┃
@@ -10201,7 +10201,7 @@ ELSEIF CFLAG:ARG:입력행동 > 0 && CFLAG:ARG:입력행동 <= 2100
 ENDIF
 
 ;-------------------------------------------------
-;810  음란モード？ON用
+;810  淫乱モード？ON用
 ;함락時
 ;-------------------------------------------------
 @K_4583_M_ON

@@ -1,17 +1,17 @@
 ﻿;-------------------------------------------------
-;당신구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;あなた口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;
 ;-------------------------------------------------
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
-;エキストラ構아야など、コメントアウトされている構아야を使う際には、『;』を外してコメントアウトを해제する필요があります
-;最後にread meにも눈を通しておくことをお勧めします
+;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -21,11 +21,11 @@
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K4999_ASSI.ERB
-;	Facility	:회화타입：조수時구상
+;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
-;	2.00    20180220        名無し                  구상テンプレ2.2をベースに、당신구상２種をマージし、加筆
+;	2.00    20180220        名無し                  口上テンプレ2.2をベースに、あなた口上２種をマージし、加筆
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -53,15 +53,15 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4999 → EVENTTRAIN_K4999_12
+;예： EVENTTRAIN_K4999 → EVENTTRAIN_K4999_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4999,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4999을 캐릭터번호로 치환）
@@ -69,9 +69,9 @@
 ;--------------------------------------------------
 @EVENTTRAIN_K4999
 ;--------------------------------------------------
-;엑스트라모드構아야　CFLAG:220を사용
+;엑스트라모드 구문　CFLAG:220을 사용
 ;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
-;下記に처녀化する場合の構아야を샘플として載せておきます
+;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
 ;	PRINTL 処女モードに移行しますか？
@@ -158,7 +158,7 @@ ENDIF
 
 ;-------------------------------------------------
 ;간이 조수구상（Y1을 조수의 캐릭터번호로 치환, 4999을 캐릭터번호로 변경한다) CFLAG203
-;掛け合いをするキャラを増やす場合は、構아야をコピー＆ペーストをして、CFLAGの数を204、205と増やす
+;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
@@ -354,7 +354,7 @@ RETURN 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
@@ -409,7 +409,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -427,7 +427,7 @@ SELECTCASE SELECTCOM
 					CFLAG:300 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -453,7 +453,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -490,22 +490,22 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:MASTER:4 || TALENT:MASTER:7
 					IF TALENT:짐승
 						IF RAND:2 == 0
-							PRINTFORMW 인간とは違う形状の페니스を嬉しそうに頬張った…
+							PRINTFORMW 人間とは違う形状のペニスを嬉しそうに頬張った…
 						ELSE
-							PRINTFORMW 눈の前に差し出された、雄臭さと짐승臭さに溢れる페니스を舌先から舐り始めた…
+							PRINTFORMW 目の前に差し出された、雄臭さと獣臭さに溢れるペニスを舌先から舐り始めた…
 						ENDIF
 					ELSE
 						IF RAND:2 == 0
-							PRINTFORMW 上눈遣いで%CALLNAME:TARGET%を見つめ、視깨달음的にも性欲を刺激していく…
+							PRINTFORMW 上目遣いで%CALLNAME:TARGET%を見つめ、視覚的にも性欲を刺激していく…
 						ELSE
-							PRINTFORMW 눈の前に差し出された、雄臭さと짐승臭さに溢れる페니스を舌先から舐り始めた…
+							PRINTFORMW 目の前に差し出された、雄臭さと獣臭さに溢れるペニスを舌先から舐り始めた…
 						ENDIF
 					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -545,7 +545,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -585,7 +585,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -626,7 +626,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -644,7 +644,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -671,7 +671,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -689,7 +689,7 @@ SELECTCASE SELECTCOM
 					CFLAG:306 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -697,7 +697,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:306 == 1
 				CFLAG:306 = 0
 			K = 306
-			GOTO 가슴系共通
+			GOTO 胸系共通
 		ENDIF
 ;-------------------------------------------------
 ;7,유두자극
@@ -722,7 +722,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -740,7 +740,7 @@ SELECTCASE SELECTCOM
 					CFLAG:307 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -748,7 +748,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:307 == 1
 				CFLAG:307 = 0
 			K = 307
-			GOTO 가슴系共通
+			GOTO 胸系共通
 		ENDIF
 ;-------------------------------------------------
 ;8,가슴애무
@@ -773,7 +773,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -791,7 +791,7 @@ SELECTCASE SELECTCOM
 					CFLAG:308 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -799,7 +799,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:308 == 1
 				CFLAG:308 = 0
 			K = 308
-			GOTO 가슴系共通
+			GOTO 胸系共通
 		ENDIF
 ;-------------------------------------------------
 ;9,조개젖히기
@@ -823,7 +823,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -863,7 +863,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -903,7 +903,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -944,7 +944,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -962,7 +962,7 @@ SELECTCASE SELECTCOM
 					CFLAG:435 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -989,7 +989,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1007,7 +1007,7 @@ SELECTCASE SELECTCOM
 					CFLAG:436 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
@@ -1033,7 +1033,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1074,7 +1074,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1092,16 +1092,16 @@ SELECTCASE SELECTCOM
 					CFLAG:444 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY
 		ENDIF
 ;-------------------------------------------------
 ;가슴系共通
-;6가슴주무르기　7유두자극　8가슴애무
+;6胸揉み　7乳首責め　8胸愛撫
 ;-------------------------------------------------
 	CASE 11111
-		$가슴系共通
+		$胸系共通
 		;처음
 		IF CFLAG:K == 0
 			PRINTFORML 
@@ -1118,7 +1118,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1160,7 +1160,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1200,7 +1200,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1324,7 +1324,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1359,7 +1359,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -1376,7 +1376,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -1399,7 +1399,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -1416,7 +1416,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -1447,7 +1447,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1487,7 +1487,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -1528,7 +1528,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1560,7 +1560,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1598,7 +1598,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1630,7 +1630,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1666,7 +1666,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 =
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 =
 						ENDIF
@@ -1689,7 +1689,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 =
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 =
 						ENDIF
@@ -1713,7 +1713,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1745,7 +1745,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1783,7 +1783,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1815,7 +1815,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1853,7 +1853,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1885,7 +1885,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1923,7 +1923,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -1955,7 +1955,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -1992,7 +1992,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2033,7 +2033,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2065,7 +2065,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2081,7 +2081,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;조교자도구계コマンド
+;조교자도구계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;50,클리캡쓴다
@@ -2106,7 +2106,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2138,7 +2138,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2158,7 +2158,7 @@ SELECTCASE SELECTCOM
 				CFLAG:453 = 0
 			K = 453
 			L = 11
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;51,오나홀쓴다
@@ -2183,7 +2183,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2215,7 +2215,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2235,7 +2235,7 @@ SELECTCASE SELECTCOM
 				CFLAG:454 = 0
 			K = 454
 			L = 12
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;52,바이브쓴다
@@ -2260,7 +2260,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2292,7 +2292,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2312,7 +2312,7 @@ SELECTCASE SELECTCOM
 				CFLAG:455 = 0
 			K = 455
 			L = 13
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;53,애널바이브쓴다
@@ -2337,7 +2337,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2369,7 +2369,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2389,7 +2389,7 @@ SELECTCASE SELECTCOM
 				CFLAG:456 = 0
 			K = 456
 			L = 14
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;54,애널비즈쓴다
@@ -2414,7 +2414,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2446,7 +2446,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2466,7 +2466,7 @@ SELECTCASE SELECTCOM
 				CFLAG:457 = 0
 			K = 457
 			L = 15
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;55,유두캡쓴다
@@ -2491,7 +2491,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2523,7 +2523,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2543,7 +2543,7 @@ SELECTCASE SELECTCOM
 				CFLAG:458 = 0
 			K = 458
 			L = 16
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
 ;56,착유기쓴다
@@ -2568,7 +2568,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2600,7 +2600,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2620,16 +2620,16 @@ SELECTCASE SELECTCOM
 				CFLAG:459 = 0
 			K = 459
 			L = 17
-			GOTO 조교자도구계コマンド共通
+			GOTO 調教者道具系コマンド共通
 		ENDIF
 ;-------------------------------------------------
-;조교자도구계コマンド共通
-;50클리캡쓴다　51오나홀쓴다　　52바이브쓴다
-;53애널바이브쓴다　54애널비즈쓴다　55유두캡쓴다
-;56착유기쓴다
+;조교자도구계 커맨드共通
+;50クリキャップ使う　51オナホール使う　　52バイブ使う
+;53アナルバイブ使う　54アナルビーズ使う　55二プルキャップ使う
+;56搾乳機使う
 ;-------------------------------------------------
 	CASE 11111
-		$조교자도구계コマンド共通
+		$調教者道具系コマンド共通
 		IF TEQUIP:PLAYER:L
 			;처음
 			IF CFLAG:K == 0
@@ -2647,7 +2647,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -2678,7 +2678,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -2715,7 +2715,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -2738,7 +2738,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -2762,7 +2762,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2784,7 +2784,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:332 == 1
 				CFLAG:332 = 0
 			K = 332
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;61,후배위
@@ -2806,7 +2806,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -2829,7 +2829,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -2853,7 +2853,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2875,7 +2875,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:333 == 1
 				CFLAG:333 = 0
 			K = 333
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;62,정상위애널
@@ -2899,7 +2899,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2921,7 +2921,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:334 == 1
 				CFLAG:334 = 0
 			K = 334
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;63,후배위애널
@@ -2945,7 +2945,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2967,7 +2967,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:335 == 1
 				CFLAG:335 = 0
 			K = 335
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;64,역강간
@@ -2991,7 +2991,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3031,7 +3031,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3069,7 +3069,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3092,7 +3092,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3116,7 +3116,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3138,7 +3138,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:338 == 1
 				CFLAG:338 = 0
 			K = 338
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;67,기승위애널
@@ -3162,7 +3162,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3184,7 +3184,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:339 == 1
 				CFLAG:339 = 0
 			K = 339
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;68,대면좌위
@@ -3206,7 +3206,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3229,7 +3229,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3253,7 +3253,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3275,7 +3275,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:340 == 1
 				CFLAG:340 = 0
 			K = 340
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;69,배면좌위
@@ -3297,7 +3297,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3320,7 +3320,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3344,7 +3344,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3366,7 +3366,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:341 == 1
 				CFLAG:341 = 0
 			K = 341
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;70,대면좌위애널
@@ -3390,7 +3390,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3412,7 +3412,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:342 == 1
 				CFLAG:342 = 0
 			K = 342
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;71,배면좌위애널
@@ -3436,7 +3436,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3458,7 +3458,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:343 == 1
 				CFLAG:343 = 0
 			K = 343
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;72,속옷비켜삽입
@@ -3480,7 +3480,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3503,7 +3503,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3527,7 +3527,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3549,7 +3549,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:420 == 1
 				CFLAG:420 = 0
 			K = 420
-			GOTO 섹스系共通
+			GOTO セックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;73,속옷비켜삽입애널
@@ -3573,7 +3573,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3595,7 +3595,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:421 == 1
 				CFLAG:421 = 0
 			K = 421
-			GOTO 애널섹스계共通
+			GOTO アナルセックス系共通
 		ENDIF
 ;-------------------------------------------------
 ;74,역강간당한다
@@ -3617,7 +3617,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3640,7 +3640,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3664,7 +3664,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3683,12 +3683,12 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;섹스계共通
-;60,정상위　　61,후배위　　66,기승위
-;68,대면좌위　69,배면좌위　72,속옷비켜삽입
+;섹스계 공통
+;60,정상위　　61,後背位　　66,騎乗位
+;68,대면좌위　69,背面座位　72,下着ずらし挿入
 ;-------------------------------------------------
 	CASE 11111
-		$섹스系共通
+		$セックス系共通
 		;처음
 		IF CFLAG:K == 0
 			;처녀
@@ -3704,7 +3704,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3726,7 +3726,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3749,7 +3749,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3768,11 +3768,11 @@ SELECTCASE SELECTCOM
 		ENDIF
 ;-------------------------------------------------
 ;애널섹스계共通
-;62,정상위애널　　63,후배위애널　　67,기승위애널
-;70,대면좌위애널　71,배면좌위애널　72,속옷비켜삽입애널
+;62,정상위애널　　63,後背位アナル　　67,騎乗位アナル
+;70,대면좌위애널　71,背面座位アナル　72,下着ずらし挿入アナル
 ;-------------------------------------------------
 	CASE 11111
-		$애널섹스계共通
+		$アナルセックス系共通
 		;처음
 		IF CFLAG:K == 0
 			PRINTFORML 
@@ -3789,7 +3789,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3831,7 +3831,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3871,7 +3871,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3917,7 +3917,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3939,7 +3939,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:346 == 1
 				CFLAG:346 = 0
 			K = 346
-			GOTO 파이즈리共通
+			GOTO パイズリ共通
 		ENDIF
 ;-------------------------------------------------
 ;83,스마타
@@ -3963,7 +3963,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4003,7 +4003,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4043,7 +4043,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4083,7 +4083,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4123,7 +4123,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4145,7 +4145,7 @@ SELECTCASE SELECTCOM
 			SIF CFLAG:351 == 1
 				CFLAG:351 = 0
 			K = 351
-			GOTO 파이즈리共通
+			GOTO パイズリ共通
 		ENDIF
 ;-------------------------------------------------
 ;88,파이즈리펠라
@@ -4169,7 +4169,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4210,7 +4210,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -4227,7 +4227,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -4254,7 +4254,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4298,7 +4298,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4316,11 +4316,11 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;파이즈리共通
+;パイズリ共通
 ;82,파이즈리　87,세로파이즈리
 ;-------------------------------------------------
 	CASE 11111
-		$파이즈리共通
+		$パイズリ共通
 		;처음
 		IF CFLAG:K == 0
 			PRINTFORML 
@@ -4337,7 +4337,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4380,7 +4380,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -4419,7 +4419,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -4460,7 +4460,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4500,7 +4500,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4540,7 +4540,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4580,7 +4580,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4620,7 +4620,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4660,7 +4660,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4700,7 +4700,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4719,7 +4719,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유먹인다　함락완료만
+;98,모유먹이기　함락완료만
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -4735,7 +4735,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -4752,7 +4752,7 @@ SELECTCASE SELECTCOM
 			ELSEIF (TALENT:5 || TALENT:8)
 				LOCALS:0 =
 			ENDIF
-			;함락완료共通
+			;함락완료 공통
 			IF LOCALS:0 == ""
 				PRINTFORML 
 			ENDIF
@@ -4780,7 +4780,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4819,7 +4819,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4862,7 +4862,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4902,7 +4902,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4942,7 +4942,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -4982,7 +4982,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5022,7 +5022,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5063,7 +5063,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -5095,7 +5095,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -5133,7 +5133,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -5165,7 +5165,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -5203,7 +5203,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -5235,7 +5235,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -5273,7 +5273,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -5305,7 +5305,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -5343,7 +5343,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -5375,7 +5375,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -5415,7 +5415,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5455,7 +5455,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5495,7 +5495,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5514,11 +5514,11 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;조수が気持ちよくて感じているセリフ
+		;조수가 기분 좋게 느끼고 있다 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;조수がこっちに来てと言うセリフ
+		;조수가 이리 오라고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;조수に大丈남편と言っているセリフ
+		;조수가 괜찮다고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;범해지며 강한 척을 하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
@@ -5552,7 +5552,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5592,7 +5592,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5650,7 +5650,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5711,7 +5711,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5751,7 +5751,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5791,7 +5791,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5831,7 +5831,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5874,7 +5874,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -5966,7 +5966,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6006,7 +6006,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6025,7 +6025,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;146,관장기＋플러그　해제すると方便
+;146,관장기＋플러그　해제할 때 쪽
 ;-------------------------------------------------
 	CASE 146
 		CALL TRAIN_MESSAGE
@@ -6047,7 +6047,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -6079,7 +6079,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -6116,7 +6116,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6157,7 +6157,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -6189,7 +6189,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -6299,7 +6299,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -6322,7 +6322,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -6346,7 +6346,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6386,7 +6386,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6426,7 +6426,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -6470,7 +6470,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -6502,7 +6502,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -6542,7 +6542,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6581,7 +6581,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6620,7 +6620,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6659,7 +6659,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6698,7 +6698,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6737,7 +6737,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6776,7 +6776,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6815,7 +6815,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 = 
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 = 
 						ENDIF
@@ -6856,7 +6856,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 =
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 =
 						ENDIF
@@ -6879,7 +6879,7 @@ SELECTCASE SELECTCOM
 						ELSEIF (TALENT:5 || TALENT:8)
 							LOCALS:0 =
 						ENDIF
-						;함락완료共通
+						;함락완료 공통
 						IF LOCALS:0 == ""
 							LOCALS:0 =
 						ENDIF
@@ -6903,7 +6903,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -6935,7 +6935,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -6973,7 +6973,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7005,7 +7005,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7043,7 +7043,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7075,7 +7075,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7113,7 +7113,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7145,7 +7145,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7183,7 +7183,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7215,7 +7215,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7253,7 +7253,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7285,7 +7285,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7301,7 +7301,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;167,촉수관장　極太の촉수が菊穴をふさぎ、体液を流し込んだ
+;167,촉수관장　극태 촉수가 항문을 막고, 체액을 부어넣는다
 ;-------------------------------------------------
 	CASE 167
 		CALL TRAIN_MESSAGE
@@ -7323,7 +7323,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7355,7 +7355,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7393,7 +7393,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7425,7 +7425,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7463,7 +7463,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7495,7 +7495,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7533,7 +7533,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7565,7 +7565,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7603,7 +7603,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7635,7 +7635,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7673,7 +7673,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7705,7 +7705,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7743,7 +7743,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7775,7 +7775,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7813,7 +7813,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7845,7 +7845,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7883,7 +7883,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -7915,7 +7915,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -7955,7 +7955,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -7995,7 +7995,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8035,7 +8035,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8076,7 +8076,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -8108,7 +8108,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -8128,8 +8128,8 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 184
 		CALL TRAIN_MESSAGE
-		;TEQUIP:29でどこの場所選んでも同じ구상が出るように
-		;변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록
+		;변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 		;폐빌딩=1　삼림=2　공원=4　냇가=8
 		IF TEQUIP:29
 			;처음
@@ -8149,7 +8149,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -8181,7 +8181,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -8218,7 +8218,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8273,7 +8273,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -8305,7 +8305,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -8343,7 +8343,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -8375,7 +8375,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -8413,7 +8413,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 = 
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 = 
 					ENDIF
@@ -8445,7 +8445,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 =
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 =
 				ENDIF
@@ -8503,7 +8503,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8543,7 +8543,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8583,7 +8583,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8623,7 +8623,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8676,7 +8676,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8716,7 +8716,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8756,7 +8756,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8796,7 +8796,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8836,7 +8836,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8876,7 +8876,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8916,7 +8916,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8956,7 +8956,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8996,7 +8996,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9039,7 +9039,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9093,7 +9093,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9133,7 +9133,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9173,7 +9173,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9211,7 +9211,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -9234,7 +9234,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -9258,7 +9258,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9296,7 +9296,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -9319,7 +9319,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -9343,7 +9343,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9383,7 +9383,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9423,7 +9423,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9463,7 +9463,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9503,7 +9503,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9543,7 +9543,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9599,7 +9599,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9622,9 +9622,9 @@ SELECTCASE SELECTCOM
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;マ스타の페니스が当たって気持ちいいセリフ
+		;마스터의 페니스가 닿아서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
-		;二人分の정액飲ませてあげるセリフ
+		;2인분의 정액 마시게 해줄께 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
 		;능숙해졌네 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
@@ -9655,7 +9655,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9695,7 +9695,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9716,7 +9716,7 @@ SELECTCASE SELECTCOM
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -9749,7 +9749,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9770,7 +9770,7 @@ SELECTCASE SELECTCOM
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -9803,7 +9803,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9822,7 +9822,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;600番台,비전투원コマンド
+;600번대,비전투원 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;600,기초훈련
@@ -9846,7 +9846,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -9969,11 +9969,11 @@ SIF LOCAL:COUNT == 0
 	PRINTW
 
 ;-------------------------------------------------
-;윤간時の구상
-;CASE 0 内は必ず通るようになっており
-;RETURNで0を返すと、この後통상の윤간行動を出します
-;CFLAGは使っていません
-;COMF201_윤간内でLOCALを使っているので使いません
+;윤간시의 구상
+;CASE 0 안은 반드시 건너뛰게 되어있으며
+;RETURN에서 0을 반환하면, 이후 통상적인 윤간행동을 출력합니다
+;CFLAG는 사용하지 않습니다
+;COMF201_윤간 내에서 LOCAL을 사용하고 있으므로 사용하지 않습니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_RINKAN_K4999, ARG:1 , ARG:2
 
@@ -9983,10 +9983,10 @@ NEXT
 
 SELECTCASE ARG:1
 	CASE 0
-	;CASE 0はオリジナル윤간구상
-	;C:一回あたりの帰宅人数、D：興奮度증가(及び減少)
-	;CとDはオリジナル윤간구상内のみ使う
-	;C += 、D += を使う
+	;CASE 0은 오리지널 윤간 구상
+	;C:1회당 귀가 인수 D：흥분도 증가(및 감소)
+	;C와 D는 오리지널 윤간 구상 내에서만 사용
+	;C += 、D += 를 사용
 		IF ARG:2 == 1
 		;하드ON
 		
@@ -9995,7 +9995,7 @@ SELECTCASE ARG:1
 		
 		ENDIF
 	;하드계
-	;가슴を踏まれる（거유・폭유のみ）
+	;가슴을 밟힌다（거유・폭유만）
 	CASE 1				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10008,7 +10008,7 @@ SELECTCASE ARG:1
 			ELSEIF (TALENT:5 || TALENT:8)	
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 			ENDIF	
@@ -10021,49 +10021,49 @@ SELECTCASE ARG:1
 		IF (CFLAG:221 < 1 || FLAG:7 == 2) && LOCALS:0 == ""		
 			PRINTFORML 
 		ENDIF		
-	;머리を踏まれる
+	;머리를 밟힌다
 	CASE 2
 	
 	;폭력을 당하다
 	CASE 3
 	
 	;담배빵
-	;興奮度が低く、반항적、꿋꿋함、프라이드높음、건방짐、저항を持っている
+	;흥분도가 낮고, 반항적, 꿋꿋함, 프라이드높음, 건방짐, 저항을 가지고 있다
 	CASE 4
 	
-	;地面に垂れた정액舐めとらせる
+	;지면에 늘어진 정액 핥아먹인다
 	;마조끼３이상
 	CASE 5
 	
 	;몸에 낙서를 당하고 범해진다
 	CASE 6
 	
-	;尻突き上げてバックから犯されつつ、머리を踏んづけられて屈辱で涙눈상태
+	;엉덩이를 치켜올려 뒤로부터 범해지면서, 머리를 짓밟혀 굴욕으로 글썽이는 상태
 	CASE 7
 	
-	;통상系
-	;음란系で눈の前に棒並べられて、どれが欲しいか選ばせるとか（음란・창부のみ）
+	;통상계
+	;음란계로 눈앞에 장대가 진열되어, 어떤 것을 원하는지 선택하게 하거나（음란・창부만）
 	CASE 8
 	
-	;거유이상의 キャラだと「その乳は飾りか？遊ばせてるんじゃねえ」とか罵られ파이즈리한다（거유・폭유のみ）
+	;거유 이상의 캐릭터라면 「그 젖은 장식이냐？ 쉬고 있지 말라고」등등 매도당하며 파이즈리한다（거유・폭유만）
 	CASE 9
 	
-	;挿れられるのだけは회피しようと必死に입と손で群がる짐ポにご봉사する（恋幕・친애のみ）
+	;삽입만은 피하려고 필사적으로 입과 손으로 몰려드는 자지에 봉사한다（연모・친애만）
 	CASE 10
 	
-	;;両穴突かれながら無理やり笑顔とピースサインとらされて記念촬영
+	;;양구멍을 뚫리면서 억지로 미소와 피스싸인을 취하게 시켜져 기념촬영
 	CASE 11
 	
-	;;輸姦後の後始末描写で、本人정액でどろどろにされてるのに周囲の男達の肉棒を舌で掃除させられてる
+	;;윤간후의 뒷처리 묘사에서, 본인 정액 투성이가 되었는데도 주위 남자들의 육봉을 혀로 청소시키고 있다
 	CASE 12
 	
 	;안에 사정당해도 즉시 다른 사람으로 교대
 	CASE 13
 	
-	;一斉사정で정액まみれ
+	;일제사정으로 정액투성이
 	CASE 14
 	
-	;;両穴突かれて同時사정
+	;;양구멍 찔리며 동시 사정
 	CASE 15
 	
 	;기승위+양겨드랑이잡
@@ -10096,7 +10096,7 @@ RETURN 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_A
 	RETURN 0
@@ -10115,14 +10115,14 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;조교자の사정時の텍스트
+;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 FOR COUNT,0,51
 	LOCALS:COUNT = 
 	LOCAL:COUNT = 0
 NEXT
 ;-------------------------------------------------
-;사정개소변경時の텍스트　有効時はここで関数종료
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
 
 
@@ -10144,7 +10144,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:221= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:221= 3
@@ -10176,7 +10176,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:222= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:222= 3
@@ -10208,7 +10208,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:223= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:223= 3
@@ -10240,7 +10240,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:224= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:224= 3
@@ -10272,7 +10272,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:225= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:225= 3
@@ -10304,7 +10304,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:226= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:226= 3
@@ -10336,7 +10336,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:227= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:227= 3
@@ -10368,7 +10368,7 @@ IF CFLAG:106
 				LOCALS:0 = 
 				CFLAG:228= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:228= 3
@@ -10402,7 +10402,7 @@ IF CFLAG:106
 					LOCALS:0 = 
 					CFLAG:229= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:229= 3
@@ -10433,7 +10433,7 @@ IF CFLAG:106
 					LOCALS:0 = 
 					CFLAG:230= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:230= 3
@@ -10460,7 +10460,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
-	;大量사정				
+	;대량사정				
 	IF TFLAG:9 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10476,7 +10476,7 @@ IF TFLAG:9 > 0
 				LOCALS:0 = 
 				CFLAG:230= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:230= 3
@@ -10509,7 +10509,7 @@ IF TFLAG:9 > 0
 				LOCALS:0 = 
 				CFLAG:230= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:230= 3
@@ -10533,7 +10533,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A			
-	;大量사정					
+	;대량사정					
 	IF TFLAG:7 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10549,7 +10549,7 @@ IF TFLAG:7 > 0
 				LOCALS:0 = 
 				CFLAG:232= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:232= 3
@@ -10582,7 +10582,7 @@ IF TFLAG:7 > 0
 				LOCALS:0 = 
 				CFLAG:232= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:232= 3
@@ -10608,7 +10608,7 @@ IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
 	;이라마치오로 사정
 	IF SELECTCOM == 140			
-		;大量사정						
+		;대량사정						
 		IF TFLAG:0 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -10624,7 +10624,7 @@ IF TFLAG:0 > 0
 					LOCALS:0 = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:233= 3
@@ -10657,7 +10657,7 @@ IF TFLAG:0 > 0
 					LOCALS:0 = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:233= 3
@@ -10676,7 +10676,7 @@ IF TFLAG:0 > 0
 		ENDIF	
 	;그 이외의 입사정
 	ELSE
-		;大量사정						
+		;대량사정						
 		IF TFLAG:0 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -10692,7 +10692,7 @@ IF TFLAG:0 > 0
 					LOCALS:0 = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:233= 3
@@ -10725,7 +10725,7 @@ IF TFLAG:0 > 0
 					LOCALS:0 = 
 					CFLAG:233= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:233= 3
@@ -10750,7 +10750,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A	
-	;大量사정					
+	;대량사정					
 	IF TFLAG:1 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10766,7 +10766,7 @@ IF TFLAG:1 > 0
 				LOCALS:0 = 
 				CFLAG:234= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:234= 3
@@ -10799,7 +10799,7 @@ IF TFLAG:1 > 0
 				LOCALS:0 = 
 				CFLAG:234= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:234= 3
@@ -10823,7 +10823,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:34 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10839,7 +10839,7 @@ IF TFLAG:34 > 0
 				LOCALS:0 = 
 				CFLAG:235= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:235= 3
@@ -10872,7 +10872,7 @@ IF TFLAG:34 > 0
 				LOCALS:0 = 
 				CFLAG:235= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:235= 3
@@ -10895,7 +10895,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:16 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -10911,7 +10911,7 @@ IF TFLAG:16 == 1
 				LOCALS:0 = 
 				CFLAG:236= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:236= 3
@@ -10944,7 +10944,7 @@ IF TFLAG:16 == 1
 				LOCALS:0 = 
 				CFLAG:236= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:236= 3
@@ -10970,7 +10970,7 @@ IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -10986,7 +10986,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:237= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:237= 3
@@ -11019,7 +11019,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:237= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:237= 3
@@ -11038,7 +11038,7 @@ IF TFLAG:2 > 0
 		ENDIF
 	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11054,7 +11054,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:238= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:238= 3
@@ -11087,7 +11087,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:238= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:238= 3
@@ -11106,7 +11106,7 @@ IF TFLAG:2 > 0
 		ENDIF
 	;그 외 섹스계
 	ELSE
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11122,7 +11122,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:239= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:239= 3
@@ -11155,7 +11155,7 @@ IF TFLAG:2 > 0
 					LOCALS:0 = 
 					CFLAG:239= 3
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 					CFLAG:239= 3
@@ -11176,11 +11176,11 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:10 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11196,7 +11196,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 				LOCALS:0 = 
 				CFLAG:240= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:240= 3
@@ -11229,7 +11229,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 				LOCALS:0 = 
 				CFLAG:240= 3
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 				CFLAG:240= 3
@@ -11269,7 +11269,7 @@ SIF LOCAL:COUNT == 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_E
 	RETURN 0
@@ -11288,7 +11288,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;촉수の사정時の텍스트
+;촉수의 사정시의 텍스트
 ;-------------------------------------------------
 FOR COUNT,0,51
 	LOCALS:COUNT = 
@@ -11313,7 +11313,7 @@ IF TFLAG:15 >0
 			LOCALS:0 = 
 			CFLAG:241= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:241= 3
@@ -11351,7 +11351,7 @@ SIF LOCAL:COUNT == 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
@@ -11370,7 +11370,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;奴隷の절정時の텍스트
+;노예의 절정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;처음 C절정
@@ -11429,7 +11429,7 @@ IF TFLAG:29 > 1
 			LOCALS:0 = 
 			CFLAG:246= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:246= 3
@@ -11462,7 +11462,7 @@ ELSEIF TFLAG:29 > 0
 			LOCALS:0 = 
 			CFLAG:246= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:246= 3
@@ -11515,7 +11515,7 @@ IF TFLAG:10 > 0
 			LOCALS:0 = 
 			CFLAG:247= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:247= 3
@@ -11568,7 +11568,7 @@ IF TFLAG:11 > 0
 			LOCALS:0 = 
 			CFLAG:248= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:248= 3
@@ -11621,7 +11621,7 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 			LOCALS:0 = 
 			CFLAG:249= 3
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""	
 			LOCALS:0 = 
 			CFLAG:249= 3
@@ -11659,7 +11659,7 @@ SIF LOCALS:0 != ""
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_C
 	RETURN 0
@@ -11678,7 +11678,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;조교後の텍스트
+;조교 후의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;처녀상실(처녀만)
@@ -11736,7 +11736,7 @@ SIF LOCAL:COUNT == 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_D
 	RETURN 0
@@ -11755,7 +11755,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;パラメータ변화時の텍스트
+;파라미터 변화시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;처음 윤활이 LV3을 넘었다
@@ -11841,7 +11841,7 @@ ENDIF
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
-;볼재갈着用時には地の아야を표시して구상をスキップする
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
 IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL MARK_MESSAGE
 	RETURN 0
@@ -11971,7 +11971,7 @@ IF TFLAG:21 == 3
 		ELSEIF (TALENT:5 || TALENT:8)	
 			LOCALS:0 = 
 		ENDIF	
-		;함락완료共通	
+		;함락완료 공통	
 		IF LOCALS:0 == ""
 			LOCALS:0 = 
 		ENDIF	
@@ -12030,7 +12030,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12056,12 +12056,12 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
 				ENDIF
-				;모유체질じゃない
+				;모유체질이 아니다
 				IF LOCALS:0 == ""
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
@@ -12073,7 +12073,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						PRINTFORML 
 					ENDIF	
@@ -12098,7 +12098,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12122,7 +12122,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12158,7 +12158,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
@@ -12175,7 +12175,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						PRINTFORML 
 					ENDIF	
@@ -12210,7 +12210,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12234,7 +12234,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12258,7 +12258,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12297,7 +12297,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12321,7 +12321,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12349,7 +12349,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12377,7 +12377,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12405,7 +12405,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12429,7 +12429,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12453,7 +12453,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12477,7 +12477,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12501,7 +12501,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12525,7 +12525,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12548,11 +12548,11 @@ SELECTCASE TFLAG:13
 	CASE 10
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					CALL EVENT_MESSAGE
-				;음란, 창부
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)					
+				;연모, 친애	
+				IF (TALENT:3 || TALENT:6)	
+					LOCALS:0 = 
+				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 자신의 부푼 아랫배를 부드럽게 어루만지고 뜻을 굳힌 후, 입 속에 레몬 색으로 빛나는 사탕을 던져 넣었다…
 					PRINTFORML …………
@@ -12572,7 +12572,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12601,75 +12601,75 @@ SELECTCASE TFLAG:13
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
-			;임신대상をTARGETに格納し、父親は奴隷はV、조수はWとする
-				;당신が女
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
+				;あなたが女
 				IF EXP:MASTER:출산경험 == 0
 					IF TALENT:MASTER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							PRINTFORMW 
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						PRINTFORMW 
 					ENDIF
 				ELSEIF EXP:MASTER:출산경험 == 1
 					IF TALENT:MASTER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							PRINTFORMW 
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						PRINTFORMW 
 					ENDIF
 				ELSEIF EXP:MASTER:출산경험 > 1
 					IF TALENT:MASTER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							PRINTFORMW 
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						PRINTFORMW 
 					ENDIF
 				ELSEIF EXP:MASTER:출산경험 >= 3
 					IF TALENT:MASTER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							PRINTFORMW 
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						PRINTFORMW 
 					ENDIF
 				ENDIF
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
-				PRINTFORMW 
+				PRINTFORML 
 			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
-				PRINTFORMW 
+				PRINTFORML 
 			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
 				;부친(조수）과의 상성이 125보다 큰 경우
@@ -12706,7 +12706,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12738,7 +12738,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
@@ -12762,7 +12762,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
@@ -12791,7 +12791,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -12932,14 +12932,14 @@ SELECTCASE TFLAG:13
 			;그 이외
 			ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
 				PRINTFORM %조사처리(CALLNAME:MASTER,"는")% 목욕과 화장을 마치고 머리카락 옷매무새를 고친 후 
-				;복장を整える処理を추가
+				;服装を整える処理を追加
 				CALL CLOTHES_TRAIN,MASTER
 					;■出勤前
-					;당신が女
+					;あなたが女
 					IF !TALENT:MASTER:남자
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							;음란, 창부
 							IF TALENT:MASTER:4 || TALENT:MASTER:7
@@ -12955,7 +12955,7 @@ SELECTCASE TFLAG:13
 									PRINTFORMW 창관으로 출근했다…
 								ENDIF
 							ENDIF
-						;당신は女
+						;あなたは女
 						ELSE
 							;음란, 창부
 							IF TALENT:4 || TALENT:7
@@ -12972,14 +12972,14 @@ SELECTCASE TFLAG:13
 								ENDIF
 							ENDIF
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						IF TALENT:4 || TALENT:7
 							PRINTFORMW 기쁜듯이 창관으로 출근했다…
 						ELSE
 							PRINTFORMW 흐뭇하게 창관에 출근했다…
 						ENDIF
-					;당신は男
+					;あなたは男
 					ELSE
 						IF TALENT:4 || TALENT:7
 							PRINTFORMW 기쁜듯이 창관으로 출근했다…
@@ -13017,7 +13017,7 @@ SELECTCASE TFLAG:13
 							PRINT 기름기 도는 중년 남자
 						ENDIF
 						PRINTFORMW 에게 성적인 시선을 받았다…
-						;■衣装구상
+						;■衣装口上
 						;세일러복
 						IF TEQUIP:MASTER:옷 == 102 && EQUIP:MASTER:옷
 							IF RAND:2 == 0
@@ -13033,9 +13033,9 @@ SELECTCASE TFLAG:13
 								PRINTL 위장용 교복이 그 안의 싱싱한 육체를 상상하게 된다…
 							ENDIF
 						;메이드
-						ELSEIF TEQUIP:MASTER:전신복 == 308
+						ELSEIF TEQUIP:MASTER:83 == 308
 						;フレンチ메이드
-						ELSEIF TEQUIP:MASTER:전신복 == 309
+						ELSEIF TEQUIP:MASTER:83 == 309
 						;체육복＋블루머
 						ELSEIF TEQUIP:MASTER:옷 == 103 && TEQUIP:MASTER:하의 == 211
 							IF RAND:2 == 0
@@ -13044,18 +13044,18 @@ SELECTCASE TFLAG:13
 								PRINTL 거리를 다니기에는 어울리지 않는 모습이지만、노출된 다리 부분이 요염한 육체를 어필하고 있다…
 							ENDIF
 						;드레스、이브닝드레스
-						ELSEIF TEQUIP:MASTER:전신복 == 304 && TEQUIP:MASTER:전신복 == 305
+						ELSEIF TEQUIP:MASTER:83 == 304 && TEQUIP:MASTER:83 == 305
 						;ギャル系私옷（핫팬츠に캐미솔or탱크탑）
-						ELSEIF TEQUIP:MASTER:하의 == 206 && (TEQUIP:MASTER:옷 == 108 || TEQUIP:MASTER:옷 == 117)
+						ELSEIF TEQUIP:MASTER:82 == 206 && (TEQUIP:MASTER:81 == 108 || TEQUIP:MASTER:81 == 117)
 							IF RAND:2 == 0
 								PRINTL 화려하고 노출이 많은 옷은 남자의 욕망을 부추긴다…
 							ELSE
 								PRINTL 가슴이나 엉덩이 등 여성적인 부분을 노출, 강조하는 패션은 욕망을 끓어오르게 한다…
 							ENDIF
 						;お嬢様系私옷（서스펜더스커트）
-						ELSEIF TEQUIP:MASTER:하의 == 213
+						ELSEIF TEQUIP:MASTER:82 == 213
 						;エロマダム（強調下着）
-						ELSEIF TEQUIP:MASTER:전신속옷 == 718
+						ELSEIF TEQUIP:MASTER:87 == 718
 							PRINTFORM %조사처리(CALLNAME:MASTER,"는")% 
 							IF TALENT:MASTER:오토코노코
 								PRINT 여성에 가까운 섬세한 몸을 
@@ -13096,36 +13096,34 @@ SELECTCASE TFLAG:13
 								PRINTW 의 란제리를 입고 있다…
 							ENDIF
 						;기모노
-						ELSEIF TEQUIP:MASTER:전신복 == 301
+						ELSEIF TEQUIP:MASTER:83 == 301
 						;유카타
-						ELSEIF TEQUIP:MASTER:옷 == 118
+						ELSEIF TEQUIP:MASTER:81 == 118
 						;바니수트
-						ELSEIF TEQUIP:MASTER:전신복 == 311
+						ELSEIF TEQUIP:MASTER:83 == 311
 						;차이나드레스
-						ELSEIF TEQUIP:MASTER:전신복 == 310
+						ELSEIF TEQUIP:MASTER:83 == 310
 						;원피스수영복
-						ELSEIF TEQUIP:MASTER:전신속옷 == 716
+						ELSEIF TEQUIP:MASTER:87 == 716
 						;비키니수영복
-						ELSEIF TEQUIP:MASTER:전신속옷 == 715
+						ELSEIF TEQUIP:MASTER:87 == 715
 						;경주용수영복
-						ELSEIF TEQUIP:MASTER:전신속옷 == 713
+						ELSEIF TEQUIP:MASTER:87 == 713
 						;ゴスロリ（黒）
-						ELSEIF TEQUIP:MASTER:옷 == 122
+						ELSEIF TEQUIP:MASTER:81 == 122
 							IF RAND:2 == 0
 								PRINT 흑색 기조의 프릴과 리본은 귀여우면서도 어딘가 선정적이다…
 							ELSE
 								PRINTFORM 검은 고딕 로리타가 %마스터를% 더 귀엽게 보이게 한다…
 							ENDIF
 						;ゴスロリ（白）
-						ELSEIF TEQUIP:MASTER:옷 == 123
+						ELSEIF TEQUIP:MASTER:81 == 123
 							IF RAND:2 == 0
 								PRINT 백색 기조의 프릴과 리본은 귀여우면서도 어딘가 선정적이다…
 							ELSE
 								PRINTFORM 하얀 고딕 로리타가 %마스터를% 더 귀엽게 보이게 한다…
 							ENDIF
-						;ここで一度切る
-						ENDIF
-						;그 외（要するに普通の옷）
+						;그 외（要するに普通の服）
 						ELSE
 							;■上半身(옷、전신복、겉옷に類するものを着ているかどうか)
 							IF EQUIP:21 > 0 || EQUIP:28 > 0
@@ -13149,7 +13147,7 @@ SELECTCASE TFLAG:13
 									PRINTFORM %조사만처리(CALLNAME:MASTER,"가")% 
 								ENDIF
 								;스커트、미니스커트、타이트스커트、タイトミニを選んでいる
-								IF TEQUIP:MASTER:하의 == 201 && EQUIP:MASTER:하의 > 0
+								IF TEQUIP:MASTER:82 == 201 && EQUIP:MASTER:22 > 0
 									PRINTL 입은 
 									IF RAND:3 == 0
 										PRINT 무릎 위 프리티
@@ -13159,7 +13157,7 @@ SELECTCASE TFLAG:13
 										PRINT 체크 
 									ENDIF
 									PRINT 스커트로부터 
-								ELSEIF TEQUIP:MASTER:하의 == 207
+								ELSEIF TEQUIP:MASTER:82 == 207
 									PRINTFORML 입은 
 									IF RAND:2 == 0
 										PRINT 허벅지까지 올라오는 
@@ -13167,7 +13165,7 @@ SELECTCASE TFLAG:13
 										PRINT 체크 
 									ENDIF
 									PRINT 미니스커트에서 
-								ELSEIF TEQUIP:MASTER:하의 == 208
+								ELSEIF TEQUIP:MASTER:82 == 208
 									PRINTFORML 입은 
 									IF RAND:2 == 0
 										PRINT 엉덩이 모양이 잘 보이는 
@@ -13175,7 +13173,7 @@ SELECTCASE TFLAG:13
 										PRINT 체크무늬의 
 									ENDIF
 									PRINT 타이트스커트로부터 
-								ELSEIF TEQUIP:MASTER:하의 == 209
+								ELSEIF TEQUIP:MASTER:82 == 209
 									PRINTFORML 입은 
 									IF RAND:2 == 0
 										PRINT 볼기짝이 튀어나올 것 같은 
@@ -13183,7 +13181,7 @@ SELECTCASE TFLAG:13
 										PRINT 아슬아슬한 
 									ENDIF
 									PRINT 타이트미니에서 
-								ELSEIF TEQUIP:MASTER:전신복 == 303
+								ELSEIF TEQUIP:MASTER:83 == 303
 									PRINTFORML 입고 있는 
 									IF RAND:5 == 0
 										PRINT 자수가 놓인 
@@ -13226,7 +13224,7 @@ SELECTCASE TFLAG:13
 										PRINT 의 
 									ENDIF
 									;팬티
-									IF TEQUIP:MASTER:속옷（하） == 602 || TEQUIP:MASTER:속옷（하） == 609 || TEQUIP:MASTER:속옷（하） == 610
+									IF TEQUIP:MASTER:86 == 602
 										PRINT 팬티
 									;ドロワ
 									ELSEIF TEQUIP:MASTER:속옷（하） == 601
@@ -13245,7 +13243,7 @@ SELECTCASE TFLAG:13
 										ELSE
 											PRINT 음부가 보일 것 같은 팬티
 										ENDIF
-									;마이クロ
+									;マイクロ
 									ELSEIF TEQUIP:MASTER:속옷（하） == 605
 										IF RAND:2 == 0
 											PRINT 천이 너무 작은 팬티
@@ -13288,7 +13286,7 @@ SELECTCASE TFLAG:13
 										ENDIF
 									ENDIF
 								;穿いてない＋노출
-								ELSEIF TEQUIP:MASTER:음순보임 > 0 && ABL:MASTER:노출증 > 3 && (TEQUIP:MASTER:속옷（하） <= 0 || EQUIP:MASTER:전신속옷 <= 0)
+								ELSEIF TEQUIP:MASTER:100 > 0 && ABL:MASTER:8 > 3 && (EQUIP:MASTER:27 > 0 || EQUIP:MASTER:29 > 0)
 									IF !TALENT:MASTER:남자
 										IF RAND:3 == 0
 											PRINTW 의 균열이 보이고 있다…
@@ -13302,20 +13300,20 @@ SELECTCASE TFLAG:13
 									ENDIF
 								ENDIF
 							;퀼로트、바지、핫팬츠、ジーンズ、カットジーンズ
-							ELSEIF TEQUIP:MASTER:하의 == 202 || TEQUIP:MASTER:하의 == 204 || TEQUIP:MASTER:하의 == 206 || TEQUIP:MASTER:하의 == 218 || TEQUIP:MASTER:하의 == 219
-								IF TEQUIP:MASTER:하의 == 202 
-								ELSEIF TEQUIP:MASTER:하의 == 204
-								ELSEIF TEQUIP:MASTER:하의 == 206
-								ELSEIF TEQUIP:MASTER:하의 == 218
-								ELSEIF TEQUIP:MASTER:하의 == 219
+							ELSEIF TEQUIP:MASTER:82 == 202 || TEQUIP:MASTER:82 == 204 || TEQUIP:MASTER:82 == 206 || TEQUIP:MASTER:82 == 218 || TEQUIP:MASTER:82 == 219
+								IF TEQUIP:MASTER:82 == 202 
+								ELSEIF TEQUIP:MASTER:82 == 204
+								ELSEIF TEQUIP:MASTER:82 == 206
+								ELSEIF TEQUIP:MASTER:82 == 218
+								ELSEIF TEQUIP:MASTER:82 == 219
 								ENDIF
 							ENDIF
-						;ENDIF
+						ENDIF
 					ENDIF
-					;노출量で判断
-					;여자만
+					;露出量で判断
+					;女のみ
 					IF !IS_LOOKSLIKE_MALE(MASTER)
-						SIF TEQUIP:MASTER:팔노출 || TEQUIP:MASTER:다리노출
+						SIF TEQUIP:MASTER:92 || TEQUIP:MASTER:94
 							PRINTL 남자는 더욱 더 시선을 다른 곳에 향한다…
 						;팔노출
 						IF TEQUIP:MASTER:92
@@ -13326,10 +13324,10 @@ SELECTCASE TFLAG:13
 							ENDIF
 						ENDIF
 						;다리노출
-						SIF TEQUIP:MASTER:다리노출
+						SIF TEQUIP:MASTER:94
 								PRINTFORML 적절하게 물이 오른 맨다리에 욕정의 시선이 핥듯이 엉겨든다…
 						;유방노출
-						IF TEQUIP:MASTER:유방노출
+						IF TEQUIP:MASTER:95
 							IF RAND:2 == 0
 								PRINTFORM 남자는 핵심으로 고개를 돌려 
 							ELSE
@@ -13377,7 +13375,7 @@ SELECTCASE TFLAG:13
 							ENDIF
 						ENDIF
 						;배꼽노출
-						IF TEQUIP:MASTER:배꼽노출 == 1 && !TALENT:MASTER:남자
+						IF TEQUIP:MASTER:97 == 1 && !TALENT:MASTER:남자
 							IF TALENT:MASTER:임신
 								PRINTFORML 불룩한 배는 대담한 옷차림으로 임산부 특유의 음란함을 강조하고 
 							ELSE
@@ -13388,7 +13386,6 @@ SELECTCASE TFLAG:13
 						IF TALENT:음란 || TALENT:창부
 							IF RAND:4 == 0
 								PRINT 을 쿨하게 받아넘겨 웃으며 
-
 							ELSEIF RAND:3 == 0
 								PRINT 을 전혀 모르는 채로 
 							ELSEIF RAND:2 == 0
@@ -13441,9 +13438,9 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 창관에 도착하면 이미 지명 예약이 들어와 있었다…
 				ENDIF
 				;위험일分岐
-				IF CFLAG:MASTER:위험일 && !TALENT:MASTER:임신
+				IF CFLAG:MASTER:113 == 1 && TALENT:MASTER:임신 == 1
 					PRINTL 오늘은 위험일인 것이 마음에 걸리지만 
-				ELSEIF CFLAG:MASTER:배란유발제 && !TALENT:MASTER:임신
+				ELSEIF CFLAG:MASTER:배란유발제 == 1 && TALENT:MASTER:임신 == 1
 					PRINTL 오늘은 배란유발제를 마시고 있는 것이 걸리지만 
 				ENDIF
 				PRINTFORM %조사처리(CALLNAME:MASTER,"는")% 
@@ -13451,7 +13448,7 @@ SELECTCASE TFLAG:13
 					;■ 衣装分岐
 					;● 衣装上半身分岐
 					;세일러복
-					IF TEQUIP:MASTER:옷 == 102 && EQUIP:MASTER:옷
+					IF TEQUIP:MASTER:81 == 102 && EQUIP:MASTER:21
 						SELECTCASE RAND:7
 							CASE 0
 								CALL COLOR_PATTERN
@@ -13471,8 +13468,8 @@ SELECTCASE TFLAG:13
 							CASE 6
 								PRINT 사쿠란 여학원과 비슷한 세일러복
 						ENDSELECT
-					;블레이저교복
-					ELSEIF TEQUIP:MASTER:겉옷 == 107 && EQUIP:MASTER:옷
+					;ブレザー
+					ELSEIF TEQUIP:MASTER:90 == 101 && EQUIP:MASTER:21
 						SELECTCASE RAND:7
 							CASE 0
 								PRINT 카루코자카고교의 블레이저교복
@@ -13493,7 +13490,7 @@ SELECTCASE TFLAG:13
 								PRINT 십성고교의 블레이저교복
 						ENDSELECT
 					;메이드（화이트브림＋메이드복）
-					ELSEIF TEQUIP:MASTER:모자 == 1 && (TEQUIP:MASTER:전신복 == 308 || TEQUIP:MASTER:전신복 == 309)
+					ELSEIF TEQUIP:MASTER:80 == 1 && (TEQUIP:MASTER:83 == 308 || TEQUIP:MASTER:83 == 309)
 						CALL COLOR_PATTERN
 						IF RAND:3 == 0
 							PRINT 의 메이드복
@@ -13503,7 +13500,7 @@ SELECTCASE TFLAG:13
 							PRINT 의 정교한 프릴이 달린 메이드복
 						ENDIF
 					;레오타드
-					ELSEIF TEQUIP:MASTER:전신속옷 == 704
+					ELSEIF TEQUIP:MASTER:87 == 704
 						CALL COLOR_PATTERN
 						IF RAND:3 == 0
 							PRINT 의 
@@ -13514,9 +13511,9 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 레오타드
 					;체육복
-					ELSEIF TEQUIP:MASTER:옷 == 103
+					ELSEIF TEQUIP:MASTER:81 == 103
 						;블루머
-						IF TEQUIP:MASTER:하의 == 211
+						IF TEQUIP:MASTER:82 == 211
 							IF RAND:3 == 0
 								PRINT 속옷이 조금 삐져나온 
 							ELSEIF RAND:2 == 0
@@ -13526,7 +13523,7 @@ SELECTCASE TFLAG:13
 							ENDIF
 							PRINT 블루머와 체육복 
 						;스패츠
-						ELSEIF TEQUIP:MASTER:속옷（하） == 616
+						ELSEIF TEQUIP:MASTER:86 == 616
 							IF RAND:3 == 0
 								PRINT 엉덩이를 강조한 
 							ELSEIF RAND:2 == 0
@@ -13537,7 +13534,7 @@ SELECTCASE TFLAG:13
 							PRINT 스패츠와 체육복
 						ENDIF
 					;드레스、이브닝드레스
-					ELSEIF TEQUIP:MASTER:전신복 == 304 || TEQUIP:MASTER:전신복 == 305
+					ELSEIF TEQUIP:MASTER:83 == 304 || TEQUIP:MASTER:83 == 305
 						IF RAND:3 == 0
 							PRINT 고급스러운 자수가 놓인 드레스
 						ELSEIF RAND:2 == 0
@@ -13547,7 +13544,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 
 					;ギャル系私옷（비키니탑+핫팬츠）
-					ELSEIF TEQUIP:MASTER:옷 == 104 && TEQUIP:MASTER:하의 == 206
+					ELSEIF TEQUIP:MASTER:81 == 104 && TEQUIP:MASTER:82 == 206
 						IF RAND:3 == 0
 							PRINT 의 노출이 많은 
 						ELSEIF RAND:2 == 0
@@ -13557,7 +13554,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 갸루패션
 					;お嬢様系私옷（캐미솔＋모자）
-					ELSEIF TEQUIP:MASTER:옷 == 117
+					ELSEIF TEQUIP:MASTER:81 == 117
 						IF RAND:3 == 0
 							PRINT 의 소박한 
 						ELSEIF RAND:2 == 0
@@ -13567,7 +13564,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 캐미솔
 					;기모노
-					ELSEIF TEQUIP:MASTER:옷 == 115 && EQUIP:MASTER:옷
+					ELSEIF TEQUIP:MASTER:81 == 115 && EQUIP:MASTER:21
 						IF RAND:3 == 0
 							PRINT 의 차분한 
 						ELSEIF RAND:2 == 0
@@ -13577,7 +13574,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 기모노
 					;유카타
-					ELSEIF TEQUIP:MASTER:옷 == 118 && EQUIP:MASTER:옷
+					ELSEIF TEQUIP:MASTER:81 == 118 && EQUIP:MASTER:21
 						IF RAND:3 == 0
 							PRINT 의 귀여운 
 						ELSEIF RAND:2 == 0
@@ -13587,7 +13584,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 유카타
 					;女侍（기모노＋하카마）
-					ELSEIF TEQUIP:MASTER:하의 == 215 && TEQUIP:MASTER:옷 == 115 && EQUIP:MASTER:옷 && EQUIP:MASTER:하의
+					ELSEIF TEQUIP:MASTER:82 == 215 && TEQUIP:MASTER:81 == 115 && EQUIP:MASTER:21 && EQUIP:MASTER:22
 						IF RAND:3 == 0
 							PRINT 
 						ELSEIF RAND:2 == 0
@@ -13595,9 +13592,9 @@ SELECTCASE TFLAG:13
 						ELSE
 							PRINT 
 						ENDIF
-						PRINT 하카마姿
+						PRINT 하카마차림
 					;여군（군복）
-					ELSEIF TEQUIP:MASTER:전신복 == 316 && EQUIP:MASTER:전신복
+					ELSEIF TEQUIP:MASTER:83 == 316 && EQUIP:MASTER:28
 						IF RAND:3 == 0
 							PRINT 망국의 훈장으로 장식된
 						ELSEIF RAND:2 == 0
@@ -13607,7 +13604,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 군복
 					;女騎士（전신갑주）
-					ELSEIF TEQUIP:MASTER:전신복 == 306 && EQUIP:MASTER:전신복
+					ELSEIF TEQUIP:MASTER:83 == 306 && EQUIP:MASTER:28
 						IF RAND:3 == 0
 							PRINT 
 						ELSEIF RAND:2 == 0
@@ -13617,7 +13614,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 전신갑주
 					;여교사、OL（블라우스orYシャツ+스커트系衣装）
-					ELSEIF (TEQUIP:MASTER:옷 == 107 || TEQUIP:MASTER:옷 == 107) && (TEQUIP:MASTER:하의 == 201 || TEQUIP:MASTER:하의 == 207 || TEQUIP:MASTER:하의 == 208 || TEQUIP:MASTER:하의 == 209 || TEQUIP:MASTER:전신복 == 303)
+					ELSEIF (TEQUIP:MASTER:81 == 107 || TEQUIP:MASTER:81 == 107) && (TEQUIP:MASTER:82 == 201 || TEQUIP:MASTER:82 == 207 || TEQUIP:MASTER:82 == 208 || TEQUIP:MASTER:82 == 209 || TEQUIP:MASTER:83 == 303)
 						IF RAND:3 == 0
 							PRINT 교사풍
 						ELSEIF RAND:2 == 0
@@ -13627,7 +13624,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 의 패션
 					;プリンセス・女王（관）＋드레스
-					ELSEIF TEQUIP:MASTER:모자 == 16 && (TEQUIP:MASTER:전신복 == 304 || TEQUIP:MASTER:전신복 == 305)
+					ELSEIF TEQUIP:MASTER:80 == 16 && (TEQUIP:MASTER:83 == 304 || TEQUIP:MASTER:83 == 305)
 						IF RAND:3 == 0
 							PRINT 기품이 넘치는 
 						ELSEIF RAND:2 == 0
@@ -13642,8 +13639,8 @@ SELECTCASE TFLAG:13
 						ELSE
 							PRINT 귀부인
 						ENDIF
-					;婦警（警官の옷）
-					ELSEIF TEQUIP:MASTER:옷 == 106
+					;婦警（警官の服）
+					ELSEIF TEQUIP:MASTER:81 == 106
 						IF RAND:3 == 0
 							PRINT 미니스커트 여경
 						ELSEIF RAND:2 == 0
@@ -13653,7 +13650,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 여경의 모습
 					;간호사（간호사복＋너스캡）
-					ELSEIF TEQUIP:MASTER:옷 == 105 && TEQUIP:MASTER:모자 == 2
+					ELSEIF TEQUIP:MASTER:81 == 105 && TEQUIP:MASTER:80 == 2
 						IF RAND:3 == 0
 							PRINT 가슴과 엉덩이를 강조한 
 						ELSEIF RAND:2 == 0
@@ -13663,16 +13660,16 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 간호사복
 					;바니수트（うさ耳バンド＋바니수트）
-					ELSEIF TEQUIP:MASTER:모자 == 4 && TEQUIP:MASTER:전신복 == 311
+					ELSEIF TEQUIP:MASTER:80 == 4 && TEQUIP:MASTER:83 == 311
 						PRINT 바니수트
 					;차이나드레스
-					ELSEIF TEQUIP:MASTER:전신복 == 310
+					ELSEIF TEQUIP:MASTER:83 == 310
 						PRINT 차이나드레스
 					;학교수영복
-					ELSEIF TEQUIP:MASTER:전신속옷 == 710
+					ELSEIF TEQUIP:MASTER:87 == 710
 						PRINT 학교수영복
 					;원피스수영복
-					ELSEIF TEQUIP:MASTER:전신속옷 == 716
+					ELSEIF TEQUIP:MASTER:87 == 716
 						IF RAND:3 == 0
 							PRINT 의 멋진 
 						ELSEIF RAND:2 == 0
@@ -13682,7 +13679,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 원피스
 					;비키니수영복
-					ELSEIF TEQUIP:MASTER:전신속옷 == 715
+					ELSEIF TEQUIP:MASTER:87 == 715
 						IF RAND:3 == 0
 							PRINT 유두만 간신히 가리는 
 						ELSEIF RAND:2 == 0
@@ -13692,7 +13689,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						PRINT 비키니
 					;경주용수영복
-					ELSEIF TEQUIP:MASTER:전신속옷 == 713
+					ELSEIF TEQUIP:MASTER:87 == 713
 						IF RAND:3 == 0
 							PRINT 신소재의 
 						ELSEIF RAND:2 == 0
@@ -13712,7 +13709,7 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINT 으로 갈아입고, 
 					ENDIF
-					;● 衣装バストサイズ가슴分岐
+					;● 衣装バストサイズ胸分岐
 					PRINT 그 
 					IF TALENT:빈유
 						IF RAND:3 == 0
@@ -13766,7 +13763,7 @@ SELECTCASE TFLAG:13
 						PRINTFORM 동성, 이성, 심지어는 악마에게까지 안기는 것을 주저하며, 
 					ENDIF
 				ELSEIF TALENT:MASTER:유아체형
-					;● 가슴サイズ分岐
+					;● 胸サイズ分岐
 					IF TALENT:MASTER:빈유
 						PRINTFORM 아이 같은 몸을 숨기며, 
 					ELSEIF TALENT:MASTER:거유 || TALENT:MASTER:폭유
@@ -13776,7 +13773,7 @@ SELECTCASE TFLAG:13
 						PRINTFORM  자그마한 몸을 헐떡거리면서, 
 					ENDIF
 				ELSEIF TALENT:MASTER:큰체형 || TALENT:MASTER:거체 && TALENT:MASTER:남자 == 1
-					;● 가슴サイズ分岐
+					;● 胸サイズ分岐
 					IF TALENT:MASTER:빈유
 						PRINTFORM 날씬한 체구에서 유유히 걷고 
 					ELSEIF TALENT:MASTER:거유 || TALENT:MASTER:폭유
@@ -13786,8 +13783,8 @@ SELECTCASE TFLAG:13
 						PRINTFORM 날씬한 체구에서 유유히 걷고 
 					ENDIF
 				ELSE
-					;普通の체격
-					;● 가슴サイズ分岐
+					;普通の体格
+					;● 胸サイズ分岐
 					IF TALENT:MASTER:빈유
 						PRINTFORM 날씬한 몸이 자아내는 우아한 분위기를 풍기며
 					ELSEIF TALENT:MASTER:거유
@@ -13888,7 +13885,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -13915,7 +13912,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -13988,7 +13985,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -14016,7 +14013,7 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8)	
 					LOCALS:0 = 
 				ENDIF	
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					LOCALS:0 = 
 				ENDIF	
@@ -14073,7 +14070,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
@@ -14110,7 +14107,7 @@ SELECTCASE TFLAG:13
 					ELSEIF (TALENT:5 || TALENT:8)	
 						LOCALS:0 = 
 					ENDIF	
-					;함락완료共通	
+					;함락완료 공통	
 					IF LOCALS:0 == ""	
 						LOCALS:0 = 
 					ENDIF	
@@ -14182,7 +14179,7 @@ SELECTCASE TFLAG:13
 						LOCALS:0 = 
 					ENDIF	
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					;진행도 분기
 					;초회
@@ -14248,7 +14245,7 @@ SELECTCASE TFLAG:13
 						LOCALS:0 = 
 					ENDIF
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					;진행도 분기
 					;초회
@@ -14327,7 +14324,7 @@ SELECTCASE TFLAG:13
 						LOCALS:0 = 
 					ENDIF
 				ENDIF
-				;함락완료共通	
+				;함락완료 공통	
 				IF LOCALS:0 == ""	
 					;진행도 분기
 					;초회
@@ -14431,7 +14428,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				LOCALS:0 = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF LOCALS:0 == ""	
 				PRINTFORML 
 			ENDIF	
@@ -14451,7 +14448,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				LOCALS:0 = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF LOCALS:0 == ""	
 				PRINTFORML 
 			ENDIF	
@@ -14471,7 +14468,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				LOCALS:0 = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF LOCALS:0 == ""	
 				PRINTFORML 
 			ENDIF	
@@ -14491,7 +14488,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				LOCALS:0 = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF LOCALS:0 == ""	
 				PRINTFORML 
 			ENDIF	
@@ -14517,7 +14514,7 @@ SELECTCASE TFLAG:13
 			;	;복종 루트
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				PRINTFORML 
 			ENDIF	
@@ -14610,7 +14607,7 @@ SELECTCASE TFLAG:13
 		;;ＮＴＲ요바이・애널
 		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;CFLAG:애널횟수가 1 이상이면 삽입당하고, CFLAG:삽입횟수가 1 이상면 삽입하고 있습니다.
-		;両方立っている場合は、地の아야では入れられている側が優先されます。
+		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
 		;-------------------------------------------------
 	CASE 60
 		CALL EVENT_MESSAGE
@@ -14669,14 +14666,14 @@ SELECTCASE TFLAG:13
 		CALL EVENT_MESSAGE
 		IF (CFLAG:602 < 1 || FLAG:7 == 2)
 			IF NO:PLAYER == 3501
-				;당신が母親
+				;あなたが母親
 				IF MASTER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					IF TALENT:4 || TALENT:7
 						PRINTFORMW 자기 아이에게 범해지는 기쁨에 %조사처리(CALLNAME:MASTER,"는")% 흥분하고 있다…
 					ELSE
 						PRINTFORMW %CALLNAME:PLAYER%의 성욕처리를 하는 것도 어머니의 일이라고 스스로를 떠올리며 몸을 맡겼다…
 					ENDIF
-				;당신が父親
+				;あなたが父親
 				ELSEIF MASTER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					IF TALENT:4 || TALENT:7
 						PRINTFORMW 자기 아이에게 범해지는 기쁨에 %조사처리(CALLNAME:MASTER,"는")% 흥분하고 있다…
@@ -14688,62 +14685,64 @@ SELECTCASE TFLAG:13
 			ENDIF
 			CFLAG:602 = 1
 		ENDIF
-	;-------------------------------------------------
-	;;던전内성욕처리：仲魔に봉사してもらう(봉사側)
-	;PLAYER에 실행자의 번호가 들어있습니다
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사하는 쪽
+		;PLAYER에 실행자의 번호가 들어있습니다
+		;-------------------------------------------------
 	CASE 80
 		CALL EVENT_MESSAGE
 		IF (CFLAG:603 < 1 || FLAG:7 == 2)
 			PRINTFORML 
 			CFLAG:603 = 1
 		ENDIF
-	;-------------------------------------------------
-	;;던전内성욕처리：その場で자위
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：그 장소에서 자위
+		;봉사하는 쪽
+		;-------------------------------------------------
 	CASE 81
 		CALL EVENT_MESSAGE
 		IF (CFLAG:604 < 1 || FLAG:7 == 2)
 			PRINTFORML 
 			CFLAG:604 = 1
 		ENDIF
-	;-------------------------------------------------
-	;던전内성욕처리：物陰で자위
-	;봉사하는 쪽
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：그늘에서 자위
+		;봉사하는 쪽
+		;-------------------------------------------------
 	CASE 82
 		CALL EVENT_MESSAGE
 		IF (CFLAG:605 < 1 || FLAG:7 == 2)
 			PRINTFORML 
 			CFLAG:605 = 1
 		ENDIF
-	;-------------------------------------------------
-	;던전내 성욕처리：동료마와 섹스한다
-	;하는 쪽
-	;PLAYERに相手の번호が入っています
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마와 섹스한다
+		;하는 쪽
+		;PLAYER에 상대의 번호가 들어있습니다
+		;-------------------------------------------------
 	CASE 83
 		CALL EVENT_MESSAGE
 		IF (CFLAG:606 < 1 || FLAG:7 == 2)
 			PRINTFORML 
 			CFLAG:606 = 1
 		ENDIF
-	;-------------------------------------------------
-	;던전내 성욕처리：동료마에게 봉사시킨다
-	;봉사받는 쪽
-	;PLAYERに봉사하는 쪽の번호が入っています
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：동료마에게 봉사시킨다
+		;봉사받는 쪽
+		;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
+		;-------------------------------------------------
 	CASE 84
 		CALL EVENT_MESSAGE
 		IF (CFLAG:607 < 1 || FLAG:7 == 2)
-			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:PLAYER%に봉사させた
+			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:PLAYER%に奉仕させた
 			CFLAG:607 = 1
 		ENDIF
-	;-------------------------------------------------
-	;던전내 성욕처리：윤간이벤트
-	;봉사하는 쪽
-	;PLAYERに実行者=윤간する악마の번호が入っています
-	;-------------------------------------------------
+		;-------------------------------------------------
+		;던전내 성욕처리：윤간이벤트
+		;봉사하는 쪽
+		;PLAYER에 실행자 = 윤간하는 악마의 번호가 들어있습니다
+		;-------------------------------------------------
 	CASE 85
 		CALL EVENT_MESSAGE
 		IF (CFLAG:608 < 1 || FLAG:7 == 2)
@@ -14757,7 +14756,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 65
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14788,7 +14787,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						CFLAG:609 = 1
 					ENDIF
-				;가이아教会
+				;가이아 교회
 				CASE 14
 					;처음
 					IF CFLAG:610 == 0
@@ -14852,7 +14851,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14883,7 +14882,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						CFLAG:612 = 1
 					ENDIF
-				;가이아教会
+				;가이아 교회
 				CASE 14
 					;처음
 					IF CFLAG:613 == 0
@@ -14947,7 +14946,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14978,7 +14977,7 @@ SELECTCASE TFLAG:13
 						ENDIF
 						CFLAG:615 = 1
 					ENDIF
-				;가이아教会
+				;가이아 교회
 				CASE 14
 					;처음
 					IF CFLAG:616 == 0
@@ -15111,7 +15110,7 @@ ENDSELECT
 RETURN 0
 
 ;-------------------------------------------------
-;エンド本아야
+;엔딩 본문
 ;-------------------------------------------------
 @KOJO_MESSAGE_ENDING_K4999
 ;--------------------------------------------------
@@ -15186,7 +15185,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 3
-;아군パーティでの被소환時の台詞	
+;아군 파티에서의 피소환시의 대사	
 ;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -15195,7 +15194,7 @@ ENDIF
 
 @BATTLE_MESSAGE_K4999,ARG,ARG:1 = 0
 
-;選択したコマンドにより分岐させたい場合、IF아야の조건にコマンドNoを記入すること
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
 ;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;	PRINTFORML ┃%"",72,LEFT%┃
@@ -15224,7 +15223,7 @@ ENDIF
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;相手の약점を付いた공격or행동불능な상태이상の적に対する공격で、현명持ちの충성도が上昇
+;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"현명")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
@@ -15269,7 +15268,7 @@ ENDIF
 ;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
 ;ENDIF
 
-;당신専用
+;あなた専用
 @COLOR_PATTERN
 SELECTCASE RAND:18
 	CASE 0
@@ -15342,14 +15341,14 @@ SELECTCASE RAND:13
 ENDSELECT
 RETURN
 
-;痴漢이벤트
+;痴漢イベント
 @CHIKAN_MASTER
 IF TALENT:MASTER:남자
 RETURN
 ELSE
 
 
-;확률は低めに
+;確率は低めに
 IF RAND:100 < 1
 	PRINTFORMW 전철은 붐비고 있다…
 	PRINTFORMW %CALLNAME:MASTER% 뒤에서 밀착해 오는 남자가 있다…
@@ -15367,15 +15366,15 @@ IF RAND:100 < 1
 
 		IF RAND:100 < 45
 			PRINTFORMW 치한은 다른 장소에 이동한 것 같다
-		;별로(너무) 난폭하게 하면(자) 화나게 해버리는 일도 있지요 ,  반드시!
+		;あんまり乱暴にすると怒らせちゃうこともあるよね、きっと！
 		ELSE
 			PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 팔에 따끔하고 한 아픔을 느꼈다
 			PRINTFORMW 무슨 일인가 하고 되돌아 보려 했지만 시야가 희미해지며 급격한 현기증으로 서있지 못하고
 			PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 치한에게 기대듯이 의식을 잃었다…
 			PRINTFORMW 
-			PRINTFORMW ···
-			PRINTFORMW ··
-			PRINTFORMW ·
+			PRINTFORMW ・・・
+			PRINTFORMW ・・
+			PRINTFORMW ・
 			PRINTFORMW 
 			IF RAND:2 == 0
 				PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 낯선 방에서 의식을 되찾았다
@@ -15584,3 +15583,4 @@ IF RAND:100 < 1
 	ENDIF
 ENDIF
 RETURN
+

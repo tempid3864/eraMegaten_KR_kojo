@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;柳谷乙女구상
+;柳谷乙女口上
 ;-------------------------------------------------
 ;	◆ライセンスについて
 ;	+----+----+-------------------------------+
@@ -20,21 +20,21 @@
 ;	|   7| ○ | 口上内容の転載・流用          |
 ;	+----+----+-------------------------------+
 ;
-;	◆구상コンセプト
-;	・なるべく複数の구상を用意
-;	・定型文+회화文で数を水増し…できたらな…
-;		ファイルの最後に呼び出し구상を用意
-;	・お姉さんキャラをやってみたかった…23歳처녀？養子持ちだけど
-;		연모…욕정一定이상でお姉さん風を吹かす感じに
-;		음란…エロく崩したいけど、みさくら語を使いたくはない→放置中
-;		예속…
+;	◆口上コンセプト
+;	・なるべく複数の口上を用意
+;	・定型文+会話文で数を水増し…できたらな…
+;		ファイルの最後に呼び出し口上を用意
+;	・お姉さんキャラをやってみたかった…23歳処女？養子持ちだけど
+;		恋慕…欲情一定以上でお姉さん風を吹かす感じに
+;		淫乱…エロく崩したいけど、みさくら語を使いたくはない→放置中
+;		隷属…
 ;
-;	◆CFLAG사용 現在800-840と900-910（おおまかに）
+;	◆CFLAG使用 現在800-840と900-910（おおまかに）
 ;	・がちがちに使って順番を操作してます
 ;	・RANDでもよくね？…はじめてしまったので…RAND分岐たくさんあると「それはさっきみた」ってなりませんか
 ;
-;	◆그외
-;	・@EVENTTRAIN_K4608_2の下に이름記入欄を書きこんでます。CSTR:100に好きな이름をいれてください
+;	◆その他
+;	・@EVENTTRAIN_K4608_2の下に名前記入欄を書きこんでます。CSTR:100に好きな名前をいれてください
 ;	・どなたでもどんどん追記・改変してもらえたらうれしいです
 ;-------------------------------------------------
 
@@ -45,7 +45,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 乙女구상2
+PRINTFORML 乙女口上2
 ;구상설명문
 PRINTFORML  　
 ;--------------------------------------------------
@@ -119,7 +119,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	
 ;	IF CFLAG:전투참가불가능 == 0
 ;		DRAWLINE
-;		PRINTFORMW ※%NAME:TARGET%は%NAME:MASTER%への신뢰を失い、전투に참가しなくなります※
+;		PRINTFORMW ※%NAME:TARGET%は%NAME:MASTER%への信頼を失い、戦闘に参加しなくなります※
 ;		SIF CFLAG:포지션 > 0
 ;			CALL REMOVE_POSITION,CFLAG:포지션
 ;		CFLAG:전투참가불가능 = 1
@@ -1451,9 +1451,9 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「」
 					ELSE
 					;仮
-						PRINTFORMW 「…捕まった時から깨달음悟はしてたのよ」
+						PRINTFORMW 「…捕まった時から覚悟はしてたのよ」
 						PRINTFORMW 「これくらい…何でもないわ
-						PRINTFORMW %CALLNAME:MASTER%の가랑이を見る눈には공포が隠せない様子だったが、彼女は凛として言い放った
+						PRINTFORMW %CALLNAME:MASTER%の股間を見る目には恐怖が隠せない様子だったが、彼女は凛として言い放った
 					ENDIF
 				ENDIF
 			;그 이외
@@ -1503,7 +1503,7 @@ SELECTCASE SELECTCOM
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
 				;仮
 				PRINTFORMW %CALLNAME:MASTER%の抽挿に苦しげな表情の%CALLNAME:TARGET%…
-				PRINTFORMW しかし拒否も저항もせず、ひたすら行為の종료を願って고통に耐えているようだ
+				PRINTFORMW しかし拒否も抵抗もせず、ひたすら行為の終了を願って苦痛に耐えているようだ
 				PRINTFORMW （あの子…今頃どうしているかしら）
 				CFLAG:332 = 2
 			ENDIF
@@ -1599,9 +1599,9 @@ SELECTCASE SELECTCOM
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 				PRINTFORMW 「%CSTR:이인칭%……お尻って…どう？…」
 				PRINTFORMW 心配そうな瞳がこちらに向けらる
-				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき눈を細めた
+				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき目を細めた
 				PRINTFORMW 「…好きに動いてね…ン…気に…しなくていいから…んっ」
-				PRINTFORMW %CALLNAME:TARGET%의 声には苦悶と쾌락の色が入り混じっている
+				PRINTFORMW %CALLNAME:TARGET%の声には苦悶と快楽の色が入り混じっている
 			ELSE
 				PRINTFORMW 「お、お尻とか変態よっ…」
 				PRINTFORMW 顔を真っ赤にしつつ、%CALLNAME:TARGET%が非難してきた
@@ -1619,9 +1619,9 @@ SELECTCASE SELECTCOM
 					IF PALAM:욕정 >= PALAMLV:6
 						IF RAND:8 == 0 && TALENT:처녀
 							PRINTFORMW %CALLNAME:TARGET%は尻穴を犯され、すっかりめろめろになっていた
-							PRINTFORMW 「…まだ처녀なのにお尻が癖になってるなんて……%CSTR:101%にヘンタイうつされちゃったわ♪」
+							PRINTFORMW 「…まだ処女なのにお尻が癖になってるなんて……%CSTR:101%にヘンタイうつされちゃったわ♪」
 							PRINTFORMW 「ね、もっとお尻いじってぇ…」
-							PRINTFORMW %CALLNAME:TARGET%의 다리が%CALLNAME:MASTER%に絡みついてきた
+							PRINTFORMW %CALLNAME:TARGET%の脚が%CALLNAME:MASTER%に絡みついてきた
 							
 						ELSEIF B >= 100 || B <= 9
 							PRINTFORMW 「%CSTR:101%、お姉さんのお尻にお願いよ…」
@@ -1632,51 +1632,51 @@ SELECTCASE SELECTCOM
 						ELSEIF B == 10
 							PRINTFORMW 「あっ、ああっ、入ってきたわっ…」
 							PRINTFORMW 「お姉さんのお尻にたくさん出してねっ…」
-							PRINTFORMW M字に開いていた다리を%CALLNAME:MASTER%の腰に巻きつけると、せり上げるような動きを加え、幸せそうな表情をうかべて、陰茎をむさぼっている…
+							PRINTFORMW M字に開いていた脚を%CALLNAME:MASTER%の腰に巻きつけると、せり上げるような動きを加え、幸せそうな表情をうかべて、陰茎をむさぼっている…
 							CFLAG:900 = 20
 						ELSE
-							PRINTFORMW 「んっ…%CSTR:101%にはすっかり애널を躾けられてしまったわね♪…」
+							PRINTFORMW 「んっ…%CSTR:101%にはすっかりアナルを躾けられてしまったわね♪…」
 							PRINTFORMW 「%CSTR:이인칭%の形がはっきりわかるわぁ…熱い…」
 							PRINTFORMW 耳元での赤裸々な告白に、高ぶった%CALLNAME:MASTER%は尻孔を抉るようにつついてやった
 							CFLAG:900 = 100
 						ENDIF
 					ELSE
 						IF RAND:8 == 0 && TALENT:처녀
-							PRINTFORMW 恥ずかしげな%CALLNAME:TARGET%は순종に長身を寝そべらせて%CALLNAME:MASTER%を待っている
+							PRINTFORMW 恥ずかしげな%CALLNAME:TARGET%は従順に長身を寝そべらせて%CALLNAME:MASTER%を待っている
 							PRINTFORMW 甘く開かれた両膝を割り、陰茎を下の孔に押し付けた
 							PRINTFORMW 「%CSTR:이인칭%ったら、いつになったら%CSTR:일인칭%を女にしてくれるのかしらね……ね」
-							PRINTFORMW 白い손を伸ばし照準を変えようとする彼女を抑え、アヌスの中を押し進む
-							PRINTFORMW 「…ん…はぁ…ぁぁ♪…………%CSTR:이인칭%が조교したんじゃないっ♪」
+							PRINTFORMW 白い手を伸ばし照準を変えようとする彼女を抑え、アヌスの中を押し進む
+							PRINTFORMW 「…ん…はぁ…ぁぁ♪…………%CSTR:이인칭%が調教したんじゃないっ♪」
 							PRINTFORMW 何か言いたげな%CALLNAME:MASTER%を遮って、にらんできた…
 							
 						ELSEIF C >= 100 || C <= 9
 							PRINTFORMW 「この姿勢で…お尻なの、%CSTR:이인칭%？　%CSTR:일인칭%、何だか恥ずかしくて」
-							PRINTFORMW そんな%CALLNAME:TARGET%が可愛いと、上体を倒して가슴を押しつけ合わせ、顔を覆っている손の甲に키스を見舞う
-							PRINTFORMW そのまま애널を犯しながら、유방の感触を愉しんだ
-							PRINTFORMW 二人の가슴の間で、豊かに実った유방がひしゃげている
+							PRINTFORMW そんな%CALLNAME:TARGET%が可愛いと、上体を倒して胸を押しつけ合わせ、顔を覆っている手の甲にキスを見舞う
+							PRINTFORMW そのままアナルを犯しながら、乳房の感触を愉しんだ
+							PRINTFORMW 二人の胸の間で、豊かに実った乳房がひしゃげている
 							CFLAG:334 = 10
 						ELSEIF C == 10
 							PRINTFORMW 「するなら、前の方を……」
-							PRINTFORMW そう言う%CALLNAME:TARGET%だったが、アヌスを亀머리が押し広げ、肉槍が侵入してくると甘い声を上げた
-							PRINTFORMW 尻穴で感じる様を見られるのが恥ずかしいのか、%CALLNAME:TARGET%は両손で顔を隠して悶えている
+							PRINTFORMW そう言う%CALLNAME:TARGET%だったが、アヌスを亀頭が押し広げ、肉槍が侵入してくると甘い声を上げた
+							PRINTFORMW 尻穴で感じる様を見られるのが恥ずかしいのか、%CALLNAME:TARGET%は両手で顔を隠して悶えている
 							CFLAG:334 = 20
 						ELSEIF C == 20
-							PRINTFORMW 恥ずかしげな%CALLNAME:TARGET%は순종に長身を寝そべらせて%CALLNAME:MASTER%を待っている
-							PRINTFORMW 甘く開かれた両膝を割り、待ちわびるアヌスを亀머리の先に持ってきた
-							PRINTFORMW 「この瞬間っていまだにドキドキしちゃうわ…애널섹스って저항あったのよね♪」
+							PRINTFORMW 恥ずかしげな%CALLNAME:TARGET%は従順に長身を寝そべらせて%CALLNAME:MASTER%を待っている
+							PRINTFORMW 甘く開かれた両膝を割り、待ちわびるアヌスを亀頭の先に持ってきた
+							PRINTFORMW 「この瞬間っていまだにドキドキしちゃうわ…アナルセックスって抵抗あったのよね♪」
 							PRINTFORMW 「大…きい…ふぅ…ゆっくりお願いね……そこぉ」
 							CFLAG:334 = 30
 						ELSEIF C == 30
 							PRINTFORMW 「ンっ…っはぁぅ…前からされると…一番愛されてる気がするわ…お尻にされてるのにね♪」
-							PRINTFORMW %CALLNAME:TARGET%は夢見るような顔になり、自分が包んだものを味わい、両손を%CALLNAME:MASTER%の尻に差し回してきた…
+							PRINTFORMW %CALLNAME:TARGET%は夢見るような顔になり、自分が包んだものを味わい、両手を%CALLNAME:MASTER%の尻に差し回してきた…
 							CALL ASEX_DEPICTION
 							CFLAG:334 = 40
 						ELSE 
 							PRINTFORMW 「あふぅ……響いて…%CSTR:이인칭%…大好き♪」
-							PRINTFORMW 抽挿を繰り返すにつれ、%CALLNAME:TARGET%はイキそうになる寸前の、切날개詰まった表情をみせ、腰をぐっと持ち上げて応えてきた。
+							PRINTFORMW 抽挿を繰り返すにつれ、%CALLNAME:TARGET%はイキそうになる寸前の、切羽詰まった表情をみせ、腰をぐっと持ち上げて応えてきた。
 							PRINTFORMW 尻を嫌がってたはずの%CALLNAME:TARGET%はどこへやら…積極的なことで喜ばしい
 							IF TALENT:처녀
-								PRINTFORMW 「誰のせいだと思ってるのよっ…お尻しか弄らないくせにっ…いまだに%CSTR:일인칭%처녀なのよ…（／／／」
+								PRINTFORMW 「誰のせいだと思ってるのよっ…お尻しか弄らないくせにっ…いまだに%CSTR:일인칭%処女なのよ…（／／／」
 							ELSE
 								PRINTFORMW 「誰のせいだと思ってるのよっ…それに、お…お尻のほうが…（／／／」
 							ENDIF
@@ -1687,22 +1687,22 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:8 == 0 && TALENT:처녀
 						PRINTFORMW %CALLNAME:TARGET%は尻穴を犯され、すっかりめろめろになっていた
-						PRINTFORMW 「…처녀なのに애널섹스が癖になっちゃったわぁ……%CSTR:101%のヘンタイがうつったのね」
-						PRINTFORMW 「애널にどんどん出して、ねっ、%CSTR:이인칭%♪…ぁん…そこ、そこぉっ♪」
+						PRINTFORMW 「…処女なのにアナルセックスが癖になっちゃったわぁ……%CSTR:101%のヘンタイがうつったのね」
+						PRINTFORMW 「アナルにどんどん出して、ねっ、%CSTR:이인칭%♪…ぁん…そこ、そこぉっ♪」
 						CALL ASEX_DEPICTION
 						
 					ELSEIF C >= 100 || C <= 9
 						PRINTFORMW 「あっ、ああっ、入ってきたわっ…」
-						PRINTFORMW 「もっとお尻ズコズコして、いっぱい정액出してね！」
-						PRINTFORMW M字に開いていた다리を%CALLNAME:MASTER%の腰に巻きつけると、せり上げるような動きを加え、幸せそうな表情をうかべて、陰茎をむさぼっている…
+						PRINTFORMW 「もっとお尻ズコズコして、いっぱい精液出してね！」
+						PRINTFORMW M字に開いていた脚を%CALLNAME:MASTER%の腰に巻きつけると、せり上げるような動きを加え、幸せそうな表情をうかべて、陰茎をむさぼっている…
 						CFLAG:334 = 10
 					ELSEIF C == 10
-						PRINTFORMW 애널の名器ぶりを褒めると熱っぽいため息をつき、にんまり顔をほころばせた
-						PRINTFORMW 「당신が開発したんじゃないのっ…嫌だっていったのにしつこくしつこくいじってきて♪…すっかり躾けられちゃったわ」
-						PRINTFORMW 「好きに動いてね……これでも당신の奴隷なのよ？」
+						PRINTFORMW アナルの名器ぶりを褒めると熱っぽいため息をつき、にんまり顔をほころばせた
+						PRINTFORMW 「あなたが開発したんじゃないのっ…嫌だっていったのにしつこくしつこくいじってきて♪…すっかり躾けられちゃったわ」
+						PRINTFORMW 「好きに動いてね……これでもあなたの奴隷なのよ？」
 						CFLAG:334 = 20
 					ELSE
-						PRINTFORMW 「もっとぉ、もっと애널をファックしてぇ…」
+						PRINTFORMW 「もっとぉ、もっとアナルをファックしてぇ…」
 						PRINTFORMW 直腸深くまで突き入れられる肉茎を貪る%CALLNAME:TARGET%…
 						PRINTFORMW まるで性器のように絡みつく腸壁に、先走りが漏れる
 						PRINTFORMW 「あぅっ、今MAGを感じたわ！…」
@@ -1738,9 +1738,9 @@ SELECTCASE SELECTCOM
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 				PRINTFORMW 「%CSTR:이인칭%……お尻って…どう？…」
 				PRINTFORMW 心配そうな瞳がこちらに向けらる
-				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき눈を細めた
+				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき目を細めた
 				PRINTFORMW 「…好きに動いてね…ン…気に…しなくていいから…んっ」
-				PRINTFORMW %CALLNAME:TARGET%의 声には苦悶と쾌락の色が入り混じっている
+				PRINTFORMW %CALLNAME:TARGET%の声には苦悶と快楽の色が入り混じっている
 			ELSE
 				PRINTFORMW 「お、お尻とか変態よっ…」
 				PRINTFORMW 顔を真っ赤にしつつ、%CALLNAME:TARGET%が非難してきた
@@ -1758,12 +1758,12 @@ SELECTCASE SELECTCOM
 					IF PALAM:욕정 >= PALAMLV:6
 						IF RAND:8 == 0 && TALENT:처녀
 						;推敲
-							PRINTFORMW 「ん、んんっ♪　처녀なのに、애널で…섹스してるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%の페니스を尻穴で貪っている…
+							PRINTFORMW 「ん、んんっ♪　処女なのに、アナルで…セックスしてるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
+							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%のペニスを尻穴で貪っている…
 							PRINTFORMW 「%CSTR:101%のも、いつもより…大きい…♪　ん、んんっ、ぁっ、すご、い…ぃ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、まるで別人のように乱れ、%CALLNAME:MASTER%の페니스を締め付けてくる…
+							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、まるで別人のように乱れ、%CALLNAME:MASTER%のペニスを締め付けてくる…
 							PRINTFORMW 「はぁー、はぁっ♪　%CSTR:이인칭%…もっと、はしたないことしましょ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%의 淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
+							PRINTFORMW %CALLNAME:TARGET%の淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
 						ELSEIF B >= 100 || B <= 9
 							PRINTFORMW 延々と尻穴を突かれ、%CALLNAME:TARGET%はすっかり出来上がっていた
 							PRINTFORMW 「はぁ～、あはぁぁ～～、凄い、お尻が感じるの…」
@@ -1774,35 +1774,35 @@ SELECTCASE SELECTCOM
 					;연모のみ
 					ELSE
 						IF RAND:8 == 0 && TALENT:처녀
-							PRINTFORMW 「ンんっ…%CSTR:이인칭%…처녀ももらってよぅ」
-							PRINTFORMW 처녀のまま애널でよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
+							PRINTFORMW 「ンんっ…%CSTR:이인칭%…処女ももらってよぅ」
+							PRINTFORMW 処女のままアナルでよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
 							PRINTFORMW 「（／／／…%CSTR:101%のヘンタイっ♪……あふっ」
-							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた눈で睨まれると、甘い声でなじられた
+							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた目で睨まれると、甘い声でなじられた
 							
 						ELSEIF C >= 100 || C <= 9
-							PRINTFORMW %CALLNAME:TARGET%의 애널に後ろから挿入しようとしたところ、戯れに這いずって逃げようとした
+							PRINTFORMW %CALLNAME:TARGET%のアナルに後ろから挿入しようとしたところ、戯れに這いずって逃げようとした
 							PRINTFORMW 「%CSTR:이인칭%ったらそちらばかりなんですもの」
-							PRINTFORMW 仕方ないので上から圧し掛かり、날개交い絞めにするといささか強引に挿入してやった
+							PRINTFORMW 仕方ないので上から圧し掛かり、羽交い絞めにするといささか強引に挿入してやった
 							PRINTFORMW 「きゃああっ！？　あ、あうっ、い、あああん…」
 							CFLAG:335 = 10
 						ELSEIF C == 10
-							PRINTFORMW 머리を沈め、尻を高く上げた%CALLNAME:TARGET%의 背中には、ぬかづいた女のなまめかしい曲線が映し出されている…
-							PRINTFORMW うつ伏せの尻たぶに손をのばし、両の丘を左右に押しひろげ、욕정にゆるむアヌスを嬲るように味わった
+							PRINTFORMW 頭を沈め、尻を高く上げた%CALLNAME:TARGET%の背中には、ぬかづいた女のなまめかしい曲線が映し出されている…
+							PRINTFORMW うつ伏せの尻たぶに手をのばし、両の丘を左右に押しひろげ、欲情にゆるむアヌスを嬲るように味わった
 							PRINTFORMW 「…あ、あぁ…お尻が、%CSTR:이인칭%でいっぱいに……ンぁぁ…っ！」
 							PRINTFORMW %CALLNAME:TARGET%は長身をくねらせ身悶えている
 							CFLAG:335 = 20
 						ELSEIF C == 20
 							PRINTFORMW 眼下の白い背中にはさざ波が走り、艶めかしい色気が醸し出されていた
-							PRINTFORMW 「きゃっ…んンぅ…%CSTR:이인칭%の손温かい…気持ちいいわ…もっと撫でて下さい…」
-							PRINTFORMW 期待に応えてその背を撫でさする……なめらなか感触が손に心地よい
-							PRINTFORMW 尻を貫かれながら、背を這いまわる%CALLNAME:MASTER%の掌の감각にうっとりする%CALLNAME:TARGET%には、見惚れるほどの艶があった…
+							PRINTFORMW 「きゃっ…んンぅ…%CSTR:이인칭%の手温かい…気持ちいいわ…もっと撫でて下さい…」
+							PRINTFORMW 期待に応えてその背を撫でさする……なめらなか感触が手に心地よい
+							PRINTFORMW 尻を貫かれながら、背を這いまわる%CALLNAME:MASTER%の掌の感覚にうっとりする%CALLNAME:TARGET%には、見惚れるほどの艶があった…
 							CFLAG:335 = 30
 						ELSE 
 							PRINTFORMW 「…ぁ…ぅ…」
-							PRINTFORMW 後ろのすぼまりに페니스を押し当てると、%CALLNAME:TARGET%は期待に高まった声を発する
-							PRINTFORMW 望みどおり、ヒップを손で固定し腰を進めていく
+							PRINTFORMW 後ろのすぼまりにペニスを押し当てると、%CALLNAME:TARGET%は期待に高まった声を発する
+							PRINTFORMW 望みどおり、ヒップを手で固定し腰を進めていく
 							PRINTFORMW 「あ、んン……くぅ♪…ふぅぅぅぅ」
-							PRINTFORMW %CALLNAME:TARGET%が長い息をつき終わると、直腸の狭い内壁が페니스をぐいぐいと締め付けてきた
+							PRINTFORMW %CALLNAME:TARGET%が長い息をつき終わると、直腸の狭い内壁がペニスをぐいぐいと締め付けてきた
 							CFLAG:335 = 100
 						ENDIF
 					ENDIF
@@ -1810,31 +1810,31 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:8 == 0 && TALENT:처녀
 						PRINTFORMW %CALLNAME:TARGET%は尻穴を犯され、すっかりめろめろになっていた
-						PRINTFORMW 「…처녀なのに애널섹스が癖になっちゃったわぁ……%CSTR:101%のヘンタイがうつったのね」
-						PRINTFORMW 「애널にどんどん出して、ねっ、%CSTR:이인칭%♪…ぁん…そこ、そこぉっ♪」
+						PRINTFORMW 「…処女なのにアナルセックスが癖になっちゃったわぁ……%CSTR:101%のヘンタイがうつったのね」
+						PRINTFORMW 「アナルにどんどん出して、ねっ、%CSTR:이인칭%♪…ぁん…そこ、そこぉっ♪」
 						CALL ASEX_DEPICTION
 						
 					ELSEIF C >= 100 || C <= 9
 						PRINTFORMW 「%CSTR:이인칭%、ケダモノみたいにバックから犯して…ね…」
-						PRINTFORMW 後ろ손に女の部分を広げ、尻を振りながら誘う%CALLNAME:TARGET%…
-						PRINTFORMW 意地悪したい気持ちになった%CALLNAME:MASTER%は、膣입に陰茎を押し当て擦り付けると、そのまま挿入する振りをしてすっと애널を貫いた
+						PRINTFORMW 後ろ手に女の部分を広げ、尻を振りながら誘う%CALLNAME:TARGET%…
+						PRINTFORMW 意地悪したい気持ちになった%CALLNAME:MASTER%は、膣口に陰茎を押し当て擦り付けると、そのまま挿入する振りをしてすっとアナルを貫いた
 						PRINTFORMW 
 						PRINTFORMW 「あああっ！？　そっちじゃないのに！」
 						PRINTFORMW 「…いい…はぁっ…あふっ…ンンっ♪…」
-						PRINTFORMW 場所に不満げな%CALLNAME:TARGET%의 声は、しかしあっという間に蕩けた…
+						PRINTFORMW 場所に不満げな%CALLNAME:TARGET%の声は、しかしあっという間に蕩けた…
 						CFLAG:335 = 10
 					ELSEIF C == 10
-						PRINTFORMW 「あ、あぁぁ……♪　わ、%CSTR:일인칭%…%CSTR:이인칭%のイヌにされてるの！♪･･･あぅ･･･ンっ･･･素적♪」
-						PRINTFORMW その言葉どおり、짐승の姿勢の%CALLNAME:TARGET%は不浄の穴を貫く剛棒に굴복し、奥へ奥へと主人を迎え入れようと媚を売っている
-						PRINTFORMW %CALLNAME:MASTER%は情欲に震える%CALLNAME:TARGET%의 腰を掴むとその逆にゆっくりと引き抜いていく…
+						PRINTFORMW 「あ、あぁぁ……♪　わ、%CSTR:일인칭%…%CSTR:이인칭%のイヌにされてるの！♪･･･あぅ･･･ンっ･･･素敵♪」
+						PRINTFORMW その言葉どおり、獣の姿勢の%CALLNAME:TARGET%は不浄の穴を貫く剛棒に屈服し、奥へ奥へと主人を迎え入れようと媚を売っている
+						PRINTFORMW %CALLNAME:MASTER%は情欲に震える%CALLNAME:TARGET%の腰を掴むとその逆にゆっくりと引き抜いていく…
 						PRINTFORMW 
 						PRINTFORMW 「あっ、あぁ…っん･･･　抜かないで･･･まだ･･･やぁ･･･抜いちゃだめぇ♪･･･　いやぁ･･･」
-						PRINTFORMW 追い腰を使ってくる%CALLNAME:TARGET%を押しとどめ、抜ける直前まで引いた腰をふたたび애널の最奥まで撃ち貫いてやった…
+						PRINTFORMW 追い腰を使ってくる%CALLNAME:TARGET%を押しとどめ、抜ける直前まで引いた腰をふたたびアナルの最奥まで撃ち貫いてやった…
 						PRINTFORMW 「んはぁ……あっ、お尻がっ、ああっ！！ おかしくなる……ああぁぁぁっ！」
 						CFLAG:335 = 20
 					ELSE
 						PRINTFORMW 「%CSTR:101%…♪　もっと、もっと…してぇ･･･　%CSTR:일인칭%のケツ穴、おチンポでズポズポなぶってぇ…っ♪」
-						PRINTFORMW 淫語たっぷりに自ら尻肉を割り開きおねだりをする%CALLNAME:TARGET%의 姿に、%CALLNAME:MASTER%は눈の眩むような욕정を感じ、荒々しく腰を動かし始めた…
+						PRINTFORMW 淫語たっぷりに自ら尻肉を割り開きおねだりをする%CALLNAME:TARGET%の姿に、%CALLNAME:MASTER%は目の眩むような欲情を感じ、荒々しく腰を動かし始めた…
 						CALL ASEX_DEPICTION
 						CFLAG:335 = 100
 					ENDIF
@@ -2014,9 +2014,9 @@ SELECTCASE SELECTCOM
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 				PRINTFORMW 「%CSTR:이인칭%……お尻って…どう？…」
 				PRINTFORMW 心配そうな瞳がこちらに向けらる
-				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき눈を細めた
+				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき目を細めた
 				PRINTFORMW 「…好きに動いてね…ン…気に…しなくていいから…んっ」
-				PRINTFORMW %CALLNAME:TARGET%의 声には苦悶と쾌락の色が入り混じっている
+				PRINTFORMW %CALLNAME:TARGET%の声には苦悶と快楽の色が入り混じっている
 			ELSE
 				PRINTFORMW 「お、お尻とか変態よっ…」
 				PRINTFORMW 顔を真っ赤にしつつ、%CALLNAME:TARGET%が非難してきた
@@ -2033,21 +2033,21 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					IF PALAM:욕정 >= PALAMLV:6
 						IF RAND:8 == 0 && TALENT:처녀
-							PRINTFORMW 「ん、んんっ♪　처녀なのに、애널で…섹스してるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%の페니스を尻穴で貪っている…
+							PRINTFORMW 「ん、んんっ♪　処女なのに、アナルで…セックスしてるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
+							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%のペニスを尻穴で貪っている…
 							PRINTFORMW 「%CSTR:101%のも、いつもより…大きい…♪　ん、んんっ、ぁっ、すご、い…ぃ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、まるで別人のように乱れ、%CALLNAME:MASTER%の페니스を締め付けてくる…
+							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、まるで別人のように乱れ、%CALLNAME:MASTER%のペニスを締め付けてくる…
 							PRINTFORMW 「はぁー、はぁっ♪　%CSTR:이인칭%…もっと、はしたないことしましょ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%의 淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
+							PRINTFORMW %CALLNAME:TARGET%の淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
 							
 						ELSEIF B >= 100 || B <= 9
 							PRINTFORMW %CALLNAME:TARGET%は前後に尻を押し込むように揺らしながら、%CALLNAME:MASTER%の反応を楽しんでいる
 							PRINTFORMW 「ふふっ、ビクビクさせちゃって…%CSTR:101%可愛い♪」
-							PRINTFORMW 「…ん…まだまだ、あぅっ…お姉さんの…애널で…気持ちよくなってね…はふっ♪」
-							PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の손をとり指を絡めると、손綱を握った騎손の様に다리をばたつかせて来た
+							PRINTFORMW 「…ん…まだまだ、あぅっ…お姉さんの…アナルで…気持ちよくなってね…はふっ♪」
+							PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の手をとり指を絡めると、手綱を握った騎手の様に脚をばたつかせて来た
 							CFLAG:902 = 10
 						ELSE
-							PRINTFORMW 「ぅぅぁ…奥まで…はいってるわ♪…애널…いい……ッ……」
+							PRINTFORMW 「ぅぅぁ…奥まで…はいってるわ♪…アナル…いい……ッ……」
 							PRINTFORMW 「…お姉さんもうイってしまいそうよ…でも…」
 							PRINTFORMW お互い相手を先にのしてしまおうと、はげしくまぐわい、二人はともに高みにのぼっていった…
 							CFLAG:902 = 100
@@ -2056,9 +2056,9 @@ SELECTCASE SELECTCOM
 					ELSE
 						IF RAND:8 == 0 && TALENT:처녀
 							PRINTFORMW 「ンんっ…%CSTR:이인칭%…前には興味ないの？」
-							PRINTFORMW 처녀のまま애널でよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
+							PRINTFORMW 処女のままアナルでよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
 							PRINTFORMW 「（／／／…%CSTR:101%のヘンタイっ♪……あふっ」
-							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた눈で睨まれると、甘い声でなじられた
+							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた目で睨まれると、甘い声でなじられた
 
 						ELSEIF C >= 100 || C <= 9
 							PRINTFORMW 「あぁっ…ひっ……」
@@ -2070,27 +2070,27 @@ SELECTCASE SELECTCOM
 						ELSEIF C == 10
 						;推敲
 							PRINTFORMW 「…ァ…気持ちよくなってね…っはぁっ」
-							PRINTFORMW 가슴に손をつくと、腰を前後にしゃくるように揺すってきた…
+							PRINTFORMW 胸に手をつくと、腰を前後にしゃくるように揺すってきた…
 							CALL ASEX_DEPICTION
 							CFLAG:339 = 20
 						ELSEIF C == 20
 							PRINTFORMW 「跨って、お尻でしろって？%CSTR:101%、相変わらず好きねぇ」
-							PRINTFORMW %CALLNAME:MASTER%の눈の前で艶めかしく가랑이を開き、艶然とほほ笑むと尻をおとしてきた
+							PRINTFORMW %CALLNAME:MASTER%の目の前で艶めかしく股間を開き、艶然とほほ笑むと尻をおとしてきた
 							PRINTFORMW 直腸が陰茎を深く深くとらえている
 							PRINTFORML 
 							PRINTFORMW 息を整え、%CALLNAME:MASTER%を悦ばそうと前後左右に腰をゆする%CALLNAME:TARGET%…
-							PRINTFORMW 애널섹스で순종に尽くされるさまは、もたらされる性感はもちろん、下から眺めるだけでも十分に愉しめた
+							PRINTFORMW アナルセックスで従順に尽くされるさまは、もたらされる性感はもちろん、下から眺めるだけでも十分に愉しめた
 							PRINTFORMW 「はぁっ、はぁっ、んっ…くはぁ…」
-							PRINTFORMW 疲労ではない何かの理由で%CALLNAME:TARGET%의 呼吸が乱れてきた
+							PRINTFORMW 疲労ではない何かの理由で%CALLNAME:TARGET%の呼吸が乱れてきた
 							CFLAG:339 = 30
 						ELSE
 							IF RAND:5
 								PRINTFORMW 「っはぁ、…ンンっっ、これでも練習してみたのよ、いかがかしら？」……お尻好きの%CSTR:101%？」
-								PRINTFORMW 陰茎を咀嚼するかのように喰いしめ、사정感を刺激してくる기교に%CALLNAME:MASTER%は思わず声をあげた
+								PRINTFORMW 陰茎を咀嚼するかのように喰いしめ、射精感を刺激してくる技巧に%CALLNAME:MASTER%は思わず声をあげた
 								PRINTFORMW 「喜んでもらえて何よりよ♪…ふふっ…たっぷりお尻で搾り出して上げるわね♪%CSTR:이인칭%？…ン…ひゃぅっ♪」
 							ELSE
-								PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の가슴に손をあて、立てた両膝だけで身体をささえると、尻を落とした
-								PRINTFORMW 애널が陰茎をしなやかに、なめらかに包み込んでいく…
+								PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の胸に手をあて、立てた両膝だけで身体をささえると、尻を落とした
+								PRINTFORMW アナルが陰茎をしなやかに、なめらかに包み込んでいく…
 								PRINTFORML 
 								PRINTFORMW しかし%CALLNAME:TARGET%は言われるがまま、ねぶるように上下する尻たぶを%CALLNAME:MASTER%にあずけていない
 								PRINTFORMW 尻丘を浮かせたままに踏ん張り、出入りするたびに濡れていく肉茎がしっかり見て取れた
@@ -2098,10 +2098,10 @@ SELECTCASE SELECTCOM
 								PRINTFORMW 開いた両膝の間から、ぬらつく結合部と丸見えの女陰を、凝視される羞恥で%CALLNAME:TARGET%は頬を朱に染めている
 								PRINTFORMW 「そんなに見ないで…ンン…%CSTR:이인칭%…この格好…恥ずかし…すぎるわ…ぁっ」
 								PRINTFORML 
-								PRINTFORMW そう言いながらも、%CALLNAME:MASTER%の指示通りに尻を乗せずに봉사しつづける%CALLNAME:TARGET%…
-								PRINTFORMW いじらしい%CALLNAME:TARGET%의 女芯は、痴態を晒しているからか、何も触れてないにもかかわらず、しとどに濡れてきている
-								PRINTFORMW ただ애널のみで尽くされていることは、思いのほか具合がよく、%CALLNAME:TARGET%의 はしたない姿態も아이まって、%CALLNAME:MASTER%の머리を灼いた
-								PRINTFORMW %CALLNAME:TARGET%의 動きに合わせて、下からお返ししてやった
+								PRINTFORMW そう言いながらも、%CALLNAME:MASTER%の指示通りに尻を乗せずに奉仕しつづける%CALLNAME:TARGET%…
+								PRINTFORMW いじらしい%CALLNAME:TARGET%の女芯は、痴態を晒しているからか、何も触れてないにもかかわらず、しとどに濡れてきている
+								PRINTFORMW ただアナルのみで尽くされていることは、思いのほか具合がよく、%CALLNAME:TARGET%のはしたない姿態もあいまって、%CALLNAME:MASTER%の頭を灼いた
+								PRINTFORMW %CALLNAME:TARGET%の動きに合わせて、下からお返ししてやった
 							ENDIF
 							CFLAG:339 = 100
 						ENDIF
@@ -2109,26 +2109,26 @@ SELECTCASE SELECTCOM
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:8 == 0 && TALENT:처녀
-						PRINTFORMW 「ん、んんっ♪　처녀なのに、애널で…섹스してるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
-						PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%の페니스を尻穴で貪っている…
+						PRINTFORMW 「ん、んんっ♪　処女なのに、アナルで…セックスしてるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
+						PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%のペニスを尻穴で貪っている…
 						PRINTFORMW 「%CSTR:101%のも、いつもより…大きい…♪　ん、んんっ、ぁっ、すご、い…ぃ…っ♪」
-						PRINTFORMW %CALLNAME:TARGET%は背を逸らし、%CALLNAME:MASTER%の페니스を締め付けてくる…
+						PRINTFORMW %CALLNAME:TARGET%は背を逸らし、%CALLNAME:MASTER%のペニスを締め付けてくる…
 						PRINTFORMW 「はぁー、はぁっ♪　%CSTR:이인칭%…もっと、はしたないことしましょ…っ♪」
-						PRINTFORMW %CALLNAME:TARGET%의 淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
+						PRINTFORMW %CALLNAME:TARGET%の淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
 						
 					ELSEIF C >= 100 || C <= 9
 						PRINTFORMW 「あぁっ……ぃぃっ♪」
-						PRINTFORMW 一突き一突きに身体を反応させる%CALLNAME:TARGET%의 腸内は、突き入れるたびに締め付けを増していく…
-						PRINTFORMW 「애널が…%CSTR:이인칭%のオチンチン美味しいって♪」
-						PRINTFORMW 馬乗りの%CALLNAME:TARGET%は애널が捲り上がりそうなくらいに自ら腰を動かした…
+						PRINTFORMW 一突き一突きに身体を反応させる%CALLNAME:TARGET%の腸内は、突き入れるたびに締め付けを増していく…
+						PRINTFORMW 「アナルが…%CSTR:이인칭%のオチンチン美味しいって♪」
+						PRINTFORMW 馬乗りの%CALLNAME:TARGET%はアナルが捲り上がりそうなくらいに自ら腰を動かした…
 						PRINTFORMW 「はぁっ、お、おかしくなっちゃう…%CSTR:이인칭%のオチンチン、よすぎるわっ♪」
 						CFLAG:339 = 10
 					ELSE
 						PRINTFORMW 「もっと、もっと♪　奥まで愛してぇッ♪」
-						PRINTFORMW 後ろに손をついて애널に重心を移すと、淫らに尻をうちつけにかかる%CALLNAME:TARGET%…
-						PRINTFORMW M字に割かれた膝が、抽挿の度にびくびくと震え、真ん中には애널からの刺激に膣孔が綻んでいる…
+						PRINTFORMW 後ろに手をついてアナルに重心を移すと、淫らに尻をうちつけにかかる%CALLNAME:TARGET%…
+						PRINTFORMW M字に割かれた膝が、抽挿の度にびくびくと震え、真ん中にはアナルからの刺激に膣孔が綻んでいる…
 						PRINTFORMW 「あっ、あぁぁっ♪　いい、気持ちいいわ！　ぁぁぅ…あたってるの…んんっ、んぁ、ぁぁっ♪」
-						PRINTFORMW %CALLNAME:MASTER%と%CALLNAME:TARGET%は、激しくまぐわい、페니스を締め付ける쾌感を、直腸を突かれる쾌락を思い思いに愉しんだ
+						PRINTFORMW %CALLNAME:MASTER%と%CALLNAME:TARGET%は、激しくまぐわい、ペニスを締め付ける快感を、直腸を突かれる快楽を思い思いに愉しんだ
 						CFLAG:339 = 100
 					ENDIF
 				;복종, 예속
@@ -2333,9 +2333,9 @@ SELECTCASE SELECTCOM
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 				PRINTFORMW 「%CSTR:이인칭%……お尻って…どう？…」
 				PRINTFORMW 心配そうな瞳がこちらに向けらる
-				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき눈を細めた
+				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき目を細めた
 				PRINTFORMW 「…好きに動いてね…ン…気に…しなくていいから…んっ」
-				PRINTFORMW %CALLNAME:TARGET%의 声には苦悶と쾌락の色が入り混じっている
+				PRINTFORMW %CALLNAME:TARGET%の声には苦悶と快楽の色が入り混じっている
 			ELSE
 				PRINTFORMW 「お、お尻とか変態よっ…」
 				PRINTFORMW 顔を真っ赤にしつつ、%CALLNAME:TARGET%が非難してきた
@@ -2354,93 +2354,93 @@ SELECTCASE SELECTCOM
 						IF RAND:8 == 0 && TALENT:처녀
 						;推敲
 							PRINTFORMW 「%CSTR:101%のミルクをたっぷり出して、お尻の中をべとべとにしてねっ♪」
-							PRINTFORMW 「오토코노코でも임신するくらいですもの、처녀の%CSTR:일인칭%が임신してもおかしくないわよね」
-							PRINTFORMW 尻を犯されながら、いたずらげな눈で睨んでくる%CALLNAME:TARGET%…
-							PRINTFORMW 처녀のまま애널섹스にこだわる%CALLNAME:MASTER%へのあてつけなのだろう
+							PRINTFORMW 「男の娘でも妊娠するくらいですもの、処女の%CSTR:일인칭%が妊娠してもおかしくないわよね」
+							PRINTFORMW 尻を犯されながら、いたずらげな目で睨んでくる%CALLNAME:TARGET%…
+							PRINTFORMW 処女のままアナルセックスにこだわる%CALLNAME:MASTER%へのあてつけなのだろう
 							
 						ELSEIF B >= 100 || B <= 9
 							PRINTFORMW 「%CSTR:이인칭%ぁ…はぁ、はぁ…もっと抱きしめて…ん、んぐ…っ！　くは……っ！」
-							PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%의 反応を窺いながら、ゆっくりと腰を進め始めていく…
+							PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の反応を窺いながら、ゆっくりと腰を進め始めていく…
 							PRINTFORMW 「あ……ぁぁ…く、ぅ…感じるわぁ…っ♪　ん、んん…んぐ、くぅ、奥まで、おちんちんががきて、る…っ」
 							IF TALENT:남자 == 0
-								PRINTFORMW 二人の豊かな가슴はなまめかしく寄り添っていて、四つの유방が애널を穿つ腰の動きに翻弄されていた
+								PRINTFORMW 二人の豊かな胸はなまめかしく寄り添っていて、四つの乳房がアナルを穿つ腰の動きに翻弄されていた
 							ELSE 
-								PRINTFORMW 二人の間で%CALLNAME:TARGET%의 유방が押しつぶされ、애널を穿つ腰の動きに翻弄されていた
+								PRINTFORMW 二人の間で%CALLNAME:TARGET%の乳房が押しつぶされ、アナルを穿つ腰の動きに翻弄されていた
 							ENDIF
 							CFLAG:903 = 10
 						ELSE
 							PRINTFORMW 「おしりぃっ！　お尻が良すぎるの！」
-							PRINTFORMW %CALLNAME:MASTER%に激しく尻を責められながら、%CALLNAME:TARGET%は自分の秘所を指でくちゅくちゅと弄び、자위している
+							PRINTFORMW %CALLNAME:MASTER%に激しく尻を責められながら、%CALLNAME:TARGET%は自分の秘所を指でくちゅくちゅと弄び、自慰している
 							PRINTFORMW 「%CSTR:101%、もっとお尻かき回して…早くぅ」
-							PRINTFORMW 切なげな声で항학を求める%CALLNAME:TARGET%には普段恥ずかしがっている姿など、微塵の面影すらない
+							PRINTFORMW 切なげな声で肛虐を求める%CALLNAME:TARGET%には普段恥ずかしがっている姿など、微塵の面影すらない
 							CFLAG:903 = 100
 						ENDIF
 					;연모のみ
 					ELSE
 						IF RAND:8 == 0 && TALENT:처녀
 						;推敲
-							PRINTFORMW 「ンんっ…%CSTR:이인칭%…처녀ももらってよぅ」
-							PRINTFORMW 처녀のまま애널でよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
+							PRINTFORMW 「ンんっ…%CSTR:이인칭%…処女ももらってよぅ」
+							PRINTFORMW 処女のままアナルでよがる%CALLNAME:TARGET%が愛らしくてたまらないのだと返す
 							PRINTFORMW 「（／／／…%CSTR:101%のヘンタイっ♪……あふっ」
-							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた눈で睨まれると、甘い声でなじられた
+							PRINTFORMW 真っ赤にした顔をこちらに向け、濡れた目で睨まれると、甘い声でなじられた
 								
 						ELSEIF C >= 100 || C <= 9
 							PRINTFORMW 「はぁぁっ…こんな顔、見ないで欲しいわ♪」
-							PRINTFORMW 애널を犯されて%CALLNAME:TARGET%は蕩けた顔を恥じるが、抱きすくめる姿勢では隠しようもない
+							PRINTFORMW アナルを犯されて%CALLNAME:TARGET%は蕩けた顔を恥じるが、抱きすくめる姿勢では隠しようもない
 							PRINTFORMW 「見ないでっていってるのに……もぅ♪　それなら…」
-							PRINTFORMW %CALLNAME:TARGET%は顔を寄せるや、そのまま입付けし、舌を深く差し込んできた
-							PRINTFORMW %CALLNAME:MASTER%は舌と애널のそれぞれで繋がったまま、%CALLNAME:TARGET%의 身体をゆっくりと上下させた
+							PRINTFORMW %CALLNAME:TARGET%は顔を寄せるや、そのまま口付けし、舌を深く差し込んできた
+							PRINTFORMW %CALLNAME:MASTER%は舌とアナルのそれぞれで繋がったまま、%CALLNAME:TARGET%の身体をゆっくりと上下させた
 							CFLAG:342 = 10
 						ELSEIF C == 10
 							IF RAND:5
 								PRINTFORMW あまりの尻穴の具合のよさに、%CALLNAME:MASTER%は身悶えた
 								PRINTFORMW 「あは、おちんちんお尻の中でビクビクしてるわよ♪%CSTR:이인칭%…ちゅっ」
-								PRINTFORMW 首に柔らかな팔が巻き付き、濡れた唇が吸いついてきた
+								PRINTFORMW 首に柔らかな腕が巻き付き、濡れた唇が吸いついてきた
 							ELSE
 								PRINTFORMW あまりの尻穴の具合のよさに、%CALLNAME:MASTER%は身悶えた
 								PRINTFORMW 「あは、おちんちんお尻の中でビクビクしてるわよ♪%CSTR:이인칭%…ちゅっ」
-								PRINTFORMW 首に柔らかな팔が巻き付き、濡れた唇が吸いついてきた
+								PRINTFORMW 首に柔らかな腕が巻き付き、濡れた唇が吸いついてきた
 							ENDIF
 							CFLAG:342 = 20
 						ELSEIF C == 20
 							IF RAND:5
-								PRINTFORMW 後ろ손に上体を支え、両다리を絡めあう%CALLNAME:MASTER%と%CALLNAME:TARGET%…
-								PRINTFORMW 二人の가랑이では페니스と애널がお互いをむさぼりあっていた
+								PRINTFORMW 後ろ手に上体を支え、両脚を絡めあう%CALLNAME:MASTER%と%CALLNAME:TARGET%…
+								PRINTFORMW 二人の股間ではペニスとアナルがお互いをむさぼりあっていた
 								PRINTFORMW %CALLNAME:MASTER%の腰使いにあわせて、%CALLNAME:TARGET%は喜色満面で尻餅をこねついている
 								PRINTFORMW 「はふっ……気持ちいい、中で暴れまわってるわ♪」
 							ELSE
 								PRINTFORMW 「お尻に…少しずつ出たり入ったりしてっ…ぁんっ！…！！　きゃぁっ！」
 								PRINTFORMW 身体のバランスを崩し、あやういところで姿勢を立て直してほっとしている%CALLNAME:TARGET%…
-								PRINTFORMW 後ろ손に体重を支えたため、結合部があらわになり、その上には緩くほころんだ女陰がぬれまみれていた
+								PRINTFORMW 後ろ手に体重を支えたため、結合部があらわになり、その上には緩くほころんだ女陰がぬれまみれていた
 								PRINTFORML 
 								PRINTFORMW %CALLNAME:MASTER%は淫らな姿態に誘われ、中を割り開いて視姦している
 								PRINTFORMW 「いやぁ…じっくりみられちゃってるわ…あんぅ…んぐっ…やぁ」
 								PRINTFORML 
-								PRINTFORMW 上体を起こそうとする%CALLNAME:TARGET%は意地悪な突き上げに아이、再び突き落とされて悶絶した
+								PRINTFORMW 上体を起こそうとする%CALLNAME:TARGET%は意地悪な突き上げにあい、再び突き落とされて悶絶した
 								PRINTFORMW 「やっ、あんっ、ふぁっ♪ ……っ！？ ん、お尻が…とける…っ、っう！　ぁっぁっぁっぁ～～」
-								PRINTFORMW 女の場所には指がはいずり回り、膣입にも入り込んでいる
+								PRINTFORMW 女の場所には指がはいずり回り、膣口にも入り込んでいる
 								PRINTFORML 
 								PRINTFORMW 「あぁ、はっ、はぁっ、あんっ、くぅぅん…%CSTR:이인칭%…気持ち…いいの…両方ともきちゃぅっ…ぁ～」
-								PRINTFORMW 身体を駆け巡る쾌락に羞恥が薄れたのか、%CALLNAME:TARGET%は両膝を大きく開き、されるがままになっていった…
+								PRINTFORMW 身体を駆け巡る快楽に羞恥が薄れたのか、%CALLNAME:TARGET%は両膝を大きく開き、されるがままになっていった…
 							ENDIF
 							CFLAG:342 = 30
 						ELSEIF C == 30
 							IF RAND:5
-								PRINTFORMW 前後にゆらす%CALLNAME:TARGET%腰の動きは激しく、形の良い유방が悩殺的に揺れている
-								PRINTFORMW たわわなおっぱいに誘われ、姿勢を前のめりに손をのばした
+								PRINTFORMW 前後にゆらす%CALLNAME:TARGET%腰の動きは激しく、形の良い乳房が悩殺的に揺れている
+								PRINTFORMW たわわなおっぱいに誘われ、姿勢を前のめりに手をのばした
 								PRINTFORMW 二人分の重心と、肛悦に耐えることで精一杯の%CALLNAME:TARGET%…
-								PRINTFORMW %CALLNAME:MASTER%は無防備な가슴を存分に揉みしだいてやる
+								PRINTFORMW %CALLNAME:MASTER%は無防備な胸を存分に揉みしだいてやる
 								PRINTFORMW 「あっ、あぁぁっ♪　いい、　ぁぁぅ…おっぱい気持ちいいの…んんっ、んぁ、ぁぁっ♪」
-								PRINTFORMW 가슴への애무は애널の収縮の引き起こし、%CALLNAME:MASTER%は極上の締め付けに包まれた
+								PRINTFORMW 胸への愛撫はアナルの収縮の引き起こし、%CALLNAME:MASTER%は極上の締め付けに包まれた
 							ELSE
-								PRINTFORMW %CALLNAME:MASTER%の팔に抱きすくめられている為、好きに動けないのがもどかしいのか%CALLNAME:TARGET%はクネクネと尻をうごめかしている
+								PRINTFORMW %CALLNAME:MASTER%の腕に抱きすくめられている為、好きに動けないのがもどかしいのか%CALLNAME:TARGET%はクネクネと尻をうごめかしている
 								PRINTFORMW 「ね、ねぇ、%CSTR:이인칭%？、もっと動いてもいいわよ……？」
 								PRINTFORML 
 								PRINTFORMW おねだりに苦笑すると、%CALLNAME:TARGET%は拗ねたようにそっぽを向いた
-								PRINTFORMW 「%CSTR:이인칭%の조교で、お、お尻で感じてしまう身体になったんだから…責任をとってよねっ」
+								PRINTFORMW 「%CSTR:이인칭%の調教で、お、お尻で感じてしまう身体になったんだから…責任をとってよねっ」
 								PRINTFORML 
 								PRINTFORMW 恥ずかしげになじる%CALLNAME:TARGET%が可愛い
-								PRINTFORMW %CALLNAME:MASTER%は即座に腰を跳ね上げ、肉棒の先端で%CALLNAME:TARGET%의 애널の奥を穿った
+								PRINTFORMW %CALLNAME:MASTER%は即座に腰を跳ね上げ、肉棒の先端で%CALLNAME:TARGET%のアナルの奥を穿った
 								PRINTFORML 
 								PRINTFORMW 「ぁぅっ！？　ら、乱暴にではなくて、%CALLNAME:MASTER%の馬鹿ぁ♪」
 								PRINTFORMW 文句を言いつつも、甘い声を出している
@@ -2450,36 +2450,36 @@ SELECTCASE SELECTCOM
 							IF RAND:5
 								PRINTFORMW 「ん、く……っ、はぁ…っ！　は、入ったわね……%CSTR:101%の、おちんちんが……」
 								PRINTFORMW %CALLNAME:TARGET%は嬉しそうに息を吐きながら、桃尻を震わせている…
-								PRINTFORMW 「…ぁぁ…こんな大きなのが……%CSTR:일인칭%の애널に……あぁぁ、熱くて、震えちゃう……っ！」
-								PRINTFORMW %CALLNAME:MASTER%はあえて腰を動かさず、深く埋めたままの상태で%CALLNAME:TARGET%의 肢体をかき抱いた…
+								PRINTFORMW 「…ぁぁ…こんな大きなのが……%CSTR:일인칭%のアナルに……あぁぁ、熱くて、震えちゃう……っ！」
+								PRINTFORMW %CALLNAME:MASTER%はあえて腰を動かさず、深く埋めたままの状態で%CALLNAME:TARGET%の肢体をかき抱いた…
 							ELSE
 								PRINTFORMW 命令された%CALLNAME:TARGET%は立ち上がり、胡坐を組む主人の顔の前に、均整のとれた長身を寄せた
 								PRINTFORM 見事な肢体が%CALLNAME:MASTER%を跨ぎ、両膝を割りながら尻を落としにかかると、
 								IF TALENT:0
-									PRINT 처녀の女芯が
+									PRINT 処女の女芯が
 								ELSE
 									PRINT 割れた柘榴のような女の秘裂が
 								ENDIF
-								PRINTFORMW 赤く濡れひらめいて눈に入る
+								PRINTFORMW 赤く濡れひらめいて目に入る
 								PRINTFORML 
-								PRINTFORMW %CALLNAME:MASTER%は눈の前で落ちていく女の花にかきたてられ、ふいに%CALLNAME:TARGET%의 腰をかかえこむと、中心に舌を見舞った
+								PRINTFORMW %CALLNAME:MASTER%は目の前で落ちていく女の花にかきたてられ、ふいに%CALLNAME:TARGET%の腰をかかえこむと、中心に舌を見舞った
 								PRINTFORMW 「きゃ？…%CSTR:이인칭%？…%CSTR:이인칭%ったら♪…ン…っはぁっ…ぁぅ…いい…」
 								PRINTFORML 
 								PRINTFORMW %CALLNAME:TARGET%は突然の行動に驚きつつも、うれしげに秘所をくゆらせる
 								PRINTFORMW 「ン…ぁぁ…ね…もう…立ってられないわ…」
 								PRINTFORML 
-								PRINTFORMW ふやふやな彼女の様子に満발した%CALLNAME:MASTER%は、当初の予定通りに尻での봉사を命じた
-								PRINTFORMW 입唇愛の余韻に눈をとろんとさせながら、애널をそそり立つ陰茎の先に着地させてくる
+								PRINTFORMW ふやふやな彼女の様子に満足した%CALLNAME:MASTER%は、当初の予定通りに尻での奉仕を命じた
+								PRINTFORMW 口唇愛の余韻に目をとろんとさせながら、アナルをそそり立つ陰茎の先に着地させてくる
 								PRINTFORMW 恥ずかしそうに視線をそらすと体重をかけると、%CALLNAME:TARGET%は奥まで飲み込んできた
 								PRINTFORML 
-								PRINTFORMW ともに焦れていた二人から満발げな呻き声が上がる
-								PRINTFORMW %CALLNAME:MASTER%と%CALLNAME:TARGET%は、じっと抱きあったまま、直腸の感触を、페니스の存在感をゆっくり愉しんだ
+								PRINTFORMW ともに焦れていた二人から満足げな呻き声が上がる
+								PRINTFORMW %CALLNAME:MASTER%と%CALLNAME:TARGET%は、じっと抱きあったまま、直腸の感触を、ペニスの存在感をゆっくり愉しんだ
 							ENDIF
 							CFLAG:342 = 50
 						ELSE
 							PRINTFORMW 「あんっ…　はふぅっ…」
-							PRINTFORMW 肉棒の上に尻を下ろした%CALLNAME:TARGET%は熱い吐息を漏らし、%CALLNAME:MASTER%の耳元に입を寄せてくる
-							PRINTFORMW 「あぁん、素적よ…お尻ゆるゆるにされちゃう…」
+							PRINTFORMW 肉棒の上に尻を下ろした%CALLNAME:TARGET%は熱い吐息を漏らし、%CALLNAME:MASTER%の耳元に口を寄せてくる
+							PRINTFORMW 「あぁん、素敵よ…お尻ゆるゆるにされちゃう…」
 							PRINTFORMW 「ふふ、今幸せよ、%CSTR:이인칭%♪…」
 							CFLAG:342 = 100
 						ENDIF
@@ -2488,32 +2488,32 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:8 == 0 && TALENT:처녀
 						;推敲
-							PRINTFORMW 「ん、んんっ♪　처녀なのに、애널で…섹스してるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%の페니스を尻穴で貪っている…
+							PRINTFORMW 「ん、んんっ♪　処女なのに、アナルで…セックスしてるわ！　あぁぁ、なんて、ぁぁ…%CSTR:일인칭%ったらはしたないっ♪」
+							PRINTFORMW %CALLNAME:TARGET%は背徳の悦楽に身体を焦がし、声を蕩かせながら%CALLNAME:MASTER%のペニスを尻穴で貪っている…
 							PRINTFORMW 「%CSTR:101%のも、いつもより…大きい…♪　ん、んんっ、ぁっ、すご、い…ぃ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、%CALLNAME:MASTER%の페니스を締め付けてくる…
+							PRINTFORMW %CALLNAME:TARGET%は背を逸らし、%CALLNAME:MASTER%のペニスを締め付けてくる…
 							PRINTFORMW 「はぁー、はぁっ♪　%CSTR:이인칭%…もっと、はしたないことしましょ…っ♪」
-							PRINTFORMW %CALLNAME:TARGET%의 淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
+							PRINTFORMW %CALLNAME:TARGET%の淫らな声に飲まれるように、%CALLNAME:MASTER%の攻めも、より一層激しさを増していく…
 							
 						ELSEIF C >= 100 || C <= 9
 							PRINTFORMW 「あんっ♪　はふぅっ♪」
-							PRINTFORMW 肉棒の上に尻を下ろした%CALLNAME:TARGET%は熱い吐息を漏らし、%CALLNAME:MASTER%の耳元に입を寄せてくる
-							PRINTFORMW 「あぁん、オチンチン素적ぃ…お尻ゆるゆるにされちゃう…」
+							PRINTFORMW 肉棒の上に尻を下ろした%CALLNAME:TARGET%は熱い吐息を漏らし、%CALLNAME:MASTER%の耳元に口を寄せてくる
+							PRINTFORMW 「あぁん、オチンチン素敵ぃ…お尻ゆるゆるにされちゃう…」
 							PRINTFORMW 「ふふ、%CSTR:일인칭%今幸せよ♪…」
 							CFLAG:342 = 10
 						ELSEIF C == 10
 							PRINTFORMW 「このままお尻に…っ…ぁんっ！…！！　きゃぁっ！」
 							PRINTFORMW 身体のバランスを崩し、あやういところで姿勢を立て直してほっとしている%CALLNAME:TARGET%…
-							PRINTFORMW 後ろ손に体重を支えたため、結合部があらわになり、その上には緩くほころんだ女陰がぬれまみれている
-							PRINTFORMW 눈を奪われていると、%CALLNAME:TARGET%は%CALLNAME:MASTER%の손を取り、大きく開かれた中心に誘導してきた
+							PRINTFORMW 後ろ手に体重を支えたため、結合部があらわになり、その上には緩くほころんだ女陰がぬれまみれている
+							PRINTFORMW 目を奪われていると、%CALLNAME:TARGET%は%CALLNAME:MASTER%の手を取り、大きく開かれた中心に誘導してきた
 							PRINTFORMW 「こっちもよろしくね♪…あぁん…ン♪」
 							PRINTFORMW ぬかるんだそこに指を遊ばせると、喘ぎ声が上がってきた…
 							CFLAG:342 = 20
 						ELSE
-							PRINTFORMW 「んっ…　んっ♪　あぅんっ♪　ああ…おしりが……素적…♪」
-							PRINTFORMW 息を弾ませ腰を使う%CALLNAME:TARGET%의 유방を、%CALLNAME:MASTER%は激しく揉みしだいた
+							PRINTFORMW 「んっ…　んっ♪　あぅんっ♪　ああ…おしりが……素敵…♪」
+							PRINTFORMW 息を弾ませ腰を使う%CALLNAME:TARGET%の乳房を、%CALLNAME:MASTER%は激しく揉みしだいた
 							PRINTFORMW 「やぁン♪　おっぱい…いじめないで…いやぁ♪」
-							PRINTFORMW うねる애널が先走りを漏らす男根の根元に吸い付き、사정中枢をくすぐってゆく
+							PRINTFORMW うねるアナルが先走りを漏らす男根の根元に吸い付き、射精中枢をくすぐってゆく
 							CFLAG:342 = 100
 						ENDIF
 				;복종, 예속
@@ -2542,9 +2542,9 @@ SELECTCASE SELECTCOM
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 				PRINTFORMW 「%CSTR:이인칭%……お尻って…どう？…」
 				PRINTFORMW 心配そうな瞳がこちらに向けらる
-				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき눈を細めた
+				PRINTFORMW ちゃんと気持ちいい事を伝えると安堵のため息をつき目を細めた
 				PRINTFORMW 「…好きに動いてね…ン…気に…しなくていいから…んっ」
-				PRINTFORMW %CALLNAME:TARGET%의 声には苦悶と쾌락の色が入り混じっている
+				PRINTFORMW %CALLNAME:TARGET%の声には苦悶と快楽の色が入り混じっている
 			ELSE
 				PRINTFORMW 「お、お尻とか変態よっ…」
 				PRINTFORMW 顔を真っ赤にしつつ、%CALLNAME:TARGET%が非難してきた
@@ -2748,31 +2748,31 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					IF PALAM:욕정 >= PALAMLV:6
 						IF B >= 100 || B <= 9
-							PRINTFORMW 욕정の熱に浮かされているのか、%CALLNAME:TARGET%はうっとりした様子で陰茎に頬ずりしている
+							PRINTFORMW 欲情の熱に浮かされているのか、%CALLNAME:TARGET%はうっとりした様子で陰茎に頬ずりしている
 							PRINTFORMW 
 							PRINTFORMW 
 							CFLAG:905 = 10
 						ELSEIF B == 10
-							PRINTFORMW 普段の上品な物腰からは想像もできない淫らさで、%CALLNAME:TARGET%は페니스を喉奥まで飲み込んでいる
+							PRINTFORMW 普段の上品な物腰からは想像もできない淫らさで、%CALLNAME:TARGET%はペニスを喉奥まで飲み込んでいる
 							PRINTFORMW ――こくっ…こくっ、こくっ――
-							PRINTFORMW 陰茎は嚥下するかのように咽喉から애무され、たまらない쾌感が立ち上ってくる
+							PRINTFORMW 陰茎は嚥下するかのように咽喉から愛撫され、たまらない快感が立ち上ってくる
 							PRINTFORMW 「ん…ンン…～」
-							PRINTFORMW 時折苦しげに表情をゆがめ입を離してしまうが、すぐに調子を整え再び奥へと迎え入れに来る%CALLNAME:TARGET%…
+							PRINTFORMW 時折苦しげに表情をゆがめ口を離してしまうが、すぐに調子を整え再び奥へと迎え入れに来る%CALLNAME:TARGET%…
 							PRINTFORMW 「気にしないでね」
-							PRINTFORMW 눈だけでそういうと、%CALLNAME:MASTER%の腰に%CALLNAME:TARGET%의 両손が巻きついてきた
+							PRINTFORMW 目だけでそういうと、%CALLNAME:MASTER%の腰に%CALLNAME:TARGET%の両手が巻きついてきた
 							CFLAG:905 = 20
 						ELSEIF B == 20
-							PRINTFORMW 熱心に봉사していた%CALLNAME:TARGET%は陰嚢まで唇を這わせると、舌を窄め、蟻の戸渡りを上下になぞってきた
-							PRINTFORMW ゾクゾクとした감각が下半身からせりあがってくる…
+							PRINTFORMW 熱心に奉仕していた%CALLNAME:TARGET%は陰嚢まで唇を這わせると、舌を窄め、蟻の戸渡りを上下になぞってきた
+							PRINTFORMW ゾクゾクとした感覚が下半身からせりあがってくる…
 							PRINTFORMW 「ふふっ、腰が浮いてるわよ♪」
-							PRINTFORMW 「そろそろよね…お姉さんのお입にだしちゃいなさいっ」
+							PRINTFORMW 「そろそろよね…お姉さんのお口にだしちゃいなさいっ」
 							PRINTFORMW 細い指が遊び回っていた陰茎は、熱い粘膜にくるまれていった
 							CFLAG:905 = 30
 						ELSE
 							PRINTFORMW ――ちゅぼっ、ちゅぼっ、ちゅぼっ、じゅっ、じゅぷっ、じゅぷっ、――
-							PRINTFORMW %CALLNAME:MASTER%の腰を両손で抱え込み、가랑이に顔を埋める%CALLNAME:TARGET%…
-							PRINTFORMW 身を任せ봉사を愉しむ%CALLNAME:MASTER%の隙をついて、%CALLNAME:TARGET%は主人の肛門に浅く指をいれてきた
-							PRINTFORMW 身じろぎしながらも、振り払うわけではない%CALLNAME:MASTER%の反応を楽しそうに확인すると、前と後ろから쾌感を送り続けてくる…
+							PRINTFORMW %CALLNAME:MASTER%の腰を両手で抱え込み、股間に顔を埋める%CALLNAME:TARGET%…
+							PRINTFORMW 身を任せ奉仕を愉しむ%CALLNAME:MASTER%の隙をついて、%CALLNAME:TARGET%は主人の肛門に浅く指をいれてきた
+							PRINTFORMW 身じろぎしながらも、振り払うわけではない%CALLNAME:MASTER%の反応を楽しそうに確認すると、前と後ろから快感を送り続けてくる…
 							PRINTFORMW 「なんだかいつもより硬くなってきたわよ♪」
 							PRINTFORMW 「ね、お姉さんにもこれで…ね」
 							CFLAG:905 = 100
@@ -2789,7 +2789,7 @@ SELECTCASE SELECTCOM
 							CFLAG:345 = 20
 						ELSEIF C == 20
 							PRINTFORMW 「この匂い、ぼーっとしちゃうわ…」
-							PRINTFORMW とろんとした%CALLNAME:TARGET%의 顔に、陰茎を擦りつけてやる
+							PRINTFORMW とろんとした%CALLNAME:TARGET%の顔に、陰茎を擦りつけてやる
 							PRINTFORMW 「やんっ、%CSTR:일인칭%にさせて、ね」
 							CFLAG:345 = 30
 						ELSE
@@ -2813,7 +2813,7 @@ SELECTCASE SELECTCOM
 							CFLAG:345 = 20
 						ELSEIF C == 20
 							PRINTFORMW 「この匂い、ぼーっとしちゃうわ…」
-							PRINTFORMW とろんとした%CALLNAME:TARGET%의 顔に、陰茎を擦りつけてやる
+							PRINTFORMW とろんとした%CALLNAME:TARGET%の顔に、陰茎を擦りつけてやる
 							PRINTFORMW 「やんっ、%CSTR:일인칭%にさせて、ね」
 							CFLAG:345 = 30
 						ELSE
@@ -6233,7 +6233,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -6355,8 +6355,8 @@ IF NOWEX:2 > 0 && CFLAG:243 == 0
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3
 		;推敲
 			ELSE
-				PRINTFORMW 애널を犯されている%CALLNAME:TARGET%を拝見しようと、そむけられた顔に覗きこむ
-				PRINTFORMW 睨みつけてくる%CALLNAME:TARGET%의 腰をかき抱き、ぐりぐりと小突いてやった
+				PRINTFORMW アナルを犯されている%CALLNAME:TARGET%を拝見しようと、そむけられた顔に覗きこむ
+				PRINTFORMW 睨みつけてくる%CALLNAME:TARGET%の腰をかき抱き、ぐりぐりと小突いてやった
 				PRINTFORMW …つと綺麗な顔が淫らに歪み、全身がわななく…
 				PRINTFORMW はっとした%CALLNAME:TARGET%は泣き出しそうな表情で、一層きつく%CALLNAME:MASTER%を睨んできた
 				PRINTFORMW 隠そうとしているが、身体は既に尻穴を犯される背徳の悦びを覚えてしまったようだ
@@ -7581,7 +7581,7 @@ SELECTCASE TFLAG:13
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
 				;애ＮＴＲ
 				PRINTFORMW 「あっ・・中は・・・っくぅぅぅん%UNICODE(0x2661)%」
-				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%は마리の言葉を無視して질내に사정した
+				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%はマリの言葉を無視して膣内に射精した
 				PRINTFORMW （・・あっ・・ダメ・・・わたし、堕ち・・る・・・）
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
@@ -7600,7 +7600,7 @@ SELECTCASE TFLAG:13
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
 				;애ＮＴＲ
 				PRINTFORMW 「んぁっ・・アイしてます・・アイしてますから中に・・・んぅぅぅっ%UNICODE(0x2661)%」
-				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%は中出しをせがむ마리に遠慮なく질내사정した
+				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%は中出しをせがむマリに遠慮なく膣内射精した
 				PRINTFORMW （・・凄い熱い・・あの人より・・・濃くて・・たくさん・・・）
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
@@ -7707,19 +7707,19 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;@TRAIN_M4608_2_VA_SEIJO…정상위・정상위애널の代替文 60 62 工事中
+;@TRAIN_M4608_2_VA_SEIJO…正常位・正常位アナルの代替文 60 62 工事中
 ;-------------------------------------------------
 ;@TRAIN_M4608_2_VA_SEIJO
 ;T = CFLAG:833
 
 ;-------------------------------------------------
-;@TRAIN_M4608_2_VA_KOHAI…후배위・후배위애널の代替文 61 63 工事中
+;@TRAIN_M4608_2_VA_KOHAI…後背位・後背位アナルの代替文 61 63 工事中
 ;-------------------------------------------------
 ;@TRAIN_M4608_2_VA_KOHAI
 ;T = CFLAG:834
 
 ;-------------------------------------------------
-;@TRAIN_M4608_2_VA_KIJO…기승위・기승위애널の代替文
+;@TRAIN_M4608_2_VA_KIJO…騎乗位・騎乗位アナルの代替文
 ;-------------------------------------------------
 @TRAIN_M4608_2_VA_KIJO
 T = CFLAG:835
@@ -7728,14 +7728,14 @@ SELECTCASE SELECTCOM
 	CASE 66
 		IF T >=100 || T <= 9
 			PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:PLAYER%の上にまたがると、ゆっくりと腰を下ろしてきた…
-			PRINTFORM %CALLNAME:TARGET%は覆いかぶさるようにのしかかり、大きく가슴を揺らしながら自ら腰を動かしている
+			PRINTFORM %CALLNAME:TARGET%は覆いかぶさるようにのしかかり、大きく胸を揺らしながら自ら腰を動かしている
 			CFLAG:835 = 10
 		ELSEIF T == 10
-			PRINTFORMW %CALLNAME:PLAYER%は馬乗りの%CALLNAME:TARGET%의 内股を開き、挟まれていた陰茎を女膣にねじ込んだ
+			PRINTFORMW %CALLNAME:PLAYER%は馬乗りの%CALLNAME:TARGET%の内股を開き、挟まれていた陰茎を女膣にねじ込んだ
 			PRINTFORMW 歓喜の声を上げた%CALLNAME:TARGET%は、身体を投げ出すように主人に体重をあずけてきた
 			CFLAG:835 = 20
 		ELSEIF T == 20
-			PRINTFORMW 가랑이をあらわに跨ってきた%CALLNAME:TARGET%は、陰茎に손を添え、女の奥へと導いてきた
+			PRINTFORMW 股間をあらわに跨ってきた%CALLNAME:TARGET%は、陰茎に手を添え、女の奥へと導いてきた
 			PRINTFORMW 仰向けの%CALLNAME:MASTER%を太腿で挟みこみ、なまめかしく下半身を動かしている
 			CFLAG:835 = 30
 		ELSE
@@ -7745,101 +7745,101 @@ SELECTCASE SELECTCOM
 			ELSE
 				PRINTW 恥ずかしそうにしながらもお尻を突き出すように陰茎の上にあてがい、ゆっくりと座り込んでくる
 			ENDIF
-			PRINTFORMW 陰茎に走る쾌感に思わず声をあげると、%CALLNAME:TARGET%は忍び笑いを漏らし、結合を解かないように注意しながら、向かい合うように姿勢を変えてきた
+			PRINTFORMW 陰茎に走る快感に思わず声をあげると、%CALLNAME:TARGET%は忍び笑いを漏らし、結合を解かないように注意しながら、向かい合うように姿勢を変えてきた
 			CFLAG:835 = 100
 		ENDIF
 		
 	CASE 67
 		IF T >=100 || T <= 9
-			PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:PLAYER%の上にまたがると、점액にまみれたアヌスでゆっくりとモノを飲み込んでいった…
+			PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:PLAYER%の上にまたがると、粘液にまみれたアヌスでゆっくりとモノを飲み込んでいった…
 			PRINTFORMW %CALLNAME:TARGET%は、覆いかぶさるようにのしかかり、自ら尻を動かしている…
 			CFLAG:835 = 10
 		ELSEIF T == 10
-			PRINTFORMW %CALLNAME:PLAYER%はまたがった%CALLNAME:TARGET%의 애널にそそりたつ陰茎をねじこんだ
+			PRINTFORMW %CALLNAME:PLAYER%はまたがった%CALLNAME:TARGET%のアナルにそそりたつ陰茎をねじこんだ
 			IF TALENT:0
-				PRINTFORMW 페니스をほおばる애널の上では、男を知らないにも関わらず、見え隠れする女芯がほころんでいる
+				PRINTFORMW ペニスをほおばるアナルの上では、男を知らないにも関わらず、見え隠れする女芯がほころんでいる
 			ELSE
-				PRINTFORMW %CALLNAME:TARGET%의 尻が円を描いて圧しつけられ、濡れた女の部分が妖しくおどっている
+				PRINTFORMW %CALLNAME:TARGET%の尻が円を描いて圧しつけられ、濡れた女の部分が妖しくおどっている
 			ENDIF
 			CFLAG:835 = 20
 		ELSEIF T == 20
-			PRINTFORMW 가랑이をあらわに跨ってきた%CALLNAME:TARGET%は、剛直に손を添え、アヌスの奥へと導いてきた
+			PRINTFORMW 股間をあらわに跨ってきた%CALLNAME:TARGET%は、剛直に手を添え、アヌスの奥へと導いてきた
 			PRINTFORMW 仰向けの%CALLNAME:MASTER%を太腿で挟みこみ、なまめかしく下半身を動かしている
 		ELSE
 			PRINTFORM %CALLNAME:TARGET%は腹這いになった%CALLNAME:PLAYER%に背を向けると、
 			IF ABL:노출증 >= 4
 				PRINTW 自ら指でひろげた尻穴を見せつけながら、陰茎の上にあてがいゆっくりと座り込んできた
 			ELSE
-				PRINTW 恥ずかしそうにしながらもお尻を突き出すように陰茎を애널にあてがい、ゆっくりと座り込んできた
+				PRINTW 恥ずかしそうにしながらもお尻を突き出すように陰茎をアナルにあてがい、ゆっくりと座り込んできた
 			ENDIF
-			PRINTFORMW %CALLNAME:TARGET%의 息が弾み、たおやかな背中が眼上で揺れている
+			PRINTFORMW %CALLNAME:TARGET%の息が弾み、たおやかな背中が眼上で揺れている
 			CFLAG:835 = 100
 		ENDIF
 ENDSELECT
 
 
 ;-------------------------------------------------
-;@TRAIN_M4608_2_VA_TAIMEN 대면좌위・대면좌위애널
+;@TRAIN_M4608_2_VA_TAIMEN 対面座位・対面座位アナル
 ;-------------------------------------------------
 @TRAIN_M4608_2_VA_TAIMEN
 T = CFLAG:836
 
 IF SELECTCOM == 68
 	IF T >= 100 || T <= 9
-		PRINTFORMW %CALLNAME:TARGET%의 身体を抱き上げ、ゆっくりと降ろしながら점액にまみれた膣孔へと挿入した
+		PRINTFORMW %CALLNAME:TARGET%の身体を抱き上げ、ゆっくりと降ろしながら粘液にまみれた膣孔へと挿入した
 		PRINTFORMW 情欲で燃え盛る女体に、勃起がしたたかに突き刺さる…
 		CFLAG:836 = 10
 	ELSEIF T == 10
-		PRINTFORMW 両膝をすくって両다리をＭ字にまたがせると、%CALLNAME:TARGET%を抱き寄せ、ほころんだ女芯を犯した
-		PRINTFORMW Ｍ字開다리の中心から、ぬちゃ、ぐちょ、と卑猥な肉ずれ音が聞こえてくる…
+		PRINTFORMW 両膝をすくって両脚をＭ字にまたがせると、%CALLNAME:TARGET%を抱き寄せ、ほころんだ女芯を犯した
+		PRINTFORMW Ｍ字開脚の中心から、ぬちゃ、ぐちょ、と卑猥な肉ずれ音が聞こえてくる…
 		CFLAG:836 = 20
 	ELSEIF T == 20
 		PRINTFORMW 膝の上に%CALLNAME:TARGET%をのせ、太腿を互い違いにからめると、陰茎の先にある女の部分をいじめにいった
 		PRINTFORMW 柔らかな秘所の果肉が陰茎をしっかりと押しつつんできた…
 		CFLAG:836 = 30
 	ELSEIF T == 30
-		PRINTFORMW 蜜に濡れた女の場所もあらわに、自ら勃起にまたがってくる%CALLNAME:TARGET%의 姿は、눈が깨달음めるほどいやらしい…
+		PRINTFORMW 蜜に濡れた女の場所もあらわに、自ら勃起にまたがってくる%CALLNAME:TARGET%の姿は、目が覚めるほどいやらしい…
 		PRINTFORMW %CALLNAME:TARGET%をしっかりと抱きしめ、ひとつになるとみっしりと動きだした
 		CFLAG:836 = 40
 	ELSEIF T == 40
-		PRINTFORMW %CALLNAME:PLAYER%はＭ字に開다리させた%CALLNAME:TARGET%と身体をつなぎ、가랑이と가랑이をくっつけあわせた
+		PRINTFORMW %CALLNAME:PLAYER%はＭ字に開脚させた%CALLNAME:TARGET%と身体をつなぎ、股間と股間をくっつけあわせた
 		PRINTFORMW 女膣に深々とくわえ込まれた勃起が、肉ひだにこすりたてられている…
 		CFLAG:836 = 50
 	ELSE
-		PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%의 腰を引き寄せ、膝の上にのせた
-		PRINTFORMW てれこになった二人の両다리の間で牡と牝の性器がじゃれあっている…
+		PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%の腰を引き寄せ、膝の上にのせた
+		PRINTFORMW てれこになった二人の両脚の間で牡と牝の性器がじゃれあっている…
 		CFLAG:836 = 100
 	ENDIF
 ELSEIF SELECTCOM == 70
 	IF T >= 100 || T <= 9
-		PRINTFORMW %CALLNAME:TARGET%의 身体を抱き上げ、ゆっくりと降ろしながら점액にまみれたアヌスへと挿入した
-		PRINTFORMW 括約筋のかすかな저항を押し退けて、亀머리が後孔の奥に沈む…
+		PRINTFORMW %CALLNAME:TARGET%の身体を抱き上げ、ゆっくりと降ろしながら粘液にまみれたアヌスへと挿入した
+		PRINTFORMW 括約筋のかすかな抵抗を押し退けて、亀頭が後孔の奥に沈む…
 		CFLAG:836 = 10
 	ELSEIF T == 10
-		PRINTFORMW 両膝をすくって両다리をＭ字にまたがせると、%CALLNAME:TARGET%を抱き寄せ、すっかり味を覚えた애널を犯した
+		PRINTFORMW 両膝をすくって両脚をＭ字にまたがせると、%CALLNAME:TARGET%を抱き寄せ、すっかり味を覚えたアナルを犯した
 		PRINTFORMW じりじりと押し進めていくと、腸壁が迎えをよこすように身体の奥へ案内してきた…
 		CFLAG:836 = 20
 	ELSEIF T == 20
 		PRINTFORMW 膝の上に%CALLNAME:TARGET%をのせ、太腿を互い違いにからめると、陰茎の先にあるアヌスをいじめにいった
-		PRINTFORMW ほぐれた애널のうねりが伝わってくる…
+		PRINTFORMW ほぐれたアナルのうねりが伝わってくる…
 		CFLAG:836 = 30
 	ELSEIF T == 30
-		PRINTFORMW 蜜に濡れた女の場所もあらわに、自ら勃起にまたがってくる%CALLNAME:TARGET%의 姿は、눈が깨달음めるほどいやらしい…
-		PRINTFORMW 落ちてくる%CALLNAME:TARGET%의 アヌスに照準をあわせて抱きとめると、奥に埋め込んだ
+		PRINTFORMW 蜜に濡れた女の場所もあらわに、自ら勃起にまたがってくる%CALLNAME:TARGET%の姿は、目が覚めるほどいやらしい…
+		PRINTFORMW 落ちてくる%CALLNAME:TARGET%のアヌスに照準をあわせて抱きとめると、奥に埋め込んだ
 		CFLAG:836 = 40
 	ELSEIF T == 40
-		PRINTFORMW %CALLNAME:PLAYER%はＭ字に開다리させた%CALLNAME:TARGET%と身体をつなぎ、가랑이と가랑이をくっつけあわせた
+		PRINTFORMW %CALLNAME:PLAYER%はＭ字に開脚させた%CALLNAME:TARGET%と身体をつなぎ、股間と股間をくっつけあわせた
 		PRINTFORMW 尻孔は勃起をしなやかに包み込んでいる…
 		CFLAG:836 = 50
 	ELSE
-		PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%의 腰を引き寄せ、膝の上にのせた
-		PRINTFORMW てれこになった二人の両다리の間で페니스と애널が、からみあっている…
+		PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%の腰を引き寄せ、膝の上にのせた
+		PRINTFORMW てれこになった二人の両脚の間でペニスとアナルが、からみあっている…
 		CFLAG:836 = 100
 	ENDIF
 ENDIF
 
 ;-------------------------------------------------
-;@TRAIN_M4608_2_VA_HAIMEN 배면좌위・배면좌위애널の代替文 69 71 工事中
+;@TRAIN_M4608_2_VA_HAIMEN 背面座位・背面座位アナルの代替文 69 71 工事中
 ;-------------------------------------------------
 ;@TRAIN_M4608_2_VA_HAIMEN
 ;T = CFLAG:837
@@ -7851,25 +7851,25 @@ ENDIF
 T = CFLAG:840
 	
 IF T >= 100 || T <= 9
-	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の亀머리を舌先で転がすように舐めまわしている…
+	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の亀頭を舌先で転がすように舐めまわしている…
 	CFLAG:840 = 10
 ELSEIF T == 10
-	PRINTFORMW %CALLNAME:TARGET%は唇を페니스の裏筋に這わせ、啄むように舌先で舐めている…
+	PRINTFORMW %CALLNAME:TARGET%は唇をペニスの裏筋に這わせ、啄むように舌先で舐めている…
 	CFLAG:840 = 20
 ELSEIF T == 20
-	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の페니스の先端部分を舌先でくるくると舐めまわしている…
+	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%のペニスの先端部分を舌先でくるくると舐めまわしている…
 	CFLAG:840 = 30
 ELSEIF T == 30
 	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%のカリ首を舌でなぞるように刺激している…
 	CFLAG:840 = 40
 ELSEIF T == 40
-	PRINTFORMW %CALLNAME:TARGET%は舌に唾液を絡め、わざと大きな動きで%CALLNAME:MASTER%の亀머리を舐め上げた…
+	PRINTFORMW %CALLNAME:TARGET%は舌に唾液を絡め、わざと大きな動きで%CALLNAME:MASTER%の亀頭を舐め上げた…
 	CFLAG:840 = 50
 ELSEIF T == 50
-	PRINTFORMW %CALLNAME:TARGET%は舌を伸ばし、%CALLNAME:MASTER%の페니스の裏筋を舐め上げた…
+	PRINTFORMW %CALLNAME:TARGET%は舌を伸ばし、%CALLNAME:MASTER%のペニスの裏筋を舐め上げた…
 	CFLAG:840 = 60
 ELSEIF T == 60
-	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%の페니스の先端部分を舌전체すり付けるようにして舐め上げた…
+	PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%のペニスの先端部分を舌全体にすり付けるようにして舐め上げた…
 	CFLAG:840 = 70
 ELSE
 	PRINTFORMW %CALLNAME:TARGET%はカリ首を伸ばした舌の上で転がすように舐め上げた…
@@ -7878,52 +7878,52 @@ ENDIF
 
 
 ;----------------------------------------------------------
-;@VSEX_DEPICTION…ほぼ鏡移しの구상なので@ASEX_DEPICTIONとCFLAG共有 以下同様
+;@VSEX_DEPICTION…ほぼ鏡移しの口上なので@ASEX_DEPICTIONとCFLAG共有 以下同様
 ;----------------------------------------------------------
 @VSEX_DEPICTION
 D = CFLAG:810 
 
 IF D >= 200 || D <= 9
-	PRINTFORMW %CALLNAME:TARGET%의 女孔を%CALLNAME:MASTER%の剛直がしごき上げていく…
-	PRINTFORMW 彼女の입の端がゆるみ、唾液が糸となってこぼれ落ちた
+	PRINTFORMW %CALLNAME:TARGET%の女孔を%CALLNAME:MASTER%の剛直がしごき上げていく…
+	PRINTFORMW 彼女の口の端がゆるみ、唾液が糸となってこぼれ落ちた
 	CFLAG:810 = 10
 ELSEIF D == 10
-	PRINTFORMW 身体の奥深く、子宮입まで挿し込んだ陰茎をゆるゆると引き抜き、再びゆっくりと収めてやる
+	PRINTFORMW 身体の奥深く、子宮口まで挿し込んだ陰茎をゆるゆると引き抜き、再びゆっくりと収めてやる
 	PRINTFORMW %CALLNAME:TARGET%は焦れたように自分から腰を揺すり、貪欲に肉棒を呑み込んできた…
 	CFLAG:810 = 20
 ELSEIF D == 20
-	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%의 前孔を욕망の赴くまま責め続けた
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の前孔を欲望の赴くまま責め続けた
 	PRINTFORMW うっとりしながら、%CALLNAME:MASTER%にされるがままの%CALLNAME:TARGET%…
-	PRINTFORMW 애액にまみれた結合部からは、抽挿のたびに卑猥な音がたっている
+	PRINTFORMW 愛液にまみれた結合部からは、抽挿のたびに卑猥な音がたっている
 	CFLAG:810 = 30
 ELSEIF D == 30
-	PRINTFORMW %CALLNAME:MASTER%は陰茎を%CALLNAME:TARGET%に収めたまま、가슴元に両손を回した
-	PRINTFORMW %CALLNAME:TARGET%は유방を揉みしだく主人の손に自分の손を重ね、幸せそうな顔している…
+	PRINTFORMW %CALLNAME:MASTER%は陰茎を%CALLNAME:TARGET%に収めたまま、胸元に両手を回した
+	PRINTFORMW %CALLNAME:TARGET%は乳房を揉みしだく主人の手に自分の手を重ね、幸せそうな顔している…
 	CFLAG:810 = 40
 ELSEIF D == 40
-	PRINTFORMW えぐるように女の奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って입をぱくぱくさせた
-	PRINTFORMW %CALLNAME:TARGET%は夢中になって%NAME:MASTER%の腰に長い다리を絡めてきた…
+	PRINTFORMW えぐるように女の奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って口をぱくぱくさせた
+	PRINTFORMW %CALLNAME:TARGET%は夢中になって%NAME:MASTER%の腰に長い脚を絡めてきた…
 	CFLAG:810 = 50
 ELSEIF D == 50
-	PRINTFORMW ゆったりとした動きで大きく페니스を出し入れしていると、%CALLNAME:TARGET%의 腰がなまめかしく迎えにやってきた
-	PRINTFORMW いきむような表情で下腹に힘を込めて、きゅっきゅっと締め付けてくる%CALLNAME:TARGET%…
-	PRINTFORMW 애액にまみれた結合部からは、抽挿のたびにクチュクチュと音がしている
+	PRINTFORMW ゆったりとした動きで大きくペニスを出し入れしていると、%CALLNAME:TARGET%の腰がなまめかしく迎えにやってきた
+	PRINTFORMW いきむような表情で下腹に力を込めて、きゅっきゅっと締め付けてくる%CALLNAME:TARGET%…
+	PRINTFORMW 愛液にまみれた結合部からは、抽挿のたびにクチュクチュと音がしている
 	CFLAG:810 = 60
 ELSEIF D == 60
-	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%をかき抱き、いきり立った剛直で膣입をかき混ぜる…
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%をかき抱き、いきり立った剛直で膣口をかき混ぜる…
 	PRINTFORMW %CALLNAME:TARGET%は主人のタイミングに合わせて、腰を巧みにくねらせている…
 	CFLAG:810 = 70
 ELSEIF D == 70
-	PRINTFORMW %CALLNAME:MASTER%は細い腰を両손で捕まえ、がつがつと音を立てそうな勢いで責め立てた
-	PRINTFORMW 大きな振幅で페니스が外れそうになるたびに、%CALLNAME:TARGET%はあわてて追い腰を使ってくる…
+	PRINTFORMW %CALLNAME:MASTER%は細い腰を両手で捕まえ、がつがつと音を立てそうな勢いで責め立てた
+	PRINTFORMW 大きな振幅でペニスが外れそうになるたびに、%CALLNAME:TARGET%はあわてて追い腰を使ってくる…
 	CFLAG:810 = 80
 ELSEIF D == 80
 	PRINTFORMW %CALLNAME:MASTER%は結合部を密着させると、剛直を留めたまま%CALLNAME:TARGET%を抱きしめた
-	PRINTFORMW %CALLNAME:TARGET%의 すらりとした팔と다리が%CALLNAME:MASTER%に絡みつき、사정を促してきた
+	PRINTFORMW %CALLNAME:TARGET%のすらりとした腕と脚が%CALLNAME:MASTER%に絡みつき、射精を促してきた
 	CFLAG:810 = 90
 ELSEIF D == 90
 	PRINTFORMW 締めつけてくる%CALLNAME:TARGET%を味わいながら、%CALLNAME:MASTER%は彼女のアヌスに指を差し入れてみた
-	PRINTFORMW 嬌声とともに%CALLNAME:TARGET%의 身体が跳ね、女膣にはさざ波が走っていく
+	PRINTFORMW 嬌声とともに%CALLNAME:TARGET%の身体が跳ね、女膣にはさざ波が走っていく
 	PRINTFORMW %CALLNAME:MASTER%をとがめる声は艶にまみれており、すぐに溶け出して、あたりを甘く染め上げていった
 	CFLAG:810 = 100
 ELSEIF D == 100
@@ -7932,11 +7932,11 @@ ELSEIF D == 100
 	CFLAG:810 = 110
 ELSEIF D == 110
 	PRINTFORMW %CALLNAME:MASTER%は、いささか乱暴に%CALLNAME:TARGET%に押し入り、剛直をつき立てた
-	PRINTFORMW 激しい突き込みにも慣れ、彼女は肉の悦びに浮かされながら更なる쾌感を求めてくる
+	PRINTFORMW 激しい突き込みにも慣れ、彼女は肉の悦びに浮かされながら更なる快感を求めてくる
 	CFLAG:810 = 120
 ELSE
-	PRINTFORMW つながったまま%CALLNAME:TARGET%의 身体をきつく引きつけ、가랑이を責め立ててやった
-	PRINTFORMW 膣奥を突かれる쾌락に身をくねらせながら、%CALLNAME:TARGET%は潤んだ瞳で%CALLNAME:MASTER%を見つめている
+	PRINTFORMW つながったまま%CALLNAME:TARGET%の身体をきつく引きつけ、股間を責め立ててやった
+	PRINTFORMW 膣奥を突かれる快楽に身をくねらせながら、%CALLNAME:TARGET%は潤んだ瞳で%CALLNAME:MASTER%を見つめている
 	CFLAG:810 = 200
 ENDIF
 
@@ -7947,37 +7947,37 @@ ENDIF
 D = CFLAG:810 
 
 IF D >= 100 || D <= 9 
-	PRINTFORMW %CALLNAME:TARGET%의 腸壁を%CALLNAME:MASTER%の剛直がしごき上げていく…
-	PRINTFORMW 쾌락に朦朧としているのか、%CALLNAME:TARGET%의 瞳の焦点が定まらない…
+	PRINTFORMW %CALLNAME:TARGET%の腸壁を%CALLNAME:MASTER%の剛直がしごき上げていく…
+	PRINTFORMW 快楽に朦朧としているのか、%CALLNAME:TARGET%の瞳の焦点が定まらない…
 	CFLAG:810 = 10
 ELSEIF D == 10
-	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%의 奥深くまで挿し込んだ陰茎をじりじりと引き抜くと、再び一気にうずめにかかった
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の奥深くまで挿し込んだ陰茎をじりじりと引き抜くと、再び一気にうずめにかかった
 	PRINTFORMW %CALLNAME:TARGET%は気持ちよさそうな声を上げ、盛んに尻を振っている
 	CFLAG:810 = 20
 ELSEIF D == 20
-	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%의 菊門を욕망の赴くまま責め続けた…
-	PRINTFORMW 페니스を受け入れた彼女の声には、苦悶と悦楽の両方が入り乱れている…
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%の菊門を欲望の赴くまま責め続けた…
+	PRINTFORMW ペニスを受け入れた彼女の声には、苦悶と悦楽の両方が入り乱れている…
 	CFLAG:810 = 30
 ELSEIF D == 30
-	PRINTFORMW 陰茎を直腸に押し入れたまま、%CALLNAME:TARGET%의 豊かな유방を손を伸ばした
-	PRINTFORMW 尻と가슴からの쾌感に%CALLNAME:TARGET%의 背が弓なりにそりかえり、嬌声がほとばしった
+	PRINTFORMW 陰茎を直腸に押し入れたまま、%CALLNAME:TARGET%の豊かな乳房を手を伸ばした
+	PRINTFORMW 尻と胸からの快感に%CALLNAME:TARGET%の背が弓なりにそりかえり、嬌声がほとばしった
 	CFLAG:810 = 40
 ELSEIF D == 40
-	PRINTFORMW えぐるようにアヌスの奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って입をぱくぱくさせた
+	PRINTFORMW えぐるようにアヌスの奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って口をぱくぱくさせた
 	PRINTFORMW 肛悦に顔をゆがめ、%CALLNAME:MASTER%の動きに翻弄されている%CALLNAME:TARGET%…
 	PRINTFORMW 乱れた直腸がうねりをうっている
 	CFLAG:810 = 50
 ELSEIF D == 50
-	PRINTFORMW ゆったりとした動きで大きく페니스を出し入れしていると、%CALLNAME:TARGET%의 尻肉が淫らに迎えにやってきた
-	PRINTFORMW トロトロに解された腸内は%CALLNAME:MASTER%の페니스を嬉しそうに愛でている…
+	PRINTFORMW ゆったりとした動きで大きくペニスを出し入れしていると、%CALLNAME:TARGET%の尻肉が淫らに迎えにやってきた
+	PRINTFORMW トロトロに解された腸内は%CALLNAME:MASTER%のペニスを嬉しそうに愛でている…
 	CFLAG:810 = 60
 ELSEIF D == 60
 	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME:TARGET%をかき抱き、いきり立った剛直で腸内をかき混ぜる…
 	PRINTFORMW 彼女は尻を前後にゆすり、%CALLNAME:MASTER%の動きに合わせてきた
 	CFLAG:810 = 70
 ELSEIF D == 70
-	PRINTFORMW %CALLNAME:MASTER%はふしだらな尻丘を両손で捕まえ、がつがつと音を立てそうな勢いで責め立てた
-	PRINTFORMW 大きな振幅で페니스が外れそうになるたびに、%CALLNAME:TARGET%はあわてて追い腰を使ってくる…
+	PRINTFORMW %CALLNAME:MASTER%はふしだらな尻丘を両手で捕まえ、がつがつと音を立てそうな勢いで責め立てた
+	PRINTFORMW 大きな振幅でペニスが外れそうになるたびに、%CALLNAME:TARGET%はあわてて追い腰を使ってくる…
 	CFLAG:810 = 80
 ELSEIF D == 80
 	PRINTFORMW %CALLNAME:MASTER%は結合部を密着させると、アヌスに深く収めたまま%CALLNAME:TARGET%を抱きしめた
@@ -7985,20 +7985,20 @@ ELSEIF D == 80
 	PRINTFORMW 二人は肛姦を愉しみつつ、舌と舌の交換に夢中になっている
 	CFLAG:810 = 90
 ELSEIF D == 90
-	PRINTFORMW %CALLNAME:MASTER%は締めつけてくる尻孔の感触を堪能しながら、%CALLNAME:TARGET%의 女の部分に指を送った
+	PRINTFORMW %CALLNAME:MASTER%は締めつけてくる尻孔の感触を堪能しながら、%CALLNAME:TARGET%の女の部分に指を送った
 	PRINTFORMW 前後を一緒に責められて、あられもなく喘ぐ%CALLNAME:TARGET%…
-	PRINTFORMW 淫らにうごめく애널だけでなく、ほころんだ女陰からも熱い점액がとうとうと湧き出ている
+	PRINTFORMW 淫らにうごめくアナルだけでなく、ほころんだ女陰からも熱い粘液がとうとうと湧き出ている
 	CFLAG:810 = 100
 ELSEIF D == 100
 	PRINTFORMW %CALLNAME:TARGET%に抱きよせ、押し付けるようにして尻をぐりぐりしてやると、開発された直腸が性器のように蠢いた
-	PRINTFORMW 애널を突き上げ、抜き差しするたび、%CALLNAME:TARGET%は大きく身体を仰け反らせる
+	PRINTFORMW アナルを突き上げ、抜き差しするたび、%CALLNAME:TARGET%は大きく身体を仰け反らせる
 	CFLAG:810 = 110
 ELSEIF D == 110
-	PRINTFORMW %CALLNAME:MASTER%は、いささか乱暴に%CALLNAME:TARGET%의 肛門に押し入り、剛直をつき立てた
-	PRINTFORMW 激しい突き込みにも慣れ、彼女は肉の悦びに浮かされながら更なる쾌感を求めてくる
+	PRINTFORMW %CALLNAME:MASTER%は、いささか乱暴に%CALLNAME:TARGET%の肛門に押し入り、剛直をつき立てた
+	PRINTFORMW 激しい突き込みにも慣れ、彼女は肉の悦びに浮かされながら更なる快感を求めてくる
 	CFLAG:810 = 120
 ELSE
-	PRINTFORMW つながったまま%CALLNAME:TARGET%의 身体をきつく引きつけ、애널を責め立ててやった
+	PRINTFORMW つながったまま%CALLNAME:TARGET%の身体をきつく引きつけ、アナルを責め立ててやった
 	PRINTFORMW 彼女はなすがままに剛直を受け入れ、嬌声を上げている
 	CFLAG:810 = 200
 ENDIF
@@ -8013,47 +8013,47 @@ D = CFLAG:811
 E = CFLAG:812
 
 IF D >=200 || D <= 9
-	PRINTFORMW %CALLNAME:TARGET%は唾液と점액で光る唇で亀머리部を包み、舌を絡めながら粘膜を擦りあげてきた…
+	PRINTFORMW %CALLNAME:TARGET%は唾液と粘液で光る唇で亀頭部を包み、舌を絡めながら粘膜を擦りあげてきた…
 	CFLAG:811 = 10
 ELSEIF D == 10
-	PRINTFORMW 입の奥まで陰茎を差し入れると、머리を前後に動かす%CALLNAME:TARGET%…
-	PRINTFORMW 페니스전체唾液を塗りつけ、熱心にしゃぶっている
+	PRINTFORMW 口の奥まで陰茎を差し入れると、頭を前後に動かす%CALLNAME:TARGET%…
+	PRINTFORMW ペニス全体に唾液を塗りつけ、熱心にしゃぶっている
 	CFLAG:811 = 20
 ELSEIF D == 20
-	PRINTFORMW 페니스の穂先を啄むように唇で覆い、鈴입に残る정액を舌ですくいだそうとする%CALLNAME:TARGET%…
+	PRINTFORMW ペニスの穂先を啄むように唇で覆い、鈴口に残る精液を舌ですくいだそうとする%CALLNAME:TARGET%…
 	PRINTFORMW ときおり甘く歯をたてては、%CALLNAME:MASTER%の反応を窺ってくる
 	CFLAG:811 = 30
 ELSEIF D == 30
-	PRINTFORMW %CALLNAME:TARGET%は唇で亀머리を押さえ、손で陰茎を根元から上下に扱いてきた…
-	PRINTFORMW なめらかな%CALLNAME:TARGET%의 손がひんやりとして気持ち良い
+	PRINTFORMW %CALLNAME:TARGET%は唇で亀頭を押さえ、手で陰茎を根元から上下に扱いてきた…
+	PRINTFORMW なめらかな%CALLNAME:TARGET%の手がひんやりとして気持ち良い
 	CFLAG:811 = 40
 ELSEIF D == 40
-	PRINTFORMW %CALLNAME:TARGET%は페니스を입の奥まで差し入れ、熱い粘膜と舌で押し包むと、根元を손でくるみ、指で甘くしめつけてきた…
+	PRINTFORMW %CALLNAME:TARGET%はペニスを口の奥まで差し入れ、熱い粘膜と舌で押し包むと、根元を手でくるみ、指で甘くしめつけてきた…
 	CFLAG:811 = 50
 ELSEIF D == 50
-	PRINTFORMW %CALLNAME:TARGET%は、塗りたくった唾液を로션代わりにして両손で페니스を扱いてきた…
-	PRINTFORMW 페니스の先へはくちづけるように唇を這わせ、優しく甘咬みしている
+	PRINTFORMW %CALLNAME:TARGET%は、塗りたくった唾液をローション代わりにして両手でペニスを扱いてきた…
+	PRINTFORMW ペニスの先へはくちづけるように唇を這わせ、優しく甘咬みしている
 	CFLAG:811 = 60
 ELSEIF D == 60
-	PRINTFORMW 亀머리部を입に含み、唾液のこぼれるままに舌を絡める%CALLNAME:TARGET%…
-	PRINTFORMW 両の손は陰茎と袋を優しく撫でまわしている
+	PRINTFORMW 亀頭部を口に含み、唾液のこぼれるままに舌を絡める%CALLNAME:TARGET%…
+	PRINTFORMW 両の手は陰茎と袋を優しく撫でまわしている
 	CFLAG:811 = 70
 ELSEIF D == 70
-	PRINTFORMW %CALLNAME:TARGET%は입の奥まで페니스を咥えこみ、吸い付いてきた…
-	PRINTFORMW 입腔の粘膜と페니스の粘膜を絡め아이ながら、%CALLNAME:MASTER%の陰嚢を転がすように揉んでいる
+	PRINTFORMW %CALLNAME:TARGET%は口の奥までペニスを咥えこみ、吸い付いてきた…
+	PRINTFORMW 口腔の粘膜とペニスの粘膜を絡めあいながら、%CALLNAME:MASTER%の陰嚢を転がすように揉んでいる
 	CFLAG:811 = 80
 ELSE
-	PRINTFORMW %CALLNAME:TARGET%は亀머리の穂先を입に含むと、両손を%CALLNAME:MASTER%の陰嚢へ送ってきた
-	PRINTFORMW 指が這いまわる감각とともに、陰茎にかかる%CALLNAME:TARGET%의 熱い鼻息も쾌い
+	PRINTFORMW %CALLNAME:TARGET%は亀頭の穂先を口に含むと、両手を%CALLNAME:MASTER%の陰嚢へ送ってきた
+	PRINTFORMW 指が這いまわる感覚とともに、陰茎にかかる%CALLNAME:TARGET%の熱い鼻息も快い
 	CFLAG:811 = 200
 ENDIF
 ;行間
 PRINTFORML
 IF E >= 100 || E <=9
-	PRINTFORMW %CALLNAME:MASTER%は가랑이を立ち上る쾌感に身を任せ、펠라치오に夢中な彼女を観賞することにした
+	PRINTFORMW %CALLNAME:MASTER%は股間を立ち上る快感に身を任せ、フェラチオに夢中な彼女を観賞することにした
 	CFLAG:812 = 10
 ELSEIF E == 10
-	PRINTFORMW %CALLNAME:MASTER%は熱心に애무してくる彼女の머리を撫でながら、페니스への봉사を愉しんだ
+	PRINTFORMW %CALLNAME:MASTER%は熱心に愛撫してくる彼女の頭を撫でながら、ペニスへの奉仕を愉しんだ
 	CFLAG:812 = 20
 ELSE
 	PRINTFORMW 這いまわる指、舌、唇の感触に%CALLNAME:MASTER%はじわじわ追い立てられていった
@@ -8078,7 +8078,7 @@ ELSEIF SELECTCOM == PREVCOM || BASE:1 == 0
 ENDIF
 
 ;◆科白
-;強い拒絶「！」多눈
+;強い拒絶「！」多目
 IF P < 1000
 	IF D >= 100 || D <= 9
 		PRINTFORMW 「い、痛っ！いきなりそんなの入るわけ、くぅぅっ！？」
@@ -8100,7 +8100,7 @@ IF P < 1000
 		CFLAG:800 = 60
 	ENDIF
 	
-;아픔はあるけど아픔だけではない…ような
+;痛みはあるけど痛みだけではない…ような
 ELSEIF P < 6000
 	IF E >= 100 || E <= 9
 		PRINTFORMW 「…なんでお尻なんかで…するの…」
@@ -8119,7 +8119,7 @@ ELSEIF P < 6000
 		PRINTFORMW 「ううっ！またっ、そこなの…んっ！」
 		CFLAG:801 = 100
 	ENDIF
-;表では부정
+;表では否定
 ELSEIF 6000 <= P
 	IF F >= 100 || F <= 9
 		PRINTFORMW 「…こ、こんなのっ…普通にっ、すればいいでしょっ…やぁ」
@@ -8146,25 +8146,25 @@ ELSEIF 6000 <= P
 ENDIF
 
 ;◆主に描写文
-;強い拒絶「！」多눈
+;強い拒絶「！」多目
 IF P < 1000
 	IF G >= 100 || G <= 9
-		PRINTFORMW %CALLNAME:TARGET%は애널を抉る페니스の感触にじたばたと暴れている…
+		PRINTFORMW %CALLNAME:TARGET%はアナルを抉るペニスの感触にじたばたと暴れている…
 		CFLAG:803 = 10
 	ELSEIF G == 10
-		PRINTFORMW %CALLNAME:TARGET%의 尻孔は堅いまま、陰茎の侵入に強く저항している…
+		PRINTFORMW %CALLNAME:TARGET%の尻孔は堅いまま、陰茎の侵入に強く抵抗している…
 		CFLAG:803 = 20
 	ELSEIF G == 20
 		PRINTFORMW %CALLNAME:TARGET%は肛門に押し入る剛直に苦悶の声を上げている
 		CFLAG:803 = 30
 	ELSE
-		PRINTFORMW %CALLNAME:MASTER%が腰を動かすたびに、%CALLNAME:TARGET%はその身体を小刻みに震わせ、눈に涙を滲ませた…
+		PRINTFORMW %CALLNAME:MASTER%が腰を動かすたびに、%CALLNAME:TARGET%はその身体を小刻みに震わせ、目に涙を滲ませた…
 		CFLAG:803 = 100
 	ENDIF
-;아픔はあるけど아픔だけでもない…ような
+;痛みはあるけど痛みだけでもない…ような
 ELSEIF P < 6000
 	IF H >= 100 || H <= 9
-		PRINTFORMW %CALLNAME:TARGET%は尻を襲う충격に眉を曇らせた
+		PRINTFORMW %CALLNAME:TARGET%は尻を襲う衝撃に眉を曇らせた
 		CFLAG:804 = 10
 	ELSEIF H == 10
 		PRINTFORMW %CALLNAME:TARGET%は、出し入れされる陰茎で強制的に排泄感を刺激され、羞恥とともに身悶えている
@@ -8176,30 +8176,30 @@ ELSEIF P < 6000
 		PRINTFORMW 時折大きく踏み込むと、腸内を埋め尽くす剛直の強い圧迫感に%CALLNAME:TARGET%が息を飲む音が聞こえた…
 		CFLAG:804 = 40
 	ELSEIF H == 40
-		PRINTFORMW 後ろの穴を犯されたまま%CALLNAME:TARGET%が睨んできたが、눈に前ほどの힘はない
-		PRINTFORMW じっと%CALLNAME:TARGET%의 見かえすと、うろたえたように視線が逸らされた
+		PRINTFORMW 後ろの穴を犯されたまま%CALLNAME:TARGET%が睨んできたが、目に前ほどの力はない
+		PRINTFORMW じっと%CALLNAME:TARGET%の見かえすと、うろたえたように視線が逸らされた
 		CFLAG:804 = 50
 	ELSE
-		PRINTFORMW %CALLNAME:TARGET%의 菊門は쾌락を得るとまではいかなくても、아픔だけでもないようだ…
+		PRINTFORMW %CALLNAME:TARGET%の菊門は快楽を得るとまではいかなくても、痛みだけでもないようだ…
 		CFLAG:804 = 100
 	ENDIF
-;表では부정
+;表では否定
 ELSEIF 6000 <= P
 	IF I >= 100 || I <= 9
-		PRINTFORMW %CALLNAME:TARGET%はなんとか애널からの쾌感をごまかそうとしている…
+		PRINTFORMW %CALLNAME:TARGET%はなんとかアナルからの快感をごまかそうとしている…
 		PRINTFORMW 我慢する彼女をゆっくりと突いてやると、ふるふると身体が震えていった
 		CFLAG:805 = 10
 	ELSEIF I == 10
-		PRINTFORMW 延々とねっとりした抽挿を続けると、きつく結ばれた입から一瞬甘くうめく声が漏れた…
-		PRINTFORMW %CALLNAME:TARGET%의 身体がさっと強張り、頬には朱がさしている
+		PRINTFORMW 延々とねっとりした抽挿を続けると、きつく結ばれた口から一瞬甘くうめく声が漏れた…
+		PRINTFORMW %CALLNAME:TARGET%の身体がさっと強張り、頬には朱がさしている
 		CFLAG:805 = 20
 	ELSEIF I == 20
-		PRINTFORMW 尻孔を犯される감각の변화に愕然とした様子の%CALLNAME:TARGET%…
+		PRINTFORMW 尻孔を犯される感覚の変化に愕然とした様子の%CALLNAME:TARGET%…
 		PRINTFORMW 懇ろに奥をこすってやると、いやいやするように首を振り乱した
 		CFLAG:805 = 30
 	ELSEIF I == 30
 		PRINTFORMW 依然、%CALLNAME:TARGET%は直腸への圧迫に身じろぎしている
-		PRINTFORMW しかし아픔ではなく쾌感から逃れようとしているためか、その弱弱しい動きはひどくなまめかしい
+		PRINTFORMW しかし痛みではなく快感から逃れようとしているためか、その弱弱しい動きはひどくなまめかしい
 		CFLAG:805 = 40
 	ELSE
 		PRINTFORMW （なんてこと…お尻に入れられてるのに、%CSTR:일인칭%きっと濡れてしまってるわ････）
@@ -8272,16 +8272,16 @@ ELSEIF ABL:5 == 3
 		CFLAG:808 = 200
 	ENDIF
 	IF E >= 100 || E <= 9
-		PRINTFORMW %CALLNAME:TARGET%의 身体は満발に抗うこともできず、%CALLNAME:PLAYER%の動きに翻弄されている…
+		PRINTFORMW %CALLNAME:TARGET%の身体は満足に抗うこともできず、%CALLNAME:PLAYER%の動きに翻弄されている…
 		CFLAG:809 = 10
 	ELSEIF E == 10
-		PRINTFORMW 少し強めに%CALLNAME:TARGET%의 奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って입をぱくぱくさせた
+		PRINTFORMW 少し強めに%CALLNAME:TARGET%の奥を突き込んでやると、%CALLNAME:TARGET%は仰け反って口をぱくぱくさせた
 		CFLAG:809 = 20
 	ELSEIF E == 20
-		PRINTFORMW %CALLNAME:TARGET%의 애널を突き上げ、抜き差しするたび、%CALLNAME:TARGET%は大きく身体を仰け反らせる
+		PRINTFORMW %CALLNAME:TARGET%のアナルを突き上げ、抜き差しするたび、%CALLNAME:TARGET%は大きく身体を仰け反らせる
 		CFLAG:809 = 30
 	ELSE
-		PRINTFORMW 言葉とは裏腹に、肛姦から逃れようとしていた힘はすっかり影を潜め、%CALLNAME:TARGET%はなすがままに剛直を受け入れている
+		PRINTFORMW 言葉とは裏腹に、肛姦から逃れようとしていた力はすっかり影を潜め、%CALLNAME:TARGET%はなすがままに剛直を受け入れている
 		PRINTFORMW どうかすると%CALLNAME:MASTER%の抽挿に合わせて、迎えにくる動きを見せることすら…
 		CFLAG:809 = 100
 	ENDIF
@@ -8292,6 +8292,6 @@ ELSEIF P < 1000
 	PRINTFORMW %CALLNAME:TARGET%は、出し入れされる陰茎で強制的に排泄感を刺激され、羞恥とともに身悶えている
 ELSE
 	PRINTFORMW 「お尻ばっかりね、この頃」
-	PRINTFORMW 「でも조교ってこういうことよね…くぅ」
+	PRINTFORMW 「でも調教ってこういうことよね…くぅ」
 	PRINTFORMW %CALLNAME:MASTER%が腰を動かすたびに、%CALLNAME:TARGET%はその身体を小刻みに震わせている
 ENDIF

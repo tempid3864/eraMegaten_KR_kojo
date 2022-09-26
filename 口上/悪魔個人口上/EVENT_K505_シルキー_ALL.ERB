@@ -32,15 +32,15 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K505 → EVENTTRAIN_K505_12
+;예： EVENTTRAIN_K505 → EVENTTRAIN_K505_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K505,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な설명や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN関係
@@ -6460,7 +6460,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7845,7 +7845,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 65
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -7940,7 +7940,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -8035,7 +8035,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -8315,7 +8315,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = 이 편이 마음에 편합니다！
 			ENDIF
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 		IF RAND:3 == 0
 			LOCALS = 봉사의 시간이군요！
@@ -8326,7 +8326,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = %CSTR:일인칭%、요정 %CALLNAME%라고 합니다。
 			LOCALS:1 = 봉사라면 맡겨주시길。
 		ENDIF
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -8337,7 +8337,7 @@ SELECTCASE TFLAG:전투이벤트
 				ELSE
 					LOCALS = ……우연이군요。
 				ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 막혀 버렸네요……
@@ -8354,7 +8354,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = ……안 되는 거군요。
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -8418,7 +8418,7 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS = 정말 맞아 주지 않는군요。
 		ENDIF
-	;회피した
+	;회피했다
 	CASE 18
 		IF RAND:8 == 0
 			LOCALS = 회피했습니다！
@@ -8455,7 +8455,7 @@ SIF TALENT:ARG:9
 CALLFORM SKILL_EFECT_{LOCAL}
 
 ;-------------------------------------------------
-;特定스킬/行動
+;특정스킬/行動
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;빙결が得意
@@ -8546,7 +8546,7 @@ ELSEIF LOCAL == 2301
 		LOCALS = 이곳은 좋지 않을지도 모르네요。
 	ENDIF
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;화염
 ELSEIF RANGE(LOCAL,701, 799)
@@ -8686,7 +8686,7 @@ ELSEIF RANGE(LOCAL,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(LOCAL,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(LOCAL,501, 505)
 		IF RAND:2
 			LOCALS = %RESULTS%！

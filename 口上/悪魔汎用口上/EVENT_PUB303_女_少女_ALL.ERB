@@ -915,7 +915,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 황홀한 눈동자로 %조사처리(CALLNAME,"는")% 고간을 %CALLNAME:MASTER%의 허리에 비비고 있다。
 			ELSE
 				PRINTFORMW 「에헤헤、기다리고 있었어、%CSTR:이인칭%♪」
-				PRINTFORML %조사처리(CALLNAME,"는")% 침대에 걸터앉아 욕심 가득한 눈으로 %CALLNAME:MASTER%의 가랑이를 보았다
+				PRINTFORMW %조사처리(CALLNAME,"는")% 침대에 걸터앉아 욕심 가득한 눈으로 %CALLNAME:MASTER%의 가랑이를 보았다
 				;KR판 임의수정, TALENT:남자 > HAVE_PENIS(TARGET)
 				PRINTFORMW 그리고 자신의 가랑이를 벌려 \@HAVE_PENIS(TARGET) ? 쿠퍼# 애\@액에 젖은 음부를 과시했다
 				PRINTFORMW 「오늘도 잔뜩 즐기자♪ 오늘은 %조사처리(CSTR:일인칭,"를")% 범하고 싶어? 그렇지 않으면 %조사처리(CSTR:이인칭,"가")% 범해지고 싶어? 우후후♥」
@@ -6655,7 +6655,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「으～응、어렵지만 해볼게」
 					PRINTFORM %조사처리(CALLNAME,"는")% 자신의 가슴을 쳐다보더니
 				;種族が人間で、「恋慕」or「親愛」でおっぱいがでかい場合
-				ELSEIF (TALENT:거유 || TALENT:폭유) && (ABL:종족 == 0) &&  (TALENT:연모 || TALENT:친애)
+				ELSEIF BUST() > 3 && (ABL:종족 == 0) &&  (TALENT:연모 || TALENT:친애)
 					IF RAND:2 == 0
 						PRINTFORMW 「반 애들한테 이런 저런 얘기를 들었지만、커다란 가슴은 ～이～런걸 위해서 있던거네♥」
 					ELSE
@@ -6823,7 +6823,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「자지를 끼우는 거야？…이렇게?」
 					ELSE
 						PRINTFORMW 「オマンコに入れなくていいの？」
-					ENDIF
+				ENDIF
 				ENDIF
 				CFLAG:347 = 1
 			;2번째 이후
@@ -7211,7 +7211,7 @@ SELECTCASE SELECTCOM
 			;연모, 친애
 			IF TALENT:연모 || TALENT:친애
 				IF TALENT:아내
-					PRINTFORMl 「이 나라에선、가슴의 한쪽은 남편분 꺼라는데♪ 그러니까、%CSTR:이인칭%의 마음대로 해도 괜찮아♥」
+					PRINTFORML 「이 나라에선、가슴의 한쪽은 남편분 꺼라는데♪ 그러니까、%CSTR:이인칭%의 마음대로 해도 괜찮아♥」
 					PRINTFORMW %조사처리(CALLNAME,"는")% 황홀해하면서 가슴을 내밀었다。
 				ELSE
 					PRINTFORML 「%CSTR:이인칭%도 젖 먹고 싶어？ 후후후、아기 같아%CSTR:이인칭%」
@@ -9223,7 +9223,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			ELSEIF CFLAG:369 < 2 || FLAG:7 == 2
 				PRINTFORMW 「싫어엇!!」
-				PRINTFORM 무엇을 당하는 것인지 목구멍 깊숙이 페니스가 찔러오고 나서야 겨우 이해한 %조사처리(CALLNAME,"는")% 싫다며 목을 흔들었지만, 
+				PRINTFORML 무엇을 당하는 것인지 목구멍 깊숙이 페니스가 찔러오고 나서야 겨우 이해한 %조사처리(CALLNAME,"는")% 싫다며 목을 흔들었지만, 
 				PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 손에 붙잡힌 머리를 거칠게 흔들며 구강을 오나홀 대신 사용하듯이 격렬한게 목을 범해갔다
 				PRINTFORMW 「응 우읏…하아…하아…콜록 콜록」
 				PRINTFORMW 「이런 심한 일은 싫어…」
@@ -9464,7 +9464,6 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		IF TEQUIP:21
 			;처음
-			IF CFLAG:375 == 0			;처음
 			IF CFLAG:375 == 0
 				IF ABL:마조끼 >= 3
 					PRINTFORMW 「おなかくるしいけど……」
@@ -13668,7 +13667,7 @@ SELECTCASE SELECTCOM
 ;600번대,비전투원 커맨드
 ;=================================================
 ;-------------------------------------------------
-;600,戦闘訓練
+;600,전투훈련
 ;-------------------------------------------------
 	CASE 600
 		CALL TRAIN_MESSAGE
@@ -14687,7 +14686,7 @@ IF TFLAG:2 > 0
 			ENDIF
 			CFLAG:239 = 1
 		ENDIF
-	;セックス系
+	;섹스계
 	ELSE
 		;経験豊富なピクシーと童貞あなたの場合
 		IF NO:E == 4999 && EXP:PLAYER:성교경험 == 0 && (NO == 501 || NO == 514) && CFLAG:이벤트가입 == 2

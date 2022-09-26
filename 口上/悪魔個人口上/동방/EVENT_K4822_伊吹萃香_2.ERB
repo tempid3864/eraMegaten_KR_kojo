@@ -54,12 +54,12 @@
 
 ;-------------------------------------------------
 ;범용 구상의 작성에 사용하는 경우는, 4822→캐릭터번호가 아니라,
-;K4822_2_2→PUB회화타입番号　로 변경해서 사용해주세요
+;K4822_2_2→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K4822_2_2_ASSI.ERB
-;	Facility	:회화타입：조수時구상
+;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
@@ -67,7 +67,7 @@
 ;	002		2019/05/04		名無し					開始時구상が二重に표시される不具合を修正
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
-;	・기본항목(許可する항목を"○"に、許可しない항목を"×"に변경してください。)
+;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
 ;	+----+----+-------------------------------+
 ;	|番号|許可|ライセンス内容                 |
 ;	+----+----+-------------------------------+
@@ -91,9 +91,9 @@
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
-;既に구상のあるキャラや회화타입の別版の구상を作成する時に利用してください
+;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4822_2 → EVENTTRAIN_K4822_2_12
+;예： EVENTTRAIN_K4822_2 → EVENTTRAIN_K4822_2_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4822_2,ARG = 0
 SIF ARG == 1
@@ -254,7 +254,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 ENDIF
 
 ;-------------------------------------------------
-;簡易조수구상（Y1を조수のキャラ番号に置換、4822をキャラ番号に변경する) CFLAG203
+;간이 조수구상（Y1을 조수의 캐릭터번호로 치환, 4822을 캐릭터번호로 변경한다) CFLAG203
 ;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
@@ -283,7 +283,7 @@ IF ASSI < 0
 ;		ENDIF
 ;		CFLAG:203 = 2
 ;	ENDIF
-;구상のある조수が居ない場合は、通常の二回目以降の구상へ飛ぶ
+;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
 	CALL EVENTTRAIN_SECOND_K4822_2
 ENDIF
@@ -306,7 +306,7 @@ NEXT
 SIF K == 0 || WSTR:(K - 1) == ""
 	PRINTW
 ;-------------------------------------------------
-;조교 개시시（2번째 이후, 4822をキャラ番号に변경する）
+;조교 개시시（2번째 이후, 4822을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K4822_2
 
@@ -345,7 +345,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 		KSTR:(K++) = 「쩨쩨해。도깨비를 범하려 하는 악당은、더 호탕해야 해」
 	ENDIF
 	CFLAG:202 = 3
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 	KSTR:(K++) = 「아、왔구나」
 	KSTR:(K++) = 스이카는 애용하는 호리박으로 술을 즐기고 있다。
@@ -356,7 +356,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:4 == 0
 			KSTR:(K++) = 「흐흥、왠지 얼굴이 빨간 것 같은데ー？　%CSTR:일인칭%한테 빠져버렸다고 솔직하게 말해버려」
 			KSTR:(K++) = 스이카는 여유로운 표정을 짓고 있다。
@@ -375,7 +375,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			;WSTR:(K++) =
 		ELSEIF RAND:2 == 0
@@ -385,7 +385,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			;WSTR:(K++) =
 		ELSEIF RAND:2 == 0
@@ -396,7 +396,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ENDIF
 	;그 외, 공통
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			KSTR:(K++) = 
 		ELSEIF RAND:2 == 0
@@ -426,7 +426,7 @@ SIF K == 0 || WSTR:(K - 1) == ""
 
 ;-------------------------------------------------
 ;EVENTEND 관련（4822을 캐릭터번호로 치환）
-;조교終了時のセリフ
+;조교 종료시의 대사
 ;-------------------------------------------------
 @EVENTEND_K4822_2
 VARSET KSTR
@@ -446,7 +446,7 @@ K = 0
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
-;조교終了時のセリフ
+;조교 종료시의 대사
 ;--------------------------------------------------
 DRAWLINE
 ;반발각인Lv3
@@ -464,7 +464,7 @@ ELSEIF MARK:2 == 2
 	WSTR:(K++) = 「하지만、아직 갈 길이 멀었어。응」
 	KSTR:(K++) =  예전보다 좀 얌전해진 것 같아보인다。조교의 성과는 나오고 있는 것 같다。
 	CFLAG:219 = 2
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	KSTR:(K++) = 「끄、끝났지？ 빨리 나가」
 	WSTR:(K++) = 시트를 머리부터 뒤집어쓴 스이카는、부끄러워 하는 표정을 지었다。
@@ -474,7 +474,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			KSTR:(K++) = 「하아、하아……。%조사처리(CSTR:일인칭,"가")%、먼저 턱을 내밀어 버리다니……」
 			KSTR:(K++) = 「절륜하다는 말조차도 부족하네……。%CSTR:이인칭%、정말로 뭐하는 사람이야？」
@@ -549,7 +549,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;想定外の구상だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -567,7 +567,7 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;関数초기化
+;함수초기화
 ;-------------------------------------------------
 VARSET KSTR
 VARSET WSTR
@@ -597,7 +597,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-		;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 						IF RAND:2 == 0
 							KSTR:(K++) = 「츄……츄……후아」
 							WSTR:(K++) = 「좀 더、좀 더어。애태우지 마」
@@ -639,7 +639,7 @@ SELECTCASE SELECTCOM
 					CFLAG:300 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY ;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -835,7 +835,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -859,7 +859,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-					;랜덤で구상が変化する（使わない場合はすべて同じにすればよい）
+					;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 					;빈유の場合５択で上２つ추가、並以上の場合下３のみ。うまくいってるかわからん！
 						IF RAND:5 == 0
 							KSTR:(K++) = 「가슴？ 어쩔 수 없네ー、%조사처리(CSTR:이인칭,"는")% 응석받이니까ー」
@@ -914,7 +914,7 @@ SELECTCASE SELECTCOM
 					CFLAG:306 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -968,7 +968,7 @@ SELECTCASE SELECTCOM
 					CFLAG:307 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -1038,7 +1038,7 @@ SELECTCASE SELECTCOM
 					CFLAG:308 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -1211,7 +1211,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:311 = 4
 			ENDIF
-			;순종Lv3以上
+			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:311 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 				;WSTR:(K++) = 
 				CFLAG:311 = 3
@@ -1250,7 +1250,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 					CFLAG:435 = 4
 				ENDIF
-				;순종Lv3以上
+				;순종Lv3 이상
 				IF ABL:0 >= 3 && (CFLAG:435 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 					;WSTR:(K++) = 
 					CFLAG:435 = 3
@@ -1261,7 +1261,7 @@ SELECTCASE SELECTCOM
 					CFLAG:435 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -1293,7 +1293,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 					CFLAG:436 = 4
 				ENDIF
-				;순종Lv3以上
+				;순종Lv3 이상
 				IF ABL:0 >= 3 && (CFLAG:436 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 					;WSTR:(K++) = 
 					CFLAG:436 = 3
@@ -1304,7 +1304,7 @@ SELECTCASE SELECTCOM
 					CFLAG:436 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -1342,7 +1342,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:442 = 4
 			ENDIF
-			;순종Lv3以上
+			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:442 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 				;WSTR:(K++) = 
 				CFLAG:442 = 3
@@ -1383,7 +1383,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 					CFLAG:444 = 4
 				ENDIF
-				;순종Lv3以上
+				;순종Lv3 이상
 				IF ABL:0 >= 3 && (CFLAG:444 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 					;WSTR:(K++) = 
 					CFLAG:444 = 3
@@ -1394,7 +1394,7 @@ SELECTCASE SELECTCOM
 					CFLAG:444 = 2
 				ENDIF
 			ENDIF
-		;촉수あり
+		;촉수있음
 		ELSE
 			GOTO SHOKUSHU_PLAY;←CASE 44949を使うならコメントアウトを外す
 		ENDIF
@@ -1442,7 +1442,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;애무계 커맨드그외
+;애무계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -1530,7 +1530,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 				CFLAG:312 = 4
 			ENDIF
-			;순종Lv3以上
+			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:312 < 2 || FLAG:7 == 2) && KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 				IF RAND:3 == 0
 					KSTR:(K++) = 「츄……응……후앗」
@@ -1963,7 +1963,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 ENDSELECT
 ;-------------------------------------------------
-;커뮤니케이션계 커맨드그외
+;커뮤니케이션계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2724,7 +2724,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;도구사용 커맨드그외
+;도구사용 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -2753,7 +2753,7 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;조교자도구계コマンド
+;조교자도구계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("대조교자도구계")
 SELECTCASE SELECTCOM
@@ -3269,7 +3269,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조교자도구계コマンド그외
+;조교자도구계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -4147,7 +4147,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;섹스계 커맨드그외
+;섹스계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -4176,7 +4176,7 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;애널섹스계コマンド
+;애널섹스계 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("Ａ성교계")
 SELECTCASE SELECTCOM
@@ -4448,7 +4448,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;애널섹스계コマンド그외
+;애널섹스계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -5018,7 +5018,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;봉사계 커맨드그외
+;봉사계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -5522,7 +5522,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조교자봉사계 커맨드그외
+;조교자봉사계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -5958,7 +5958,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;SM계 커맨드그외
+;SM계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -6106,11 +6106,11 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;조수が気持ちよくて感じているセリフ
+		;조수가 기분 좋게 느끼고 있다 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;조수がこっちに来てと言うセリフ
+		;조수가 이리 오라고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;조수に大丈남편と言っているセリフ
+		;조수가 괜찮다고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;범해지며 강한 척을 하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
@@ -6433,7 +6433,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;조수에 의한 커맨드, 및 레즈플레이그외
+;조수에 의한 커맨드, 및 레즈플레이 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -6715,7 +6715,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;146,관장기＋플러그　해제すると方便
+;146,관장기＋플러그　해제할 때 쪽
 ;-------------------------------------------------
 	CASE 146
 		CALL TRAIN_MESSAGE
@@ -7130,7 +7130,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;하드한조교 커맨드그외
+;하드한조교 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -7979,7 +7979,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;167,촉수관장　極太の촉수が菊穴をふさぎ、体液を流し込んだ
+;167,촉수관장　극태 촉수가 항문을 막고, 체액을 부어넣는다
 ;-------------------------------------------------
 	CASE 167
 		CALL TRAIN_MESSAGE
@@ -8587,7 +8587,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;촉수계 커맨드그외
+;촉수계 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -8820,8 +8820,8 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 184
 		CALL TRAIN_MESSAGE
-		;TEQUIP:29でどこの場所選んでも同じ구상が出るように
-		;변경･場所ごとで変えたければ==にして数字をいじる
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록
+		;변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 		;폐빌딩=1　삼림=2　공원=4　냇가=8
 		IF TEQUIP:29
 			;처음
@@ -9682,7 +9682,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;=================================================
-;600番台,비전투원コマンド(특수커맨드)
+;600번대,비전투원 커맨드(특수커맨드)
 ;=================================================
 ;-------------------------------------------------
 ;600,기초훈련
@@ -9740,7 +9740,7 @@ SELECTCASE SELECTCOM
 ;			;초기페르소나추가
 			;ABL:초기페르소나 =
 			
-;			;초기페르소나能力변경
+;			;초기페르소나능력변경
 			;ABL:페르소나1데이터／스킬1 =
 			
 			;ABL:페르소나1데이터／습득스킬 =
@@ -9754,7 +9754,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		IF TALENT:이능자 && !TALENT:비전투원
 			;WSTR:(K++) =
-;			;能力변경
+;			;능력변경
 			;ABL:스킬1 = 
 			
 			;ABL:습득스킬
@@ -9779,7 +9779,7 @@ SELECTCASE SELECTCOM
 ;			;초기링크악마
 			;CFLAG:초기링크악마
 			
-;			;초기링크악마能力변경
+;			;초기링크악마능력변경
 			;ABL:초기변신악마스킬1
 			
 			;ABL:초기변신악마습득스킬
@@ -9810,7 +9810,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;특수커맨드그외
+;특수커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -9839,7 +9839,7 @@ ENDSELECT
 			ENDIF
 		ENDIF
 ;=================================================
-;派生コマンド
+;파생 커맨드
 ;=================================================
 ELSEIF RESULT == COMTYPE("派生系")
 SELECTCASE SELECTCOM
@@ -10425,9 +10425,9 @@ SELECTCASE SELECTCOM
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;マスターの페니스が当たって気持ちいいセリフ
+		;마스터의 페니스가 닿아서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
-		;二人分の정액飲ませてあげるセリフ
+		;2인분의 정액 마시게 해줄께 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
 		;능숙해졌네 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
@@ -10515,7 +10515,7 @@ SELECTCASE SELECTCOM
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -10567,7 +10567,7 @@ SELECTCASE SELECTCOM
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -10622,7 +10622,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;派生コマンド그외
+;파생 커맨드 그 외
 ;-------------------------------------------------
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -10652,7 +10652,7 @@ ENDSELECT
 		ENDIF
 ENDIF
 ;-------------------------------------------------
-;그 외、どれ系の조교かわからなかった奴(「CALL TRAIN_MESSAGE」は使わないでおく)
+;그 외, 어느 계통의 조교인지 몰랐던 녀셕(「CALL TRAIN_MESSAGE」は使わないでおく)
 ;-------------------------------------------------
 IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 SELECTCASE SELECTCOM
@@ -10681,11 +10681,11 @@ SIF K == 0 || WSTR:(K - 1) == ""
 
 
 ;-------------------------------------------------
-;윤간時の구상
-;CASE 0 内は必ず通るようになっており
-;RETURNで0を返すと、この後通常の윤간行動を出します
-;CFLAGは使っていません
-;COMF201_윤간内でLOCALを使っているので使いません
+;윤간시의 구상
+;CASE 0 안은 반드시 건너뛰게 되어있으며
+;RETURN에서 0을 반환하면, 이후 통상적인 윤간행동을 출력합니다
+;CFLAG는 사용하지 않습니다
+;COMF201_윤간 내에서 LOCAL을 사용하고 있으므로 사용하지 않습니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_RINKAN_K4822_2, ARG:1 , ARG:2
 
@@ -10696,10 +10696,10 @@ K = 0
 
 SELECTCASE ARG:1
 	CASE 0
-	;CASE 0はオリジナル윤간구상
-	;C:一回あたりの帰宅人数、D：興奮度増加(及び減少)
-	;CとDはオリジナル윤간구상内のみ使う
-	;C += 、D += を使う
+	;CASE 0은 오리지널 윤간 구상
+	;C:1회당 귀가 인수 D：흥분도 증가(및 감소)
+	;C와 D는 오리지널 윤간 구상 내에서만 사용
+	;C += 、D += 를 사용
 		IF ARG:2 == 1
 		;하드ON
 		
@@ -10708,7 +10708,7 @@ SELECTCASE ARG:1
 		
 		ENDIF
 	;하드계
-	;가슴を踏まれる（거유・폭유のみ）
+	;가슴을 밟힌다（거유・폭유만）
 	CASE 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
 			;연모, 친애
@@ -10741,11 +10741,11 @@ SELECTCASE ARG:1
 	CASE 3
 	
 	;담배빵
-	;興奮度が低く、반항적、꿋꿋함、프라이드높음、건방짐、저항を持っている
+	;흥분도가 낮고, 반항적, 꿋꿋함, 프라이드높음, 건방짐, 저항을 가지고 있다
 	CASE 4
 	
-	;地面に垂れた정액舐めとらせる
-	;마조끼３以上
+	;지면에 늘어진 정액 핥아먹인다
+	;마조끼３이상
 	CASE 5
 	
 	;몸에 낙서를 당하고 범해진다
@@ -10758,25 +10758,25 @@ SELECTCASE ARG:1
 	;음란系で目の前に棒並べられて、どれが欲しいか選ばせるとか（음란・창부のみ）
 	CASE 8
 	
-	;거유以上のキャラだと「その乳は飾りか？遊ばせてるんじゃねえ」とか罵られ파이즈리한다（거유・폭유のみ）
+	;거유 이상의 캐릭터라면 「그 젖은 장식이냐？ 쉬고 있지 말라고」등등 매도당하며 파이즈리한다（거유・폭유만）
 	CASE 9
 	
 	;挿れられるのだけは회피しようと必死に口と手で群がるチンポにご봉사する（恋幕・친애のみ）
 	CASE 10
 	
-	;;両穴突かれながら無理やり笑顔とピースサインとらされて記念촬영
+	;;양구멍을 뚫리면서 억지로 미소와 피스싸인을 취하게 시켜져 기념촬영
 	CASE 11
 	
-	;;輸姦後の後始末描写で、本人정액でどろどろにされてるのに周囲の男達の肉棒を舌で掃除させられてる
+	;;윤간후의 뒷처리 묘사에서, 본인 정액 투성이가 되었는데도 주위 남자들의 육봉을 혀로 청소시키고 있다
 	CASE 12
 	
 	;안에 사정당해도 즉시 다른 사람으로 교대
 	CASE 13
 	
-	;一斉사정で정액まみれ
+	;일제사정으로 정액투성이
 	CASE 14
 	
-	;;両穴突かれて同時사정
+	;;양구멍 찔리며 동시 사정
 	CASE 15
 	
 	;기승위+양겨드랑이잡
@@ -10806,7 +10806,7 @@ SIF K == 0 || WSTR:(K - 1) == ""
 RETURN 1 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG 관련（4822을 캐릭터번호로 치환）
-;パラメータ変化などをトリガーにした구상　CFLAG 221～260を사용
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_A（4822을 캐릭터번호로 치환）
@@ -10843,7 +10843,7 @@ VARSET WSTR
 VARSET NSTR
 K = 0
 ;-------------------------------------------------
-;사정개소변경時のテキスト　有効時はここで関数終了
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
 
 
@@ -11181,7 +11181,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
-	;大量사정				
+	;대량사정				
 	IF TFLAG:9 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11214,7 +11214,7 @@ IF TFLAG:9 > 0
 			CFLAG:230= 1	
 		ENDIF		
 	ENDIF
-	;通常				
+	;통상				
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11254,7 +11254,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A			
-	;大量사정					
+	;대량사정					
 	IF TFLAG:7 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11287,7 +11287,7 @@ IF TFLAG:7 > 0
 			CFLAG:232= 1	
 		ENDIF		
 	ENDIF	
-	;通常					
+	;통상					
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11329,7 +11329,7 @@ IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
 	;이라마치오로 사정
 	IF SELECTCOM == 140			
-		;大量사정						
+		;대량사정						
 		IF TFLAG:0 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11362,7 +11362,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-		;通常						
+		;통상						
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11397,7 +11397,7 @@ IF TFLAG:0 > 0
 		ENDIF	
 	;그 이외의 입사정
 	ELSE
-		;大量사정						
+		;대량사정						
 		IF TFLAG:0 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11431,7 +11431,7 @@ IF TFLAG:0 > 0
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
-		;通常						
+		;통상						
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11473,7 +11473,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A	
-	;大量사정					
+	;대량사정					
 	IF TFLAG:1 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11506,7 +11506,7 @@ IF TFLAG:1 > 0
 			CFLAG:234= 1	
 		ENDIF		
 	ENDIF	
-	;通常					
+	;통상					
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11546,7 +11546,7 @@ ENDIF
 ;-------------------------------------------------
 IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:34 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11579,7 +11579,7 @@ IF TFLAG:34 > 0
 			CFLAG:235= 1	
 		ENDIF		
 	ENDIF	
-	;通常					
+	;통상					
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11619,7 +11619,7 @@ W:K = 1
 ;-------------------------------------------------
 IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:16 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11652,7 +11652,7 @@ IF TFLAG:16 == 1
 			CFLAG:236= 1	
 		ENDIF		
 	ENDIF	
-	;通常					
+	;통상					
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11694,7 +11694,7 @@ IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11727,7 +11727,7 @@ IF TFLAG:2 > 0
 				CFLAG:237= 1	
 			ENDIF		
 		ENDIF	
-		;通常						
+		;통상						
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11762,7 +11762,7 @@ IF TFLAG:2 > 0
 		ENDIF
 	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11797,7 +11797,7 @@ IF TFLAG:2 > 0
 				CFLAG:238= 1	
 			ENDIF		
 		ENDIF	
-		;通常						
+		;통상						
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11833,7 +11833,7 @@ IF TFLAG:2 > 0
 		ENDIF
 	;그 외 섹스계
 	ELSE
-		;大量사정						
+		;대량사정						
 		IF TFLAG:2 > 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11867,7 +11867,7 @@ IF TFLAG:2 > 0
 				CFLAG:239= 1	
 			ENDIF		
 		ENDIF	
-		;通常						
+		;통상						
 		IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
@@ -11905,11 +11905,11 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A		
-	;大量사정					
+	;대량사정					
 	IF TFLAG:10 > 1
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -11943,7 +11943,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 			CFLAG:240= 1	
 		ENDIF		
 	ENDIF	
-	;通常					
+	;통상					
 	IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -12095,7 +12095,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;想定外の구상だとスキップ(これ消したらバグる)
+;상정외의 구상이라면 스킵(이거 지우면 버그난다)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
@@ -12366,7 +12366,7 @@ SIF K == 0 || WSTR:(K - 1) == ""
 	PRINTW
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（4822을 캐릭터번호로 치환）
-;조교後の変化をトリガーにした구상
+;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_C_K4822_2
 ;조수が조교した時に구상をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
@@ -12449,7 +12449,7 @@ SIF K == 0 || WSTR:(K - 1) == ""
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（4822을 캐릭터번호로 치환）
-;パラメータ変化をトリガーにした구상
+;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_D_K4822_2
 ;조수が조교した時に구상をスキップする（好みに応じて使う、行頭の;を消すとスキップするようになる）
@@ -12710,7 +12710,7 @@ NEXT
 SIF K == 0 || WSTR:(K - 1) == ""
 	PRINTW
 ;-------------------------------------------------
-;이벤트구상 모음（4822をキャラ番号に置換する） CFLAG 261～299を사용
+;이벤트구상 모음（4822을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
 @KOJO_MESSAGE_EVENT_K4822_2
 
@@ -12778,7 +12778,7 @@ SELECTCASE TFLAG:13
 						;WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;모유체질じゃない
+				;모유체질이 아니다
 				IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
@@ -13324,7 +13324,7 @@ SELECTCASE TFLAG:13
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
-			;임신대상をTARGETに格納し、父親は奴隷はV、조수はWとする
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				;WSTR:(K++) =
@@ -13385,7 +13385,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;育児室
+		;육아실
 		;-------------------------------------------------
 	CASE 13
 			CALL EVENT_MESSAGE
@@ -14037,12 +14037,12 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;애(愛)계 재함락시
-		;;主人に対して연모系함락している、もしくは一度愛系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 연모계 함락되었거나, 한번 애(愛)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 48
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
 		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 		
 		IF (CFLAG:291 < 1 || FLAG:7 == 2)
@@ -14057,12 +14057,12 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;음(淫)계 재함락시
-		;;主人に対して음란系함락している、もしくは一度淫系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 음란계 함락되었거나, 한번 음(淫)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 49
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
 		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:292 < 1 || FLAG:7 == 2)
@@ -14077,12 +14077,12 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;예(隷)계 재함락시
-		;;主人に対して복종系함락している、もしくは一度隷系ＮＴＲ상태にされたキャラに再び함락させられる時
+		;;주인에게 복종계 함락되었거나, 한번 예(隷)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
 		;-------------------------------------------------
 	CASE 50
 		CALL EVENT_MESSAGE
-		;再함락前に함락しているキャラ→CFLAG:함락캐릭터 で取得可能、名前は%NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET)　で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
 		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:293 < 1 || FLAG:7 == 2)
@@ -14109,7 +14109,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""	
 				;WSTR:(K++) =
 			ENDIF	
@@ -14129,7 +14129,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""	
 				;WSTR:(K++) =
 			ENDIF	
@@ -14149,7 +14149,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""	
 				;WSTR:(K++) =
 			ENDIF	
@@ -14169,7 +14169,7 @@ SELECTCASE TFLAG:13
 				;이전에 복종 루트였던 경우
 				;WSTR:(K++) = 
 			ENDIF	
-			;음란、함락済み共通	
+			;음란, 함락완료 공통	
 			IF KSTR:0 == "" && WSTR:0 == "" && NSTR:0 == ""	
 				;WSTR:(K++) =
 			ENDIF	
@@ -14203,7 +14203,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)になった直後の一日の終了後、一度だけ行う
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)가 된 직후 하루 종료 후, 한번만 행한다
 		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
 		;-------------------------------------------------
 	CASE 56
@@ -14224,7 +14224,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・데이트
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 57
 		CALL EVENT_MESSAGE
@@ -14244,7 +14244,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・본방
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;여성이라면 삽입당하는 쪽, 남성이라면 삽입하는 쪽으로 고정
 		;-------------------------------------------------
 	CASE 58
@@ -14265,7 +14265,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・자위서로과시
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
 		;애ＮＴＲ상태인 경우, 노출증 3이나 자위중독 1 중 하나를 충족시키는 것이 조건이 됩니다.
 		;-------------------------------------------------
 	CASE 59
@@ -14286,8 +14286,8 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・애널
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;CFLAG:애널횟수が1以上なら入れられている、CFLAG:삽입횟수が1以上なら入れています。
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;CFLAG:애널횟수가 1 이상이면 삽입당하고, CFLAG:삽입횟수가 1 이상면 삽입하고 있습니다.
 		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
 		;-------------------------------------------------
 	CASE 60
@@ -14308,8 +14308,8 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;;ＮＴＲ요바이・야외플레이
-		;;애ＮＴＲか隷ＮＴＲ상태(TALENT:ＮＴＲが 1 か 3 か 4 か 6)で１日の終了時に発生。
-		;애ＮＴＲの場合、노출증が4以上でないと発生しません
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ의 경우, 노출증이 4 이상이 아니라면 발생하지 않습니다
 		;-------------------------------------------------
 	CASE 61
 		CALL EVENT_MESSAGE
@@ -14328,8 +14328,8 @@ SELECTCASE TFLAG:13
 			CFLAG:604 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・野外조교
-		;;예ＮＴＲ상태(TALENT:ＮＴＲが 3 か 6)でCFLAG:현ＮＴＲ진행도が6以上の場合１日の終了時に発生。
+		;;ＮＴＲ요바이・야외조교
+		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
 		;-------------------------------------------------
 	CASE 62
 		CALL EVENT_MESSAGE
@@ -14420,7 +14420,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 65
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14515,7 +14515,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14610,7 +14610,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -14784,7 +14784,7 @@ RETURN 0
 ;--------------------------------------------------
 SELECTCASE TSTR:END종별
 	CASE "개별END"
-		;연모1체エンド
+		;연모 1체 엔딩
 		IF TALENT:아내 || TALENT:남편 && CFLAG:21 == 1
 			KSTR:(K++) = …
 			KSTR:(K++) = ……
@@ -14802,7 +14802,7 @@ SELECTCASE TSTR:END종별
 			KSTR:(K++) = 오늘도、적어도 %조사처리(CALLNAME:MASTER,"과")% 스이카의 주위를 둘러싼 세계는 평화롭다。
 			KSTR:(K++) = 
 			WSTR:(K++) = 　　　　　　　　―― Extra Ending　스이카 엔딩
-		;음란1체エンド
+		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;DRAWLINE
 			;PRINTFORMW …………
@@ -14812,7 +14812,7 @@ SELECTCASE TSTR:END종별
 
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;복종1체エンド
+		;복종 1체 엔딩
 		;ELSEIF TALENT:노리개 && CFLAG:21 == 1
 			;DRAWLINE
 			;PRINTFORMW …………
@@ -14881,7 +14881,7 @@ ENDIF
 
 @BATTLE_MESSAGE_K4822_2,ARG,ARG:1 = 0
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;사용した스킬の名前をLOCALSに代入
+;사용한 스킬의 이름을 LOCALS에 대입
 LOCALS = %RESULTS%
 ;타격
 IF RANGE(CFLAG:ARG:입력행동,201, 299)
@@ -14965,16 +14965,16 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
 ;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	;사용した스킬の名前をLOCALSに代入
+;	;사용한 스킬의 이름을 LOCALS에 대입
 ;	LOCALS = %RESULTS%
 
 ;	SELECTCASE ARG:1
-;		;物理데미지を与える行動で、영맹持ちの충성도が上昇
+;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"영맹")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;魔法데미지を与える行動で、교활持ちの충성도が上昇
+;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교활")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
@@ -14984,17 +14984,17 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;相手の弱点を付いた공격or行動不能な상태이상の적に対する공격で、현명持ちの충성도が上昇
+;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"현명")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;파마相性の行動で、천사持ちの충성도が上昇
+;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;주살相性の行動で、타천사持ちの충성도が上昇
+;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"타천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
@@ -15004,7 +15004,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;상태変化では교만持ちの충성도が上昇
+;		;상태변화로는 교만 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교만")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃

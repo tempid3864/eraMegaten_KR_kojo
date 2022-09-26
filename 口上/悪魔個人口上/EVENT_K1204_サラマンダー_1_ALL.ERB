@@ -402,7 +402,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 			PRINTFORMW 「%CSTR:일인칭%のカラダに興味あんのか？　そりゃまあ、トカゲの方がラクだがな……他の連中もできんだろ」
 		ENDIF
 	CFLAG:202 = 3
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 		IF RAND:3 == 0
 			PRINTFORMW 「%CSTR:일인칭%は逃げも隠れもしねえ。正々堂々と勝負だ」
@@ -886,7 +886,7 @@ RETURN 0
 
 ;-------------------------------------------------
 ;EVENTEND関係
-;조교終了時のセリフ
+;조교 종료시의 대사
 ;-------------------------------------------------
 @EVENTEND_K1204_1
 ;--------------------------------------------------
@@ -928,7 +928,7 @@ ELSEIF MARK:2 == 2
 		PRINTFORMW 「づがれだ」
 	ENDIF
 	CFLAG:219 = 2
-;굴복각인Lv3＋함락素質無し＋체력500未満
+;굴복각인Lv3＋함락소질없음＋체력500未満
 ELSEIF BASE:0 < 500 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 		IF RAND:3 == 0
 			PRINTFORMW 「殺す気か%ANATANAME("テメェ" , "")%……」
@@ -938,7 +938,7 @@ ELSEIF BASE:0 < 500 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:
 			PRINTFORMW 「次ァ손加減って言葉を覚えてくるんだな……」
 		ENDIF
 	CFLAG:219 = 3
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 		IF RAND:3 == 0
 			PRINTFORMW 「あ"ー……なんか首にキてんな、これだからヒトのカタチめんどくせえんだ」
@@ -948,7 +948,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 			PRINTFORMW 「ちっとばっかねみい……」
 		ENDIF
 	CFLAG:219 = 3
-;함락완료＋체력500未満
+;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
@@ -1164,7 +1164,7 @@ SELECTCASE SELECTCOM
 						IF RAND:2 == 0
 							PRINTFORMW 「効率考えてんのかギリギリ狙ってんのかどっちだ！？」
 						ELSE
-							PRINTFORMW 「あっクソ……好き勝손してやがんな……」
+							PRINTFORMW 「あっクソ……好き勝手してやがんな……」
 						ENDIF
 
 					;未実装枠
@@ -1193,7 +1193,7 @@ SELECTCASE SELECTCOM
 						IF RAND:2 == 0
 							PRINTFORMW 「効率考えてんのかギリギリ狙ってんのかどっちだ！？」
 						ELSE
-							PRINTFORMW 「あっクソ……好き勝손してやがんな……」
+							PRINTFORMW 「あっクソ……好き勝手してやがんな……」
 						ENDIF
 					ELSEIF PALAM:욕정 >= PALAMLV:5
 						IF RAND:2 == 0
@@ -1215,7 +1215,7 @@ SELECTCASE SELECTCOM
 						IF RAND:2 == 0
 							PRINTFORMW 「効率考えてんのかギリギリ狙ってんのかどっちだ！？」
 						ELSE
-							PRINTFORMW 「あっクソ……好き勝손してやがんな……」
+							PRINTFORMW 「あっクソ……好き勝手してやがんな……」
 						ENDIF
 					ELSEIF PALAM:욕정 >= PALAMLV:5
 						IF RAND:2 == 0
@@ -1239,7 +1239,7 @@ SELECTCASE SELECTCOM
 					IF RAND:2 == 0
 						PRINTFORMW 「効率考えてんのかギリギリ狙ってんのかどっちだ！？」
 					ELSE
-						PRINTFORMW 「あっクソ……好き勝손してやがんな……」
+						PRINTFORMW 「あっクソ……好き勝手してやがんな……」
 					ENDIF
 				ELSEIF PALAM:욕정 >= PALAMLV:5
 					IF RAND:2 == 0
@@ -1262,7 +1262,7 @@ SELECTCASE SELECTCOM
 					IF RAND:2 == 0
 						PRINTFORMW 「効率考えてんのかギリギリ狙ってんのかどっちだ！？」
 					ELSE
-						PRINTFORMW 「あっクソ……好き勝손してやがんな……」
+						PRINTFORMW 「あっクソ……好き勝手してやがんな……」
 					ENDIF
 				ELSEIF PALAM:욕정 >= PALAMLV:5
 					IF RAND:2 == 0
@@ -1515,7 +1515,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「されてみるモンだな、なかなかってカンジ」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「いまさら何しようが勝손だけどな……」
+					PRINTFORMW 「いまさら何しようが勝手だけどな……」
 				ELSE
 					PRINTFORMW 「正気を疑う」
 				ENDIF
@@ -1681,7 +1681,7 @@ SELECTCASE SELECTCOM
 						IF RAND:2 == 0
 							PRINTFORMW 「見なきゃオナホみてえなモンだしな」
 						ELSE
-							PRINTFORMW 「勝손にいじくられねえってだけでいくらかマシだな」
+							PRINTFORMW 「勝手にいじくられねえってだけでいくらかマシだな」
 						ENDIF
 					ENDIF
 				ELSE
@@ -1713,7 +1713,7 @@ SELECTCASE SELECTCOM
 						IF RAND:2 == 0
 							PRINTFORMW 「見なきゃオナホみてえなモンだしな」
 						ELSE
-							PRINTFORMW 「勝손にいじくられねえってだけでいくらかマシだな」
+							PRINTFORMW 「勝手にいじくられねえってだけでいくらかマシだな」
 						ENDIF
 					ENDIF
 				ELSE
@@ -2649,7 +2649,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 				ENDIF
 				CFLAG:311 = 4
-			;순종Lv3以上
+			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:311 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:311 = 3
@@ -2689,7 +2689,7 @@ CASE 14
 				PRINTFORMW 
 			CFLAG:442 = 4
 			ENDIF
-		;순종Lv3以上
+		;순종Lv3 이상
 		ELSEIF ABL:0 >= 3 && (CFLAG:442 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:442 = 3
@@ -2726,7 +2726,7 @@ CASE 14
 					PRINTFORMW 
 				ENDIF
 				CFLAG:312 = 4
-			;순종Lv3以上
+			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:312 = 3
@@ -7456,7 +7456,7 @@ ENDSELECT
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG 관련
-;パラメータ変化などをトリガーにした구상　CFLAG 221～260を사용
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_A
@@ -8106,7 +8106,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -8293,7 +8293,7 @@ ENDIF
 ;-------------------------------------------------
 ;사정
 ;-------------------------------------------------
-;大量사정している
+;대량사정している
 IF TFLAG:10 > 1
 	;함락완료
 	IF 함락(TARGET) && (CFLAG:247 < 3 || FLAG:7 == 2)
@@ -8367,7 +8367,7 @@ ENDIF
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_C関係
-;조교後の変化をトリガーにした구상
+;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_C_K1204_1
 IF (TEQUIP:20 &&  SELECTCOM != 107) || (ASSI > 0 && ASSIPLAY)
@@ -8404,7 +8404,7 @@ ENDIF
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_D関係
-;パラメータ変化をトリガーにした구상
+;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
 @KOJO_MESSAGE_PALAMCNG_D_K1204_1
 IF (TEQUIP:20 &&  SELECTCOM != 107) || (ASSI > 0 && ASSIPLAY)
@@ -8541,7 +8541,7 @@ ENDIF
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_MARKCNG関係
 ;○각인変動をトリガーにした구상
-;각인変動後に구상を発動します
+;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_MARKCNG_K1204_1
 IF TEQUIP:20 &&  SELECTCOM != 107
@@ -9963,7 +9963,7 @@ SELECTCASE TFLAG:13
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
-			;임신대상をTARGETに格納し、父親は奴隷はV、조수はWとする
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				PRINTFORMW 
@@ -10013,7 +10013,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;育児室
+		;육아실
 		;-------------------------------------------------
 	CASE 13
 			CALL EVENT_MESSAGE
@@ -10150,7 +10150,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;함락완료
 			IF 함락(TARGET)
-				;연모, 친애+반발각인Lv3未満
+				;연모, 친애+반발각인Lv3 미만
 				IF (TALENT:3 || TALENT:6) && MARK:3 < 3
 					IF RAND:3 == 0
 						PRINTFORML 「おう。まあ、そんなこったろうと思ったぜ」
@@ -10179,7 +10179,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「……行き先どこだ？　서머너か？」
 						PRINTFORMW 「武闘派ならいいんだがな。ファントムにケンカ売らせてくれんならなおいい」
 					ENDIF
-				;음란, 창부+반발각인Lv3未満
+				;음란, 창부+반발각인Lv3 미만
 				ELSEIF (TALENT:4 || TALENT:7) && MARK:3 < 3
 					IF RAND:3 == 0
 						PRINTFORML 「あ？　買い손ついたのかよ。スゲえなそいつ……」
@@ -10208,7 +10208,7 @@ SELECTCASE TFLAG:13
 						PRINTFORML 「……不満？　さあな、ヤってみねえとわかんねえだろ」
 						PRINTFORMW 「少なくとも、販売元にクレーム行かねえようにはしてやんよ」
 					ENDIF
-				;복종, 예속+반발각인Lv3未満
+				;복종, 예속+반발각인Lv3 미만
 				ELSEIF (TALENT:5 || TALENT:8) && MARK:3 < 3
 					IF RAND:3 == 0
 						PRINTFORML 「악마を복종させんのって손間だかんな。売れるのはわかる」
@@ -10469,7 +10469,7 @@ SELECTCASE TFLAG:13
 		;계약系は해리Ｑ구상さんから
 		;-------------------------------------------------
 		;-------------------------------------------------
-		;◎[아내][남편]取得時 친애 전제
+		;◎[아내][남편]취득시 친애 전제
 		;-------------------------------------------------
 	CASE 40
 		IF CFLAG:283 < 1 || FLAG:7 == 2
@@ -10704,7 +10704,7 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;△初Ａ섹스系共通で呼び出すやつ
+;△初Ａセックス系共通で呼び出すやつ
 ;体位はともかく初挿入コンパチになりそうなのでいっそまとめておく
 ;-------------------------------------------------
 @KOJO_K1204_1_ASEX_FIRST
@@ -10861,17 +10861,17 @@ SELECTCASE TSTR:END종별
 		;PRINTFORML ……
 		;PRINTFORMW 
 		;PRINTL 
-		;연모1체エンド
+		;연모 1체 엔딩
 		;IF TALENT:아내 || TALENT:남편 && CFLAG:21 == 1
 			;PRINTFORMW 「真似事で終わらせときゃよかったんだよ」
 			;PRINTFORMW 「ニンゲンひとりに深入りするとロクなコトにならねえって、わかってたつもりなんだがなあ！」
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（살라만더エンド）
-		;음란1체エンド
+		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
-		;복종1체エンド
+		;복종 1체 엔딩
 		;ELSEIF TALENT:노리개 && CFLAG:21 == 1
 			;PRINTFORMW 
 			;PRINTFORMW 　　　　　　　　―― Extra Ending　（◯◯エンド）
@@ -10957,7 +10957,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = %CSTR:일인칭%に花道をよこしたな！
 			LOCALS:1 = いいぜ、派손に燃やしてやるよォ！
 		ENDIF
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -10985,7 +10985,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = ハァ！？
 		ENDIF
 	;피데미지
-	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -11049,7 +11049,7 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS = や、ヤロウ……
 		ENDIF
-	;회피した
+	;회피했다
 	CASE 18
 		IF RAND:8 == 0
 			LOCALS = 喰らうかよ
@@ -11086,7 +11086,7 @@ SIF TALENT:ARG:9 || MARK:3 == 3
 CALLFORM SKILL_EFECT_{LOCAL}
 
 ;-------------------------------------------------
-;特定스킬/行動
+;특정스킬/行動
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;화염
@@ -11147,7 +11147,7 @@ ELSEIF LOCAL == 2301
 		LOCALS = チッ……
 	ENDIF
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;화염
 ELSEIF RANGE(LOCAL,701, 799)
@@ -11214,7 +11214,7 @@ ELSEIF RANGE(LOCAL,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(LOCAL,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(LOCAL,501, 505)
 		IF RAND:2
 			LOCALS = %RESULTS%だあ？

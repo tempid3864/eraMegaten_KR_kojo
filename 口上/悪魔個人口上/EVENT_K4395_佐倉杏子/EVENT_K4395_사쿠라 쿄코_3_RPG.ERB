@@ -46,7 +46,7 @@ IF TFLAG:전투이벤트 == 2
 	ENDIF
 ENDIF
 IF TFLAG:전투이벤트 == 3
-;아군パーティでの被소환時の台詞
+;아군 파티에서의 피소환시의 대사
 	IF RAND:2 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"切り札サマのお出ましだぁ！",72,LEFT%┃
@@ -133,7 +133,7 @@ ENDIF
 
 ;피탄
 IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
-	;피탄（死亡）
+	;被弾（死亡）
 	IF BASE:ARG:ＨＰ <= 0
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
@@ -521,7 +521,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 			PRINTFORML ┃%"회복마법。　" + CSTR:일인칭 + "もこんくらいは使えるのさ",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;리캄、사마리캄
+	;リカーム、サマリカーム
 	ELSEIF RANGE(CFLAG:ARG:입력행동,417, 418)
 		IF FLAG:(CFLAG:ARG:타겟) == 0 && 함락(ARG)
 			IF RAND:2
@@ -911,7 +911,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999) || LOCAL == 16
 	ENDIF
 ;만능
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099) || LOCAL == 17
-	;자폭系
+	;자폭계
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"独りぼっちは寂しいからな　道連れになりな",72,LEFT%┃

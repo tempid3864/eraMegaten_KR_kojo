@@ -1,13 +1,13 @@
 ﻿;-------------------------------------------------
-;베스구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;ベス口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;以下作者さんのコメント
-;베스たんを음란복종になんて、僕はできません。
-;というか原作だと베스たんあっさり死んじゃうので
+;ベスたんを淫乱服従になんて、僕はできません。
+;というか原作だとベスたんあっさり死んじゃうので
 ;どういうキャラなのか全然ワカンネ
-;というわけで私のイメージで書いてますので「こんなの俺の베스じゃない！」
+;というわけで私のイメージで書いてますので「こんなの俺のベスじゃない！」
 ;と思ったら書き直してくれておｋですよ
 ;-------------------------------------------------
-;복종 루트開発者：主に리세とかの人
+;복종 루트開発者：主にりせとかの人
 ;加筆改変はご自由に
 ;-------------------------------------------------
 ;2011/03/20
@@ -41,31 +41,20 @@
 ;	|   7| × | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 ;--------------------------------------------------
-;구상ファイルの存在판정（4501을 캐릭터번호로 치환）
+;구상파일의 존재 판정（4501을 캐릭터번호로 치환）
 ;--------------------------------------------------
-;@EVENTTRAIN_K4501_1
+;@EVENTTRAIN_K4501
 ;#PRI
 ;SIF NO:TARGET == 4501
 ;	TCVAR:0 = 1
 ;SIF FLAG:7 == 0
 ;	FLAG:7 = 2
 
-;입상 선택지 띄우는 구문 --> 이거 안 만들어놓으니까 베스 구상은 계~속 일본어였음.. ㅠㅠ
-@셀렉트구상설명_K4501_1,ARG = 0
-SIF ARG == 1
-	RETURN 0
-;구상명
-PRINTFORML 베스 대사1
-;구상설명문
-PRINTFORML 한글화된 베스 대사
-PRINTFORML 
-
-
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4501을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_K4501_1
+@EVENTTRAIN_K4501
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF NO:TARGET != 4501
@@ -97,12 +86,12 @@ PRINTFORML
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_K4501_1
+;	CALL EVENTTRAIN_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_K4501_1
+;		CALL EVENTTRAIN_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -342,7 +331,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_K4501_1
+	CALL EVENTTRAIN_SECOND_K4501
 ;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
@@ -368,13 +357,13 @@ IF ASSI < 0
 ;	ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_K4501_1
+	CALL EVENTTRAIN_SECOND_K4501
 ENDIF
 
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, 4501을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_K4501_1
+@EVENTTRAIN_SECOND_K4501
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	PRINTFORML 「…싫어…싫어…」
@@ -475,7 +464,7 @@ RETURN 0
 ;EVENTEND 관련（4501을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_K4501_1
+@EVENTEND_K4501
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF NO:TARGET != 4501
@@ -484,12 +473,12 @@ RETURN 0
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTEND_PY1_K4501_1
+;	CALL EVENTEND_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	SIF NO:ASSI == Y1
-;	CALL EVENTEND_PY1_K4501_1
+;	CALL EVENTEND_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -564,7 +553,7 @@ RETURN 0
 ;@KOJO_MESSAGE_COM 관련（4501을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_K4501_1
+@KOJO_MESSAGE_COM_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
@@ -577,12 +566,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_K4501_1
+;	CALL KOJO_MESSAGE_COM_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_K4501_1
+;		CALL KOJO_MESSAGE_COM_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6327,7 +6316,7 @@ ENDSELECT
 ;@KOJO_MESSAGE_PALAMCNG_A（4501을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_K4501_1
+@KOJO_MESSAGE_PALAMCNG_A_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6340,12 +6329,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4501_1
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4501_1
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6673,7 +6662,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -6696,7 +6685,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（4501을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_K4501_1
+@KOJO_MESSAGE_PALAMCNG_E_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6709,12 +6698,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4501_1
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4501_1
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6745,7 +6734,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（4501을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_K4501_1
+@KOJO_MESSAGE_PALAMCNG_B_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6758,12 +6747,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4501_1
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4501_1
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6893,7 +6882,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（4501을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_K4501_1
+@KOJO_MESSAGE_PALAMCNG_C_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6906,12 +6895,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4501_1
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4501_1
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6954,7 +6943,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（4501을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_K4501_1
+@KOJO_MESSAGE_PALAMCNG_D_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6967,12 +6956,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4501_1
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4501_1
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -7066,7 +7055,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_K4501_1
+@KOJO_MESSAGE_MARKCNG_K4501
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -7079,12 +7068,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4501_1
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4501_1
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4501
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -7183,12 +7172,12 @@ ENDIF
 ;-------------------------------------------------
 ;이벤트구상 모음（4501、4501을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_K4501_1
+@KOJO_MESSAGE_EVENT_K4501
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_K4501_1
+;	CALL KOJO_MESSAGE_EVENT_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;-------------------------------------------------
@@ -7332,27 +7321,27 @@ SELECTCASE TFLAG:13
 					IF S:1 == 5
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 힘이 넘치는 듯한 기분이 들었다。
 						;BASE:MASTER:힘 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の힘が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の力が上昇した！
 					ELSEIF S:1 == 4
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 터프해진듯한 기분이 들었다。
 						;BASE:MASTER:인내력 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の인내력が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の耐力が上昇した！
 					ELSEIF S:1 == 3
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 홀가분 해진 것 같다。
 						;BASE:MASTER:속도 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の속도が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の速さが上昇した！
 					ELSEIF S:1 == 2
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 머리가 개운해진 것 같다。
 						;BASE:MASTER:지혜 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の지혜が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の知恵が上昇した！
 					ELSEIF S:1 == 1
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 마음 속으로부터 힘이 끓어 오르는 느낌이 들었다。
 						;BASE:MASTER:마력 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の마력が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の魔力が上昇した！
 					ELSE
 						PRINTFORML 베스의 요리를 먹은 %조사처리(CALLNAME:MASTER,"는")% 뭐든 할 수있을 것 같은 느낌이 들었다。
 						;BASE:MASTER:운 += 1
-						;PRINTFORMW %CALLNAME:MASTER%の운が上昇した！
+						;PRINTFORMW %CALLNAME:MASTER%の運が上昇した！
 					ENDIF
 				ELSE
 						PRINTFORML 
@@ -7393,7 +7382,7 @@ SELECTCASE TFLAG:13
 
 
 	;-------------------------------------------------
-	
+	;일어나자 곁에서 자고 있다
 	;-------------------------------------------------
 	CASE 27
 		CALL EVENT_MESSAGE
@@ -8175,7 +8164,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;조건설정
 ;-------------------------------------------------
-@EVENTTURNEND_K4501_1
+@EVENTTURNEND_K4501
 ;#LATER
 ;SIF TARGET < 0
 ;	RETURN 0
@@ -8206,12 +8195,12 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_K4501_1
+@KOJO_MESSAGE_ENDING_K4501
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, 4501을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_ENDING_PY1_K4501_1
+;	CALL KOJO_MESSAGE_ENDING_PY1_K4501
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------

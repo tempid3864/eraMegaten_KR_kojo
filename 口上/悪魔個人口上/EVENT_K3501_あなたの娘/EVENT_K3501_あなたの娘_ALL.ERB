@@ -22,7 +22,7 @@
 ;|809:プロフィール書き換え 관련（0:未설정、1:可、2:）
 ;|810:대상の性別（1：男、2：女、3：오토코노코、4：후타나리）
 ;|811:당신の性別（1：男、2：女、3：오토코노코、4：후타나리）
-;|812:동정フラグ（0＝동정、1＝非동정）
+;|812:동정フラグ（0＝동정、1＝非童貞）
 ;|813:男性器サイズ（0=未설정、1=小さい、2=平均、3=巨根、4=名器、5=人外、6=촉수）
 ;|814:男性器スタイル（0=未설정、1=真性包茎、2=仮性包茎、3=剥けてる）
 ;|815:女性器타입（0=未설정、1=狭い、2=普通、3=ゆるい、4=名器）
@@ -66,7 +66,7 @@
 ;|CSTR:49　%CALLNAME:TARGET%의 유두形状記述
 ;|50はなし
 ;--------------------------------------------------
-;구상ファイルの存在판정（X2을 캐릭터번호로 치환）
+;구상파일의 존재 판정（X2을 캐릭터번호로 치환）
 ;--------------------------------------------------
 @EVENTTRAIN
 ;#PRI
@@ -148,8 +148,8 @@ SIF NO:TARGET != 3501
 DRAWLINE
 ;첫조교시
 	IF !TALENT:남자
-	;페니스の有無체크
-		;페니스がある
+	;ペニスの有無チェック
+		;ペニスがある
 		;후타나리
 		IF HAVE_PENIS(TARGET) || TALENT:후타나리
 			CFLAG:810 = 4
@@ -169,8 +169,8 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	;■　初回性別체크
 	;女
 	IF !TALENT:남자
-	;페니스の有無체크
-		;페니스がある
+	;ペニスの有無チェック
+		;ペニスがある
 		;후타나리
 		IF HAVE_PENIS(TARGET) || TALENT:후타나리
 			CFLAG:810 = 4
@@ -591,8 +591,8 @@ ENDIF
 	;■　性別체크
 	;女
 	IF !TALENT:남자
-	;페니스の有無체크
-		;페니스がある
+	;ペニスの有無チェック
+		;ペニスがある
 		;후타나리
 		IF HAVE_PENIS(TARGET) || TALENT:후타나리
 			CFLAG:810 = 4
@@ -1112,7 +1112,7 @@ CFLAG:802 = 0
 	ELSEIF 위험일(TARGET) == 3
 		PRINTFORMW 그러고보니 오늘은 만월이다…
 		PRINTFORMW 월령에 영향을 받는 %CALLNAME:TARGET%도, 평소보다 흥분하고 있는 것 같다…
-	;임신中
+	;妊娠中
 	ELSEIF TALENT:임신
 		PRINTFORMW 임신한 %CALLNAME:TARGET%의 하복부는, 둥그렇게 부풀어 있다…
 		IF RAND:2
@@ -1554,10 +1554,10 @@ SELECTCASE SELECTCOM
 				PRINTFORMW %CALLNAME:TARGET%의 아직 미성숙한 여성기에 얼굴을 접근하고, 냄새를 맡아 본다…
 				PRINTFORML 육벽에서는 아이 특유의 약간 달콤한 냄새와 땀과 같이 분비되기 시작한 애액이 뒤섞여, 독특한 향기를 발하고 있다…
 			ELSE
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 딸의 비부를 핥는다…　그런 배덕적 흥분이 %조사처리(CALLNAME:PLAYER,"를")% 감싼다…
-				;당신が父親
+				;あなたが父親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 딸의 비부를 핥는다…　그런 배덕적 흥분이 %조사처리(CALLNAME:PLAYER,"를")% 감싼다…
 				;兄弟
@@ -1726,10 +1726,10 @@ SELECTCASE SELECTCOM
 				PRINTFORML %CALLNAME:PLAYER%의 펠라에 의해, 일을 보는 용도로밖에 사용하지 않았던 %CALLNAME:TARGET%의 남성기는 조금씩 커져,
 				PRINTFORMW 몇분 후, %조사처리(CALLNAME:PLAYER,"가")% 한숨을 돌리고 입을 때었을 때에는, 작으면서도 훌륭하게 수컷의 위상을 보이고 있었다…
 				PRINTFORML 열심히 행해진 %CALLNAME:PLAYER%의 봉사로 충분한 경도에까지 흥분된 %CALLNAME:TARGET%의 남근은,
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					PRINTFORMW %조사처리(CALLNAME:MASTER,"를")% 임신시켰던 물건보다 딱딱하고, 굵을지도 모른다…
-				;당신が父親
+				;あなたが父親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸) && ASSIPLAY == 0
 					PRINTFORMW %CALLNAME:MASTER%자신의 남성기와 비교해도 손색이 없는, 용감한 심볼이 거기에 있었다…
 				;조수조교時
@@ -1747,7 +1747,7 @@ SELECTCASE SELECTCOM
 				IF TEQUIP:46 >= 5
 					PRINTFORMW 구경꾼들이 시끄럽게 떠드는 가운데, %CALLNAME:TARGET%의 성기에 봉사하기 시작한다…
 				ELSEIF TEQUIP:46 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 						IF RAND:2 == 0
 							PRINTFORMW 
@@ -1765,7 +1765,7 @@ SELECTCASE SELECTCOM
 			ELSEIF TEQUIP:29 == 2
 				IF TEQUIP:46 >= 5
 				ELSEIF TEQUIP:46 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 						IF RAND:2 == 0
 							PRINTFORMW 
@@ -1783,7 +1783,7 @@ SELECTCASE SELECTCOM
 			ELSEIF TEQUIP:29 == 4
 				IF TEQUIP:46 >= 5
 				ELSEIF TEQUIP:46 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 						IF RAND:2 == 0
 							PRINTFORMW 
@@ -1801,7 +1801,7 @@ SELECTCASE SELECTCOM
 			ELSEIF TEQUIP:29 == 8
 				IF TEQUIP:46 >= 5
 				ELSEIF TEQUIP:46 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					;조교자が兄弟姉妹
 					ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
@@ -1819,7 +1819,7 @@ SELECTCASE SELECTCOM
 						PRINTFORM %조사처리(CALLNAME:PLAYER,"는")% 스커트를 넘긴 뒤 
 					ENDIF
 				ENDIF
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					IF TALENT:유치
 						IF PREVCOM == 2
@@ -2011,9 +2011,9 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 서비스로 웃으며 귀두에 가볍게 키스하자, 페니스가 움찔 하고 떨렸다…
 						ELSE 
 							PRINTFORMW 페니스는 하늘을 찌르는 각도로 발기해,%CALLNAME:PLAYER%의 군침으로 미끈미끈 광택을 보이고 있다…
-							;당신が母親
+							;あなたが母親
 							IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
-							;당신が父親
+							;あなたが父親
 							ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸) && HAVE_PENIS(PLAYER)
 								IF CFLAG:813 == 1
 								ELSEIF CFLAG:813 == 2
@@ -2033,42 +2033,42 @@ SELECTCASE SELECTCOM
 						;皮のかぶり具合で구상변화
 						ELSE
 							IF CFLAG:814 == 1
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
 								ELSE
 								ENDIF
 							ELSEIF CFLAG:814 == 2
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
 								ELSE
 								ENDIF
 							ELSEIF CFLAG:814 == 3
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
 								ELSE
 								ENDIF
 							ELSEIF CFLAG:814 == 4
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
 								ELSE
 								ENDIF
 							ELSEIF CFLAG:814 == 5
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
 								ELSE
 								ENDIF
 							ELSEIF CFLAG:814 == 6
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 								;조교자が兄弟姉妹
 								ELSEIF ASSIPLAY == 1 && NO:ASSI == 3501 && NO:TARGET == 3501
@@ -2145,7 +2145,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;전회사정している
 			IF TCVAR:PLAYER:101 > 0
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					IF RAND:3 == 0
 						PRINTFORMW 정액을 충분히 토해낸 균열에 혀끝을 대, 요도 안에 남은 정액을 군침으로 늘려, 빨아 올린다…
@@ -2312,7 +2312,7 @@ SELECTCASE SELECTCOM
 				CFLAG:303 = 3
 			;그 이외
 			ELSEIF CFLAG:303 < 2 || FLAG:7 == 2
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					IF RAND:2 == 0
 						PRINTFORML %조사처리(CALLNAME:PLAYER,"는")% 친딸에게 여자의 즐거움을 가르치려고, 몸을 꽉 껴안으며
@@ -3621,7 +3621,7 @@ CASE 14
 				IF RAND:3 == 0
 					PRINTFORMW 민감한 콩에 닿을 때마다 %CALLNAME:TARGET%의 한숨을 닮은 허덕임 소리가 새어 들린다…
 				ELSEIF RAND:2 == 0
-					;당신が母親
+					;あなたが母親
 					SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 						PRINT 딸인
 					PRINTFORM %CALLNAME:TARGET%의 밤처럼 부풀어 오른 클리토리스를, 마치 페니스를 잡아당기듯이 당겼다…
@@ -3790,7 +3790,7 @@ CASE 14
 				PRINTFORML %조사처리(CALLNAME:PLAYER,"와")% %조사처리(CALLNAME:TARGET,"는")% 서로의 뒷목을 손으로 가볍게 잡고, 열심히 입술을 애무해 간다…
 				PRINTFORMW  깊은 입 맞춤의 뒤, 혀를 겹쳐 타액이나 서로의 빨아먹을 듯이 탐내 간다…
 			ELSEIF RAND:2 == 0
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					;주도권が아이
 					IF TEQUIP:주도권 == 1
@@ -4421,7 +4421,7 @@ CASE 14
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;전회実行애무・가슴주무르기・유두자극・가슴애무・가슴자위중 하나で임신中（非긴박상태も조건に入れたい…けど）
+					;전회実行애무・가슴주무르기・유두자극・가슴애무・가슴자위중 하나で妊娠中（非긴박상태も조건に入れたい…けど）
 					IF GROUPMATCH(PREVCOM,0,6,7,8,10) && TALENT:임신
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 이전과 달라진 가슴을 놀림받아 숨기려고 했지만, %조사처리(CALLNAME:PLAYER,"는")% 허락하지 않고 손을 내리라고 명령했다…
 					;전회実行조개젖히기
@@ -5449,9 +5449,9 @@ CASE 14
 						PRINTFORMW 인 %CALLNAME:PLAYER%에게 범해져 느끼고 있다…
 					ENDIF
 					PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 그 허리놀림을 보다 격렬하고, 가감하지 않는 것으로 높여 갔다…
-				;당신が母親か父親
+				;あなたが母親か父親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) || PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						IF RAND:3 == 0
 							PRINTFORMW %조사처리(CALLNAME:PLAYER,"가")% 허리를 부딪힐 때,%CALLNAME:TARGET%의 엉덩이가 부딪치며, 둔한 육음이 들린다…
@@ -5530,14 +5530,14 @@ CASE 14
 			PRINTFORML %조사처리(CALLNAME:MASTER,"는")% 드러누운 %CALLNAME:TARGET%의 찔끔찔끔 액을 흘리고 있는 페니스를 잡고는, 귀두를 비렬의 입구에 집요하게 문지른다…
 			PRINTFORMW 언제 들어오는지 지금인가 지금인가하고 기다리며 홍수와 같이 애액을 분비한 비렬은, 문지를 때마다 웅덩이를 밟는듯한 물소리를 세운다…
 			PRINTFORMW 육식짐승과 같은 미소를 흘린 %조사처리(CALLNAME:MASTER,"는")%, 잡고 있던 손을 떼어 놓고, 허리를 천천히 떨어뜨리기 시작했다…
-			;당신が母親
+			;あなたが母親
 			SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				PRINT 모친의
 			PRINTFORML 비렬에 삼켜져 가는 강직은, 원추형의 첨단으로 가차 없이 질을 확대해
 			PRINTFORMW 원래의 형태로 돌아오려고 하는 벽을 세게 긁어, 그 조형을 %CALLNAME:MASTER%의 고기로 바꾸어 간다…
 			PRINTFORMW 비육에 이물이 들어와, 먹는다, 라고 하는 여자로서의 쾌감에 휘둘린 %조사처리(CALLNAME:MASTER,"는")%, 허덕임 소리를 흘리면서 육봉을 먹어 간다…
 			PRINTFORML 싱싱한 엉덩이를 %CALLNAME:TARGET%의 허벅지에 얹자, %CALLNAME:MASTER%의 빈혈을 관철하고 있는 페니스가 완전하게 들어갔다…
-			;당신が母親
+			;あなたが母親
 			SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				PRINT 모친의
 			PRINTFORMW 태내에서도 주장을 그만두지 않고, 작열하는 마그마와 같이 열을 발해, 그 크기를 과시하고 있다…
@@ -5560,7 +5560,7 @@ CASE 14
 			CFLAG:336 = 1
 		;2번째 이후
 		ELSE
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF PREVCOM == 64
 				ELSE
@@ -6272,7 +6272,7 @@ CASE 14
 					ELSE
 						PRINTFORMW 에 성기를 잡게 해 봉사시키는 흥분이 %CALLNAME:PLAYER%의 짐승같은 욕구를 부추긴다…
 					ENDIF
-				;당신が母親
+				;あなたが母親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					IF PALAM:PLAYER:욕정 >= PALAMLV:3
 						IF RAND:2 == 0
@@ -6285,7 +6285,7 @@ CASE 14
 						ELSE
 						ENDIF
 					ENDIF
-				;당신が父親
+				;あなたが父親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					IF PALAM:PLAYER:욕정 >= PALAMLV:3
 						IF RAND:2 == 0
@@ -6328,11 +6328,11 @@ CASE 14
 		;처음
 		IF CFLAG:345 == 0
 			CALL TRAIN_MESSAGE
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0 && !TALENT:150
 					PRINTFORMW 배를 아파 낳은 친자식에게, 가랑이 사이에서 벌벌 발기하고 있는 페니스를 물리려고 하고 있다…
 					PRINTFORMW 그렇게 생각하자, %CALLNAME:TARGET%의 입안에서 %CALLNAME:MASTER%의 페니스는 한층 더 경도를 더해 갔다…
-				;당신が父親
+				;あなたが父親
 				ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸) && ASSIPLAY == 0 && !TALENT:150
 					PRINTFORMW %CALLNAME:TARGET%의 입 앞으로 씩씩하게 발기하고 있는 페니스를 접근한 %조사처리(CALLNAME:MASTER,"는")% 이것을 빨라고 명령을 내렸다…
 					IF TALENT:MASTER:새드
@@ -6447,7 +6447,7 @@ CASE 14
 						PRINTFORMW 숨을 쉬기 위해서 장대를 떼어 놓은 %조사처리(CALLNAME:TARGET,"는")%, 전체에 쪼아먹는 키스를 반복한 후,
 						PRINTFORMW 이번은 고환을 입에 물고 장대를 손가락끝으로 흔들며 봉사를 시작했다…
 					ELSEIF RAND:2 == 0 && ASSIPLAY == 0 && !TALENT:150
-						;당신が父親
+						;あなたが父親
 						IF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸) && !TALENT:150
 							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 불뚝 서 있는 스스로의 페니스에 봉사하고 있는 %조사처리(CALLNAME:TARGET,"를")% 어루만지면서,
 							PRINTFORMW 문득 %CALLNAME:TARGET%의 모친을 임신시켜, 낳게 했을 때의 일을 생각해 내고 있었다…
@@ -7189,7 +7189,7 @@ CASE 14
 					PRINTFORML 
 					PRINTFORML 【수유 손코키】
 					PRINTFORMW 
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						IF RAND:2 == 0
 							IF TALENT:PLAYER:빈유
@@ -7290,12 +7290,12 @@ CASE 14
 				;実行為
 				;興奮分岐
 				IF RAND:2 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						IF RAND:2 == 0
 						ELSE
 						ENDIF
-					;당신が父親
+					;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					;行為者が兄弟姉妹
 					ELSEIF NO:PLAYER == 3501
@@ -7356,7 +7356,7 @@ CASE 14
 		;行為後
 		;유아、유아퇴행
 		IF TALENT:150 && !PREVCOM == 90
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF RAND:3 == 0
 					PRINTFORML 『미성숙한 우리 아이에게, 모친으로서 성교육을 현장에서 철저히 가르친다…』
@@ -7368,7 +7368,7 @@ CASE 14
 					PRINTFORML 『아직 어리면서, 남자, 수컷으로서의 기능을%조사처리(CALLNAME:TARGET,"는")% 가지고 있다…』
 					PRINTFORMW 페니스를 훑어 내지는 것으로 번민하는 %CALLNAME:TARGET%의 치태에, %조사처리(CALLNAME:PLAYER,"는")% 여자로서의 즐거움을 느낀다…
 				ENDIF
-			;당신が父親
+			;あなたが父親
 			ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			;行為者が兄弟姉妹
 			ELSEIF NO:PLAYER == 3501
@@ -7376,7 +7376,7 @@ CASE 14
 			ELSE
 			ENDIF
 		ELSE
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF TCVAR:TARGET:101 > 0
 				ELSE
@@ -7414,7 +7414,7 @@ CASE 14
 						PRINTW 속삭여 보인다…
 					ENDIF
 				ENDIF
-			;당신が父親
+			;あなたが父親
 			ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			;お互いに実子
 			ELSEIF NO:PLAYER == 3501 && NO:TARGET == 3501
@@ -7598,7 +7598,7 @@ CASE 14
 			;行動分岐
 			;유치持ち
 			IF TALENT:150 && LOCAL:7 == 0
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORML 『미성숙한 우리 아이에게, 모친으로서 성교육을 현장에서 철저히 가르친다…』
 					PRINTFORMW 그런, 모성과 열정이 뒤섞인 광기가 %조사처리(CALLNAME:PLAYER,"를")% 자극한다…
@@ -7930,7 +7930,7 @@ CASE 14
 				IF TEQUIP:PLAYER:81 == 105
 					PRINTFORML 세라복을 몸에 걸친 %조사처리(CALLNAME:PLAYER,"가")% 넓적다리를 손으로 열려 권하자, 
 					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 천천히 허리를 찔러 넣었다…
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						;전회정상위시킨다を選んでいる
 						IF PREVCOM == 92
@@ -7942,7 +7942,7 @@ CASE 14
 				;기모노
 				ELSEIF TEQUIP:PLAYER:81 == 115
 					PRINTFORMW 
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					;전회정상위시킨다を選んでいる
 						IF PREVCOM == 92
@@ -7951,7 +7951,7 @@ CASE 14
 					ENDIF
 				;체육복
 				ELSEIF TEQUIP:PLAYER:81 == 103
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					;전회정상위시킨다を選んでいる
 						IF PREVCOM == 92
@@ -7961,19 +7961,19 @@ CASE 14
 					ENDIF
 				;드레스、이브닝드레스
 				ELSEIF TEQUIP:PLAYER:81 == 105
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					ENDIF
 				;메이드복、프렌치메이드복
 				ELSEIF TEQUIP:PLAYER:81 == 105
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					ENDIF
 				;차이나드레스
 				ELSEIF TEQUIP:PLAYER:81 == 105
 					PRINTFORMW %CALLNAME:PLAYER%의 아름다운 몸을 감싸는 차이나드레스는, 
 					PRINTFORMW 선명한 색채와 현란한 자수로 물들여져 촉감이 좋은 소재로 짜져 감싸지고 있다…
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					;전회정상위시킨다を選んでいる
 						IF PREVCOM == 92
@@ -7982,7 +7982,7 @@ CASE 14
 					ENDIF
 				;미니스커트、스커트、타이트스커트、タイトミニ、원피스
 				ELSEIF TEQUIP:PLAYER:82 == 201 || TEQUIP:PLAYER:82 == 205 || TEQUIP:PLAYER:82 == 207 || TEQUIP:PLAYER:82 == 208 || TEQUIP:PLAYER:82 == 209 || TEQUIP:PLAYER:83 == 303 || TEQUIP:PLAYER:83 == 303
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0 && !TALENT:150
 						;당신の소질
 						IF TALENT:PLAYER:임신
@@ -8006,7 +8006,7 @@ CASE 14
 				ENDIF
 			ENDIF
 			;●　実行部分
-			;당신が母親で行為者
+			;あなたが母親で行為者
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 				;랜덤分岐
 				PRINTFORML 　
@@ -8036,7 +8036,7 @@ CASE 14
 				ELSEIF LOCAL:101 == 2
 					PRINTFORML %조사처리(CALLNAME:TARGET,"는")% %조사처리(CALLNAME:PLAYER,"와")% 시선과 손가락을 걸어 맞춘 채로, 허리를 부딪히고 있다…
 					PRINTFORMW 흥분된 육괴가 비육을 출입할 때마다, 결합부로부터 백탁한 애액이 눅진눅진해져 흘러넘쳐 나간다…
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						IF RAND:2 == 0
 							PRINTFORML 자신이 태어난 고기구멍을 %CSTR:12%%UNICODE(0x2661)%　%CSTR:12%%UNICODE(0x2661)% 라고 중얼거리면서 꿰뚫는 %CALLNAME:TARGET%에게, 
@@ -8208,7 +8208,7 @@ CASE 14
 				IF !PREVCOM == 93 && (HAVE_PENIS(PLAYER)) && (ABL:섹스중독 >= 1 || TALENT:섹스광 || TALENT:음란 || TALENT:창부)
 					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 강하고 딱딱하게 발기시킨 페니스를 잡아당기면서, 그 첨단을 %CALLNAME:TARGET%의 비렬에 꽉 눌러 몇번이나 문지른다…
 					PRINTFORM 섹스의 쾌락에 삼켜진 %CALLNAME:TARGET%에게 있어 
-					;당신が母親
+					;あなたが母親
 						IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 							PRINTFORM 어머니인 %CALLNAME:PLAYER%도, 
 						ELSE
@@ -8222,7 +8222,7 @@ CASE 14
 					PRINTFORMW 세일러복과 스커트를 입은 %CALLNAME:PLAYER%에게
 					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% %CALLNAME:PLAYER%의 비소에 페니스를 조준하여、천천히 허리를 찔러 넣는다…
 						IF TALENT:PLAYER:임신
-							;당신が母親
+							;あなたが母親
 							IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 							ENDIF
 						ENDIF
@@ -8238,7 +8238,7 @@ CASE 14
 						IF TALENT:PLAYER:임신
 							PRINTFORMW %CALLNAME:PLAYER%의 하복부는 기모노를 밀어 올리듯이 부풀어 올라있어、
 							PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 애무를 하면서 남근을 찔러 넣어 간다…
-							;당신が母親
+							;あなたが母親
 							IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 								PRINTFORML 친어머니이며、임신한 %조사처리(CALLNAME:PLAYER,"를")% 짐승과 같이 범한다고 하는 쾌락이、
 								PRINTFORMW %조사처리(CALLNAME:TARGET,"를")% 보다 깊은 육욕의 늪에 빠져가게 한다…
@@ -8343,12 +8343,12 @@ CASE 14
 						PRINTFORML %조사처리(CALLNAME:TARGET,"는")% %CALLNAME:PLAYER%의 골반을 잡아, 허리를 크게 그라인드 시키며 찌른다…
 						PRINTFORMW 허리를 찔러 넣는 충격으로 고육은 물결과 같이 흔들리며, 팡팡 하고 추잡한 소리를 연주한다…
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 여자로서의 %조사처리(CALLNAME:PLAYER,"를")% 맛보려고, 땀투성이가 된 유방을 애무해, 바짝 발기하고 있는 음핵을 자극해 나간다…
-						;당신が母親かつ미약発動中は文章추가
+						;あなたが母親かつ미약発動中は文章추가
 						IF TEQUIP:PLAYER:26 == 1 && PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 							PRINTFORMW 미약의 효과로 발정해, 단지 열심히 암컷으로서의 즐거움에 취해 심취하는 %조사처리(CALLNAME:PLAYER,"는")%,
 							PRINTFORMW 비육을 긁어내는 %CALLNAME:TARGET%의 피스톤에 맞추어 허리를 흔들어,
 							PRINTFORMW 그 꿀단지는 친자식의 구이와 같이 뜨거워진 용감한 봉을 환영하며, 쾌락을 즐기고 있다…
-						;당신が임신している
+						;당신が妊娠している
 						ELSEIF TALENT:PLAYER:임신 && PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 							PRINTFORMW 임신하고 있는 %CALLNAME:PLAYER%의 배는 공처럼 부풀어 올라, 확실히 생명이 머물고 있는 것을 느끼게 한다…
 							PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 자신의 형제, 자매가 무럭무럭자라고 있는 %CALLNAME:PLAYER%의 배를 어루만져 문지르면서,
@@ -8795,7 +8795,7 @@ CASE 14
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
-					;당신が母親かつ미약発動中は文章추가
+					;あなたが母親かつ미약発動中は文章추가
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"를")% 낳았을 때의 기쁨을 생각해 냈다…
 					ELSE
@@ -8808,7 +8808,7 @@ CASE 14
 					ELSE
 						PRINT 유두를 이빨로 굴려져 들이마셔지는 달콤한 쾌락과 함께, 
 					ENDIF
-					;당신が母親かつ미약発動中は文章추가
+					;あなたが母親かつ미약発動中は文章추가
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"를")% 낳은 것을 생각해 냈다…
 					ELSE
@@ -8816,7 +8816,7 @@ CASE 14
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;당신が母親かつ미약発動中は文章추가
+					;あなたが母親かつ미약発動中は文章추가
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"를")% 낳았을 때의 일을 생각해 냈다…
 					ELSE
@@ -9020,12 +9020,12 @@ CASE 14
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				IF RAND:2 == 0
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					ELSE
 					ENDIF
 				ELSE
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					ELSE
 					ENDIF
@@ -9696,7 +9696,7 @@ CASE 108
 				;유아、유아퇴행
 				IF TALENT:150
 					IF ASSIPLAY == 0
-						;당신が母親
+						;あなたが母親
 						IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						ELSE
 						ENDIF
@@ -10382,7 +10382,7 @@ CASE 108
 		;아이のオナニーを見てオナニーをする
 		;전회자위をする
 		IF PREVCOM == 11
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF HAVE_PENIS(TARGET)
 					IF HAVE_VAGINA(PLAYER)
@@ -10462,7 +10462,7 @@ CASE 108
 		IF TEQUIP:PLAYER:바이브 && TEQUIP:PLAYER:애널바이브
 			IF RAND:2 == 0
 				PRINTFORMW %CALLNAME:PLAYER%의 꿀단지과 배설구 양쪽에는 남성기를 본뜬 기구가 삽입되어 무자비하게 날뛰어 꾸불꾸불하고 있다…
-				;당신が母親かつ후타나리
+				;あなたが母親かつ후타나리
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && TALENT:PLAYER:후타나리
 					PRINTFORML 남성·여성기 양쪽 모두를 가지는 모친이, 기구를 사용해 스스로를 낳은 구멍과 남성기와 배설구로 자위하는 치태는,
 					PRINTFORMW 친자인 %CALLNAME:TARGET%조차 이해하기 어려운 이상함 을 가져오는 광경이었다…
@@ -10486,7 +10486,7 @@ CASE 108
 				ENDIF
 				PRINTFORMW 바이브가 출납할 때, 즈폿즈폿 하는 추잡한 소리와 %CALLNAME:PLAYER%의 허덕이는 목소리가 울린다…
 			ENDIF
-				;당신が母親
+				;あなたが母親
 				SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORML 모친이 「바이브로 자위를 하는 광경을 과시한다」는 천박한 무서움이, %조사처리(CALLNAME:TARGET,"를")% 덮친다…
 			;奴隷に주도권ありor奴隷が새드持ち
@@ -10669,22 +10669,22 @@ CASE 108
 				SIF TALENT:150
 					PRINTFORM 아직 남녀의 차이조차 잘 모르는 %CALLNAME:TARGET%의 눈 앞에서,
 				;●　당신の性別が男、오토코노코、후타나리、女
-				;당신が女
+				;あなたが女
 				IF TALENT:PLAYER:남자 == 1
-				;페니스の有無체크
-					;페니스がある
-					;당신は후타나리
+				;ペニスの有無チェック
+					;ペニスがある
+					;あなたはふたなり
 					IF TALENT:PLAYER:후타나리
 						PRINTFORML %조사처리(CALLNAME:PLAYER,"는")% 우뚝 솟은 페니스를 상하로 잡아당기면서,
 						PRINTFORMW 다른 한 손 육혈에 손가락을 출납, 애액으로 젖은 손가락으로 클리토리스를 어루만져 붙여 간다…
-					;당신は女
+					;あなたは女
 					ELSE
 						PRINTFORMW 
 					ENDIF
-				;당신が오토코노코
+				;あなたが男の娘
 				ELSEIF TALENT:PLAYER:오토코노코
 					PRINTFORMW 
-				;당신は男
+				;あなたは男
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10697,11 +10697,11 @@ CASE 108
 			IF TEQUIP:46 >= 1
 				IF TALENT:PLAYER:음란 || TALENT:PLAYER:창부
 					;■　당신の性別が男、오토코노코、후타나리、女
-					;당신が女
+					;あなたが女
 					IF TALENT:PLAYER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF TALENT:PLAYER:후타나리
 							IF RAND:3
 								PRINTFORMW 격렬하게 발기하고 있는 물건을 과시하듯이 쑥 내밀어, 그대로 천천히 흔들어 냈다…
@@ -10710,14 +10710,14 @@ CASE 108
 							ELSE
 								PRINTFORMW  여성기에 손가락을 굴리면서, 주위에 과시하는 자위를 개시했다…
 							ENDIF
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:PLAYER:오토코노코
 						PRINTFORMW 
-					;당신は男
+					;あなたは男
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -10733,7 +10733,7 @@ CASE 108
 		;처음
 		IF CFLAG:433 == 0
 			PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME:TARGET%에게 성기가 확실히 보이도록 앉아 크게 다리를 벌리고, 
-			;당신が母親
+			;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 문지기와 같이 비렬을 닫아 지키는 라비아에 손가락을 걸어 %CSTR:12%의, 여기…봐줘…라고 중얼거리며, 좌우로 당겨 열어 간다…
 					PRINTFORMW 평상시는 자신있는 무기나 총기로 싸우며, 동료마에 지시를 퍼부어, 이능을 이용하고 악마와 싸우는 모친인 %조사처리(CALLNAME:PLAYER,"가")%, 
@@ -10944,7 +10944,7 @@ CASE 108
 					ELSE
 						PRINTFORMW 거기는 복숭아색의 육벽이 조용하게 숨쉬어, 남성기의 삽입을 기다려 바래, 윤활유가 되는 애액으로 젖고 있다…
 					ENDIF
-					;당신が母親かつ섹스중독、섹스광、음란중 하나を持っている
+					;あなたが母親かつ섹스중독、섹스광、음란중 하나を持っている
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && (TALENT:PLAYER:음란 || TALENT:PLAYER:창부)
 						PRINTFORML %조사처리(CALLNAME:PLAYER,"는")% 스스로의 녀혈을 나누어 펼치면서, %CALLNAME:TARGET%의 부친에게 안겨 %조사처리(CALLNAME:TARGET,"를")% 임신했다는 것을 추잡하게 말했다…
 						PRINTFORMW %CALLNAME:TARGET%의 부친에게 페니스를 푹푹 박혀 발정기의 암컷과 같이 히이히이제 울부짖은 것…
@@ -10992,7 +10992,7 @@ CASE 108
 				ELSE
 					PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 양손으로 천천히 라비아를 당겨 펼쳐 여성만이 가지는 복숭아색의 꽃을 피게 해 간다…
 					PRINTFORMW 넓혀진 비육은 애액이라고 하는 상질의 지방으로 요염하게 젖어 여성기를 구성하는 내벽은 호흡과 동기해 무시무시한 색기를 흘리고 있다…
-					;당신が母親かつ섹스중독、섹스광、음란중 하나を持っている
+					;あなたが母親かつ섹스중독、섹스광、음란중 하나を持っている
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && (TALENT:PLAYER:음란 || TALENT:PLAYER:창부)
 						PRINTFORML 발정기의 암캐과 같이 페니스를 푹푹 박혀 히이히이 신음을 내며 
 						PRINTFORML 위험일이라고 고했는데도 관련되지 않고, 전용의 육변기와 같이 몇번이나에 질내사정될 때,
@@ -11041,7 +11041,7 @@ CASE 108
 				CFLAG:433 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 					IF ABL:섹스중독 >= 1 || TALENT:섹스광 || TALENT:음란 || TALENT:창부 || PALAM:욕정 >= PALAMLV:4
 						IF RAND:3 == 0
@@ -11074,7 +11074,7 @@ CASE 108
 				IF TALENT:150
 					CALL TRAIN_MESSAGE
 				ELSE
-					;당신が母親
+					;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) && ASSIPLAY == 0
 						IF RAND:3 == 0
 							PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 추잡한 모친을 경멸하면서도, 스스로가 태어난 비부에 호기심을 가지고 있다…
@@ -11486,7 +11486,7 @@ CASE 108
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 				ENDIF
-			;당신は女
+			;あなたは女
 			ELSE
 				IF RAND:2 == 0
 					PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 
@@ -13568,9 +13568,9 @@ CASE 108
 		;2번째 이후
 		ELSE
 			PRINTFORM %조사처리(CALLNAME:PLAYER,"는")% 
-			;페니스の有無체크
+			;ペニスの有無チェック
 			IF HAVE_PENIS(TARGET)
-				;페니스がある
+				;ペニスがある
 				;후타나리
 				IF TALENT:TARGET:후타나리
 					PRINTFORMW 우뚝 솟아있는 페니스와, 그 아래에 숨은 바기나 양쪽을 손으로 잡아당겨, 입술과 혀로 핥아간다…
@@ -13587,9 +13587,9 @@ CASE 108
 			ENDIF
 			;조교대상の行動
 			PRINTFORM %CALLNAME:TARGET%도 
-			;페니스の有無체크
+			;ペニスの有無チェック
 			IF HAVE_PENIS(PLAYER)
-				;페니스がある
+				;ペニスがある
 				IF TALENT:PLAYER:후타나리
 					PRINTFORMW 우뚝 솟은 페니스와, 그 아래에 숨은 것 양쪽 모두를 손가락으로 잡아당겨, 입술과 혀로 핥아 간다…
 				ELSEIF TALENT:PLAYER:남자 || TALENT:PLAYER:오토코노코
@@ -14140,12 +14140,12 @@ CASE 108
 			ENDIF
 		ENDIF
 		;■　당신
-		;당신が母親
+		;あなたが母親
 		IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 			;조수が母親か父親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸) || PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			ENDIF
-		;당신が父親
+		;あなたが父親
 		ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			;조수が母親か父親
 			IF ASSI == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)|| ASSI == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
@@ -15632,7 +15632,7 @@ IF TFLAG:10 > 0
 	ELSEIF SELECTCOM == 90
 		;오나홀장비中
 		IF TEQUIP:12 > 0
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF RAND:2 == 0
 					PRINTFORMW 오나홀 너머로 쓰다듬던 %CALLNAME:TARGET%의 성기는 마침내 한계에 달했다…
@@ -15643,7 +15643,7 @@ IF TFLAG:10 > 0
 			ENDIF
 		;전회모유飲ませるを選んでいる
 		ELSEIF PREVCOM == 98
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF RAND:2 == 0
 					PRINTFORML 유방을 빨게 하면서, 남근을 훑어 가자, %조사처리(CALLNAME:TARGET,"가")% 허리를 실룩실룩 움직이기 시작했다…
@@ -15656,7 +15656,7 @@ IF TFLAG:10 > 0
 		ELSEIF RAND:2 == 0
 			PRINTFORML %조사처리(CALLNAME:PLAYER,"가")% 완전이 빳빳해진 페니스를 괴롭히자, 
 			PRINTFORMW %조사처리(CALLNAME:TARGET,"는")%, 못참겠어, 나와, 라고 한계를 호소했다…
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				IF RAND:5 == 0
 					PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 귓전으로 추잡한 말을 속삭이면서, 그 육봉을 희롱하는 속도를 한층 더 높여갔다…
@@ -15710,7 +15710,7 @@ IF TFLAG:10 > 0
 						IF TFLAG:10 >= 4
 							PRINTFORML 피를 정액으로 바꾸어서까지 부어 낸 것 같은 초대량사정에, 
 							PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")%, 잔뜩 내 버렸네요, 노력했군요, 라고 어머니의 미소로 대답했다…
-						;大量사정이상
+						;대량사정이상
 						ELSEIF TFLAG:10 >= 2
 							PRINTFORMW 대량의 정액을 방출한 %조사처리(CALLNAME:TARGET,"는")% 많이 지쳐있는 것 같다…
 						ELSE
@@ -15938,9 +15938,9 @@ IF TFLAG:10 > 0
 			LOCAL:100 = RAND:4
 			;랜덤1
 			IF LOCAL:100 == 0 && ASSIPLAY == 0 && !TALENT:150
-				;당신が母親
+				;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
-					;임신中＋위험일・排卵日フラグが成立していない（成立していると임신中なのに排卵、위험일が成立してしまうので）
+					;妊娠中＋위험일・排卵日フラグが成立していない（成立していると妊娠中なのに排卵、위험일が成立してしまうので）
 					IF TALENT:MASTER:임신 && CFLAG:800 == 1
 						PRINTFORML %CALLNAME:MASTER%의 무릎을 껴안아 격렬하게 허리를 박고 있던 %조사처리(CALLNAME:TARGET,"가")% 
 						PRINTFORML 한계에 달해 강하게 허리를 다 밀어넣은 순간, %CALLNAME:MASTER%의 자궁에 뜨거운 분류가 흘러들어 온다…
@@ -15955,7 +15955,7 @@ IF TFLAG:10 > 0
 						PRINTFORMW 난폭하게 육욕과 육근을 여성기에 찔러 넣어지는 광경은 레이프라고 해도 과언이 아닌 광경이었다…
 						PRINTFORML %CALLNAME:MASTER%의 하복부는 마치 무를 그대로 감추어 넣고 있는것 같이 페니스가 떠올라、어느정도 이상한 광경이 되고 있다…
 						PRINTFORMW 가속해서 허리를 찔러 넣고 있던 %조사처리(CALLNAME:TARGET,"가")% 신음하자 、그 짐승의 욕구를 풀어 발했다…
-						;당신が임신中
+						;당신が妊娠中
 						IF TALENT:MASTER:임신 && CFLAG:800 == 1
 						ELSE
 							;사정中
@@ -15966,7 +15966,7 @@ IF TFLAG:10 > 0
 								;究極사정時
 								IF TFLAG:10>= 4
 									PRINTFORML 작은 체구에 알맞은 작은 자궁은 %CALLNAME:TARGET%의 사정을 받아 들이지 않고, 하복부는 이상할 만큼 부풀어 올라 있었다…
-								;大量사정이상
+								;대량사정이상
 								ELSEIF TFLAG:10<= 3
 									PRINTFORML %CALLNAME:PLAYER%의 하복부는 대량의 정액에 의해서, 꼴사납게 부풀어 올라 있다…
 								ENDIF
@@ -15985,7 +15985,7 @@ IF TFLAG:10 > 0
 						ELSE
 							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 본능적으로 %CALLNAME:TARGET%의 엉덩이를 손바닥으로 끌어당겨, 꿀단지의 가장 안쪽에서 사정시켰다…
 						ENDIF
-						;당신が임신中
+						;당신が妊娠中
 						IF TALENT:MASTER:임신 && CFLAG:800 == 1
 							IF RAND:2 == 0
 								PRINTFORMW 
@@ -16005,7 +16005,7 @@ IF TFLAG:10 > 0
 						ELSE
 							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 본능적으로 %CALLNAME:TARGET%의 엉덩이를 손바닥으로 끌어당겨, 꿀단지의 가장 안쪽에서 사정시켰다…
 						ENDIF
-						;당신が임신中
+						;당신が妊娠中
 						IF TALENT:MASTER:임신 && CFLAG:800 == 1
 							IF RAND:2 == 0
 								PRINTFORMW 자궁 내의 아이에게 사정된다는 것을 느낄 때, 여자로서의 열락이 %조사처리(CALLNAME:MASTER,"를")% 관통한다…
@@ -16074,9 +16074,9 @@ IF TFLAG:10 > 0
 			ENDIF
 			LOCAL:100 = RAND:4
 			IF LOCAL:100 == 0 && ASSIPLAY == 0 && !TALENT:150
-			;당신が母親
+			;あなたが母親
 				IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
-				;임신中＋위험일・排卵日フラグが成立していない（成立していると임신中なのに排卵、위험일が成立してしまうので）
+				;妊娠中＋위험일・排卵日フラグが成立していない（成立していると妊娠中なのに排卵、위험일が成立してしまうので）
 					IF TALENT:MASTER:임신 && CFLAG:800 == 1
 					PRINTFORML %CALLNAME:MASTER%의 무릎을 껴안아 격렬하게 허리를 박고 있던 %조사처리(CALLNAME:TARGET,"가")% 
 					PRINTFORML 한계에 달해 강하게 허리를 다 밀어넣은 순간, %CALLNAME:MASTER%의 자궁에 뜨거운 분류가 흘러들어 온다…
@@ -16256,7 +16256,7 @@ IF TFLAG:10 > 0
 					PRINTFORMW 귀두로 자궁구를 눌러 강력한 찌르기를 선물하자, 짐승과도 같은 비명소리와 함께 사정을 시작했다…
 					PRINTFORML 하반신과 허리를 크게 진동시킨,%CALLNAME:TARGET%의 생명 모두를 건 것 같은 사정은,
 					PRINTFORMW %CALLNAME:PLAYER%의 자궁을 백탁액으로 채운 후, 결합부인 음부로부터도 새어 흘러넘칠 정도의 대량사정이었다…
-				;大量사정이상
+				;대량사정이상
 				ELSEIF TFLAG:10 >= 2
 					PRINTFORML 고환이 눈에 보일 만큼 상하운동해, 자식을 %CALLNAME:TARGET%의 태내에 남김없이 쏟아 간다…
 					PRINTFORMW 사정에 의한 기절할 것 같은 쾌감이%CALLNAME:TARGET%의 뇌를 하얗게 구워 간다…
@@ -16283,7 +16283,7 @@ IF TFLAG:10 > 0
 						;랜덤＆당신が조교
 						IF LOCAL:99 == 0 && ASSIPLAY == 0 && !TALENT:150
 							PRINTFORMW %CALLNAME:MASTER%의 어여쁜 엉덩이를 양쪽에서 잡고 육단지를 격렬한 움직임으로 만끽하고 있던 %조사처리(CALLNAME:TARGET,"는")%, 
-								;당신が母親
+								;あなたが母親
 								IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 									PRINTFORMW 친어머니에게 정액을 쏟으려고, 크게 숨을 들이쉼과 함께 허리를 가장 안쪽으로 박았다…
 								ELSE
@@ -16449,7 +16449,7 @@ IF TFLAG:10 > 0
 			LOCAL:99 = RAND:3
 		IF TALENT:PLAYER:임신
 			IF LOCAL:99 == 0 && ASSIPLAY == 0 && !TALENT:150
-			;당신が母親
+			;あなたが母親
 				SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINT 모친의
 			PRINTFORMW 질내를 휘젓듯이 날뛰던 페니스는, 마침내 정액을 퓻퓻 뿌리고는 질내에서 크게 움츠러들었다…
@@ -16465,7 +16465,7 @@ IF TFLAG:10 > 0
 			ENDIF
 		ELSE
 			IF LOCAL:99 == 0 && ASSIPLAY == 0 && !TALENT:150
-			;당신が母親
+			;あなたが母親
 			SIF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				PRINT 모친의
 			PRINTFORMW 질내를 휘젓듯이 날뛰던 페니스는, 마침내 정액을 퓻퓻 뿌리고는 질내에서 크게 움츠러들었다…
@@ -17135,11 +17135,11 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
 				PRINTFORML %조사처리(CALLNAME:TARGET,"는")% 사랑스러운 %CALLNAME:MASTER%의 페니스에 양손을 대고는, 
 				PRINTFORMW 천천히 입술을 통과시키고, 뜨거운 입 안의 점막에 싸 넣었다…
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORML 배아파서 낳은 %조사처리(CALLNAME:TARGET,"가")%, 아침부터 친어머니의 페니스를 사랑스럽게 입에 넣고 봉사하는 모습은 
 					PRINTFORMW %CALLNAME:MASTER%의 만족감을 높이는 것이었다…
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 친아버지의 페니스에 열심히 봉사하는%CALLNAME:TARGET%의 머리를 어루만지면서, 봉사를 즐겼다…
 					ENDIF
@@ -17286,28 +17286,28 @@ SELECTCASE TFLAG:13
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW 아침 키스를 강하게 요구하는 %CALLNAME:TARGET%의 뺨에 입을 맞추어 주었다…
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 						PRINTFORMW 아침 키스를 강하게 요구하는 %CALLNAME:TARGET%의 뺨에 입을 맞추어 주었다…
 					ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW 아침 키스를 강하게 요구하는 %CALLNAME:TARGET%의 뺨에 입을 맞추어 주었다…
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 						PRINTFORMW 아침 키스를 강하게 요구하는 %CALLNAME:TARGET%의 뺨에 입을 맞추어 주었다…
 					ENDIF
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 						PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 						PRINTFORMW 
 					ENDIF
@@ -17401,28 +17401,28 @@ SELECTCASE TFLAG:13
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
@@ -17440,28 +17440,28 @@ SELECTCASE TFLAG:13
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
@@ -17479,28 +17479,28 @@ SELECTCASE TFLAG:13
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && !TALENT:150
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				;당신が母親
+				;あなたが母親
 					IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 					PRINTFORMW 
-				;당신が父親
+				;あなたが父親
 					ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 					PRINTFORMW 
 					ENDIF
@@ -17689,10 +17689,10 @@ SELECTCASE TFLAG:13
 				PRINTFORML %조사처리(CALLNAME:TARGET,"는")% 몇회인가 모르는 질내사정을 끝낸 %CALLNAME:MASTER%의 페니스를 뽑아 내고는, 
 				PRINTFORML 기쁜듯이 하복부를 누르면서, 오늘은 임신하기 쉬운 날인 것을 중얼거렸다…
 			ENDIF
-			;당신が母親
+			;あなたが母親
 			IF PLAYER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 				PRINTFORMW 
-			;당신が父親
+			;あなたが父親
 			ELSEIF PLAYER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 				PRINTFORMW 
 			ELSE
@@ -18701,7 +18701,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 연민을 느끼게 한다…
 				ENDIF
 				PRINTFORM %조사처리(CALLNAME:MASTER,"는")% 
-				;임신中
+				;妊娠中
 				IF TALENT:임신
 					PRINT 임신한 
 				ENDIF
@@ -18755,7 +18755,7 @@ SELECTCASE TFLAG:13
 					CALL MUSUME_TOILET
 					CALL MUSUME_TOILET_2
 				ENDIF
-			;임신中
+			;妊娠中
 			ELSEIF TALENT:임신
 				IF RAND:4
 					PRINTFORMW 그 자궁에 새로운 생명을 머금은 채 %조사처리(CALLNAME:TARGET,"는")% 쉬는 것도 허용되지 않고
@@ -19655,14 +19655,14 @@ SELECTCASE TFLAG:13
 	CASE 40
 		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%에게 반지를 건넸다…
 		PRINTFORM %조사처리(CALLNAME,"는")% 
-		;당신が母親
+		;あなたが母親
 		IF MASTER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 			IF RAND:2 == 0
 				PRINT 친어머니인 
 			ELSE
 				PRINT 친어머니인 
 			ENDIF
-		;당신が父親
+		;あなたが父親
 		ELSEIF MASTER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			IF RAND:2 == 0
 				PRINT 친아버지인 
@@ -20600,7 +20600,7 @@ SELECTCASE TFLAG:13
 			CFLAG:603 = 1
 		ENDIF
 	;-------------------------------------------------
-	;;던전内성욕처리：その場で자위
+	;;던전내 성욕처리：그 장소에서 자위
 	;-------------------------------------------------
 	CASE 81
 		CALL EVENT_MESSAGE
@@ -20609,7 +20609,7 @@ SELECTCASE TFLAG:13
 			CFLAG:604 = 1
 		ENDIF
 	;-------------------------------------------------
-	;던전内성욕처리：物陰で자위
+	;던전내 성욕처리：그늘에서 자위
 	;봉사하는 쪽
 	;-------------------------------------------------
 	CASE 82
@@ -20621,7 +20621,7 @@ SELECTCASE TFLAG:13
 	;-------------------------------------------------
 	;던전내 성욕처리：동료마와 섹스한다
 	;하는 쪽
-	;PLAYERに相手の번호が入っています
+	;PLAYER에 상대의 번호가 들어있습니다
 	;-------------------------------------------------
 	CASE 83
 		CALL EVENT_MESSAGE
@@ -20632,7 +20632,7 @@ SELECTCASE TFLAG:13
 	;-------------------------------------------------
 	;던전내 성욕처리：동료마에게 봉사시킨다
 	;봉사받는 쪽
-	;PLAYERに봉사하는 쪽の번호が入っています
+	;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
 	;-------------------------------------------------
 	CASE 84
 		CALL EVENT_MESSAGE
@@ -20647,7 +20647,7 @@ SELECTCASE TFLAG:13
 	;-------------------------------------------------
 	;던전내 성욕처리：윤간이벤트
 	;봉사하는 쪽
-	;PLAYERに実行者=윤간する악마の번호が入っています
+	;PLAYER에 실행자 = 윤간하는 악마의 번호가 들어있습니다
 	;-------------------------------------------------
 	CASE 85
 		CALL EVENT_MESSAGE
@@ -22201,7 +22201,7 @@ ENDIF
 			ENDIF
 		ENDIF
 		;이인칭セレクト（CSTR:12）
-		;당신が母親
+		;あなたが母親
 		IF MASTER == FINDCHARA_ID(CFLAG:딸의친부모고유번호딸)
 			IF CFLAG:딸성격 == 1
 				CSTR:12 = 어머님
@@ -22220,7 +22220,7 @@ ENDIF
 			ELSE
 				CSTR:12 = %CALLNAME:MASTER%
 			ENDIF
-		;당신が父親
+		;あなたが父親
 		ELSEIF MASTER == FINDCHARA_ID(CFLAG:딸의부친고유번호딸)
 			IF CFLAG:딸성격 == 1
 				CSTR:12 = 아버님

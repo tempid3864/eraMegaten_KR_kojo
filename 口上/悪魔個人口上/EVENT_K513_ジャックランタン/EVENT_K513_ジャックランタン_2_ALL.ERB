@@ -42,7 +42,7 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K513_2 → EVENTTRAIN_K513_2_12
+;예： EVENTTRAIN_K513_2 → EVENTTRAIN_K513_2_12
 ;--------------------------------------------------
 @셀렉트구상설명_K513_2,ARG = 0
 SIF ARG == 1
@@ -1689,7 +1689,7 @@ SELECTCASE SELECTCOM
 						ELSEIF TEQUIP:23 == 1
 						;촉수+중독
 						ELSEIF TEQUIP:25 == 1 && ABL:촉수중독 > 3
-							PRINTFORMW 「んぐ……好き勝손してくれるね%UNICODE(0x2665)%」
+							PRINTFORMW 「んぐ……好き勝手してくれるね%UNICODE(0x2665)%」
 						;촉수
 						ELSEIF TEQUIP:25 == 1
 							PRINTFORMW 「……やっぱりこれ気持ち悪いよ」
@@ -1762,7 +1762,7 @@ SELECTCASE SELECTCOM
 						ELSEIF TEQUIP:23 == 1
 						;촉수+중독
 						ELSEIF TEQUIP:25 == 1 && ABL:촉수중독 > 3
-							PRINTFORMW 「んぐ……好き勝손してくれるね%UNICODE(0x2665)%」
+							PRINTFORMW 「んぐ……好き勝手してくれるね%UNICODE(0x2665)%」
 						;촉수
 						ELSEIF TEQUIP:25 == 1
 							PRINTFORMW 「……やっぱりこれ気持ち悪いよ」
@@ -1835,7 +1835,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「あがッ%UNICODE(0x2665)%　……ぐ……%UNICODE(0x2665)%」
 						;촉수+중독
 						ELSEIF TEQUIP:25 == 1 && ABL:촉수중독 > 3
-							PRINTFORMW 「んぐ……好き勝손してくれるね%UNICODE(0x2665)%」
+							PRINTFORMW 「んぐ……好き勝手してくれるね%UNICODE(0x2665)%」
 						;촉수
 						ELSEIF TEQUIP:25 == 1
 							PRINTFORMW 「……やっぱりこれ気持ち悪いよ」
@@ -4127,7 +4127,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 ;ゴムつき
 IF SELECTCOM == 64 && TFLAG:10 > 0 && TEQUIP:35
@@ -4658,7 +4658,7 @@ SELECTCASE TFLAG:13
 				PRINTFORML 眠っていた%CALLNAME:MASTER%は、下半身に違和感を覚えて突然눈を醒ました。
 				PRINTFORML 見ると下着は全て脱がされ、シーツは大量の로션で濡れている。
 				PRINTFORML そして%CALLNAME:MASTER%の膣からは、出された정액が中からとろとろと垂れ落ちている……
-				PRINTFORML 身勝손な行為に及んだ%CALLNAME%は、%CALLNAME:MASTER%が起きたことを知ると
+				PRINTFORML 身勝手な行為に及んだ%CALLNAME%は、%CALLNAME:MASTER%が起きたことを知ると
 				PRINTFORMW 再び%CALLNAME:MASTER%に覆い被さってきた……
 				;함락완료
 				IF 함락(TARGET) && (CFLAG:269 < 1 || FLAG:7 == 2)
@@ -4889,7 +4889,7 @@ SELECTCASE TFLAG:13
 				ELSEIF RAND:2 == 0
 					PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%が満발するまで、乱暴な行為を受け止めた…
 				ELSE
-					PRINTFORMW 그리고、%CALLNAME%の身勝손な肛辱は、そのまま長い間続けられた…
+					PRINTFORMW 그리고、%CALLNAME%の身勝手な肛辱は、そのまま長い間続けられた…
 				ENDIF
 			ENDIF
 			;함락완료
@@ -4982,7 +4982,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「気持ちいいかい？　それはよかった」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「勝손なことしてごめんね……」
+					PRINTFORMW 「勝手なことしてごめんね……」
 				ENDIF
 				CFLAG:269 = 1
 			ENDIF
@@ -5268,7 +5268,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = なんだ、やるじゃないか！
 			ENDIF
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 		IF RAND:3 == 0
 			LOCALS = %CSTR:일인칭%の出番かな！
@@ -5281,7 +5281,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = %CSTR:일인칭%の힘が필요かい？
 			LOCALS:1 = それじゃあ、頑張ってみようかな。
 		ENDIF
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -5292,7 +5292,7 @@ SELECTCASE TFLAG:전투이벤트
 				ELSE
 					LOCALS = 恨まないでくれよ。
 				ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = ああっ、防がれてる！
@@ -5309,7 +5309,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = これはひどい。
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -5373,7 +5373,7 @@ SELECTCASE TFLAG:전투이벤트
 		ELSE
 			LOCALS = つぎは当てるぞ。
 		ENDIF
-	;회피した
+	;회피했다
 	CASE 18
 		IF RAND:8 == 0
 			LOCALS = ヒーホー！
@@ -5410,7 +5410,7 @@ SIF TALENT:ARG:9
 CALLFORM SKILL_EFECT_{LOCAL}
 
 ;-------------------------------------------------
-;特定스킬/行動
+;특정스킬/行動
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;화염
@@ -5526,7 +5526,7 @@ ELSEIF LOCAL == 2301
 		LOCALS = うん、かわったほうがよさそうだ。
 	ENDIF
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;화염
 ELSEIF RANGE(LOCAL,701, 799)
@@ -5689,7 +5689,7 @@ ELSEIF RANGE(LOCAL,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(LOCAL,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(LOCAL,501, 505)
 		IF RAND:2
 			LOCALS = %RESULTS%、ねえ。やっておこうか。

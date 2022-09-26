@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;○○구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;
 ;-------------------------------------------------
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -21,7 +21,7 @@
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K4669_ASSI.ERB
-;	Facility	:회화타입：조수時구상
+;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
@@ -53,15 +53,15 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_KX1 → EVENTTRAIN_KX1_12
+;예： EVENTTRAIN_KX1 → EVENTTRAIN_KX1_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4669,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -118,19 +118,19 @@
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	PRINTFORMW 奴隷の部屋ここには치하야と言う奴隷がいる
-	PRINTFORML 「あ…당신が%CSTR:일인칭%を拐った人拐いですね…」
+	PRINTFORMW 奴隷の部屋ここには千早と言う奴隷がいる
+	PRINTFORML 「あ…あなたが%CSTR:일인칭%を拐った人拐いですね…」
 	PRINTFORMW 「…%CSTR:일인칭%をどうする気なんですか？」
-	PRINTFORMW まるで自分が拐われることがわかっていたような입ぶりだ
-	PRINTFORMW そんなことは構わずに당신は치하야に설명する
-	PRINTFORMW 「人を売るために조교ですか…」
+	PRINTFORMW まるで自分が拐われることがわかっていたような口ぶりだ
+	PRINTFORMW そんなことは構わずにあなたは千早に説明する
+	PRINTFORMW 「人を売るために調教ですか…」
 	PRINTFORMW 「それって…その…痛いこととかはしないんですよね…」
 	PRINTFORMW 「その…ひどいことは…あまりしないで欲しいです…」
 	CFLAG:201 = 1
 	RETURN 0
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
-	PRINTFORMW 「조교ですね…わかりました…」
+	PRINTFORMW 「調教ですね…わかりました…」
 	CFLAG:201 = 2
 	RETURN 0
 ;굴복각인Lv2
@@ -140,7 +140,7 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	RETURN 0
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORMW 「%CSTR:일인칭%、%CSTR:이인칭%から逃れられないと占いの결과が出ました」
+	PRINTFORMW 「%CSTR:일인칭%、%CSTR:이인칭%から逃れられないと占いの結果が出ました」
 	PRINTFORMW 「もうその意味がわかった気がします」
 	CFLAG:201 = 4
 	RETURN 0
@@ -165,8 +165,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 「あっ来ましたね、待ってたんですよ！」
 		PRINTFORMW %CALLNAME%は自分に会うことを楽しみにしていたようだ
 		PRINTFORMW 「うふふ、どこを使いたいですか？」
-		PRINTFORMW 「손ですか？발ですか？お입ですか？」
-		PRINTFORMW 「…それとも下のお입、おマンコ使いますかぁ%UNICODE(0x2661)%」
+		PRINTFORMW 「手ですか？足ですか？お口ですか？」
+		PRINTFORMW 「…それとも下のお口、おマンコ使いますかぁ%UNICODE(0x2661)%」
 		PRINTFORML %CALLNAME%はくぱぁと恥部を見せつける
 		PRINTFORMW 「%CSTR:이인칭%に触られる度にエッチなことが好きになってたんですよ%UNICODE(0x2661)%」
 		PRINTFORMW 「たくさんエッチなことしてください%UNICODE(0x2661)%」
@@ -175,8 +175,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 「あっ来ましたね、待ってたんですよ！」
 		PRINTFORMW %CALLNAME%は自分に会うことを楽しみにしていたようだ
 		PRINTFORML 「最初は怖かったんですけど」
-		PRINTFORMW 「最近は%CSTR:이인칭%に조교されることが楽しくなって来たんです」
-		PRINTFORMW 「今ではこの운명に感謝してるんですよ」
+		PRINTFORMW 「最近は%CSTR:이인칭%に調教されることが楽しくなって来たんです」
+		PRINTFORMW 「今ではこの運命に感謝してるんですよ」
 		PRINTFORMW 「こうして%CSTR:이인칭%に会えたんですから%UNICODE(0x2661)%」
 	ENDIF
 	CFLAG:201 = 5
@@ -225,7 +225,7 @@ ENDIF
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	PRINTFORMW 「むー…」
-	PRINTFORMW 치하야は당신を睨んだまま喋らない
+	PRINTFORMW 千早はあなたを睨んだまま喋らない
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
@@ -237,7 +237,7 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	PRINTFORMW 「조교ですね…わかりました…」
+	PRINTFORMW 「調教ですね…わかりました…」
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
@@ -256,7 +256,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 「%CSTR:일인칭%のことも忘れないでくださいよ！」 
 		ELSE
 			PRINTFORMW 「%CSTR:이인칭%%UNICODE(0x2661)%今日は何をお望みですか？」
-			PRINTFORMW 「가사ですか？デートですか？そ・れ・と・も…%UNICODE(0x2661)%」 
+			PRINTFORMW 「家事ですか？デートですか？そ・れ・と・も…%UNICODE(0x2661)%」 
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
@@ -269,16 +269,16 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 「%CSTR:일인칭%のことも忘れないでくださいね、おマンコが切なくなっちゃいますよぉ%UNICODE(0x2661)%」
 		ELSE
 			PRINTFORMW 「今日は何をお望みですか%UNICODE(0x2661)%」
-			PRINTFORMW 「お입で봉사します？おっぱいで봉사します？それとも…おマンコで봉사しますか%UNICODE(0x2661)%」
+			PRINTFORMW 「お口で奉仕します？おっぱいで奉仕します？それとも…おマンコで奉仕しますか%UNICODE(0x2661)%」
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:3 == 0
 			PRINTFORML 「待っていましたよ」
-			PRINTFORMW 「今日も%CSTR:일인칭%を조교するんですね」
+			PRINTFORMW 「今日も%CSTR:일인칭%を調教するんですね」
 		ELSEIF RAND:2 == 0
-			PRINTFORMW 「%CSTR:이인칭%は他の人の조교で忙しいことはわかってます」
+			PRINTFORMW 「%CSTR:이인칭%は他の人の調教で忙しいことはわかってます」
 			PRINTFORMW 「でも、%CSTR:일인칭%のことも忘れないでくださいね」
 			PRINTFORMW 「少し寂しいです…」
 		ELSE
@@ -374,7 +374,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 「次もたくさん愛し合いましょうね！」
 		ELSE
 			PRINTFORMW 「今日はここまでですか？」
-			PRINTFORMW 「まだ、物발りないかもです…%UNICODE(0x2661)%」
+			PRINTFORMW 「まだ、物足りないかもです…%UNICODE(0x2661)%」
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
@@ -383,7 +383,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 「おチンポもっと欲しかったです…」
 		ELSE
 			PRINTFORMW 「今日はここまでですか？」
-			PRINTFORML 「少し物발りないです」
+			PRINTFORML 「少し物足りないです」
 			PRINTFORMW 「もっとおマンコして欲しいです…」
 		ENDIF
 	;복종, 예속
@@ -454,16 +454,16 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:300 < 3 || FLAG:7 == 2)
-					;通す
+					;통과
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:300 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:300 < 4 || FLAG:7 == 2)
 						IF RAND:3 == 0
-							PRINTFORMW 「さあ、たっぷり%CSTR:일인칭%の体を애무してください%UNICODE(0x2661)%」
+							PRINTFORMW 「さあ、たっぷり%CSTR:일인칭%の体を愛撫してください%UNICODE(0x2661)%」
 							CALL chihaya_aegi
 						ELSEIF RAND:2 == 0					
 							CALL chihaya_aegi
-							PRINTFORMW 「うふふ、相変わらずとてもお上손ですね♪」
+							PRINTFORMW 「うふふ、相変わらずとてもお上手ですね♪」
 						ELSE
 							CALL chihaya_aegi
 							CALL chihaya_aegi
@@ -476,7 +476,7 @@ SELECTCASE SELECTCOM
 							CALL chihaya_aegi
 							PRINTFORMW 「あはぁ♪おマンコからエッチな音が出てる%UNICODE(0x2661)%」
 						ELSEIF RAND:2 == 0					
-							PRINTFORMW 「%CSTR:이인칭%の손で%CSTR:일인칭%をもっといやらしくしてくださいね%UNICODE(0x2661)%」
+							PRINTFORMW 「%CSTR:이인칭%の手で%CSTR:일인칭%をもっといやらしくしてくださいね%UNICODE(0x2661)%」
 							CALL chihaya_aegi
 						ELSE
 							CALL chihaya_aegi
@@ -488,7 +488,7 @@ SELECTCASE SELECTCOM
 					ELSEIF TALENT:5 || TALENT:8 && (CFLAG:300 < 4 || FLAG:7 == 2)
 						IF RAND:3 == 0
 							CALL chihaya_aegi
-							PRINTFORMW  「相変わらずいやらしい손つきですね、とても気持ちいいです」
+							PRINTFORMW  「相変わらずいやらしい手つきですね、とても気持ちいいです」
 						ELSEIF RAND:2 == 0					
 							PRINTFORMW 「好きなだけ%CSTR:일인칭%の体を弄ってくださいね%UNICODE(0x2661)%」
 							CALL chihaya_aegi
@@ -524,7 +524,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE
-			;촉수あり
+			;촉수있음
 			;처음
 			IF CFLAG:445 == 0
 				PRINTFORMW 
@@ -532,7 +532,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:445 < 3 || FLAG:7 == 2)
-					;通す
+					;통과
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:445 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:445 < 4 || FLAG:7 == 2)
@@ -572,7 +572,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:301 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:301 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:301 < 4 || FLAG:7 == 2)	
@@ -602,7 +602,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「どうです？%CSTR:일인칭%のおマンコおいしいですか？」
 					ELSE
 						CALL chihaya_aegi
-						PRINTFORMW 「と、とてもお上손です%UNICODE(0x2661)%」
+						PRINTFORMW 「と、とてもお上手です%UNICODE(0x2661)%」
 						CALL chihaya_aegi
 					ENDIF
 					CFLAG:301= 4
@@ -616,7 +616,7 @@ SELECTCASE SELECTCOM
 						CALL chihaya_aegi
 					ELSE
 						CALL chihaya_aegi
-						PRINTFORMW 「おしっこの出るとこ…舐めて大丈남편なんですか？…」
+						PRINTFORMW 「おしっこの出るとこ…舐めて大丈夫なんですか？…」
 						CALL chihaya_aegi
 					ENDIF
 					CFLAG:301= 3
@@ -645,7 +645,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:302 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:302 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:302 < 4 || FLAG:7 == 2)	
@@ -682,7 +682,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:303 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:303 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:303 < 4 || FLAG:7 == 2)	
@@ -691,7 +691,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「す、すごい、指だけでいっちゃいそうです」
 				    ELSE
 						CALL chihaya_aegi
-						PRINTFORMW 「もう%UNICODE(0x2661)%손つきがいやらしいですよ%UNICODE(0x2661)%」
+						PRINTFORMW 「もう%UNICODE(0x2661)%手つきがいやらしいですよ%UNICODE(0x2661)%」
 				    ENDIF
 					CFLAG:303= 4
 				;음란, 창부	
@@ -709,7 +709,7 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:303 < 4 || FLAG:7 == 2)	
 					IF RAND:2 == 0
 						CALL chihaya_aegi
-						PRINTFORMW 「お上손です、とても気持ちいですよ」
+						PRINTFORMW 「お上手です、とても気持ちいですよ」
 				    ELSE
 						CALL chihaya_aegi
 						PRINTFORMW 「ゆ、指でいっちゃいそうですぅ！」
@@ -748,7 +748,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:304 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:304 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:304 < 4 || FLAG:7 == 2)	
@@ -818,7 +818,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:305 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:305 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:305 < 4 || FLAG:7 == 2)					
@@ -827,7 +827,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「す、すごい、お尻ででいっちゃいそうです」				
 					    ELSE				
 							CALL chihaya_aegi				
-							PRINTFORMW 「もう%UNICODE(0x2661)%손つきがいやらしいですよ%UNICODE(0x2661)%」				
+							PRINTFORMW 「もう%UNICODE(0x2661)%手つきがいやらしいですよ%UNICODE(0x2661)%」				
 					    ENDIF
 					    CFLAG:305= 4
 					;음란, 창부	
@@ -847,7 +847,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「す、すごい、お尻ででいっちゃいそうです」				
 					    ELSE				
 							CALL chihaya_aegi				
-							PRINTFORMW 「と、とてもお上손です」				
+							PRINTFORMW 「と、とてもお上手です」				
 					    ENDIF
 						CFLAG:305= 4
 					;굴복각인Lv3	
@@ -875,7 +875,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:446 == 0			
 				PRINTFORMW 		
@@ -883,7 +883,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:446 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:446 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:446 < 4 || FLAG:7 == 2)	
@@ -922,7 +922,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:306 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:306 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:306 < 4 || FLAG:7 == 2)
@@ -930,10 +930,10 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「いいですよ♪好きなだけ揉んでくださいね」
 					    ELSEIF RAND:2 == 0
 							CALL chihaya_aegi
-							PRINTFORMW 「うふふ…%UNICODE(0x2661)%とてもいやらしい손つきです…%UNICODE(0x2661)%」
+							PRINTFORMW 「うふふ…%UNICODE(0x2661)%とてもいやらしい手つきです…%UNICODE(0x2661)%」
 					    ELSE
 							CALL chihaya_aegi
-							PRINTFORMW 「もう、おっぱいを触る손、とてもいやらしいですよ%UNICODE(0x2661)%」
+							PRINTFORMW 「もう、おっぱいを触る手、とてもいやらしいですよ%UNICODE(0x2661)%」
 					    ENDIF
 						CFLAG:306= 4
 					;음란, 창부	
@@ -990,7 +990,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:447 == 0			
 				PRINTFORMW 		
@@ -998,7 +998,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:447 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:447 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:447 < 4 || FLAG:7 == 2)	
@@ -1037,7 +1037,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:307 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:307 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:307 < 4 || FLAG:7 == 2)
@@ -1045,34 +1045,34 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「いいですよ♪好きなだけ弄ってくださいね」
 					    ELSEIF RAND:2 == 0
 							CALL chihaya_aegi
-							PRINTFORMW 「うふふ…%UNICODE(0x2661)%とてもいやらしい손つきです…%UNICODE(0x2661)%」
+							PRINTFORMW 「うふふ…%UNICODE(0x2661)%とてもいやらしい手つきです…%UNICODE(0x2661)%」
 					    ELSE
 							CALL chihaya_aegi
-							PRINTFORMW 「もう、유두をつねる손、とてもいやらしいですよ%UNICODE(0x2661)%」
+							PRINTFORMW 「もう、乳首をつねる手、とてもいやらしいですよ%UNICODE(0x2661)%」
 					    ENDIF
 						CFLAG:307= 4
 					;음란, 창부	
 					ELSEIF TALENT:4 || TALENT:7 && (CFLAG:307 < 4 || FLAG:7 == 2)	
 						IF RAND:3 == 0
-							PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%の유두をたくさん弄ってくださいね%UNICODE(0x2661)%」
+							PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%の乳首をたくさん弄ってくださいね%UNICODE(0x2661)%」
 					    ELSEIF RAND:2 == 0
 							CALL chihaya_aegi
-							PRINTFORMW 「すごぉい…%UNICODE(0x2661)%유두だけでいっちゃいますぅ…%UNICODE(0x2661)%」
+							PRINTFORMW 「すごぉい…%UNICODE(0x2661)%乳首だけでいっちゃいますぅ…%UNICODE(0x2661)%」
 					    ELSE
 							CALL chihaya_aegi
-							PRINTFORMW 「もう、유두をつねる손、とてもいやらしいですよ%UNICODE(0x2661)%」
+							PRINTFORMW 「もう、乳首をつねる手、とてもいやらしいですよ%UNICODE(0x2661)%」
 					    ENDIF
 						CFLAG:307= 4
 					;복종, 예속	
 					ELSEIF TALENT:5 || TALENT:8 && (CFLAG:307 < 4 || FLAG:7 == 2)	
 						IF RAND:3 == 0
-							PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%の유두をたくさんいじめてくださいね」
+							PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%の乳首をたくさんいじめてくださいね」
 					    ELSEIF RAND:2 == 0
 							CALL chihaya_aegi
-							PRINTFORMW 「はぁはぁ…%CSTR:일인칭%の유두、触り心地はどうですか？…ん%UNICODE(0x2661)%」
+							PRINTFORMW 「はぁはぁ…%CSTR:일인칭%の乳首、触り心地はどうですか？…ん%UNICODE(0x2661)%」
 					    ELSE
 							CALL chihaya_aegi
-							PRINTFORMW 「유두をつねる指、とてもいやらしいです…%UNICODE(0x2661)%」
+							PRINTFORMW 「乳首をつねる指、とてもいやらしいです…%UNICODE(0x2661)%」
 					    ENDIF
 						CFLAG:307= 4
 					;굴복각인Lv3	
@@ -1101,7 +1101,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:448 == 0			
 				PRINTFORMW 		
@@ -1109,7 +1109,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:448 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:448 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:448 < 4 || FLAG:7 == 2)	
@@ -1148,7 +1148,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:308 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:308 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:308 < 4 || FLAG:7 == 2)	
@@ -1174,7 +1174,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:449 == 0			
 				PRINTFORMW 		
@@ -1182,7 +1182,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:449 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:449 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:449 < 4 || FLAG:7 == 2)	
@@ -1221,7 +1221,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:309 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:309 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:309 < 4 || FLAG:7 == 2)	
@@ -1259,7 +1259,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:310 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:310 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:310 < 4 || FLAG:7 == 2)	
@@ -1297,7 +1297,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:311 < 3 || FLAG:7 == 2)
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:311 < 3 || FLAG:7 == 2)
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:311 < 4 || FLAG:7 == 2)	
@@ -1336,7 +1336,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:435 < 4 || FLAG:7 == 2)	
@@ -1362,7 +1362,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:450 == 0			
 				PRINTFORMW 		
@@ -1370,7 +1370,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:450 < 4 || FLAG:7 == 2)	
@@ -1410,7 +1410,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:436 < 4 || FLAG:7 == 2)	
@@ -1436,7 +1436,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 			ENDIF
 				ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:451 == 0			
 				PRINTFORMW 		
@@ -1444,7 +1444,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:451 < 4 || FLAG:7 == 2)	
@@ -1483,7 +1483,7 @@ CASE 14
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:442 < 4 || FLAG:7 == 2)	
@@ -1521,7 +1521,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:444 < 4 || FLAG:7 == 2)	
@@ -1547,7 +1547,7 @@ CASE 15
 				ENDIF
 			ENDIF
 		ELSE				
-			;촉수あり			
+			;촉수있음			
 			;처음			
 			IF CFLAG:452 == 0			
 				PRINTFORMW 		
@@ -1555,7 +1555,7 @@ CASE 15
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:452 < 4 || FLAG:7 == 2)	
@@ -1593,7 +1593,7 @@ CASE 15
 		IF CFLAG:312 == 0
 			;연모, 친애	
 			IF TALENT:3 || TALENT:6 && (CFLAG:312 < 4 || FLAG:7 == 2)	
-				PRINTFORMW 「うふふ、好きな人と키스できるなんて嬉しいです」
+				PRINTFORMW 「うふふ、好きな人とキスできるなんて嬉しいです」
 				CFLAG:312= 4
 			;음란, 창부	
 			ELSEIF TALENT:4 || TALENT:7 && (CFLAG:312 < 4 || FLAG:7 == 2)	
@@ -1613,7 +1613,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:312 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:312 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:312 < 4 || FLAG:7 == 2)	
@@ -1624,14 +1624,14 @@ CASE 15
 								PRINTFORMW 「ん…ちゅ%UNICODE(0x2661)%…はぁっ…んむぅ…」
 							ENDIF				
 						IF RAND:3 == 0 && ABL:MASTER:기교 > 3
-							PRINTFORMW 「はぁ…%UNICODE(0x2661)%머리がとけちゃいそうですぅ」
+							PRINTFORMW 「はぁ…%UNICODE(0x2661)%頭がとけちゃいそうですぅ」
 						ELSEIF ABL:기교 < 3
-							PRINTFORMW 「키스って意外と難しいですね」
+							PRINTFORMW 「キスって意外と難しいですね」
 						ELSE
 							PRINTFORMW 「ちょっと慣れてきました」
 						ENDIF
 					ELSE
-						PRINTFORMW 「えへへ、たくさん키스しましょ%UNICODE(0x2661)%」
+						PRINTFORMW 「えへへ、たくさんキスしましょ%UNICODE(0x2661)%」
 					ENDIF
 					CFLAG:312= 4
 				;음란, 창부	
@@ -1643,12 +1643,12 @@ CASE 15
 					ENDIF
 					
 					IF RAND:3 == 0 && ABL:MASTER:기교 > 3
-						PRINTFORMW 「はぁん%UNICODE(0x2661)%머리がとけちゃいそうですぅ」
+						PRINTFORMW 「はぁん%UNICODE(0x2661)%頭がとけちゃいそうですぅ」
 					ELSEIF RAND:2 == 0 && ABL:기교 > 3
 						SIF TALENT:MASTER:남자 || TALENT:MASTER:후타나리
-							PRINTFORMW 「うふ、%CSTR:일인칭%の키스でおチンポとてもびくびくしてるぅ%UNICODE(0x2661)%」
+							PRINTFORMW 「うふ、%CSTR:일인칭%のキスでおチンポとてもびくびくしてるぅ%UNICODE(0x2661)%」
 					ELSE
-						PRINTFORMW 「んはぁ、お입の中あったかいですぅ…%UNICODE(0x2661)%」
+						PRINTFORMW 「んはぁ、お口の中あったかいですぅ…%UNICODE(0x2661)%」
 					ENDIF
 					CFLAG:312= 4
 				;복종, 예속	
@@ -1656,14 +1656,14 @@ CASE 15
 					IF RAND:2 == 0
 						PRINTFORMW 「ん…、んちゅ……」
 						IF RAND:3 == 0 && ABL:MASTER:기교 > 3
-							PRINTFORMW 「はぁん%UNICODE(0x2661)%머리がとけちゃいそうですぅ」
+							PRINTFORMW 「はぁん%UNICODE(0x2661)%頭がとけちゃいそうですぅ」
 						ELSEIF ABL:기교 > 3
-							PRINTFORMW 「키스って意外と難しいですね」
+							PRINTFORMW 「キスって意外と難しいですね」
 						ELSE
 							PRINTFORMW 「ちょっと慣れてきました」
 						ENDIF
 					ELSE
-						PRINTFORMW 「はい、いっぱい키스しましょう」
+						PRINTFORMW 「はい、いっぱいキスしましょう」
 					ENDIF
 					CFLAG:312= 4
 				;순종Lv3 이상	
@@ -1690,7 +1690,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:313 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:313 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:313 < 4 || FLAG:7 == 2)	
@@ -1816,7 +1816,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:320 < 4 || FLAG:7 == 2)	
@@ -1920,7 +1920,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:322 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:322 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:322 < 4 || FLAG:7 == 2)	
@@ -1958,7 +1958,7 @@ CASE 15
 					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:323 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:323 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:323 < 4 || FLAG:7 == 2)	
@@ -1997,7 +1997,7 @@ CASE 15
 			;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:324 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:324 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:324 < 4 || FLAG:7 == 2)	
@@ -2042,7 +2042,7 @@ CASE 15
 			;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:325 < 4 || FLAG:7 == 2)	
@@ -2093,7 +2093,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:326 < 4 || FLAG:7 == 2)	
@@ -2138,7 +2138,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:327 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:327 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:327 < 4 || FLAG:7 == 2)	
@@ -2183,7 +2183,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:328 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:328 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:328 < 4 || FLAG:7 == 2)	
@@ -2228,7 +2228,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:329 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:329 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:329 < 4 || FLAG:7 == 2)	
@@ -2272,7 +2272,7 @@ CASE 15
 		;2번째 이후
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:330 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:330 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:330 < 4 || FLAG:7 == 2)	
@@ -2311,7 +2311,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:331 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:331 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:331 < 4 || FLAG:7 == 2)	
@@ -2343,7 +2343,7 @@ CASE 15
 			ENDIF
 		ENDIF
 ;=================================================
-;조교자도구계コマンド
+;조교자도구계 커맨드
 ;=================================================
 ;-------------------------------------------------
 ;50,클리캡쓴다
@@ -2358,7 +2358,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:453 < 4 || FLAG:7 == 2)	
@@ -2402,7 +2402,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:454 < 4 || FLAG:7 == 2)	
@@ -2447,7 +2447,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:455 < 4 || FLAG:7 == 2)	
@@ -2491,7 +2491,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:456 < 4 || FLAG:7 == 2)	
@@ -2535,7 +2535,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:457 < 4 || FLAG:7 == 2)	
@@ -2579,7 +2579,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:458 < 4 || FLAG:7 == 2)	
@@ -2623,7 +2623,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:459 < 4 || FLAG:7 == 2)	
@@ -2668,7 +2668,7 @@ CASE 15
 			IF TALENT:0
 				;연모, 친애
 				IF TALENT:3 || TALENT:6 && !ASSIPLAY
-					PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
+					PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
 					PRINTFORMW ……
 					PRINTFORMW 「……痛いっ！で、でもとてもうれしいです」
 					PRINTFORMW 「やっと、大好きな%CSTR:이인칭%と一つになれたんですから…%UNICODE(0x2661)%」
@@ -2677,13 +2677,13 @@ CASE 15
 					PRINTFORMW 「さあ、おちんちんを%CSTR:일인칭%のおマンコに入れてつださぁい%UNICODE(0x2661)%」
 					PRINTFORMW ……
 					PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」
-					PRINTFORMW 「ほ…本当に大丈남편なんですかね…、気持ちよくなれますかね…？」
+					PRINTFORMW 「ほ…本当に大丈夫なんですかね…、気持ちよくなれますかね…？」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
+					PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
 					PRINTFORMW ……
 					PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」
-					PRINTFORMW 「で、でも大丈남편ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
+					PRINTFORMW 「で、でも大丈夫ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
 				ELSE
 					PRINTFORMW 「や、やめてください！そ、それだけは…」
 					PRINTFORMW ……
@@ -2713,7 +2713,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:332 < 4 || FLAG:7 == 2)	
@@ -2741,7 +2741,7 @@ CASE 15
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:332 < 4 || FLAG:7 == 2)	
 					CALL chihaya_sex
 					IF RAND:2 == 0
-						PRINTFORMW 「とても、お上손、です、あぁん%UNICODE(0x2661)%」
+						PRINTFORMW 「とても、お上手、です、あぁん%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「すごい、気持ちいい、です、んんっ%UNICODE(0x2661)%」
 					ENDIF
@@ -2780,7 +2780,7 @@ CASE 15
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6) && !ASSIPLAY
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
 						PRINTFORMW ……
 						PRINTFORMW 「……痛いっ！で、でもとてもうれしいです」
 						PRINTFORMW 「やっと、大好きな%CSTR:이인칭%と一つになれたんですから…%UNICODE(0x2661)%」
@@ -2790,17 +2790,17 @@ CASE 15
 						PRINTFORMW 「さあ、おちんちんを%CSTR:일인칭%のおマンコに入れてつださぁい%UNICODE(0x2661)%」
 						PRINTFORMW ……
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」
-						PRINTFORMW 「ほ…本当に大丈남편なんですかね…、気持ちよくなれますかね…？」
+						PRINTFORMW 「ほ…本当に大丈夫なんですかね…、気持ちよくなれますかね…？」
 						LOCALS:0 = 　　
 					;복종, 예속
 					ELSEIF (TALENT:5 || TALENT:8)
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」				
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」				
 						PRINTFORMW ……				
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」				
-						PRINTFORMW 「で、でも大丈남편ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
+						PRINTFORMW 「で、でも大丈夫ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
 						LOCALS:0 =　　
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -2825,7 +2825,7 @@ CASE 15
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						PRINTFORMW 「んっ……！」
 						PRINTFORMW 「な、なんかドキドキしますね…%UNICODE(0x2661)%」
@@ -2867,13 +2867,13 @@ CASE 15
 				ELSEIF (TALENT:5 || TALENT:8)
 					CALL chihaya_sex
 					IF RAND:2 == 0
-						PRINTFORMW 「とても、お上손、です、あぁん%UNICODE(0x2661)%」
+						PRINTFORMW 「とても、お上手、です、あぁん%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「すごい、気持ちいい、です、んんっ%UNICODE(0x2661)%」
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -2914,7 +2914,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:334 < 4 || FLAG:7 == 2)	
@@ -2942,7 +2942,7 @@ CASE 15
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:334 < 4 || FLAG:7 == 2)	
 					CALL chihaya_sex
 					IF RAND:2 == 0
-						PRINTFORMW 「とても、お上손、です、あぁん%UNICODE(0x2661)%」
+						PRINTFORMW 「とても、お上手、です、あぁん%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「お尻、すごい、気持ちいい、です、んんっ%UNICODE(0x2661)%」
 					ENDIF
@@ -3009,13 +3009,13 @@ CASE 15
 				ELSEIF (TALENT:5 || TALENT:8)
 					CALL chihaya_sex
 					IF RAND:2 == 0
-						PRINTFORMW 「とても、お上손、です、あぁん%UNICODE(0x2661)%」
+						PRINTFORMW 「とても、お上手、です、あぁん%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「お尻、すごい、気持ちいい、です、んんっ%UNICODE(0x2661)%」
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3058,7 +3058,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:336 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:336 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:336 < 4 || FLAG:7 == 2)	
@@ -3097,7 +3097,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:337 < 4 || FLAG:7 == 2)	
@@ -3135,27 +3135,27 @@ CASE 15
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6) && !ASSIPLAY
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
-						PRINTFORMW %CALLNAME%は自分から페니스を挿入する
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
+						PRINTFORMW %CALLNAME%は自分からペニスを挿入する
 						PRINTFORMW 「……痛いっ！で、でもとてもうれしいです」
 						PRINTFORMW 「やっと、大好きな%CSTR:이인칭%と一つになれたんですから…%UNICODE(0x2661)%」
 						LOCALS:0 = 　　
 					;음란, 창부
 					ELSEIF (TALENT:4 || TALENT:7)
 						PRINTFORMW 「さあ、おちんちんを%CSTR:일인칭%のおマンコに入れてつださぁい%UNICODE(0x2661)%」
-						PRINTFORMW %CALLNAME%は自分から페니스を挿入する
+						PRINTFORMW %CALLNAME%は自分からペニスを挿入する
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」
-						PRINTFORMW 「ほ…本当に大丈남편なんですかね…、気持ちよくなれますかね…？」
+						PRINTFORMW 「ほ…本当に大丈夫なんですかね…、気持ちよくなれますかね…？」
 						LOCALS:0 = 　　
 					;복종, 예속
 					ELSEIF (TALENT:5 || TALENT:8)
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」				
-						PRINTFORMW %CALLNAME%は自分から페니스を挿入する
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」				
+						PRINTFORMW %CALLNAME%は自分からペニスを挿入する
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」				
-						PRINTFORMW 「で、でも大丈남편ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
+						PRINTFORMW 「で、でも大丈夫ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
 						LOCALS:0 =　　
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3165,7 +3165,7 @@ CASE 15
 					PRINTFORML 「や、やめてください！そ、それだけは…」
 					PRINTFORMW %CALLNAME%に早くやれと命じる
 					PRINTFORML 「は…はい…わかりました…」
-					PRINTFORMW %CALLNAME%は自分から페니스を挿入する
+					PRINTFORMW %CALLNAME%は自分からペニスを挿入する
 					PRINTFORMW 「……いつっ！」
 					PRINTFORMW 「う、うぅぅぅぅ…　ぐずっ…」
 				ENDIF
@@ -3182,7 +3182,7 @@ CASE 15
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						PRINTFORMW 「自分から入れるなんて、なんかドキドキしますね…%UNICODE(0x2661)%」
 						LOCALS:0 = 　　
@@ -3207,7 +3207,7 @@ CASE 15
 						PRINTFORMW 「えへっ%UNICODE(0x2661)%　ちょっと%CSTR:이인칭%を支配している感じがしますぅ%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「こういうのはどうですかぁ%UNICODE(0x2661)%」
-						PRINTFORMW %CALLNAME%は기승위の腰つきを少し変えた
+						PRINTFORMW %CALLNAME%は騎乗位の腰つきを少し変えた
 						CALL chihaya_sex
 					ENDIF
 					LOCALS:0 = 　　
@@ -3236,7 +3236,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3286,7 +3286,7 @@ CASE 15
 						PRINTFORMW 「えへっ%UNICODE(0x2661)%　ちょっと%CSTR:이인칭%を支配している感じがしますぅ%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「こういうのはどうですかぁ%UNICODE(0x2661)%」
-						PRINTFORMW %CALLNAME%は기승위の腰つきを少し変えた
+						PRINTFORMW %CALLNAME%は騎乗位の腰つきを少し変えた
 						CALL chihaya_sex
 					ENDIF
 					LOCALS:0 = 　　
@@ -3315,7 +3315,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3355,7 +3355,7 @@ CASE 15
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6) && !ASSIPLAY
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
 						PRINTFORMW …………
 						PRINTFORMW 「……痛いっ！で、でもとてもうれしいです」
 						PRINTFORMW 「やっと、大好きな%CSTR:이인칭%と一つになれたんですから…%UNICODE(0x2661)%」
@@ -3365,17 +3365,17 @@ CASE 15
 						PRINTFORMW 「さあ、おちんちんを%CSTR:일인칭%のおマンコに入れてつださぁい%UNICODE(0x2661)%」
 						PRINTFORMW …………
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」
-						PRINTFORMW 「ほ…本当に大丈남편なんですかね…、気持ちよくなれますかね…？」
+						PRINTFORMW 「ほ…本当に大丈夫なんですかね…、気持ちよくなれますかね…？」
 						LOCALS:0 = 　　
 					;복종, 예속
 					ELSEIF (TALENT:5 || TALENT:8)
-						PRINTFORMW 「どうぞ、%CSTR:일인칭%の처녀をもらってくださいね」
+						PRINTFORMW 「どうぞ、%CSTR:일인칭%の処女をもらってくださいね」
 						PRINTFORMW …………
 						PRINTFORMW 「……痛いっ！うわぁ、血も出てる…」				
-						PRINTFORMW 「で、でも大丈남편ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
+						PRINTFORMW 「で、でも大丈夫ですよ。%CSTR:일인칭%を%CSTR:이인칭%好みのいやらしい女の子にしてくださいね%UNICODE(0x2661)%」
 						LOCALS:0 =　　
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
 						LOCALS:0 =
 					ENDIF
@@ -3400,9 +3400,9 @@ CASE 15
 					ELSEIF (TALENT:5 || TALENT:8)
 						LOCALS:0 =
 					ENDIF
-					;함락완료共通
+					;함락완료 공통
 					IF LOCALS:0 == ""
-						PRINTFORMW 「うふふ…%UNICODE(0x2661)%키스できそうな距離ですね%UNICODE(0x2661)%」
+						PRINTFORMW 「うふふ…%UNICODE(0x2661)%キスできそうな距離ですね%UNICODE(0x2661)%」
 						LOCALS:0 = 　　
 					ENDIF
 				ENDIF
@@ -3424,7 +3424,7 @@ CASE 15
 						PRINTFORMW 「%CALLNAME:MASTER%%UNICODE(0x2661)%　%CALLNAME:MASTER%%UNICODE(0x2661)%　%CALLNAME:MASTER%…あんっ%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「こういうのはどうですかぁ%UNICODE(0x2661)%」
-						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%に키스をした
+						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%にキスをした
 						CALL ADDS_EXP("키스경험", 1, TARGET)
 						CALL ADDS_EXP("키스경험", 1, PLAYER)
 					ENDIF
@@ -3456,7 +3456,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3534,7 +3534,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:341 < 4 || FLAG:7 == 2)	
@@ -3579,7 +3579,7 @@ CASE 15
 						PRINTFORMW 「%CALLNAME:MASTER%%UNICODE(0x2661)%　%CALLNAME:MASTER%%UNICODE(0x2661)%　%CALLNAME:MASTER%…あんっ%UNICODE(0x2661)%」
 					ELSE
 						PRINTFORMW 「こういうのはどうですかぁ%UNICODE(0x2661)%」
-						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%に키스をした
+						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%にキスをした
 						CALL ADDS_EXP("키스경험", 1, TARGET)
 						CALL ADDS_EXP("키스경험", 1, PLAYER)
 					ENDIF
@@ -3611,7 +3611,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -3654,7 +3654,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:343 < 4 || FLAG:7 == 2)	
@@ -3728,7 +3728,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:420 < 4 || FLAG:7 == 2)	
@@ -3766,7 +3766,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:421 < 4 || FLAG:7 == 2)	
@@ -3840,7 +3840,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:460 < 4 || FLAG:7 == 2)	
@@ -3880,7 +3880,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:344 < 4 || FLAG:7 == 2)	
@@ -3913,12 +3913,12 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:345 == 0
-			PRINTFORMW 「こ、これを입に入れるんですね…」
+			PRINTFORMW 「こ、これを口に入れるんですね…」
 			CFLAG:345 = 1
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:345 < 4 || FLAG:7 == 2)	
@@ -3929,14 +3929,14 @@ CASE 15
 						PRINTFORMW 「おひんひんほっへもほいひいへふ（おチンチンとってもおいしいです）」
 					ELSE
 						PRINTFORML  「くひのなはふぃくふぃくひてはんふぃてるのをはんしまふほ」
-						PRINTFORMW （입の中でビクビクして感じてるのがわかります）
+						PRINTFORMW （口の中でビクビクして感じてるのがわかります）
 					ENDIF
 					CFLAG:345= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:345 < 4 || FLAG:7 == 2)	
 					CALL chihaya_fera
 					IF RAND:2 == 0
-						PRINTFORMW 「はやふおいひいふぇーへきだしてくらはい（早く美味しい정액出してください）」
+						PRINTFORMW 「はやふおいひいふぇーへきだしてくらはい（早く美味しい精液出してください）」
 					ELSE
 						PRINTFORMW 「おひんほのはまんひるほいひーでふ（おチンポのがまん汁美味しいです）」
 					ENDIF
@@ -3986,7 +3986,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:346 < 4 || FLAG:7 == 2)	
@@ -4001,7 +4001,7 @@ CASE 15
 					IF RAND:2 == 0
 						PRINTFORMW 「あは、おっぱいの中でおチンポビクビクしてます%UNICODE(0x2661)%」
 					ELSE
-						PRINTFORMW 「%CSTR:일인칭%のおっぱいでたくさん정액出してくださいね%UNICODE(0x2661)%」
+						PRINTFORMW 「%CSTR:일인칭%のおっぱいでたくさん精液出してくださいね%UNICODE(0x2661)%」
 					ENDIF
 					CFLAG:346= 4
 				;복종, 예속	
@@ -4044,14 +4044,14 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:347 < 4 || FLAG:7 == 2)	
 					CALL chihaya_aegi
 					IF RAND:2 == 0
 						PRINTFORMW 「うふ、おチンチンビクビクしてますね」
-					    PRINTFORMW 「そんなに%CSTR:일인칭%の스마타が気持ちいいですか?」
+					    PRINTFORMW 「そんなに%CSTR:일인칭%の素股が気持ちいいですか?」
 					ELSE
 					    PRINTFORMW 「どうです、気持ちいいですか?」
 					    PRINTFORMW 「%CSTR:일인칭%も%CSTR:이인칭%のおチンチンが擦れて気持ちいいです」
@@ -4108,7 +4108,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:348 < 4 || FLAG:7 == 2)
@@ -4117,9 +4117,9 @@ CASE 15
 						PRINTFORMW 「女の子の体で綺麗にしてほしいなんて本当にえっちですね」
 					ELSE 
 						PRINTFORMW 「隅々まで綺麗にしてあげますよ」
-						PRINTFORMW 「가슴とか팔とか、それに、こことか%UNICODE(0x2661)%」
+						PRINTFORMW 「胸とか腕とか、それに、こことか%UNICODE(0x2661)%」
 						SIF TALENT:MASTER:남자 || TALENT:MASTER:후타나리
-							PRINTFORMW %CALLNAME%に가랑이をきゅっとつかまれた
+							PRINTFORMW %CALLNAME%に股間をきゅっとつかまれた
 					ENDIF
 					CFLAG:348= 4
 				;음란, 창부	
@@ -4140,7 +4140,7 @@ CASE 15
 						PRINTFORMW 「どうでしょうか？気持ちいいですか？」
 						PRINTFORMW 「%CSTR:일인칭%も気持ちいいです」
 					ELSE  
-						PRINTFORMW 「どこを綺麗にしましょうか？팔ですか？背中ですか？」
+						PRINTFORMW 「どこを綺麗にしましょうか？腕ですか？背中ですか？」
 						PRINTFORMW 「どこでも隅々まで綺麗にしてあげますよ」
 					ENDIF
 					CFLAG:348= 4
@@ -4178,7 +4178,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:349 < 4 || FLAG:7 == 2)	
@@ -4216,7 +4216,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:350 < 4 || FLAG:7 == 2)	
@@ -4254,7 +4254,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:352 < 4 || FLAG:7 == 2)	
@@ -4286,18 +4286,18 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:351 == 0
-			PRINTFORMW 「おっぱいで挟みながら입で？」
+			PRINTFORMW 「おっぱいで挟みながら口で？」
 			PRINTFORMW 「と、とてもやりにくそうです」
 			CFLAG:351 = 1
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:351 < 4 || FLAG:7 == 2)	
 					IF RAND:2 == 0
-						PRINTFORMW 「%CSTR:일인칭%のおっぱいとお입で%CSTR:이인칭%おチンチンを愛してあげますね%UNICODE(0x2661)%」
+						PRINTFORMW 「%CSTR:일인칭%のおっぱいとお口で%CSTR:이인칭%おチンチンを愛してあげますね%UNICODE(0x2661)%」
 						CALL chihaya_fera
 					ELSE
 						CALL chihaya_fera
@@ -4314,7 +4314,7 @@ CASE 15
 					ELSE
 						CALL chihaya_fera
 						PRINTFORML 「おふぃんほふぁはふぇーうぇひふぁふんはふぃほうはふわいふふぉいふぇふぁふ」
-						PRINTFORMW （おチンポから정액が噴射しそうなくらい動いてます）
+						PRINTFORMW （おチンポから精液が噴射しそうなくらい動いてます）
 					ENDIF
 					CFLAG:351= 4
 				;복종, 예속	
@@ -4323,7 +4323,7 @@ CASE 15
 						CALL chihaya_fera
 						PRINTFORMW 「おふぃんほほっへふぉふぁんふぃへふぁふへ（おチンポとっても感じてますね）」
 					ELSE
-						PRINTFORMW 「では、お입とおっぱいで봉사しますね」
+						PRINTFORMW 「では、お口とおっぱいで奉仕しますね」
 						CALL chihaya_fera
 					ENDIF
 					CFLAG:351= 4
@@ -4396,7 +4396,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -4438,7 +4438,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:423 < 4 || FLAG:7 == 2)	
@@ -4474,7 +4474,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:461 < 4 || FLAG:7 == 2)	
@@ -4513,7 +4513,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:424 < 4 || FLAG:7 == 2)	
@@ -4550,7 +4550,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:425 < 4 || FLAG:7 == 2)	
@@ -4587,7 +4587,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:426 < 4 || FLAG:7 == 2)	
@@ -4624,7 +4624,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:427 < 4 || FLAG:7 == 2)	
@@ -4661,7 +4661,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:428 < 4 || FLAG:7 == 2)	
@@ -4698,7 +4698,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:429 < 4 || FLAG:7 == 2)	
@@ -4735,7 +4735,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:430 < 4 || FLAG:7 == 2)	
@@ -4804,7 +4804,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:462 < 4 || FLAG:7 == 2)	
@@ -4841,7 +4841,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:480 < 4 || FLAG:7 == 2)	
@@ -4882,7 +4882,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:354 < 4 || FLAG:7 == 2)	
@@ -4920,7 +4920,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:355 < 4 || FLAG:7 == 2)	
@@ -4958,7 +4958,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:356 < 4 || FLAG:7 == 2)	
@@ -4996,7 +4996,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:357 < 4 || FLAG:7 == 2)	
@@ -5034,7 +5034,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:358 < 4 || FLAG:7 == 2)	
@@ -5073,7 +5073,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:359 < 4 || FLAG:7 == 2)	
@@ -5118,7 +5118,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:360 < 4 || FLAG:7 == 2)	
@@ -5163,7 +5163,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:361 < 4 || FLAG:7 == 2)	
@@ -5208,7 +5208,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:463 < 4 || FLAG:7 == 2)	
@@ -5252,7 +5252,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:464 < 4 || FLAG:7 == 2)	
@@ -5298,7 +5298,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:362 < 4 || FLAG:7 == 2)	
@@ -5336,7 +5336,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:363 < 4 || FLAG:7 == 2)	
@@ -5374,7 +5374,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:364 < 4 || FLAG:7 == 2)	
@@ -5401,11 +5401,11 @@ CASE 15
 			ENDIF
 		ENDIF
 		;조수구상 호출 함수
-		;조수が気持ちよくて感じているセリフ
+		;조수가 기분 좋게 느끼고 있다 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;조수がこっちに来てと言うセリフ
+		;조수가 이리 오라고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;조수に大丈남편と言っているセリフ
+		;조수가 괜찮다고 말하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
 		;범해지며 강한 척을 하는 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
@@ -5429,7 +5429,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:365 < 4 || FLAG:7 == 2)	
@@ -5467,7 +5467,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:366 < 4 || FLAG:7 == 2)	
@@ -5523,7 +5523,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:367 < 4 || FLAG:7 == 2)	
@@ -5581,7 +5581,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:368 < 4 || FLAG:7 == 2)	
@@ -5619,7 +5619,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:432 < 4 || FLAG:7 == 2)	
@@ -5657,7 +5657,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:465 < 4 || FLAG:7 == 2)	
@@ -5695,7 +5695,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:466 < 4 || FLAG:7 == 2)	
@@ -5736,7 +5736,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:369 < 4 || FLAG:7 == 2)	
@@ -5829,7 +5829,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:373 < 4 || FLAG:7 == 2)	
@@ -5867,7 +5867,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:374 < 4 || FLAG:7 == 2)	
@@ -5906,7 +5906,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:375 < 4 || FLAG:7 == 2)	
@@ -5949,7 +5949,7 @@ CASE 15
 			CFLAG:376 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:376 < 4 || FLAG:7 == 2)	
@@ -5990,7 +5990,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:377 < 4 || FLAG:7 == 2)	
@@ -6070,7 +6070,7 @@ CASE 15
 					ELSE	
 						PRINTFORMW 「んくうぅぅぅ…」
 						PRINTFORMW ぬポンッ
-						PRINTFORMW 「い、嫌な감각ですぅ…」
+						PRINTFORMW 「い、嫌な感覚ですぅ…」
 					ENDIF	
 			ENDIF
 		ENDIF
@@ -6202,7 +6202,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:467 < 4 || FLAG:7 == 2)	
@@ -6239,7 +6239,7 @@ CASE 15
 			CFLAG:468 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:468 < 4 || FLAG:7 == 2)	
@@ -6276,7 +6276,7 @@ CASE 15
 			CFLAG:469 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:469 < 4 || FLAG:7 == 2)	
@@ -6323,7 +6323,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:382 < 4 || FLAG:7 == 2)	
@@ -6373,7 +6373,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:383 < 4 || FLAG:7 == 2)	
@@ -6411,7 +6411,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:384 < 4 || FLAG:7 == 2)	
@@ -6449,7 +6449,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:385 < 4 || FLAG:7 == 2)	
@@ -6487,7 +6487,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:386 < 4 || FLAG:7 == 2)	
@@ -6525,7 +6525,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:387 < 4 || FLAG:7 == 2)	
@@ -6563,7 +6563,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:388 < 4 || FLAG:7 == 2)	
@@ -6601,7 +6601,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:389 < 4 || FLAG:7 == 2)	
@@ -6640,7 +6640,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:390 < 4 || FLAG:7 == 2)	
@@ -6684,7 +6684,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:391 < 4 || FLAG:7 == 2)	
@@ -6723,7 +6723,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:470 < 4 || FLAG:7 == 2)	
@@ -6767,7 +6767,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:471 < 4 || FLAG:7 == 2)	
@@ -6811,7 +6811,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:472 < 4 || FLAG:7 == 2)	
@@ -6855,7 +6855,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:473 < 4 || FLAG:7 == 2)	
@@ -6899,7 +6899,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:474 < 4 || FLAG:7 == 2)	
@@ -6943,7 +6943,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:475 < 4 || FLAG:7 == 2)	
@@ -6989,7 +6989,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:392 < 4 || FLAG:7 == 2)	
@@ -7027,7 +7027,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:393 < 4 || FLAG:7 == 2)	
@@ -7065,7 +7065,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:394 < 4 || FLAG:7 == 2)	
@@ -7103,7 +7103,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:395 < 4 || FLAG:7 == 2)	
@@ -7147,7 +7147,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:396 < 4 || FLAG:7 == 2)	
@@ -7182,7 +7182,7 @@ CASE 15
 				;2번째 이후								
 				ELSE				
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)			
-						;通す		
+						;통과		
 						IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
 						;연모, 친애		
 						;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:396 < 4 || FLAG:7 == 2)		
@@ -7222,7 +7222,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)		
-				;통과		
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:397 < 4 || FLAG:7 == 2)	
@@ -7275,7 +7275,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:398 < 4 || FLAG:7 == 2)	
@@ -7320,7 +7320,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:399 < 4 || FLAG:7 == 2)	
@@ -7365,7 +7365,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:400 < 4 || FLAG:7 == 2)	
@@ -7431,7 +7431,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:402 < 4 || FLAG:7 == 2)	
@@ -7470,7 +7470,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:403 < 4 || FLAG:7 == 2)	
@@ -7508,7 +7508,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:404 < 4 || FLAG:7 == 2)	
@@ -7598,7 +7598,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:406 < 4 || FLAG:7 == 2)	
@@ -7636,7 +7636,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:431 < 4 || FLAG:7 == 2)	
@@ -7673,7 +7673,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:437 < 4 || FLAG:7 == 2)	
@@ -7710,7 +7710,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:438 < 4 || FLAG:7 == 2)	
@@ -7748,7 +7748,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:433 < 4 || FLAG:7 == 2)	
@@ -7791,19 +7791,19 @@ CASE 15
 				ELSEIF (TALENT:4 || TALENT:7)
 					IF RAND:2 == 0
 						PRINTFORML 「はぁ………%UNICODE(0x2661)%はぁ……%UNICODE(0x2661)%気持ちよかったぁ%UNICODE(0x2661)%」
-						PRINTFORMW 「もうおマンコもお尻も정액でいっぱいですよぉ%UNICODE(0x2661)%」
-						PRINTFORML そう言って%CALLNAME%は애널と恥部を開きながら尻を突き出した
-						PRINTFORML 両穴からはたくさんの정액がどろどろと流れ落ちている
+						PRINTFORMW 「もうおマンコもお尻も精液でいっぱいですよぉ%UNICODE(0x2661)%」
+						PRINTFORML そう言って%CALLNAME%はアナルと恥部を開きながら尻を突き出した
+						PRINTFORML 両穴からはたくさんの精液がどろどろと流れ落ちている
 					ELSE
 						PRINTFORML 「はぁ………%UNICODE(0x2661)%はぁ……%UNICODE(0x2661)%気持ちよかったぁ%UNICODE(0x2661)%」
-						PRINTFORML 「体中정액だらけで、정액のお風呂に入ってるみたいです%UNICODE(0x2661)%」
+						PRINTFORML 「体中精液だらけで、精液のお風呂に入ってるみたいです%UNICODE(0x2661)%」
 					ENDIF
 					LOCALS:0 = 　　
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					LOCALS:0 = 
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -7835,7 +7835,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:476 < 4 || FLAG:7 == 2)	
@@ -7872,7 +7872,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:477 < 4 || FLAG:7 == 2)	
@@ -7898,7 +7898,7 @@ CASE 15
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;204,정음
+;204,精飲
 ;-------------------------------------------------
 	CASE 204
 		CALL TRAIN_MESSAGE
@@ -7909,7 +7909,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:478 < 4 || FLAG:7 == 2)	
@@ -8006,7 +8006,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:408 < 4 || FLAG:7 == 2)	
@@ -8043,7 +8043,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:409 < 4 || FLAG:7 == 2)	
@@ -8080,7 +8080,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:410 < 4 || FLAG:7 == 2)	
@@ -8123,7 +8123,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:411 < 4 || FLAG:7 == 2)	
@@ -8166,7 +8166,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:412 < 4 || FLAG:7 == 2)	
@@ -8234,7 +8234,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8246,7 +8246,7 @@ CASE 15
 				IF RAND:2 == 0
 					PRINTFORML 「き、気持ちいですぅ%UNICODE(0x2661)%」
 				ELSE
-					PRINTFORML 「あ%UNICODE(0x2661)%머리が、溶けちゃいそう、ですぅ%UNICODE(0x2661)%」
+					PRINTFORML 「あ%UNICODE(0x2661)%頭が、溶けちゃいそう、ですぅ%UNICODE(0x2661)%」
 				ENDIF
 				LOCALS:0 = 　　
 				CFLAG:413 = 3
@@ -8304,7 +8304,7 @@ CASE 15
 					ENDIF
 					LOCALS:0 = 　　
 				ENDIF
-				;함락완료共通
+				;함락완료 공통
 				IF LOCALS:0 == ""
 					LOCALS:0 = 
 				ENDIF
@@ -8344,7 +8344,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:415 < 4 || FLAG:7 == 2)	
@@ -8381,7 +8381,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:416 < 4 || FLAG:7 == 2)	
@@ -8472,7 +8472,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:418 < 4 || FLAG:7 == 2)	
@@ -8502,9 +8502,9 @@ CASE 15
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
 		;자신도 확실히 기분 좋게 해줘 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
-		;マスターの페니스が当たって気持ちいいセリフ
+		;마스터의 페니스가 닿아서 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
-		;二人分の정액飲ませてあげるセリフ
+		;2인분의 정액 마시게 해줄께 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(4)
 		;능숙해졌네 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(5)
@@ -8524,7 +8524,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:419 < 4 || FLAG:7 == 2)	
@@ -8561,7 +8561,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:439 < 4 || FLAG:7 == 2)	
@@ -8590,7 +8590,7 @@ CASE 15
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -8612,7 +8612,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:440 < 4 || FLAG:7 == 2)	
@@ -8641,7 +8641,7 @@ CASE 15
 		;조수구상 호출 함수
 		;안쪽이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(1)
-		;입がとても気持ちいいセリフ
+		;입이 무척 기분 좋아 대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(2)
 		;계속 가버려라！대사
 		;		CALL KOJO_MESSAGE_ASSIPAIR_COM(3)
@@ -8663,7 +8663,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:441 < 4 || FLAG:7 == 2)	
@@ -8691,10 +8691,10 @@ CASE 15
 		
 
 ;=================================================
-;600番台,비전투원コマンド
+;600번대,비전투원 커맨드
 ;=================================================
 ;-------------------------------------------------
-;600,전투訓練
+;600,전투훈련
 ;-------------------------------------------------
 	CASE 600
 		CALL TRAIN_MESSAGE
@@ -8705,7 +8705,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -8840,10 +8840,10 @@ SIF LOCAL:GYOU == 0
 	PRINTW
 
 ;-------------------------------------------------
-;윤간時の구상
-;CASE 0 内は必ず通るようになっており
-;RETURNで0を返すと、この後통상の윤간行動を出します
-;CFLAGは使っていません
+;윤간시의 구상
+;CASE 0 안은 반드시 건너뛰게 되어있으며
+;RETURN에서 0을 반환하면, 이후 통상적인 윤간행동을 출력합니다
+;CFLAG는 사용하지 않습니다
 ;-------------------------------------------------
 @KOJO_MESSAGE_RINKAN_K4669, ARG:1 , ARG:2
 
@@ -8854,10 +8854,10 @@ NEXT
 
 SELECTCASE ARG:1
 	CASE 0
-	;CASE 0はオリジナル윤간구상
-	;C:一回あたりの帰宅人数、D：興奮度증가(及び減少)
-	;CとDはオリジナル윤간구상内のみ使う
-	;C += 、D += を使う
+	;CASE 0은 오리지널 윤간 구상
+	;C:1회당 귀가 인수 D：흥분도 증가(및 감소)
+	;C와 D는 오리지널 윤간 구상 내에서만 사용
+	;C += 、D += 를 사용
 		IF ARG:2 == 1
 		;하드ON
 		
@@ -8866,7 +8866,7 @@ SELECTCASE ARG:1
 		
 		ENDIF
 	;하드계
-	;가슴を踏まれる（거유・폭유のみ）
+	;가슴을 밟힌다（거유・폭유만）
 	CASE 1				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)		
 			;연모, 친애	
@@ -8879,7 +8879,7 @@ SELECTCASE ARG:1
 			ELSEIF (TALENT:5 || TALENT:8)	
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				LOCALS:0 = 
 			ENDIF	
@@ -8892,40 +8892,40 @@ SELECTCASE ARG:1
 		IF (CFLAG:221 < 1 || FLAG:7 == 2) && LOCALS:0 == ""		
 			PRINTFORML 
 		ENDIF		
-	;머리を踏まれる
+	;머리를 밟힌다
 	CASE 2
 	
 	;폭력을 당하다
 	CASE 3
 	
 	;담배빵
-	;興奮度が低く、반항적、꿋꿋함、프라이드높음、건방짐、저항を持っている
+	;흥분도가 낮고, 반항적, 꿋꿋함, 프라이드높음, 건방짐, 저항을 가지고 있다
 	CASE 4
 	
-	;地面に垂れた정액舐めとらせる
+	;지면에 늘어진 정액 핥아먹인다
 	;마조끼３이상
 	CASE 5
 	
 	;몸에 낙서를 당하고 범해진다
 	CASE 6
 	
-	;尻突き上げてバックから犯されつつ、머리を踏んづけられて屈辱で涙눈상태
+	;엉덩이를 치켜올려 뒤로부터 범해지면서, 머리를 짓밟혀 굴욕으로 글썽이는 상태
 	CASE 7
 	
-	;통상系
-	;음란系で눈の前に棒並べられて、どれが欲しいか選ばせるとか（음란・창부のみ）
+	;통상계
+	;음란계로 눈앞에 장대가 진열되어, 어떤 것을 원하는지 선택하게 하거나（음란・창부만）
 	CASE 8
 	
-	;거유이상의 キャラだと「その乳は飾りか？遊ばせてるんじゃねえ」とか罵られ파이즈리한다（거유・폭유のみ）
+	;거유 이상의 캐릭터라면 「그 젖은 장식이냐？ 쉬고 있지 말라고」등등 매도당하며 파이즈리한다（거유・폭유만）
 	CASE 9
 	
-	;挿れられるのだけは회피しようと必死に입と손で群がるチンポにご봉사する（恋幕・친애のみ）
+	;삽입만은 피하려고 필사적으로 입과 손으로 몰려드는 자지에 봉사한다（연모・친애만）
 	CASE 10
 	
-	;;両穴突かれながら無理やり笑顔とピースサインとらされて記念촬영
+	;;양구멍을 뚫리면서 억지로 미소와 피스싸인을 취하게 시켜져 기념촬영
 	CASE 11
 	
-	;;輸姦後の後始末描写で、本人정액でどろどろにされてるのに周囲の男達の肉棒を舌で掃除させられてる
+	;;윤간후의 뒷처리 묘사에서, 본인 정액 투성이가 되었는데도 주위 남자들의 육봉을 혀로 청소시키고 있다
 	CASE 12
 		;하드OFF
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)		
@@ -8937,8 +8937,8 @@ SELECTCASE ARG:1
 			    ELSE
 					CALL chihaya_fera
 					PRINTFORMW 「！！…ごく…ごく…ちゅる…」
-					PRINTFORML 「ぷはぁ…はぁ%UNICODE(0x2661)%　もっと정액飲ませてください%UNICODE(0x2661)%」
-					PRINTFORMW そう言って%CALLNAME%は別の페니스を咥えた
+					PRINTFORML 「ぷはぁ…はぁ%UNICODE(0x2661)%　もっと精液飲ませてください%UNICODE(0x2661)%」
+					PRINTFORMW そう言って%CALLNAME%は別のペニスを咥えた
 					CALL chihaya_fera
 			    ENDIF
 				LOCALS:0 = 　　
@@ -8949,7 +8949,7 @@ SELECTCASE ARG:1
 			ELSEIF (TALENT:5 || TALENT:8)	
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 					CALL chihaya_fera
 					PRINTFORMW 「つ、次の方…どうぞ…」
@@ -8970,12 +8970,12 @@ SELECTCASE ARG:1
 	;안에 사정당해도 즉시 다른 사람으로 교대
 	CASE 13
 	
-	;一斉사정で정액まみれ
+	;일제사정으로 정액투성이
 	CASE 14
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)		
 			;음란, 창부	
 			IF (TALENT:4 || TALENT:7)||(CFLAG:음란도 > 1000 && RAND:3 == 0)
-				PRINTFORML 「はぁ…%UNICODE(0x2661)%정액あったかいですぅ…%UNICODE(0x2661)%」
+				PRINTFORML 「はぁ…%UNICODE(0x2661)%精液あったかいですぅ…%UNICODE(0x2661)%」
 				LOCALS:0 = 　　
 			;연모, 친애	
 			ELSEIF (TALENT:3 || TALENT:6)	
@@ -8984,9 +8984,9 @@ SELECTCASE ARG:1
 			ELSEIF (TALENT:5 || TALENT:8)	
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
-				PRINTFORML 「皆さんの정액…温かいです…」
+				PRINTFORML 「皆さんの精液…温かいです…」
 				LOCALS:0 = 　　
 			ENDIF	
 		ENDIF		
@@ -8999,7 +8999,7 @@ SELECTCASE ARG:1
 			PRINTFORML 「う…う…ぐずっ…」
 			LOCALS:0 = 　　
 		ENDIF		
-	;;両穴突かれて同時사정
+	;;양구멍 찔리며 동시 사정
 	CASE 15
 	
 	;기승위+양겨드랑이잡
@@ -9031,8 +9031,8 @@ IF LOCALS:0 == "" && ARG:1 > 0
 			    ELSEIF RAND:2 == 0
 					CALL chihaya_fera
 					PRINTFORMW 「！！…ごく…ごく…ちゅる…」
-					PRINTFORML 「ぷはぁ…はぁ%UNICODE(0x2661)%　もっと정액飲ませてください%UNICODE(0x2661)%」
-					PRINTFORMW そう言って%CALLNAME%は別の페니스を咥えた
+					PRINTFORML 「ぷはぁ…はぁ%UNICODE(0x2661)%　もっと精液飲ませてください%UNICODE(0x2661)%」
+					PRINTFORMW そう言って%CALLNAME%は別のペニスを咥えた
 					CALL chihaya_fera
 			    ELSE
 					CALL chihaya_sex
@@ -9048,7 +9048,7 @@ IF LOCALS:0 == "" && ARG:1 > 0
 			ELSEIF (TALENT:5 || TALENT:8)	
 				LOCALS:0 = 
 			ENDIF	
-			;함락완료共通	
+			;함락완료 공통	
 			IF LOCALS:0 == ""	
 				IF RAND:3 == 0
 					CALL chihaya_sex
@@ -9145,14 +9145,14 @@ IF CFLAG:106
 	;머리카락
 	IF CFLAG:106 == 1				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 3 || FLAG:7 == 2)	
 				IF RAND:3 == 0 && (TALENT:5 || TALENT:6)
-					PRINTFORMW 「えへっ、정액のシャンプーですね」
+					PRINTFORMW 「えへっ、精液のシャンプーですね」
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「머리카락の毛が白くなっちゃいました」
+					PRINTFORMW 「髪の毛が白くなっちゃいました」
 				ELSE
 					PRINTFORMW 「うふっ、とても気持ちよさそうに出しましたね」
 				ENDIF
@@ -9178,12 +9178,12 @@ IF CFLAG:106
 	;얼굴
 	ELSEIF CFLAG:106 == 2				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 3 || FLAG:7 == 2)	
 				IF RAND:3 == 0 && (TALENT:5 || TALENT:6)
-					PRINTFORMW 「はぁ～%UNICODE(0x2661)%정액のにおいがすごいです～%UNICODE(0x2661)%」
+					PRINTFORMW 「はぁ～%UNICODE(0x2661)%精液のにおいがすごいです～%UNICODE(0x2661)%」
 				ELSEIF RAND:2 == 0
 					PRINTFORMW 「んもうっ、相変わらず変態ですね」
 				ELSE
@@ -9211,7 +9211,7 @@ IF CFLAG:106
 	;가슴
 	ELSEIF CFLAG:106 == 3				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 3 || FLAG:7 == 2)	
@@ -9244,7 +9244,7 @@ IF CFLAG:106
 	;배
 	ELSEIF CFLAG:106 == 4				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 3 || FLAG:7 == 2)	
@@ -9275,12 +9275,12 @@ IF CFLAG:106
 	;겨드랑이
 	ELSEIF CFLAG:106 == 5				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 3 || FLAG:7 == 2)	
 				IF RAND:3 == 0
-					PRINTFORMW 「정액でとてもぬるぬるしてます～」
+					PRINTFORMW 「精液でとてもぬるぬるしてます～」
 				ELSEIF RAND:2 == 0
 					PRINTFORMW 「んもうっ、相変わらず変態ですね」
 				ELSE
@@ -9308,7 +9308,7 @@ IF CFLAG:106
 	;허벅지
 	ELSEIF CFLAG:106 == 6				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 3 || FLAG:7 == 2)	
@@ -9339,7 +9339,7 @@ IF CFLAG:106
 	;가랑이
 	ELSEIF CFLAG:106 == 7				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 3 || FLAG:7 == 2)	
@@ -9371,7 +9371,7 @@ IF CFLAG:106
 	;엉덩이
 	ELSEIF CFLAG:106 == 8				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 3 || FLAG:7 == 2)	
@@ -9406,7 +9406,7 @@ IF CFLAG:106
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 3 || FLAG:7 == 2)	
@@ -9434,7 +9434,7 @@ IF CFLAG:106
 			ENDIF
 		ELSE					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 3 || FLAG:7 == 2)	
@@ -9471,7 +9471,7 @@ ENDIF
 IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:231 < 4 || FLAG:7 == 2)	
@@ -9523,7 +9523,7 @@ ENDIF
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 3 || FLAG:7 == 2)	
@@ -9549,7 +9549,7 @@ IF TFLAG:0 > 0
 	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:233 < 4 || FLAG:7 == 2)	
@@ -9592,7 +9592,7 @@ IF TFLAG:0 > 0
 	;그 이외의 입사정
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:233 < 4 || FLAG:7 == 2)	
@@ -9601,20 +9601,20 @@ IF TFLAG:0 > 0
 					PRINTFORMW 「えへへ、全部飲んじゃいました」
 				ELSE
 					PRINTFORMW 「ごくごく……ふぅ～」
-					PRINTFORMW 「정액とっても美味しいです」
+					PRINTFORMW 「精液とっても美味しいです」
 				ENDIF
 				CFLAG:233= 4
 			;음란, 창부	
 			ELSEIF TALENT:4 || TALENT:7 && (CFLAG:233 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
-					PRINTFORMW %CALLNAME%は정액を입に含んだまま페니스を입から外し
-					PRINTFORMW モゴモゴと정액を長いこと味わった後ごっくんと一飲みした
+					PRINTFORMW %CALLNAME%は精液を口に含んだままペニスを口から外し
+					PRINTFORMW モゴモゴと精液を長いこと味わった後ごっくんと一飲みした
 					PRINTFORMW 「えへへ、ごちそうさまです」
 				ELSE
-					PRINTFORML %CALLNAME%は정액を입に含んだまま페니스を입から外し
-					PRINTFORMW 당신に정액だらけの입の中を見せ、いやらしい音を立てながら舌を動かす
+					PRINTFORML %CALLNAME%は精液を口に含んだままペニスを口から外し
+					PRINTFORMW あなたに精液だらけの口の中を見せ、いやらしい音を立てながら舌を動かす
 					PRINTFORMW 「くちゃあ、にちゃあ、ぷちゅう……」
-					PRINTFORMW 정액を長いこと味わった後ごっくんと一飲みした
+					PRINTFORMW 精液を長いこと味わった後ごっくんと一飲みした
 				ENDIF
 				CFLAG:233= 4
 			;복종, 예속	
@@ -9650,12 +9650,12 @@ ENDIF
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:234 < 4 || FLAG:7 == 2)	
 			IF RAND:2 == 0
-				PRINTFORMW 「あは、정액が손にたくさんついちゃいました%UNICODE(0x2661)%」
+				PRINTFORMW 「あは、精液が手にたくさんついちゃいました%UNICODE(0x2661)%」
 			ELSE
 				PRINTFORMW 「えへ%UNICODE(0x2661)%我慢できなかったんですね%UNICODE(0x2661)%」
 			ENDIF
@@ -9663,9 +9663,9 @@ IF TFLAG:1 > 0
 		;음란, 창부	
 		ELSEIF TALENT:4 || TALENT:7 && (CFLAG:234 < 4 || FLAG:7 == 2)	
 			IF RAND:2 == 0
-				PRINTFORMW 「すごぉい、정액いっぱい%UNICODE(0x2661)%」
+				PRINTFORMW 「すごぉい、精液いっぱい%UNICODE(0x2661)%」
 			ELSE
-				PRINTFORMW %CALLNAME%は손についた정액を舐めている
+				PRINTFORMW %CALLNAME%は手についた精液を舐めている
 				PRINTFORML 「ぺろぉ、ちゅるん」
 				PRINTFORMW 「えへ%UNICODE(0x2661)%まだまだ絞り取っちゃいますよ%UNICODE(0x2661)%」
 			ENDIF
@@ -9705,7 +9705,7 @@ IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:235 < 4 || FLAG:7 == 2)	
@@ -9718,9 +9718,9 @@ IF TFLAG:34 > 0
 		;음란, 창부	
 		ELSEIF TALENT:4 || TALENT:7 && (CFLAG:235 < 4 || FLAG:7 == 2)	
 			IF RAND:2 == 0
-				PRINTFORMW 「わぁい、おっぱいに정액いっぱぁい%UNICODE(0x2661)%」
+				PRINTFORMW 「わぁい、おっぱいに精液いっぱぁい%UNICODE(0x2661)%」
 			ELSE
-				PRINTFORMW 「おっぱい、정액で真っ白です%UNICODE(0x2661)%」
+				PRINTFORMW 「おっぱい、精液で真っ白です%UNICODE(0x2661)%」
 			ENDIF
 			CFLAG:235= 4
 		;복종, 예속	
@@ -9756,7 +9756,7 @@ ENDIF
 IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:236 < 4 || FLAG:7 == 2)	
@@ -9788,14 +9788,14 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:237 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
-					PRINTFORMW 「はぁ～%UNICODE(0x2661)%%CSTR:일인칭%のお尻に%CSTR:이인칭%の정액が入ってますぅ～%UNICODE(0x2661)%」
+					PRINTFORMW 「はぁ～%UNICODE(0x2661)%%CSTR:일인칭%のお尻に%CSTR:이인칭%の精液が入ってますぅ～%UNICODE(0x2661)%」
 				ELSE
 					PRINTFORMW 「お尻の中で%CSTR:이인칭%の愛が注がれています～%UNICODE(0x2661)%」
 				ENDIF
@@ -9803,9 +9803,9 @@ IF TFLAG:2 > 0
 			;음란, 창부	
 			ELSEIF TALENT:4 || TALENT:7 && (CFLAG:237 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
-					PRINTFORMW 「すごぉい%UNICODE(0x2661)%おチンポからドピュドピュって정액入って来てるぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「すごぉい%UNICODE(0x2661)%おチンポからドピュドピュって精液入って来てるぅ%UNICODE(0x2661)%」
 				ELSE
-					PRINTFORMW 「あはぁ%UNICODE(0x2661)%%CSTR:일인칭%のお尻が정액の入れ物になってるぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「あはぁ%UNICODE(0x2661)%%CSTR:일인칭%のお尻が精液の入れ物になってるぅ%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:237= 4
 			;복종, 예속	
@@ -9814,13 +9814,13 @@ IF TFLAG:2 > 0
 					PRINTFORML 「あ、あ…」
 					PRINTFORMW 「たくさん注がれているのが感じます」
 				ELSE
-					PRINTFORMW 「ん…あ、정액が入って来てます」
+					PRINTFORMW 「ん…あ、精液が入って来てます」
 				ENDIF
 				CFLAG:237= 4
 			;굴복각인Lv3	
 			ELSE	
 				IF RAND:2 == 0
-					PRINTFORMW 「お、お尻に정액が入って来るのを感じます…」
+					PRINTFORMW 「お、お尻に精液が入って来るのを感じます…」
 				ELSE
 					PRINTFORMW 「あ、お尻に入って来てる…」
 				ENDIF
@@ -9834,13 +9834,13 @@ IF TFLAG:2 > 0
 	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:238 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
 					PRINTFORML 「こんなに奥で中出しするなんて」
-					PRINTFORMW 「%CSTR:일인칭%を임신させる気まんまんですね%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:일인칭%を妊娠させる気まんまんですね%UNICODE(0x2661)%」
 				ELSE
 					PRINTFORML 「どんどん出していいんですよ%UNICODE(0x2661)%」
 					PRINTFORMW 「二人の愛の結晶作りましょ%UNICODE(0x2661)%」
@@ -9851,15 +9851,15 @@ IF TFLAG:2 > 0
 				IF RAND:2 == 0
 					PRINTFORMW 「すごいよぉ%UNICODE(0x2661)%おチンポ汁が子宮に当たってるよぉ%UNICODE(0x2661)%」
 				ELSE
-					PRINTFORMW 「子宮に정액がたくさん流れ込んでるぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「子宮に精液がたくさん流れ込んでるぅ%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:238= 4
 			;복종, 예속	
 			ELSEIF TALENT:5 || TALENT:8 && (CFLAG:238 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
-					PRINTFORMW 「あ…奥に、子宮に정액が流れ込んできます」
+					PRINTFORMW 「あ…奥に、子宮に精液が流れ込んできます」
 				ELSE
-					PRINTFORMW 「あ、すごい、임신しちゃいそうな気がします」
+					PRINTFORMW 「あ、すごい、妊娠しちゃいそうな気がします」
 				ENDIF
 				CFLAG:238= 4
 			;굴복각인Lv3	
@@ -9867,7 +9867,7 @@ IF TFLAG:2 > 0
 				IF RAND:2 == 0
 					PRINTFORMW 「あぁっ、中に入って来てます…」
 				ELSE
-					PRINTFORMW 「こ、こんなに中に出して大丈남편ですか？」
+					PRINTFORMW 「こ、こんなに中に出して大丈夫ですか？」
 				ENDIF
 				CFLAG:238= 3
 			ENDIF	
@@ -9879,14 +9879,14 @@ IF TFLAG:2 > 0
 	;그 외 섹스계
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:239 < 4 || FLAG:7 == 2)	
 				IF RAND:2 == 0
 					PRINTFORMW 「%CSTR:이인칭%の愛が中にたくさん注がれてますぅ%UNICODE(0x2661)%」
 				ELSE
-					PRINTFORMW 「%CSTR:이인칭%の정액、熱くてとても気持ちいいですぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:이인칭%の精液、熱くてとても気持ちいいですぅ%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:239= 4
 			;음란, 창부	
@@ -9894,7 +9894,7 @@ IF TFLAG:2 > 0
 				IF RAND:2 == 0
 					PRINTFORMW 「すごぉい%UNICODE(0x2661)%おマンコの中におチンポ汁出てるぅ%UNICODE(0x2661)%」
 				ELSE
-					PRINTFORMW 「もっとぉ%UNICODE(0x2661)%임신しちゃうくらい中出ししてくださぁい%UNICODE(0x2661)%」
+					PRINTFORMW 「もっとぉ%UNICODE(0x2661)%妊娠しちゃうくらい中出ししてくださぁい%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:239= 4
 			;복종, 예속	
@@ -9903,7 +9903,7 @@ IF TFLAG:2 > 0
 					PRINTFORMW 「あ、あ…」
 					PRINTFORMW 「たくさん注がれているのが感じます」
 				ELSE
-					PRINTFORMW 「ん…あ、정액が入って来てます」
+					PRINTFORMW 「ん…あ、精液が入って来てます」
 				ENDIF
 				CFLAG:239= 4
 			;굴복각인Lv3	
@@ -9911,7 +9911,7 @@ IF TFLAG:2 > 0
 				IF RAND:2 == 0
 					PRINTFORMW 「あぁっ、中に入って来てます…」
 				ELSE
-					PRINTFORMW 「こ、こんなに中に出して大丈남편ですか？」
+					PRINTFORMW 「こ、こんなに中に出して大丈夫ですか？」
 				ENDIF
 				CFLAG:239= 3
 			ENDIF	
@@ -9924,12 +9924,12 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 3 || FLAG:7 == 2)	
@@ -9983,7 +9983,7 @@ ENDIF
 IF TFLAG:15 >0
 	CALL PALAM_MESSAGE_E
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 3 || FLAG:7 == 2)	
@@ -10074,7 +10074,7 @@ ENDIF
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:246 < 4 || FLAG:7 == 2)	
@@ -10130,7 +10130,7 @@ IF TFLAG:29 > 1
 ELSEIF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:246 < 4 || FLAG:7 == 2)	
@@ -10190,7 +10190,7 @@ ENDIF
 ;사정하고 있다
 IF TFLAG:10 > 0	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 3 || FLAG:7 == 2)	
@@ -10214,7 +10214,7 @@ ENDIF
 ;분유하고 있다
 IF TFLAG:11 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 3 || FLAG:7 == 2)	
@@ -10238,7 +10238,7 @@ ENDIF
 ;방뇨하고 있다
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 3 || FLAG:7 == 2)	
@@ -10509,7 +10509,7 @@ IF TFLAG:21 == 3
 		;복종, 예속
 		;ELSEIF TALENT:5 || TALENT:8
 		;	PRINTFORMW 
-		;공통、그외
+		;공통, 그 외
 		ELSE
 			PRINTFORMW 
 		ENDIF
@@ -10548,7 +10548,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10607,7 +10607,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10631,7 +10631,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF				
@@ -10680,7 +10680,7 @@ SELECTCASE TFLAG:13
 				;	ELSE
 				;		PRINTFORMW 
 				;	ENDIF
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10714,7 +10714,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10738,7 +10738,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10762,7 +10762,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10801,7 +10801,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10825,7 +10825,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10852,7 +10852,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10879,7 +10879,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10906,7 +10906,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10930,7 +10930,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10954,7 +10954,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -10978,7 +10978,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11002,7 +11002,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11026,7 +11026,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11060,7 +11060,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11120,7 +11120,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11149,7 +11149,7 @@ SELECTCASE TFLAG:13
 					;복종, 예속
 					;ELSEIF TALENT:5 || TALENT:8
 					;	PRINTFORMW 
-					;공통、그외
+					;공통, 그 외
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -11172,7 +11172,7 @@ SELECTCASE TFLAG:13
 					;복종, 예속
 					;ELSEIF TALENT:5 || TALENT:8
 					;	PRINTFORMW 
-					;공통、그외
+					;공통, 그 외
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -11200,7 +11200,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11286,7 +11286,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11315,7 +11315,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11387,7 +11387,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11414,7 +11414,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				;ELSEIF TALENT:5 || TALENT:8
 				;	PRINTFORMW 
-				;공통、그외
+				;공통, 그 외
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -11470,7 +11470,7 @@ SELECTCASE TFLAG:13
 					;복종, 예속
 					;ELSEIF TALENT:5 || TALENT:8
 					;	PRINTFORMW 
-					;공통、그외
+					;공통, 그 외
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -11490,7 +11490,7 @@ SELECTCASE TFLAG:13
 					;복종, 예속
 					;ELSEIF TALENT:5 || TALENT:8
 					;	PRINTFORMW 
-					;공통、그외
+					;공통, 그 외
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -11895,7 +11895,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:298 = 1
@@ -11915,7 +11915,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:299 = 1
@@ -11936,7 +11936,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:601 = 1
@@ -11957,7 +11957,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:602 = 1
@@ -11979,7 +11979,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:603 = 1
@@ -12000,7 +12000,7 @@ SELECTCASE TFLAG:13
 				;예ＮＴＲ
 			;	PRINTFORMW 
 			ELSE
-				;공통、그외
+				;공통, 그 외
 				PRINTFORMW 
 			ENDIF
 			CFLAG:604 = 1
@@ -12098,7 +12098,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 65
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -12193,7 +12193,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 66
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -12288,7 +12288,7 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 67
 			CALL EVENT_MESSAGE
-			;교회の종류によって分ける
+			;교회의 종류에 따라 나눈다
 			SELECTCASE 점포("종류",(CFLAG:노역플래그 - 10))
 				;메시아 교회
 				CASE 13
@@ -12516,7 +12516,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 3
-;아군パーティでの被소환時の台詞	
+;아군 파티에서의 피소환시의 대사	
 ;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛

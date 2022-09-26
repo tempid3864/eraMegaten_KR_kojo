@@ -1,11 +1,11 @@
 ﻿;作業環境ver0.301　最終更新2012/05/25
-;ライセンスフリー　改変・流用も可（허가不要）
+;ライセンスフリー　改変・流用も可（許可不要）
 ;-------------------------------------------------
-;토모코구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;トモコ口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;ハッカーズ主人公（通称カツオ）の妹ちゃんです
 ;完全にオリキャラ化、eraMegaten主人公とは赤の他人なのが大変残念
 ;全く関わりの無い他作品登場キャラとの絡みも有りますので注意して下さい
-;つまり마리先生のキャラ大붕괴
+;つまりマリ先生のキャラ大崩壊
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -170,7 +170,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			SIF CFLAG:미조교함락 == 0
 				PRINT …굉장히 엣치…
 			PRINTL 」
-			PRINTFORML 「그렇, 그렇지만…%CSTR:이인칭%을(를)、좋아해…, 이미！」
+			PRINTFORML 「그렇, 그렇지만…%이인칭을%、좋아해…, 이미！」
 			PRINTFORML 「응, 응…, 자、%CSTR:이인칭%는 토모코의 남자친구라는 것으로 좋아…？」
 			PRINTFORML 「예~에! 뭐 때문에 싫은 것 같은 얼굴이야！？」
 			PRINTFORML 「자 토모코가, 지금부터는%CSTR:이인칭%의 그녀의 한사람인 것이라면？」
@@ -200,8 +200,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;복종
 	ELSEIF TALENT:5
 		PRINTFORML 「기…어떻게 하면 용서해 줄래…?」
-		PRINTFORML 「토모코, 무엇때문에 %CSTR:12%가 화가 났는지, 이제 몰라 …」
-		PRINTFORML 「 이제 불필요한 것은, 생각하는 것 멈추어…%CSTR:12%의 노예같이 되면 좋은거야…?」
+		PRINTFORML 「토모코, 무엇때문에 %CSTR:이인칭%가 화가 났는지, 이제 몰라 …」
+		PRINTFORML 「 이제 불필요한 것은, 생각하는 것 멈추어…%CSTR:이인칭%의 노예같이 되면 좋은거야…?」
 		PRINTFORML 「응, 된다…. 토모코, 노예가 되기 때문에…」
 		PRINTFORML 「네, 에또…, 토모코의 주인님으로, 되어 주세요…」
 		PRINTFORMW 「…응, 주인님에 마음에 들고 싶기 때문에…토모코, 좀 더 노력할게……」
@@ -437,13 +437,13 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 		PRINTFORML 「어…오늘은, %CSTR:일인칭%, 위험한 날이야…?　, 정말로…?」
 		PRINTFORMW 「아…안돼…!　또…저런 것 되면 …정말로 아기생겨 버린다…」
 	ELSE
-		PRINTFORMW 「우…거짓말쟁이…%CSTR:12%의 일、믿고 있었는데…。심하다구, 이건…！」
+		PRINTFORMW 「우…거짓말쟁이…%CSTR:이인칭%의 일、믿고 있었는데…。심하다구, 이건…！」
 	ENDIF
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 	IF CFLAG:101 >= 1 && 위험일(TARGET) == 1
-		PRINTFORML 「으, 싫어…오늘은 위험한 날이라고,%CSTR:12%가 스스로 말했잖아…」
+		PRINTFORML 「으, 싫어…오늘은 위험한 날이라고,%CSTR:이인칭%가 스스로 말했잖아…」
 		PRINTFORMW 「아! 무리하게, 하지 말아…!　무서워 ……」
 	ELSE
 		PRINTFORMW 「또, 음란한 것 하는 거야…? …이제 용서해줘…」
@@ -465,7 +465,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	IF TALENT:3 || TALENT:6
 		IF 위험일(TARGET) == 1
 			PRINTFORML 「아! …싫구나…오늘, 나, 위험한 날이라고 생각해…」
-			PRINTFORML 「아, …그, 그렇지만! …아무래도 %CSTR:12%가 하고싶으면…」
+			PRINTFORML 「아, …그, 그렇지만! …아무래도 %CSTR:이인칭%가 하고싶으면…」
 			PRINTFORML 「에, 좋을까…한다고 해도…에헤헤…」
 			PRINTFORMW 토모코는%NAME:MASTER%의 관심을 잃고 싶지 않은 일심으로, 상응하는 각오는 하고있는 것 같다……
 		ELSE
@@ -475,7 +475,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 토모코는 이 처지에도 구애받지 않고, 행복하게 미소짓고 있다……
 			ELSEIF RAND:3 == 0
 				PRINTFORML 「아……하는거야…?」
-				PRINTFORML 「그런데, 기다려 …처음은요,%CSTR:12%에, 꼬옥해 주었으면 하는거야…」
+				PRINTFORML 「그런데, 기다려 …처음은요,%CSTR:이인칭%에, 꼬옥해 주었으면 하는거야…」
 				PRINTFORMW 요망대로 꼭 껴안은 토모코의 머리카락으로부터는, 소녀답게 상쾌한 샴푸의 향기가 났다……
 			ELSEIF RAND:2 == 0
 				PRINTFORML 「ねっ…あんまりヘンタイっぽいのは、ヤだよ？」
@@ -491,7 +491,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ELSEIF TALENT:4 || TALENT:7
 		IF 위험일(TARGET) == 1
 			PRINTFORML 「토모코, 오늘은 위험한 날인데, 괜찮아…?」
-			PRINTFORML 「아…혹시 %CSTR:12%, 자지 커졌어…?　벌써 …랄까, 하지만 이해해…」
+			PRINTFORML 「아…혹시 %CSTR:이인칭%, 자지 커졌어…?　벌써 …랄까, 하지만 이해해…」
 			PRINTFORML 「그야、%CSTR:일인칭%도 위험하다고는 생각하지만, 그 이상으로 굉장히 흥분되는걸…」
 			PRINTFORMW %NAME:MASTER%의 페니스를 응시하는 토모코는, 완전히 발정한 것 처럼, 뜨거운 한숨을 흘리고 있다……
 		ELSE
@@ -500,12 +500,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				IF RAND:2 == 0
 					PRINTFORML 「의 자지, 좀 더 기분 좋게 해 주고 싶은데…？」
 				ELSE
-					PRINTFORML 「こういう勉強だって、필요だよね…？」
+					PRINTFORML 「こういう勉強だって、必要だよね…？」
 				ENDIF
 				PRINTFORMW 토모코는, 여자의 아양을 포함한 표정으로, 못된 장난 같이 %NAME:MASTER%를 눈을 치켜 뜨고 보고 있다……
 			ELSEIF RAND:2 == 0
 				PRINTFORML 「으으응♪…응, 토모코…, 기분 좋아지고 싶다…%UNICODE(0x2661)%」
-				PRINTFORML 「응? …이, 이제…%CSTR:12%과 함께, 기분 좋아지는거지?」
+				PRINTFORML 「응? …이, 이제…%CSTR:이인칭%과 함께, 기분 좋아지는거지?」
 				PRINTFORMW 토모코는, 여자의 아양을 포함한 표정으로, 못된 장난 같이 %NAME:MASTER%를 눈을 치켜 뜨고 보고 있다……
 			ELSE
 				PRINTFORML 「으으응…, 이제는…이런 일, 좋아할지도……응…」
@@ -591,12 +591,12 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORML 「하아 …하아―…아, 수고 하셨습니다…」
-		PRINTFORML 「응, 오늘의%CSTR:12%, 굉장해…토모코의 신체, 망가질까하고 생각해 버렸다…」
+		PRINTFORML 「응, 오늘의%CSTR:이인칭%, 굉장해…토모코의 신체, 망가질까하고 생각해 버렸다…」
 		PRINTFORMW 「…그렇게 좋았던거야, %CSTR:일인칭%…?」
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORML 「하아 …하아―…이젠, 기진맥진이야 …」
-		PRINTFORML 「그렇지만, 이렇게 될 때까지,%CSTR:12%에게 귀여움 받을 수 있었다…」
+		PRINTFORML 「그렇지만, 이렇게 될 때까지,%CSTR:이인칭%에게 귀여움 받을 수 있었다…」
 		PRINTFORMW 「후후…오늘은 토모코도, 굉장히…흥분해 버렸어…!」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
@@ -613,7 +613,7 @@ ELSEIF CFLAG:219 < 5 || FLAG:7 == 2
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORML 「응, 알았어, 그렇지만…별로 토모코를 혼자 두지 마…?」
-		PRINTFORMW 「이젠…스스로 해도…,%CSTR:12%가 보지 않으면, 만족할 수 없어…」
+		PRINTFORMW 「이젠…스스로 해도…,%CSTR:이인칭%가 보지 않으면, 만족할 수 없어…」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		PRINTFORMW 「네…주인님…또 토모코의 신체, 사용해 주세요……」
@@ -893,14 +893,14 @@ SELECTCASE SELECTCOM
 					IF RAND:2 == 0
 						PRINTFORMW 「「으으응, 브라가 조금 끼어…. 최근, 운동하고 있지 않기 때문에 살쪄 버린 것 일까…？」
 					ELSE
-						PRINTFORMW 「하, 으응! 응응…하아…응…아, %CSTR:12%에 비비어지고 있으니, 커졌다든가…?」
+						PRINTFORMW 「하, 으응! 응응…하아…응…아, %CSTR:이인칭%에 비비어지고 있으니, 커졌다든가…?」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:2 == 0
 						PRINTFORMW 「아! 아…, 웃…응…굉장한…젖가슴, 기분 이이야 …」
 					ELSE
-						PRINTFORMW 「무엇으로 그렇게 …아! …%CSTR:12%는, 엣치가…응! 아…능, 능숙한 …?」
+						PRINTFORMW 「무엇으로 그렇게 …아! …%CSTR:이인칭%는, 엣치가…응! 아…능, 능숙한 …?」
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -1000,14 +1000,14 @@ SELECTCASE SELECTCOM
 					IF RAND:2 == 0
 						PRINTFORMW 「으으응, 브라가 조금 끼어…. 최근, 운동하고 있지 않기 때문에 살쪄 버린 것 일까…？」
 					ELSE
-						PRINTFORMW 「하, 으응! 응응…하아…응…아, %CSTR:12%에 비비어지고 있으니, 커졌다든가…?」
+						PRINTFORMW 「하, 으응! 응응…하아…응…아, %CSTR:이인칭%에 비비어지고 있으니, 커졌다든가…?」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:2 == 0
 						PRINTFORMW 「아! 아…, 웃…응…굉장한…젖가슴, 기분 이이야 …」
 					ELSE
-						PRINTFORMW 「무엇으로 그렇게 …아! …%CSTR:12%는, 엣치가…응! 아…능, 능숙한 …?」
+						PRINTFORMW 「무엇으로 그렇게 …아! …%CSTR:이인칭%는, 엣치가…응! 아…능, 능숙한 …?」
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -1042,9 +1042,9 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「응…부끄럽지만…,%CSTR:12%라면, 봐도 괜찮아…」
-						PRINTFORML 「응…토모코, 버진이야…핀치때에, %CSTR:12%에 도와 주었기 때문에 그런데…」
-						PRINTFORMW 「%CSTR:12%는, 토모코의 히어로이니까, 주어도 괜찮은데…」
+						PRINTFORML 「응…부끄럽지만…,%CSTR:이인칭%라면, 봐도 괜찮아…」
+						PRINTFORML 「응…토모코, 버진이야…핀치때에, %CSTR:이인칭%에 도와 주었기 때문에 그런데…」
+						PRINTFORMW 「%CSTR:이인칭%는, 토모코의 히어로이니까, 주어도 괜찮은데…」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORML 「응…펼치기 때문에, 가장 안쪽까지 봐…」
@@ -1067,11 +1067,11 @@ SELECTCASE SELECTCOM
 						;연모, 친애
 						IF TALENT:3 || TALENT:6
 							PRINTFORML 「미안해요…토모코, 버진이 아니어서…」
-							PRINTFORMW 「응…토모코도%CSTR:12%에 버진 주고 싶었다…」
+							PRINTFORMW 「응…토모코도%CSTR:이인칭%에 버진 주고 싶었다…」
 						;음란, 창부
 						ELSEIF TALENT:4 || TALENT:7
 							PRINTFORML 「미안해요…토모코인 여기, 버진이 아니어서…」
-							PRINTFORMW 「응…토모코도%CSTR:12%가 버진 빼앗았으면 좋았을껄…」
+							PRINTFORMW 「응…토모코도%CSTR:이인칭%가 버진 빼앗았으면 좋았을껄…」
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
 							PRINTFORML 「네…에, 말하겠습니다 , 지금부터………웃…」
@@ -1088,12 +1088,12 @@ SELECTCASE SELECTCOM
 					IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 						;연모, 친애
 						IF TALENT:3 || TALENT:6
-							PRINTFORML 「응…부끄럽지만…,%CSTR:12%라면, 봐도 괜찮아…」
+							PRINTFORML 「응…부끄럽지만…,%CSTR:이인칭%라면, 봐도 괜찮아…」
 							PRINTFORML 「응…토모코, 벌써 버진 졸업해버렸어군요…」
 							PRINTFORMW 「토모코…, 굉장히 H인가…」
 						;음란, 창부
 						ELSEIF TALENT:4 || TALENT:7
-							PRINTFORML 「응,%CSTR:12%가 봐줬으면 좋겠어…」
+							PRINTFORML 「응,%CSTR:이인칭%가 봐줬으면 좋겠어…」
 							PRINTFORML 「토모코, 벌써 경험이 끝난 상태이고…하고싶은데, 해주는거야…?」
 							PRINTFORMW 「토모코의 여기에…, 보지에, 자지 넣어줘…」
 						;복종, 예속
@@ -1120,7 +1120,7 @@ SELECTCASE SELECTCOM
 						IF ASSI > 0 && ASSIPLAY && NO:ASSI == 4516
 							PRINTFORML 『…역시 주인님 참, 아직 손대지 않고 계셨네요…』
 							PRINTFORML 『토모코, 너도 사랑하는 주인님께 버진을 바치고 싶지…?』
-							PRINTFORML 「…으、응…。　나、지금은%CSTR:12%을 좋아하니까…」
+							PRINTFORML 「…으、응…。　나、지금은%CSTR:이인칭%을 좋아하니까…」
 							PRINTFORML 『음…내 앞에서 ぬけぬけと…올려본 그림들을함을 네요…』
 							PRINTFORML 『나에게 맡겨준다면 평생 잊을 수없는 첫경험을 경험시켜드린다고요?』
 							PRINTFORML 『저도 서머너입니다…개나 말은 좋아하나요?…후후후 …』
@@ -1130,7 +1130,7 @@ SELECTCASE SELECTCOM
 						ELSEIF TEQUIP:29 == 1
 							PRINTFORML 「우,우우…, 너무 부끄러워…. 토모코, 첫 경험도 아직인데 그런데, 이런 일을…」
 							PRINTFORML 「우우…이래서야, 모르는 사람에게, 알몸은 커녕, 보지까지 보이면 웃…」
-							PRINTFORMW 「토모코、%CSTR:12%만의 물건인데……」
+							PRINTFORMW 「토모코、%CSTR:이인칭%만의 물건인데……」
 						;자위경험300回
 						ELSEIF EXP:10 >= 300
 							PRINTFORML 「아…하아 …응…우…거짓말, 끼리야 …하…」
@@ -1138,7 +1138,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「누군가에게, 보일 것 같은데 …자위…하고 싶어서, 견딜 수 없어…!」
 						ELSE
 							PRINTFORML 「응…부끄럽지만, 봐도 괜찮아…%UNICODE(0x2661)%」
-							PRINTFORML 「원…토모코의 버진…%CSTR:12%에 예약되어 버렸다 …」
+							PRINTFORML 「원…토모코의 버진…%CSTR:이인칭%에 예약되어 버렸다 …」
 							PRINTFORMW 「무엇인가, 굉장하게 되어 버린다…」
 						ENDIF
 					;음란, 창부
@@ -1156,7 +1156,7 @@ SELECTCASE SELECTCOM
 						ELSEIF TEQUIP:29 == 1
 							PRINTFORML 「もうっ…토모코, 아직 버진인데, 이런 것 시켜 버리니까…%UNICODE(0x2661)%」
 							PRINTFORML 「응 …, 이런 장소는, 토모코의 보지, 모르는 사람에게 보여져버린다…」
-							PRINTFORMW 「%CSTR:12%는, 그 쪽이 흥분되는 거야…?　응, 토모코도 좋아…%UNICODE(0x2661)%」
+							PRINTFORMW 「%CSTR:이인칭%는, 그 쪽이 흥분되는 거야…?　응, 토모코도 좋아…%UNICODE(0x2661)%」
 						;자위경험300回
 						ELSEIF EXP:10 >= 300
 							PRINTFORML 「아…하아 …아…젖어 버렸다…아으…%UNICODE(0x2661)%」
@@ -1164,8 +1164,8 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「아우…, 확실히 참지 않으면 …언제나 같이, 손가락이 움직여버려…」
 						ELSE
 							PRINTFORML 「응 …, 아직 토모코와 하고싶지 않아…?」
-							PRINTFORML 「벌써 …, 토모코가 이렇게 H에 %CSTR:12%를 유혹해 …」
-							PRINTFORMW 「토모코는 빨리 %CSTR:12%에, 버진 바치고 싶은데…심술쟁이야」
+							PRINTFORML 「벌써 …, 토모코가 이렇게 H에 %CSTR:이인칭%를 유혹해 …」
+							PRINTFORMW 「토모코는 빨리 %CSTR:이인칭%에, 버진 바치고 싶은데…심술쟁이야」
 						ENDIF
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
@@ -1217,20 +1217,20 @@ SELECTCASE SELECTCOM
 					IF TALENT:3 || TALENT:6
 						;야외플레이
 						IF TEQUIP:29 == 1
-							PRINTFORML 「응、%CSTR:12%라면、봐도 괜찮아…%UNICODE(0x2661)%」
+							PRINTFORML 「응、%CSTR:이인칭%라면、봐도 괜찮아…%UNICODE(0x2661)%」
 							PRINTFORML 「응 ... 토모코 다른 가득 경험 끝난이고 ...하고싶은데, 해줄래…？」1210
 							PRINTFORMW 「토모코의 여기라면… 이제 괜찮아……」
 						;성교경험300回
 						ELSEIF EXP:4 >= 300
-							PRINTFORML 「응、%CSTR:12%라면、봐도 괜찮아…%UNICODE(0x2661)%」
+							PRINTFORML 「응、%CSTR:이인칭%라면、봐도 괜찮아…%UNICODE(0x2661)%」
 							PRINTFORML 「응 ... 토모코 다른 가득 경험 끝난이고 ...하고싶은데, 해줄래…？」
 							PRINTFORMW 「토모코의 여기라면… 이제 괜찮아……」
 						;던전능욕発生済み
 						ELSEIF DB:90:0 > 21
 							PRINTFORML 「미안해…토모코, 버진이 아니어서…」
-							PRINTFORMW 「응…토모코도 %CSTR:12%에게 버진 주고 싶었어…」
+							PRINTFORMW 「응…토모코도 %CSTR:이인칭%에게 버진 주고 싶었어…」
 						ELSE
-							PRINTFORML 「응…부끄럽지만…, %CSTR:12%라면, 봐도 괜찮아…」
+							PRINTFORML 「응…부끄럽지만…, %CSTR:이인칭%라면, 봐도 괜찮아…」
 							PRINTFORML 「응…토모코, 벌써 버진 졸업해버렸어…」
 							PRINTFORMW 「토모코…, 굉장히 H인가…?」
 						ENDIF
@@ -1248,24 +1248,24 @@ SELECTCASE SELECTCOM
 									PRINTFORML 「あっ……そんなのっ……言えなっ……」
 									PRINTFORML 『あはっ、ママの穴、ヨダレが出てきたよ。 ホントにスケベなんだから……』
 								ENDIF
-								PRINTFORMW 今の토모코は実の息子の侮蔑を孕んだ視線ですら、背徳の쾌락を感じているようだ……
+								PRINTFORMW 今のトモコは実の息子の侮蔑を孕んだ視線ですら、背徳の快楽を感じているようだ……
 							ELSE
 								IF RAND:2 == 0
 									PRINTFORML 『ふ～ん…ココが、ボクが出てきた穴かぁ……』
-									PRINTFORML 『フフッ、ボクの方がずっとキ레이だね』
+									PRINTFORML 『フフッ、ボクの方がずっとキレイだね』
 									PRINTFORML 「はぁっ……あぁっ……ヒドイこと言っちゃ、イヤ……はぁっ……」
 								ELSE
 									PRINTFORML 『ねぇ、ママ、ご主人様のチンポと、パパのイルカチンポ、どっちが良かったの…？』
 									PRINTFORML 「あっ……そんなのっ……言えなっ……」
 									PRINTFORML 『あはっ、ママの穴、ヨダレが出てきたよ。 ホントにスケベなんだから……』
 								ENDIF
-								PRINTFORMW 今の토모코は実の娘の侮蔑を孕んだ視線ですら、背徳の쾌락を感じているようだ……
+								PRINTFORMW 今のトモコは実の娘の侮蔑を孕んだ視線ですら、背徳の快楽を感じているようだ……
 							ENDIF
 						;야외플레이
 						ELSEIF TEQUIP:29 == 1
-							PRINTFORML 「응,%CSTR:12%가 봐줬으면 좋겠어~~%UNICODE(0x2661)%」
+							PRINTFORML 「응,%CSTR:이인칭%가 봐줬으면 좋겠어~~%UNICODE(0x2661)%」
 							PRINTFORML 「응 …, 이런 장소에선, 토모코, 모르는 사람에게 보지 보여지는데」
-							PRINTFORMW 「%CSTR:12%는, 그 쪽이 좋은 거야…?　응, 토모코도 좋아…굉장히 흥분되는걸~%UNICODE(0x2661)%」
+							PRINTFORMW 「%CSTR:이인칭%는, 그 쪽이 좋은 거야…?　응, 토모코도 좋아…굉장히 흥분되는걸~%UNICODE(0x2661)%」
 						;수간경험30回
 						ELSEIF EXP:57 >= 30
 							;조수が마요네
@@ -1287,16 +1287,16 @@ SELECTCASE SELECTCOM
 								PRINTFORML 「윽… 응…하지만 주인님이 가장 좋……」
 								PRINTFORMW 『%CSTR:일인칭%의 앞에서 뻔뻔스럽게… 헐렁한 것은 가랑이뿐만이 아니라 머리 쪽도 이지요?』
 							ELSE
-								PRINTFORML 「응,%CSTR:12%가 봐줬으면 좋겠어~」
-								PRINTFORML 「응 …,%CSTR:12%에 말해져서지만…, 토모코, 벌써 많은 사람들과 해버렸어…?」
-								PRINTFORML 「질투하고 있어…? 아핫…%UNICODE(0x2661)% 제대로 포상도、여기에 줘야해%UNICODE(0x2661)%」
+								PRINTFORML 「응,%CSTR:이인칭%가 봐줬으면 좋겠어~」
+								PRINTFORML 「응 …,%CSTR:이인칭%에 말해져서지만…, 토모코, 벌써 많은 사람들과 해버렸어…?」
+								PRINTFORMW 「질투하고 있어…? 아핫…%UNICODE(0x2661)% 제대로 포상도、여기에 줘야해%UNICODE(0x2661)%」
 							ENDIF
 						;던전능욕発生済み
 						ELSEIF DB:90:0 > 21
 							PRINTFORML 「미안해요…토모코인 보지, 버진이 아니어서……」
-							PRINTFORMW 「응…토모코도 %CSTR:12%에게 버진 주고 싶었다…」
+							PRINTFORMW 「응…토모코도 %CSTR:이인칭%에게 버진 주고 싶었다…」
 						ELSE
-							PRINTFORML 「응,%CSTR:12%가 보았으면 좋겠어…」
+							PRINTFORML 「응,%CSTR:이인칭%가 보았으면 좋겠어…」
 							PRINTFORML 「응 ... 토모코 다른 가득 경험 끝난이고 ...하고싶은데, 해줄래…？」
 							PRINTFORMW 「토모코의 여기에…,보지에,자지 넣어줘…%UNICODE(0x2661)%」
 						ENDIF
@@ -1405,13 +1405,13 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「으으응! …하아, %CSTR:12%에게, 토모코… 보여지고있어…」
+					PRINTFORML 「으으응! …하아, %CSTR:이인칭%에게, 토모코… 보여지고있어…」
 					PRINTFORML 「아! 하아 …자위, 보여지고있어 …, 토모코, 대단히 젖고 있어…！」
 					PRINTFORMW 토모코는 손가락으로 복숭아색의 육벽을 노출로 해, 점액으로 미끄러진 비렬을, 격렬하게 손가락으로 자극하고 있었다……
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「으으응! …하아 , 좋아!　%CSTR:12%로 보여지고…느껴 버린다！」
-					PRINTFORML 「아! 하아…%CSTR:12%에게 자위 보일 수 있어서…토모코, 대단히 행복~해！」
+					PRINTFORML 「으으응! …하아 , 좋아!　%CSTR:이인칭%로 보여지고…느껴 버린다！」
+					PRINTFORML 「아! 하아…%CSTR:이인칭%에게 자위 보일 수 있어서…토모코, 대단히 행복~해！」
 					PRINTFORMW 토모코는 손가락으로 복숭아색의 육벽을 노출로 해, 점액으로 미끄러진 비렬을, 격렬하게 손가락으로 자극하고 있었다……
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -1450,7 +1450,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「응…하아∼…,…그런데, %CSTR:12%…,어른의 키스, 하고 싶다아…?」
+					PRINTFORML 「응…하아∼…,…그런데, %CSTR:이인칭%…,어른의 키스, 하고 싶다아…?」
 					PRINTFORML 「무츄우…츄웁…하흡…춥…츄우、우추읍…하아……」
 					PRINTFORML 토모코의 작은 입술을 차지한 %NAME:MASTER%가 찔러넣은 혀를 넣자, 토모코의 작은 혀가 곧바로 응해 왔다
 					PRINTFORMW %CALLNAME:PLAYER%와 토모코는 마음껏, 서로의 타액을 교환했다……
@@ -1627,7 +1627,7 @@ SELECTCASE SELECTCOM
 					PRINT 아아……
 				ENDIF
 				IF RAND:4 == 0
-					PRINT %CSTR:12%의
+					PRINT %CSTR:이인칭%의
 				ELSEIF RAND:3 == 0
 					PRINT 스네피의
 				ELSEIF RAND:2 == 0
@@ -2276,7 +2276,7 @@ SELECTCASE SELECTCOM
 						IF 위험일(TARGET) == 1
 							PRINTFORML 「あっ、あぁ…っ、ん、ふっ…ぁ……、ね、%CSTR:이인칭%、イキそう…？」
 							PRINTFORML 「うんっ…イイよ……。 %CSTR:일인칭%のナカに全部出して…！」
-							PRINTFORMW 절정を察した토모코は、%NAME:MASTER%にそう告げると、恥ずかしそうに顔を枕に押し付けた……
+							PRINTFORMW 絶頂を察したトモコは、%NAME:MASTER%にそう告げると、恥ずかしそうに顔を枕に押し付けた……
 						ELSE
 							PRINTFORMW 
 							PRINTFORMW 
@@ -6537,7 +6537,7 @@ IF TFLAG:2 > 0
 				IF 위험일(TARGET) == 1
 					PRINTFORML 「아! …아앙!　……하아아 …하아…」
 					PRINTFORML 「이제, 정말로 안에 낸다니까…이렇게 진한 정액을 받으면, 토모코, 임신해버린다…？」
-					PRINTFORMW 「으으응…토모코도, %CSTR:12%의 일, 사랑하니까…용서해 줄게…！」
+					PRINTFORMW 「으으응…토모코도, %CSTR:이인칭%의 일, 사랑하니까…용서해 줄게…！」
 				ELSE
 					PRINTFORML 「아! …아앙!　……하아아 …하아…」
 					PRINTFORMW 「하아…안에 정액이…따뜻한 것이 퍼지고 있어…」
@@ -6546,15 +6546,15 @@ IF TFLAG:2 > 0
 			ELSEIF TALENT:4 || TALENT:7
 				IF 위험일(TARGET) == 1
 					PRINTFORML 「아! …아앙!　……하아아 …하아…」
-					PRINTFORML 「아, 굉장히 많이 나왔구나…%CSTR:12%의 토모코, 임신해버릴지도…」
+					PRINTFORML 「아, 굉장히 많이 나왔구나…%CSTR:이인칭%의 토모코, 임신해버릴지도…」
 					PRINTFORMW 「나, 어째서 이렇게 즐거운걸까…」
-				;던전능욕임신済み
+				;던전능욕妊娠済み
 				ELSEIF DB:90:0 > 22
-					PRINTFORML 「아！…나오고있어！　%CSTR:12%의 정액, 드크드크 따라져서, 토모코의 보지 흘러넘치고있어！」
+					PRINTFORML 「아！…나오고있어！　%CSTR:이인칭%의 정액, 드크드크 따라져서, 토모코의 보지 흘러넘치고있어！」
 					PRINTFORMW 「하아…하아……. 토모코, 정액으로… 또 임신 해 버릴지도~…？」
 				ELSE
 					PRINTFORML 「아! …아앙!　……하아아 …하아…」
-					PRINTFORMW 「%CSTR:12%의 정액, 드크드크 따라져서, 토모코의 보지 흘러넘치고있어！」
+					PRINTFORMW 「%CSTR:이인칭%의 정액, 드크드크 따라져서, 토모코의 보지 흘러넘치고있어！」
 				ENDIF
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
@@ -6581,7 +6581,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7042,7 +7042,7 @@ IF TFLAG:22 == 3
 		ENDIF
 	ELSE
 		PRINTFORML 「꺄악!　아파 , 아프다! 아파!　그만해! 제발!」
-		PRINTFORMW 「…웃……이제, 절대 %CSTR:12%에게 거역하지 않을태니까…용서해…주세요…」
+		PRINTFORMW 「…웃……이제, 절대 %CSTR:이인칭%에게 거역하지 않을태니까…용서해…주세요…」
 	ENDIF
 ENDIF
 
@@ -7080,11 +7080,11 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 		PRINTFORMW 「아, 기분 너무 좋아…나…이제, 어떻게 되어도 좋아…」
 	;공포와 고통에 의한 굴복
 	ELSEIF TFLAG:24 == 23
-		PRINTFORML 「으, 읏 …, 확실히 %CSTR:12%가 말하는 일, 듣는, 듣을 테니까…！」
+		PRINTFORML 「으, 읏 …, 확실히 %CSTR:이인칭%가 말하는 일, 듣는, 듣을 테니까…！」
 		PRINTFORMW 「…이제, 아픈 것도, 무서운 것도 용서해줘…！」
 	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
-		PRINTFORML 「으、응 …, 확실히 %CSTR:12%가 말하는 일 듣기 때문에…」
+		PRINTFORML 「으、응 …, 확실히 %CSTR:이인칭%가 말하는 일 듣기 때문에…」
 		PRINTFORMW 「토모코…칭찬해 줄래…？」
 	ENDIF
 ENDIF
@@ -7102,7 +7102,7 @@ IF TFLAG:21 == 3
 			PRINTFORMW 「…우우…이런 건, 너무 심해…！」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「심해…, 토모코, %CSTR:12%를 싫어하게 되어 버렸어…！？」
+			PRINTFORMW 「심해…, 토모코, %CSTR:이인칭%를 싫어하게 되어 버렸어…！？」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORML 「괴로워 ……어째서 …, 토모코, 노력했는데…」
@@ -7469,11 +7469,11 @@ SELECTCASE TFLAG:13
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORML 「아직, 토모코를 두고, 혼자서 먼저 자는 건, 안돼」
-					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:12%에게 받아낼태니까…」
+					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:이인칭%에게 받아낼태니까…」
 					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:12%에게 귀여움 받고 싶어」
+					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:이인칭%에게 귀여움 받고 싶어」
 					PRINTFORMW 「아까전부터 계속, 토모코의 보지가 욱신거려, 잔뜩 젖어서 곧바로 할 수 있으니까…,해줘,…응？」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -7494,11 +7494,11 @@ SELECTCASE TFLAG:13
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORML 「아직, 토모코를 두고, 혼자서 먼저 자는 건, 안돼」
-					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:12%에게 받아낼태니까…」
+					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:이인칭%에게 받아낼태니까…」
 					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:12%에게 귀여움 받고 싶어」
+					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:이인칭%에게 귀여움 받고 싶어」
 					PRINTFORMW 「아까전부터 계속, 토모코의 엉덩이가 욱신거려, 잔뜩 젖어서 곧바로 할 수 있으니까…,해줘,…응？」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -7569,11 +7569,11 @@ SELECTCASE TFLAG:13
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORML 「아직, 토모코를 두고, 혼자서 먼저 자는 건, 안돼」
-					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:12%에게 받아낼태니까…」
+					PRINTFORML 「잔다면 먼저, 토모코를 이렇게 H인 아가씨로 만들어 버린 책임,%CSTR:이인칭%에게 받아낼태니까…」
 					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:12%에게 귀여움 받고 싶어…」
+					PRINTFORML 「아직 자면 안돼…토모코, 좀 더 %CSTR:이인칭%에게 귀여움 받고 싶어…」
 					PRINTFORMW 「아까전부터 계속, 토모코의 몸이 욱신거려, 잔뜩 젖어서 곧바로 할 수 있으니까…,해줘,…응」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -7963,12 +7963,12 @@ SELECTCASE TFLAG:13
 				IF TALENT:아내
 					IF RAND:2 == 0
 						PRINTFORML 「어째서…！？」
-						PRINTFORML 「토모코는…%CSTR:12%의 신부잖아！？」
+						PRINTFORML 「토모코는…%CSTR:이인칭%의 신부잖아！？」
 					ELSE
 						IF CFLAG:본방횟수 || CFLAG:애널횟수
 							PRINTFORML 「에엣！？　으읏…아…아……들어가 버렸어……」
 						ELSE
-							PRINTFORML 「이런건…이제 싫어…도와줘…%CSTR:12%…！！」
+							PRINTFORML 「이런건…이제 싫어…도와줘…%CSTR:이인칭%…！！」
 						ENDIF
 					ENDIF
 					PRINTFORMW %NAME:MASTER%의 아내는 열심히 일하고있다……
@@ -8119,7 +8119,7 @@ SELECTCASE TFLAG:13
 					PRINTFORML 「진짜, 꿈같아…」
 					PRINTFORML 렌즈 너머로 토모코의 눈동자는 젖고 있어, 당장 울기 시작해 버릴 것 같다。
 					PRINTFORML 그렇게 눅눅한 분위기를 날려 버리듯이 토모코는,%NAME:MASTER%의 팔에 강하게 안겨왔다
-					PRINTFORML 「…토모코도…!　%CSTR:12%의, 신부가 되고 싶어…！」
+					PRINTFORML 「…토모코도…!　%CSTR:이인칭%의, 신부가 되고 싶어…！」
 					PRINTFORML %NAME:MASTER%는 토모코의 손을 잡아, 토모코의 손가락에 반지를 끼웠다。
 					PRINTFORML 토모코는, 안팎으로부터 반지의 존재를 확인하듯이, 그 손을 몇번이나 가려 응시하고는
 					PRINTFORML %NAME:MASTER%에게도 만면의 미소로 반지의 낀 손가락을 보였다。
@@ -8151,7 +8151,7 @@ SELECTCASE TFLAG:13
 					;처녀
 					IF TALENT:0
 						IF ABL:TARGET:5 >= 3
-							PRINTFORML 「응…%CSTR:12%가, 말해진 대로 하고 왔어…」
+							PRINTFORML 「응…%CSTR:이인칭%가, 말해진 대로 하고 왔어…」
 							PRINTFORML 토모코가 견디고 있던 힘을 빼자, 고혈에 묻어있던 거품같은던 정액이 흘러나와 마루에 주르륵 떨어졌다
 							PRINTFORML 「이게…엉덩이에 받은…오빠의 정액이야…」
 							PRINTFORML 「굉장히 놀라고 있었어…하는게 싫은 것 같아서 권하거나 부탁하지않고, 억지로 강요했어…」
@@ -8161,7 +8161,7 @@ SELECTCASE TFLAG:13
 							PRINTFORML 보고를 끝내자 토모코는 쓰러지듯 주저앉아 아직 흘러내리는 오빠의 정액 위에서 자위를 시작했다
 							PRINTFORMW 이것으로 이제 토모코가 돌아오는 장소는, 여기 밖에 없을 것이다……
 						ELSE
-							PRINTFORML 「……하아 …하아 …하아…%CSTR:12%가 , 말한 대로로 하고 왔어…」
+							PRINTFORML 「……하아 …하아 …하아…%CSTR:이인칭%가 , 말한 대로로 하고 왔어…」
 							PRINTFORML 토모코는 꽉 물고있던 입을 열어, 부풀린 뺨에 담고 있던 것을 토해냈다
 							PRINTFORML 타액에 섞인 대량의 백탁액, 확실히 남자의 정액이다
 							PRINTFORML 「이게…입에 받은…오빠의 정액이야…」
@@ -8173,7 +8173,7 @@ SELECTCASE TFLAG:13
 							PRINTFORMW 이것으로 이제 토모코가 돌아오는 장소는, 여기 밖에 없을 것이다……
 						ENDIF
 					ELSE
-						PRINTFORML 「응…%CSTR:12%가, 말해진 대로 해 왔어…」
+						PRINTFORML 「응…%CSTR:이인칭%가, 말해진 대로 해 왔어…」
 						PRINTFORML 토모코가 견디고 있던 힘을 빼자, 보지에 묻어있던 거품같은던 정액이 흘러나와 마루에 주르륵 떨어졌다
 						PRINTFORML 「이게…보지로 받아낸…오빠의 정액이야…」
 						PRINTFORML 「굉장히 놀라고 있었어…하는게 싫은 것 같아서 권하거나 부탁하지않고, 억지로 강요했어…」
@@ -8266,7 +8266,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 
 					;3번째（함락）
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
-						PRINTFORMW 「토모코・・・あのおじさんの事・・・好きになっちゃった・・」
+						PRINTFORMW 「トモコ・・・あのおじさんの事・・・好きになっちゃった・・」
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -8422,7 +8422,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 
 					;3번째（함락）
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
-						PRINTFORMW 「토모코、こっちのご主人様のチンポのほうが好きかもぉ♪」
+						PRINTFORMW 「トモコ、こっちのご主人様のチンポのほうが好きかもぉ♪」
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -8680,7 +8680,7 @@ SELECTCASE TFLAG:13
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
 				;애ＮＴＲ
 				PRINTFORMW 「あっ、パパのっ・・おちんちんっ・・きもちいっ・・・んっ、ビクビクしてるぅ」
-				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%は토모코に覆いかぶさる様にしながら腰を振り、そのまま幼い질내に精を放出した
+				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%はトモコに覆いかぶさる様にしながら腰を振り、そのまま幼い膣内に精を放出した
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
 				PRINTFORMW 
@@ -8733,7 +8733,7 @@ SELECTCASE TFLAG:13
 			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
 				;애ＮＴＲ
 				PRINTFORMW 「あっ、はっ、パパとつながってる所っ・・・%CALLNAME:MASTER%に見つかっちゃうよぅ・・」
-				PRINTFORMW 토모코は%CSTR:이인칭%に密会が発깨달음することを무서움声をあげるが、%NTRNAME(CFLAG:함락캐릭터)%は腰を止めずに何回も질내に정액を放った
+				PRINTFORMW トモコは%CSTR:이인칭%に密会が発覚することを恐れ声をあげるが、%NTRNAME(CFLAG:함락캐릭터)%は腰を止めずに何回も膣内に精液を放った
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
 				PRINTFORMW 

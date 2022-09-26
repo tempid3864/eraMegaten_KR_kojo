@@ -8,7 +8,7 @@ IF ASSIPLAY
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;とりあえず촉수もスキップしておく
+;とりあえず触手もスキップしておく
 IF TEQUIP:촉수
 	CALL TRAIN_MESSAGE
 	RETURN 0
@@ -19,8 +19,8 @@ IF TEQUIP:볼재갈 &&  SELECTCOM != 107
 	RETURN 0
 ENDIF
 
-;TRAINNAMEの配列の범위外の数字がSELECTCOMに격납されている場合、구상をスキップする
-IF SELECTCOM >= VARSIZE("SELECTCOM")
+;TRAINNAMEの配列の範囲外の数字がSELECTCOMに格納されている場合、口上をスキップする
+IF SELECTCOM >= VARSIZE("TRAINNAME")
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
@@ -38,11 +38,11 @@ ENDIF
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
-;頻度판정めんどすぎなので申し訳程度に기능残してばっさり
-;구상ないので、自動喘ぎに飛ばすようにしとく
+;頻度判定めんどすぎなので申し訳程度に機能残してばっさり
+;口上ないので、自動喘ぎに飛ばすようにしとく
 IF 함락(TARGET)
 	IF RESULTS == "연모"
-		;とりあえず、なしよりはいいだろうし暫定的に함락前に飛ばしとく
+		;とりあえず、なしよりはいいだろうし暫定的に陥落前に飛ばしとく
 		;CALL KOJO_MESSAGE_COM_K4518_LOVE
 		CALL KOJO_MESSAGE_COM_K4518_BASE
 	ELSEIF RESULTS == "음란"
@@ -60,7 +60,7 @@ ENDIF
 ;=================================================
 ;애무계 커맨드
 ;=================================================
-;키스한다まで키스させないことに
+;キスするまでキスさせないことに
 SELECTCASE TRAINNAME:SELECTCOM
 	CASE "애무"
 		;CALL TRAIN_MESSAGE
@@ -425,7 +425,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 					PRINTFORMW %CALLNAME:TARGET%는 신음하면서, %CALLNAME:TARGET%에게 열기띤 눈으로 시선을 보내온다…
 				ENDIF
 			ELSE
-				;욕망でみてみることに
+				;欲望でみてみることに
 				IF ABL:욕망 > 2
 					IF !RAND:3
 						PRINTFORMW 「흥, 너한테 당할 거라면, 스스로 하는 게 낫지롱」
@@ -455,7 +455,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 ;=================================================
 ;커뮤니케이션계 커맨드
 ;=================================================
-;実際は애무でまず키스されてんだけど
+;実際は愛撫でまずキスされてんだけど
 	CASE "키스한다"
 		;CALL TRAIN_MESSAGE
 		IF !GET_COMFLAG(SELECTCOM)
@@ -1039,7 +1039,7 @@ SELECTCASE TRAINNAME:SELECTCOM
 				ENDIF
 			ENDIF
 		ENDIF
-	;デフォで기교4が조건なのでABL조건は省く
+	;デフォで技巧4が条件なのでABL条件は省く
 	CASE "파이즈리"
 		CALL TRAIN_MESSAGE
 		;想定してないサイズが来た場合ははじく

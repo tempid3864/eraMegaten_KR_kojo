@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;아야세 유우카구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;綾瀬 優香口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;
 ;-------------------------------------------------
@@ -14,7 +14,7 @@
 ;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
 ;--------------------------------------------------
-;구상ファイルの存在판정（4515을 캐릭터번호로 치환）
+;구상파일의 존재 판정（4515을 캐릭터번호로 치환）
 ;--------------------------------------------------
 ;@EVENTTRAIN
 ;#PRI
@@ -214,8 +214,19 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 	CFLAG:202 = 4
 ;함락완료
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
-	;연모, 친애、음란, 창부
-	IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+	;연모, 친애
+	IF TALENT:3 || TALENT:6
+		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
+		K:1 = RAND:3
+		IF K:1 == 0
+			PRINTFORMW 
+		ELSEIF K:1 == 1
+			PRINTFORMW 
+		ELSE
+			PRINTFORMW 
+		ENDIF
+	;음란, 창부
+	ELSEIF TALENT:4 || TALENT:7
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
@@ -414,8 +425,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「하악、하악、아으！」
 					PRINTFORMW 어느새 음액이 미끈미끈하게 젖기 시작했다
 					PRINTFORMW 「아ーーーー으응♡♡좋、아♡가버려～～～엉♡」
@@ -483,8 +497,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:303 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「후으우응♡아응、이제…손가락 만으론 만족 할 수 없어어♡」
 					PRINTFORMW 「빠・알・리이♡ 그 굵～은 걸로오、찔걱찔걱해줘엉♡」
 				;복종, 예속
@@ -517,8 +534,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「하윽、으아앗…　위험햇위험해 그거어～♡」
 					PRINTFORMW 혀를 찔러 넣을때마다 깜짝깜짝 엉덩이가 튀어오르고 있었다
 				;복종, 예속
@@ -540,7 +560,7 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 ;5,애널애무
 ;-------------------------------------------------
-;애널바이브装着中
+;アナルバイブ装着中
 	CASE 5
 		IF TEQUIP:14 == 1
 			CALL TRAIN_MESSAGE
@@ -557,7 +577,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -573,7 +593,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;애널비즈
+		;アナルビーズ
 		ELSEIF EQUIP:15 == 1
 			CALL TRAIN_MESSAGE
 			;처음
@@ -589,7 +609,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -605,7 +625,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;관장기＋플러그
+		;浣腸器＋プラグ
 		ELSEIF TEQUIP:21 == 1
 			CALL TRAIN_MESSAGE
 			;처음
@@ -621,7 +641,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -637,7 +657,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;확장벌룬
+		;拡張バルーン
 		ELSEIF TEQUIP:22 == 1
 			CALL TRAIN_MESSAGE
 			;처음
@@ -653,7 +673,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -669,7 +689,7 @@ SELECTCASE SELECTCOM
 					CFLAG:305 = 2
 				ENDIF
 			ENDIF
-		;애널전극
+		;アナル電極
 		ELSEIF SELECTCOM == 5 && TEQUIP:23 == 1
 			CALL TRAIN_MESSAGE
 			;처음
@@ -685,7 +705,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -718,7 +738,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 
@@ -748,8 +768,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「흐냐아아！ 힛 흐냐아아아♡」
 					PRINTFORMW 아야세는 가슴을 노리개 마냥、주물러지고 희롱당해 느끼고 있는 것 같다
 				;복종, 예속
@@ -781,8 +804,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「핫♡핫♡핫♡핫♡유두…안돼에에에♡」
 					PRINTFORMW 단단해진 끝쪽을 굴리듯이 희롱한다
 				;복종, 예속
@@ -814,8 +840,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:308 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「흐냐아아！ 흣 흐냐아아아♡」
 					PRINTFORMW 아야세는 가슴을 장난감 마냥、주물러지고 희롱당해서 느끼고 있는 것 같다
 				;복종, 예속
@@ -847,8 +876,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「네에ーー엣、여고생 보지 공개에～～～♪」
 					PRINTFORMW 「자아、좀 더 얼굴 가까이해서 관찰해줘어♡」
 					PRINTFORMW 그렇게 말하며 아야세는 성기를 실룩실룩 움직였다
@@ -881,8 +913,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「하아읏…아하앙♡」
 					PRINTFORMW 아야세는 보란듯이 자신의 가슴을 애무하여 기분을 고조시키고 있다
 				;복종, 예속
@@ -914,8 +949,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아앙……싫다아、그렇게 보며언……응후훗♡」
 					PRINTFORMW 「어때에？ 현역 고교생의、생 자위가？♡ 흥분되？ 응？」
 					PRINTFORMW 그렇게 말하며 아야세는 허리를 띄우며、이쪽에 내보이듯이 스스로를 고조시켜 갔다
@@ -952,8 +990,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「흐에아앙……하ーー앙……♡으햐아아아아……」
 					PRINTFORMW 무너뜨릴듯이、혀를 흠뻑 밀어부쳐온다고 생각하려니
 					PRINTFORMW 「응 츄릅 꼴깍 쪼옥 쪽쪽、쥬릅쥬릅쥬릅♡」
@@ -1183,8 +1224,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:322 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「으흐으으으으♡히이、히이이이이이이이잇……！！」
 					PRINTFORMW 「위험해위험해위험햇♡클리 안돼！ 클리 앙돼에에에에♡」
 					PRINTFORMW 아야세는 로터가 주는 자극에 꿈틀꿈들 몸부림치고 있다
@@ -1217,8 +1261,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:323 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아흐하아아아아아아～～아앙…！！아흐윽♡하、하아아앙……！！」
 					PRINTFORMW 「아아、최、최고오옷……、위험……아아、버、버릇될것같아앙♡」
 				;복종, 예속
@@ -1573,8 +1620,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:330 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「흐윽♡하앗♡에아앗♡유두…안돼…유두…♡」
 					PRINTFORMW 지속적으로 주어지는 쾌감에 아야세는 숨을 헐떡이고 있다
 				;복종, 예속
@@ -1648,35 +1698,43 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡ 범죄자의 세계에 어서오새요오～♡」
 						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -1685,25 +1743,29 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「」
+					PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「앗、하윽、앗♡으하아아아아아～앙……！！」
 					PRINTFORMW 엉덩이의 탄력、꾹꾹 조여오는 보지、그리고…
 					PRINTFORMW 「하윽！！ 하아윽！！ 으극、으그응！！ 앗흐으으으으오오오옹！！」
 					PRINTFORMW 기분 좋게 헐떡이는 소리를 즐겼다
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:332 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:332 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:332 = 3
 			;그 이외
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:332 = 2
 			ENDIF
 		ENDIF
@@ -1718,19 +1780,23 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -1738,18 +1804,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -1758,24 +1824,28 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「」
+					PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아아！ 으끄、위、위험……이、이런 거 위험……」
 					PRINTFORMW 「아하윽！？ 으앗、으앗、으아아아아～～～아앙！！」
 					PRINTFORMW 기분좋게 울리는 신음 소리를 들으면서、아야세 고기 구멍을 즐겼다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:333 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:333 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:333 = 3
 			;그 이외
 			ELSEIF CFLAG:333 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:333 = 2
 			ENDIF
 		ENDIF
@@ -1906,8 +1976,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:337 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아항♡뜨거～워♡」
 					PRINTFORMW 「아핫♡ 열심히 허리 움직이고、그렇게 여고생 가슴 기분 좋은거야아？」
 				;복종, 예속
@@ -1936,19 +2009,23 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -1956,18 +2033,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -1976,25 +2053,29 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「」
+					PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「헤헤헷……좋아아、%조사처리(CSTR:일인칭,"가")% 움직일꺼얏♡」
 					PRINTFORMW 구불구불 리드미컬하게 움직이는 엉덩이、벌컥벌컥 출입시키는 감각
 					PRINTFORMW 「자、자、아무때나 싸도 좋아아♡하앗、응、후응、응훗♡」
 					PRINTFORMW 날뛰는 육체과 보지의 감각을 마음껏 즐겼다
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:338 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:338 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:338 = 3
 			;그 이외
 			ELSEIF CFLAG:338 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:338 = 2
 			ENDIF
 		ENDIF
@@ -2048,19 +2129,23 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2068,18 +2153,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2088,25 +2173,29 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「」
+					PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「앗♡하、하앗、으극！ 하아아아아아아아～～～앙……♡」
 					PRINTFORMW 성난 소처럼 거친 콧김을 가까이에서 받으며、천장까지 날려버릴 작정으로 허리를 찔러올린다。
 					PRINTFORMW 「으아앗！！ 으아、으응！？ 으흐으、으흑！！ 쪼 쫌만、기닷、기다렷」
 					PRINTFORMW 비명같은 신음을 BGM 삼아 보지를 즐겼다
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:340 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:340 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:340 = 3
 			;그 이외
 			ELSEIF CFLAG:340 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:340 = 2
 			ENDIF
 		ENDIF
@@ -2121,19 +2210,23 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
@@ -2141,18 +2234,18 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2161,24 +2254,28 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「」
+					PRINTFORMW 「」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「꺄아악！ 흐、흐으으으으으으으으응！？」
 					PRINTFORMW 「뭐、뭣…뭐얏、이거……하아、아윽！ 아아아앙……」
 					PRINTFORMW 들썩들썩 허리를 요동치며、리드미컬하게 소녀는 헐떡인다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:341 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:341 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:341 = 3
 			;그 이외
 			ELSEIF CFLAG:341 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:341 = 2
 			ENDIF
 		ENDIF
@@ -2271,37 +2368,45 @@ SELECTCASE SELECTCOM
 			;처녀
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「해…해냈구나 %CALLNAME:MASTER%♡ 기쁘고 부끄러운 첫합체♡」
 						PRINTFORMW 「범죄자의 세계에 어서오세요오～♡여、여고생 보지 듬～뿍 맛봐줘♡」
 						PRINTFORMW 대사는 산뜻하지만 목소리는 떨린다、그 표정은 아픔을 필사적으로 참고있다。
 						PRINTFORMW 순혈의 증거로 새빨갛게 물든 보지를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			;그 이외
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 「」
+						PRINTFORMW 「」
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「앗、하윽、앗♡으하아아아아아～앙……！！」
 						PRINTFORMW 엉덩이의 탄력、꾹꾹 조여오는 보지、그리고…
 						PRINTFORMW 「하윽！！ 하아윽！！ 으극、으그응！！ 앗흐으으으으오오오옹！！」
 						PRINTFORMW 기분 좋게 헐떡이는 소리를 즐겼다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2312,25 +2417,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-					PRINTFORMW 
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:420 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:420 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
-				PRINTFORMW 
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:420 = 3
 			;그 이외
 			ELSEIF CFLAG:420 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:420 = 2
 			ENDIF
 		ENDIF
@@ -2446,8 +2551,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「이제 안돼에、잘 먹겠습니다～아♪」
 					PRINTFORMW 「응픕응픕응픕응픕……응쥬브브브브븝！」
 					PRINTFORMW 천박한 접착음을 울리며、허리만으로 가려는듯이 격렬하게 움직이고 있다
@@ -2480,8 +2588,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「응훗후우♡ 참을 수 있을까나아？ 이야압！」
 					PRINTFORMW 허리 전체가 롤러에 말려들어가는 것 같다…
 					PRINTFORMW 「자아、자아、부드럽지이～？ 탱탱하고～말랑말랑해서어～、폭신폭신하지이～？」
@@ -2585,8 +2696,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:349 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「응후으～♡♡♡」
 					PRINTFORMW 「여기가 좋아아～♡ 아니면～♡ 줄기 쪽이 느껴져～？」
 					PRINTFORMW 아야세의 집요한 공세가 계속되었다
@@ -3044,8 +3158,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:354 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「으끄으으으으！ 하히이이이이이！」
 					PRINTFORMW 「하아、하아…가、가끔은 이런 것도 자극이 있어서 괜찮네♡」
 					PRINTFORMW 「좀 더 때려줘어♡ 주인니임♡」
@@ -3078,8 +3195,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:355 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「으끄으으으으！ 하히이이이이이！」
 					PRINTFORMW 「하아、하아…가、가끔은 이런 것도 자극이 있어서 괜찮네♡」
 					PRINTFORMW 「좀 더 때려줘어♡ 주인니임♡」
@@ -3630,8 +3750,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:369 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「쮸읍쮸읍쮸읍쮸읍 쯉쯉！！」
 					PRINTFORMW 입에서 추잡한 소리가 새고있다…
 					PRINTFORMW 아야세는 볼을 가득 채우고 %CALLNAME:MASTER%의 얼굴을 만족스럽게 바라보고 있다
@@ -3744,8 +3867,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:374 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「쥬르릅、쥬릇、쥬프픕」
 					PRINTFORMW 아야세의 혀가 %CALLNAME:MASTER%의 항문을 유린한다
 					PRINTFORMW 「엄청나게 반응하고있어어～♡ 좀 더 좀～더 기분 좋～게 해줄께에♡」
@@ -4459,8 +4585,11 @@ SELECTCASE SELECTCOM
 			ELSE
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:395 < 4 || FLAG:7 == 2)
-					;연모, 친애、음란, 창부
-					IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+					;연모, 친애
+					IF TALENT:3 || TALENT:6
+						PRINTFORMW 
+					;음란, 창부
+					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「이예ー이♪  엘민학원 ２학년 아야세예～요♡」
 						PRINTFORMW 「오늘은～ %CALLNAME:MASTER%하고오～、듬～뿍 푸슉푸슉해버리고 있습니다～♡」
 						PRINTFORMW 「아야세의～♪ 치태를～♪ 차ーー분히 즐겨줘♡」
@@ -4487,7 +4616,7 @@ SELECTCASE SELECTCOM
 				CALL TRAIN_MESSAGE
 				;처음
 				IF CFLAG:395 == 1
-					PRINTFORMW 
+					PRINTFORMW 「」
 
 				;2번째 이후
 				ELSE
@@ -4498,7 +4627,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 
 						;음란, 창부
 						ELSEIF TALENT:4 || TALENT:7
-							PRINTFORMW 
+							PRINTFORMW 「」
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
 							PRINTFORMW 
@@ -4750,8 +4879,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:402 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아이잉 차암♡ 찍을거면 말해줘어」
 					PRINTFORMW 「자아～、재촬영！ 이렇게일까나？ 아니면 이러는 쪽이 에로오～할까나♡」
 					PRINTFORMW 그렇게 말하며 아야세는 차례차례 망설임없는 포즈를 취하기 시작했다
@@ -5294,8 +5426,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:413 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「하아ーーー앙！ 하아아아아아아아아응！！ 가갓♡가버려어어어～～～어엉！！」
 					PRINTFORMW 긁어올리듯이 허리를 찔러넣을 때마다 굉장한 목소리가 울린다
 					PRINTFORMW 「여、여、여고생상대롯、무、무슨 허리놀림하는、얏、버、범죄자아앗・・・♡♡」
@@ -5329,8 +5464,11 @@ SELECTCASE SELECTCOM
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「아히、하히익……！！ 아앗……으윽♡아아、다、닿았어……！！」
 					PRINTFORMW 아야세는 머리를 좌우로 흔들며、머리카락을 흩날리고 있다
 					PRINTFORMW 「으앗！！ 으앗！！ 나아아앗！！ 앗 앗 닿앗 닿았엇♡ 자지가 닿았어어어～～～！！」
@@ -5748,8 +5886,11 @@ IF TFLAG:0 > 0
 	IF SELECTCOM == 140
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
-			;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「으으응흐우우우우우으으으으…！！」
 				PRINTFORMW 「쥬릅 꿀꺾 꿀꺽…」
 				PRINTFORMW 「흐ーーー으응…으푸ーーーー으응……♡♡」
@@ -5772,8 +5913,11 @@ IF TFLAG:0 > 0
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
-			;연모, 친애、음란, 창부
-				IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「으극、읍、으읍ーー！・・・프핫！」
 				PRINTFORMW 「자지밀크 진해에～♡ 신선해～에♡♡」
 				PRINTFORMW 그렇게 말하며 아야세는 입을 열고、보란듯이 혀 위에서 굴리다가、츄릅♪ 하고 상스러운 소리를 내며 정액을 마셨다
@@ -5885,8 +6029,11 @@ IF TFLAG:2 > 0
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
-			;연모, 친애、음란, 창부
-			IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「아하아아아♡최곳♡안쪽이이～이♡♡」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
@@ -5930,7 +6077,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -6077,8 +6224,11 @@ IF TFLAG:29 > 1
 	IF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 4 || FLAG:7 == 2)
-			;연모, 친애、음란, 창부
-			IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「하우읏！？아옷 아오아옷 아오읏、아악 죽어♡죽겠어어～～～어어어엉！！♡♡」
 				PRINTFORMW 강렬한 쾌락에 아야세는 침을 흘리며 몸을 뒤로 젖혔다
 			;복종, 예속
@@ -6097,8 +6247,11 @@ IF TFLAG:29 > 1
 		ENDIF
 	;함락완료
 	ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 4 || FLAG:7 == 2)
-		;연모, 친애、음란, 창부
-		IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+		;연모, 친애
+		IF TALENT:3 || TALENT:6
+			PRINTFORMW 
+		;음란, 창부
+		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 「아ーーーーー앗！！！」
 			PRINTFORMW 강렬한 쾌락에 아야세는 흰자위를 보이며 몸을 뒤로 젖혔다
 		;복종, 예속
@@ -6122,8 +6275,11 @@ ELSEIF TFLAG:29 > 0
 	IF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 4 || FLAG:7 == 2)
-			;연모, 친애、음란, 창부
-			IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「아으으하아아ーーー으윽！！ 가버렷♡♡안으로 가버려어어～～～！！！」
 				PRINTFORMW 아야세는 상스러운 소리를 내며、부들부들 쾌감에 온몸을 떨고있다
 			;복종, 예속
@@ -6142,9 +6298,12 @@ ELSEIF TFLAG:29 > 0
 		ENDIF
 	;함락완료
 	ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 4 || FLAG:7 == 2)
-		;연모, 친애、음란, 창부
-		IF TALENT:3 || TALENT:6 || TALENT:4 || TALENT:7
-			;랜덤で절정변화
+		;연모, 친애
+		IF TALENT:3 || TALENT:6
+			PRINTFORMW 
+		;음란, 창부
+		ELSEIF TALENT:4 || TALENT:7
+			;ランダムで絶頂変化
 			K:1 = RAND:2
 				IF K:1 == 0
 				PRINTFORMW 「하앗、하악、핫……하아아아아아～～～～으윽…」

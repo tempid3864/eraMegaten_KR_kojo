@@ -1,20 +1,23 @@
 ﻿;-------------------------------------------------
-;미츠루구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;2012/10/13		공중변소 플레이시、ＮＴＲ요바이・본방に加筆		ネトリス
-;2011/05/16 	0.290テンプレに従来のものを加筆수정したもの
+;美鶴口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;2020/08/14　　変わった悪魔の売買を参考に戦闘口上に画像表示機能を搭載　マリーちゃんの中の人
+;2012/10/13		公衆便所プレイ時、ＮＴＲ夜這い・本番に加筆		ネトリス
+;2011/05/16 	0.290テンプレに従来のものを加筆修正したもの
 ;
-;2011/10/20 	クロスオーバー조수구상추가　	P1系作成者
-;2011/11/30 	微妙に추가			P1系作成者
-;2012/02/23	テンプレ対応、손가락삽입,매춘	P1系作成者
+;2011/10/20 	クロスオーバー助手口上追加　	P1系作成者
+;2011/11/30 	微妙に追加			P1系作成者
+;2012/02/23	テンプレ対応、指挿入れ,売春	P1系作成者
 ;		
-;	◆사용CFLAGに関して
-;800	クロスオーバー조수구상 1:ON 2:OFF 
-;204	에리조수時
+;	◆使用CFLAGに関して
+;800	クロスオーバー助手口上 1:ON 2:OFF 
+;204	エリー助手時
 ;-------------------------------------------------
-
+;2020/08/15
+;복종 루트をメインに全面改修する
+;普段の口調が高慢なので、どうしても口調が違うと誰手前になる為、改修工事する
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -253,22 +256,66 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			ENDIF
 		ELSE
 			PRINTFORMW 오늘의 %CALLNAME%는 좀 상태가 이상하다。
-			PRINTFORMW 최근 매우 울적해하던 모습이었을 터인데, 묘하게 밝아 보이는 것 같은‥‥？
+			PRINTFORMW 최근 매우 울적해하던 모습이었을 터인데, 묘하게 밝아 보이는 것 같은……？
 			PRINTFORMW 「응? 아아, 조금 생각을 바꿨을 뿐이다」
-			PRINTFORMW 「‥‥그런 것은 아무래도 좋지 않나? %CSTR:일인칭%를 불러낸 것은 그런 이야기를 하기 위해서가 아닐 터다」
+			PRINTFORMW 「……그런 것은 아무래도 좋지 않나? %CSTR:일인칭%를 불러낸 것은 그런 이야기를 하기 위해서가 아닐 터다」
 			PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%에게 아양떨듯 기대고서, 슬며시 입술을 핥았다。
-			PRINTFORMW 「‥‥자, 시작하지 않겠나？」
+			PRINTFORMW 「……자, 시작하지 않겠나？」
 		ENDIF
 	;복종
 	ELSEIF TALENT:5
-		PRINTFORMW 오늘의 %CALLNAME%는 좀 상태가 이상하다。
-		PRINTFORMW 확실히 최근 매우 울적해하던 모습이긴 했지만, 그래도 자발적으로 저자세로 나왔던 적은 없다。
-		PRINTFORMW 그랬을 텐데, 오늘은 %CALLNAME:MASTER%의 얼굴을 본 순간, 깊게 머리를 조아리고서 마중한 것이다。
-		PRINTFORMW 하지만, 정말로 확신이 든 것은, %CALLNAME%의 대사를 듣고 난 후였다。
-		PRINTFORMW 「‥‥기다리고 있었습니다, 그‥‥ 주인님‥‥」
-		PRINTFORMW 그렇게, %CALLNAME%는 함락된 거라고‥‥
+;		PRINTFORMW 오늘의 %CALLNAME%는 좀 상태가 이상하다。
+;		PRINTFORMW 확실히 최근 매우 울적해하던 모습이긴 했지만, 그래도 자발적으로 저자세로 나왔던 적은 없다。
+;		PRINTFORMW 그랬을 텐데, 오늘은 %CALLNAME:MASTER%의 얼굴을 본 순간, 깊게 머리를 조아리고서 마중한 것이다。
+;		PRINTFORMW 하지만, 정말로 확신이 든 것은, %CALLNAME%의 대사를 듣고 난 후였다。
+;		PRINTFORMW 「……기다리고 있었습니다, 그…… 주인님……」
+;		PRINTFORMW 그렇게, %CALLNAME%는 함락된 거라고……
+		
+		;「すまない……解釈違いと言うやつだ」
+		;「裏の顔としての性奴隷。表の顔としての桐条グループの女帝」
+		;「この二つは両立する」
+		;「女帝としての立場のまま、無様にケツ穴を掘られ……メスとして屈するしかない情けない私を、愛してはくれないか？」
+		;
+		;ここまで書いて思うのですが、どうして倒錯的ついてないの？
+		;桐条グループにそんな因習はない（
+		PRINTFORMW 話があると%CALLNAME%は切り出した。
+		PRINTFORMW 「特別課外活動部の面々が私にとっての弱点である事は認めよう」
+		PRINTFORMW 「──だが、知っての通り、私は桐条グループ宗家の娘だ」
+		PRINTFORMW 「私がその気になれば──」
+		PRINTFORMW 「ファントムソサエティを通じて私自身や、特別課外活動部の面々を救う事は……何時でも出来た」
+		PRINTFORMW 「それをしなかった理由はそうだな……」
+		PRINTFORMW 「私は私自身の力でこの苦境を脱する事を自分自身に対するルールとして課していた」
+		PRINTFORMW 「桐条美鶴に敗北は許されない。私は立月光館学園生徒会長。桐条グループ代表。処刑女王」
+		PRINTFORMW 「……私は自分自身の立場と力に驕っていたのかもしれないな」
+		PRINTFORMW %CALLNAME:MASTER%を見つめる%CALLNAME:TARGET%はそう言葉を吐き出すと肩を小さくすくめた。
+		PRINTFORMW 
+		PRINTFORMW 「私は常に支配する側の人間だと思っていたが……」
+		PRINTFORMW 「本当は私を支配し、従属させてくれる相手を求めていたのかもしれないな」
+		PRINTFORMW 「さて、自分が課したルールに従い敗北した今、私は君を主人と仰ぐ」
+		PRINTFORML 
+		PRINTFORMW 「その事に不満はないが……一つだけ私の秘密を聞いてはくれないか」
+		PRINTFORMW 「桐条グループの宗家には忌まわしき因習がある」
+		PRINTFORMW 「宗家においては然るべき年齢を迎えた女子は将来の伴侶のあらゆる要望に応えるべくその術を学ぶ」
+		PRINTFORMW 「平たく言えば──」
+		PRINTFORMW 「父親の性奴隷として飼育されるのだ」
+		PRINTFORMW 「幸か不幸か、私の父は私を奴隷として飼育する前に亡くなった」
+		PRINTFORMW 「だが、私はかつて見た母の姿を忘れる事が出来なかった」
+		PRINTFORMW 「普段は貞淑で優しい母が夜は奴隷として人の尊厳を奪われ、獣の様に振る舞う」
+		PRINTFORMW 「ご主人様として先代を仰ぎ、淫らに犯される姿を私は見てしまった」
+		PRINTFORMW 「唾棄すべき因習は私の代で葬るべきだと思ってはいた」
+		PRINTFORMW 「しかし……血は争えないのだな」
+		PRINTFORMW 「私自身がこうして性奴隷に堕ちて、解ってしまった」
+		PRINTFORMW 「桐条の女には淫蕩の血が流れている」
+		PRINTFORMW 「君にされた数々の行為に対して憤るたび……どうしようもなく私の身体は熱くなってしまう」
+		PRINTFORML 
+		PRINTFORMW 「君は私のご主人様だ」
+		PRINTFORML 
+		;倒錯的を得る。弱味は本当の意味での弱味ではなかったので失う
+		TALENT:도착적 = 1
+		TALENT:약점 = 0
 	ENDIF
 	CFLAG:201 = 5
+	;部員の事はどうでも良くなる
 	RETURN 0
 ENDIF
 
@@ -285,7 +332,7 @@ ELSEIF NO:ASSI == 4557
 	IF CFLAG:203 == 0
 		;함락완료＋함락시 첫 구상이 발생완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
-			;역강간で20回처녀を奪った　새드끼Lv3이상orデバッグ　당신は男以外
+			;역강간で20回처녀を奪った　새드끼Lv3이상orデバッグ　あなたは男以外
 			IF (CFLAG:8 >= 20 && ABL:10 >= 3 || FLAG:DEBUG) && (ASSI > 0 && ABL:ASSI:0 == 1)
 				PRINTFORMW 「명령을, 명령을 내려라, 내 주인이여」
 				PRINTFORMW 「%CSTR:일인칭%는 조교할 수 있다. 미진의 주저함도 없이 한 점의 후회도 없이 악마를, 인간을, 동료를, 당신을 조교하고, 처녀를 빼앗는다」
@@ -311,24 +358,24 @@ ELSEIF NO:ASSI == 4557
 				PRINTFORMW 『저… 그… %CSTR:일인칭%의 의지는 무시되는 건가요？』
 				PRINTFORMW 「안심하는 게 좋을 거다. 애시당초 그런 것은 고려따위 하지 않고 있으니까」
 			ELSE
-				PRINTFORMW 「유카리！　너마저‥‥」
+				PRINTFORMW 「유카리！　너마저……」
 				PRINTFORMW %CALLNAME%는、유카리가 따르는 모습을 보이는 %CALLNAME:MASTER%에게、책망하듯이 시선을 향한다。
-				PRINTFORMW 「%CSTR:일인칭% 한 사람으로 만족하리라고 자만하지 않을 심산이었지만‥‥유카리인가、그런가‥‥」
-				PRINTFORMW ‥‥왠지、등뒤로 차가운 것을 느낀다‥‥
-				PRINTFORMW 『키리조 선배가 그런 얼굴을 하다니‥‥』
+				PRINTFORMW 「%CSTR:일인칭% 한 사람으로 만족하리라고 자만하지 않을 심산이었지만……유카리인가、그런가……」
+				PRINTFORMW ……왠지、등뒤로 차가운 것을 느낀다……
+				PRINTFORMW 『키리조 선배가 그런 얼굴을 하다니……』
 				PRINTFORMW 경악한 것 같은 유카리의 중얼거림에、%CALLNAME%는 핫 하고 자신으로 돌아가、얼버무리듯이 입을 연다。
-				PRINTFORMW 「응‥‥그보다、오늘 %CSTR:일인칭%의 상대를 해 주는 것은 어느쪽일까？」
+				PRINTFORMW 「응……그보다、오늘 %CSTR:일인칭%의 상대를 해 주는 것은 어느쪽일까？」
 			ENDIF
 		;그 이외
 		ELSE
-			PRINTFORMW 「유카리！　너마저‥‥」
+			PRINTFORMW 「유카리！　너마저……」
 			PRINTFORMW %CALLNAME%는、유카리가 따르는 모습을 보이는 %CALLNAME:MASTER%에게 분노를 드러내었다。
 			PRINTFORMW 그 창 끝은 유카리쪽으로도 향한다
 			PRINTFORMW 「유카리！　너는 저 녀석이 어떤 녀석인지 알고 있는 건가！？」
-			PRINTFORMW 『알고 있어요、선배。　‥‥얌전히 따르면 기분 좋게 해주는 사람、이에요』
-			PRINTFORMW 「‥‥유카리、너는‥‥」
+			PRINTFORMW 『알고 있어요、선배。　……얌전히 따르면 기분 좋게 해주는 사람、이에요』
+			PRINTFORMW 「……유카리、너는……」
 			PRINTFORMW 어지간히 쇼크였던 건지、아연한 표정을 띄운 %CALLNAME%를、유카리는 부러운듯이 바라본다。
-			PRINTFORMW 『괜찮아요、선배조차도 곧 알 수 있어요。　‥‥이렇게 굉장한 몸을 하고 있으니까』
+			PRINTFORMW 『괜찮아요、선배조차도 곧 알 수 있어요。　……이렇게 굉장한 몸을 하고 있으니까』
 		ENDIF
 		CFLAG:203 = 1
 	;2번째 이후
@@ -341,12 +388,12 @@ ELSEIF NO:ASSI == 4557
 			PRINTFORMW 두 사람의 기대를 담은 시선이 %마스터를% 꿰뚫는다。
 		;그 이외
 		ELSE
-			PRINTFORMW 「유카리、그만둬！　너는 이런‥‥」
-			PRINTFORMW 『죄송해요、선배‥‥。　그치만、선배도 더 조금만、솔직해져 보시겠어요？』
+			PRINTFORMW 「유카리、그만둬！　너는 이런……」
+			PRINTFORMW 『죄송해요、선배……。　그치만、선배도 더 조금만、솔직해져 보시겠어요？』
 			PRINTFORMW 유카리의 손은、당황한 %CALLNAME%의 몸을 천천히 더듬어 간다。
-			PRINTFORML 「아、안된‥‥다、유카리‥‥」
+			PRINTFORML 「아、안된……다、유카리……」
 			PRINTFORML 그리 말하면서도、%CALLNAME%는 강제로 유카리를 떼어내려고는 하지 않는다。
-			PRINTFORMW ‥‥잠시 후、유카리는 %CALLNAME:MASTER%에게 눈짓을 했다。　준비가 된 것같다‥‥
+			PRINTFORMW ……잠시 후、유카리는 %CALLNAME:MASTER%에게 눈짓을 했다。　준비가 된 것같다……
 		ENDIF
 		CFLAG:203 = 2
 	ENDIF
@@ -364,16 +411,16 @@ ELSEIF CFLAG:800 == 1
 					PRINTFORMW 『어머、오늘의 Guest는 이분인 건가요？』
 					PRINTFORMW 어디서 만난 적이 있는 걸까？ 라고 고개를 갸웃거리는 %CALLNAME:ASSI%에게、%CALLNAME%는 가볍게 머리를 흔들었다。
 					PRINTFORMW 「아니、안면은 없다고 생각한다。　키리조 미츠루다。　잘 부탁한다」
-					PRINTFORMW 『Oh‥‥키리조 그룹의。　성함은 들었어요。전、키리시마 에리코라고 합니다』
+					PRINTFORMW 『Oh……키리조 그룹의。　성함은 들었어요。전、키리시마 에리코라고 합니다』
 					PRINTFORMW 이 두 사람은 외관이 닮은 것은 아니지만、어딘가 서로 통하는 곳이 있는 것 같아서、자기소개를 마친 두 사람은、나란히 %CALLNAME:MASTER% 쪽을 돌아보았다。
-					PRINTFORMW 『‥‥그래서、%CALLNAME:MASTER%、오늘의 취향은？　내가、Mituru를 귀여워해 드리면 좋은 걸까？』
-					PRINTFORMW 「‥‥너는、나와 %CALLNAME:MASTER%의 정사를、그저 보고 있어 라고 말하는 건 어떨까？」
-					PRINTFORMW ‥‥이것은、어딘가 닮은 만큼、라이벌 의식이라도 싹튼 건가‥‥？
+					PRINTFORMW 『……그래서、%CALLNAME:MASTER%、오늘의 취향은？　내가、Mituru를 귀여워해 드리면 좋은 걸까？』
+					PRINTFORMW 「……너는、나와 %CALLNAME:MASTER%의 정사를、그저 보고 있어 라고 말하는 건 어떨까？」
+					PRINTFORMW ……이것은、어딘가 닮은 만큼、라이벌 의식이라도 싹튼 건가……？
 ;에리側でクロスオーバ구상発生
 				ELSE
 					PRINTFORMW 『어머、오늘의 상대는 Mituru인 건가요？』
 					PRINTFORMW %마스터를% 뒤따르듯이 방에 들어온 %CALLNAME:ASSI%는、기쁜듯이 미소지었다。
-					PRINTFORMW 『‥‥지난번과는、입장이 거꾸로 되었네요？　Mituru?』
+					PRINTFORMW 『……지난번과는、입장이 거꾸로 되었네요？　Mituru?』
 					PRINTFORMW 「아무래도、그런 것 같군。　그래서、오늘 나의 상대를 하는 것은 어느 쪽일까？」
 					PRINTFORMW 두 사람은、완전히 같은 타이밍으로 %CALLNAME:MASTER% 쪽을 돌아보았다。
 				ENDIF
@@ -381,7 +428,7 @@ ELSEIF CFLAG:800 == 1
 			ELSE
 				PRINTFORMW 『흠、오늘의 상대는 이 아가씨인가？　대체 몇 사람의 여자를 거느리고 있는 건지』
 				PRINTFORMW 찔리지 않도록 조심해라、라고 빈정거림을 섞어 입을 연 %CALLNAME:ASSI%에게、%CALLNAME%는 놀란 표정을 띄웠다。
-				PRINTFORMW 「‥‥분명히 키리조 그룹의‥‥이런 분까지‥‥」
+				PRINTFORMW 「……분명히 키리조 그룹의……이런 분까지……」
 			ENDIF
 			CFLAG:204 = 1
 		;2번째 이후
@@ -390,7 +437,7 @@ ELSEIF CFLAG:800 == 1
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 				PRINTFORMW %CALLNAME%의 조교때문에 불러낸 %CALLNAME:ASSI%가 시간이 되어도 모습을 나타내지 않는다。
 				IF CFLAG:206 == 3
-					PRINTFORMW 최근、%CALLNAME:ASSI%는 %CALLNAME%와 몹시 사이가 좋아진 것 같으니、먼저 방으로 향했겠지‥‥
+					PRINTFORMW 최근、%CALLNAME:ASSI%는 %CALLNAME%와 몹시 사이가 좋아진 것 같으니、먼저 방으로 향했겠지……
 					PRINTFORMW 생각한 대로、방 안에서는、소녀들이 담소하는 목소리가 흘러나오고 있다。
 				ELSE
 					PRINTFORMW 부득이 혼자서 %CALLNAME%의 방으로 향한 %CALLNAME:MASTER%였지만、방에서는 담소하는 목소리가 들린다。
@@ -399,21 +446,21 @@ ELSEIF CFLAG:800 == 1
 					PRINTFORMW 담소하는 목소리의 주인은、역시 %CALLNAME%와 %CALLNAME:ASSI%였다。
 					PRINTFORMW 『%CALLNAME:MASTER%？　벌써 그런 시간인가』
 					PRINTFORMW 어느 쪽이 끓인 것인지、홍차까지 준비했다。
-					PRINTFORMW 「‥‥어쩐지、Mituru와는 통하는 것을 느낍니다、그래서 말이 맞는다는」
-					PRINTFORMW 『허나、다과회는 여기까지군。이제부터는‥‥』
+					PRINTFORMW 「……어쩐지、Mituru와는 통하는 것을 느낍니다、그래서 말이 맞는다는」
+					PRINTFORMW 『허나、다과회는 여기까지군。이제부터는……』
 					PRINTFORMW 두 사람은 기대하듯이、%CALLNAME:MASTER% 쪽에 시선을 향한다。
 				ELSE
 					PRINTFORMW 담소하는 목소리의 주인은、역시 %CALLNAME%와 %CALLNAME:ASSI%였다。
 					PRINTFORMW 『%CALLNAME:MASTER%？　아니、취미에 대해 이야기를 하고 있던 것 뿐이지만、이렇게 시간이 지났던 건가』
 					PRINTFORMW 「Mituru도 펜싱을 했다고 해서、그 이야기를」
 					PRINTFORMW 『기회가 있다면 시합을 해보고 싶은 생각도 들지만、그건 재차 기회가 있다면、이군』
-					PRINTFORMW 「‥‥그렇네요、모처럼 찾아오신 %마스터를% 내버려두면 도리가 아닌 걸요」
+					PRINTFORMW 「……그렇네요、모처럼 찾아오신 %마스터를% 내버려두면 도리가 아닌 걸요」
 				ENDIF
 			;그 이외
 			ELSE
-				PRINTFORMW 「‥‥제정신인 건가요！？　저런 사람이 하라는 대로 하다니‥‥！」
+				PRINTFORMW 「……제정신인 건가요！？　저런 사람이 하라는 대로 하다니……！」
 				PRINTFORMW 말이 점점 격해지는 %CALLNAME%를 어딘가 가엾다는 듯이 내려다보면서、%CALLNAME:ASSI%는 그녀에게 다가갔다。
-				PRINTFORMW 『‥‥그것은 네가 %마스터를% 받아들이지 않아서 그리 생각하는 것이지』
+				PRINTFORMW 『……그것은 네가 %마스터를% 받아들이지 않아서 그리 생각하는 것이지』
 				PRINTFORMW 『여기서는、아무것도 가장할 필요가 없다。그게 얼마나 고마운 건지、너에게도 가르쳐주려 생각한다만』
 				PRINTFORMW %CALLNAME:ASSI%의 대사에 무엇을 느낀 건지、%CALLNAME%의 저항이 누그러진다。
 				PRINTFORMW 그 틈에、%CALLNAME:ASSI%의 손이、%CALLNAME%를 붙잡았다。
@@ -432,14 +479,14 @@ ENDIF
 @EVENTTRAIN_SECOND_K4549
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
-	PRINTFORMW 「‥‥이제、네 녀석과 말하고 싶지 않아」
+	PRINTFORMW 「……이제、네 녀석과 말하고 싶지 않아」
 	PRINTFORMW %CALLNAME%는 그것만 말하고、입을 다물었다。
-	PRINTFORMW 그 눈에는 적의만이 머물러 있다‥‥
+	PRINTFORMW 그 눈에는 적의만이 머물러 있다……
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 	IF RAND:2 == 0
-		PRINTFORMW 「‥‥이런 짓이 소원인가。　상것이」
+		PRINTFORMW 「……이런 짓이 소원인가。　상것이」
 		PRINTFORMW %CALLNAME%는 멸시하는 것 같은 눈으로 이쪽을 보고 있다。
 	ELSE
 		PRINTFORMW 「네 녀석과 말할 것은 없다」
@@ -449,7 +496,7 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	IF RAND:2 == 0
-		PRINTFORMW 「‥‥이런 짓이 소원인가。　상것이」
+		PRINTFORMW 「……이런 짓이 소원인가。　상것이」
 		PRINTFORMW %CALLNAME%는 멸시하는 것 같은 눈으로 이쪽을 보고 있다
 	ELSE
 		PRINTFORMW 「폐쇄된 공간에서 의지할 것을 빼앗아 대상이 의존케 하다」
@@ -461,7 +508,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 	IF RAND:3 == 0
 		PRINTFORMW 「질리지도 않고 쓸데없는 걸 잘도 계속하는군。마음에 없는 여자를 농락하는 게 그리 즐거운가？」
 		PRINTFORMW %CALLNAME%는 평정을 가장하면서、날카롭게 쏘아붙인다。
-		PRINTFORMW ‥‥허나、%조사처리(CALLNAME:MASTER,"는")%、그녀의 손이 미미하게 떨리고 있는 것을 놓치지 않았다
+		PRINTFORMW ……허나、%조사처리(CALLNAME:MASTER,"는")%、그녀의 손이 미미하게 떨리고 있는 것을 놓치지 않았다
 	ELSEIF RAND:2 == 0
 		PRINTFORMW 「얼마나 몸을 농락해도 시간 낭비다」
 		PRINTFORMW 「마음까지 네 녀석의 생각대로 되지 않아」
@@ -473,7 +520,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
 	IF RAND:2 == 0
-		PRINTFORMW 「네 녀석에게 무엇을 말해도 쓸데없겠지‥‥」
+		PRINTFORMW 「네 녀석에게 무엇을 말해도 쓸데없겠지……」
 		PRINTFORMW 「시간을 낭비하는 것은 좋아하지 않아。　마음대로 해라、그리고 얼른 나가라」
 		PRINTFORMW %CALLNAME%는 그리 말하고 외면한다。
 	ELSE
@@ -498,12 +545,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	IF TALENT:3 || TALENT:6
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 			IF RAND:3 == 0
-				PRINTFORML 「‥‥설마、%CSTR:일인칭%가 이런 걸 생각하게 될 줄이야」
-				PRINTFORML 「‥‥아니、그‥‥또、와줘서、기뻐‥‥」
+				PRINTFORML 「……설마、%CSTR:일인칭%가 이런 걸 생각하게 될 줄이야」
+				PRINTFORML 「……아니、그……또、와줘서、기뻐……」
 				PRINTFORMW 단지 그것만을 말하는데、%CALLNAME%는 새빨갛게 되어 수줍어하고 있다。
 			ELSEIF RAND:2 == 0
-				PRINTFORML 「‥‥설마、%CSTR:일인칭%에게도 이런 감정이 싹틀 줄이야…」
-				PRINTFORML 「‥‥아니、그‥‥또、%CSTR:이인칭%의 얼굴을 볼 수 있어서、기뻐‥‥」
+				PRINTFORML 「……설마、%CSTR:일인칭%에게도 이런 감정이 싹틀 줄이야…」
+				PRINTFORML 「……아니、그……또、%CSTR:이인칭%의 얼굴을 볼 수 있어서、기뻐……」
 				PRINTFORMW 단지 그것만을 말하는데、%CALLNAME%는 새빨갛게 되어 수줍어하고 있다。
 			ELSE
 				PRINTFORML 「아！　……아、아니、아무것도 아니다」
@@ -516,7 +563,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORML 「그……%CSTR:이인칭%는、언제쯤、그、%CSTR:일인칭%의…순결을 바다 주는 걸까라고…그…」
 				;애널광だと추가
 				IF TALENT:76
-					PRINTFORML 「……언제까지나、받아 주지 않으니까、완전히……이쪽이 좋아、져서‥‥」
+					PRINTFORML 「……언제까지나、받아 주지 않으니까、완전히……이쪽이 좋아、져서……」
 					PRINTFORMW 그리 말하고 자신의 엉덩이 구멍을 만진다。
 					PRINTFORML 「읏、그、그러잖아도！………그、그러니까！」
 				ENDIF
@@ -527,8 +574,8 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ELSEIF TALENT:1 
 				PRINTFORMW %CALLNAME%は、무언가를 소근소근 말한다。
 				PRINTFORML 「정말 %CSTR:이인칭%는、%CSTR:일인칭%의 처음을 받아주었다고 생각했는데！！！」
-				PRINTFORML 「‥‥아니、그‥‥와준 것은、기쁘지、만‥‥」
-				PRINTFORML 「……또 %CSTR:이인칭%의 처녀막을 재생해서‥‥」
+				PRINTFORML 「……아니、그……와준 것은、기쁘지、만……」
+				PRINTFORML 「……또 %CSTR:이인칭%의 처녀막을 재생해서……」
 				PRINTFORMW %CALLNAME%는 눈을 감으면서 얼굴을 새빨갛게 해 소리친다。
 				PRINTFORML 「며、몇 번이고、%CSTR:일인칭%의 처녀막을 빼앗어야、%CSTR:이인칭%는 속이 풀리는 거냐！！！」
 				PRINTFORMW 「…………………………%CSTR:이인칭%와의 첫체험을、몇번이고 체험할 수 있는 건、기쁘기도 하지、만……」
@@ -555,21 +602,47 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW %CALLNAME%는 침대에 걸터앉은 채 거만한 태도로 %CALLNAME:MASTER%에게 그리 고한다……
 		ENDIF
 	;복종, 예속
+	;全面的に改修したら台詞とやっていることが矛盾するクソカオスになった。
 	ELSEIF TALENT:5 || TALENT:8
-		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-		K:1 = RAND:3
-		IF K:1 == 0
-			PRINTFORML 「‥‥부르셨습니까？　주인님‥‥」
-			PRINTFORML 방에 들어가자마자、%CALLNAME%는 정중하게 인사를 한다。
-			PRINTFORMW %CALLNAME%에게 그것을 하게 한다는 것만으로 묘한 만족감을 느낄 수 있다‥‥
-		ELSEIF K:1 == 1
-			PRINTFORML 「‥‥주인님‥‥잘 부탁드립니다」
-			PRINTFORML 방에 들어가자마자、%CALLNAME%는 절을 하며 정중하게 인사를 한다。
-			PRINTFORMW 그 당찬 영애에게、이같은 모습을 취하게 하는 것은 기분이 좋다‥‥
+		IF RAND:5 == 0
+;			PRINTFORML 「……부르셨습니까？　주인님……」
+;			PRINTFORML 방에 들어가자마자、%CALLNAME%는 정중하게 인사를 한다。
+			PRINTFORML 「私を顎で使うとはな。こんな事が許されるのは君だけだぞ」
+			PRINTFORML 部屋に入るやいなや、%CALLNAME%は慇懃に礼をしてみせた。
+			PRINTFORMW %CALLNAME%에게 그것을 하게 한다는 것만으로 묘한 만족감을 느낄 수 있다……
+		ELSEIF RAND:4 == 0
+;			PRINTFORML 「……주인님……잘 부탁드립니다」
+;			PRINTFORML 방에 들어가자마자、%CALLNAME%는 절을 하며 정중하게 인사를 한다。
+
+			PRINTFORML 「まったく……いい趣味だよ」
+			PRINTFORML 「私もそれに付き合っているのだから、人の事は言えないのだがな」
+			PRINTFORML 部屋で待っていた%CALLNAME%は%CALLNAME:MASTER%の姿を認めると三つ指揃え床に頭をつけ、深々と礼をした。
+			PRINTFORMW 그 당찬 영애에게 이같은 모습을 취하게 하는 것은 기분이 좋다……
+		ELSEIF RAND:3 == 0
+;			PRINTFORML 「……주인님……기다리고 있었습니다」
+;			PRINTFORML 방에 들어가자마자、%CALLNAME%는 절을 하며 정중하게 인사를 한다。
+
+			PRINTFORML 「君が喜ぶかと思ってな。紅茶を淹れておいた」
+			PRINTFORML 「さて……今日もするのだろう？」
+			PRINTFORML 用意された部屋に向かった%CALLNAME:MASTER%の鼻を淹れたての紅茶の香りがくすぐる。
+			;スカート履いてなかったらどうするんですか！？
+			PRINTFORML スカートの両端を持ち、%CALLNAME%は深々と慇懃に礼をして%CALLNAME:MASTER%を出迎えた。
+			PRINTFORMW 지금의 %CALLNAME%가 이른바 영애 메이드 라는 것일까……
+		;음란分岐を流用しつつ増やす
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「すまない。少し遅れてしまった……」
+			PRINTFORML 桐条グループの会議に出席していた%CALLNAME%は予定の時間に遅れて姿を現した。
+			PRINTFORML %CALLNAME:MASTER%はそんな%CALLNAME%に然るべき謝罪の気持ちを見せろと命じる。
+			PRINTFORML 「くっ……」
+			PRINTFORML 「お許しください……ご主人様」
+			PRINTFORMW %CALLNAME%は桐条グループの令嬢しての仮面を脱ぎすて性奴隷として%CALLNAME:MASTER%に傅いた……
 		ELSE
-			PRINTFORML 「‥‥주인님‥‥기다리고 있었습니다」
-			PRINTFORML 방에 들어가자마자、%CALLNAME%는 절을 하며 정중하게 인사를 한다。
-			PRINTFORMW 지금의 %CALLNAME%는、마치 영애 메이드라 말하는 건가‥‥
+			PRINTFORML 「すまない……スケジュールは調整したのだがな」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%を見ると申し訳なさそうに謝罪した。
+			PRINTFORML ここは事務所の調教部屋ではなくとある最高級ホテルのＶＩＰ専用調教ルーム。
+			PRINTFORML 桐条グループの代表として多忙の日々を送る%CALLNAME%が指定した場所に%CALLNAME:MASTER%は足を運んでいた。
+			PRINTFORML 「さて……ご主人様」
+			PRINTFORMW 「するべき事をするのだろう。私の覚悟は出来ている」
 		ENDIF
 	ENDIF
 	CFLAG:202 = 5
@@ -600,22 +673,22 @@ DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	PRINTFORMW 조교를 끝내고 등을 돌린 %CALLNAME:MASTER%의 등뒤에서 바늘같은 날카로운 시선이 박힌다。
-	PRINTFORMW ‥‥섣불리 틈이라도 보이면、뭘 저지를 지 모르겠다。　
-	PRINTFORMW %CALLNAME%의 눈에는 그런 불안을 품게 하는 것이 있었다‥‥。
+	PRINTFORMW ……섣불리 틈이라도 보이면、뭘 저지를 지 모르겠다。　
+	PRINTFORMW %CALLNAME%의 눈에는 그런 불안을 품게 하는 것이 있었다……。
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	PRINTFORMW 「‥‥이제야、겨우 좋은 느낌이 들었군‥‥」
+	PRINTFORMW 「……이제야、겨우 좋은 느낌이 들었군……」
 	PRINTFORMW %CALLNAME%는 이를 악물면서 중얼거린다。
 	CFLAG:219 = 1
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
 	PRINTFORMW 「계속 같은 짓 뿐、그만하면 질릴 때도 되지 않았는가？」
-	PRINTFORMW ‥‥%CALLNAME%는 한숨을 내쉬며 그리 말하지만、미안하게도 이 정도의 몸에 쉽사리 질린다고는 생각하지 않아‥‥
+	PRINTFORMW ……%CALLNAME%는 한숨을 내쉬며 그리 말하지만、미안하게도 이 정도의 몸에 쉽사리 질린다고는 생각하지 않아……
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORMW 「‥‥오늘은 이걸로 끝、인가‥‥」
+	PRINTFORMW 「……오늘은 이걸로 끝、인가……」
 	PRINTFORMW %CALLNAME%는 심혈을 다 쏟아낸 것 같은 얼굴로、침대에 몸을 쓰러뜨린다。
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
@@ -623,22 +696,43 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORML 「하아、하아、오늘의 %CSTR:이인칭%는、하아、하아、격렬해서……」
-		PRINTFORML 「그게……굉장、했다……♡」
+		PRINTFORML 「그게……굉장、했다……%UNICODE(0x2665)%」
 		PRINTFORMW %CALLNAME%는 사타구니에서 새어나오는 체액을 늘어뜨린 채로、자리에 누워 열락에 떨리는 몸을 침대에 눕혔다。
-			;처녀
-			IF TALENT:0
-				PRINTFORML 「…이대로……%CSTR:일인칭%의 처녀를……빼앗아줘도 된다…」
-				PRINTFORMW 그리 말하고 가랑이를 벌리자、거기에는 영애의 처녀 구멍이 음란하게 헐떡이고 있다。
-			ENDIF
+		;처녀
+		IF TALENT:0
+			PRINTFORML 「…이대로……%CSTR:일인칭%의 처녀를……빼앗아줘도 된다…」
+			PRINTFORMW 그리 말하고 가랑이를 벌리자、거기에는 영애의 처녀 구멍이 음란하게 헐떡이고 있다。
+		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORML 「하아、하아、오늘의 %CSTR:이인칭%는、하아、하아、격렬해서……」
-		PRINTFORML 「그게……굉장、했다……♡」
+		PRINTFORML 「그게……굉장、했다……%UNICODE(0x2665)%」
 		PRINTFORMW 그리 말한 %CALLNAME%는、자신의 사타구니에서 새어나오는 여러가지 체액이 뒤섞인 액체를 손가락으로 떠서、할짝하고 요염하게 핥아마셨다。
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		PRINTFORML 「하아、하아、오늘의 %CSTR:이인칭%는、하아、하아、격렬해서……」
-		PRINTFORML 「그게……굉장、했습니다……♡」
+;		IF RAND:4 == 0
+;			PRINTFORML 「하아、하아、오늘의 %CSTR:이인칭%는、하아、하아、격렬해서……」
+;			PRINTFORML 「그게……굉장、했습니다……%UNICODE(0x2665)%」
+;		ELSEIF RAND:3 == 0
+;			PRINTFORML 「はぁ……はぁ……」
+;			PRINTFORML 「遠慮はいりませんから……どうか私が壊れるまで使ってください。ご主人様%UNICODE(0x2665)%」
+;		ELSEIF RAND:2 == 0
+;			PRINTFORML 「はぁ、はぁ……」
+;			PRINTFORML 「遠慮は不要です……どうか飽きるまで壊してください……」
+;		ELSE
+;			PRINTFORML 「私は……ご主人様の性奴隷です……」
+;			PRINTFORML 「これからも……寵愛をいただければ光栄です……」
+;		ENDIF
+		IF RAND:2 == 0
+			PRINTFORML 「絶倫にもほどがあるだろう……」
+			PRINTFORML 「私も……人の事は言えないがな……」
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「ふぅ……終わりにするのだな」
+			PRINTFORML 「ま、まて……流石にこれ以上は、私と言えど……」
+		ELSE
+			PRINTFORML 「大したものだな……」
+			PRINTFORML 「私も体力には自信がある方だが……己の未熟を思い知らされたよ」
+		ENDIF
 		PRINTFORMW 침대에 누워 M자로 가랑이를 벌린 %CALLNAME%의 엉덩이 아래에는、서로의 체액이 뒤섞인 웅덩이가 생겼다。
 	ENDIF
 	CFLAG:218 = 1
@@ -647,19 +741,19 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		PRINTFORML 「오늘의 용무는 이걸로 끝인가？」
-		PRINTFORML 「그게‥‥시간이 나면、말이지만。　‥‥이제부터는 %CSTR:일인칭%와 어울려주지 않겠는가？」
+		PRINTFORML 「그게……시간이 나면、말이지만。　……이제부터는 %CSTR:일인칭%와 어울려주지 않겠는가？」
 		PRINTFORMW %CALLNAME%는 얼굴을 빨갛게 하면서 침대에 걸터앉아、%CALLNAME:MASTER%에게 곁에 앉길 권한다。
-			;처녀
-			IF TALENT:0
-				PRINTFORML 권유대로 곁에 앉자、
-				PRINTFORML 「오늘도 받아주지 않았군……뭐、후일의 기쁨、인가」
-				PRINTFORMW %CALLNAME%는 조금 안타까운 것 같은、기쁜 것 같은、복잡한 표정을 하고、%CALLNAME:MASTER%의 어깨에 머리를 기대어 온다。
-			ENDIF
+		;처녀
+		IF TALENT:0
+			PRINTFORML 권유대로 곁에 앉자、
+			PRINTFORML 「오늘도 받아주지 않았군……뭐、후일의 기쁨、인가」
+			PRINTFORMW %CALLNAME%는 조금 안타까운 것 같은、기쁜 것 같은、복잡한 표정을 하고、%CALLNAME:MASTER%의 어깨에 머리를 기대어 온다。
+		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		PRINTFORML %CALLNAME%는 확인하는 것처럼 말하지만、어딘가 만족하지 못한 것 같이도 보인다。
 		PRINTFORML %조사처리(CALLNAME:MASTER,"는")% 고개를 끄덕이자、
-		PRINTFORMW 「‥‥그런가。　‥‥그럼、다음은 더 만족하게 해줘。」
+		PRINTFORMW 「……그런가。　……그럼、다음은 더 만족하게 해줘。」
 		;처녀
 		IF TALENT:0
 			PRINTFORML 「오늘도 받아주지 않았군……뭐、후일의 기쁨、인가」
@@ -667,12 +761,44 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		PRINTFORML 「‥‥용무는 끝났습니까？　%CSTR:이인칭%‥‥」
-		PRINTFORMW 「그러면、다음 방문을 기다리겠습니다」
-		;처녀
-		IF TALENT:0
-			PRINTFORML 「오늘도 받아주지 않았네요……후일의 기쁨、이라는 걸로 해두겠습니다」
-			PRINTFORMW %마스터를% 배웅하는 %CALLNAME%는 조금 안타까운 것 같은、기쁜 것 같은、복잡한 표정을 하고 있다。
+		IF RAND:3 == 0
+			IF RAND:2 == 0
+				PRINTFORML 「……용무는 끝났습니까？　%CSTR:이인칭%……」
+				PRINTFORMW 「그러면、다음 방문을 기다리겠습니다」
+			ELSE
+				PRINTFORML 「もうお仕舞いですか　ご主人様」
+				PRINTFORMW 「私は……あなたの性奴隷ですから、何時でもご利用くださいませ」
+			ENDIF
+			;처녀
+			IF TALENT:0
+				PRINTFORML 「오늘도 받아주지 않았네요……후일의 기쁨、이라는 걸로 해두겠습니다」
+				PRINTFORMW %마스터를% 배웅하는 %CALLNAME%는 조금 안타까운 것 같은、기쁜 것 같은、복잡한 표정을 하고 있다。
+			ENDIF
+		ELSEIF RAND:3 == 0
+			PRINTFORML 「ご主人様……」
+			PRINTFORML 「……この後は桐条グループ代表としての仕事が入っている」
+			PRINTFORML %CALLNAME%は名残惜しそうにしながらも、表情を何時もの冷徹な女帝としての仮面へと切り替える。
+			PRINTFORML 「ああ……解っているとも」
+			PRINTFORMW 「この埋め合わせは後でする……恥ずかしい事だが、次は特別に痛めつけてくれるのを期待しているよ」
+		ELSEIF RAND:2 == 0
+			PRINTFORML 傍らに置かれた%CALLNAME%のスマホが鳴った
+			PRINTFORML 「すまない……私に呼び出しだ」
+			PRINTFORML 「そうか。解った」
+			PRINTFORML 電話越しの相手に状況を悟られまいと%CALLNAME%は努めて冷静に何時もの女帝の仮面を被る。
+			PRINTFORML 「……ご主人様。申し訳ありません」
+			PRINTFORML 「この埋め合わせは必ず……此方から連絡する」
+			PRINTFORMW 心底申し訳ないと言った様子で%CALLNAME%は深々と頭を下げ、足早に%CALLNAME:MASTER%の元を去った。
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「ご主人様……」
+			PRINTFORML 「こうしていると女帝である私。性奴隷である私」
+			PRINTFORMW 「どちらがの本当の姿なのか……自分自身でも解らなくなるな」
+		ELSE
+			PRINTFORML 「……私だ」
+			PRINTFORML 「菊乃か。緊急の用向き以外は連絡を寄越すなと言ったはずだが」
+			PRINTFORML 「すまない……ご主人様。今日はここまでの様だ」
+			PRINTFORML %CALLNAME%は桐条グループ宗家令嬢としての顔。社会に対する役割の仮面と言うべきペルソナを被る。
+			PRINTFORML 「ああ……解っている。私は桐条の人間である前に君の性奴隷だとも」
+			PRINTFORMW %CALLNAME%の日常を緩やかに性奴隷としての非日常が侵食している手応えを%CALLNAME:MASTER%は確かに感じていた……
 		ENDIF
 	ENDIF
 	CFLAG:219 = 4
@@ -687,8 +813,77 @@ RETURN 0
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
-;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+;ボールギャグ着用時には口枷口上と地の文を表示して、通常の口上をスキップする
 IF TEQUIP:20 &&  SELECTCOM != 107
+	IF PALAM:쾌Ａ >= PALAMLV:2
+		PRINTFORMW 「%TEXTR("ん゛ぅっ/ん゛ん゛ぅっ/ん゛ぅう゛ぅ/ん゛う゛ぅっ/ん゛っ/ん゛ー/ん゛ぅっ/ん゛ぅう/ん゛うぅ/ん゛ん゛ぅ/ん゛ぅっ/ん゛ん゛っ/ん゛っ/ん゛ー/ん゛ぅっ/ん゛ん゛ぅ")%
+	;苦痛　痛い
+	ELSEIF PALAM:고통 >= PALAMLV:2 || PALAM:고통 >= PALAMLV:3 && ABL:마조끼 >= 3 || PALAM:고통 >= PALAMLV:4 && ABL:마조끼 >= 5
+		IF RAND:2 == 0
+			PRINTFORM 「%TEXTR("んぅぅ/んぅっ/んんぅっ/ん゛ぅっ/ん゛ん゛っ/ん゛ぅーっ/ん゛ん゛ぅ/ん゛ぅっ")%
+		ELSE
+			PRINTFORM 「%TEXTR("んぅっ/んんっ/んぅう/んうぅ/んっ/んー/んぅっ/ん゛ぅう/ん゛うぅ/ん゛ん゛ぅ/ん゛ぅっ/ん゛ん゛っ/ん゛っ/ん゛ー/ん゛ぅっ/ん゛ん゛ぅ")%
+		ENDIF
+	;苦痛　苦しい
+	ELSEIF PALAM:고통 >= PALAMLV:1 || PALAM:고통 >= PALAMLV:2 && ABL:마조끼 >= 3 || PALAM:고통 >= PALAMLV:3 && ABL:마조끼 >= 5
+		IF RAND:2 == 0
+			PRINTFORM 「%TEXTR("んぐっ、/んぐ、んっ…/ん゛んっ、/んむぅっ、/んぅっ/ん゛ぐぅ/んー/ん゛っー/んぅっ/んんっ/んぅう/んうぅ/んっ/んー/んぅっ/ん゛ぅう/ん゛うぅ/ん゛ん゛ぅ/ん゛ぅっ/ん゛ん゛っ/ん゛っ/ん゛ー/ん゛ぅっ/ん゛ん゛ぅ")%%TEXTR("むぐぅっ/んむぅ…っ/ん゛むぅ…っ/んん゛っ…、ぶぐ、ぅ/っ…ぐぶっ/んむ゛っ……っ/ん゛ん…っ")%
+		ELSE
+			PRINTFORM 「%TEXTR("んぐっ/んぐ、んっ/ん゛んっ/んむぅっ/んぅっ/ん゛ぐぅ/んー/ん゛っー/んぅっ/んんっ/んぅう/んうぅ/んっ/んー/んぅっ/ん゛ぅう/ん゛うぅ/ん゛ん゛ぅ/ん゛ぅっ/ん゛ん゛っ/ん゛っ/ん゛ー/ん゛ぅっ/ん゛ん゛ぅ")%
+		ENDIF
+	ELSE
+		IF RAND:2 == 0
+			PRINTFORM 「%TEXTR("んっ、/んっんっ、/んぅっ、/ん゛ぅっ、/んん…っ、/ん゛ん゛…っ、")%%TEXTR("んっ…っ/ん゛っ…っ/んぐ…っ/んぐ…っ/ん゛ぐ…っ/ぐむ……っ/んんぅ゛っ/んぐむ…っ/んっ、…っ/ん゛っ…っ/んっ、んぅ")%
+		ELSE
+			PRINTFORM 「%LOCALS%%TEXTR("んっ/んっんっ/んぅっ/ん゛ぅっ/んん…っ/ん゛ん゛…っ")%
+		ENDIF
+	ENDIF
+	;苦痛　痛い
+	IF PALAM:고통 >= PALAMLV:2 || PALAM:고통 >= PALAMLV:3 && ABL:마조끼 >= 3 || PALAM:고통 >= PALAMLV:4 && ABL:마조끼 >= 5
+		PRINTFORMW ！！」
+	;苦痛　苦しい
+	ELSEIF PALAM:고통 >= PALAMLV:1 || PALAM:고통 >= PALAMLV:2 && ABL:마조끼 >= 3 || PALAM:고통 >= PALAMLV:3 && ABL:마조끼 >= 5
+		PRINTFORMW ！」
+	ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && RAND:2 == 0
+	; && (PALAM:쾌Ｃ >= PALAMLV:3 || PALAM:쾌Ｂ >= PALAMLV:3 || PALAM:쾌Ｖ >= PALAMLV:3 || PALAM:쾌Ａ >= PALAMLV:3)
+		IF PALAM:쾌Ｃ >= PALAMLV:4 || PALAM:쾌Ｂ >= PALAMLV:4 || PALAM:쾌Ｖ >= PALAMLV:4 || PALAM:쾌Ａ >= PALAMLV:4
+			SETCOLOR COLOR("ハートピンク")
+			PRINTFORM %UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%
+			RESETCOLOR
+			PRINTFORMW 」
+		ELSE
+			SETCOLOR COLOR("ハートピンク")
+			PRINTFORM %UNICODE(0x2665)%
+			RESETCOLOR
+			PRINTFORMW 」
+		ENDIF
+	ELSE
+		IF RAND:2 == 0
+			PRINTFORMW ……」
+		ELSE
+			PRINTFORMW 」
+		ENDIF
+	ENDIF
+	IF ABL:마조끼 >= 3
+		IF RAND:3 == 0
+				PRINTFORMW %CALLNAME:TARGET%に嵌められたボールギャグからはとめどなく液体が溢れ堕ちていた……
+		ELSEIF RAND:2 == 0
+			PRINTFORMW %CALLNAME:TARGET%は言葉にならない獣の様な呻きを漏らしながら被虐の悦びに身体を振るわせている……
+		ELSE
+			PRINTFORMW 口をボールギャグで塞がれている%CALLNAME:TARGET%は%CALLNAME:MASTER%から視線を反らしながら荒い息をついて快感を耐え忍んでいる……
+		ENDIF
+	ELSE
+		IF RAND:4 == 0
+			PRINTFORMW 口をボールギャグで塞がれた%CALLNAME:TARGET%は、何とか見せまいと%CALLNAME:MASTER%に気丈に振る舞っている。
+		ELSEIF RAND:3 == 0
+			PRINTFORMW 口をボールギャグで塞がれたまま%CALLNAME:TARGET%は%CALLNAME:MASTER%を睨みつけている。
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 口をボールギャグで塞がれている%CALLNAME:TARGET%は苦しげな吐息を漏らし、声にならない声をあげる。
+		ELSE
+			PRINTFORMW 殺意のこもった視線を%CALLNAME:MASTER%に向けながら苦痛に%CALLNAME:TARGET%は耐えている。
+		ENDIF
+	ENDIF
+	PRINTFORML 
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
@@ -721,7 +916,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:300 == 0
 			PRINTFORMW 「뭐、뭘 하낫！　놔랏！！」
 			PRINTFORMW 저항하는 %CALLNAME%의 입술을 억지로 뺏고、몸에 손을 뻗어나간다。
-			PRINTFORMW 「이‥‥이런 모욕을‥‥！」
+			PRINTFORMW 「이……이런 모욕을……！」
 			CFLAG:300 = 1
 		;2번째 이후
 		ELSE
@@ -735,16 +930,32 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「아아、기분 좋다…」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「하아、기분 좋습니다…」
+;					PRINTFORMW 「하아、기분 좋습니다…」
+					IF RAND:2 == 0
+						PRINTFORML 「ああ、気持ちいい……」
+					ELSE
+						PRINTFORML 「これがご主人様の指使い……」
+					ENDIF
+					PRINTFORMW （そうか……私は父の面影を重ねてみているのか。私は……）
 				ENDIF
 				CFLAG:300 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:300 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「큭、이런 거、참을 수 없…다！！」
+;				PRINTFORMW 「큭、이런 거、참을 수 없…다！！」
+				IF RAND:2 == 0
+					PRINTFORMW 「くっ……好きなだけ触るがいい」
+				ELSE
+					PRINTFORMW 「やめ……くっ……」
+				ENDIF
 				CFLAG:300 = 3
 			;그 이외
 			ELSEIF CFLAG:300 < 2 || FLAG:7 == 2
-				PRINTFORMW 「큭、이런 거…！！」
+;				PRINTFORMW 「큭、이런 거…！！」
+				IF RAND:2 == 0
+					PRINTFORMW 「くっ……死にたい様だな」
+				ELSE
+					PRINTFORMW 「薄汚い手で触るな……」
+				ENDIF
 				CFLAG:300 = 2
 			ENDIF
 		ENDIF
@@ -776,10 +987,30 @@ SELECTCASE SELECTCOM
 					PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%의 혀의 움직임에 맞춰、허리를 눌러 온다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「하우우우우！」
-					PRINTFORML 「하아……%CSTR:일인칭%가、봉사하지 않으면、안되는、데！」
-					PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%의 혀의 움직임에 맞춰、허리를 눌러 온다。
+;					PRINTFORML 「하우우우우！」
+;					PRINTFORML 「하아……%CSTR:일인칭%가、봉사하지 않으면、안되는、데！」
+;					PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%의 혀의 움직임에 맞춰、허리를 눌러 온다。
+					IF ASSI > 0 && ASSIPLAY && (NO:ASSI == 4557)
+						IF RAND:2 == 0
+							PRINTFORML 「上手じゃないか、ゆかり」
+							PRINTFORMW 「君もご主人様に仕込まれたのだな」
+						ELSE
+							PRINTFORML 「君を奴隷にする人間がいるとしたら、それは私以外にはいないと思っていたのだがな」
+							PRINTFORMW 「先を越されてしまったようだ。随分と舌使いが上手になったじゃないか」
+						ENDIF
+					ELSEIF RAND:2 == 0
+						IF RAND:2 == 0
+							PRINTFORML 「んぅ……」
+						ELSE
+							PRINTFORML 「はぁ……」
+						ENDIF
+						PRINTFORML 「……奉仕されるのはやはり良いものだな」
+					ELSE
+						PRINTFORML 「……私ばかり奉仕されるのはフェアではないがな」
+						PRINTFORML 「ご主人様がそうしたいのであれば従う他にないだろう」
+					ENDIF
 				ENDIF
+				PRINTFORMW %CALLNAME%は%CALLNAME:PLAYER%の舌の動きに合わせて、腰を押し付けてくる。
 				CFLAG:301 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:301 < 3 || FLAG:7 == 2)
@@ -845,16 +1076,18 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:303 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「응‥‥아아‥‥%CALLNAME:MASTER%의 손가락이이‥‥들어와섯」
+					PRINTFORMW 「응……아아……%CALLNAME:MASTER%의 손가락이이……들어와섯」
 					PRINTFORMW 쾌락에 몸부림치는 %CALLNAME%에게、짖궃게 어디에 손가락이 들어와 있는 건지 물어 보자、
 					PRINTFORMW 수치에 뺨을 물들이며、토라진 듯이 고개를 돌려 버렸다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW %CALLNAME%의 비순 안에 손가락을 넣어 주자、%CALLNAME%는 스스로 깊게 손가락을 삼키려 하는 듯이 허리를 내밀었다。
-					PRINTFORMW 「크으아‥‥아、더、강하게엥、문질‥‥러어‥‥！」 
+					PRINTFORMW 「크으아……아、더、강하게엥、문질……러어……！」
 				;복종, 예속
+				;처녀分岐取らなくていいんだっけ？
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「ん……あっ、悪くない……」
+					PRINTFORMW 「くぅ……ソコは、あっ、ダメだ。あっ、あああっ！」
 				ENDIF
 				CFLAG:303 = 4
 			;굴복각인Lv3
@@ -881,7 +1114,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:304 == 0
 			PRINTFORMW 침대 위에、엎드리게 해 %CALLNAME%를 누른다。
-			PRINTFORMW 「‥‥무슨 속셈이냐、이런 모습으로‥‥에！？」
+			PRINTFORMW 「……무슨 속셈이냐、이런 모습으로……에！？」
 			PRINTFORMW %CALLNAME%는 %조사처리(CALLNAME:MASTER,"는")% 뭘 하려는 건지 정말로 몰랐던 것 같다。
 			PRINTFORMW 「히야아아아！」
 			PRINTFORMW %CALLNAME%의 당황과 혼란을 즐기면서、그녀의 국문을 혀로 자극한다。
@@ -903,12 +1136,23 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					;尻穴狂い
+					IF TALENT:76
+						PRINTFORML 「はぁ……」
+						IF RAND:2 == 0
+							PRINTFORMW 「舐めるだけなのか……頼む」
+						ELSE
+							PRINTFORMW 「舐められているだけでは……くっ、焦らさないでくれ」
+						ENDIF
+					ELSE
+						PRINTFORML 「ご主人様……私は……」
+						PRINTFORMW 「……アナルを舐められて……ああ、感じているとも」
+					ENDIF
 				ENDIF
 				CFLAG:304 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「‥‥크、우、우아아아아‥‥！」
+				PRINTFORMW 「……크、우、우아아아아……！」
 				PRINTFORMW 항문의 주름을 정성껏 혀로 덧그려 주자、국화는 기쁜듯이 벌름거리며 반응한다。
 				PRINTFORMW 「히야아아아아！거、거짓말이다아、거、거기는、배설기관으로……배설기관인데에！」
 				PRINTFORMW 당찬 영애도、가까스로 배덕의 쾌락을 느끼기 시작한 것 같다。
@@ -927,8 +1171,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:305 == 0
-			PRINTFORMW 「엣、거기는‥‥읏」
-			PRINTFORMW 「그、그만‥‥어디를 만지는 거냣‥‥！」
+			PRINTFORMW 「엣、거기는……읏」
+			PRINTFORMW 「그、그만……어디를 만지는 거냣……！」
 			PRINTFORMW %CALLNAME%는 처음에、뭘 하려는 건지 몰랐던 것 같아、대응이 늦었지만
 			PRINTFORMW 잠깐의 틈을 두고、전력으로 저항하기 시작한다
 			CFLAG:305 = 1
@@ -942,8 +1186,8 @@ SELECTCASE SELECTCOM
 						PRINTFORML 엉덩이 구멍으로 삼킨 애널비즈를 넣고 뺄 때마다、%CALLNAME%는 격렬하게 헐떡인다。
 						PRINTFORMW 「아、아、아、아、아、아후으」
 						IF TALENT:76
-							PRINTFORML 「더、더、격렬하게、질……질퍽질퍽…해줘…♡」
-							PRINTFORML 「그、그리고、더、안까지……♡」
+							PRINTFORML 「더、더、격렬하게、질……질퍽질퍽…해줘…%UNICODE(0x2665)%」
+							PRINTFORML 「그、그리고、더、안까지……%UNICODE(0x2665)%」
 							PRINTFORM 매우 주문이 많지만 바라는 대로 해주자、만지지도 않았는데 영애의
 							;처녀
 							IF TALENT:0
@@ -992,12 +1236,31 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					;アナルバイブ
+					IF TEQUIP:14 == 1
+						;前回もアナルバイブ弄り
+						IF PREVCOM == 5
+							PRINTFORML 「や、約束が違う……あっ%UNICODE(0x2665)%」
+							PRINTFORMW 「やめるんだ。私は%TEXTR("アナル/ケツ穴/尻穴")%で感じてなど、あああっ%UNICODE(0x2665)%」
+						ELSE
+							PRINTFORML 「くっ……%TEXTR("解った。言う……言えばソレを止めてくれるのだな/私が言えば、ソレを弄ぶのをやめるのだな")%」
+							PRINTFORMW 「ご主人様……私は%TEXTR("アナル/ケツ穴/尻穴")%%TEXTR("で感じてしまう……変態マゾ令嬢です/にアナルバイブを咥え込んで……感じてしまう、令嬢奴隷です")%
+						ENDIF
+					;アナルビーズ
+					ELSEIF TEQUIP:15 == 1
+						PRINTFORML 「はぁ……はぁ……」
+						PRINTFORMW 「%TEXTR("出したり入れたり/抜き差しして")%……私を弄ぶなどと……」
+						PRINTFORMW （この感覚……まるで……ダメだ。考えるな……）
+					;アナル電極
+					ELSEIF TEQUIP:23 == 1
+						PRINTFORML 「くっ……」
+						PRINTFORMW 「今、動かされ……%TEXTR("ぐふっ/があああああっ！")%」
+					ENDIF
 				ENDIF
 				CFLAG:305 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
-				PRINTFORML 「‥‥크、우、우아아아아‥‥！」
+				PRINTFORML 「……크、우、우아아아아……！」
 				PRINTFORM 엉덩이 구멍에 삽입한
 				IF TEQUIP:14 == 1
 					PRINTFORM 애널바이브
@@ -1014,7 +1277,7 @@ SELECTCASE SELECTCOM
 				CFLAG:305 = 3
 			;그 이외
 			ELSEIF CFLAG:305 < 2 || FLAG:7 == 2
-				PRINTFORML 「‥‥크、우、우아아아아‥‥！」
+				PRINTFORML 「……크、우、우아아아아……！」
 				PRINTFORM 엉덩이 구멍에 삽입한
 				IF TEQUIP:14 == 1
 					PRINTFORM 애널바이브
@@ -1039,7 +1302,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:306 == 0
 			PRINTFORMW %CALLNAME%의 가슴은 한눈에 알아볼 수 있을만큼 크게、어필을 하듯이 흔들린다。
 			PRINTFORMW 그 크기를 재듯이 팔을 감싸、손으로 쌍구를 움켜쥔다。
-			PRINTFORMW 「크읏！　놔라、이노‥‥옴」
+			PRINTFORMW 「크읏！　놔라、이노……옴」
 			PRINTFORMW 아픔은 있겠지만、%CALLNAME%는 그것을 겉에 드러내지 않는다。
 			PRINTFORMW 덕분에 사양하지 않고、%CALLNAME%의 유방의 촉감을 만끽할 수 있다。
 			CFLAG:306 = 1
@@ -1049,24 +1312,25 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-				PRINTFORML 「하으읏‥‥」
+				PRINTFORML 「하으읏……」
 				PRINTFORMW 볼륨이 있는 미유를 주무르자、여러가지 표정을 보인다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「%TEXTR("胸を揉まれたぐらいでは……/……この程度の行為。既に慣れている")%」
+					PRINTFORMW %CALLNAME%は表情を崩すまいと懸命に堪えているが、%TEXTR("おっぱい/乳房/美乳")%を揉まれると%CALLNAME%の食いしばった唇からは僅かに%TEXTR("甘い/切なげな")%吐息が漏れ%TEXTR("ていた/だした")%……
 				ENDIF
 				CFLAG:306 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
-				PRINTFORML 「하읏‥‥이런…일……」
+				PRINTFORML 「하읏……이런…일……」
 				PRINTFORMW 볼륨이 있는 미유를 주무르자、%CALLNAME%의 숨은 즉시 거칠어졌다。
 				CFLAG:306 = 3
 			;그 이외
 			ELSEIF CFLAG:306 < 2 || FLAG:7 == 2
-				PRINTFORML 「크읏！　놔라、이 노‥‥옴」
+				PRINTFORML 「크읏！　놔라、이 노……옴」
 				PRINTFORMW 볼륨이 있는 미유는、힘주어 주무르는 데도、그 유린에 저항하는 것 같은 탄력을 보인다。
 				CFLAG:306 = 2
 			ENDIF
@@ -1081,7 +1345,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:307 == 0
 			PRINTFORMW %CALLNAME%의 유방은 큼직하여 살결은 풍만하고 탄력이 있다。
 			PRINTFORMW 그 정점의 엷은 담홍색을 손가락 끝으로 자극한다。
-			PRINTFORMW 「우읏！　그만‥‥둿。　이 이상은‥‥용서‥‥못！」
+			PRINTFORMW 「우읏！　그만……둿。　이 이상은……용서……못！」
 			PRINTFORMW %CALLNAME%는 치욕에 떨면서도、분노로 프라이드를 지탱하고 있는 것 같다。
 			PRINTFORMW 그 표정을 흐트러뜨리는 걸 보고 싶어져서、유방에 천천히 얼굴을 대어、그 끝부분에 혀를 기게 한다。
 			CFLAG:307 = 1
@@ -1097,19 +1361,26 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					IF RAND:2 == 0
+						PRINTFORML 「%TEXTR("死にたい様だな/死刑だ")%、と言いたい所だがな」
+						PRINTFORML 「私に奉仕しようと言う君の気持ちを無碍には出来まい」
+					ELSE
+						PRINTFORML 「%TEXTR("くっ/ふっ")%……」
+						PRINTFORML 「悪くない……もっと続けてくれても構わない」
+					ENDIF
+					PRINTFORMW %CALLNAME%の口調は落ち着いているが、%TEXTR("乳房の先端/乳首")%は硬く充血し、快楽を享受しているのを隠せてはいなかった……
 				ENDIF
 				CFLAG:307 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
 				PRINTFORML %CALLNAME%의 유방의 정점에 있는 엷은 담홍색의 유두를 손가락끝으로 주무른다。
-				PRINTFORML 「우읏！　그‥‥만‥‥둿！우、우아아아！」
+				PRINTFORML 「우읏！　그……만……둿！우、우아아아！」
 				PRINTFORMW 치욕과 분노에 떨리는 표정을 흐트러뜨리려고、혀로 유두를 살짝 깨물어 주자、돌연 커다란 비명을 지르면서 %CALLNAME%는 몸을 떨었다。
 				CFLAG:307 = 3
 			;그 이외
 			ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
 				PRINTFORML %CALLNAME%의 유방의 정점에 있는 엷은 담홍색을 손가락끝으로 주무른다。
-				PRINTFORML 「우읏！　그만둬‥‥읏‥‥읏！」
+				PRINTFORML 「우읏！　그만둬……읏……읏！」
 				PRINTFORMW 치욕과 분노에 떨리는 표정을 흐트러뜨리는 걸 보고 싶어져서、유방에 천천히 얼굴을 대어、그 끝부분에 혀를 기게 한다。
 				CFLAG:307 = 2
 			ENDIF
@@ -1124,7 +1395,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:308 == 0
 			PRINTFORMW %CALLNAME%를 침대에 누르도록 해서 저항을 봉해、여유있게 가슴을 애무한다。
 			PRINTFORMW 큼직한 유방은 위를 향해 있어도 모양이 무너지지 않고、강한 탄력으로 손가락의 힘에 저항한다。
-			PRINTFORMW 「젠、장‥‥읏！　우으‥‥응읏」
+			PRINTFORMW 「젠、장……읏！　우으……응읏」
 			PRINTFORMW %CALLNAME%는 필사적으로 저항하지만、체중을 실도록 해서 억누르고、가슴을 계속 자극한다。
 			CFLAG:308 = 1
 		;2번째 이후
@@ -1139,16 +1410,24 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「%TEXTR("そうだな……今更、この程度は不快と言うほどではない/慣れたからな、私も。この程度で取り乱したりはしない")%」
+					PRINTFORMW 「最初こそ、私の肌の上を這いまわる手は%TEXTR("虫/シャドウ")%を連想させたが、今では可愛いものだ」
 				ENDIF
 				CFLAG:308 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:308 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORML 「何を言っても無駄なのだろう。ならば……好きにするといい」
+				SIF TEQUIP:유방노출 == 0
+					PRINT 着衣の上から
+				PRINTFORMW %TEXTR("乳房/おっぱい/胸/大きな胸")%を%TEXTR("強く/何度も")%%TEXTR("掴まれた/愛撫された")%%CALLNAME%は%TEXTR("せめて声は漏らすまいと唇を噛みしめている/眉根を寄せて屈辱に耐えている")%……
 				CFLAG:308 = 3
 			;그 이외
 			ELSEIF CFLAG:308 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORML 「くっ！　その手を離せ……っ……ぅ！」
+				;服装の種類分岐取るのが面倒なので
+				SIF TEQUIP:유방노출 == 0
+					PRINT 着衣の上から
+				PRINTFORMW %TEXTR("乳房/おっぱい/胸/大きな胸")%を%TEXTR("撫でまわされた/愛撫された")%%CALLNAME%は%TEXTR("怒りに満ちた視線を向けて来た/不快感に眉根を寄せた")%……
 				CFLAG:308 = 2
 			ENDIF
 		ENDIF
@@ -1160,7 +1439,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:309 == 0
-			PRINTFORMW 「크‥‥읏　이、이것으로‥‥된 거겠지、보고 싶으면 마음대로 보면 된다！」
+			PRINTFORMW 「크……읏　이、이것으로……된 거겠지、보고 싶으면 마음대로 보면 된다！」
 			PRINTFORMW %CALLNAME%는 수치에 얼굴을 새빨갛게 하면서、강경함을 가장해 소리친다。
 			PRINTFORMW 허나、그 속마음을 나타내듯이、눈에는 눈물이 맺혀 있다。
 			CFLAG:309 = 1
@@ -1178,16 +1457,23 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「くっ……」
+					PRINTFORML 「%TEXTR("変態マゾ/マゾ豚/令嬢奴隷")%桐条美鶴の……%TEXTR("はしたない/淫乱")%%TEXTR("お○んこ/ヴァギナ")%……」
+					PRINTFORML 「%TEXTR("飽きるまで……御覧ください/じっくりと……子宮の奥までお見せします")%……」
+					PRINTFORMW %CALLNAME%は屈従に顔を歪めながらも、大人しく%CALLNAME:MASTER%に従い秘所を曝け出してみせた。
 				ENDIF
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORML 「解っている……やればいいのだろう」
+				PRINTFORML 「私の……恥ずかしい所をご覧ください……」
+				PRINTFORMW %CALLNAME%は冷たい視線を%CALLNAME:MASTER%に送った後、命じられた通りの口上を述べ秘所を左右に開いて見せた。
 				CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORML 「貴様っ……」
+				PRINTFORML 「良いだろう。%TEXTR("見たければ勝手に見るがいい/この様な辱めが如何に無意味か、解らせてやる")%」
+				PRINTFORMW %CALLNAME%は羞恥に頬を染めながらも、瞳には怒りと強い嫌悪を浮かべ命じられるがままに秘所を開いてみせた……
 				CFLAG:309 = 2
 			ENDIF
 		ENDIF
@@ -1200,12 +1486,12 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:310 == 0
 			PRINTFORMW %CALLNAME:MASTER%의 명령에、%CALLNAME%는 더러운 것을 보는 것 같은 눈으로 되노려본다。
-			PRINTFORML 「‥‥정말 구제하기 어려운 상것이로군。　그런 짓을 %CSTR:일인칭%가 할 지라도‥‥」
+			PRINTFORML 「……정말 구제하기 어려운 상것이로군。　그런 짓을 %CSTR:일인칭%가 할 지라도……」
 			PRINTFORML 뭐라 욕해도 상관없으니、명령에는 따라 줘라。　재차 명령을 되풀이한다。
-			PRINTFORML ‥‥이윽고、%CALLNAME%는 침이라도 뱉을 것같은 얼굴로 풍만한 가슴을 만지기 시작한다。
-			PRINTFORML 「읏‥‥이、이것으로 된 건가！？」
+			PRINTFORML ……이윽고、%CALLNAME%는 침이라도 뱉을 것같은 얼굴로 풍만한 가슴을 만지기 시작한다。
+			PRINTFORML 「읏……이、이것으로 된 건가！？」
 			PRINTFORML 아무래도、하는 법을 잘 모르고 있는 것 같다。저런 손놀림으로는 좀처럼 갈 수 없다。
-			PRINTFORML ‥‥천천히 가르쳐주지 않으면。
+			PRINTFORML ……천천히 가르쳐주지 않으면。
 			CFLAG:310 = 1
 		;2번째 이후
 		ELSE
@@ -1224,11 +1510,15 @@ SELECTCASE SELECTCOM
 				CFLAG:310 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORML 「くっ……」
+				PRINTFORML 「慣れてきてなど……いない」
+				PRINTFORMW %CALLNAME%は否定の言葉を口にしながら、幾分慣れた手つきで自分の豊満な胸を強調する様に弄び、先端を指先でしごきながら甘い吐息を漏らし始めた……
 				CFLAG:310 = 3
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORML 「くっ……」
+				PRINTFORML 「貴様は本当に救いのない下衆だな」
+				PRINTFORMW %CALLNAME%は憎々しげに%CALLNAME:MASTER%を睨みつけると、たどたどしい手つきで豊満な胸を愛撫しはじめた。
 				CFLAG:310 = 2
 			ENDIF
 		ENDIF
@@ -1241,12 +1531,12 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:311 == 0
 			PRINTFORMW %CALLNAME:MASTER%의 명령에、%CALLNAME%는 더러운 것을 보는 것 같은 눈으로 되노려본다。
-			PRINTFORML 「‥‥정말 구제하기 어려운 상것이로군。　그런 짓을 %CSTR:일인칭%가 할 지라도‥‥」
+			PRINTFORML 「……정말 구제하기 어려운 상것이로군。　그런 짓을 %CSTR:일인칭%가 할 지라도……」
 			PRINTFORML 뭐라 욕해도 상관없으니、명령에는 따라 줘라。　재차 명령을 되풀이한다。
-			PRINTFORML ‥‥이윽고、%CALLNAME%는 침이라도 뱉을 것같은 얼굴로 사타구니를 만지기 시작한다。
-			PRINTFORML 「읏‥‥이、이것으로 된 건가！？」
+			PRINTFORML ……이윽고、%CALLNAME%는 침이라도 뱉을 것같은 얼굴로 사타구니를 만지기 시작한다。
+			PRINTFORML 「읏……이、이것으로 된 건가！？」
 			PRINTFORML 아무래도、하는 법을 잘 모르고 있는 것 같다。저런 손놀림으로는 좀처럼 갈 수 없다。
-			PRINTFORML ‥‥천천히 가르쳐주지 않으면。
+			PRINTFORML ……천천히 가르쳐주지 않으면。
 			CFLAG:311 = 1
 		;2번째 이후
 		ELSE
@@ -1268,7 +1558,9 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「私が一人でしている所を見たいのか……」
+					PRINTFORMW 「いいだろう。しっかりと目に焼きつけるといい」
+					PRINTFORMW %CALLNAME%は%CALLNAME:PLAYER%に見せつける様にして、大胆に艶めかしく自慰を見せつけた……
 				ENDIF
 				CFLAG:311 = 4
 			;순종Lv3 이상
@@ -1294,10 +1586,10 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:312 == 0
-			PRINTFORML 「무、무엇을‥‥으읍‥‥읏！」
+			PRINTFORML 「무、무엇을……으읍……읏！」
 			PRINTFORML 무엇을 당할까 하고 긴장하고 있던 %CALLNAME%의 틈을 찔러、그 입술을 빼앗는다。
 			PRINTFORML %CALLNAME%는、상당히 놀란 모양인지 눈을 깜빡거리고 있다。
-			PRINTFORMW 그 사이에 혀를 넣으려고‥‥하마터면 깨물릴 뻔 했다。
+			PRINTFORMW 그 사이에 혀를 넣으려고……하마터면 깨물릴 뻔 했다。
 			CFLAG:312 = 1
 		;2번째 이후
 		ELSE
@@ -1311,20 +1603,22 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「んっ……ちゅっ、ちゅぱ」
+					PRINTFORMW 自ら積極的に舌を伸ばし、逆に%CALLNAME:PLAYER%の口内を蹂躙しようと%CALLNAME%の舌は侵入を試みる。
+					PRINTFORMW 「ふふっ……生半可なやり口では私を屈服させるなど、叶わぬと知るがいい」
 				ENDIF
 				CFLAG:312 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
-				PRINTFORML 「응‥‥읍으‥‥읏」
+				PRINTFORML 「응……읍으……읏」
 				PRINTFORML %CALLNAME%의 틈을 찔러、그 입술을 빼앗는다。
 				PRINTFORMW 굳게 다문 이를 열어주려고 혀로 잇몸을 정성껏 희롱하자、이가 열려 천천히 혀가 뻗어 온다。
-				PRINTFORMW 「하‥‥으읍、으‥‥ㅡ」
+				PRINTFORMW 「하……으읍、으……ㅡ」
 				PRINTFORMW 쭈뼛쭈뼛하고 있는 %CALLNAME%의 혀에、자신의 혀를 얽어주자、%CALLNAME%의 한숨이 점차 달콤하게 바뀌어 갔다。
 				CFLAG:312 = 3
 			;그 이외
 			ELSEIF CFLAG:312 < 2 || FLAG:7 == 2
-				PRINTFORML 「응‥‥읍으‥‥읏！」
+				PRINTFORML 「응……읍으……읏！」
 				PRINTFORML %CALLNAME%의 틈을 찔러、그 입술을 빼앗는다。
 				PRINTFORMW 굳게 다문 이를 열어주려고 혀로 잇몸을 정성껏 희롱했다。
 				CFLAG:312 = 2
@@ -1338,7 +1632,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:313 == 0
-			PRINTFORML 「아무것도‥‥하지 않는 건가？」
+			PRINTFORML 「아무것도……하지 않는 건가？」
 			PRINTFORMW %CALLNAME%는 경계하듯이 이쪽을 보고 있다。
 			CFLAG:313 = 1
 		;2번째 이후
@@ -1347,7 +1641,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:313 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「아무것도‥‥하지 않는 건가？」
+					PRINTFORML 「아무것도……하지 않는 건가？」
 					PRINTFORMW %CALLNAME%는 아쉽다는 듯이 이쪽을 보고 있다。
 					IF TALENT:76
 						PRINTFORMW 잠시 후에、%CALLNAME%는 스스로 자신의 국문을 만지기 시작한다。
@@ -1362,12 +1656,12 @@ SELECTCASE SELECTCOM
 				CFLAG:313 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:313 < 3 || FLAG:7 == 2)
-				PRINTFORML 「아무것도‥‥하지 않는 건가？」
+				PRINTFORML 「아무것도……하지 않는 건가？」
 				PRINTFORMW %CALLNAME%는 경계하듯이 이쪽을 보고 있다。
 				CFLAG:313 = 3
 			;그 이외
 			ELSEIF CFLAG:313 < 2 || FLAG:7 == 2
-				PRINTFORML 「아무것도‥‥하지 않는 건가？」
+				PRINTFORML 「아무것도……하지 않는 건가？」
 				PRINTFORMW %CALLNAME%는 경계하듯이 이쪽을 보고 있다。
 				CFLAG:313 = 2
 			ENDIF
@@ -1380,7 +1674,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:314 == 0
-			PRINTFORML 「‥‥그러고 보면、이렇게 느긋하게 말할 기회는 여태까지 없었군」
+			PRINTFORML 「……그러고 보면、이렇게 느긋하게 말할 기회는 여태까지 없었군」
 			PRINTFORML 「말하고 싶은 것은 여러 개 밀려 있었다。　지금은 느긋하게 말을 듣게 할 거다？」
 			PRINTFORMW %CALLNAME%는 짓궃게 미소지으며 그리 말했다。
 			CFLAG:314 = 1
@@ -1430,14 +1724,14 @@ SELECTCASE SELECTCOM
 			CFLAG:316 = 1
 		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
-			PRINTFORML 「………♡」
+			PRINTFORML 「………%UNICODE(0x2665)%」
 			IF RAND:3 == 0
 				PRINTFORML %CALLNAME%는 얼굴을 빨갛게 하면서、%CALLNAME:MASTER%의 유두를 만지기 시작했다。
-				PRINTFORML 「정말、%CSTR:이인칭%는……♡」
+				PRINTFORML 「정말、%CSTR:이인칭%는……%UNICODE(0x2665)%」
 			ELSEIF RAND:2 == 0
 				PRINTFORML %CALLNAME%는 얼굴을 빨갛게 하면서、%CALLNAME:MASTER%의 아직 시들어 있는 육봉을 만지기 시작했다。
 				PRINTFORML 「이것이、언제나 %CSTR:일인칭%를 괴롭히는 것이군…」
-				PRINTFORML 「오늘은、이것으로 어떤 것을 당해버릴 건가……♡」
+				PRINTFORML 「오늘은、이것으로 어떤 것을 당해버릴 건가……%UNICODE(0x2665)%」
 			ELSE
 				PRINTFORML 「……」
 				PRINTFORML 「%CALLNAME:MASTER%……」
@@ -1447,7 +1741,7 @@ SELECTCASE SELECTCOM
 				PRINTFORML 「불렀을 뿐이라니까…」
 				PRINTFORML 「그렇게 뚫어지게 보지마」
 				PRINTFORML 「%CALLNAME:MASTER%、가…그런 식으로 보면…」
-				PRINTFORML 「……♡」
+				PRINTFORML 「……%UNICODE(0x2665)%」
 			ENDIF
 			PRINTFORMW %CALLNAME%는 기쁜듯이 %CALLNAME:MASTER%의 가슴에 얼굴을 묻었다。
 			CFLAG:316 = 2
@@ -1489,18 +1783,18 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:318 == 0
-			PRINTFORML 「‥‥뭐냐、%CSTR:일인칭%가 이런 일을 할 수 없다든지‥‥」
+			PRINTFORML 「……뭐냐、%CSTR:일인칭%가 이런 일을 할 수 없다든지……」
 			PRINTFORMW 「뭐、특별 장기라고까진 말하지 않겠지만」
 			CFLAG:318 = 1
 		;2번째 이후
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
-			PRINTFORML 「훗‥‥%CSTR:일인칭%가、누군가를 위해 이런 일을 하게 될 줄이야‥‥」
+			PRINTFORML 「훗……%CSTR:일인칭%가、누군가를 위해 이런 일을 하게 될 줄이야……」
 			PRINTFORMW %CALLNAME%는 푸근하게 미소지어、그리 중얼거린다。
 			IF RAND:3 == 0
 				IF ABL:11 == 10 && Exp:23 >= 250
 					PRINTFORML 「흠、%CSTR:일인칭%의 실력도 꽤 좋아졌다고 생각하지만……%CSTR:이인칭%의 입에 맞으면 좋겠다만……」
 					PRINTFORML 맛있다。일류 요리사도 새파랗게 될 거다……젓가락이 멈추지 않는다。
-					PRINTFORMW 「모습을 보아하니、잘 된 것 같은。가、조미료는、%CSTR:이인칭%의……애、애、애정인……거야……♡♡♡♡」
+					PRINTFORMW 「모습을 보아하니、잘 된 것 같은。가、조미료는、%CSTR:이인칭%의……애、애、애정인……거야……%UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%」
 				ELSEIF ABL:11 >= 8
 					PRINTFORML 「흠、%CSTR:일인칭%의 실력도 꽤 좋아졌다고 생각하지만……%CSTR:이인칭%의 입에 맞으면 좋겠다만……」
 					PRINTFORMW 맛있다。일류 요리사도 새파랗게 될 거다……
@@ -1519,7 +1813,7 @@ SELECTCASE SELECTCOM
 				PRINTFORML 「응？　………이것은……그 사람의、속옷、인가？」
 				PRINTFORML 「………페르소나！」
 				PRINTFORMW 세탁하던 중、%CALLNAME:MASTER%의 팬티를 찾아 중얼거리며、%CALLNAME%는 페르소나로 방 근처에 아무도 없는 것을 확인했다。
-				PRINTFORML 「………스～～～～～～～하아아아♡　………스～～～～～～～하아아아♡♡♡♡♡」
+				PRINTFORML 「………스～～～～～～～하아아아%UNICODE(0x2665)%　………스～～～～～～～하아아아%UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%%UNICODE(0x2665)%」
 				PRINTFORMW 놀랍게도、%CALLNAME%는 %CALLNAME:MASTER%의 팬티를 얼굴에 대고 냄새를 맡기 시작했다！
 			ELSE
 				PRINTFORML %CALLNAME%와 같이 방청소를 하기로 했다。
@@ -1537,13 +1831,18 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:319 == 0
-			PRINTFORML 「고교 레벨의 공부따위、이미 끝냈지만‥‥그렇다고 넘길 수도 없는 처지라 말이지」
+			PRINTFORML 「고교 레벨의 공부따위、이미 끝냈지만……그렇다고 넘길 수도 없는 처지라 말이지」
 			PRINTFORML %CALLNAME%는 명백하게 고교 레벨이라고는 생각되지 않는 책을 손에 들면서、그리 설명했다。
-			PRINTFORMW 「뭐、여기서는 소용없는 지식이겠지만‥‥」
+			PRINTFORMW 「뭐、여기서는 소용없는 지식이겠지만……」
 			CFLAG:319 = 1
 		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
-			PRINTFORMW 「%CSTR:일인칭%의 노래따위、대단한 것도 아니지만、%CSTR:이인칭%가 듣고 싶은 거라면…」
+			IF RAND:2 == 0
+				PRINTFORMW 「%CSTR:일인칭%의 노래따위、대단한 것도 아니지만、%CSTR:이인칭%가 듣고 싶은 거라면…」
+			ELSE
+				PRINTFORML 「あまり褒められると少し……私でも照れ臭い」
+				PRINTFORMW 「賛美は聞き飽きているが、だからこそ心からの言葉は響く」
+			ENDIF
 			CFLAG:319 = 2
 		ENDIF
 
@@ -1578,7 +1877,12 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORML 「……言いたい事はそれだけか」
+					PRINTFORML 「だが、確かに私にも非はある──」
+					PRINTFORML 「服従を誓った性奴隷でありながら、傲慢そのものとも言える私の態度が気に入らない」
+					PRINTFORML 「その怒りは尤もだ。ならば、どうするべきか」
+					PRINTFORML 「私の主人ならば解っているだろう？」
+					PRINTFORMW 「言葉は不要だ」
 				ENDIF
 				CFLAG:320 = 4
 			;굴복각인Lv3
@@ -1605,12 +1909,12 @@ SELECTCASE SELECTCOM
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORML 화면 속 자신의 치태를 %CALLNAME%는 얼굴을 붉히며 보고 있다。
-				PRINTFORML 「뭐、뭐어、%CSTR:일인칭%는‥‥%CSTR:이인칭%에게 안길 때、언제나 저런‥‥건가？」
+				PRINTFORML 「뭐、뭐어、%CSTR:일인칭%는……%CSTR:이인칭%에게 안길 때、언제나 저런……건가？」
 				PRINTFORMW 당황한 듯이 물어보면서도 %CALLNAME%는、다리를 머뭇머뭇 움직이고 있다。
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORML 화면 속 자신의 치태를 %CALLNAME%는 뚫어지게 보고 있다。
-				PRINTFORML 「과、과연、저런 식으로 되었던 것인가‥‥。　가、가능하면 이지만‥‥참고하도록 다른 여자의 비디오도 보고 싶군‥‥」
+				PRINTFORML 「과、과연、저런 식으로 되었던 것인가……。　가、가능하면 이지만……참고하도록 다른 여자의 비디오도 보고 싶군……」
 				PRINTFORMW 그런 것을 말하면서도 %CALLNAME%는、한 손을 무의식적으로 국부에 옮기고 있다。
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
@@ -1631,7 +1935,9 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
+				PRINTFORML 「……改めて、自分自身の痴態を再確認させられるのは少し、な」
+				PRINTFORML 「解っているとも……これもまた自分自身であり」
+				PRINTFORMW 「君は……私のご主人様だ」
 			ENDIF
 		CFLAG:321 = 2
 		ENDIF
@@ -1677,10 +1983,10 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:322 == 0
-			PRINTFORML 「‥‥뭐냐、그건？　또 묘한 물건을‥‥」
+			PRINTFORML 「……뭐냐、그건？　또 묘한 물건을……」
 			PRINTFORML %CALLNAME%는 이게 뭔지 모르는 것 같다。
 			PRINTFORML 당장、이게 뭔지 가르쳐 주지。
-			PRINTFORMW 틀림없이、마음에 들어할 것이 틀림없다‥‥
+			PRINTFORMW 틀림없이、마음에 들어할 것이 틀림없다……
 			CFLAG:322 = 1
 		;2번째 이후
 		ELSE
@@ -1718,7 +2024,7 @@ SELECTCASE SELECTCOM
 			PRINTFORML 「마사지기？　그런 물건이 필요할 정도로 약해지진 않았다」
 			PRINTFORML 무리도 아니지만、%CALLNAME%는 이것의 사용법에 생각이 미치지 못한 것 같다。
 			PRINTFORML 그렇다면、여기서는 마사지기의 사용법을 가르쳐주지 않으면 안되겠지。
-			PRINTFORML 「기、기다려、어디에 대는 거냐！？　크、으으으‥‥！」
+			PRINTFORML 「기、기다려、어디에 대는 거냐！？　크、으으으……！」
 			PRINTFORMW 당황한 %CALLNAME%의 비부에 기구를 대고 스위치를 넣자、%CALLNAME%의 몸이 흠칫하고 떨린다。
 			CFLAG:323 = 1
 		;2번째 이후
@@ -1846,17 +2152,17 @@ SELECTCASE SELECTCOM
 			IF TALENT:0
 				PRINTFORML 이것이 뭔지 모르는 것 같은 %CALLNAME%에게、간단하게 설명해 준다。
 				PRINTFORML %CALLNAME%는 얼굴을 빨갛게 하고서、즉시 창백해졌다。
-				PRINTFORML 「기다려‥‥기다려 줘！　그게、%CSTR:일인칭%는 아직‥‥경험이 없는 거다。　그러니까‥‥」
-				PRINTFORML 「부탁해！　부탁하니까‥‥」
+				PRINTFORML 「기다려……기다려 줘！　그게、%CSTR:일인칭%는 아직……경험이 없는 거다。　그러니까……」
+				PRINTFORML 「부탁해！　부탁하니까……」
 				PRINTFORML %CALLNAME%의 애원도 필사의 저항도、%CALLNAME:MASTER%의 의사를 바꿀 수는 없었다。
 				PRINTFORML %CALLNAME%의 처녀지에、굵은 바이브가 메워져 가자、%CALLNAME%는 견디지 못하고 절규한다。
-				PRINTFORMW 「‥‥그만、그만‥‥아、으‥‥아아、크、아아아아앗！！」
+				PRINTFORMW 「……그만、그만……아、으……아아、크、아아아아앗！！」
 			;그 이외
 			ELSE
 				PRINTFORML 이것이 뭔지 모르는 것 같은 %CALLNAME%에게、간단하게 설명해 준다。
-				PRINTFORML 「‥‥남자의、물건 대신이라고？　과연、%CSTR:일인칭%따위 안을 생각도 들지 않는다고 말하는 건가」
-				PRINTFORML ‥‥%CALLNAME%의 자조를 무시하고、비순에 굵은 바이브를 억지로 쑤셔 넣는다
-				PRINTFORMW 「큭、으으‥‥윽‥‥！(구、굵다！　아파‥‥)」
+				PRINTFORML 「……남자의、물건 대신이라고？　과연、%CSTR:일인칭%따위 안을 생각도 들지 않는다고 말하는 건가」
+				PRINTFORML ……%CALLNAME%의 자조를 무시하고、비순에 굵은 바이브를 억지로 쑤셔 넣는다
+				PRINTFORMW 「큭、으으……윽……！(구、굵다！　아파……)」
 			ENDIF
 			CFLAG:326 = 1
 		;2번째 이후
@@ -1901,9 +2207,9 @@ SELECTCASE SELECTCOM
 		IF CFLAG:327 == 0
 			PRINTFORML 눈 앞에 꺼내든 물건이 무엇인지 %CALLNAME%는 몰랐던 것 같다。
 			PRINTFORML 설명해주자、%CALLNAME%는 분노와 놀람이 섞인 것 같은 표정으로 소리친다。
-			PRINTFORML 「‥‥제정신인가？　이런 물건이‥‥들어갈 리 없겠지！？」
+			PRINTFORML 「……제정신인가？　이런 물건이……들어갈 리 없겠지！？」
 			PRINTFORML 그것이 들어가는 거다。　순간적으로 피하려고 하는 %CALLNAME%를 붙잡아、항문에 바이브를 쑤셔넣는다。
-			PRINTFORMW 「‥‥읏、그만‥‥으‥‥읏‥‥！　그、그만、둬‥‥읏！！」
+			PRINTFORMW 「……읏、그만……으……읏……！　그、그만、둬……읏！！」
 			CFLAG:327 = 1
 		;2번째 이후
 		ELSE
@@ -1948,9 +2254,9 @@ SELECTCASE SELECTCOM
 		IF CFLAG:328 == 0
 				PRINTFORML 눈 앞에 꺼내든 물건이 무엇인지 %CALLNAME%는 몰랐던 것 같다。
 				PRINTFORML 설명해주자、%CALLNAME%는 분노와 놀람이 섞인 것 같은 표정으로 소리친다。
-				PRINTFORML 「‥‥제정신인가？　이런 물건이‥‥들어갈 리 없겠지！？」
+				PRINTFORML 「……제정신인가？　이런 물건이……들어갈 리 없겠지！？」
 				PRINTFORML 그것이 들어가는 거다。　순간적으로 피하려고 하는 %CALLNAME%를 붙잡아、항문에 비즈를 쑤셔넣는다。
-				PRINTFORMW 「‥‥읏、그만‥‥으‥‥읏‥‥！　그、그만、둬‥‥읏！！」
+				PRINTFORMW 「……읏、그만……으……읏……！　그、그만、둬……읏！！」
 			CFLAG:328 = 1
 		;2번째 이후
 		ELSE
@@ -2120,30 +2426,30 @@ SELECTCASE SELECTCOM
 					IF TALENT:3 || TALENT:6
 						PRINTFORML %CALLNAME%를 침대에 밀어뜨리고 위에서 누른다。
 						PRINTFORML 이제부터 뭘하려는 건지、알고 있겠지만、%CALLNAME%는 굳이 저항하려고는 하지 않았다。
-						PRINTFORML 「언젠가、이런 날이 온다고는 생각했었다‥‥아니 은근히 기다리고 있었던 건지도 모른다‥‥」
-						PRINTFORML 「‥‥%CSTR:일인칭%를‥‥당신의 여자로 해주세요」
+						PRINTFORML 「언젠가、이런 날이 온다고는 생각했었다……아니 은근히 기다리고 있었던 건지도 모른다……」
+						PRINTFORML 「……%CSTR:일인칭%를……당신의 여자로 해주세요」
 						PRINTFORMW 눈을 돌려、작은 소리로 속삭인 %CALLNAME%의 비부에 흥분한 육봉을 쑤셔넣는다
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORML %CALLNAME%를 침대에 밀어뜨리고 위에서 누른다。
 						PRINTFORML 이제부터 뭘하려는 건지、알고 있겠지만、%CALLNAME%는 굳이 저항하려고는 하지 않았다。
-						PRINTFORML 「언젠가、이런 날이 온다고는 생각했었다‥‥아니 은근히 기다리고 있었던 건지도 모른다‥‥」
-						PRINTFORML 「‥‥%CSTR:일인칭%를‥‥당신의 여자로 해주세요」
+						PRINTFORML 「언젠가、이런 날이 온다고는 생각했었다……아니 은근히 기다리고 있었던 건지도 모른다……」
+						PRINTFORML 「……%CSTR:일인칭%를……당신의 여자로 해주세요」
 						PRINTFORMW 눈을 돌려、작은 소리로 속삭인 %CALLNAME%의 비부에 흥분한 육봉을 쑤셔넣는다
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORML %CALLNAME%를 침대에 밀어뜨리고 위에서 누른다。
 						PRINTFORML 이제부터 뭘하려는 건지、알고 있겠지만、%CALLNAME%는 굳이 저항하려고는 하지 않았다。
-						PRINTFORML 「언젠가、이런 날이 온다고 생각하고 있었습니다‥‥아뇨、오히려 은근히 기다리고 있었을 지도‥‥」
-						PRINTFORML 「‥‥%CSTR:일인칭%를‥‥당신의 여자로 해주세요」
+						PRINTFORML 「언젠가、이런 날이 온다고 생각하고 있었습니다……아뇨、오히려 은근히 기다리고 있었을 지도……」
+						PRINTFORML 「……%CSTR:일인칭%를……당신의 여자로 해주세요」
 						PRINTFORMW 눈을 돌려、작은 소리로 속삭인 %CALLNAME%의 비부에 흥분한 육봉을 쑤셔넣는다
 					ELSE
 						PRINTFORML %CALLNAME%를 침대에 위를 향하게 하여 밀어뜨리고、반사적으로 저항하는 %CALLNAME%를 꼼짝 못하게 한다。
 						PRINTFORML 긴 다리를 벌려、그 사이에 몸을 비집어 넣었을 때 %CALLNAME%에게도 이쪽의 의도가 전해진 거겠지。
 						PRINTFORML 그녀의 표정에 초조와 두려움이 나타난다。
-						PRINTFORML 「크、그만둬‥‥읏！　그런‥‥」
+						PRINTFORML 「크、그만둬……읏！　그런……」
 						PRINTFORML 완전하게 닫힌 비순을 벌려、육봉을 바싹 댄다。
-						PRINTFORML 「기、기다려‥‥싫어、구해줘、아버님‥‥읏！」
+						PRINTFORML 「기、기다려……싫어、구해줘、아버님……읏！」
 						PRINTFORMW %CALLNAME%의 공포와 절망의 표정을 즐기면서、허리를 찔렀다。
 					ENDIF
 				ENDIF
@@ -2154,21 +2460,21 @@ SELECTCASE SELECTCOM
 					IF TALENT:3 || TALENT:6
 						PRINTFORML 「새삼스럽게 말해도 소용없지만、처음할 때에는 보통으로 할 수 없었던 건가？」
 						PRINTFORML %CALLNAME%는 망연한 얼굴로 투덜대지만、그것을 흘려듣고 육봉을 바싹 댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORML 「새삼스럽게 말해도 소용없지만、처음할 때에는 보통으로 할 수 없었던 건가？」
 						PRINTFORML %CALLNAME%는 망연한 얼굴로 투덜대지만、그것을 흘려듣고 육봉을 바싹 댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORML 「새삼스럽게 말해도 소용없지만、처음할 때에는 보통으로 해주지 않을까 해서…」
 						PRINTFORML %CALLNAME%는 망연한 얼굴로 투덜대지만、그것을 흘려듣고 육봉을 바싹 댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					ELSE
-						PRINTFORML 「어떻게든 마음대로 하는 게 좋다‥‥그런 짓으로 %CSTR:일인칭%를 손에 넣을 심산이라면」
+						PRINTFORML 「어떻게든 마음대로 하는 게 좋다……그런 짓으로 %CSTR:일인칭%를 손에 넣을 심산이라면」
 						PRINTFORML 그리 고한 후、%CALLNAME%는 비부를 꿰뚫려서도、소리를 새어나오지 않게 하고 있다。
-						PRINTFORMW ‥‥이것이 그녀의 의지인 거겠지만、자 언제까지 견딜 건가‥‥？
+						PRINTFORMW ……이것이 그녀의 의지인 거겠지만、자 언제까지 견딜 건가……？
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2205,7 +2511,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORM 거기
 					ENDIF
-					PRINTFORML 로 문질러져서、아아、기분 좋은 거야아！♡」
+					PRINTFORML 로 문질러져서、아아、기분 좋은 거야아！%UNICODE(0x2665)%」
 					PRINTFORMW 예전의 밉살스러운 말투는 완전히 사라져、헐떡이면서 암컷의 기쁨을 부르짖는 영애의 모습에 자극되어、허리의 움직임을 더 빠르게 했다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -2235,7 +2541,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORM 거기
 					ENDIF
-					PRINTFORML 로 문질러져서、아아、기분 좋은 거야아！♡」
+					PRINTFORML 로 문질러져서、아아、기분 좋은 거야아！%UNICODE(0x2665)%」
 					PRINTFORMW 예전의 밉살스러운 말투는 완전히 사라져、헐떡이면서 암컷의 기쁨을 부르짖는 영애의 모습에 자극되어、허리의 움직임을 더 빠르게 했다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -2265,7 +2571,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORM 거기
 					ENDIF
-					PRINTFORML 로 문질러져서、아아、기분 좋습니다아！♡」
+					PRINTFORML 로 문질러져서、아아、기분 좋습니다아！%UNICODE(0x2665)%」
 					PRINTFORMW 예전의 밉살스러운 말투는 완전히 사라져、헐떡이면서 암컷의 기쁨을 부르짖는 영애의 모습에 자극되어、허리의 움직임을 더 빠르게 했다。
 				ENDIF
 				CFLAG:332 = 4
@@ -2296,30 +2602,30 @@ SELECTCASE SELECTCOM
 					IF TALENT:3 || TALENT:6
 						PRINTFORML %CALLNAME%를 엎드리게 해 침대에 넘어뜨리고、허리를 끌어올린다。
 						PRINTFORML %CALLNAME%는 짐승 같은 자세에 당황한 것 같지만、굳이 저항하려 하지 않았다。
-						PRINTFORML 「뭣‥‥갑자기、이런 모습‥‥아니 언젠가는 이렇게 된다고는 생각하고 있었지만‥‥」
-						PRINTFORML 「‥‥가능하면、그게‥‥좀 더 상냥하게는 할 수 없는 건가？　이래보여도 %CSTR:일인칭%는‥‥」
+						PRINTFORML 「뭣……갑자기、이런 모습……아니 언젠가는 이렇게 된다고는 생각하고 있었지만……」
+						PRINTFORML 「……가능하면、그게……좀 더 상냥하게는 할 수 없는 건가？　이래보여도 %CSTR:일인칭%는……」
 						PRINTFORMW 눈을 돌려、새빨간 얼굴을 한 %CALLNAME%의 항의를 무시하고、그 비부에 육봉을 쑤셔넣는다。
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORML %CALLNAME%를 엎드리게 해 침대에 넘어뜨리고、허리를 끌어올린다。
 						PRINTFORML %CALLNAME%는 짐승 같은 자세에 당황한 것 같지만、굳이 저항하려 하지 않았다。
-						PRINTFORML 「뭣‥‥갑자기、이런 모습‥‥아니 언젠가는 이렇게 된다고는 생각하고 있었지만‥‥」
-						PRINTFORML 「‥‥가능하면、그게‥‥좀 더 상냥하게는 할 수 없는 건가？　이래보여도 %CSTR:일인칭%는‥‥」
+						PRINTFORML 「뭣……갑자기、이런 모습……아니 언젠가는 이렇게 된다고는 생각하고 있었지만……」
+						PRINTFORML 「……가능하면、그게……좀 더 상냥하게는 할 수 없는 건가？　이래보여도 %CSTR:일인칭%는……」
 						PRINTFORMW 눈을 돌려、새빨간 얼굴을 한 %CALLNAME%의 항의를 무시하고、그 비부에 육봉을 쑤셔넣는다。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORML %CALLNAME%를 엎드리게 해 침대에 넘어뜨리고、허리를 끌어올린다。
 						PRINTFORML %CALLNAME%는 짐승 같은 자세에 당황한 것 같지만、굳이 저항하려 하지 않았다。
-						PRINTFORML 「뭣‥‥갑자기、이런 모습‥‥아니 언젠가는 이렇게 된다고는 생각하고 있었습니다만‥‥」
-						PRINTFORML 「‥‥가능하면、그게‥‥좀 더 상냥하게는 대해주실 수 없습니까？　이래보여도 %CSTR:일인칭%는‥‥」
+						PRINTFORML 「뭣……갑자기、이런 모습……아니 언젠가는 이렇게 된다고는 생각하고 있었습니다만……」
+						PRINTFORML 「……가능하면、그게……좀 더 상냥하게는 대해주실 수 없습니까？　이래보여도 %CSTR:일인칭%는……」
 						PRINTFORMW 눈을 돌려、새빨간 얼굴을 한 %CALLNAME%의 항의를 무시하고、그 비부에 육봉을 쑤셔넣는다。
 					ELSE
 						PRINTFORML %CALLNAME%를 침대에 엎드리게 넘어뜨려、팔을 비틀어올려 꼼짝 못하게 한다。
 						PRINTFORML 고통으로 무심코 신음을 흘리는 %CALLNAME%의 비부에 손을 뻗었다。
 						PRINTFORML 초조와 두려움 때문인지、%CALLNAME%의 저항은 격렬함을 늘리지만、팔을 잡혀 있어 쉽사리 할 수 없는 모습이다。
-						PRINTFORML 「크、놔라‥‥읏！　그만‥‥읏！」
+						PRINTFORML 「크、놔라……읏！　그만……읏！」
 						PRINTFORML 완전히 다문 비순을 벌려、육봉을 뒤에서 바싹 댄다。
-						PRINTFORML 「기、기다려‥‥싫어、구해줘、아버님‥‥읏！」
+						PRINTFORML 「기、기다려……싫어、구해줘、아버님……읏！」
 						PRINTFORMW 허리를 찌르는 것과 동시에、%CALLNAME%의 목에서는 절망의 외침이 울려퍼진다。
 					ENDIF
 				ENDIF
@@ -2328,23 +2634,23 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「뒤에서？　‥‥상관없지만、이 모습은‥‥조금‥‥」
+						PRINTFORML 「뒤에서？　……상관없지만、이 모습은……조금……」
 						PRINTFORML %CALLNAME%는 짐승같아 보이는 자세에 저항감이 있는 모습으로 망연한 얼굴을 하고 있지만、그걸 흘려들으며 육봉을 바싹댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「뒤에서？　‥‥상관없지만、이 모습은‥‥조금‥‥」
+						PRINTFORML 「뒤에서？　……상관없지만、이 모습은……조금……」
 						PRINTFORML %CALLNAME%는 짐승같아 보이는 자세에 저항감이 있는 모습으로 망연한 얼굴을 하고 있지만、그걸 흘려들으며 육봉을 바싹댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「뒤에서？　‥‥상관없지만、이 모습은‥‥조금‥‥」
+						PRINTFORML 「뒤에서？　……상관없지만、이 모습은……조금……」
 						PRINTFORML %CALLNAME%는 짐승같아 보이는 자세에 저항감이 있는 모습으로 망연한 얼굴을 하고 있지만、그걸 흘려들으며 육봉을 바싹댄다。
-						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가‥‥아앗！！」
+						PRINTFORMW 「자、잠깐 기다려、아직 마음의 준비가……아앗！！」
 					ELSE
-						PRINTFORML 「어떻게든 마음대로 하는 게 좋다‥‥그런 짓으로 %CSTR:일인칭%를 손에 넣을 심산이라면」
+						PRINTFORML 「어떻게든 마음대로 하는 게 좋다……그런 짓으로 %CSTR:일인칭%를 손에 넣을 심산이라면」
 						PRINTFORML 그리 고한 후、%CALLNAME%는 비부를 꿰뚫려서도、소리를 새어나오지 않게 하고 있다。
-						PRINTFORMW ‥‥이것이 그녀의 의지인 거겠지만、자 언제까지 견딜 건가‥‥？
+						PRINTFORMW ……이것이 그녀의 의지인 거겠지만、자 언제까지 견딜 건가……？
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2449,7 +2755,7 @@ SELECTCASE SELECTCOM
 							ELSE
 								PRINTFORM 항문
 							ENDIF
-							PRINTFORML …좋닷♡　좋은 거야아♡」
+							PRINTFORML …좋닷%UNICODE(0x2665)%　좋은 거야아%UNICODE(0x2665)%」
 							PRINTFORML %CALLNAME%의 국문은 %CALLNAME:MASTER%의 육봉을 뿌리까지 삼키고、세게 죄여온다
 							PRINTFORMW 양다리를 %CALLNAME:MASTER%의 몸에 휘감어、육봉의 움직임에 맞춰 엉덩이를 들이받듯이 허리를 움직이고 있다。
 						ELSE
@@ -2479,7 +2785,7 @@ SELECTCASE SELECTCOM
 							ENDIF
 							PRINTFORML 은…어떠한…갓？」
 							PRINTFORML 배덕적인 항학에 쾌감을 느끼도록 된 %CALLNAME%는、%CALLNAME:MASTER%의 뺨에 양손을 대어 물어보면서、혀를 내밀어 왔다。
-							PRINTFORML 「하………읍、응、쪼옥……♡………응오！응！응！오！오오오！」
+							PRINTFORML 「하………읍、응、쪼옥……%UNICODE(0x2665)%………응오！응！응！오！오오오！」
 							PRINTFORMW 그 혀를 가볍게 깨물면서、혀를 얽어 입을 빨아들이면서 허리 움직을 격렬하게 해 장벽을 보다 더 문질러 주자、%CALLNAME%는 문질러질 적마다 가벼운 절정을 맞이한 건지、전신을 부들부들 떨고 있다。
 						ENDIF
 					;윤활2Lv미만
@@ -2632,10 +2938,10 @@ SELECTCASE SELECTCOM
 						PRINTFORM \@ RAND:2 == 0 ? 애널 # 엉덩이구멍 \@
 						PRINTFORML 으로 찔러넣었다。
 						IF RAND:2 == 0
-							PRINTFORMW 「아아앗♡　이상해져 버릴 것 같다」
+							PRINTFORMW 「아아앗%UNICODE(0x2665)%　이상해져 버릴 것 같다」
 						ELSE
 							PRINTFORML 「앗아아아앗！！」
-							PRINTFORMW 「더다、더 %CSTR:일인칭%의 애널을 범해 줘♡」
+							PRINTFORMW 「더다、더 %CSTR:일인칭%의 애널을 범해 줘%UNICODE(0x2665)%」
 						ENDIF
 						PRINTFORMW %CALLNAME%는 입에서 혀를 내밀어 하아하아 하고 짐승처럼 거친 숨을 쉬면서 욕심부리듯이 엉덩이의 즐거움에 빠지기 시작했다。
 					ELSE
@@ -2688,7 +2994,7 @@ SELECTCASE SELECTCOM
 						PRINTFORML 로 문질러 주세요……부、부탁、합니다……」
 						PRINTFORML 라고 말하곤、부끄러운 듯이 베개에 얼굴을 파묻어 버렸다。
 						PRINTFORML 소원대로、똥구멍을 육봉으로 후벼주자、짐승처럼 울부짖으며 %CALLNAME%는 기뻐하기 시작했다。
-						PRINTFORMW 「아오오오오오！♡」
+						PRINTFORMW 「아오오오오오！%UNICODE(0x2665)%」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -2829,33 +3135,33 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「‥‥아주 지독한 녀석이다、이래 보여도 %CSTR:일인칭%는‥‥처음이라고？　그걸‥‥」
+						PRINTFORML 「……아주 지독한 녀석이다、이래 보여도 %CSTR:일인칭%는……처음이라고？　그걸……」
 						PRINTFORML %CALLNAME%는 망설이면서도 %CALLNAME:MASTER%의 지시에 따라、그 몸에 걸터앉으면서、얼굴을 새빨갛게 물들여 투덜거린다。
 						PRINTFORML 새삼스럽게 겁먹은 건 아닌 것 같지만、확실히 이런 취급에는 불평 하나쯤 나오는 거겠지。
 						PRINTFORML 허나、아래서 올려다보는 %CALLNAME%의 스타일은 최상이었기 때문에、그 정도는 흘려듣기로 했다。
 						PRINTFORML 단단하게 흥분한 육봉을、%CALLNAME%의 중심에 덧붙인다。
 						PRINTFORML 각오를 한 것처럼、%CALLNAME%는 눈과 입을 다물고、단숨에 허리를 떨어뜨렸다。
-						PRINTFORML 「‥‥읏！！」
+						PRINTFORML 「……읏！！」
 						PRINTFORMW 눈에 눈물을 띄우고 아픔을 견디는 %CALLNAME%를 위로하듯이 입맞춤을 해준다、그리고 나서 천천히 움직이기 시작했다。
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「‥‥아주 지독한 녀석이다、이래 보여도 %CSTR:일인칭%는‥‥처음이라고？　그걸‥‥」
+						PRINTFORML 「……아주 지독한 녀석이다、이래 보여도 %CSTR:일인칭%는……처음이라고？　그걸……」
 						PRINTFORML %CALLNAME%는 망설이면서도 %CALLNAME:MASTER%의 지시에 따라、그 몸에 걸터앉으면서、얼굴을 새빨갛게 물들여 투덜거린다。
 						PRINTFORML 새삼스럽게 겁먹은 건 아닌 것 같지만、확실히 이런 취급에는 불평 하나쯤 나오는 거겠지。
 						PRINTFORML 허나、아래서 올려다보는 %CALLNAME%의 스타일은 최상이었기 때문에、그 정도는 흘려듣기로 했다。
 						PRINTFORML 단단하게 흥분한 육봉을、%CALLNAME%의 중심에 덧붙인다。
 						PRINTFORML 각오를 한 것처럼、%CALLNAME%는 눈과 입을 다물고、단숨에 허리를 떨어뜨렸다。
-						PRINTFORML 「‥‥읏！！」
+						PRINTFORML 「……읏！！」
 						PRINTFORMW 눈에 눈물을 띄우고 아픔을 견디는 %CALLNAME%를 위로하듯이 입맞춤을 해준다、그리고 나서 천천히 움직이기 시작했다。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「‥‥아주 지독한 사람…、이래 보여도 %CSTR:일인칭%는‥‥처음인데‥‥」
+						PRINTFORML 「……아주 지독한 사람…、이래 보여도 %CSTR:일인칭%는……처음인데……」
 						PRINTFORML %CALLNAME%는 망설이면서도 %CALLNAME:MASTER%의 지시에 따라、그 몸에 걸터앉으면서、얼굴을 새빨갛게 물들여 투덜거린다。
 						PRINTFORML 새삼스럽게 겁먹은 건 아닌 것 같지만、확실히 이런 취급에는 불평 하나쯤 나오는 거겠지。
 						PRINTFORML 허나、아래서 올려다보는 %CALLNAME%의 스타일은 최상이었기 때문에、그 정도는 흘려듣기로 했다。
 						PRINTFORML 단단하게 흥분한 육봉을、%CALLNAME%의 중심에 덧붙인다。
 						PRINTFORML 각오를 한 것처럼、%CALLNAME%는 눈과 입을 다물고、단숨에 허리를 떨어뜨렸다。
-						PRINTFORML 「‥‥읏！！」
+						PRINTFORML 「……읏！！」
 						PRINTFORMW 눈에 눈물을 띄우고 아픔을 견디는 %CALLNAME%를 위로하듯이 입맞춤을 해준다、그리고 나서 천천히 움직이기 시작했다。
 					ELSE
 						PRINTFORMW 
@@ -2920,19 +3226,19 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:339 == 0
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-				PRINTFORML 「‥‥아주 지독한 녀석이다‥‥처음인데 스스로 삽입하라니‥‥」
+				PRINTFORML 「……아주 지독한 녀석이다……처음인데 스스로 삽입하라니……」
 				PRINTFORML %CALLNAME%는 망설이면서도 %CALLNAME:MASTER%의 지시에 따라、그 몸에 걸터앉으면서、얼굴을 새빨갛게 물들여 투덜거린다。
 				PRINTFORML 새삼스럽게 겁먹은 건 아닌 것 같지만、확실히 이런 취급에는 불평 하나쯤 나오는 거겠지。
 				PRINTFORML 허나、아래서 올려다보는 %CALLNAME%의 스타일은 최상이었기 때문에、그 정도는 흘려듣기로 했다。
 				PRINTFORML 단단하게 흥분한 육봉을、%CALLNAME%의 국문에 덧붙인다。
 				PRINTFORML 각오를 한 것처럼、%CALLNAME%는 눈과 입을 다물고、단숨에 허리를 떨어뜨렸다。
-				PRINTFORML 「‥‥읏！！」
+				PRINTFORML 「……읏！！」
 				PRINTFORMW 눈에 눈물을 띄우고 아픔을 견디는 %CALLNAME%를 위로하듯이 입맞춤을 해준다、그리고 나서 천천히 움직이기 시작했다。
 			ELSE
 				PRINTFORML 저항하는 %CALLNAME%에게 기승위 자세를 취하게 하는 것은、예상 이상의 어려운 일이었다。
 				PRINTFORML %CALLNAME%의 허리를 안아올려 떠받치고、국문을 우뚝 솟은 육봉 위에 있게 한다。
-				PRINTFORML 「크‥‥으‥‥！」
-				PRINTFORML (아버님‥‥읏！！)
+				PRINTFORML 「크……으……！」
+				PRINTFORML (아버님……읏！！)
 				PRINTFORMW 아픔을 참으면서、분루를 흘리는 %CALLNAME%를 올려다보면서、가차없이 상하운동을 개시했다。
 			ENDIF
 			CFLAG:339 = 1
@@ -3443,7 +3749,7 @@ SELECTCASE SELECTCOM
 			PRINTFORML 펠라티오라는 행위 자체를 모르고 있던 %CALLNAME%에게、무엇을 하면 되는 건지 가르쳐 주자、
 			PRINTFORML 예상대로 새빨갛게 되어 화내기 시작했다。
 			PRINTFORML 강경하게 거부하는 %CALLNAME%의 입에、억지로 육봉을 쑤셔넣는다。
-			PRINTFORMW 기교는 커녕、서비스도 되지 않지만、뭐 이제부터다‥‥
+			PRINTFORMW 기교는 커녕、서비스도 되지 않지만、뭐 이제부터다……
 			CFLAG:345 = 1
 		;2번째 이후
 		ELSE
@@ -3472,7 +3778,13 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					IF RAND:2 == 0
+						PRINTFORML 「んっ、じゅる、じゅるる」
+						PRINTFORMW 「こうされると嬉しいのだろう。繰り返していれば嫌でも覚えるさ」
+					ELSE
+						PRINTFORML 「んっ、んんっ、はぁ……」
+						PRINTFORMW 「この私が口で奉仕する事に抵抗がなくなるとはな。自分自身が一番驚いているよ」
+					ENDIF
 				ENDIF
 				CFLAG:345 = 4
 			;굴복각인Lv3
@@ -3483,7 +3795,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			ELSEIF CFLAG:345 < 2 || FLAG:7 == 2
 				PRINTFORML 강경하게 거부하는 %CALLNAME%의 입에、억지로 육봉을 쑤셔넣는다。
-				PRINTFORML 증오하는 눈초리로 치뜨고 %마스터를% 노려보며 삼킨채로 움직이지 않는다‥‥
+				PRINTFORML 증오하는 눈초리로 치뜨고 %마스터를% 노려보며 삼킨채로 움직이지 않는다……
 				PRINTFORMW 이 당찬 영애에게、더 봉사의 마음을 가르쳐 주지 않으면 안 되겠다。
 				CFLAG:345 = 2
 			ENDIF
@@ -3497,7 +3809,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:346 == 0
 			PRINTFORML %CALLNAME%의 거대한 가슴의 계곡에、육봉을 파묻는다。
-			PRINTFORML 「‥‥정말 제대로 된 짓을 생각하지 않는 녀석이다‥‥！」
+			PRINTFORML 「……정말 제대로 된 짓을 생각하지 않는 녀석이다……！」
 			PRINTFORML 파이즈리는 무척 굴욕적이었던 건지、%CALLNAME%의 말에는 참을 수 없는 분노가 깃들어 있다。
 			CFLAG:346 = 1
 		;2번째 이후
@@ -3517,7 +3829,9 @@ SELECTCASE SELECTCOM
 				CFLAG:346 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:346 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORML 「屈辱だ……それ以上の感想などないさ」
+				PRINTFORML 「君はさぞかし気分が良いのだろうがな」
+				PRINTFORMW %CALLNAME%は憎々しげに吐き捨てながらも胸の間に挟んだ%CALLNAME:PLAYER%の肉棒を丁寧に包み込み奉仕してくれた……
 				CFLAG:346 = 3
 			;그 이외
 			ELSEIF CFLAG:346 < 2 || FLAG:7 == 2
@@ -3536,7 +3850,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:347 == 0
 			PRINTFORML 「……%CSTR:일인칭%의 의견따위 들을 생각도 없는 거겠지？　마음대로 해라」
 			PRINTFORML 삽입도 아닌 행위를 이해할 수 없어、경멸하듯이 내뱉는 %CALLNAME%에게、스마타의 맛을 가르쳐 주기로 한다。
-			PRINTFORML 「‥‥큭‥‥이、것‥‥은읏‥‥！」
+			PRINTFORML 「……큭……이、것……은읏……！」
 			PRINTFORML %CALLNAME%는 허리를 빼 피하려고 하지만、그것을 불허하고 육봉으로 민감한 부분을 계속 자극했다。
 			CFLAG:347 = 1
 		;2번째 이후
@@ -4123,7 +4437,6 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
 				ENDIF
 				CFLAG:354 = 4
 			;굴복각인Lv3
@@ -4391,7 +4704,12 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:361 == 0
-				PRINTFORMW 
+				PRINTFORMW 「悪趣味な事だな……」
+				PRINTFORMW 「今度は私にコレをつけろと言うのか」
+				PRINTFORMW %CALLNAME:TARGET%は%CALLNAME:MASTER%を睨みつけ、不平を露わにする。
+				PRINTFORMW 「貴様はもっと無神経な人間だと思っていたが、私の言葉に心を痛める程度の知能はあったと言う事だな」
+				PRINTFORMW 「良いだろう。望み通りつけてやる」
+				PRINTFORMW 「貴様と無駄な会話をしなくて良いと思うと、私も少しは気が楽だからな」
 				CFLAG:361 = 1
 			;2번째 이후
 			ELSE
@@ -4399,29 +4717,56 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:361 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
+						PRINTFORML 「……君はそう言う趣味がある%TEXTR("か/のだな")%」
+						PRINTFORMW 「私も……%TEXTR("知っているかもしれないが/今更隠してもしょうがない事だが")%、少しは%TEXTR("ＳＭに興味が/調教には興味が/嗜む程度にはＳＭに理解が")%ある」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORML 「今日はそう言うプレイをするのだな」
+						PRINTFORMW 「いいだろう。それでつけるのは私か、君か。どちらでも構わないがな」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
+						IF RAND:4 == 0
+							PRINTFORML 「これが私のカバンに入っていた。だと……」
+							PRINTFORMW 「%TEXTR("その目はなんだ。私ではないぞ……本当に、だ/いや……バカな。私がそんなミスをするはずがない/勘違いするな。これは自分用ではない")%」
+						ELSEIF RAND:3 == 0
+							PRINTFORML 「私は普段は%TEXTR("服従/つけ")%させる側なのだがな……」
+							PRINTFORMW 「複雑な気分だが……その嫌な%TEXTR("気分/訳")%ではないんだ」
+						ELSEIF RAND:2 == 0
+							PRINTFORML 「……ち、違う」
+							PRINTFORMW 「今、息を飲んでしまったのは偶然だ。何も期待しているわけではない……」
+						ELSE
+							PRINTFORML 「ご主人様……」
+							PRINTFORMW 「%TEXTR("何でもない……何でもないと言っているだろう。早くつけないか/つけるのだろう。さっさと済ませるがいい")%」
+						ENDIF
 					ENDIF
 					CFLAG:361 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:361 < 3 || FLAG:7 == 2)
-					PRINTFORMW 
+					IF RAND:2 == 0
+						PRINTFORML 「あまり調子に乗るなよ」
+						PRINTFORMW 「あくまで私は命令に従うだけだ。これは私の意志ではない」
+					ELSE
+						PRINTFORML 「貴様とこれ以上、言葉を交わす必要がないと言うのは存外に気が楽だよ」
+						PRINTFORMW 「さぁ、さっさとつけるがいい」
+					ENDIF
 					CFLAG:361 = 3
 				;그 이외
 				ELSEIF CFLAG:361 < 2 || FLAG:7 == 2
-					PRINTFORMW 
+					IF RAND:2 == 0
+						PRINTFORMW 「貴様はもっと無神経な人間だと思っていたが、私の言葉に心を痛める程度の知能はあったと言う事だな」
+					ELSE
+						PRINTFORML 「良いだろう。望み通りつけてやる」
+						PRINTFORMW 「貴様と会話しなくていいと思うと、私も少しは気が楽だからな」
+					ENDIF
 					CFLAG:361 = 2
 				ENDIF
 			ENDIF
 		ELSE
 			IF CFLAG:361 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
-				PRINTFORMW 
+				PRINTFORML 
+				PRINTFORML 「%TEXTR("はぁ……はぁ/ふぅ")%……」
+				PRINTFORMW 「%TEXTR("満足したか？/終わりでいいんだな？")%……」
 			ENDIF
 		ENDIF
 
@@ -5846,11 +6191,11 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:401 == 0
-				PRINTFORMW 「으음………이것은………제법、쑥쓰러운 것이군♡」
+				PRINTFORMW 「으음………이것은………제법、쑥쓰러운 것이군%UNICODE(0x2665)%」
 				CFLAG:401 = 1
 			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
-				PRINTFORML 「서방님、식사와 목욕、어느 쪽을 하시겠습니까？　아니면、%CSTR:일인칭%으로 하시겠습니까？♡」
+				PRINTFORML 「서방님、식사와 목욕、어느 쪽을 하시겠습니까？　아니면、%CSTR:일인칭%으로 하시겠습니까？%UNICODE(0x2665)%」
 				PRINTFORML 상쾌한 미소로 그리 말한 직후、%CALLNAME%의 얼굴이 새빨갛게 물들어、정수리에서 펑하고 연기가 피어올랐다。
 				PRINTFORML 「～～～～～～………%CSTR:일인칭%라도……그러한 것을 망상하는 적이 있는……거…다…」
 				PRINTFORMW 그리 말하고 고개 숙인 %CALLNAME%를 껴안아 주었다。
@@ -6956,7 +7301,7 @@ IF TFLAG:9 > 1
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:231 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「흠、벌써 싸버린 건가？　‥‥뭐、내가 능숙해진 거라고 해둘까」
+			PRINTFORMW 「흠、벌써 싸버린 건가？　……뭐、내가 능숙해진 거라고 해둘까」
 			PRINTFORMW %CALLNAME%는、희고 탁한 액체를 뱉어낸 육봉을 보며、웃음을 지었다。
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
@@ -7092,12 +7437,12 @@ IF TFLAG:34 > 0
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			PRINTFORML %CALLNAME%의 풍만한 유방에 끼워져、%조사처리(CALLNAME:MASTER,"는")% 희고 탁한 액체를 뱉어냈다
-			PRINTFORML 「음‥‥그게‥‥여기에서 나와버려도 말이지‥‥」
+			PRINTFORML 「음……그게……여기에서 나와버려도 말이지……」
 			PRINTFORMW 가슴 앞을 희게 물들인 %CALLNAME%는 당황한 모습、이지만 행복한 듯이 미소지었다。 
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORML %CALLNAME%는 풍만한 유방을 양손으로 잡아、다양하게 힘을 더하고 %CALLNAME:MASTER%의 음경을 사정으로 이끌었다
-			PRINTFORMW 「‥‥후우、어때？　나의 기술도 매우 좋아졌다고 생각하지 않나？」
+			PRINTFORMW 「……후우、어때？　나의 기술도 매우 좋아졌다고 생각하지 않나？」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
@@ -7107,11 +7452,11 @@ IF TFLAG:34 > 0
 	ELSEIF MARK:2 == 3 && (CFLAG:235 < 3 || FLAG:7 == 2)
 		PRINTFORML 분출한 정액이 %CALLNAME%의 턱과 가슴을 희게 물들여 간다。
 		PRINTFORML %CALLNAME%는 꺼림칙한 듯이 눈썹을 찌푸리며 입을 열었다。
-		PRINTFORMW 「‥‥어때、이걸로 만족했나？」 
+		PRINTFORMW 「……어때、이걸로 만족했나？」 
 		CFLAG:235 = 3
 	;그 이외
 	ELSEIF CFLAG:235 < 2 || FLAG:7 == 2
-		PRINTFORML 「우읏‥‥더러웟！」
+		PRINTFORML 「우읏……더러웟！」
 		PRINTFORMW 가슴에서 목까지 뿌려진 희고 더러운 정액에 、%CALLNAME%는 혐오의 소리를 냈다。 
 		CFLAG:235 = 2
 	ENDIF
@@ -7210,7 +7555,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7313,7 +7658,7 @@ ENDIF
 ;처음 C절정
 ;-------------------------------------------------
 IF NOWEX:0 > 0 && CFLAG:241 == 0
-	PRINTFORMW 「‥‥시、모、몰라！　이런 거、이러언‥‥아、하아、하아‥‥」
+	PRINTFORMW 「……시、모、몰라！　이런 거、이러언……아、하아、하아……」
 	PRINTFORMW 클리토리스로의 자극에 견디지 못하고、%CALLNAME%는 크게 몸을 경직하고、마침내 축 늘어졌다。
 	CFLAG:241 = 1
 ENDIF
@@ -7322,7 +7667,7 @@ ENDIF
 ;처음 V절정
 ;-------------------------------------------------
 IF NOWEX:1 > 0 && CFLAG:242 == 0
-	PRINTFORMW 「‥‥시、지、질이！　이런、이런 것‥‥아、아、아아아아아아！」
+	PRINTFORMW 「……시、지、질이！　이런、이런 것……아、아、아아아아아아！」
 	PRINTFORMW 영애의 질 구멍은 절정의 기쁨에、꾹꾹하고 간헐적인 조임을 보였다。
 	CFLAG:242 = 1
 ENDIF
@@ -7331,7 +7676,7 @@ ENDIF
 ;처음 A절정
 ;-------------------------------------------------
 IF NOWEX:2 > 0 && CFLAG:243 == 0
-		PRINTFORMW 「‥‥크、우、우아아아아‥‥！」
+		PRINTFORMW 「……크、우、우아아아아……！」
 		PRINTFORMW 「히야아아아！거、거짓말이다아、거、거기는、배설기관으로……항문、인、데에！히이이이익！」
 		PRINTFORMW 최후의 일격을 가할 즈음에 격렬하게 국화를 괴롭혀 주자、%CALLNAME%의 아름다운 엉덩이가 크게 뛰어올랐다。
 		;처녀
@@ -7350,7 +7695,7 @@ ENDIF
 ;처음 B절정
 ;-------------------------------------------------
 IF NOWEX:3 > 0 && CFLAG:244 == 0
-	PRINTFORML 「아아、거짓말이다、이런‥‥가슴이、가슴으로오‥‥！！」
+	PRINTFORML 「아아、거짓말이다、이런……가슴이、가슴으로오……！！」
 	PRINTFORMW %CALLNAME%는 커다란 가슴을 흔들면서、절정에 이르렀다。
 	CFLAG:244 = 1
 ENDIF
@@ -7846,27 +8191,27 @@ IF TFLAG:3 > 0
 	CALL PALAM_MESSAGE_C
 	;연모나 친애이면서 주인의 섹스에 의한 처녀상실
 	IF TFLAG:20
-		PRINTFORMW 「크으‥‥처、처음‥‥이라는 것은‥‥아픈、것이로군‥‥」
+		PRINTFORMW 「크으……처、처음……이라는 것은……아픈、것이로군……」
 		PRINTFORMW %CALLNAME%는 아픔을 참으면서 중얼거린다。
-		PRINTFORMW 「‥‥하지만、만족한다。　그게、%CSTR:이인칭%에게‥‥줄 수 있었으니까‥‥」
+		PRINTFORMW 「……하지만、만족한다。　그게、%CSTR:이인칭%에게……줄 수 있었으니까……」
 		PRINTFORMW %CALLNAME%는 눈물을 머금은 채로、미소지어 보였다。
 	;그 이외의 때에 처녀상실
 	ELSE
 		;함락완료
 		IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-			PRINTFORMW 「머지않아 이런 날이 올거라 생각하고 있었지‥‥」
+			PRINTFORMW 「머지않아 이런 날이 올거라 생각하고 있었지……」
 			PRINTFORMW %CALLNAME%는 아픔에 눈썹을 찌푸리면서、중얼거렸다。
 			PRINTFORMW (그렇다、머지않아 정략결혼으로 맺어진 남편과、이렇게 되리라 생각했다)
-			PRINTFORMW (좋아하는 남자에게‥‥같은 꿈은、꾸지 않는다‥‥대단한 것은 아니다‥‥)
+			PRINTFORMW (좋아하는 남자에게……같은 꿈은、꾸지 않는다……대단한 것은 아니다……)
 			PRINTFORMW (그런데、어째서 이렇게 아픈 거냐！？)
 		;굴복각인Lv3
 ;		ELSEIF MARK:2 == 3
 ;			PRINTFORMW 
 		;그 이외
 		ELSE
-			PRINTFORMW 「‥‥읏！ 크、으윽‥‥」
+			PRINTFORMW 「……읏！ 크、으윽……」
 			PRINTFORML 처녀를 빼앗겨도 %CALLNAME%는 당차게 행동하고 있지만、
-			PRINTFORMW 눈가에 감출 수 없는 눈물이 떠올라 있다‥‥
+			PRINTFORMW 눈가에 감출 수 없는 눈물이 떠올라 있다……
 		ENDIF
 	ENDIF
 ENDIF
@@ -7914,7 +8259,7 @@ IF P > PALAMLV:4 && CFLAG:245 == 0
 	;그 이외
 	ELSE
 		PRINTFORMW %CALLNAME%의 마음은 어쩄든、몸은 솔직하게 된 것 같다。
-		PRINTFORMW 분한 듯한 %CALLNAME%의 표정과는 반대로、그녀의 비순은 실을 뽑을 정도로 젖어 있다‥‥
+		PRINTFORMW 분한 듯한 %CALLNAME%의 표정과는 반대로、그녀의 비순은 실을 뽑을 정도로 젖어 있다……
 	ENDIF
 	CFLAG:245 = 1
 ENDIF
@@ -7927,12 +8272,12 @@ IF P > PALAMLV:3 && CFLAG:246 == 0
 	CALL PALAM_MESSAGE_D
 	;미약을 사용한 경우
 	IF SELECTCOM == 181
-		PRINTFORMW (우으、이것이 아까 약의 효과‥‥？　몸이 뜨거워‥‥읏！)
+		PRINTFORMW (우으、이것이 아까 약의 효과……？　몸이 뜨거워……읏！)
 		PRINTFORMW %CALLNAME%는 나약한 말을 내뱉지 않는 것이 고작、몸이 붉게 불살라져 몸부림치고 있다。
 	;그 이외
 	ELSE
 		PRINTFORMW %CALLNAME%의 가랑이를 닦아、젖은 손가락끝을 보인다。
-		PRINTFORMW 「새、생리현상이다！　이런‥‥！」
+		PRINTFORMW 「새、생리현상이다！　이런……！」
 		PRINTFORMW %CALLNAME%는 새빨갛게 되어、얼굴을 돌리면서 항변했다。
 	ENDIF
 	CFLAG:246 = 1
@@ -8035,7 +8380,7 @@ IF TFLAG:22 == 3
 			PRINTFORMW %CALLNAME%는 %조사처리(CALLNAME:MASTER,"는")% 주는 고통에 기쁨을 느끼게 된 것 같다。
 		ENDIF
 	ELSE
-		PRINTFORML 「크으‥‥죽이고 싶다면、냉큼 죽여어！！」
+		PRINTFORML 「크으……죽이고 싶다면、냉큼 죽여어！！」
 		PRINTFORMW %CALLNAME%는 피를 토하듯이 소리쳤다。
 	ENDIF
 ENDIF
@@ -8052,15 +8397,15 @@ IF TFLAG:23 == 3
 			PRINTFORMW 
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「아아아！　머릿속이、새하얗게에‥‥！」
+			PRINTFORMW 「아아아！　머릿속이、새하얗게에……！」
 			PRINTFORMW %CALLNAME%는 창피고 체면이고 아랑곳하지 않고 큰소리로 외쳤다。
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「하아、하아‥‥주인님、더 %CSTR:일인칭%를 미치게 해주세요‥‥」
+			PRINTFORMW 「하아、하아……주인님、더 %CSTR:일인칭%를 미치게 해주세요……」
 			PRINTFORMW %CALLNAME%는 멍한 눈빛으로 %CALLNAME:MASTER%의 얼굴을 보았다。
 		ENDIF
 	ELSE
-		PRINTFORMW 「거、거짓말‥‥ㅣ런、%CSTR:일인칭%가、%CSTR:일인칭%가‥‥쾌락에……빠지는 것따위、있을 리……」
+		PRINTFORMW 「거、거짓말……ㅣ런、%CSTR:일인칭%가、%CSTR:일인칭%가……쾌락에……빠지는 것따위、있을 리……」
 		PRINTFORMW %CALLNAME%는 %조사처리(CALLNAME:MASTER,"는")% 주는 쾌락에 참을 수 없게 된 것 같다。
 	ENDIF
 ENDIF
@@ -8072,16 +8417,16 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 	CALL MARK_MESSAGE_S
 	;쾌락에 의한 굴복
 	IF TFLAG:24 == 13
-		PRINTFORMW 「하앗하앗하‥‥크、으‥‥응」
-		PRINTFORMW 「이、이제‥‥안돼、멈추지‥‥、말아、줘‥‥」
-		PRINTFORMW 거친 한숨을 내쉬면서도 겨우 견디고 있던 %CALLNAME%의 입에서、끝내 굴복의 목소리가 흘러나왔다‥‥
+		PRINTFORMW 「하앗하앗하……크、으……응」
+		PRINTFORMW 「이、이제……안돼、멈추지……、말아、줘……」
+		PRINTFORMW 거친 한숨을 내쉬면서도 겨우 견디고 있던 %CALLNAME%의 입에서、끝내 굴복의 목소리가 흘러나왔다……
 	;공포와 고통에 의한 굴복
 	ELSEIF TFLAG:24 == 23
-		PRINTFORMW 「‥‥그、그만‥‥、둬、주세요‥‥부탁합니다‥‥」
-		PRINTFORMW 처음에는 속삭이는 듯한 목소리로、차츰 명확하게、%CALLNAME%의 입에서 굴복의 목소리가 흘러나왔다‥‥
+		PRINTFORMW 「……그、그만……、둬、주세요……부탁합니다……」
+		PRINTFORMW 처음에는 속삭이는 듯한 목소리로、차츰 명확하게、%CALLNAME%의 입에서 굴복의 목소리가 흘러나왔다……
 	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
-		PRINTFORMW 「아버님‥‥죄송합니다。　%CALLNAME%는‥‥이제‥‥」
+		PRINTFORMW 「아버님……죄송합니다。　%CALLNAME%는……이제……」
 		PRINTFORMW 먼곳을 바라보는 눈으로 중얼거리는 %CALLNAME%에게는、평소의 기개가 전혀 느껴지지 않는다。
 	ENDIF
 ENDIF
@@ -8107,8 +8452,8 @@ IF TFLAG:21 == 3
 			PRINTFORMW %CALLNAME%는 눈에 눈물을 띄우고 %CALLNAME:MASTER%에게 호소해 왔다。
 		ENDIF
 	ELSE
-		PRINTFORMW 「‥‥처형이군‥‥」
-		PRINTFORMW 그것은 속삭이는 듯한 작은 목소리였지만、숨겨진 결의때문에 실제보다 훨씬 크게 들렸다‥‥
+		PRINTFORMW 「……처형이군……」
+		PRINTFORMW 그것은 속삭이는 듯한 작은 목소리였지만、숨겨진 결의때문에 실제보다 훨씬 크게 들렸다……
 	ENDIF
 ENDIF
 
@@ -8235,7 +8580,7 @@ SELECTCASE TFLAG:13
 						ELSE
 							PRINTFORM 항문
 						ENDIF
-						PRINTFORMW 이 욱신거려서…아♡」
+						PRINTFORMW 이 욱신거려서…아%UNICODE(0x2665)%」
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -8256,7 +8601,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「안녕、%CALLNAME:MASTER%…쪽♡」
+					PRINTFORMW 「안녕、%CALLNAME:MASTER%…쪽%UNICODE(0x2665)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -8788,13 +9133,13 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「아아……%CALLNAME:MASTER%、%CALLNAME:MASTER%……더……%CSTR:일인칭%를 사랑해 줘……앗♡」
+					PRINTFORMW 「아아……%CALLNAME:MASTER%、%CALLNAME:MASTER%……더……%CSTR:일인칭%를 사랑해 줘……앗%UNICODE(0x2665)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「아아……%CALLNAME:MASTER%、%CALLNAME:MASTER%……더……세게……앗♡」
+					PRINTFORMW 「아아……%CALLNAME:MASTER%、%CALLNAME:MASTER%……더……세게……앗%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「아아……%CALLNAME:MASTER%님、%CALLNAME:MASTER%님……더……%CSTR:일인칭%를 훈육해 줘……앗♡」
+					PRINTFORMW 「아아……%CALLNAME:MASTER%님、%CALLNAME:MASTER%님……더……%CSTR:일인칭%를 훈육해 줘……앗%UNICODE(0x2665)%」
 				ENDIF
 				CFLAG:269 = 1
 			ENDIF
@@ -8808,13 +9153,13 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「%CALLNAME:MASTER%……♡」
+					PRINTFORMW 「%CALLNAME:MASTER%……%UNICODE(0x2665)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「쪼옥……♡」
+					PRINTFORMW 「쪼옥……%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「%CALLNAME:MASTER%님……♡」
+					PRINTFORMW 「%CALLNAME:MASTER%님……%UNICODE(0x2665)%」
 				ENDIF
 				CFLAG:269 = 1
 			ENDIF
@@ -9069,18 +9414,18 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:278 < 2 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「‥‥그것을、파는 건가！？　그것을‥‥」
-					PRINTFORMW 「‥‥아니、그것이 %CSTR:이인칭%의 도움이 될 수만 있다면、%CSTR:일인칭%는 그래도 좋다‥‥」
+					PRINTFORMW 「……그것을、파는 건가！？　그것을……」
+					PRINTFORMW 「……아니、그것이 %CSTR:이인칭%의 도움이 될 수만 있다면、%CSTR:일인칭%는 그래도 좋다……」
 					PRINTFORMW %CALLNAME%는 얼굴을 빨갛게 해、복잡한 듯한 표정을 지으면서도、비디오를 파는 일을 인정했다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「‥‥%CSTR:일인칭%의 비디오를‥‥여러 사람이 산다？」
-					PRINTFORMW 「‥‥브릴리언트！　얼마나 훌륭한가！」
+					PRINTFORMW 「……%CSTR:일인칭%의 비디오를……여러 사람이 산다？」
+					PRINTFORMW 「……브릴리언트！　얼마나 훌륭한가！」
 					PRINTFORMW 취한 듯한 눈으로、도취된 %CALLNAME%가 대체 무엇을 생각하는 건지、%CALLNAME:MASTER%도 알 수 없었다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「%CSTR:일인칭%의 비디오를‥‥판다고？　‥‥에에、특별히 말할 것도 없습니다만‥‥」
-					PRINTFORMW ‥‥무엇을 말해도、자신의 의견따위 인정되지 않는다。　%CALLNAME%의 태도에는 그런 체념이 비치고 있다。
+					PRINTFORMW 「%CSTR:일인칭%의 비디오를……판다고？　……에에、특별히 말할 것도 없습니다만……」
+					PRINTFORMW ……무엇을 말해도、자신의 의견따위 인정되지 않는다。　%CALLNAME%의 태도에는 그런 체념이 비치고 있다。
 				ENDIF
 				CFLAG:278 = 2
 			ELSEIF CFLAG:278 < 1 || FLAG:7 == 2
@@ -9689,17 +10034,17 @@ SELECTCASE TFLAG:13
 			IF TALENT:연모 || TALENT:친애
 				;이전에 연모 루트였던 경우
 				PRINTFORMW 「읏읏！・・하・・아・・응으・・다음은 너인가？・・좋을 대로 해줘도 상관없다」
-				PRINTFORMW 「추천메뉴는・・여기다♡ 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고♡」
+				PRINTFORMW 「추천메뉴는・・여기다%UNICODE(0x2665)% 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고%UNICODE(0x2665)%」
 				PRINTFORMW 미츠루가 비부를 벌려 보이자 희고 탁한 망울이 흘러 내렸다
 			ELSEIF TALENT:음란 || TALENT:창부
 				;이전에 음란 루트였던 경우
 				PRINTFORMW 「읏읏！・・하・・아・・응으・・다음은 너인가？・・좋을 대로 해줘도 상관없다」
-				PRINTFORMW 「추천메뉴는・・여기다♡ 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고♡」
+				PRINTFORMW 「추천메뉴는・・여기다%UNICODE(0x2665)% 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고%UNICODE(0x2665)%」
 				PRINTFORMW 미츠루가 비부를 벌려 보이자 희고 탁한 망울이 흘러 내렸다
 			ELSEIF TALENT:복종 || TALENT:예속
 				;이전에 복종 루트였던 경우
 				PRINTFORMW 「읏읏！・・하・・아・・응으・・다음은 너인가？・・좋을 대로 해줘도 상관없다」
-				PRINTFORMW 「추천메뉴는・・여기다♡ 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고♡」
+				PRINTFORMW 「추천메뉴는・・여기다%UNICODE(0x2665)% 몇 명째인지는 모르겠지만 아직 너의 씨가 맞을 가능성은 있다고%UNICODE(0x2665)%」
 				PRINTFORMW 미츠루가 비부를 벌려 보이자 희고 탁한 망울이 흘러 내렸다
 			ELSE
 				PRINTFORMW
@@ -9716,17 +10061,17 @@ SELECTCASE TFLAG:13
 			IF TALENT:연모 || TALENT:친애
 				;이전에 연모 루트였던 경우
 				PRINTFORMW 「응읏・・으읍・・・음으읏・・・응～～！？」
-				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다♡）
+				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다%UNICODE(0x2665)%）
 				PRINTFORMW 미츠루는 부랑자들에게 윤간당하면서 황홀한 표정을 띄우고 있다
 			ELSEIF TALENT:음란 || TALENT:창부
 				;이전에 음란 루트였던 경우
 				PRINTFORMW 「응읏・・으읍・・・음으읏・・・응～～！？」
-				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다♡）
+				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다%UNICODE(0x2665)%）
 				PRINTFORMW 미츠루는 부랑자들에게 윤간당하면서 황홀한 표정을 띄우고 있다
 			ELSEIF TALENT:복종 || TALENT:예속
 				;이전에 복종 루트였던 경우
 				PRINTFORMW 「응읏・・으읍・・・음으읏・・・응～～！？」
-				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다♡）
+				PRINTFORMW （・・하・・아・・범해진다・・・더러운 치구 자지로 교배 섹스당한다%UNICODE(0x2665)%）
 				PRINTFORMW 미츠루는 부랑자들에게 윤간당하면서 황홀한 표정을 띄우고 있다
 			ELSE
 				PRINTFORMW
@@ -9764,17 +10109,17 @@ SELECTCASE TFLAG:13
 			IF TALENT:연모 || TALENT:친애
 				;이전에 연모 루트였던 경우
 				PRINTFORMW 「후훗、%CSTR:일인칭%를 안고 싶은 건가？・・좋다、실은 %CSTR:일인칭%도다・・・」
-				PRINTFORMW 「벌써 이렇게 된 거다♡ 빨리 너의 씨로 채워주지 않겠나？」
+				PRINTFORMW 「벌써 이렇게 된 거다%UNICODE(0x2665)% 빨리 너의 씨로 채워주지 않겠나？」
 				PRINTFORMW 미츠루는 남자의 손을 젖은 비부에 밑어붙이면서 귓전으로 달콤하게 속삭였다
 			ELSEIF TALENT:음란 || TALENT:창부
 				;이전에 음란 루트였던 경우
 				PRINTFORMW 「후훗、%CSTR:일인칭%를 안고 싶은 건가？・・좋다、실은 %CSTR:일인칭%도다・・・」
-				PRINTFORMW 「벌써 이렇게 된 거다♡ 빨리 너의 씨로 채워주지 않겠나？」
+				PRINTFORMW 「벌써 이렇게 된 거다%UNICODE(0x2665)% 빨리 너의 씨로 채워주지 않겠나？」
 				PRINTFORMW 미츠루는 남자의 손을 젖은 비부에 밑어붙이면서 귓전으로 달콤하게 속삭였다
 			ELSEIF TALENT:복종 || TALENT:예속
 				;이전에 복종 루트였던 경우
 				PRINTFORMW 「후훗、%CSTR:일인칭%를 안고 싶은 건가？・・좋다、실은 %CSTR:일인칭%도다・・・」
-				PRINTFORMW 「벌써 이렇게 된 거다♡ 빨리 너의 씨로 채워주지 않겠나？」
+				PRINTFORMW 「벌써 이렇게 된 거다%UNICODE(0x2665)% 빨리 너의 씨로 채워주지 않겠나？」
 				PRINTFORMW 미츠루는 남자의 손을 젖은 비부에 밑어붙이면서 귓전으로 달콤하게 속삭였다
 			ELSE
 				PRINTFORMW
@@ -9821,7 +10166,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW %NTRNAME(CFLAG:함락캐릭터)%가 콘돔에 손을 뻗자、미츠루의 손이 살짝 가로막는다
 				PRINTFORML 「오、오늘은…그걸……하지 않다고 된다……아으…뭐랄까……그게……」
 				PRINTFORML 「…너의 것으로…하고 싶다……너의 아이가……갖고 싶은 거다…」
-				PRINTFORMW 「잔뜩 싸 줘♡ 빠짐없이 받아들이니까♡」
+				PRINTFORMW 「잔뜩 싸 줘%UNICODE(0x2665)% 빠짐없이 받아들이니까%UNICODE(0x2665)%」
 				PRINTFORML 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
@@ -9861,8 +10206,8 @@ SELECTCASE TFLAG:13
 					PRINTFORML 「읏아！！아아아아아아아앗！！」
 					PRINTFORML 몸을 활모양으로 젖힌 미츠루의 질내에서 %NTRNAME(CFLAG:함락캐릭터)%의 페니스가 튄다
 					PRINTFORML 「하…아……응……응읏……」
-					PRINTFORMW 「후…으、…이렇게 잔뜩…후훗、기쁘다♡」
-					PRINTFORMW 「이거라면 아이를 임신하는 것도 시간문제로군♡」
+					PRINTFORMW 「후…으、…이렇게 잔뜩…후훗、기쁘다%UNICODE(0x2665)%」
+					PRINTFORMW 「이거라면 아이를 임신하는 것도 시간문제로군%UNICODE(0x2665)%」
 					PRINTFORML 
 				CASE 1
 					PRINTFORML 
@@ -9958,7 +10303,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 	CASE 63
 		;-------------------------------------------------
-		;;창관매춘内容
+		;;娼館売春内容
 		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
 		;-------------------------------------------------
 		IF TALENT:음란 || TALENT:창부 || TALENT:복종 || TALENT:예속
@@ -9989,12 +10334,12 @@ SELECTCASE TFLAG:13
 			SELECTCASE RAND:6
 			;挨拶
 			CASE 0
-				PRINTFORML 「오、오늘 지명‥‥」
+				PRINTFORML 「오、오늘 지명……」
 				PRINTFORMW 딱딱하게、판에 박힌 인사를 하려고 하는 %CALLNAME%에게、손님은 이름을 말하도록 요구했다。
-				PRINTFORML 「우‥‥읏、시、실례‥‥했습니다。키리조、미츠루입니다、오늘 밤은‥‥」
+				PRINTFORML 「우……읏、시、실례……했습니다。키리조、미츠루입니다、오늘 밤은……」
 				PRINTFORMW 원래、긍지와 함께 칭해야할「키리조」의 성씨를 스스로 더럽힌 분함에、눈을 내리깔며 참는 %CALLNAME%。
 				PRINTFORML 손님은 능글맞은 웃음을 띄우면서、
-				PRINTFORMW 『그、키리조 재벌의 후계자가、이런 짓을 말이지‥‥뭐、이런 야한 몸을 가지고 있으면 어쩔 수 없나？』
+				PRINTFORMW 『그、키리조 재벌의 후계자가、이런 짓을 말이지……뭐、이런 야한 몸을 가지고 있으면 어쩔 수 없나？』
 				PRINTFORMW 처럼 모욕적인 언사를 내뱉지만、%CALLNAME%는 닥치고 참을 수 밖에 없었다。
 			;知り合い
 			CASE 1
@@ -10017,7 +10362,7 @@ SELECTCASE TFLAG:13
 				PRINTFORML 『자네의 춘부장께서는 훌륭한 분이셨지만、딸의 교육만은 실패한 것 같구만』
 				PRINTFORML 비아냥으로 내리깔고 보는 손님의 언사에、%CALLNAME%는 반사적으로 아버지에게의 모욕을 비난하려고 했다。
 				PRINTFORML 그 태도를 깨달은 손님은、가차없이 %CALLNAME%의 뺨을 친다。
-				PRINTFORML 『창녀 주제에 무슨 태도냐？　건방진‥‥네 입의 사용법은 이런 거겠지！』
+				PRINTFORML 『창녀 주제에 무슨 태도냐？　건방진……네 입의 사용법은 이런 거겠지！』
 				PRINTFORML 손님은、꺼내든 육봉을 %CALLNAME%의 눈 앞에 내던진다。
 				PRINTFORML 『이봐、알고 있는 거지？　그 입으로 봉사하는 거다！』
 				PRINTFORMW %CALLNAME%는、분노를 말하는 일도 허락되지 않아、존경하는 아버지를 모욕한 남자의 육봉에 입을 맞추는 수밖에 없었다。
@@ -10048,24 +10393,24 @@ SELECTCASE TFLAG:13
 				PRINTFORML 미츠루는 손님의 언사를 필사적으로 참으면서、손님의 몸에 올라탄 채로 허리를 흔든다。
 				PRINTFORML 『그래 그래、하면 할 수 있잖아！　키리조의 영애가 인재라고 들었지만、설마 이쪽의 재능도 있으리라곤』
 				PRINTFORML 손님은 만족한 듯한 얼굴로、%CALLNAME%의 거유가 흔들리는 광경을 아래서 올려다 보고 있다。
-				PRINTFORML 『그럼、섭섭하지만 슬슬 끝낼까‥‥여기선 안에 싸도 되는 거였지』
-				PRINTFORMW 「！　기、기다려 줘！　그건‥‥읏！」
+				PRINTFORML 『그럼、섭섭하지만 슬슬 끝낼까……여기선 안에 싸도 되는 거였지』
+				PRINTFORMW 「！　기、기다려 줘！　그건……읏！」
 			CASEELSE
 			;후배위
 				PRINTFORML 『왜 그래？　단지 엎드려서 엉덩이를 높이 쳐들라고 말했을 뿐이겠지？』
 				PRINTFORML 손님은 원래라면 손을 대는 짓도 할 수 없는 높은 곳의 꽃을 마음대로 할 수 있다는 우월감을 숨기려 하지 않고、굴욕적인 명령을 내린다。
-				PRINTFORML (크으‥‥상것、%CALLNAME:MASTER%의 명령이 아니라면‥‥)
+				PRINTFORML (크으……상것、%CALLNAME:MASTER%의 명령이 아니라면……)
 				PRINTFORML 하지만、%CALLNAME%에겐、거기에 거스르는 짓은 허락되지 않는다。
 				PRINTFORML 느릿느릿 허리를 들어올린 %CALLNAME%의 태도에 속마음의 불만을 알아차린 것인지。
 				PRINTFORML 『뭐냐、그 태도는！』
 				PRINTFORML 소리가 나도록、%CALLNAME%의 드러난 흰 엉덩이를 손바닥으로 쳤다。
 				PRINTFORML %CALLNAME%는 말 한마디도 없이 아픔을 견딘다。
-				PRINTFORML ‥‥이윽고、엉덩이가 남김없이 빨갛게 물들였을 무렵、손님은 혀를 차며 손을 멈췄다。
-				PRINTFORML 『쳇‥‥이렇게 세게 때려도 울음소리 한번 내지 않는가‥‥』
+				PRINTFORML ……이윽고、엉덩이가 남김없이 빨갛게 물들였을 무렵、손님은 혀를 차며 손을 멈췄다。
+				PRINTFORML 『쳇……이렇게 세게 때려도 울음소리 한번 내지 않는가……』
 				PRINTFORML 『그럼、신음 소리를 지르게 해볼까』
 				PRINTFORML 손님은 %CALLNAME%의 허리를 껴안듯이 해서、세게 육봉을 집어넣었다。
-				PRINTFORML 「‥‥읏！　앗‥‥크으‥‥」
-				PRINTFORMW 무심코 소리를 낸 %CALLNAME%에게 기분이 좋아진 손님은、격렬하게 허리를 움직여 비순 안을 후비기 시작했다‥‥。
+				PRINTFORML 「……읏！　앗……크으……」
+				PRINTFORMW 무심코 소리를 낸 %CALLNAME%에게 기분이 좋아진 손님은、격렬하게 허리를 움직여 비순 안을 후비기 시작했다……。
 			ENDSELECT
 		ENDIF
 	CASEELSE
@@ -10180,392 +10525,1297 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-
 @BATTLE_EVENT_K4549, ARG, ARG:1, ARG:2
+
+;ARGが自分
 IF TFLAG:전투이벤트 == 1
-;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-	IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 612 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"큭……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"읏……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;2020/08/14　画像表示分岐を追加
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		;PRINTFORML 　┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+
+		;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 612 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+				PRINTFORML 　┃%"くっ……",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+				PRINTFORML 　┃%"っ……",72,LEFT%┃
+			ELSE
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+				PRINTFORML 　┃%"くぅっ……",72,LEFT%┃
+			ENDIF
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"크으……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			;연모, 친애
+			IF (TALENT:3 || TALENT:6) && RAND:2 == 0
+				IF RAND:3 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"邪魔をするな！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"そこを退け！",72,LEFT%┃
+				ELSE
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"一掃する！！",72,LEFT%┃
+				ENDIF
+			;음란, 창부
+			ELSEIF (TALENT:4 || TALENT:7) && RAND:2 == 0 
+				IF RAND:3 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"いやぁぁっっ！　たぁ！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"たぁぁぁっ！　沈め！",72,LEFT%┃
+				ELSE
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"はぁぁっ！　散れ！",72,LEFT%┃
+				ENDIF
+			;복종, 예속
+			ELSEIF (TALENT:5 || TALENT:8) && RAND:2 == 0 
+				IF RAND:3 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"いやぁぁっっ！　たぁ！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"たぁぁぁっ！　沈め！",72,LEFT%┃
+				ELSE
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"はぁぁっ！　散れ！",72,LEFT%┃
+				ENDIF
+			ELSE
+				IF RAND:5 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"処刑タイムと行こうじゃないか。",72,LEFT%┃
+				ELSEIF RAND:5 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"さて、処刑しよう。",72,LEFT%┃
+				ELSEIF RAND:4 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"処刑の時間だ。",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"エクセレント！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"たわいもない。散れ！",72,LEFT%┃
+				ELSE
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+					PRINTFORML 　┃%"皆殺しにしてくれる！",72,LEFT%┃
+				ENDIF
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
+	;画像なし
+	ELSE
+		;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 612 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"큭……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"읏……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"크으……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		ELSE
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"거기서 비켜라!",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"소탕한다！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"이야아아앗！　타아！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"타아아앗！　빠져라！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"하아앗！　흩어져라！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"이야아아앗！　타아！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"타아아앗！　빠져라！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"하아앗！　흩어져라！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+;COOP참가　発動者は自分以外
+ELSEIF TFLAG:전투이벤트 == 2
+	;2020/08/14　画像表示分岐を追加　通常版と分岐二つ用意するのが面倒なので画像あり版のみ新設
+	;基本的な構文は芳澤かすみ口上よりお借りしました
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML 　┃%"くっ……",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"っ……",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"くぅ……",72,LEFT%┃
+			ENDIF
+
+		;個別は二分の一。相性でも判定取っても良いけど面倒なので
+		;P4勢
+		;番長がCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:P4주인공]] && RAND:2 == 0
+
+			PRINTFORML 　┃%"さすが、リーダーを務めるだけはある。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"これからが楽しみな逸材だ。",72,LEFT%┃
+
+		;足立がCOOP発動　[[キャラ:발立]]がRNAMEされていないので番号指定　そもそも味方にならねえよ！
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4625 && RAND:2 == 0
+
+			PRINTFORML 　┃%"恐ろしい男だな……",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"彼らはこんなヤツと一戦を交えていたのか……",72,LEFT%┃
+
+		;マーガレットがCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:마가렛]] && RAND:2 == 0
+
+			PRINTFORML 　┃%"これ程の強者がひしめく稲羽市とは一体……驚きだな。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+
+		;P3勢
+		;キタローorハム子がCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && ((NO:(FLAG:행동순1) == [[キャラ:P3남주인공]]) || (NO:(FLAG:행동순1) == [[キャラ:P3여주인공]])) && RAND:2 == 0
+
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"君に合わせる！　行くぞ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"頼りにしているぞ。処刑の時間だ！",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+
+		;ゆかりがCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:유카리]] && RAND:2 == 0
+
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"君のペースに私が合わせよう。さぁ、行くぞ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"ナイスだ、ゆかり。さて、ここからは私達の時間と言う事だな",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+		;アイギスがCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:아이기스]] && RAND:2 == 0
+
+			PRINTFORML 　┃%"君の成長ぶりには、目を見張るものがある。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"これからも目標達成の為、共に精進しよう、アイギス。",72,LEFT%┃
+
+		;真田明彦がCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:사나다]] && RAND:2 == 0
+
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"腕を上げたのは間違いないようだな。",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"環境が変わって、更に腕を上げたようだな。",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"頼りにしているぞ、明彦。",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"仕掛けるぞ！、明彦。",72,LEFT%┃
+			ENDIF
+
+		;伊織順平がCOOP発動　[[キャラ:준페이]]がRNAMEされていないので番号指定
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4547 && RAND:2 == 0
+
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"やるじゃないか。",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"口だけではなかったな。",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+
+		;天田乾がCOOP発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:아마다]] && RAND:2 == 0
+
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"焦る事はない。",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"焦らず仕掛けていこうじゃないか。",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"君の力はこんなものではないと、誰よりも私が知っているのだからな",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"私がカバーする。落ち着いていこうか。",72,LEFT%┃
+			ENDIF
+
+		;シャドウがCOOP発動
+;		LOCAL = FLAG:행동순1
+		ELSEIF FLAG:행동순1 != -1 && ABL:ARG:종족 == 32
+			IF RAND:2 == 0
+	
+				PRINTFORML 　┃%"シャドウと共闘とはな……",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"唾棄すべきだが……やむを得ないな。",72,LEFT%┃
+			ELSE
+	
+				PRINTFORML 　┃%"寝首をかくような真似はしないさ……",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"だが、私はシャドウを仲間と認めたわけではない。",72,LEFT%┃
+			ENDIF
+		;汎用　常に出さないと顔がずれる
+		ELSE
+			IF RAND:4 == 0
+				PRINTFORML 　┃%"チャンスだ！",72,LEFT%┃
+			ELSEIF RAND:3 == 0
+				PRINTFORML 　┃%"見えた！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"立ち塞がるのならば、容赦はしない！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"総攻撃だな。了解した！",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+		ENDIF
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;画像無し版
+	ELSE
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 612 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"큭……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"읏……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"크으……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		ELSE
+		
+		ENDIF
+	ENDIF
+;敵にダメージ等
+ELSEIF TFLAG:전투이벤트 == 11
+	CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
+	LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
+	;상대가 죽었다
+	IF BASE:(ARG:1):ＨＰ <= 0
+
+;		PRINTFORML 
+	;약점을 찔렀다. 즉 COOP
+	ELSEIF LOCAL > 100 && LOCAL < 999
+		IF CFLAG:(ARG:1):방어플래그
+;			PRINTFORML 
+		ELSE
+			;이쪽은 COOP발동으로 돌리기 위해서 CUT
+			RETURN 0
+		ENDIF
+	;대 데미지
+	ELSEIF 데미지비율(ARG:1, ARG:2) > 50
+;		PRINTFORML 
+	ELSEIF 데미지비율(ARG:1, ARG:2) > 25
+;		PRINTFORML 
+	ELSEIF 데미지비율(ARG:1, ARG:2) > 0
+;		PRINTFORML 
+	;무효化された
+	ELSEIF ARG:2 == 0
+;		PRINTFORML 
+	;흡수された
+	ELSEIF ARG:2 < 0
+;		PRINTFORML 
+	ENDIF
+
+;피데미지
+;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
+;敵にダメージ等
+ELSEIF TFLAG:전투이벤트 == 12
+	;죽었다
+	IF BASE:ARG:ＨＰ <= 0
+;		PRINTFORML 
+	;대 데미지
+	ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
+;		PRINTFORML 
+	;무효
+	ELSEIF ARG:2 == 0
+;		PRINTFORML 
+	;흡수
+	ELSEIF ARG:2 < 0
+;		PRINTFORML 
+	;그 이외
+	ELSE
+;		PRINTFORML 
+	ENDIF
+
+;敵に反射された
+ELSEIF TFLAG:전투이벤트 == 15
+;	PRINTFORML 
+
+;自分が反射した
+ELSEIF TFLAG:전투이벤트 == 16
+;	PRINTFORML 
+
+;회피당했다
+ELSEIF TFLAG:전투이벤트 == 17
+;	PRINTFORML 
+
+;회피했다
+ELSEIF TFLAG:전투이벤트 == 18
+	IF  FLAG:화상표시설정_능력확인화면 == 1 && 현HP비율(ARG) < 25
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+		PRINTFORML 　┃%"見えたっ！",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		
+	ENDIF
+;반격스킬 발동했다
+ELSEIF TFLAG:전투이벤트 == 20
+;	PRINTFORML 
+
+;배틀에서 승리했다
+ELSEIF TFLAG:전투이벤트 == 90
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		IF RAND:7 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"悪く思わないでくれ。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"私は、負けるわけにはいかないんだ。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"背負っているもののためにも……",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:6 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"いつ、如何なる時でも負けることは許されない。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"それでもかかってくるのであれば、容赦はしない！",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:5 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"なに、落ち込むことはない。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"ただほんの僅か、私の方が強かっただけだ。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:4 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"何度向かって来ようと、返り討ちにしよう……",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"誰一人、邪魔はさせない！",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:3 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"処刑女王か……名誉な二つ名とはいえないが、",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"……それも悪くはないか。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"立ち塞がる者は、全て私が捌いてくれよう！",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:2 == 0
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			PRINTFORML 　┃%"もっと実戦経験を積むのだな。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"いざという時、大切なものを守れないぞ。",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"もっとも……次があればの話だがな",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ENDIF
+	ELSE
+	
+	ENDIF
+;레벨 업했다
+ELSEIF TFLAG:전투이벤트 == 91
+
+;도주에 성공했다
+ELSEIF TFLAG:전투이벤트 == 92
+
+;도주에 실패했다
+ELSEIF TFLAG:전투이벤트 == 93
+
+;전투 개시시
+ELSEIF TFLAG:전투이벤트 == 94 && BASE:ARG:LV > 50 && EQUIP:ARG:장비페르소나 == 0
+	IF FLAG:선제공격플래그
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+		PRINTFORML 　┃%"折角もらった二つ名だ",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+		PRINTFORML 　┃%"見せてやろうじゃないか",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"【処刑女王】の力",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"身をもって知るがいい！！",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+	
+	ENDIF
+;백어택을 당했다
+ELSEIF TFLAG:전투이벤트 == 95
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+	PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+	PRINTFORML 　┃%"見えたっ！",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+	PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+;적에게 선제공격을 당했다
+ELSEIF TFLAG:전투이벤트 == 96
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+	PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+	PRINTFORML 　┃%"安い挑発だが、悪くない。",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+	PRINTFORML 　┃%"乗ってやろうじゃないか",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+	PRINTFORML 　┃%"来い！！",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+	PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+ENDIF
+
+@BATTLE_MESSAGE_K4549,ARG,ARG:1 = 0
+#DIM UNKO, 1
+
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
+IF CFLAG:ARG:입력행동 == 2304
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		;연모, 친애
+		IF TALENT:3 || TALENT:6
+
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"見るがいい！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"覚悟！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"ペルソナ！！",72,LEFT%┃
+			ENDIF
+
+		ELSE
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			IF RAND:2 == 0
+				PRINTFORML 　┃%"いくぞ！！",72,LEFT%┃
+			
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"終わらせるっ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"今はもう護るだけの闘いじゃない！！",72,LEFT%┃
+			ENDIF
+		ENDIF
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
 	ELSE
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			IF RAND:3 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
+				PRINTFORML ┃%"보는게 좋다！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"거기서 비켜라!",72,LEFT%┃
+				PRINTFORML ┃%"각오！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"소탕한다！！",72,LEFT%┃
+				PRINTFORML ┃%"페르소나！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"간다！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"끝내 주맛！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"지금은 더 이상 지킬 만한 싸움이 아냐！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		ENDIF
+	ENDIF
+;剣
+ELSEIF CFLAG:ARG:입력행동 == 0
+	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML 　┃%"くっ……",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"っ……",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"くぅ……",72,LEFT%┃
+			ENDIF
+		;연모, 친애
+		ELSEIF TALENT:3 || TALENT:6
+			IF RAND:4 == 0
+				PRINTFORML 　┃%"邪魔をするな！",72,LEFT%┃
+			ELSEIF RAND:3 == 0
+				PRINTFORML 　┃%"ふっ！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"はっ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"でやあっ！！",72,LEFT%┃
+			ENDIF
+		;음란, 창부
+		ELSEIF TALENT:4 || TALENT:7
+			IF RAND:4 == 0
+				PRINTFORML 　┃%"邪魔をするな！",72,LEFT%┃
+			ELSEIF RAND:3 == 0
+				PRINTFORML 　┃%"ふっ！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"はっ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"でやあっ！！",72,LEFT%┃
+			ENDIF
+		;복종, 예속
+		ELSEIF TALENT:5 || TALENT:8
+			IF RAND:4 == 0
+				PRINTFORML 　┃%"邪魔をするな！",72,LEFT%┃
+			ELSEIF RAND:3 == 0
+				PRINTFORML 　┃%"ふっ！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"はっ！！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"でやあっ！！",72,LEFT%┃
+			ENDIF
+		ENDIF
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"큭……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"읏……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"크으……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;연모, 친애
+		ELSEIF TALENT:3 || TALENT:6
+			IF RAND:4 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"훗！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"핫！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"데야앗！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;음란, 창부
+		ELSEIF TALENT:4 || TALENT:7
+			IF RAND:4 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"훗！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"핫！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"데야앗！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;복종, 예속
+		ELSEIF TALENT:5 || TALENT:8
+			IF RAND:4 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"훗！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"핫！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"데야앗！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		ENDIF
+	ENDIF
+;銃
+ELSEIF CFLAG:ARG:입력행동 == 2101
+	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML 　┃%"くっ……",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"っ……",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"くぅ……",72,LEFT%┃
+			ENDIF
+		;함락
+		ELSEIF 함락( ) > 0
+			IF RAND:3 == 0
+				PRINTFORML 　┃%"そこっ！！",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"当ててみせる！",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"見えたっ！！",72,LEFT%┃
+			ENDIF
+		ENDIF
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"큭……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"읏……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"크으……",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;연모, 친애
+		ELSEIF TALENT:3 || TALENT:6
+			IF RAND:3 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"거깃！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"보였닷！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			IF RAND:3 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"이야아아앗！　타아！",72,LEFT%┃
+				PRINTFORML ┃%"거깃！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"타아아앗！　빠져라！",72,LEFT%┃
+				PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"하아앗！　흩어져라！",72,LEFT%┃
+				PRINTFORML ┃%"보였닷！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			IF RAND:3 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"이야아아앗！　타아！",72,LEFT%┃
+				PRINTFORML ┃%"거깃！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"타아아앗！　빠져라！",72,LEFT%┃
+				PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"하아앗！　흩어져라！",72,LEFT%┃
+				PRINTFORML ┃%"보였닷！！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
 	ENDIF
-ENDIF
-IF TFLAG:전투이벤트 == 2
-	IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 612 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"큭……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"읏……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"크으……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;ブフーラ　;ブフダイン　;マハ・ブフダイン　;ニブルヘイム
+ELSEIF CFLAG:ARG:입력행동 == 108 || CFLAG:ARG:입력행동 == 802 || CFLAG:ARG:입력행동 == 803 || CFLAG:ARG:입력행동 == 806 || CFLAG:ARG:입력행동 == 814 || CFLAG:ARG:입력행동 == 1226
+	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+	IF  FLAG:화상표시설정_능력확인화면 == 1
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+		PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+			IF RAND:3 == 0
+				PRINTFORML 　┃%"큭……",72,LEFT%┃
+			ELSEIF RAND:2 == 0
+				PRINTFORML 　┃%"읏……",72,LEFT%┃
+			ELSE
+				PRINTFORML 　┃%"크으……",72,LEFT%┃
+			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+		;함락
+		ELSEIF 함락( ) > 0
+			;クー・ドロア
+			IF CFLAG:ARG:입력행동 == 9 && BASE:ARG:LV >= 50 && EQUIP:ARG:장비페르소나 == 0 && DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("NO") == 3952
+				IF RAND:5 == 0
+					PRINTFORML 　┃%"行かせてもらう！",72,LEFT%┃
+				ELSEIF RAND:4 == 0
+					PRINTFORML 　┃%"覚悟しろ！",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					PRINTFORML 　┃%"息の根を止めてやる！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"そこだっ！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"クー・ドロア！",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			ELSEIF CFLAG:ARG:입력행동 == 108
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"畳み掛けるっ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"いやあああああっ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"そこをどけぇっ！！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"逃がさないっ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"いやあああああっ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"出直しなさいっ！！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"逃がさん！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"てやあぁっ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"処刑の時間だぁ！！",72,LEFT%┃
+				ENDIF
+			ELSEIF CFLAG:ARG:입력행동 == 512
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"ブリリアント！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"これで決めるぞ！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"覚悟するがいい！",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			ELSEIF CFLAG:ARG:입력행동 == 802
+				IF RAND:5 == 0
+					PRINTFORML 　┃%"凍てつけ！",72,LEFT%┃
+				ELSEIF RAND:4 == 0
+					PRINTFORML 　┃%"氷の鏡よ！",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					PRINTFORML 　┃%"ミラー！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"退路を断つ！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"追い詰める！",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			ELSEIF CFLAG:ARG:입력행동 == 803
+				IF RAND:2 == 0
+					PRINTFORML 　┃%"来い！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"そびえ立て！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"カモン！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"墜ちろ！",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			ELSEIF CFLAG:ARG:입력행동 == 806
+				IF RAND:4 == 0
+					PRINTFORML 　┃%"これで終わりだ！",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					PRINTFORML 　┃%"決める！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"迸れ！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"もう遅い！",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			;ニブルヘイム
+			ELSEIF CFLAG:ARG:입력행동 == 814 && EQUIP:ARG:장비페르소나 == 0 && DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("NO") == 3952
+				IF RAND:4 == 0
+					PRINTFORML 　┃%"処刑する！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					PRINTFORML 　┃%"フィナーレだ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"捕まえたぞ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"美しく散れ…！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"イーヤァッ！！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"さあ、処刑の時間だ！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+					PRINTFORML 　┃%"アデュー！",72,LEFT%┃
+					CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+					PRINTFORML 　┃%"ジ・エンドォっ！",72,LEFT%┃
+				ENDIF
+			ELSEIF CFLAG:ARG:입력행동 == 1226
+				IF RAND:4 == 0
+					PRINTFORML 　┃%"テンタラフー！",72,LEFT%┃
+				ELSEIF RAND:3 == 0
+					PRINTFORML 　┃%"これならばどうだ！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"まどろむがいい！",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"ふっ、計算通りだな",72,LEFT%┃
+				ENDIF
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+				PRINTFORML 　┃%"",72,LEFT%┃
+				CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+				PRINTFORML 　┃%"",72,LEFT%┃
+			ENDIF
 		ENDIF
-	ENDIF
-ENDIF
-
-@BATTLE_MESSAGE_K4549,ARG,ARG:1 = 0
-
-;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-IF CFLAG:ARG:입력행동 == 2304
-	;연모, 친애
-	IF TALENT:3 || TALENT:6
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"보는게 좋다！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"각오！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"페르소나！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+		PRINTFORML 　┃%"",72,LEFT%┃
+		CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+		PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"간다！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"끝내 주맛！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"지금은 더 이상 지킬 만한 싸움이 아냐！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
 	ENDIF
-;검
-ELSEIF CFLAG:ARG:입력행동 == 0
-	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+ELSEIF EQUIP:ARG:장비페르소나 == 0
+	PRINTFORML 
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+	PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
 	IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"큭……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"큭……",72,LEFT%┃
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"읏……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"읏……",72,LEFT%┃
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"크으……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"크으……",72,LEFT%┃
 		ENDIF
-	;연모, 친애
-	ELSEIF TALENT:3 || TALENT:6
-		IF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;그 외
+	ELSE 
+		IF RAND:9 == 0
+			PRINTFORML 　┃%"逃がさん！",72,LEFT%┃
+		ELSEIF RAND:8 == 0
+			PRINTFORML 　┃%"容赦はしない！",72,LEFT%┃
+		ELSEIF RAND:7 == 0
+			PRINTFORML 　┃%"ペルソナ！",72,LEFT%┃
+		ELSEIF RAND:6 == 0
+			PRINTFORML 　┃%"ペルソナッ！！",72,LEFT%┃
+		ELSEIF RAND:5 == 0
+			IF DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("NO") == 3952
+				PRINTFORML 　┃%"来いっ！　ペンテシレア！！",72,LEFT%┃
+			ELSEIF DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("NO") == 3953
+				PRINTFORML 　┃%"来いっ！　アルテミシア！！",72,LEFT%┃
+			ENDIF
+		ELSEIF RAND:4 == 0
+			PRINTFORML 　┃%"一掃するっ！",72,LEFT%┃
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"훗！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"処刑の時間だっ！",72,LEFT%┃
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"핫！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"処刑だ！",72,LEFT%┃
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"데야앗！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	;음란, 창부
-	ELSEIF TALENT:4 || TALENT:7
-		IF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"훗！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"핫！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"데야앗！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	;복종, 예속
-	ELSEIF TALENT:5 || TALENT:8
-		IF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"방해 하지마！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"훗！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"핫！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"데야앗！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML 　┃%"処刑する",72,LEFT%┃
 		ENDIF
 	ENDIF
-;총
-ELSEIF CFLAG:ARG:입력행동 == 2101
-	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-	IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"큭……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"읏……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"크으……",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	;연모, 친애
-	ELSEIF TALENT:3 || TALENT:6
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"거깃！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"보였닷！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	;음란, 창부
-	ELSEIF TALENT:4 || TALENT:7
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"거깃！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"보였닷！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	;복종, 예속
-	ELSEIF TALENT:5 || TALENT:8
-		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"거깃！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"맞혀 보인다！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"보였닷！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		ENDIF
-	ENDIF
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+	PRINTFORML 　┃%"",72,LEFT%┃
+	CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+	PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ELSE
 	CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 	IF RESULT == 1
-		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"큭……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"읏……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"크으……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		IF  FLAG:화상표시설정_능력확인화면 == 1
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"큭……",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"읏……",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"크으……",72,LEFT%┃
+				ENDIF
+			;함락
+			ELSEIF 함락( ) > 0
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"방해하지마랏！！",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"단숨에 공격하겠다",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"활로를 연닷！！",72,LEFT%┃
+				ENDIF
 			ENDIF
-		;연모, 친애
-		ELSEIF TALENT:3 || TALENT:6
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방해하지맛！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			RETURN 0
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방해하지맛！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+		ELSE
+			IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"큭……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"읏……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"크으……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+			;연모, 친애
+			ELSEIF TALENT:3 || TALENT:6
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방해하지마랏！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방해하지맛！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방해하지맛！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
 			ENDIF
-			RETURN 0
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방해하지맛！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　단숨에 공격하겠다",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　활로를 연닷！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ENDIF
-			RETURN 0
 		ENDIF
 	ELSEIF RESULT == 2 || RESULT == 5
-		IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"큭……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"읏……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"크으……",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		IF  FLAG:화상표시설정_능력확인화면 == 1
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 1
+			PRINTFORML 　┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 2
+			IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"큭……",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"읏……",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"크으……",72,LEFT%┃
+				ENDIF
+			;함락
+			ELSEIF 함락( ) > 0
+				IF RAND:3 == 0
+					PRINTFORML 　┃%"손이 많이 가는구나",72,LEFT%┃
+				ELSEIF RAND:2 == 0
+					PRINTFORML 　┃%"괜찮나？",72,LEFT%┃
+				ELSE
+					PRINTFORML 　┃%"방심하지 마라",72,LEFT%┃
+				ENDIF
 			ENDIF
-		;연모, 친애
-		ELSEIF TALENT:3 || TALENT:6
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　신경쓰게 하지마",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ENDIF
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 3
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 4
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 5
+			PRINTFORML 　┃%"",72,LEFT%┃
+			CALL WRITE_IMG, [[キャラ:미츠루]], 1, 6
+			PRINTFORMW 　┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			RETURN 0
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　신경쓰게 하지마",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+		ELSE
+			IF FLAG:무후후전개 == 1 && (TEQUIP:86 == 613 || TEQUIP:86 == 613 || TEQUIP:86 == 614 || TEQUIP:86 == 615)
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"큭……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"읏……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"크으……",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+			;연모, 친애
+			ELSEIF TALENT:3 || TALENT:6
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS +"　손이 많이 가는구나",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　신경쓰게 하지마",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
+				IF RAND:3 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　신경쓰게 하지마",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSEIF RAND:2 == 0
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
+					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				RETURN 0
 			ENDIF
-			RETURN 0
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			IF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　신경쓰게 하지마",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　괜찮나？",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%RESULTS + "　방심하지 마라",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ENDIF
-			RETURN 0
 		ENDIF
 	ENDIF
 ENDIF
+
+@EVOLUTE_PERSONA_K4549, ARG
+IF CFLAG:ARG:페르소나강화플래그 == 1 
+	IF TALENT:ARG:약점
+		PRINTFORMW 「桐条美鶴、彼女の仲間の力になりたいという想いに」
+	ELSE
+		PRINTFORMW 「桐条美鶴、彼女のあなたの力になりたいという想いに」
+	ENDIF
+	PRINTFORMW 「常に彼女の傍に寄り添ってきたペルソナが応えようとしているようですぞ」
+	PRINTFORMW 「我が手助けし、ペルソナの新たな力を引き出してみせましょう」
+	PRINTL
+	PRINTW
+	PRINTW ペルソナ「ペンテシレア」が誕生した
+ELSE
+	IF TALENT:ARG:약점
+		PRINTFORMW 「桐条美鶴、彼女の仲間の力になりたいという想いに」
+	ELSE
+		PRINTFORMW 「桐条美鶴、彼女のあなたの力になりたいという想いに」
+	ENDIF
+	PRINTFORMW 「彼女のさらなる成長と想いに、またペルソナも新たな力を得ようとしているようです」
+	PRINTFORMW 「いままた我が手助けし、ペルソナの更なる力を引き出してみせましょう」
+	PRINTL
+	PRINTW
+	PRINTW ペルソナ「アルテミシア」が誕生した
+	IF DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("NO") == 3953
+		DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("습득스킬11") = [[스킬:번개찌르기]]
+		DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("습득LV11") = 53
+		DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("습득스킬12") = [[스킬:니플헤임]]
+		DITEMTYPE:(CFLAG:ARG:초기페르소나넘버):페르소나("습득LV12") = 73
+	ENDIF
+ENDIF
+

@@ -44,7 +44,7 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4770 → EVENTTRAIN_K4770_12
+;예： EVENTTRAIN_K4770 → EVENTTRAIN_K4770_12
 ;--------------------------------------------------
 @셀렉트구상설명_K4770,ARG = 0
 SIF ARG == 1
@@ -53,7 +53,7 @@ SIF ARG == 1
 PRINTFORML アサヒ口上
 ;구상설명문
 PRINTFORML 基本的に恋慕優先、主人が男性前提で作成しております。
-PRINTFORML 初回調教時に이인칭が○○さんに設定されます（○○にはプレイヤーの呼び名が入ります）
+PRINTFORML 初回調教時に二人称が○○さんに設定されます（○○にはプレイヤーの呼び名が入ります）
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -320,7 +320,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 		PRINTFORML =  ……………………
 		PRINTFORMW  ………………
 		PRINTFORMW 　
-		;의존도、忠誠度が上昇
+		;依存度、忠誠度が上昇
 		IF TALENT:MASTER:깨달음
 			PRINTFORMW %CALLNAME%の依存度が300上がった。
 		ENDIF
@@ -606,13 +606,13 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	GOTO 表示
 ;上位陥落
 ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
-	;친애
+	;親愛
 	IF TALENT:6
 		WSTR:(K++) = 
-	;창부
+	;娼婦
 	ELSEIF TALENT:7
 		;KSTR:(K++) = 
-	;예속
+	;隷属
 	ELSEIF TALENT:8
 		;KSTR:(K++) = 
 	ENDIF
@@ -731,12 +731,12 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 			WSTR:(K++) = 「逆に小さくするなんて訳分かんないよ……ぅぅ」
 			WSTR:(K++) = すすり泣く%CALLNAME%を無視してベッドに押し倒すのだった。
 		ELSEIF TALENT:111 == 1
-			;거유
+			;巨乳
 			WSTR:(K++) = 「い、いくら%CSTR:일인칭%のおっぱいがそんなに大きくないからって……」
 			WSTR:(K++) = 「変な薬で無理やりおっきくしなくてもいいでしょ！？」
 			WSTR:(K++) = 「…………そ、それはそれとして、嬉しいけどさ」
 		ELSEIF TALENT:112 == 1 || TALENT:126 == 1
-			;폭유、마유
+			;爆乳、魔乳
 			WSTR:(K++) = 「い、いくら%CSTR:일인칭%のおっぱいがそんなに大きくないからって……」
 			WSTR:(K++) = 「こんなあり得ないくらいおっきくしなくてもいいでしょ！？」
 			WSTR:(K++) = ギャーギャー喚き散らす%CALLNAME%を無視してベッドに押し倒すのだった。
@@ -936,7 +936,7 @@ ELSEIF MARK:2 == 2
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	;スマホを壊した
 	IF CFLAG:801 == 1
-		;체력 500미만
+		;体力500未満
 		IF BASE:0 < 500
 			WSTR:(K++) = 「んっ……！　ふっ……」
 			WSTR:(K++) = 「お、終わった……？」
@@ -957,7 +957,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 	;スマホを壊していない
 	ELSE
 		IF BASE:0 < 500
-			;체력 500미만
+			;体力500未満
 			WSTR:(K++) = 「はぁっ……はぁっ……！」
 			WSTR:(K++) = 「っ、もう、がっつきすぎだってば……！」
 			WSTR:(K++) = ベッドに突っ伏して乱れた息を整えている%CALLNAME%。
@@ -1035,22 +1035,22 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			KSTR:(K++) = 拒否する理由などもちろん無い。%CALLNAME:MASTER%は目の前の桃を撫で上げ、
 			WSTR:(K++) = 我慢汁の零れる熱り立った自身を取り出すのだった。
 			KSTR:(K++) = 　
-			;Ｖ경험（経験ありのみ）
+			;Ｖ経験（経験ありのみ）
 			SIF 0 < EXP:0
 				EXP:0 += 3
-			;절정경험
+			;絶頂経験
 			EXP:2 += 3
-			;성교경험（経験ありのみ）
+			;性交経験（経験ありのみ）
 			SIF 0 < EXP:4
 				EXP:4 += 3
-			;정액경험
+			;精液経験
 			EXP:20 += 1
-			;펠라경험（経験ありのみ）
+			;フェラ経験（経験ありのみ）
 			SIF 0 < EXP:22
 				EXP:22 += 1
-			;절정경험（マスター）
+			;絶頂経験（マスター）
 			EXP:MASTER:2 += 1
-			;사정경험（マスター）
+			;射精経験（マスター）
 			EXP:MASTER:3 += 1
 			SIF 0 < EXP:0
 				KSTR:(K++) = %EXPNAME:0%＋3
@@ -1226,7 +1226,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						WSTR:(K++) = 「あっ！」
 						KSTR:(K++) = %CALLNAME:MASTER%の手が触れた瞬間、
@@ -1308,7 +1308,7 @@ SELECTCASE SELECTCOM
 							;빈유, 절벽
 							IF TALENT:109 == 1 || TALENT:110 == 1
 								WSTR:(K++) = 胡座の上に座った%CALLNAME%の小振りな乳房を後ろから掬うようにして撫で上げる。。
-							;거유, 폭유、마유
+							;거유, 폭유, 마유
 							ELSEIF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 								WSTR:(K++) = 胡座の上に座った%CALLNAME%の豊満な乳房を後ろからゆっくりと撫で上げる。
 							ENDIF
@@ -1395,7 +1395,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						WSTR:(K++) = 「えっ！？　な、舐めるって……こ、ここを？」
 						WSTR:(K++) = 「で、でも汚いし、止めた方が……ナ、ナナシもそう思うよね？」
@@ -1554,7 +1554,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -1711,7 +1711,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -1831,7 +1831,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -1928,7 +1928,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -1937,7 +1937,7 @@ SELECTCASE SELECTCOM
 						WSTR:(K++) = 特に抵抗はせず%CALLNAME:MASTER%のされるがままになっている。
 						WSTR:(K++) = 「……じ、自分でも不思議なんだけどね」
 						WSTR:(K++) = 「%CALLNAME:MASTER%に触られてると、なんだか安心する」
-						;거유, 폭유、마유ではない
+						;거유, 폭유, 마유ではない
 						SIF TALENT:111 != 1 && TALENT:112 != 1 && TALENT:126 != 1
 							WSTR:(K++) = 「も、物足りなかったりしない……よね？」
 					ENDIF
@@ -1980,7 +1980,7 @@ SELECTCASE SELECTCOM
 						IF ASSIPLAY
 							KSTR:(K++) = 
 						ELSE
-							;거유, 폭유、마유
+							;거유, 폭유, 마유
 							IF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 								WSTR:(K++) = 「あっ%ハート()%　……ん、ふ%ハート()%」
 								WSTR:(K++) = 「えへへ……おっぱい、柔らかい？」
@@ -2026,7 +2026,7 @@ SELECTCASE SELECTCOM
 				IF ASSIPLAY
 					KSTR:(K++) = 
 				ELSE
-					;거유, 폭유、마유
+					;거유, 폭유, 마유
 					IF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 						WSTR:(K++) = 「……変態っ」
 						KSTR:(K++) = 薬で無理やり大きくされた自身の胸を揉みしだく%CALLNAME:MASTER%を
@@ -2056,7 +2056,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -2148,7 +2148,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -2561,7 +2561,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;助手がナナシ（복종）の場合
+					;助手がナナシ（服従）の場合
 					IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 						KSTR:(K++) = 
 					ELSE
@@ -4009,7 +4009,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4069,7 +4069,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4100,7 +4100,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4169,7 +4169,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4229,7 +4229,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4260,7 +4260,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4329,7 +4329,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4389,7 +4389,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4420,7 +4420,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4489,7 +4489,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4549,7 +4549,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4580,7 +4580,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4649,7 +4649,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4709,7 +4709,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -4740,7 +4740,7 @@ SELECTCASE SELECTCOM
 				ELSE
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						;助手がナナシ（복종）の場合
+						;助手がナナシ（服従）の場合
 						IF ASSI > 0 && NO:ASSI == 4775 && (TALENT:ASSI:5 || TALENT:ASSI:8)
 							KSTR:(K++) = 
 						ELSE
@@ -10511,7 +10511,7 @@ SELECTCASE SELECTCOM
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_2
 		;마스터의 페니스가 닿아서 기분 좋아 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_3
-		;2인분의 정액 마시게 해줄께 대사를
+		;2인분의 정액 마시게 해줄께 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_4
 		;능숙해졌네 대사
 		;		K_CALL:K = KOJO_MESSAGE_ASSIPAIR_COM_5
@@ -10785,7 +10785,7 @@ SELECTCASE SELECTCOM
 			;ABL:페르소나1데이터／스킬1 =
 			
 			;ABL:페르소나1데이터／습득스킬1 =
-			;ABL:ペルソナ1データ／습득LV1 =
+			;ABL:페르소나1데이터／습득LV1 =
  
 		ENDIF
 ;-------------------------------------------------
@@ -10826,15 +10826,15 @@ SELECTCASE SELECTCOM
 			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
-			;ABL:初期リンク悪魔공격상성
-			;ABL:初期リンク悪魔최저공격횟수
-			;ABL:初期リンク悪魔최대공격횟수
-			;ABL:初期リンク悪魔사거리
-			;ABL:初期リンク悪魔공격범위
-			;ABL:初期リンク悪魔추가효과
-			;ABL:初期リンク悪魔추가효과상성
-			;ABL:初期リンク悪魔추가효과명중률
-			;ABL:初期リンク悪魔추가효과최대명중률
+			;ABL:초기링크악마공격상성
+			;ABL:초기링크악마최저공격횟수
+			;ABL:초기링크악마최대공격횟수
+			;ABL:초기링크악마사거리
+			;ABL:초기링크악마공격범위
+			;ABL:초기링크악마추가효과
+			;ABL:초기링크악마추가효과상성
+			;ABL:초기링크악마추가효과명중률
+			;ABL:초기링크악마추가효과최대명중률
 		ENDIF
 ;-------------------------------------------------
 ;606,개조수술
@@ -10929,7 +10929,7 @@ SELECTCASE ARG:1
 	CASE 4
 	
 	;지면에 늘어진 정액 핥아먹인다
-	;마조끼 ３이상
+	;마조끼３이상
 	CASE 5
 	
 	;몸에 낙서를 당하고 범해진다
@@ -11013,7 +11013,7 @@ ENDIF
 ;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 CALL 구상변수초기화
-LOCAL = 0;射精量
+LOCAL = 0;사정량
 ;-------------------------------------------------
 ;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
@@ -12085,7 +12085,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	LOCAL = TFLAG:10
@@ -12630,7 +12630,7 @@ IF SELECTCOM == 21
 			WSTR:(K++) =
 		ENDIF
 	ENDIF	
-	;欲情LV3以上 + 미약
+	;欲情LV3以上 + 媚薬
 	IF !구상유무확인(0) && PALAM:5 >= PALAMLV:3 && TEQUIP:26
 		;함락완료
 		IF 함락()
@@ -15249,7 +15249,7 @@ SELECTCASE TFLAG:전투이벤트
 	;도주에 실패했다
 	CASE 93
 			LOCALS:10 = 追いつかれちゃった……
-	;전투개시시
+	;전투 개시시
 	CASE 94
 		IF FLAG:선제공격플래그
 			LOCALS:10 = チャンスだよ！

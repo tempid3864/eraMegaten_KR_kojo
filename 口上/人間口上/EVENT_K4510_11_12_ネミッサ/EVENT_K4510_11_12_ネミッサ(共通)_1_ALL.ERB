@@ -1,7 +1,7 @@
 ﻿;-------------------------------------------------
-;네밋사共通구상
+;ネミッサ共通口上
 ;	◆コンセプト
-;	네밋사の性格に関係のない共通の専用구상
+;	ネミッサの性格に関係のない共通の専用口上
 ;
 ;	◆ライセンスについて
 ;	+----+----+-------------------------------+
@@ -22,27 +22,27 @@
 ;	|   7| ○ | 口上内容の転載・流用          |
 ;	+----+----+-------------------------------+
 ;
-;	@네밋사구상셀렉트さえ残していただければ
-;	自由に추가・改変していただいてかまいません。
-;	上記ライセンスについても最初の구상追記・改変者が
-;	自由に변경してください。
-;	@네밋사구상셀렉트についても専用구상の추가等あれば
-;	自由に변경していただいてかまいません。
+;	@ネミッサ口上セレクトさえ残していただければ
+;	自由に追加・改変していただいてかまいません。
+;	上記ライセンスについても最初の口上追記・改変者が
+;	自由に変更してください。
+;	@ネミッサ口上セレクトについても専用口上の追加等あれば
+;	自由に変更していただいてかまいません。
 ;
-;	◆내역
+;	◆履歴
 ;	Edit	Date			Author					Reason
 ;	001		2011/09/21		黒天					新規作成
-;	002		2011/11/25		LMT						専用구상選択時にイメージを壊す가능性に関しての注意書き추가
+;	002		2011/11/25		LMT						専用口上選択時にイメージを壊す可能性に関しての注意書き追加
 ;
 ;-------------------------------------------------
-;	◆ 사용している個別のCFLAGフラグについて
-;	800		専用구상설정有無判断用(0:で未설정、1:で설정済み)。
-;			本ファイル内では사용していないが呼び元で사용しているため記載
+;	◆ 使用している個別のCFLAGフラグについて
+;	800		専用口上設定有無判断用(0:で未設定、1:で設定済み)。
+;			本ファイル内では使用していないが呼び元で使用しているため記載
 ;-------------------------------------------------
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -52,13 +52,13 @@
 
 ;-------------------------------------------------
 ;범용 구상의 작성에 사용하는 경우는, X1→캐릭터번호가 아니라,
-;네밋사共通_1→PUB회화타입번호　로 변경해서 사용해주세요
+;ネミッサ共通_1→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_네밋사共通_1
+@EVENTTRAIN_ネミッサ共通_1
 ;--------------------------------------------------
 ;엑스트라모드 구문　CFLAG:220을 사용
 ;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
@@ -86,12 +86,12 @@
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_네밋사共通_1
+;	CALL EVENTTRAIN_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_네밋사共通_1
+;		CALL EVENTTRAIN_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -153,7 +153,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_네밋사共通_1
+	CALL EVENTTRAIN_SECOND_ネミッサ共通_1
 ;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
@@ -179,13 +179,13 @@ IF ASSI < 0
 ;	ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_네밋사共通_1
+	CALL EVENTTRAIN_SECOND_ネミッサ共通_1
 ENDIF
 
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_네밋사共通_1
+@EVENTTRAIN_SECOND_ネミッサ共通_1
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	PRINTFORMW 
@@ -250,17 +250,17 @@ RETURN 0
 ;EVENTEND 관련（X1을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_네밋사共通_1
+@EVENTEND_ネミッサ共通_1
 ;--------------------------------------------------
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTEND_PY1_네밋사共通_1
+;	CALL EVENTEND_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	SIF NO:ASSI == Y1
-;	CALL EVENTEND_PY1_네밋사共通_1
+;	CALL EVENTEND_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -316,7 +316,7 @@ RETURN 0
 ;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_네밋사共通_1
+@KOJO_MESSAGE_COM_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
@@ -329,12 +329,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_COM_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_COM_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -5374,7 +5374,7 @@ ENDSELECT
 ;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_네밋사共通_1
+@KOJO_MESSAGE_PALAMCNG_A_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -5387,12 +5387,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -5835,7 +5835,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -5859,7 +5859,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_네밋사共通_1
+@KOJO_MESSAGE_PALAMCNG_E_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -5872,12 +5872,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -5909,7 +5909,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_네밋사共通_1
+@KOJO_MESSAGE_PALAMCNG_B_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -5922,12 +5922,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6086,7 +6086,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_네밋사共通_1
+@KOJO_MESSAGE_PALAMCNG_C_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6099,12 +6099,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6139,7 +6139,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_네밋사共通_1
+@KOJO_MESSAGE_PALAMCNG_D_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6152,12 +6152,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6244,7 +6244,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_네밋사共通_1
+@KOJO_MESSAGE_MARKCNG_ネミッサ共通_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6257,12 +6257,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_네밋사共通_1
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_ネミッサ共通_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6343,13 +6343,13 @@ ENDIF
 ;-------------------------------------------------
 ;이벤트구상 모음（X1을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_네밋사共通_1
+@KOJO_MESSAGE_EVENT_ネミッサ共通_1
 
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_EVENT_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 SELECTCASE TFLAG:13
@@ -7707,7 +7707,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;조건설정
 ;-------------------------------------------------
-@EVENTTURNEND_네밋사共通_1
+@EVENTTURNEND_ネミッサ共通_1
 ;#LATER
 ;SIF TARGET < 0
 ;	RETURN 0
@@ -7738,12 +7738,12 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_네밋사共通_1
+@KOJO_MESSAGE_ENDING_ネミッサ共通_1
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_ENDING_PY1_네밋사共通_1
+;	CALL KOJO_MESSAGE_ENDING_PY1_ネミッサ共通_1
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -7795,7 +7795,7 @@ ENDSELECT
 ;RETURN 0
 
 
-@ENEMY_BATTLE_EVENT_네밋사共通_1, ARG, ARG:1, ARG:2
+@ENEMY_BATTLE_EVENT_ネミッサ共通_1, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -7809,7 +7809,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-@BATTLE_EVENT_네밋사共通_1, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_ネミッサ共通_1, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -7824,11 +7824,11 @@ IF TFLAG:전투이벤트 == 2
 ENDIF
 
 
-@BATTLE_MESSAGE_네밋사共通_1,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_ネミッサ共通_1,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 IF CFLAG:ARG:입력행동 == 721
-;로마・카롤사용時
+;ロマ・カロル使用時
 	;ＨＰ割合で分岐
 	SELECTCASE BASE:ARG:ＨＰ * 100 / MAXBASE:ARG:ＨＰ
 		CASE IS < 26
@@ -7848,7 +7848,7 @@ IF CFLAG:ARG:입력행동 == 721
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDSELECT
 ELSEIF CFLAG:ARG:입력행동 == 821
-;로마・그랜드사용時
+;ロマ・グランド使用時
 	;ＨＰ割合で分岐
 	SELECTCASE BASE:ARG:ＨＰ * 100 / MAXBASE:ARG:ＨＰ
 		CASE IS < 26
@@ -7859,22 +7859,22 @@ ELSEIF CFLAG:ARG:입력행동 == 821
 		CASE IS < 51
 			;CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"뼈の髄まで凍っちゃえ！",72,LEFT%┃
+			PRINTFORML ┃%"骨の髄まで凍っちゃえ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASEELSE
 			;CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"머리冷やせば？",72,LEFT%┃
+			PRINTFORML ┃%"頭冷やせば？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDSELECT
 ELSEIF CFLAG:ARG:입력행동 == 921
-;로마・풀멘사용時
+;ロマ・フルメン使用時
 	;ＨＰ割合で分岐
 	SELECTCASE BASE:ARG:ＨＰ * 100 / MAXBASE:ARG:ＨＰ
 		CASE IS < 26
 			;CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"건방짐よっ！消えなさい！",72,LEFT%┃
+			PRINTFORML ┃%"生意気よっ！消えなさい！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASE IS < 51
 			;CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG

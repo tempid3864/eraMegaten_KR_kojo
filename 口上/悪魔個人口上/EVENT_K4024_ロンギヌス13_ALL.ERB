@@ -25,7 +25,7 @@
 ;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 ;eraMegaten전용 구상 템플릿
-;X1와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -44,15 +44,15 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4024 → EVENTTRAIN_K4024_12
+;예： EVENTTRAIN_K4024 → EVENTTRAIN_K4024_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4024,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な설명や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -1034,7 +1034,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;아내
 				IF TALENT:170
-					;임신中
+					;妊娠中
 					IF TALENT:153
 						PRINTFORMW 「하ー악。하ー악。아기도 있는데、너란 녀석은……」
 						PRINTFORMW 「……응。열심히 낳을테니까%UNICODE(0x2661)%」
@@ -1054,7 +1054,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
-					;임신中
+					;妊娠中
 					IF TALENT:153
 						PRINTFORMW 「하ー악。하ー악。아기도 있는데、너란 녀석은……」
 						PRINTFORMW 「……응。열심히 낳을테니까%UNICODE(0x2661)%」
@@ -1074,7 +1074,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;임신中
+					;妊娠中
 					IF TALENT:153
 						PRINTFORMW
 					;그 외
@@ -6699,7 +6699,7 @@ IF TFLAG:2 > 0
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:238 < 4 || FLAG:7 == 2)
 			;아내
 			IF TALENT:170
-				;임신中
+				;妊娠中
 				IF TALENT:153
 					PRINTFORMW 「아앗…으응…응…앗　어라라、어랏？　자〇지 끝、덜덜 떨고 있네%UNICODE(0x2661)%」
 					PRINTFORMW 「나오는거야？　나온다。　후으～응。뱃속에 아이가 있는데도、정말 곤란한 녀석이네%UNICODE(0x2661)%」
@@ -6816,7 +6816,7 @@ IF TFLAG:2 > 0
 				ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				;임신中
+				;妊娠中
 				IF TALENT:153
 					PRINTFORMW
 				ELSE
@@ -6829,7 +6829,7 @@ IF TFLAG:2 > 0
 			CFLAG:238 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:238 < 3 || FLAG:7 == 2)
-			;임신中
+			;妊娠中
 			IF TALENT:153
 				PRINTFORMW 「흑흑……싫어어……열등종의 아이를 또 만드는 건 싫단 말야！」
 				PRINTFORMW 「이제 그마아…안、뭐든지 할테니까 아기만은 더럽히지 말아줘」
@@ -6843,7 +6843,7 @@ IF TFLAG:2 > 0
 			CFLAG:238 = 3
 		;그 이외
 		ELSEIF CFLAG:238 < 2 || FLAG:7 == 2
-			;임신中
+			;妊娠中
 			IF TALENT:153
 				PRINTFORMW 「흑흑……싫어어……열등종의 아이를 또 만드는 건 싫단 말야！」
 				PRINTFORMW 「이제 그마아…안、뭐든지 할테니까 아기만은 더럽히지 말아줘」
@@ -6860,7 +6860,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A

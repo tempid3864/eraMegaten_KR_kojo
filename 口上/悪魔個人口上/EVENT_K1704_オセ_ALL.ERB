@@ -212,7 +212,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 	PRINTFORMW 「……」
 	PRINTFORMW 여느 때처럼 %CALLNAME:TARGET%를 호출하면、%CALLNAME:TARGET%은(는) 한숨을 토하면서 체념한 표정을 %CALLNAME:MASTER%에게 향했다。
 	PRINTFORMW 「어째서 이렇게 끈질긴건가、%CSTR:이인칭%은(는)……」
-	PRINTFORMW 「아、아、알겠다、%CSTR:이인칭%을(를) 인정해 주도록 하지……어느 정도의 일은 따라주겠다」
+	PRINTFORMW 「아、아、알겠다、%이인칭을% 인정해 주도록 하지……어느 정도의 일은 따라주겠다」
 	PRINTFORMW %CALLNAME:TARGET%의 패배 선언에、%CALLNAME:MASTER%은(는) 웃음을 띠었다……
 	CFLAG:201 = 4
 	RETURN 0
@@ -279,7 +279,7 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
 			ENDIF
 		PRINTFORMW 「그래……그럼, 뭐 재차 선언만은 해둘까」
 		PRINTFORMW 말하고는、%CALLNAME:TARGET%는 갑자기 정색을 하며、%CALLNAME:MASTER%의 손을 잡아 그 손등에 키스를 했다。
-		PRINTFORMW 「%CALLNAME:MASTER%……나의 주인이여。지금부터、%CSTR:일인칭%은 %CSTR:이인칭%을(를) 지키겠다고、나 %CALLNAME:TARGET%의 이름에 걸고 맹세하겠노라」
+		PRINTFORMW 「%CALLNAME:MASTER%……나의 주인이여。지금부터、%CSTR:일인칭%은 %이인칭을% 지키겠다고、나 %CALLNAME:TARGET%의 이름에 걸고 맹세하겠노라」
 		PRINTFORMW 「무릎까지 꿇는 건 유행이 지났으니」
 		PRINTFORMW %CALLNAME:TARGET%는 핫하하 경쾌하게 웃으며 %CALLNAME:MASTER%의 어깨를 치고는 다시 입술에 가볍게 키스를 했다。
 		PRINTFORMW 「적어도 너의 생명이 다할 때까지……앞으로도 잘 부탁한다、%CALLNAME:MASTER%」
@@ -332,7 +332,7 @@ ELSEIF CFLAG:201 < 7 && TALENT:6 && TALENT:171
 			TEQUIP:주도권 = 1
 	CFLAG:201 = 7
 	RETURN 0
-;主人公が오세の아이を身篭った（친애、오세が남편、主人公が임신している、오세の아이を임신中）
+;主人公が오세の아이を身篭った（친애、오세が남편、主人公が妊娠している、오세の아이を妊娠中）
 ;ELSEIF CFLAG:201 < 8 && TALENT:6 && TALENT:171 && TALENT:MASTER:153 == 1 && CFLAG:MASTER:임신확정후의부친판정 == 1704
 ;		PRINTFORMW 어ー 없어 (장난 아니라 진짜 이렇게 작성되어 있음)
 ;	CFLAG:201 = 8
@@ -1640,7 +1640,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:311 == 0
 			IF TALENT:PLAYER:남자 == 1
 				PRINTFORMW 「백보 양보해서 명령은 들어주마……하지만」
-				PRINTFORMW 「%CSTR:이인칭%을(를) 반찬으로 하라는 건 무슨 소리냐？」
+				PRINTFORMW 「%이인칭을% 반찬으로 하라는 건 무슨 소리냐？」
 				PRINTFORMW 「……알겠다 알겠어、하면 되는 거지？」
 				CALL OSE_JII_1_K1704
 				PRINTFORMW 「……으응」
@@ -3971,7 +3971,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「……정중하게 다뤄라」
 					PRINTFORMW %CALLNAME:TARGET%는 떨떠름한 얼굴을 하면서도 허리를 %CALLNAME:PLAYER%의 앞에 가져가、거침없이 %CALLNAME:PLAYER%의 얼굴에 페니스를 들이댔다……
 				ELSE
-					PRINTFORMW 「정중히 다루라고？%CSTR:이인칭%을(를) 범하기 위한 물건이니까」
+					PRINTFORMW 「정중히 다루라고？%이인칭을% 범하기 위한 물건이니까」
 					PRINTFORMW %CALLNAME:TARGET%는 낮은 목소리로 웃으면서 허리를 %CALLNAME:PLAYER%의 앞에 가져가、거침없이 %CALLNAME:PLAYER%의 얼굴에 페니스를 들이댔다……
 				ENDIF
 				CALL TRAIN_MESSAGE
@@ -8513,7 +8513,7 @@ IF TFLAG:10 > 0
 	ELSEIF TEQUIP:12
 		PRINTFORM 단속적으로 페니스에 주어지는 쾌감에 견디지 못하고 
 	ENDIF
-	;大量사정
+	;대량사정
 	SIF TFLAG:10 == 2
 		PRINT 대량의 
 	PRINTW 정액을 분출했다
@@ -11143,7 +11143,7 @@ IF TFLAG:10 > 0
 	;조교자に中出しで下降
 	ELSEIF GROUPMATCH(SELECTCOM , 64 , 92 , 93 , 94 , 95 , 96 , 97 )
 		CFLAG:801 -= 2
-		;大量사정
+		;대량사정
 		SIF TFLAG:10 == 2
 			CFLAG:801 -= 2
 		;오세に주도권
@@ -11161,7 +11161,7 @@ IF TFLAG:10 > 0
 	;펠라한다、파이즈리한다で사정
 	ELSEIF GROUPMATCH(SELECTCOM , 2 , 90 , 91 )
 		CFLAG:801 -= 1
-		;大量사정
+		;대량사정
 		SIF TFLAG:10 == 2
 			CFLAG:801 -= 2
 			;오세に주도권

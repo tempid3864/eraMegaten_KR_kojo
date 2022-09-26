@@ -1,8 +1,8 @@
 ﻿;-------------------------------------------------
-;리사구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;リサ口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;-------------------------------------------------
-;	Module		:EVENT_K4525_리사_ALL.ERB
-;	Facility	:리사구상
+;	Module		:EVENT_K4525_リサ_ALL.ERB
+;	Facility	:リサ口上
 ;	Start word	:広東語を知りたい、広東語って何だ
 ;
 ;	Licence		:ライセンスフリー。
@@ -11,9 +11,9 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	000		2011/05/29		Wikiの中の人			新規作成
-;	001		2011/05/29		Wikiの中の人			구상更新
-;	002		2011/06/22		Wikiの中の人			구상更新
-;	003		2011/07/06		Wikiの中の人			구상更新
+;	001		2011/05/29		Wikiの中の人			口上更新
+;	002		2011/06/22		Wikiの中の人			口上更新
+;	003		2011/07/06		Wikiの中の人			口上更新
 ;-------------------------------------------------
 ;eratohoA 및 eratohoA계열 전용 구상 템플릿
 ;4525와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
@@ -23,7 +23,7 @@
 ;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
 ;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;--------------------------------------------------
-;구상ファイルの存在판정（X2을 캐릭터번호로 치환）
+;구상파일의 존재 판정（X2을 캐릭터번호로 치환）
 ;--------------------------------------------------
 ;@EVENTTRAIN
 ;#PRI
@@ -35,7 +35,7 @@
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4525을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
-;소질による性格타입をTFLAG 400～として사용
+;素質による性格タイプをTFLAG 400～として使用
 ;--------------------------------------------------
 @EVENTTRAIN_K4525
 ;SIF FLAG:7 <= 0
@@ -485,7 +485,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
 					;発情モードON
 					IF CFLAG:801 == 1
-						;전회コマンドが조개젖히기
+						;前回コマンドが秘貝開帳
 						IF PREVCOM:9
 							PRINTFORMW %CALLNAME:TARGET% 스스로, 비부를 활짝 열었다
 							PRINTFORMW 「%CSTR:이인칭%에게 잔뜩 사랑 받아 버렸으니까…이제 안되겠네요…♡」
@@ -515,7 +515,7 @@ SELECTCASE SELECTCOM
 				CFLAG:301 = 3
 			;그 이외
 			ELSEIF CFLAG:301 < 2 || FLAG:7 == 2
-				;전회実行조개젖히기
+				;前回実行秘貝開帳
 				IF PREVCOM:9
 					PRINTFORMW 
 					IF TALENT:처녀
@@ -714,17 +714,17 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
 					IF TALENT:폭유 || TALENT:거유
-						;옷を着ている＆속옷（상）を着けている
+						;服を着ている＆下着（上）を着けている
 						IF TEQUIP:81 == 1 && TEQUIP:85 == 1
 							PRINTFORMW 옷과 브래지어 너머로 %CALLNAME:TARGET%의 풍만하고 부드러운 가슴을 주물렀다…
 							PRINTFORMW 「싫어♡　손놀림이 음란하네요… 으응…」
-						;옷を着ていない＆속옷（상）を着けている
+						;服を着ていない＆下着（上）を着けている
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 1
 							PRINTFORMW 브라 너머로 %CALLNAME:TARGET%의 풍만한 가슴을 주물렀다…
 							PRINTFORMW 「에헤헤…♡　속옷인 채로는 어쩐지 조금 이상한 느낌이네요…」
-						;옷を着ている＆속옷（상）を着けていない
+						;服を着ている＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 1 && TEQUIP:85 == 0
-							;블라우스を着用している＋블레이저 교복を脱いでいる（디폴트衣装から겉옷を一枚脱いだ상태限定）
+							;ブラウスを着用している＋ブレザーを脱いでいる（デフォルト衣装から上着を一枚脱いだ状態限定）
 							IF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								IF RAND:2 == 0
 									PRINTFORMW 「저기, 지금… 브라가 맞질 않아서…」
@@ -741,54 +741,54 @@ SELECTCASE SELECTCOM
 							ELSE
 								PRINTFORMW 
 							ENDIF
-						;옷を着ていない＆속옷（상）を着けていない
+						;服を着ていない＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 0
 							PRINTFORMW
 						ENDIF
 					;빈유
 					ELSEIF TALENT:빈유
-						;옷を着ている＆속옷（상）を着けている
+						;服を着ている＆下着（上）を着けている
 						IF TEQUIP:81 == 1 && TEQUIP:85 == 1
 							PRINTFORMW 
-						;옷を着ていない＆속옷（상）を着けている
+						;服を着ていない＆下着（上）を着けている
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 1
 							PRINTFORMW 
-						;옷を着ている＆속옷（상）を着けていない
+						;服を着ている＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 1 && TEQUIP:85 == 0
 							PRINTFORMW 
-						;옷を着ていない＆속옷（상）を着けていない
+						;服を着ていない＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 0
 							PRINTFORMW 
 						ENDIF
-					;디폴트の리사はこれ　普通サイズの가슴（「スタイルが良い」とあるので、ウェストが細いはず）
+					;デフォルトのリサはこれ　普通サイズの胸（「スタイルが良い」とあるので、ウェストが細いはず）
 					ELSE
-						;옷を着ている＆속옷（상）を着けている
+						;服を着ている＆下着（上）を着けている
 						IF TEQUIP:81 == 1 && TEQUIP:85 == 1
-							;블라우스を着用している＋블레이저교복を脱いでいる（디폴트衣装から겉옷を一枚脱いだ상태限定）
+							;ブラウスを着用している＋ブレザーを脱いでいる（デフォルト衣装から上着を一枚脱いだ状態限定）
 							IF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								PRINTFORMW 「」
 							ELSEIF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								PRINTFORMW %CALLNAME:TARGET%의 균형잡힌 부드러운 가슴을 옷 너머로 주물렀다…
 							ENDIF
-						;옷を着ていない＆속옷（상）を着けている
+						;服を着ていない＆下着（上）を着けている
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 1
-							;블라우스を着用している＋블레이저교복を脱いでいる（디폴트衣装から겉옷を一枚脱いだ상태限定）
+							;ブラウスを着用している＋ブレザーを脱いでいる（デフォルト衣装から上着を一枚脱いだ状態限定）
 							IF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								PRINTFORMW 
 							ELSE
 								PRINTFORMW %CALLNAME:TARGET%의 균형 잡힌 나름 풍만한 가슴을 브라 너머로 주물렀다…
 							ENDIF
-						;옷を着ている＆속옷（상）を着けていない
+						;服を着ている＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 1 && TEQUIP:85 == 0
-							;블라우스を着用している＋블레이저교복を脱いでいる（디폴트衣装から겉옷を一枚脱いだ상태限定）
+							;ブラウスを着用している＋ブレザーを脱いでいる（デフォルト衣装から上着を一枚脱いだ状態限定）
 							IF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								PRINTFORMW 
 							ELSE
 								PRINTFORMW 노브라 상태인 %CALLNAME:TARGET%의 균형 잡힌 부드러운 가슴을 옷 너머로 주물렀다…
 							ENDIF
-						;옷を着ていない＆속옷（상）を着けていない
+						;服を着ていない＆下着（上）を着けていない
 						ELSEIF TEQUIP:81 == 0 && TEQUIP:85 == 0
-							;블라우스を着用している＋블레이저교복を脱いでいる（디폴트衣装から겉옷を一枚脱いだ상태限定）
+							;ブラウスを着用している＋ブレザーを脱いでいる（デフォルト衣装から上着を一枚脱いだ状態限定）
 							IF EQUIP:81 == 107 && (EQUIP:81 == 107 && TEQUIP:81 == 0)
 								PRINTFORMW 
 							ELSE
@@ -1191,22 +1191,22 @@ SELECTCASE SELECTCOM
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
 				IF CFLAG:801 == 1
-					;■　당신の性別が男、오토코노코、후타나리、女
-					;당신が女
+					;■　あなたの性別が男、男の娘、ふたなり、女
+					;あなたが女
 					IF TALENT:MASTER:남자 == 1
-					;페니스の有無체크
-						;페니스がある
-						;당신は후타나리
+					;ペニスの有無チェック
+						;ペニスがある
+						;あなたはふたなり
 						IF HAVE_PENIS(MASTER) || TALENT:MASTER:후타나리
 							PRINTFORMW 「」
-						;당신は女
+						;あなたは女
 						ELSE
 							PRINTFORMW 
 						ENDIF
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:MASTER:오토코노코
 						PRINTFORMW 
-					;당신は男
+					;あなたは男
 					ELSE
 						PRINTFORMW 
 					ENDIF
@@ -1355,7 +1355,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「저기 저기, 이거 귀여워？」
 				ENDIF
 			ENDIF
-			;ラブ회화ルート
+			;ラブ会話ルート
 			IF RAND:2 == 0
 				IF RAND:4 == 0
 					PRINTFORMW 「저기 저기, 있잖아…」
@@ -1370,7 +1370,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「응ー…　그런데, 쭉 생각해 왔는데…」
 					PRINTFORMW %CALLNAME:TARGET%의 소박한 의문에 대해 이야기를 주고 받았다…
 				ENDIF
-			;適当회화
+			;適当会話
 			ELSEIF RAND:2 == 0 && ASSIPLAY == 0
 				PRINTFORMW 
 			;ゲームネタルート
@@ -1465,7 +1465,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「페르소나를 손에 넣을 때의 이야기？　필레몬을 만났을 때…던가, 꿈의 세계같은…가벼운 느낌이었어
 						PRINTFORMW 　일본 말고 중국의 고전인 호접지몽이라는 이야기가 있는데, 만약 꿈에서 죽어 버리면 정말로 죽기도 해…！
 						PRINTFORMW 　……같은, 그런 건 만화나 게임이 아니기 때문에 있을 수 없어요ー　%CALLNAME:MASTER%도, 진짜로 믿지 말아요？」
-					;세계樹ネタ
+					;世界樹ネタ
 					ELSE
 						PRINTFORMW 「나는 게임 같은 건 안 하지만, 전차 안이라던가 학교 등에선 휴대용 게임을 하고 있는 사람은 많아요ー
 						PRINTFORMW 　친구가 터치 펜 사용해서 노는 걸 가지고 있어서, 대체로, 쾅！ 퍼펑！ 같은,
@@ -1566,7 +1566,7 @@ SELECTCASE SELECTCOM
 			CFLAG:319 = 1
 		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
-			;기능ルート
+			;技能ルート
 			IF RAND:2 == 0
 				IF ABL:가창기능 < 1
 						IF RAND:2 == 0
@@ -1612,7 +1612,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 
 						ENDIF
 				ENDIF
-			;랜덤ルート
+			;ランダムルート
 			ELSE
 				IF RAND:3 == 0
 					PRINTFORMW 「……激氣(열받아)！　전혀 달라요！　곡조는 되도 높낮이가 없어서 뭘 노래하는지 모르겠어！
@@ -2323,16 +2323,16 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
-					;전회후배위（子宮口責めやってもう一回후배위）
+					;前回後背位（子宮口責めやってもう一回後背位）
 					IF PREVCOM:61
-						;욕정モードON
+						;欲情モードON
 						IF CFLAG:801 >= 1
 							PRINTFORMW 「겨, 격렬해♡　……좀…　좀 더 찔러요…！」
 							PRINTFORMW 허리를 부딪힐 때마다, 결합부에서 나는 물컹거리는 음란한 소리가 새어 나왔다…
 						ELSE
 							PRINTFORMW 「그런데, 뒤로 하는 걸 좋아 하는 거야…？」
 						ENDIF
-					;욕정モードON
+					;欲情モードON
 					ELSEIF CFLAG:801 >= 1
 						IF RAND:2 == 0
 							PRINTFORMW %CALLNAME:MASTER%에게 등을 향하고 엉덩이를 쑥 내민 자세의 %CALLNAME:TARGET%는
@@ -2955,7 +2955,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
 					IF PREVCOM:72
-						;디폴트衣装（블라우스＋스커트系＋블레이저교복）
+						;デフォルト衣装（ブラウス＋スカート系＋ブレザー）
 						IF TEQUIP:81 == 107 && (TEQUIP:82 == 201 || TEQUIP:82 == 205 || TEQUIP:82 == 207) && TEQUIP:90 == 1003
 							IF CFLAG:801 == 1
 								PRINTFORMW 「교복 엣찌…　좋아…」
@@ -2966,7 +2966,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW %CALLNAME:TARGET%
 						ENDIF
 					ELSE
-						;디폴트衣装（블라우스＋스커트系＋블레이저교복）
+						;デフォルト衣装（ブラウス＋スカート系＋ブレザー）
 						IF TEQUIP:81 == 107 && (TEQUIP:82 == 201 || TEQUIP:82 == 205 || TEQUIP:82 == 207) && TEQUIP:90 == 1003
 							IF CFLAG:801 == 1
 								PRINTFORMW %CALLNAME:TARGET%의 스커트를 들어 올리자, 이미 애액이 듬뿍 스며들어 투명하게 비치는 속옷이 있었다…
@@ -3595,7 +3595,7 @@ SELECTCASE SELECTCOM
 			CFLAG:425 = 1
 		;2번째 이후
 		ELSE
-			;衣装分岐체크
+			;衣装分岐チェック
 			;세일러복
 			IF TEQUIP:MASTER:81 == 105
 				PRINTFORMW 진한 파란색이 인상적인 세일러복을 입은 %CALLNAME:MASTER%이 스스로 허벅지를 열고 비밀의 틈 속으로 초대하자,
@@ -3693,7 +3693,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0 && ASSIPLAY == 0
-					PRINTFORMW 「%CALLNAME:PLAYER%の中…　すごい暖かくて気持ちいい…♡」
+					PRINTFORMW 「%CALLNAME:PLAYER%の中…　すごい暖かくて気持ちいい…%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5462,7 +5462,7 @@ SELECTCASE SELECTCOM
 				CFLAG:396 = 1
 			;2번째 이후
 			ELSE
-				;場所はどのルートでも同じ。소질で連れて行った後のリアクションが변화
+				;場所はどのルートでも同じ。素質で連れて行った後のリアクションが変化
 				;自宅
 				IF TEQUIP:29 == 0
 					PRINTFORMW 자택으로 돌아왔다…
@@ -6801,7 +6801,7 @@ ENDIF
 				IF (TALENT:3 || TALENT:6)
 					IF CFLAG:801 == 1
 						PRINTFORMW 
-						;조교자と조수、どっちを先に咥えるかの択
+						;調教者と助手、どっちを先に咥えるかの択
 						IF RAND:2
 						ELSE
 						ENDIF
@@ -6814,7 +6814,7 @@ ENDIF
 					IF CFLAG:801 == 1
 						PRINTFORMW 「아학♡　왔어～요♡」
 						PRINTFORMW 좋아하는 것이 내밀어진 아이처럼 기뻐하는 표정으로
-						;조교자と조수、どっちを先に咥えるかの択
+						;調教者と助手、どっちを先に咥えるかの択
 						IF RAND:2
 							PRINTFORMW 「그럼, 먼저 %CSTR:이인칭%의 자지네요」
 						ELSE
@@ -7489,9 +7489,9 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;■　させる系사정
+;■　させる系射精
 ;-------------------------------------------------
-;펠라한다で사정させた
+;フェラするで射精させた
 ;-------------------------------------------------
 IF SELECTCOM == 90 && TFLAG:10 > 0
 	;함락완료
@@ -7518,7 +7518,7 @@ IF SELECTCOM == 90 && TFLAG:10 > 0
 ENDIF
 
 ;-------------------------------------------------
-;수음한다で사정させた
+;수음한다で射精させた
 ;-------------------------------------------------
 IF SELECTCOM == 2 && TFLAG:10 > 0
 	;함락완료
@@ -7544,7 +7544,7 @@ IF SELECTCOM == 2 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;정상위시킨다で사정させた
+;정상위시킨다で射精させた
 ;-------------------------------------------------
 IF SELECTCOM == 92 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7560,7 +7560,7 @@ IF SELECTCOM == 92 && TFLAG:10 > 0
 		PRINTFORMW %CALLNAME:PLAYER%의 자궁에 %CALLNAME:TARGET%의 활력으로 가득 찬 정액이 눈사태처럼 쏟아져 나와 자궁을 삼켜갔다…
 		IF CFLAG:MASTER:113 == 1 && CFLAG:800 == 0
 			PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 들어오는 것을 느끼며, 오늘이 자신의 위험일 이었던 것을 생각해 내었다.
-			;랜덤分岐
+			;ランダム分岐
 			IF RAND:2 == 0
 				PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 			ELSEIF RAND:2 == 1
@@ -7575,7 +7575,7 @@ IF SELECTCOM == 92 && TFLAG:10 > 0
 			ENDIF
 		ELSEIF CFLAG:MASTER:배란유발제 == 1 && CFLAG:800 == 0
 			PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 오는 것을 느끼며, 오늘은 배란유발제를 마셨다는 것을 생각해 내었다,
-			;랜덤分岐
+			;ランダム分岐
 			IF RAND:2 == 0
 				PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 			ELSEIF RAND:2 == 1
@@ -7594,7 +7594,7 @@ IF SELECTCOM == 92 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;후배위시킨다で사정させた
+;후배위시킨다で射精させた
 ;-------------------------------------------------
 IF SELECTCOM == 93 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7604,7 +7604,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 			;위험일分岐
 			IF CFLAG:MASTER:113 == 1 && CFLAG:800 == 0
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 들어오는 것을 느끼며, 오늘이 자신의 위험일 이었던 것을 생각해 내었다.
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7619,7 +7619,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 				ENDIF
 			ELSEIF CFLAG:MASTER:배란유발제 == 1 && CFLAG:800 == 0
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 오는 것을 느끼며, 오늘은 배란유발제를 마셨다는 것을 생각해 내었다,
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7640,7 +7640,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 		PRINTFORMW %CALLNAME:PLAYER%의 자궁에 %CALLNAME:TARGET%의 활력으로 가득 찬 정액이 눈사태처럼 쏟아져 나와 자궁을 삼켜갔다…
 			IF CFLAG:MASTER:113 == 1 && CFLAG:800 == 0
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 들어오는 것을 느끼며, 오늘이 자신의 위험일 이었던 것을 생각해 내었다.
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7655,7 +7655,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 				ENDIF
 			ELSEIF CFLAG:MASTER:배란유발제 == 1 && CFLAG:800 == 0
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 오는 것을 느끼며, 오늘은 배란유발제를 마셨다는 것을 생각해 내었다,
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7676,7 +7676,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 		PRINTFORMW %CALLNAME:PLAYER%의 자궁에 %CALLNAME:TARGET%의 활력으로 가득 찬 정액이 눈사태처럼 쏟아져 나와 자궁을 삼켜갔다…
 			IF CFLAG:MASTER:113 == 1
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 들어오는 것을 느끼며, 오늘이 자신의 위험일이었던 것을 생각해 내었다.
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7686,7 +7686,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 				ENDIF
 			ELSEIF CFLAG:MASTER:배란유발제 == 1 && CFLAG:800 == 0
 				PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 오는 것을 느끼며, 오늘은 배란유발제를 마셨다는 것을 생각해 내었다,
-				;랜덤分岐
+				;ランダム分岐
 				IF RAND:2 == 0
 					PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 				ELSEIF RAND:2 == 1
@@ -7700,7 +7700,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;기승위한다で사정させた
+;기승위한다で射精させた
 ;-------------------------------------------------
 IF SELECTCOM == 94 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7726,7 +7726,7 @@ IF SELECTCOM == 94 && TFLAG:10 > 0
 	;위험일分岐
 	IF CFLAG:MASTER:113 == 1 && CFLAG:800 == 0
 		PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 들어오는 것을 느끼며, 오늘이 자신의 위험일이었던 것을 생각해 내었다.
-		;랜덤分岐
+		;ランダム分岐
 		IF RAND:2 == 0
 			PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 		ELSEIF RAND:2 == 1
@@ -7741,7 +7741,7 @@ IF SELECTCOM == 94 && TFLAG:10 > 0
 		ENDIF
 	ELSEIF CFLAG:MASTER:배란유발제 == 1 && CFLAG:800 == 0
 		PRINTFORMW %CALLNAME:MASTER%는 자궁 내에 정액이 쏟아져 오는 것을 느끼며, 오늘은 배란유발제를 마셨다는 것을 생각해 내었다,
-		;랜덤分岐
+		;ランダム分岐
 		IF RAND:2 == 0
 			PRINTFORMW 뭐, 별로 임신해도 괜찮으니까 라고 본능과 쾌락으로 달아올라 흐릿해진 머리로 그렇게 생각했다…
 		ELSEIF RAND:2 == 1
@@ -7758,7 +7758,7 @@ IF SELECTCOM == 94 && TFLAG:10 > 0
 	CFLAG:800 = 1
 ENDIF
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7779,7 +7779,7 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;후배위시킨다で사정
+;후배위시킨다で射精
 ;-------------------------------------------------
 IF SELECTCOM == 93 && TFLAG:10 > 0
 	;함락완료
@@ -7791,7 +7791,7 @@ IF SELECTCOM == 93 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;속옷비켜삽입으로사정
+;下着ずらし挿入で射精
 ;-------------------------------------------------
 IF SELECTCOM == 72 && TFLAG:10 > 0
 	;함락완료
@@ -7803,7 +7803,7 @@ IF SELECTCOM == 72 && TFLAG:10 > 0
 	ENDIF
 ENDIF
 ;-------------------------------------------------
-;팬티훑기で사정した
+;パンツ扱きで射精した
 ;-------------------------------------------------
 IF SELECTCOM == 197 && TFLAG:1 > 0
 	;함락완료
@@ -8193,7 +8193,7 @@ IF P > PALAMLV:3 && CFLAG:247 == 0
 		PRINTFORMW 
 	;그 이외
 	ELSE
-		PRINTFORMW （연인…　나, 연인일 경우…　）
+		PRINTFORMW （정인…　나, 정인을…　）
 	ENDIF
 	CFLAG:247 = 1
 ENDIF
@@ -8784,7 +8784,7 @@ SELECTCASE TFLAG:13
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 			;연모, 친애
 			IF (TALENT:3 || TALENT:6) && ASSIPLAY == 0
-				;카메라と필름소지　필름残量は변화無し
+				;カメラとフィルム所持　フィルム残量は変化無し
 				IF ITEM:카메라 == 1 && ITEM:필름 > 0
 					PRINTFORMW %CALLNAME:TARGET%는 %CALLNAME:MASTER%이 찍힌 사진을 응시하며 자신의 성기를 희롱하고 있다…
 					PRINTFORMW 이윽고 금방이라도 끊어질 것만 같은 목소리가 된 %CSTR:12%, %CSTR:12%♡와 %CALLNAME:MASTER%의 이름을 계속 부르며 절정에 달한 것 같다…
@@ -8868,7 +8868,7 @@ SELECTCASE TFLAG:13
 		;부친이 주인이고 모친이 연모나 친애 보유
 		ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 			PRINTFORMW 「저기……　아기가… 아기가 생겨 버렸어…♡」
-		;父親が奴隷or조수で母親が음란or창부持ち
+		;父親が奴隷or助手で母親が淫乱or娼婦持ち
 		ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
 			;부친(조수）과의 상성이 100보다 큰 경우
 			IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125

@@ -14,7 +14,7 @@ ELSEIF LOCAL == [[스킬:ＧＵＮ]]
 	LOCALS = あたれっ
 ELSEIF LOCAL == [[스킬:노바사이저]]
 	IF RAND:2
-		LOCALS = 노바사이저っ！！
+		LOCALS = ノヴァサイザーっ！！
 	ELSE
 		LOCALS = もう終わりだ
 	ENDIF
@@ -55,7 +55,7 @@ ELSEIF RESULT == 2 && RAND:3 == 0
 		IF RAND:2
 			LOCALS = やらせるかっ
 		ELSE
-			LOCALS = 눈を閉じてな
+			LOCALS = 目を閉じてな
 		ENDIF
 	ENDIF
 ;상태변화
@@ -92,7 +92,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = 行くぞ！
 		ENDIF
 	CASE 2
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		;潜在反撃対策
 		IF CFLAG:ARG:입력행동 == -1
@@ -107,7 +107,7 @@ SELECTCASE TFLAG:전투이벤트
 				ELSE
 					LOCALS = 詰めが、甘かったな…
 				ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = やるな
@@ -128,7 +128,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = 命拾いしたな
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -167,17 +167,17 @@ SIF LOCALS != "EMPTY"
 	CALL MESSAGE_BL(LOCAL:1, LOCALS, LOCALS:1, LOCALS:2, LOCALS:3, LOCALS:4)
 @EVOLUTE_PERSONA_K4524,ARG
 IF CFLAG:ARG:페르소나강화플래그 == 1
-	PRINTFORMW 「周防타츠야、彼の당신の힘になりたいという想いに」
-	PRINTFORMW 「常に彼の傍に寄り添ってきた페르소나が応えようとしているようですぞ」
-	PRINTFORMW 「我が손助けし、페르소나の新たな힘を引き出してみせましょう」
+	PRINTFORMW 「周防達哉、彼のあなたの力になりたいという想いに」
+	PRINTFORMW 「常に彼の傍に寄り添ってきたペルソナが応えようとしているようですぞ」
+	PRINTFORMW 「我が手助けし、ペルソナの新たな力を引き出してみせましょう」
 	PRINTL
 	PRINTW
-	PRINTW 페르소나「불카누스」が페르소나「불카누스・개」に生まれ変わった
+	PRINTW ペルソナ「ヴォルカヌス」がペルソナ「ヴォルカヌス・改」に生まれ変わった
 ELSE
-	PRINTFORMW 「周防타츠야、以前彼の想いに応えた페르소나ですが」
-	PRINTFORMW 「彼のさらなる成長と想いに、また페르소나も新たな힘を得ようとしているようです」
-	PRINTFORMW 「いままた我が손助けし、페르소나の更なる힘を引き出してみせましょう」
+	PRINTFORMW 「周防達哉、以前彼の想いに応えたペルソナですが」
+	PRINTFORMW 「彼のさらなる成長と想いに、またペルソナも新たな力を得ようとしているようです」
+	PRINTFORMW 「いままた我が手助けし、ペルソナの更なる力を引き出してみせましょう」
 	PRINTL
 	PRINTW
-	PRINTW 페르소나「불카누스・개」が페르소나「아폴로」に生まれ変わった
+	PRINTW ペルソナ「ヴォルカヌス・改」がペルソナ「アポロ」に生まれ変わった
 ENDIF

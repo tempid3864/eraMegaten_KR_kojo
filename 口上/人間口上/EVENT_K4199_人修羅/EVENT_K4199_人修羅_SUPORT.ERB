@@ -1,24 +1,24 @@
-﻿;eraMegaten専用ナビ口上テンプレート
-;X1をキャラ番号に置換してください
+﻿;eraMegaten전용 내비 구상 템플릿
+;X1을 캐릭터번호로 치환해 주세요
 ;人修羅くんナビ口上
 ;半魔だし初期でアナライズできるし悪魔に詳しいはず、ということで作成。
 ;完全自分用　作成者 490メモリー
 ;=========================================
-;ARG	戦闘状況
-;ARG:1	敵の初期数
-;ARG:2	現在の敵数
-;ARG:3	現在の味方の数
-;ARG:4	状態異常の味方の数
-;ARG:5	HPが50%を切った味方の数
-;ARG:6	HPが25%を切った味方の数
-;ARG:7	死亡している味方の数
-;ARG:8	対象キャラの番号取得用
+;ARG	전투상황
+;ARG:1	적의 초기 수
+;ARG:2	현재의 적 수
+;ARG:3	현재의 아군의 수
+;ARG:4	상태이상인 아군의 수
+;ARG:5	HP가 50%를 밑도는 아군의 수
+;ARG:6	HP가 25%를 밑도는 아군의 수
+;ARG:7	사망한 아군의 수
+;ARG:8	대상 캐릭터의 번호 취득용
 ;=========================================
 @BATTLE_NAVI_K4199, ARG, ARG:1, ARG:2, ARG:3, ARG:4, ARG:5, ARG:6, ARG:7, ARG:8
 #DIM 行
 #DIMS 敵数
-;右のような指定も可能→SETCOLOR 0xA0A0A0
-;色見本に#ABCDEFというような書き方がされていた場合は、こちらの書き方(SETCOLOR 0xABCDEF)を使うと良い
+;오른쪽과 같이 지정도 가능 → SETCOLOR 0xA0A0A0
+;색 견본에 #ABCDEF라고 쓰여있는 경우는, 이쪽의 기술법(SETCOLOR 0xABCDEF)을 사용하면 좋을 것
 ;水色
 SETCOLOR 0x33ffcc
 VARSET LOCALS
@@ -36,33 +36,33 @@ LOCALS = %CALLNAME:ASSI%
 ;LOCALS:30 = ３０行目
 
 SELECTCASE ARG
-	;戦闘開始・味方のレベルが敵のレベルより１０以上高い
+	;전투개시・아군의 레벨이 적의 레벨보다 １０이상 높다
 	CASE 0
 		IF ARG:1 == 4
-			;敵数4
-			LOCALS:1 = ……少しは油断しても大丈夫そう。この数なら蹴散らせると思う
+			;적 수 4
+			LOCALS:1 = ……少しは油断しても大丈夫そうだけど、この数なら蹴散らせると思う
 		ELSEIF ARG:1 == 3
-			;敵数3
+			;적 수 3
 			LOCALS:1 = ……まぁ、ほどほどに痛めつければ逃げてくれそうだ
 		ELSEIF ARG:1 == 2
-			;敵数2
+			;적 수 2
 			LOCALS:1 = ……舐められてるのかと思ったけど、そういうわけでもないみたい
 		ELSEIF ARG:1 == 1
-			;敵数1
+			;적 수 1
 			LOCALS:1 = ……その勇気は褒めてあげたい
 		ELSE
-			;敵数5以上
+			;적 수 5이상
 			LOCALS:1 = ……相手は 敵数 = 匹。一応、気をつけて
 		ENDIF
-	;戦闘開始・味方のレベルが敵のレベルより１０以上低い
+	;전투개시・아군의 레벨이 적의 레벨보다 １０이상 낮다
 	CASE 1
-		;敵数１
+		;적 수 １
 		IF ARG:1 == 1
 			LOCALS:1 = ……敵は1体。だけど…危ない、かもな
 		ELSE
 			LOCALS:1 = ……敵の方がかなり強い。それに 敵数 体だから戦略は考えてね
 		ENDIF
-	;戦闘開始・同レベル帯
+	;전투개시・동레벨대
 	CASE 2
 		IF ARG:1 == 2
 			LOCALS:1 = ……敵もまぁまぁ強いみたいだ
@@ -71,7 +71,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……相手は 敵数 = 体。一撃で沈められれば問題なさそう
 		ENDIF
-	;戦闘開始・先制攻撃
+	;전투개시・선제공격
 	CASE 3
 		IF RAND:3 == 0
 			LOCALS:1 = ……こっちの方が察知したのは早かったからね、さっさとカタを付けよう
@@ -80,7 +80,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……いいね、すぐ終わりそう
 		ENDIF
-	;戦闘開始・バックアタック
+	;전투개시・백어택
 	CASE 4
 		IF RAND:3 == 0
 			LOCALS:1 = ……敵が来てる。 敵数 = 体、だけど…
@@ -89,14 +89,14 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……敵か。今完全に気を抜いてた…
 		ENDIF
-	;戦闘開始・バックアタック（百太郎発動）
+	;전투개시・백어택（하쿠타로우）
 	CASE 5
 		IF RAND:2 == 0
 			LOCALS:1 = ……敵 敵数 = 体。はやく身構えてくれれば防げるよ
 		ELSE
 			LOCALS:1 = ……大丈夫。敵は 敵数 = 体しかいないから
 		ENDIF
-	;戦闘開始・不意打ち
+	;전투개시・기습
 	CASE 6
 		IF RAND:3 == 0
 			LOCALS:1 = ……めんどくさい戦法をとってくるヤツらだな
@@ -105,14 +105,14 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……チッ
 		ENDIF
-	;戦闘開始・不意打ち（百太郎発動）
+	;전투개시・기습（하쿠타로우）
 	CASE 7
 		IF RAND:2 == 0
 			LOCALS:1 = ……敵 敵数 = 体。正面向かってこないってことは、こっちに勝機がある
 		ELSE
 			LOCALS:1 = ……予測通りに来てくれた。敵 敵数 = 体だよ
 		ENDIF
-	;戦闘終了・味方のレベルが敵のレベルより１０以上高い
+	;전투종료・아군의 레벨이 적의 레벨보다 １０이상 높다
 	CASE 8
 		IF RAND:3 == 0
 			LOCALS:1 = ……やっぱり楽勝だった？　お疲れ様
@@ -121,7 +121,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……よし、次に進もう
 		ENDIF
-	;戦闘終了・味方のレベルが敵のレベルより１０以上低い
+	;전투종료・아군의 레벨이 적의 레벨보다 １０이상 낮다
 	CASE 9
 		IF RAND:3 == 0
 			LOCALS:1 = ……よかった、苦戦はしたけど勝てた。お疲れ様
@@ -130,7 +130,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……一回、休憩するのも手だよ
 		ENDIF
-	;戦闘終了・同レベル帯
+	;전투종료・동레벨대
 	CASE 10
 		IF RAND:3 == 0
 			LOCALS:1 = ……安定してるね。お疲れ様
@@ -139,7 +139,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……気を抜かないでね
 		ENDIF
-	;戦闘終了・全滅
+	;전투종료・전멸
 	CASE 11
 		IF RAND:3 == 0
 			LOCALS:1 = ……こんな終わり方って…やるせないな
@@ -148,7 +148,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……わかってはいたけど、嫌な光景だ…
 		ENDIF
-	;전투중・死亡している味方が複数いる・逃走不能
+	;전투중・사망한 아군이 복수 있다・도주불가
 	CASE 12
 		IF RAND:3 == 0
 			LOCALS:1 = ……クソ、はやく立って！　こんなの嫌だろ…！
@@ -157,13 +157,13 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……ここを乗り切れば、どうにかなるかも
 		ENDIF
-	;전투중・死亡している味方が複数いる・逃走可能
+	;전투중・사망한 아군이 복수 있다・도주가능
 	CASE 13
 		LOCALS:1 = ……今なら逃げれる！　早くして！
-	;전투중・死亡している味方が一人いる（あなた）
+	;전투중・사망한 아군이 1명 있다（아나타）
 	CASE 14
 		LOCALS:1 = ……はやくッ！%CALLNAME:MASTER%と一緒に避難しろ！
-	;전투중・死亡している味方が一人いる（あなた以外）
+	;전투중・사망한 아군이 1명 있다（아나타 이외）
 	CASE 15
 		IF 0
 ;		ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -173,7 +173,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = 
 		ENDIF
-	;전투중・ＨＰを25%切った味方が複数いる・逃走不能
+	;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주불가
 	CASE 16
 		IF RAND:3 == 0
 			LOCALS:1 = ……これは痛いな
@@ -182,21 +182,21 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……皆、防御も忘れないで
 		ENDIF
-	;전투중・ＨＰを25%切った味方が複数いる・逃走可能
+	;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주가능
 	CASE 17
 		IF RAND:2 == 0
 			LOCALS:1 = ……一回、仕切り直すのはどう？
 		ELSE
 			LOCALS:1 = ……回復しないと不味いよ
 		ENDIF
-	;전투중・ＨＰを25%切った味方が一人いる（あなた）
+	;전투중・ＨＰ를 25% 밑도는 아군이 1명 있다（아나타）
 	CASE 18
 		IF RAND:2 == 0
 			LOCALS:1 = ……%CALLNAME:MASTER%、回復しないと承知しないから
 		ELSE
 			LOCALS:1 = ……！
 		ENDIF
-	;전투중・ＨＰを25%切った味方が一人いる（あなた以外）
+	;전투중・ＨＰ를 25% 밑도는 아군이 1명 있다（아나타 이외）
 	CASE 19
 		IF 0
 ;		ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -206,7 +206,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = ……回避すればいいわけじゃないから、回復して
 		ENDIF
-	;전투중・状態異常の味方が複数いる
+	;전투중・상태이상인 아군이 복수 있다
 	CASE 20
 		IF RAND:3 == 0
 			LOCALS:1 = 
@@ -215,10 +215,10 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = 
 		ENDIF
-	;전투중・状態異常の味方がいる
+	;전투중・상태이상인 아군이 있다
 	CASE 33,21,22,23,24,25,26,27
 		SELECTCASE CFLAG:(ARG:8):상태이상
-			;HAPPY　幸福
+			;HAPPY　행복
 			CASE 1
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -228,7 +228,7 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;PANIC　混乱
+			;PANIC　혼란
 			CASE 3
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -238,7 +238,7 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;SLEEP　睡眠
+			;SLEEP　수면
 			CASE 4
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -248,11 +248,11 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;BIND　金縛
+			;BIND　긴박
 ;			CASE 6
-			;CLOSE　沈黙
+			;CLOSE　침묵
 ;			CASE 7
-			;POISON　毒
+			;POISON　독
 			CASE 8
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -262,9 +262,9 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;BOMB　爆弾化
+			;BOMB　폭탄화
 ;			CASE 9
-			;CHARM　魅了
+			;CHARM　매료
 			CASE 10
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -274,7 +274,7 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;PALYZE　麻痺
+			;PALYZE　마비
 			CASE 11
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -284,11 +284,11 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;CURSE　呪い
+			;CURSE　저주
 ;			CASE 12
-			;FLY　蠅化
+			;FLY　파리화
 ;			CASE 13
-			;STONE　石化
+			;STONE　석화
 			CASE 14
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -298,13 +298,13 @@ SELECTCASE ARG
 				ELSE
 					LOCALS:1 = 
 				ENDIF
-			;FLAME　炎上
+			;FLAME　염상
 ;			CASE 18
-			;SLIP　転倒
+			;SLIP　전도
 ;			CASE 19
 			;BRAND　낙인
 ;			CASE 20
-			;その他の状態異常
+			;그 외 상태이상
 			CASEELSE
 				IF 0
 ;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -316,7 +316,7 @@ SELECTCASE ARG
 				ENDIF
 			ENDSELECT
 		;ENDIF
-	;전투중・ＨＰを50%切った味方がいる
+	;전투중・ＨＰ를 50% 밑도는 아군이 있다
 	CASE 28
 		IF 0
 ;		ELSEIF NO:(ARG:8) == [[キャラ:○○]]
@@ -326,7 +326,7 @@ SELECTCASE ARG
 		ELSE
 			LOCALS:1 = 
 		ENDIF
-	;전투중・危険な状態の味方はいない・逃走不能
+	;전투중・위험한 상태의 아군은 없다・행동불능
 	CASE 29
 			IF FLAG:경과턴수 < 3
 				LOCALS:1 = ……苦戦させられてるね、そいつの弱点を探すから待って
@@ -335,7 +335,7 @@ SELECTCASE ARG
 			ELSE
 				LOCALS:1 = ……勝てるよ、絶対
 			ENDIF
-	;전투중・危険な状態の味方はいない・戦闘開始時よりも敵の数が少ない
+	;전투중・위험한 상태의 아군은 없다・전투 개시시보다 적의 수가 적다
 	CASE 30
 		IF RAND:3 == 0
 				LOCALS:1 = ……この感じならもう終わるよ
@@ -344,7 +344,7 @@ SELECTCASE ARG
 		ELSE
 				LOCALS:1 = ……
 		ENDIF
-	;전투중・危険な状態の味方はいない・戦闘開始時から敵の数が変わらない
+	;전투중・위험한 상태의 아군은 없다・전투 개시시부터 적의 수가 변하지 않는다
 	CASE 31
 		IF RAND:3 == 0
 				LOCALS:1 = ……敵は 敵数 = 体。狙いを外さないようにね
@@ -353,7 +353,7 @@ SELECTCASE ARG
 		ELSE
 				LOCALS:1 = 
 		ENDIF
-	;전투중・戦闘開始時よりも味方の数が少ない
+	;전투중・전투 개시시보다 아군의 수가 적다
 	CASE 32
 		IF RAND:3 == 0
 				LOCALS:1 = ……追い詰められるなんてね
@@ -362,7 +362,7 @@ SELECTCASE ARG
 		ELSE
 				LOCALS:1 = 
 		ENDIF
-;	CASE 33 は上記
+;	CASE 33 은 상기
 ;
 ENDSELECT
 
@@ -370,7 +370,7 @@ ENDSELECT
 SIF !(LOCALS:1 == "")
 	CALL MESSAGE_B2(LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
 	;CALL MESSAGE_P(NO:ASSI,0,LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
-	;SHOP画面の얼굴이미지を出す
+	;SHOP화면의 얼굴이미지를 출력
 	
 RESETCOLOR
 

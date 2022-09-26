@@ -1,6 +1,6 @@
 ﻿;;-------------------------------------------------
-;	Module		:EVENT_K4700_라비リス_ALL.ERB
-;	Facility	:라비リス구상
+;	Module		:EVENT_K4700_ラビリス_ALL.ERB
+;	Facility	:ラビリス口上
 ;	Start word	:関西弁のロボお姉ちゃんにエロいことしようぜ！
 ;	Licence		:ライセンスフリー。
 ;
@@ -8,22 +8,22 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	001		2012/04/03		Wikiの中の人			新規作成
-;	002		2013/03/07		Wikiの中の人			구상更新
+;	002		2013/03/07		Wikiの中の人			口上更新
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4700 → EVENTTRAIN_K4700_12
+;예： EVENTTRAIN_K4700 → EVENTTRAIN_K4700_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4700,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4700을 캐릭터번호로 치환）
@@ -5906,7 +5906,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -5982,7 +5982,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -8034,7 +8034,7 @@ ENDIF
 @BATTLE_EVENT_K4700, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-	;라비リスが発動時
+	;ラビリスが発動時
 	IF RAND:3 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"유단금물、아픈꼴 보고 싶은기가！",72,LEFT%┃
@@ -8051,7 +8051,7 @@ IF TFLAG:전투이벤트 == 1
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-	;당신が発動
+	;あなたが発動
 	IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8066,7 +8066,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"에에 간보기라！　내도 해볼기라ー！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;번장が発動
+	;番長が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4573
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8081,7 +8081,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"나라쿠미군한테 질수 없데이！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;치에が発動
+	;千枝が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4560
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8096,7 +8096,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"（……고기사발로 먹으니까 강하게 될 수 있는 걸까？）",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;유키코が発動
+	;雪子が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4561
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8111,7 +8111,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"그런디、그런 무기로 괜찮은기가？　내 도끼、빌려줄까？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;요스케が発動
+	;陽介が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4564
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8126,7 +8126,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"내파워、받아보그라！　…하、하나무라군、위험ㅎ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;칸지が発動
+	;完二が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4630
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8141,7 +8141,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"그런디…나중에 뜨개질의 다음부분 가르쳐 줄 수 있는가？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;아이기스が発動
+	;アイギスが発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4631
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8156,7 +8156,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"일케 같이 싸운는 거、뭔가 이상한 기분이 들구만…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;미츠루が発動
+	;美鶴が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4549
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8171,7 +8171,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"（미츠루씨…지금은 이제、동료니까！）",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;사나다が発動
+	;真田が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4548
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8186,7 +8186,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"그런디、손은 아프지 않는긴가？　단련하는 기가？　…대단하데이",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;발立が発動
+	;足立が発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4625
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8201,7 +8201,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"（으음、나쁜 사람…이군요…　그렇게 보이지 않지만…）",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;메티스が発動
+	;メティスが発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4556
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8216,7 +8216,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORML ┃%"（또 한명의 여동생과 함께 싸울 수 있다니…　기쁘네…♪）",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;곰が発動
+	;クマが発動
 	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4567
 		IF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8250,7 +8250,7 @@ IF TFLAG:전투이벤트 == 2
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
-;공격して殺害した
+;攻撃して殺害した
 IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 	IF RAND:5 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8273,7 +8273,7 @@ IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 		PRINTFORML ┃%"이 정도로 용서해 주는기라♪",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;공격したけど흡수された
+;攻撃したけど吸収された
 ELSEIF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 	IF RAND:3 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8289,7 +8289,7 @@ ELSEIF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
-;피탄（死亡）
+;被弾（死亡）
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 	IF RAND:3 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8324,7 +8324,7 @@ ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 15
 		PRINTFORML ┃%"",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;피탄
+;被弾
 ELSEIF TFLAG:전투이벤트 == 12
 	IF RAND:5 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8372,7 +8372,7 @@ IF TFLAG:전투이벤트 == 17
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
-;회피
+;回避
 IF TFLAG:전투이벤트 == 18
 	IF RAND:5 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8402,7 +8402,7 @@ IF TFLAG:전투이벤트 == 15
 	PRINTFORML ┃%"엣！　그런 말도안되는 기！？",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
-;반사
+;反射
 IF TFLAG:전투이벤트 == 16
 	IF RAND:4 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8492,17 +8492,17 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;회복
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
-	;디아系
+	;ディア系
 	IF RANGE(CFLAG:ARG:입력행동,401, 406)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%RESULTS + "！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;상태회복系
+	;状態回復系
 	ELSEIF RANGE(CFLAG:ARG:입력행동,408, 414)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%RESULTS + "！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;리캄、사마리캄
+	;リカーム、サマリカーム
 	ELSEIF RANGE(CFLAG:ARG:입력행동,417, 418)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%RESULTS + "！",72,LEFT%┃

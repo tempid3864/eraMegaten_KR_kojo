@@ -1,25 +1,25 @@
 ﻿;-------------------------------------------------
-;P3キタロー구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;キャラメイク기능だけとりあえず、あと、どうでもいい
+;P3キタロー口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;キャラメイク機能だけとりあえず、あと、どうでもいい
 ;
 ;	Edit	Date			Author					Reason
 ;	01		2013/04/07	 	海苔塩					新規作成
-;	02		2013/09/28		〃						加筆수정
-;	03		2014/04/16		〃						전투구상、절정&사정時、ほか色々と加筆수정
+;	02		2013/09/28		〃						加筆修正
+;	03		2014/04/16		〃						戦闘口上、絶頂&射精時、ほか色々と加筆修正
 ;
 ;-------------------------------------------------
-;言いたい事はほぼ全てこちらで言ってます。ですが、一応read meの方にも눈を通して頂けると嬉しいです。
+;言いたい事はほぼ全てこちらで言ってます。ですが、一応read meの方にも目を通して頂けると嬉しいです。
 ;
 ;キタローを喘がせたいが為だけに書いた。反省はしている。
-;色々と原作を投げ捨てているというかキャラ붕괴甚だしいです。
+;色々と原作を投げ捨てているというかキャラ崩壊甚だしいです。
 ;
-;一応、함락前は反応薄めで声は抑え気味、함락後は솔직함に声を出す感じにしてます。
-;연모→당신大好き。당신が喜べば自分も嬉しい。
-;음란→7股かけてもおかしくないヤリチンor음란ビッチ（予定）
-;복종→敬語で卑屈な사고で、痛めつけられて喜ぶ마조奴隷（予定）
+;一応、陥落前は反応薄めで声は抑え気味、陥落後は素直に声を出す感じにしてます。
+;연모→あなた大好き。あなたが喜べば自分も嬉しい。
+;음란→7股かけてもおかしくないヤリチンor淫乱ビッチ（予定）
+;복종→敬語で卑屈な思考で、痛めつけられて喜ぶマゾ奴隷（予定）
 ;
-;作成にあたって、構文などは他の구상をかなり参考にしています。
-;作者が구상初心者なので、おかしい部分が多々あると思われます。もし見つけたら随時書き直して下さい。
+;作成にあたって、構文などは他の口上をかなり参考にしています。
+;作者が口上初心者なので、おかしい部分が多々あると思われます。もし見つけたら随時書き直して下さい。
 ;
 ;-------------------------------------------------
 ;ライセンスについて
@@ -67,7 +67,7 @@ PRINTFORML 키타로 대사
 ;구상설명문
 PRINTFORML  　무언 무관심이란 게 뭐였더라、같은 원작 붕괴 P3 남주인공 대사.
 ;--------------------------------------------------
-;구상ファイルの存在판정（X2을 캐릭터번호로 치환）
+;구상파일의 존재 판정（X2을 캐릭터번호로 치환）
 ;--------------------------------------------------
 ;@EVENTTRAIN
 ;#PRI
@@ -142,7 +142,7 @@ IF CFLAG:201 == 0
 		PRINTFORML 자신이 생각하는 %CALLNAME:TARGET%의 이미지대로 소질을 붙여주세요
 		CALL MAKE_CHARA_TALENT(TARGET, 25)
 	ELSE
-;		;수수께끼의매력つけたいところではあるけど、억압・부정いれらんないし、ちょっとそこまででもないかなぁ感
+;		;謎の魅力つけたいところではあるけど、抑圧・否定いれらんないし、ちょっとそこまででもないかなぁ感
 		TALENT:꿋꿋함 = 1
 		TALENT:자제심 = 1
 		TALENT:일선을넘지않음 = 1
@@ -300,11 +300,11 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ENDIF
 	CFLAG:201 = 5
 	RETURN 0
-;上位함락
+;上位陥落
 ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
-	;친애
-	;ハム子구상の影響受けまくってますごめんなさいごめんなさい
-	;もしアレなら삭제&書き直して下さい
+	;親愛
+	;ハム子口上の影響受けまくってますごめんなさいごめんなさい
+	;もしアレなら削除&書き直して下さい
 	IF TALENT:6
 		PRINTFORMW 방에 들어가니、조금 격식을 차린 모습의 %타겟이%、이야기를 들어달라했다。
 		PRINTFORML 「%조사처리(CSTR:11,"는")%、부모님이 없었어」
@@ -465,7 +465,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		;おまけ程度のコスプレ分岐 色々ひどい
-		;마요네구상と발立구상を参考にしています
+		;マヨーネ口上と足立口上を参考にしています
 		IF TEQUIP:모자 == 1 && TEQUIP:전신복 == 308 && TEQUIP:신발 == 909
 		;메이드복 화이트브림&메이드복&가죽구두
 			PRINTFORMW 「갈아 입으라 해서 입긴 했지만……」
@@ -677,7 +677,7 @@ ELSEIF MARK:2 == 2
 	PRINTFORML 그렇게 말하고、%타겟은% 베개에 푸욱 얼굴을 묻었다.
 	PRINTFORMW 슬쩍 이 쪽에 시선을 보내지만、곧바로 흥미를 잃은 듯 몸을 돌리고 눈을 감았다.
 	CFLAG:219 = 2
-;굴복각인Lv3＋함락素質無し
+;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORML 「하암…」
 	PRINTFORML 조교에 지쳤는지、%타겟은% 작은 하품을 하면서、침대에 몸을 맡겼다。
@@ -3257,7 +3257,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:346 == 0
 			;함락완료
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-				;연모, 친애かつ거유または폭유の時
+				;연모, 친애かつ巨乳または爆乳の時
 				;完全にネタ分岐
 				IF (TALENT:3 || TALENT:6) && (TALENT:111 || TALENT:112)
 					PRINTFORML 「……………………」
@@ -3282,7 +3282,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;연모, 친애かつ거유または폭유の時
+					;연모, 친애かつ巨乳または爆乳の時
 					IF (TALENT:3 || TALENT:6) && (TALENT:111 || TALENT:112)
 						PRINTFORML 흥분한 페니스를、%CALLNAME:TARGET%의 휘어지게 무르익은 가슴 사이에 꼈다。
 						PRINTFORMW 부드러운 탄력이 있는 고기에 눌린 그것은、가슴을 문질르는 거에 따라서、점점 더 딱딱해져 갔다。
@@ -3855,7 +3855,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:426 == 0
-			;함락완료＆당신が조교時
+			;함락완료＆あなたが調教時
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && ASSIPLAY == 0
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
@@ -7076,7 +7076,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF TEQUIP:Ａ삽입자 == PLAYER && SELECTCOM != 500 && SELECTCOM != 514
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -7282,7 +7282,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7433,9 +7433,9 @@ IF TFLAG:29 > 1
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			;애널系コマンド
-			;지나나구상を参考
-			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 142 || SELECTCOM == 149 || TEQUIP:Ａ삽입자 == PLAYER
+			;アナル系コマンド
+			;ジナーナ口上を参考
+			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 142 || SELECTCOM == 149 || SELECTCOM == 512 || SELECTCOM == 514 || (SELECTCOM == 505 && TFLAG:40 == 2)
 				IF RAND:3 == 0 && TALENT:76
 				;애널광のみ
 					PRINTFORML 「아、아앗！ 이、좋아、엉덩이、좀 더……！ 아、앗、이이잇%ハート()%」
@@ -7448,9 +7448,9 @@ IF TFLAG:29 > 1
 					PRINTFORML 「아우、하아……이거、이상해……엉덩이인데、기분이 좋다니」
 					PRINTFORMW 헛소리처럼 중얼거리는 동안에도、%CALLNAME:TARGET%의 애널은 벌름벌름 경련하고 있었다。
 				ENDIF
-			;섹스계 커맨드でＶ절정
-			;메어리구상を参考
-			ELSEIF NOWEX:1 && TEQUIP:Ｖ삽입자 == PLAYER
+			;섹스계 커맨드でＶ絶頂
+			;メアリ口上を参考
+			ELSEIF  NOWEX:1 && (SELECTCOM == 60 || SELECTCOM == 61 || SELECTCOM == 66 || SELECTCOM == 68 || SELECTCOM == 69 || SELECTCOM == 72 || SELECTCOM == 506 || SELECTCOM == 507)
 				IF RAND:2 == 0
 					PRINTFORML 「힛、아、아앗、굉장、%CSTR:12%……앗、아아앗！」
 					PRINTFORML 「응、하아……에？ 아、자、잠깐、지금 막 가버렸는데――힛、아아아아！！」
@@ -7472,8 +7472,8 @@ IF TFLAG:29 > 1
 			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			;애널系コマンド
-			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 142 || SELECTCOM == 149 || TEQUIP:Ａ삽입자 == PLAYER
+			;アナル系コマンド
+			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 142 || SELECTCOM == 149 || SELECTCOM == 512 || SELECTCOM == 514 || (SELECTCOM == 505 && TFLAG:40 == 2)
 				IF RAND:3 == 0 && TALENT:76
 				;애널광のみ
 					PRINTFORML 「하아앗%ハート()% 아、좋아、애널 좋아%ハート()% …아、아앗！」
@@ -7486,8 +7486,8 @@ IF TFLAG:29 > 1
 					PRINTFORML 「힛、싫어、아、엉덩이、기분 좋아……！ 앗、아앗、읏아아아아！」
 					PRINTFORMW 엉덩이에서 초래되는 강한 쾌감에、%타겟은% 몸을 떨며 훨씬 큰 목소리로 허덕였다。
 				ENDIF
-			;섹스계 커맨드でＶ절정
-			ELSEIF NOWEX:1 && TEQUIP:Ｖ삽입자 == PLAYER	
+			;섹스계 커맨드でＶ絶頂
+			ELSEIF  NOWEX:1 && (SELECTCOM == 60 || SELECTCOM == 61 || SELECTCOM == 66 || SELECTCOM == 68 || SELECTCOM == 69 || SELECTCOM == 72 || SELECTCOM == 506 || SELECTCOM == 507)
 				IF RAND:2 == 0
 					PRINTFORML 「하아아아앙、더 찔러서、엉망진창으로 만들어줘！！」
 					PRINTFORML 「히이잇、아、가버려、후앙、아아아앙！！」
@@ -7509,8 +7509,8 @@ IF TFLAG:29 > 1
 			ENDIF
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			;애널系コマンド
-			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 142 || SELECTCOM == 149 || TEQUIP:Ａ삽입자 == PLAYER
+			;アナル系コマンド
+			IF SELECTCOM == 4 || SELECTCOM == 5 || SELECTCOM == 45 || SELECTCOM == 46 || SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 142 || SELECTCOM == 149 || SELECTCOM == 512 || SELECTCOM == 514 || (SELECTCOM == 505 && TFLAG:40 == 2)
 				IF RAND:2 == 0
 					PRINTFORML 「응아아아아아、쿠읏、더 이상、참을 수 없……아아아아！！」
 					PRINTFORML 「앗、또…、아아앗！ 아、안 되는데、히이잇……！！」
@@ -7519,8 +7519,8 @@ IF TFLAG:29 > 1
 					PRINTFORML 「네에、%조사처리(CSTR:11,"는")%、크읏…！ 애널로 가버리는、변태입니다……！！」
 					PRINTFORMW 엉덩이에서 초래되는 강한 쾌감에、%타겟은% 몸을 떨며 훨씬 큰 목소리로 허덕였다。
 				ENDIF
-			;섹스계 커맨드でＶ절정
-			ELSEIF  NOWEX:1 && TEQUIP:Ｖ삽입자 == PLAYER	
+			;섹스계 커맨드でＶ絶頂
+			ELSEIF  NOWEX:1 && (SELECTCOM == 60 || SELECTCOM == 61 || SELECTCOM == 66 || SELECTCOM == 68 || SELECTCOM == 69 || SELECTCOM == 72 || SELECTCOM == 506 || SELECTCOM == 507)
 				IF RAND:2 == 0
 					PRINTFORML 「히이이웃、히야아앗！ 갑니다、칠칠치 못하게、가버렷！！」
 					PRINTFORML 「아우、아아아！ 이젠 안돼、앗、후아아아앗！！」
@@ -8563,10 +8563,10 @@ SELECTCASE TFLAG:13
 			PRINTFORMW 「…………고마워、%CSTR:12%」
 		;부친이 노예나 조수고 모친이 음란이나 창부 보유
 		ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
-			;父親(조수）との상성が100より大きい場合
+			;부친(조수）과의 상성이 100보다 큰 경우
 			IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125
 				PRINTFORMW 
-		 	;父親(奴隷）との상성が100より大きい場合
+		 	;부친(노예）과의 상성이 100보다 큰 경우
 			ELSEIF CFLAG:102 == 3 && GET_RELATION(TARGET, V) > 125
 				PRINTFORMW 
 			ELSE
@@ -9056,7 +9056,7 @@ IF TFLAG:전투이벤트 == 1
 			ENDIF
 ENDIF
 
-;피탄（死亡）※나나미전투구상を参考
+;被弾（死亡）※나나미전투구상を参考
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9133,7 +9133,7 @@ ENDIF
 @BATTLE_MESSAGE_K4532_1,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-;主に메어리구상を参考にしました
+;主にメアリ口上を参考にしました
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	;사용한 스킬의 이름을 LOCALS에 대입
 	LOCALS = %RESULTS%
@@ -9205,7 +9205,7 @@ ELSEIF CFLAG:ARG:입력행동 == 0 || CFLAG:ARG:입력행동 == 2101
 
 ;회복
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
-	;디아系
+	;ディア系
 	IF RANGE(CFLAG:ARG:입력행동,401, 406)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9216,7 +9216,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 			PRINTFORML ┃%"상처는……" + LOCALS + "！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;상태회복系
+	;状態回復系
 	ELSEIF RANGE(CFLAG:ARG:입력행동,408, 414)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9227,7 +9227,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 			PRINTFORML ┃%"아무래도 좋다……라는 건 예사로 볼게 아니야",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;리캄、사마리캄
+	;リカーム、サマリカーム
 	ELSEIF RANGE(CFLAG:ARG:입력행동,417, 418)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"이런 곳에서 쓰러지면 안돼",72,LEFT%┃
@@ -9241,7 +9241,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9402,12 +9402,12 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;파마상성의 行動で、천사持ちの충성도が上昇
+;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;주살상성의 行動で、타천사持ちの충성도が上昇
+;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"타천사")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃

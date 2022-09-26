@@ -1,21 +1,21 @@
 ﻿;-------------------------------------------------
-;伴亜衣梨구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;原作6日눈以降の加入となったので、ちょっとだけ方向性変わりました
-;연모	エッチにも솔직함 + テンプレ的츤데레　原作キャラが조수ならちょっと공격的　例外は마코토さんと오토메さん
+;伴亜衣梨口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;原作6日目以降の加入となったので、ちょっとだけ方向性変わりました
+;연모	エッチにも素直 + テンプレ的ツンデレ　原作キャラが助手ならちょっと攻撃的　例外はマコトさんとオトメさん
 ;　　	で書いてたはずがいつの間にかツンどこ行った誰お前に。原作で優しすぎる女はダメとか言ってた割にべた惚れな感じに
-;음란	皆と平等にエッチする　この함락소질だけ原作キャラに対しては공격的じゃないというか見境がなく性的に襲う感じに
-;복종	당신は怖いけど당신に捨てられたくない
-;붕괴	당신がお父さん、히나코がお母さん
+;음란	皆と平等にエッチする　この陥落素質だけ原作キャラに対しては攻撃的じゃないというか見境がなく性的に襲う感じに
+;복종	あなたは怖いけどあなたに捨てられたくない
+;붕괴	あなたがお父さん、ヒナコがお母さん
 ;
-;この구상のライセンスに関してはフリーとなっています。
-;수정・加筆・改変・再配布・流用はご自由にやって頂いて構いません
+;この口上のライセンスに関してはフリーとなっています。
+;修正・加筆・改変・再配布・流用はご自由にやって頂いて構いません
 ;
 ;Edit	Date	Author		Reason
-;001	7/20	セーロGUN 	eraMegaten구상アップローダー上で공개一応動くはず････
-;002	8/8	セーロGUN	붕괴소질用구상のコメントアウト外したり、あちこち加筆したり
-;003	11/10	セーロGUN	色々수정しまくって음란소질とか加筆
-;004	03/10	セーロGUN	BRで히나코までが思いっきりデレる中、아이리だけそういう傾向全くなしという有り様にぐぎぎしながら加筆수정
-;005	08/25	J( 'ー`)し	コード上の엘라ーを수정
+;001	7/20	セーロGUN 	eraMegaten口上アップローダー上で公開一応動くはず････
+;002	8/8	セーロGUN	崩壊素質用口上のコメントアウト外したり、あちこち加筆したり
+;003	11/10	セーロGUN	色々修正しまくって淫乱素質とか加筆
+;004	03/10	セーロGUN	BRでヒナコまでが思いっきりデレる中、アイリだけそういう傾向全くなしという有り様にぐぎぎしながら加筆修正
+;005	08/25	J( 'ー`)し	コード上のエラーを修正
 ;
 ;-------------------------------------------------
 
@@ -40,15 +40,15 @@
 ;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;例： EVENTTRAIN_K4606 → EVENTTRAIN_K4606_12
+;예： EVENTTRAIN_K4606 → EVENTTRAIN_K4606_12
 ;--------------------------------------------------
 ;@셀렉트구상설명_K4606,ARG = 0
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML 여기에 구상명을 기술하세요
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML 여기에 구상의 간단한 설명이나 주의점 등을 기술해 주세요
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4606을 캐릭터번호로 치환）
@@ -61,18 +61,18 @@
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀모ー드로 이행합니까？
-;	PRINTL [0] 네
-;	PRINTL [1] 아니오
+;	PRINTL 処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―처녀모ー드로 소질、능력을 변경합니다―
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―통상모ー드로 조교를 개시합니다―
+;		PRINTFORMW ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -105,7 +105,7 @@
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	;救出が遅れている場合、음란に함락
+	;救出が遅れている場合、淫乱に陥落
 	IF CFLAG:이벤트가입 >= 8
 		PRINTFORMW 「조････교････？」
 		PRINTFORMW 「････뭐、그런 약속했네요。오히려、늦은 정도 일지도････」
@@ -140,7 +140,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 
 ;붕괴
 ELSEIF TALENT:9 && CFLAG:201 < 5
-	;이인칭변경　男でも女でもお父さん
+	;二人称変更　男でも女でもお父さん
 	CSTR:이인칭 = 아버지
 	PRINTFORMW %조사처리(CALLNAME,"가")% %조사처리(CALLNAME,"를")% 대하는 이인칭이 변경되었습니다。
 	DRAWLINE
@@ -302,7 +302,7 @@ ENDIF
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K4606
 ;조수
-;조수도리　先にご褒美or초기ボーナスで도리ちゃんを입수していたという前提で구상を書いてます
+;조수ドリー　先にご褒美or初期ボーナスでドリーちゃんを入手していたという前提で口上を書いてます
 ELSEIF NO:ASSI == 4505
 	;처음
 	IF CFLAG:203 == 0
@@ -312,7 +312,7 @@ ELSEIF NO:ASSI == 4505
 			PRINTFORMW 「귀････귀엽지만････。혹시、나도 말해야해？」
 			PRINTFORMW 『물론이지！덧붙여서 등장 대사는、사랑의 사자! 매지컬・아이！』
 		ELSE
-			;ネタが思いつかないので통상通りの구상に飛ばす
+			;ネタが思いつかないので通常通りの口上に飛ばす
 			CALL EVENTTRAIN_SECOND_K4606
 		ENDIF
 		CFLAG:203 = 1
@@ -327,7 +327,7 @@ ELSEIF NO:ASSI == 4505
 			PRINTFORMW 『「처벌！」』
 			PRINTFORMW 변태괴인이라니。둘이 함께 처벌 결정이다。
 		ELSE
-			;ネタが思いつかないので통상通りの구상に飛ばす
+			;ネタが思いつかないので通常通りの口上に飛ばす
 			CALL EVENTTRAIN_SECOND_K4606
 		ENDIF
 		CFLAG:203 = 2
@@ -555,7 +555,7 @@ ENDIF
 ;조교 개시시（2번째 이후, 4606을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K4606
-;붕괴＋함락구상が発生済み
+;붕괴＋陥落口上が発生済み
 IF TALENT:9 && (CFLAG:201 < 5 || FLAG:7 == 2)
 	IF RAND:2 == 0
 		PRINTFORMW 「%CSTR:12%、착한 아이라서 기다리고 있었어 %CSTR:11%」
@@ -930,12 +930,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 부드러운 %CALLNAME%의 음부를 매우 맛있게 핥았다。
-					PRINTFORMW 물소리와 침소리의 하모니에 맞춰서 %조사처리(CALLNAME,"가")% 덜덜 떨었다。
-					PRINTFORMW 「안돼、안돼엣、그렇게 추잡스럽게 핣으면 부、부끄러워었!」
-					PRINTFORMW 너의 그 치태가 얼마나 사랑스러운지 알아、%CALLNAME%?
-					PRINTFORMW 그 모든 것이 범죄라고! 반칙이라고!! 그러니 네 모든 것을 다 빨아먹도록 하겠어!
-					PRINTFORMW 「시、싫어어엇!」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -1258,11 +1253,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:309 == 0
-			PRINTFORMW 「저, 정신나갔어!? 대체 뭘 시키는거야 바보옷!」
-			PRINTFORMW %조사처리(CALLNAME,"는")% 씩씩거리며 분해하면서도 %CALLNAME:MASTER%의 지시를 받들어 떨리는 두 손으로 음순을 양쪽으로 천천히 끌어당겼다。
-			PRINTFORMW %CALLNAME%의 비밀의 입술은 생각했던 것보다 더 귀여운 모양이었다。무엇보다 깨끗했고 색깔도 선명한 핑크색이었다。
-			PRINTFORMW 아주 좋은 구경거리다。뭐 정작 그 주인인 %조사처리(CALLNAME,"는")% 무척이나 노하신것 같지만。알까 보냐。
-			PRINTFORMW 「너! 이 수치, 기억해두겠어!」
+			PRINTFORMW 
 			CFLAG:309 = 1
 		;2번째 이후
 		ELSE
@@ -1270,11 +1261,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「헤헤헷♡ 여기가 그렇게나 보고 싶어, 변태%CSTR:12%씨?」
-					PRINTFORMW 「그런데 어쩌나♡ 이 아랫입은 %조사처리(CSTR:12,"가")% 생각하는 만큼 귀여운 물건이 아니거든?」
-					PRINTFORMW 「아무리 생각해도 이해가 안된단 말야? 왜 남자들은 이런 데를 보고 싶어하는거야? 이거… 여자애나 여자 입장에선 그저 성가신 구멍이라고?」
-					PRINTFORMW 나에게 있어서는 정말 귀여운 구멍이야。그러니 네맘대로 성가시다고 말하지 말아주었으면 해。
-					PRINTFORMW 「그래 알았어♡ 네가 그러면 그런거겠지♡ 자, 그럼 얼마든지 구경하세요♡」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -1285,11 +1272,11 @@ SELECTCASE SELECTCOM
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「우읏! 이런거 그만 시켜엇!」
+				PRINTFORMW 
 				CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
-				PRINTFORMW 「이런 변탯!」
+				PRINTFORMW 
 				CFLAG:309 = 2
 			ENDIF
 		ENDIF
@@ -1349,10 +1336,6 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORMW 「아우･･･이제와서、스스로 하라니、너무하잖아･･･바보！」
 					ENDIF
-					PRINTFORMW 말은 그렇게 하면서 왜 정작 네 손가락은 거기에 가있는건데?
-					PRINTFORMW 「그、그건 네가！」
-					PRINTFORMW 아니지, 네가 갖고 싶어서 그러는 거잖아?
-					PRINTFORMW 「아、아니야아！ 아앙♡ 아아앗♡ 아아아아아앗♡♡」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					IF TEQUIP:26
@@ -2823,12 +2806,7 @@ CASE 14
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					IF RAND:2 == 0
-						PRINTFORMW 「%CSTR:11%의 허리 흔드는 모습, 부디 봐줘♡」
-						PRINTFORMW 「아핫♡ 기분 좋나보구나♡♡ 귀여워♪」
-					ELSE
-						PRINTFORMW 「%CSTR:11% 힘낼테니까･･･움직이지 말고 가만히 있어줘♡」
-					ENDIF
+					PRINTFORMW 「%CSTR:11% 힘낼테니까･･･움직이지 말고 가만히 있어줘♡」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「괜찮아、%조사처리(CSTR:11,"가")% 위가 되어도？잔뜩잔뜩 착취할 거라구？」
@@ -7123,7 +7101,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -7146,45 +7124,42 @@ IF TFLAG:2 > 0
 			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
+	;안쪽 자극 섹스계
+	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
+		;함락완료
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				IF ASSIPLAY
+					PRINTFORMW 「子供出来ちゃったらどうするのよ！？%CSTR:12%も%CALLNAME:MASTER%も皆馬鹿ァ！」
+						ELSE
+					PRINTFORMW 「いっぱい････出たね。子供出来ちゃうかな････？」
+						ENDIF
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
+				PRINTFORMW 
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
+				PRINTFORMW 
+					ENDIF
+			CFLAG:238 = 4
+		;굴복각인Lv3
+		ELSEIF MARK:2 == 3 && (CFLAG:238 < 3 || FLAG:7 == 2)
+			PRINTFORMW 「奴隷だから････仕方ないんだ････」
+			CFLAG:238 = 3
+		;그 이외
+		ELSEIF CFLAG:238 < 2 || FLAG:7 == 2
+			PRINTFORMW 「嫌ぁ！%CSTR:12%なんかの子供なんか作りたくない！」
+			CFLAG:238 = 2
+				ENDIF
 	;그 외 섹스계
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				;섹스による膣절정＆질내사정時
-				IF NOWEX:1 && NOWEX:MASTER:0
-					IF RAND:2 == 0
-						PRINTFORMW 「우히잇、죠아해！죠아해애앳！」
-						PRINTFORMW %CALLNAME%도 한계가 다가오고 있는 것 같다。
-						;기승위, 대면좌위
-						IF (SELECTCOM == 66 || TFLAG:60 == 4) || (SELECTCOM == 68 || TFLAG:60 == 2) || ((PREVCOM == 66 || PREVCOM == 68) && (SELECTCOM == 506 || SELECTCOM == 507))
-							PRINTFORMW %조사처리(CALLNAME,"는")% 그대로 기세 좋게、%CALLNAME:MASTER%의 위에 올라탄 채 허리 놀리는 속도를 최대로 높였다。
-						ELSE
-							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 기세 좋게、%CALLNAME%에게 파고 들었다。
-						ENDIF
-						PRINTFORMW 「～～～ッ%ハート()%」
-						PRINTFORMW 이윽고 %조사처리(CALLNAME,"는")% 침을 흘리면서、몸을 떨면서、%CALLNAME:MASTER%의 분신을 강하게 옥죄었다。
-						PRINTFORMW 강한 사정감이 %조사처리(CALLNAME:MASTER,"를")% 덮치고、%CALLNAME%의 자궁 안쪽에 새하얀 정액이 퍼져나간다。
-						PRINTFORMW 그동안、%CALLNAME% 자신은 방심했다。
-						PRINTFORMW 「아하････%ハート()%」
-					ELSE
-						PRINTFORMW 「%CALLNAME:MASTER%、%CALLNAME:MASTER%、좋아해････좋아하니까、아、안에！」
-						PRINTFORMW %CALLNAME%도 한계가 다가오고 있는 것 같다。
-						;기승위, 대면좌위
-						IF (SELECTCOM == 66 || TFLAG:60 == 4) || (SELECTCOM == 68 || TFLAG:60 == 2) || ((PREVCOM == 66 || PREVCOM == 68) && (SELECTCOM == 506 || SELECTCOM == 507))
-							PRINTFORMW %조사처리(CALLNAME,"는")% 그대로 기세 좋게、%CALLNAME:MASTER%의 위에 올라탄 채 허리 놀리는 속도를 최대로 높였다。
-						ELSE
-							PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 기세 좋게、%CALLNAME%에게 파고 들었다。
-						ENDIF
-						PRINTFORMW 「～～～ッ%ハート()%」
-						PRINTFORMW %조사처리(CALLNAME,"는")% 몸을 떨면서、%CALLNAME:MASTER%도 이내、질내에 정액을 흘려넣는다。
-						PRINTFORMW %조사처리(CALLNAME,"는")% 황홀해하면서、물줄기를 받아들였다。
-						PRINTFORMW 「정-액이、안에 퓩퓩하고 나오고、있어････%ハート()%」
-					ENDIF
-				ENDIF
 				IF ASSIPLAY
-					PRINTFORMW 「아이가 생겨버리면 어떻게 할거야！？%CSTR:12%도 %CALLNAME:MASTER%도 전부 바보！」
+					PRINTFORMW 
 				ELSE
 					IF TEQUIP:29 == 2 || TEQUIP:29 == 4 && RANGE(CFLAG:106,1,9)
 						PRINTFORMW 「불결해졌네」
@@ -7197,7 +7172,6 @@ IF TFLAG:2 > 0
 						PRINTFORMW 「앗 싫어！%CALLNAME:MASTER%의 정액이 흘러넘쳐 버려！」
 					ELSE
 						PRINTFORMW 「뱃속이 따뜻해････」
-						PRINTFORMW 「잔뜩････쌌네。아기 생겨버릴까나････？」
 					ENDIF
 				ENDIF
 			;음란, 창부
@@ -7206,36 +7180,23 @@ IF TFLAG:2 > 0
 				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				;섹스による膣절정＆질내사정時
-				IF NOWEX:1 && NOWEX:MASTER:0
-					PRINTFORMW 「히긋････SUBSTRING(CSTR:12,0,1)、%CSTR:12%････%CSTR:11%････」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 이제 한계가 가까운 것 같다････。
-					;기승위, 대면좌위
-					IF (SELECTCOM == 66 || TFLAG:60 == 4) || (SELECTCOM == 68 || TFLAG:60 == 2) || ((PREVCOM == 66 || PREVCOM == 68) && (SELECTCOM == 506 || SELECTCOM == 507))
-						PRINTFORMW %조사처리(CALLNAME,"는")% 그대로 기세 좋게、%CALLNAME:MASTER%의 위에 올라탄 채 허리 놀리는 속도를 최대로 높였다。
-					ELSE
-						PRINTFORMW %CALLNAME:MASTER%도 허리에 마지막 스퍼트를 한다。
-					ENDIF
-					PRINTFORMW 「아긋！？마、망가졋････망가져버려어！？」
-					PRINTFORMW 「～～～읏！！！」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 눈을 희게 뜨면서、%CALLNAME:MASTER%의 분신을 강하게 조여、정액을 짜냈다。
-				ENDIF
+				PRINTFORMW 
 			ENDIF
 			CFLAG:239 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:239 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「노예니깐････어쩔 수 없네････」
+			PRINTFORMW 
 			CFLAG:239 = 3
 		;그 이외
 		ELSEIF CFLAG:239 < 2 || FLAG:7 == 2
-			PRINTFORMW 「싫어！%CSTR:12%따위의 아이는 가지고 싶지 않아아！」
+			PRINTFORMW 
 			CFLAG:239 = 2
 		ENDIF
 	ENDIF
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -7376,15 +7337,37 @@ IF TFLAG:29 > 1
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「기、기다려、더 이상은、히야아아아아앗！？」
+			;セックスによる膣絶頂＆膣内射精時
+			IF NOWEX:1 && NOWEX:MASTER:0 && TCVAR:MASTER:사정개소 == 1 && TEQUIP:MASTER:콘돔 == 0
+				PRINTFORMW 「우히잇、죠아해！죠아해애앳！」
+				PRINTFORMW %CALLNAME%도 한계가 다가오고 있는 것 같다。
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 기세 좋게、%CALLNAME%에게 파고 들었다。
+				PRINTFORMW 「～～～ッ%ハート()%」
+				PRINTFORMW 이윽고 %조사처리(CALLNAME,"는")% 침을 흘리면서、몸을 떨면서、%CALLNAME:MASTER%의 분신을 강하게 옥죄었다。
+				PRINTFORMW 강한 사정감이 %조사처리(CALLNAME:MASTER,"를")% 덮치고、%CALLNAME%의 자궁 안쪽에 새하얀 정액이 퍼져나간다。
+				PRINTFORMW 그동안、%CALLNAME% 자신은 방심했다。
+				PRINTFORMW 「아하････%ハート()%」
+			ELSE
+				PRINTFORMW 「기、기다려、더 이상은、히야아아아아앗！？」
+			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「%CSTR:12%、%CSTR:11%、더、더는････」
-			PRINTFORMW 「히야、히깃」
-			PRINTFORMW 「우햐아아아앗！？」
+			;セックスによる膣絶頂＆膣内射精時
+			IF NOWEX:1 && NOWEX:MASTER:0 && TCVAR:MASTER:사정개소 == 1
+				PRINTFORMW 「히긋････SUBSTRING(CSTR:12,0,1)、%CSTR:12%････%CSTR:11%････」
+				PRINTFORMW %조사처리(CALLNAME,"는")% 이제 한계가 가까운 것 같다････。
+				PRINTFORMW %CALLNAME:MASTER%도 허리에 마지막 스퍼트를 한다。
+				PRINTFORMW 「아긋！？마、망가졋････망가져버려어！？」
+				PRINTFORMW 「～～～읏！！！」
+				PRINTFORMW %조사처리(CALLNAME,"는")% 눈을 희게 뜨면서、%CALLNAME:MASTER%의 분신을 강하게 조여、정액을 짜냈다。
+			ELSE
+				PRINTFORMW 「%CSTR:12%、%CSTR:11%、더、더는････」
+				PRINTFORMW 「히야、히깃」
+				PRINTFORMW 「우햐아아아앗！？」
+			ENDIF
 		ENDIF
 		CFLAG:246 = 4
 	;굴복각인Lv3
@@ -7404,7 +7387,16 @@ ELSEIF TFLAG:29 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			IF !TFLAG:42
+			;セックスによる膣絶頂＆膣内射精時
+			IF NOWEX:1 && NOWEX:MASTER:0 && TCVAR:MASTER:사정개소 == 1 && TEQUIP:MASTER:콘돔 == 0
+				PRINTFORMW 「SUBSTRING(CALLNAME:MASTER,0,1)、%CALLNAME:MASTER%、좋아해････좋아하니까、아、안에！」
+				PRINTFORMW %CALLNAME%도 한계가 다가오고 있는 것 같다。
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 기세 좋게、%CALLNAME%에게 파고 들었다。
+				PRINTFORMW 「～～ッ%ハート()%」
+				PRINTFORMW %조사처리(CALLNAME,"는")% 몸을 떨면서、%CALLNAME:MASTER%도 이내、질내에 정액을 흘려넣는다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% 황홀해하면서、물줄기를 받아들였다。
+				PRINTFORMW 「정-액이、안에 퓩퓩하고 나오고、있어････%ハート()%」
+			ELSEIF !TFLAG:42
 				PRINTFORMW 「%CALLNAME:MASTER%、더 이상 %CSTR:11%、참을 수 없어어････」
 			ELSE
 				PRINTFORMW 「기분좋아、기분좋아아！」
@@ -9711,6 +9703,7 @@ ENDSELECT
 @ENEMY_BATTLE_EVENT_K4606, ARG, ARG:1, ARG:2
 
 @BATTLE_EVENT_K4606, ARG, ARG:1, ARG:2
+;KR판 추가수정, 전투구상 수정/가필되어있음
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 	IF RAND:2 == 0
@@ -9752,7 +9745,7 @@ ELSEIF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 	ELSE
 		LOCALS = 해치웠、아니지 이 대사는 플래그성 발언이야！
 	ENDIF
-;피탄（死亡）
+;被弾（死亡）
 ELSEIF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
@@ -9798,7 +9791,7 @@ ELSEIF TFLAG:전투이벤트 == 90
 	ELSE
 		LOCALS = 후우、끝났다！
 	ENDIF
-;레벨アップした
+;레벨 업했다
 ELSEIF TFLAG:전투이벤트 == 91
 	IF RAND:2
 		LOCALS = 어때！ 한층 새롭게 성장했다고！

@@ -30,13 +30,13 @@
 ;
 @ENEMY_BATTLE_EVENT_K5320, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;적でのデビルＣＯ−ＯＰ発動時の台詞
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
-;적でのデビルＣＯ−ＯＰ참가時の台詞
+;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -457,7 +457,7 @@ ELSEIF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ENDIF
-;피탄（死亡）
+;被弾（死亡）
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 		;악마변신時
 		IF CFLAG:ARG:악마변신
@@ -891,7 +891,7 @@ IF TFLAG:전투이벤트 == 90
 	ENDIF
 ENDIF
 
-;레벨アップした
+;레벨 업했다
 IF TFLAG:전투이벤트 == 91
 	IF RAND:4 == 0
 			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -912,7 +912,7 @@ IF TFLAG:전투이벤트 == 91
 	ENDIF
 ENDIF
 
-;도주に성공した
+;도주에 성공했다
 IF TFLAG:전투이벤트 == 92
 	IF RAND:4 == 0
 			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -933,7 +933,7 @@ IF TFLAG:전투이벤트 == 92
 	ENDIF
 ENDIF
 
-;도주に실패した
+;도주에 실패했다
 IF TFLAG:전투이벤트 == 93
 	IF RAND:4 == 0
 			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -955,7 +955,7 @@ IF TFLAG:전투이벤트 == 93
 	ENDIF
 ENDIF
 
-;전투開始時
+;전투 개시시
 IF TFLAG:전투이벤트 == 94
 	;パワーアップイベントのボス戦限定
 	IF GETBIT(이벤트플래그:93:18, 2) && (이벤트플래그:93:0 == 12 || 이벤트플래그:93:0 == 13) && (이벤트플래그:93:10 && [[キャラ:마야（무대소녀）]])
@@ -1023,7 +1023,7 @@ IF TFLAG:전투이벤트 == 94
 	ENDIF
 ENDIF
 
-;전투開始時・バックアタックを受けた
+;전투 개시시・バックアタックを受けた
 IF TFLAG:전투이벤트 == 95
 	IF RAND:3 == 0
 			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -1040,7 +1040,7 @@ IF TFLAG:전투이벤트 == 95
 	ENDIF
 ENDIF
 
-;전투開始時・先制공격を受けた
+;전투 개시시・先制공격を受けた
 IF TFLAG:전투이벤트 == 96
 	IF RAND:3 == 0
 			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -1064,9 +1064,9 @@ ENDIF
 LOADGLOBAL
 
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;사용した스킬の名前をLOCALSに代入
+;사용한 스킬의 이름을 LOCALS에 대입
 LOCALS = %RESULTS%
-;타겟先の포지션を参照するための変数。FLAG:とあわせて使う。
+;ターゲット先のポジションを参照するための変数。FLAG:とあわせて使う。
 LOCALS:1 = 포지션{(CFLAG:ARG:타겟)}
 
 ;악마변신（ゼウスのみ）

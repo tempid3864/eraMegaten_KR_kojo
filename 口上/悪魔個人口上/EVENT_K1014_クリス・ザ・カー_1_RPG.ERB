@@ -227,7 +227,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = 《확보오ーーー！》
 		ENDIF
 	CASE 2
-	;공격　ARGが공격을する仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -242,7 +242,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS = 《배제완료입니다》
 				ENDIF
 			ENDIF
-		;약점をついた。つまりCOOP
+		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
 				LOCALS = 《단단해곰…》
@@ -283,7 +283,7 @@ SELECTCASE TFLAG:전투이벤트
 			ENDIF
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0

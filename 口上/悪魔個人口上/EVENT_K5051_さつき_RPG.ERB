@@ -42,10 +42,10 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = 여기 사람들은 모두 굉장하네。나도 열심히 해야겠다。
 			ENDIF
 		ENDIF
-	;被소환時
+	;피소환시
 	CASE 3
 			LOCALS = 아ー아、이런 극적인 모험도 익숙해졌어…
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -69,7 +69,7 @@ SELECTCASE TFLAG:전투이벤트
 ;			LOCALS = 
 		ENDIF
 	;피데미지
-	;ARGが공격을受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -101,7 +101,7 @@ SELECTCASE TFLAG:전투이벤트
 	;회피당했다
 	CASE 17
 			LOCALS = 어라아？
-	;회피した
+	;회피했다
 	CASE 18
 			LOCALS = 이래뵈도、나는 몇 년에 한 번 나올까말까 하는 일재(逸材)라고 했잖아！
 ENDSELECT
@@ -121,9 +121,9 @@ SIF TALENT:ARG:9
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは통상공격
+;이쪽은 통상공격
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:3 == 0
 		LOCALS = 에이！
@@ -138,7 +138,7 @@ IF CFLAG:ARG:입력행동 == 0
 ;ELSEIF LOCAL == 2301
 ;	LOCALS = 
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -168,7 +168,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		LOCALS = 활기차게 해나가자~！
 	;약체계
@@ -225,13 +225,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 ;	LOCALS = 
 ;;만능
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-;	;자폭系
+;	;자폭계
 ;	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 ;		LOCALS = 
 ;	ELSE
 ;		LOCALS = 
 ;	ENDIF
-;마법소녀系
+;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 ;アルティメットさつき
 	IF CFLAG:ARG:입력행동 == 2991

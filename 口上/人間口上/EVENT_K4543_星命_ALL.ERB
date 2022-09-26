@@ -1,27 +1,27 @@
 ﻿;-------------------------------------------------
-;安倍星命구상
+;安倍星命口上
 ;-------------------------------------------------
 ;	Module		:EVENT_K4543_星命_ALL.ERB
-;	Facility	:安倍星命구상（原作寄り…にしたい）
-;	Start word	:二面性のある美소년（ラスボスだしね）
+;	Facility	:安倍星命口上（原作寄り…にしたい）
+;	Start word	:二面性のある美少年（ラスボスだしね）
 ;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		Wikiの中の人			新規作成
-;	002		2012/03/15		Wikiの中の人			新テンプレに対応、구상更新
+;	002		2012/03/15		Wikiの中の人			新テンプレに対応、口上更新
 ;改変・再配布はご自由に。
 ;-------------------------------------------------
-;|■　사용CFLAG
+;|■　使用CFLAG
 ;|
 ;|800:
 ;|801：本性を暴いたかどうか
 ;-------------------------------------------------
-;|■　사용LOCAL
+;|■　使用LOCAL
 ;|
 ;-------------------------------------------------
-;|■　사용CSTR
+;|■　使用CSTR
 ;-------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
@@ -34,9 +34,9 @@
 ;SIF ARG == 1
 ;	RETURN 0
 ;;구상명
-;PRINTFORML ここに구상の명칭を記述してください
+;PRINTFORML ここに口上の名称を記述してください
 ;;구상설명문
-;PRINTFORML    ここに구상の簡가운な설명や注意点などを記述してください
+;PRINTFORML    ここに口上の簡単な説明や注意点などを記述してください
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（4543을 캐릭터번호로 치환）
@@ -49,18 +49,18 @@
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀 모드로 이행하시겠습니까?
-;	PRINTL [0] 예
-;	PRINTL [1] 아니오
+;	PRINTL 処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―처녀 모드로 소질, 능력을 변경하겠습니다―
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―통상 모드로 조교를 개시하겠습니다―
+;		PRINTFORMW ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -3787,19 +3787,19 @@ CASE 14
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
 				;당신のちんこの有無
 				IF HAVE_PENIS(PLAYER)
-				;페니스の有無체크
-					;페니스がある
-					;당신は후타나리
+				;ペニスの有無チェック
+					;ペニスがある
+					;あなたはふたなり
 					IF TALENT:PLAYER:후타나리
 						PRINTFORMW 
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:PLAYER:오토코노코
 						PRINTFORMW 
-					;당신は男
+					;あなたは男
 					ELSEIF TALENT:PLAYER:남자
 						PRINTFORMW 
 					ENDIF
-				;당신は女
+				;あなたは女
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -3808,19 +3808,19 @@ CASE 14
 			ELSEIF CFLAG:432 < 2 || FLAG:7 == 2
 				;당신のちんこの有無
 				IF HAVE_PENIS(PLAYER)
-				;페니스の有無체크
-					;페니스がある
-					;당신は후타나리
+				;ペニスの有無チェック
+					;ペニスがある
+					;あなたはふたなり
 					IF TALENT:PLAYER:후타나리
 						PRINTFORMW 
-					;당신が오토코노코
+					;あなたが男の娘
 					ELSEIF TALENT:PLAYER:오토코노코
 						PRINTFORMW 
-					;당신は男
+					;あなたは男
 					ELSEIF TALENT:PLAYER:남자
 						PRINTFORMW 
 					ENDIF
-				;당신は女
+				;あなたは女
 				ELSE
 					PRINTFORMW 
 				ENDIF
@@ -6355,7 +6355,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정당했다
+;역강간으로 사정시켰다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
@@ -8609,13 +8609,13 @@ ENDSELECT
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"이 정도야, 견뎌내 보이겠어…!",72,LEFT%                               ┃
+			PRINTFORML ┃%"이 정도야, 견뎌내 보이겠어…!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%                                                            ┃
+;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
@@ -8624,23 +8624,23 @@ IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 		IF RAND:5 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"다그쳐라！",72,LEFT%                                                  ┃
+			PRINTFORML ┃%"다그쳐라！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"아베 세이메이, 참가!",72,LEFT%                                        ┃
+			PRINTFORML ┃%"아베 세이메이, 참가!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"우리들을 적으로 돌린 것을, 후회해라!",72,LEFT%                        ┃
+			PRINTFORML ┃%"우리들을 적으로 돌린 것을, 후회해라!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"아직 끝이 아니다…!",72,LEFT%                                         ┃
+			PRINTFORML ┃%"아직 끝이 아니다…!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"한 번 더 먹을 때도 있는 거지…!",72,LEFT%                             ┃
+			PRINTFORML ┃%"한 번 더 먹을 때도 있는 거지…!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ENDIF
@@ -8659,47 +8659,47 @@ ENDIF
 ;이악물기
 IF CFLAG:ARG:입력행동 == 2406
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"이대로라면 끝나질 않아…!",72,LEFT%                                   ┃
+	PRINTFORML ┃%"이대로라면 끝나질 않아…!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;트라프리
 ELSEIF CFLAG:ARG:입력행동 == 513
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"그럼, 실례하지…",72,LEFT%                                            ┃
+	PRINTFORML ┃%"그럼, 실례하지…",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;결계부・치유
 ELSEIF CFLAG:ARG:입력행동 == 415
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"치유의 부적이여, 상처를 낫게 하라!",72,LEFT%                          ┃
+	PRINTFORML ┃%"치유의 부적이여, 상처를 낫게 하라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;결계부・물리
 ELSEIF CFLAG:ARG:입력행동 == 608
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"음양의 힘이여, 힘을 주어라!",72,LEFT%                                 ┃
+	PRINTFORML ┃%"음양의 힘이여, 힘을 주어라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;결계부・마법
 ELSEIF CFLAG:ARG:입력행동 == 609
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"음양의 힘이여, 마를 베어라!",72,LEFT%                                 ┃
+	PRINTFORML ┃%"음양의 힘이여, 마를 베어라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;玄武소환
 ELSEIF CFLAG:ARG:입력행동 == 1513
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"검은 거북이여, 부수어라!",72,LEFT%                                    ┃
+	PRINTFORML ┃%"검은 거북이여, 부수어라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;白虎소환
 ELSEIF CFLAG:ARG:입력행동 == 1713
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"흰 짐승이여, 찢어발겨라!",72,LEFT%                                    ┃
+	PRINTFORML ┃%"흰 짐승이여, 찢어발겨라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;朱雀소환
 ELSEIF CFLAG:ARG:입력행동 == 716
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"붉은 새여, 태워버려라!",72,LEFT%                                      ┃
+	PRINTFORML ┃%"붉은 새여, 태워버려라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;青龍소환
 ELSEIF CFLAG:ARG:입력행동 == 916
 	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"푸른 용이여, 휩쓸어라!",72,LEFT%                                      ┃
+	PRINTFORML ┃%"푸른 용이여, 휩쓸어라!",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 

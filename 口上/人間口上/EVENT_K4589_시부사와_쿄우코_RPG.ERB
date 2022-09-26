@@ -36,7 +36,7 @@ SELECTCASE TFLAG:전투이벤트
 	;피소환시
 	CASE 3
 			LOCALS = 
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2が데미지量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
@@ -60,7 +60,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = 엄청 튼튼해、내 공격이 통하지 않나봐…
 		ENDIF
 	;피데미지
-	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2が데미지量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -84,7 +84,7 @@ SELECTCASE TFLAG:전투이벤트
 ;	;회피당했다
 ;	CASE 17
 ;			LOCALS = 
-;	;회피した
+;	;회피했다
 ;	CASE 18
 ;			LOCALS = 
 ENDSELECT
@@ -104,9 +104,9 @@ SIF TALENT:ARG:9
 
 CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 ;-------------------------------------------------
-;特定스킬
+;특정스킬
 ;-------------------------------------------------
-;これは通常공격
+;이쪽은 통상공격
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:3 == 0
 		LOCALS = 에잇！
@@ -121,7 +121,7 @@ IF CFLAG:ARG:입력행동 == 0
 ;ELSEIF LOCAL == 2301
 ;	LOCALS = 
 ;-------------------------------------------------
-;汎用스킬
+;범용스킬
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
@@ -145,7 +145,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	ENDIF
 ;지원
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
-	;강화系
+	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505)
 		LOCALS = 이러면 좀 더 힘을 낼 수 있을거야！
 	;약체계
@@ -202,13 +202,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
 	LOCALS = 좀 더 더울테니 이해해 줘
 ;만능
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-	;자폭系
+	;자폭계
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 		LOCALS = 에엑?! %조사처리(CSTR:ARG:일인칭,"가")% 어째서!!?
 	ELSE
 		LOCALS = 피할 수 없는 속성공격이라니, 굉장하지 않아?
 	ENDIF
-;魔法소녀系
+;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	LOCALS = 엑? 이런 건 부끄러워서…
 
