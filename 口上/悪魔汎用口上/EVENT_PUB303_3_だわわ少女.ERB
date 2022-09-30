@@ -11,6 +11,14 @@
 ;	001 	2021/05/09		名無し					汎用少女口上7.12をベースに手動で変換
 ;	002 	2021/07/09		名無し					汎用少女口上7.13をベースに手動で変換
 ;	003 	2021/07/22		名無し					汎用少女口上7.14をベースに手動で変換
+;	004 	2022/05/01		名無し					汎用少女口上8   をベースに手動で変換
+
+
+;備忘録
+;サードアイを持っていると心の声が駄々洩れで聞こえる
+;心の声が聞こえる/聞こえないを「何もしない」で切り替えられるようにしておこう
+
+
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -132,12 +140,12 @@ CALL 구상변수초기화
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―処女モードに素質、能力を変更します―
+;		WSTR:(K++) = ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―通常モードで調教を開始します―
+;		WSTR:(K++) = ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -171,7 +179,7 @@ DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「%CSTR:이인칭%、何か用？」
-	PRINTFORMW 「……え？調教？」
+	PRINTFORMW 「……え？　調教？」
 	;人間キャラの場合
 	IF ABL:종족 == 0
 		IF RAND:2 == 0
@@ -187,7 +195,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 			PRINTFORMW 「子供を攫って調教とか、どうしようもな変態だわ」
 			IF TALENT:처녀
 				PRINTFORML 　
-				PRINTFORMW 「はぁ……」
+				PRINTFORML 「はぁ……」
 				PRINTFORMW 「これでバージンともサヨナラか……」
 			ELSE
 				PRINTFORMW （隙をみて逃げ出してやるわ……）
@@ -224,8 +232,8 @@ ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 	GOTO 表示
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
-	KSTR:(K++) = 「今日は何をするつもり？」
-	WSTR:(K++) = 今日はずいぶんと大人しい
+	PRINTFORML 「今日は何をするつもり？」
+	PRINTFORMW 今日はずいぶんと大人しい
 	PRINTFORML 「どうせ抵抗してもダメなら、暴れるだけ体力の無駄だわ」
 	PRINTFORMW %CALLNAME%も大分わかってきたようだ
 	CFLAG:201 = 3
@@ -233,13 +241,13 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && 함락()> 0
 	IF RAND:2 == 0
-		KSTR:(K++) = 「今日は何をするつもりなの？」
-		WSTR:(K++) = この前と少し様子が違うようだ
+		PRINTFORML 「今日は何をするつもりなの？」
+		PRINTFORMW この前と少し様子が違うようだ
 		PRINTFORMW 「少しなら……」
 		PRINTFORML 「この前よりエッチなことしても許してあげるわ」
 	ELSE
 		PRINTFORML 「ほら、%CSTR:일인칭%が欲しいんでしょ」
-		WSTR:(K++) = この前と少し様子が違うようだ
+		PRINTFORMW この前と少し様子が違うようだ
 		PRINTFORMW 「どうせ逆らえないし」
 		PRINTFORML 「それに%CSTR:이인칭%に色々されるの、悪くないわ……」
 	ENDIF
@@ -349,7 +357,7 @@ ENDIF
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_PUB303_3
-;助手
+;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
 ;	IF CFLAG:203 == 0
@@ -385,124 +393,124 @@ $表示
 @EVENTTRAIN_SECOND_PUB303_3
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
-	;奴隷が経験豊富なのに、あなたが동정の場合
+	;奴隷が経験豊富なのに、あなたが童貞の場合
 	IF RAND:3 == 0 && EXP:성교경험 == 50 && EXP:PLAYER:성교경험 == 0
-		PRINTFORMW 「%CSTR:이인칭%の調教は全くダメだわ」
-		PRINTFORML 「まぁ、동정ならしょうがないわ」
-		PRINTFORMW %CALLNAME%は諦めと憐みの眼差しでこちらを見ている
+		WSTR:(K++) = 「%CSTR:이인칭%の調教は全くダメだわ」
+		KSTR:(K++) = 「まぁ、童貞ならしょうがないわ」
+		WSTR:(K++) = %CALLNAME%は諦めと憐みの眼差しでこちらを見ている
 	ELSEIF RAND:2 == 0
-		PRINTFORMW 「屈服させるどころか恨みを買う……」
-		PRINTFORMW 「%CSTR:이인칭%、調教に向いてないわ」
+		WSTR:(K++) = 「屈服させるどころか恨みを買う……」
+		WSTR:(K++) = 「%CSTR:이인칭%、調教に向いてないわ」
 	ELSE
-		PRINTFORMW 「%CSTR:이인칭%の顔なんて見たくないのに何で来たの？」
+		WSTR:(K++) = 「%CSTR:이인칭%の顔なんて見たくないのに何で来たの？」
 	ENDIF
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 	;もし助手がバエルだったら
-	IF NO:ASSI == 270 && CFLAG:800 == 0
-		PRINTFORMW 「一人だと駄目だからって仲間を連れてきたわね」
-		PRINTFORMW 「あら、かわいい女の子じゃない……」
+	IF ASSI > 0 && NO:ASSI == 270 && CFLAG:800 == 0
+		WSTR:(K++) = 「一人だと駄目だからって仲間を連れてきたわね」
+		WSTR:(K++) = 「あら、かわいい女の子じゃない……」
 		IF ABL:종족 == 0
-			PRINTFORML 　
-			PRINTFORML 「きゃっ！」
-			PRINTFORML 「何で蛙なんて持ってるの！」
-			PRINTFORMW 少女は不思議そうな顔をしている
-			PRINTFORML 『安心せいや、ワシは%CSTR:ASSI:이인칭%の助手や』
-			PRINTFORML 『取って食ったりせんで』
-			PRINTFORMW 少女は頷いている
-			PRINTFORMW 「えっ、なんで蛙が喋ってるの？」
-			PRINTFORMW 『何を言うとんのや』
-			PRINTFORMW 『悪魔が跋扈しとる世界や、この位は普通やろ』
-			PRINTFORML 『まぁ、ワイも悪魔やがな』
-			PRINTFORMW 少女は頷いている
-			PRINTFORML 　
-			PRINTFORML 『てな訳で、今回は二人がかりや』
-			PRINTFORMW 少女は%CALLNAME%の前に突き出した
-			PRINTFORMW 「ちょっと、その蛙を近づけないで！」
+			KSTR:(K++) = 　
+			KSTR:(K++) = 「きゃっ！」
+			KSTR:(K++) = 「何で蛙なんて持ってるの！」
+			WSTR:(K++) = 少女は不思議そうな顔をしている
+			KSTR:(K++) = 『安心せいや、ワシは%CSTR:ASSI:이인칭%の助手や』
+			KSTR:(K++) = 『取って食ったりせんで』
+			WSTR:(K++) = 少女は頷いている
+			WSTR:(K++) = 「えっ、なんで蛙が喋ってるの？」
+			WSTR:(K++) = 『何を言うとんのや』
+			WSTR:(K++) = 『悪魔が跋扈しとる世界や、この位は普通やろ』
+			KSTR:(K++) = 『まぁ、ワイも悪魔やがな』
+			WSTR:(K++) = 少女は頷いている
+			KSTR:(K++) = 　
+			KSTR:(K++) = 『てな訳で、今回は二人がかりや』
+			WSTR:(K++) = 少女は%CALLNAME%の前に突き出した
+			WSTR:(K++) = 「ちょっと、その蛙を近づけないで！」
 		ELSE
-			PRINTFORML 　
-			PRINTFORMW 「えっ、なんで高位の悪魔がここに？」
-			PRINTFORMW 『気づいたか』
-			PRINTFORMW 『だが安心しや。今はお前さんとおんなじ%CSTR:ASSI:이인칭%の仲魔で助手や』
-			PRINTFORML 『よろしゅうな』
-			PRINTFORMW 少女はペコリとお辞儀をした
+			KSTR:(K++) = 　
+			WSTR:(K++) = 「えっ、なんで高位の悪魔がここに？」
+			WSTR:(K++) = 『気づいたか』
+			WSTR:(K++) = 『だが安心しや。今はお前さんとおんなじ%CSTR:ASSI:이인칭%の仲魔で助手や』
+			KSTR:(K++) = 『よろしゅうな』
+			WSTR:(K++) = 少女はペコリとお辞儀をした
 		ENDIF
 		CFLAG:800 = 1
 	;もし助手がまたバエルだったら
-	ELSEIF NO:ASSI == 270 && CFLAG:800 == 1
+	ELSEIF ASSI > 0 && NO:ASSI == 270 && CFLAG:800 == 1
 		IF RAND:2 == 0
-			PRINTFORML 	『まだ%CSTR:ASSI:이인칭%がオトせてないから%CSTR:ASSI:일인칭%が加勢に来たで』
-			PRINTFORMW 	少女は%CALLNAME%の前に突き出した
+			KSTR:(K++) = 	『まだ%CSTR:ASSI:이인칭%がオトせてないから%CSTR:ASSI:일인칭%が加勢に来たで』
+			WSTR:(K++) = 	少女は%CALLNAME%の前に突き出した
 			IF ABL:종족 == 0
-				PRINTFORML 「きゃっ！」
-				PRINTFORMW 「だから、その蛙を近づけないでって言ってるでしょ！」
+				KSTR:(K++) = 「きゃっ！」
+				WSTR:(K++) = 「だから、その蛙を近づけないでって言ってるでしょ！」
 			ENDIF
 		ELSE
-			PRINTFORMW 『調教の時間やぁ～～』
-			PRINTFORML 「きゃっ！」
-			PRINTFORMW 	%CALLNAME%は飛んでくる蛙をかろうじて躱した
-			PRINTFORML 　
-			PRINTFORMW 「何で、蛙を放り投げるの？　自分の半身を投げつけてもおかしいと思わないの？」
-			PRINTFORMW 少女は%CALLNAME%の前に正座して説教を受けている
-			PRINTFORML 『説教はそのくらいにして調教始めるで』
-			PRINTFORMW 何事も無かったかのように蛙は調教の開始を宣言した
+			WSTR:(K++) = 『調教の時間やぁ～～』
+			KSTR:(K++) = 「きゃっ！」
+			WSTR:(K++) = 	%CALLNAME%は飛んでくる蛙をかろうじて躱した
+			KSTR:(K++) = 　
+			WSTR:(K++) = 「何で、蛙を放り投げるの？　自分の半身を投げつけてもおかしいと思わないの？」
+			WSTR:(K++) = 少女は%CALLNAME%の前に正座して説教を受けている
+			KSTR:(K++) = 『説教はそのくらいにして調教始めるで』
+			WSTR:(K++) = 何事も無かったかのように蛙は調教の開始を宣言した
 		ENDIF
 	ELSEIF RAND:3 == 0
-		PRINTFORML 「また調教？」
-		PRINTFORMW 「全くバカな事だわ」
+		KSTR:(K++) = 「また調教？」
+		WSTR:(K++) = 「全くバカな事だわ」
 	ELSEIF RAND:2 == 0
-		PRINTFORML 「%CSTR:이인칭%の調教など全く気持ち良くないわ」
-		PRINTFORMW 「これなら自分でオナニーしてた方がマシですわ」
+		KSTR:(K++) = 「%CSTR:이인칭%の調教など全く気持ち良くないわ」
+		WSTR:(K++) = 「これなら自分でオナニーしてた方がマシですわ」
 	ELSE
 		IF ABL:종족 == 0
-			PRINTFORMW 「もう家に帰してもらうわ」
+			WSTR:(K++) = 「もう家に帰してもらうわ」
 		ELSE
-			PRINTFORMW 「もう契約解除してもらうわ」
+			WSTR:(K++) = 「もう契約解除してもらうわ」
 		ENDIF
-		PRINTFORMW 「%CSTR:이인칭%の調教、まったく無意味ですから」
+		WSTR:(K++) = 「%CSTR:이인칭%の調教、まったく無意味ですから」
 	ENDIF
 	CFLAG:202 = 1
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
-	PRINTFORMW 「また調教？」
+	WSTR:(K++) = 「また調教？」
 	IF TALENT:츤데레 || TALENT:반항적 || TALENT:건방짐
-		PRINTFORMW 「無駄でしょうけど、言わせてもらうわ」
-		PRINTFORMW 「ヘンタイ！」
+		WSTR:(K++) = 「無駄でしょうけど、言わせてもらうわ」
+		WSTR:(K++) = 「ヘンタイ！」
 	ELSE
-		PRINTFORMW 「今回はもう少し上手にやって欲しいわ」
+		WSTR:(K++) = 「今回はもう少し上手にやって欲しいわ」
 	ENDIF
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	PRINTFORMW 「また調教」
-	PRINTFORMW 「今日はどんな事をするの？」
+	WSTR:(K++) = 「また調教」
+	WSTR:(K++) = 「今日はどんな事をするの？」
 	IF RAND:2 == 0
-		PRINTFORMW 「……！　楽しみにしている訳じゃないわ」
-		PRINTFORMW 「そう、こころがまえ！　心構えしておきたいだけだわ！」
+		WSTR:(K++) = 「……！　楽しみにしている訳じゃないわ」
+		WSTR:(K++) = 「そう、こころがまえ！　心構えしておきたいだけだわ！」
 	ELSE
-		PRINTFORMW 「…あ、ちょっとだけチョウキョウが……」
-		PRINTFORMW 「そんな事ありませんわ！　冗談ですわ！」
+		WSTR:(K++) = 「…あ、ちょっとだけチョウキョウが……」
+		WSTR:(K++) = 「そんな事ありませんわ！　冗談ですわ！」
 	ENDIF
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && 함락()> 0 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	IF RAND:3 == 0
-		PRINTFORML 「あ、今日も？」
-		PRINTFORMW 呼び出された%CALLNAME%は顔をパッと明るくさせたが、すぐに澄ました顔で取り繕い始めた。
-		PRINTFORML 「た、楽しみにしてたワケじゃないわ」
-		PRINTFORMW %CALLNAME%はもじもじと内股を擦り合わせ、顔を赤くしている
-		PRINTFORMW 「退屈だから付きあってあげるわ」
-		PRINTFORMW 「嘘じゃないわ。ドキドキなんてしてないったらしてないの！」
+		KSTR:(K++) = 「あ、今日も？」
+		WSTR:(K++) = 呼び出された%CALLNAME%は顔をパッと明るくさせたが、すぐに澄ました顔で取り繕い始めた。
+		KSTR:(K++) = 「た、楽しみにしてたワケじゃないわ」
+		WSTR:(K++) = %CALLNAME%はもじもじと内股を擦り合わせ、顔を赤くしている
+		WSTR:(K++) = 「退屈だから付きあってあげるわ」
+		WSTR:(K++) = 「嘘じゃないわ。ドキドキなんてしてないったらしてないの！」
 	ELSEIF RAND:2 == 0
-		PRINTFORMW 「今日も子供相手にナニをするつもり？」
-		PRINTFORML 「いい加減に捕まってしまえばいいわ」
-		PRINTFORMW %CALLNAME%の顔は楽しそうな笑みを浮かべている
+		WSTR:(K++) = 「今日も子供相手にナニをするつもり？」
+		KSTR:(K++) = 「いい加減に捕まってしまえばいいわ」
+		WSTR:(K++) = %CALLNAME%の顔は楽しそうな笑みを浮かべている
 	ELSE
-		PRINTFORMW 「さぁ、始めるといいわ%CSTR:이인칭%」
-		PRINTFORML 
-		PRINTFORMW 「抵抗するだけ無駄なのだから、楽しまないとダメだわ♪」
-		PRINTFORMW 素直になった理由を問いただしてみると%CALLNAME%はそう答えた
+		WSTR:(K++) = 「さぁ、始めるといいわ%CSTR:이인칭%」
+		KSTR:(K++) = 
+		WSTR:(K++) = 「抵抗するだけ無駄なのだから、楽しまないとダメだわ♪」
+		WSTR:(K++) = 素直になった理由を問いただしてみると%CALLNAME%はそう答えた
 	ENDIF
 	CFLAG:202 = 4
 ;함락완료
@@ -513,104 +521,104 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		IF TALENT:아내
 			;夜のおつとめ
 			IF TIME == 3 && FLAG:던전탐색완료 == 1
-				PRINTFORMW 「%CSTR:이인칭%も今日は十分に働いたわ」
-				PRINTFORMW 「次はおヨメさんとの夜のオツトメの時間だわ%ハート()%」
+				WSTR:(K++) = 「%CSTR:이인칭%も今日は十分に働いたわ」
+				WSTR:(K++) = 「次はおヨメさんとの夜のオツトメの時間だわ%ハート()%」
 				;もし助手がまたバエルだったら
-				IF NO:ASSI == 270 && TALENT:ASSI:아내
-					PRINTFORMW 少女も肯いている
-					PRINTFORML 　
+				IF ASSI > 0 && NO:ASSI == 270 && TALENT:ASSI:아내
+					WSTR:(K++) = 少女も肯いている
+					KSTR:(K++) = 　
  					IF CFLAG:800 == 1
-						PRINTFORML 「何でアンタがココにいるの！」
-						PRINTFORMW 少女は不思議そうな顔をしている
-						PRINTFORMW 『お前さんも言うとったやないか』
-						PRINTFORML 『”お嫁さんとの夜のお勤めの時間”やと』
-						PRINTFORMW 少女は指にはめた指輪を%CALLNAME%に見せた
-						PRINTFORML 　
-						PRINTFORMW 「…わかったわ」
-						PRINTFORMW 「どっちが本当の妻か勝負だわ！」
+						KSTR:(K++) = 「何でアンタがココにいるの！」
+						WSTR:(K++) = 少女は不思議そうな顔をしている
+						WSTR:(K++) = 『お前さんも言うとったやないか』
+						KSTR:(K++) = 『”お嫁さんとの夜のお勤めの時間”やと』
+						WSTR:(K++) = 少女は指にはめた指輪を%CALLNAME%に見せた
+						KSTR:(K++) = 　
+						WSTR:(K++) = 「…わかったわ」
+						WSTR:(K++) = 「どっちが本当の妻か勝負だわ！」
 						CFLAG:800 = 3
 					ELSEIF CFLAG:800 == 3
-						PRINTFORMW 「またアンタね」
-						PRINTFORMW 「今回で本妻決定戦を終わらせてやるわ！」
-						PRINTFORMW %CALLNAME%の言葉に少女もやる気だ
+						WSTR:(K++) = 「またアンタね」
+						WSTR:(K++) = 「今回で本妻決定戦を終わらせてやるわ！」
+						WSTR:(K++) = %CALLNAME%の言葉に少女もやる気だ
 					ENDIF
 				ENDIF
 			;妻とのひととき
 			ELSEIF RAND:2 == 0
-				PRINTFORML 「%CSTR:이인칭%、待ってたわ」
-				PRINTFORMW 「%CSTR:일인칭%もこんな幼くて可愛い奥さんを放っておく訳ないもんね%ハート()%」
+				KSTR:(K++) = 「%CSTR:이인칭%、待ってたわ」
+				WSTR:(K++) = 「%CSTR:일인칭%もこんな幼くて可愛い奥さんを放っておく訳ないもんね%ハート()%」
 			ELSE
-				PRINTFORML 「%CSTR:일인칭%の事、忘れてくれなかったのね」
-				PRINTFORMW %CALLNAME%に頭を撫でられた
-				PRINTFORMW 「次は%CSTR:이인칭%の方から優しくして欲しいわ」
+				KSTR:(K++) = 「%CSTR:일인칭%の事、忘れてくれなかったのね」
+				WSTR:(K++) = %CALLNAME%に頭を撫でられた
+				WSTR:(K++) = 「次は%CSTR:이인칭%の方から優しくして欲しいわ」
 			ENDIF
 		ELSE
 			IF RAND:4 == 0
-				PRINTFORMW 「いつになったら、つぎの契約するの？」
-				PRINTFORMW 「このままズルズルと関係が続くのはお断りだわ」
+				WSTR:(K++) = 「いつになったら、つぎの契約するの？」
+				WSTR:(K++) = 「このままズルズルと関係が続くのはお断りだわ」
 			ELSEIF RAND:3 == 0
-				PRINTFORMW 「約束の時間より３分遅かったけど、特別に許してあげるわ」
-				PRINTFORML 「ほら、遅れた分、ちゃんとエスコートしなさいよ」
-				PRINTFORMW %CALLNAME%恥ずかしそうに%CALLNAME:MASTER%に手を差し出した。
+				WSTR:(K++) = 「約束の時間より３分遅かったけど、特別に許してあげるわ」
+				KSTR:(K++) = 「ほら、遅れた分、ちゃんとエスコートしなさいよ」
+				WSTR:(K++) = %CALLNAME%恥ずかしそうに%CALLNAME:MASTER%に手を差し出した。
 			ELSEIF RAND:2 == 0
-				PRINTFORMW 「また来たの？」
-				PRINTFORMW 「%CSTR:이인칭%もよっぽど暇なのね」
-				PRINTFORMW 「…可愛そうだから%CSTR:일인칭%が相手してあげるわ♪」
+				WSTR:(K++) = 「また来たの？」
+				WSTR:(K++) = 「%CSTR:이인칭%もよっぽど暇なのね」
+				WSTR:(K++) = 「…可愛そうだから%CSTR:일인칭%が相手してあげるわ♪」
 			ELSE
-				PRINTFORML 「%CSTR:이인칭%っ」
-				PRINTFORMW 呼び出すなり、%CALLNAME%は%CALLNAME:MASTER%に抱きついてきた
-				PRINTFORMW 「今は%CSTR:이인칭%の傍にいてあげるわ」
-				PRINTFORMW 「だからね、もっとギュッとして」
+				KSTR:(K++) = 「%CSTR:이인칭%っ」
+				WSTR:(K++) = 呼び出すなり、%CALLNAME%は%CALLNAME:MASTER%に抱きついてきた
+				WSTR:(K++) = 「今は%CSTR:이인칭%の傍にいてあげるわ」
+				WSTR:(K++) = 「だからね、もっとギュッとして」
 			ENDIF
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:4 == 0
-			PRINTFORML 「来たわね」
-			PRINTFORMW 調教を待ちきれなかった%CALLNAME%は隠す様子もなく自分を慰めていた
-			PRINTFORMW 「ほら、子供マンコも準備できてるわ」
-			PRINTFORML 
+			KSTR:(K++) = 「来たわね」
+			WSTR:(K++) = 調教を待ちきれなかった%CALLNAME%は隠す様子もなく自分を慰めていた
+			WSTR:(K++) = 「ほら、子供マンコも準備できてるわ」
+			KSTR:(K++) = 
 			IF EXP:Ａ경험 < 25
-				PRINTFORML 「それとも、こっちの穴を使ってみたいの？」
-				PRINTFORMW %CALLNAME%はまだ固く閉じている菊穴をこちらに向けると誘うように尻を振り出した
+				KSTR:(K++) = 「それとも、こっちの穴を使ってみたいの？」
+				WSTR:(K++) = %CALLNAME%はまだ固く閉じている菊穴をこちらに向けると誘うように尻を振り出した
 			ELSE
-				PRINTFORML 「もちろん、子供アヌスも準備できてるわ♪」
-				PRINTFORMW 色々な体液でぬらぬらと光る両穴を見せつけながら、%CALLNAME%は腰を突き出してきた
+				KSTR:(K++) = 「もちろん、子供アヌスも準備できてるわ♪」
+				WSTR:(K++) = 色々な体液でぬらぬらと光る両穴を見せつけながら、%CALLNAME%は腰を突き出してきた
 			ENDIF
 		ELSEIF RAND:3 == 0
-			PRINTFORMW 「%CSTR:이인칭%、やっと来たわね」
-			PRINTFORML 「遅いから、もう%CSTR:일인칭%一人で始めてるわ」
-			PRINTFORMW %CALLNAME%の股間は既に\@TALENT:남자 ? 先走り # 愛液\@でふやけており、扇情的にてらてらと光っている。
-			PRINTFORMW 「ほらっ！　はやくいっぱいセックスするわ%ハート()%」
+			WSTR:(K++) = 「%CSTR:이인칭%、やっと来たわね」
+			KSTR:(K++) = 「遅いから、もう%CSTR:일인칭%一人で始めてるわ」
+			WSTR:(K++) = %CALLNAME%の股間は既に\@TALENT:남자 ? 先走り # 愛液\@でふやけており、扇情的にてらてらと光っている。
+			WSTR:(K++) = 「ほらっ！　はやくいっぱいセックスするわ%ハート()%」
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「え～～いっ！！」
-			PRINTFORMW %CALLNAME%は勢いをつけて飛びつくと、%CALLNAME:MASTER%を押し倒した。
-			PRINTFORML 「今日は%CSTR:일인칭%から襲っちゃうわ%ハート()%」
-			PRINTFORMW 蕩けた瞳を向けながら、%CALLNAME%は股間を%CALLNAME:MASTER%の腰に擦り付けてきた。
+			KSTR:(K++) = 「え～～いっ！！」
+			WSTR:(K++) = %CALLNAME%は勢いをつけて飛びつくと、%CALLNAME:MASTER%を押し倒した。
+			KSTR:(K++) = 「今日は%CSTR:일인칭%から襲っちゃうわ%ハート()%」
+			WSTR:(K++) = 蕩けた瞳を向けながら、%CALLNAME%は股間を%CALLNAME:MASTER%の腰に擦り付けてきた。
 			;主導権を取られる
 			TEQUIP:주도권 = 1
 		ELSE
-			PRINTFORML 「待ってたわ、%CSTR:이인칭%♪」
-			PRINTFORMW %CALLNAME%はベッドに腰掛けながら物欲しそうに%CALLNAME:MASTER%の股間を見つめ、足を広げて\@TALENT:남자 ? 先走り # 愛液\@に濡れた秘所を見せ付ける。
-			PRINTFORMW 「今日は%CSTR:이인칭%が%CSTR:일인칭%犯すの？　逆の方がいい？」
+			KSTR:(K++) = 「待ってたわ、%CSTR:이인칭%♪」
+			WSTR:(K++) = %CALLNAME%はベッドに腰掛けながら物欲しそうに%CALLNAME:MASTER%の股間を見つめ、足を広げて\@TALENT:남자 ? 先走り # 愛液\@に濡れた秘所を見せ付ける。
+			WSTR:(K++) = 「今日は%CSTR:이인칭%が%CSTR:일인칭%犯すの？　逆の方がいい？」
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		IF RAND:4 == 0 && TALENT:처녀
-			PRINTFORMW 「今日はどんなことするの？」
-			PRINTFORMW 「%CSTR:일인칭%はもう%CSTR:이인칭%のモノだからバージンだって好きにしていいのよ」
-			PRINTFORMW 「それとも普通じゃないロストバージンをさせるつもり？」
+			WSTR:(K++) = 「今日はどんなことするの？」
+			WSTR:(K++) = 「%CSTR:일인칭%はもう%CSTR:이인칭%のモノだからバージンだって好きにしていいのよ」
+			WSTR:(K++) = 「それとも普通じゃないロストバージンをさせるつもり？」
 		ELSEIF RAND:3 == 0
-			PRINTFORML 「お尻が真っ赤になるまで叩いても、熱いローソク垂らしてもいいわ」
-			PRINTFORMW %CALLNAME%はそのさまを想像しながら内股でモジモジしている
+			KSTR:(K++) = 「お尻が真っ赤になるまで叩いても、熱いローソク垂らしてもいいわ」
+			WSTR:(K++) = %CALLNAME%はそのさまを想像しながら内股でモジモジしている
 		ELSEIF RAND:2 == 0
-			PRINTFORMW 「動けないくらいギュウギュウに縛ってそのまま%CSTR:일인칭%にゴホーシさせちゃう？」
-			PRINTFORMW 「%CSTR:일인칭%も精一杯頑張るから、期待していいわ」
+			WSTR:(K++) = 「動けないくらいギュウギュウに縛ってそのまま%CSTR:일인칭%にゴホーシさせちゃう？」
+			WSTR:(K++) = 「%CSTR:일인칭%も精一杯頑張るから、期待していいわ」
 		ELSE
-			PRINTFORMW 「来てくれたのね」
-			PRINTFORML 「%CSTR:일인칭%の全身全霊で奉仕させて貰うわ」
-			PRINTFORMW %CALLNAME%は嬉しそうだ
+			WSTR:(K++) = 「来てくれたのね」
+			KSTR:(K++) = 「%CSTR:일인칭%の全身全霊で奉仕させて貰うわ」
+			WSTR:(K++) = %CALLNAME%は嬉しそうだ
 		ENDIF
 	ENDIF
 	CFLAG:202 = 5
@@ -642,61 +650,61 @@ DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	IF RAND:2 == 0
-		PRINTFORML 「早く死んでくれないかしら」
+		KSTR:(K++) = 「早く死んでくれないかしら」
 	ELSE
-		PRINTFORML 「%CALLNAME%なんて悪魔に食われてしまえばいいわ」
+		KSTR:(K++) = 「%CALLNAME%なんて悪魔に食われてしまえばいいわ」
 	ENDIF
-	PRINTFORM %CALLNAME:MASTER%は恨み事を聞きながら%CALLNAME%
+	WSTR:(K++) =  %CALLNAME:MASTER%は恨み事を聞きながら%CALLNAME%
 	IF ABL:종족 == 0
-		PRINTFORMW の部屋を出た。
+		WSTR:(K++) = の部屋を出た。
 	ELSE
-		PRINTFORMW を送還した。
+		WSTR:(K++) = を送還した。
 	ENDIF
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	PRINTFORML 「やっと終わった」
+	KSTR:(K++) = 「やっと終わった」
 	SELECTCASE TIME
 		CASE 0
-			PRINTFORMW 「さ、お昼にするわ」
+			WSTR:(K++) = 「さ、お昼にするわ」
 		CASE 1
-			PRINTFORMW 「ヤな事忘れるにはおやつに限るわ」
+			WSTR:(K++) = 「嫌な事忘れるにはおやつに限るわ」
 		CASE 2
-			PRINTFORMW 「さ、夕飯の時間だわ」
+			WSTR:(K++) = 「さ、夕飯の時間だわ」
 		CASE 3
-			PRINTFORMW 「お風呂入ってさっぱりしてから寝るわ」
+			WSTR:(K++) = 「お風呂入ってさっぱりしてから寝るわ」
 	ENDSELECT
 	CFLAG:219 = 1
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
 	IF RAND:3 == 0
-		PRINTFORML 「あ、もう終わり…？」
+		KSTR:(K++) = 「あ、もう終わり…？」
 	ELSEIF RAND:2 == 0
-		PRINTFORML 「ん…はぁ、何かしらこの気持ちは……」
+		KSTR:(K++) = 「ん…はぁ、何かしらこの気持ちは……」
 	ELSE
-		PRINTFORML 「…うん、またね」
+		KSTR:(K++) = 「…うん、またね」
 	ENDIF
 	IF RAND:2 == 0
-		PRINTFORMW %CALLNAME%は何か言い足そうな様子を見せたが、何も言わずにタオルで身体を拭き始めた。
+		WSTR:(K++) = %CALLNAME%は何か言い足そうな様子を見せたが、何も言わずにタオルで身体を拭き始めた。
 	ELSE
-		PRINTFORMW 複雑な表情を見せる%CALLNAME%。快楽に溺れかけている自分に戸惑っているようだ。
+		WSTR:(K++) = 複雑な表情を見せる%CALLNAME%。快楽に溺れかけている自分に戸惑っているようだ。
 	ENDIF
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && 함락()> 0
 	IF RAND:3 == 0
-		PRINTFORMW 「今日はこれで終わり？」
-		PRINTFORML 「また呼んでくれるよね？　ね？」
+		WSTR:(K++) = 「今日はこれで終わり？」
+		KSTR:(K++) = 「また呼んでくれるよね？　ね？」
 	ELSEIF RAND:2 == 0
-		PRINTFORML 「も、もう終わり……なの……？」
+		KSTR:(K++) = 「も、もう終わり……なの……？」
 	ELSE
-		PRINTFORML 「%CSTR:이인칭%と一緒にいるのが楽しくなってるわ……」
+		KSTR:(K++) = 「%CSTR:이인칭%と一緒にいるのが楽しくなってるわ……」
 	ENDIF
 	IF RAND:2 == 0
-		PRINTFORMW %CALLNAME%はぐったりと脱力して横たわっている。
-		PRINTFORMW ぼんやりと天井を見つめるその瞳には、現状を素直に受け入れる諦観が漂っていた……
+		WSTR:(K++) = %CALLNAME%はぐったりと脱力して横たわっている。
+		WSTR:(K++) = ぼんやりと天井を見つめるその瞳には、現状を素直に受け入れる諦観が漂っていた……
 	ELSE
-		PRINTFORMW そう呟く%CALLNAME%は、まだ物欲しそうな眼でこちらを見つめていた。
+		WSTR:(K++) = そう呟く%CALLNAME%は、まだ物欲しそうな眼でこちらを見つめていた。
 	ENDIF
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
@@ -704,46 +712,46 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		IF RAND:3 == 0
-			PRINTFORMW 「疲れたわ」
-			PRINTFORML 「けど満たされた気分……」
-			PRINTFORMW ぐったりと身体を%CALLNAME:MASTER%に預けながら、%CALLNAME%は幸せそうに微笑んだ。
+			WSTR:(K++) = 「疲れたわ」
+			KSTR:(K++) = 「けど満たされた気分……」
+			WSTR:(K++) = ぐったりと身体を%CALLNAME:MASTER%に預けながら、%CALLNAME%は幸せそうに微笑んだ。
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「もうだめ……だわ……」
-			PRINTFORMW 身体をシーツに投げ出し、肩で息をしつつ%CALLNAME%は快楽の余韻に浸っている
-			PRINTFORMW 毛布をかけてやると、%CALLNAME%は感謝の眼差しを%CALLNAME:MASTER%に向けた。
+			KSTR:(K++) = 「もうだめ……だわ……」
+			WSTR:(K++) = 身体をシーツに投げ出し、肩で息をしつつ%CALLNAME%は快楽の余韻に浸っている
+			WSTR:(K++) = 毛布をかけてやると、%CALLNAME%は感謝の眼差しを%CALLNAME:MASTER%に向けた。
 		ELSE
-			PRINTFORMW 疲労しきっているというのに、%CALLNAME%は%CALLNAME:MASTER%にしがみついたまま離れようとしない。
-			PRINTFORMW どうしたものかと思案していると、小さな寝息が胸元から聞こえてきた。
-			PRINTFORML 「ん……%CSTR:이인칭%……好き……離さない…わ……」
-			PRINTFORMW 苦笑しながら%CALLNAME%を優しく横たえると、%CALLNAME%が幸せそうに寝言を呟いた。
+			WSTR:(K++) = 疲労しきっているというのに、%CALLNAME%は%CALLNAME:MASTER%にしがみついたまま離れようとしない。
+			WSTR:(K++) = どうしたものかと思案していると、小さな寝息が胸元から聞こえてきた。
+			KSTR:(K++) = 「ん……%CSTR:이인칭%……好き……離さない…わ……」
+			WSTR:(K++) = 苦笑しながら%CALLNAME%を優しく横たえると、%CALLNAME%が幸せそうに寝言を呟いた。
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		IF RAND:2 == 0
-			PRINTFORMW 「はぁ、はぁ……」
-			PRINTFORML 「気持ち…よかったわ……%ハート()%」
+			WSTR:(K++) = 「はぁ、はぁ……」
+			KSTR:(K++) = 「気持ち…よかったわ……%ハート()%」
 		ELSE
-			PRINTFORML 「もっと…スるわ……」
+			KSTR:(K++) = 「もっと…スるわ……」
 		ENDIF
-		PRINTFORMW %CALLNAME%は身体に残る快楽の余韻に時々痙攣しながら、情欲に濡れた瞳を%CALLNAME:MASTER%に向けた。
-		PRINTFORMW 「もっと……壊れて失神しちゃうまで…セックスして……」
+		WSTR:(K++) = %CALLNAME%は身体に残る快楽の余韻に時々痙攣しながら、情欲に濡れた瞳を%CALLNAME:MASTER%に向けた。
+		WSTR:(K++) = 「もっと……壊れて失神しちゃうまで…セックスして……」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		IF RAND:2 == 0
-			PRINTFORML 「はぁ…はぁ…%ハート()%」
+			KSTR:(K++) = 「はぁ…はぁ…%ハート()%」
 		ELSE
-			PRINTFORML 「今日もすごかったわ」
-			PRINTFORMW 「次もまた、お願い……」
+			KSTR:(K++) = 「今日もすごかったわ」
+			WSTR:(K++) = 「次もまた、お願い……」
 		ENDIF
-		PRINTFORMW 体力を使い果たしたのか、%CALLNAME%は体を動かせないようだ。
-		PRINTFORML  
+		WSTR:(K++) = 体力を使い果たしたのか、%CALLNAME%は体を動かせないようだ。
+		KSTR:(K++) =  
 		IF RAND:2 == 0
-			PRINTFORMW 「ありがとうございましたぁ%ハート()%」
-			PRINTFORMW 去り際に尻を一発叩いてやると%CALLNAME%は嬉しそうに礼を述べた。
+			WSTR:(K++) = 「ありがとうございましたぁ%ハート()%」
+			WSTR:(K++) = 去り際に尻を一発叩いてやると%CALLNAME%は嬉しそうに礼を述べた。
 		ELSE
-			PRINTFORMW 「ありがとうございます！」
-			PRINTFORML 「足蹴にしてもらって、%CSTR:일인칭%は幸せ者だわ……」
-			PRINTFORMW %CALLNAME%の顔を足で踏みつけると、%CALLNAME%は自分の立場を思い出して調教の礼を述べた。
+			WSTR:(K++) = 「ありがとうございます！」
+			KSTR:(K++) = 「足蹴にしてもらって、%CSTR:일인칭%は幸せ者だわ……」
+			WSTR:(K++) = %CALLNAME%の顔を足で踏みつけると、%CALLNAME%は自分の立場を思い出して調教の礼を述べた。
 		ENDIF
 	ENDIF
 	CFLAG:218 = 1
@@ -752,60 +760,60 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		IF RAND:3 == 0
-			PRINTFORMW 「あ……も、もう終わるの？」
-			PRINTFORML 「うん、分かったわ……」
-			PRINTFORML 「でも、また呼んでね。約束よ？」
-			PRINTFORMW 聞き分けの良さそうな素振りを見せているが、どことなく不満そうだ
+			WSTR:(K++) = 「あ……も、もう終わるの？」
+			KSTR:(K++) = 「うん、分かったわ……」
+			KSTR:(K++) = 「でも、また呼んでね。約束よ？」
+			WSTR:(K++) = 聞き分けの良さそうな素振りを見せているが、どことなく不満そうだ
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「いっぱい愛してもらっちゃったわ♪」
-			PRINTFORMW %CALLNAME%は身体を%CALLNAME:MASTER%の腕に擦りつけ、愛しそうに何度も腕にキスをする。
-			PRINTFORML 「%CSTR:일인칭%もいっぱい愛してあげたわ」
-			PRINTFORML 「嬉しいでしょ、%CSTR:이인칭%？」
-			PRINTFORMW %CALLNAME%はいたずらっぽく見上げ、顔を近づけて%CALLNAME:MASTER%にキスのおねだりをした。
+			KSTR:(K++) = 「いっぱい愛してもらっちゃったわ♪」
+			WSTR:(K++) = %CALLNAME%は身体を%CALLNAME:MASTER%の腕に擦りつけ、愛しそうに何度も腕にキスをする。
+			KSTR:(K++) = 「%CSTR:일인칭%もいっぱい愛してあげたわ」
+			KSTR:(K++) = 「嬉しいでしょ、%CSTR:이인칭%？」
+			WSTR:(K++) = %CALLNAME%はいたずらっぽく見上げ、顔を近づけて%CALLNAME:MASTER%にキスのおねだりをした。
 		ELSE
-			PRINTFORML 「ねえ…%CSTR:이인칭%」
-			PRINTFORMW 快楽の余韻に顔を火照らせながら、%CALLNAME:MASTER%に抱きついたまま%CALLNAME%は顔を寄せる。
-			PRINTFORMW 「%CSTR:이인칭%が他のコにもえっちなコトしてるのは知ってるわ」
-			PRINTFORMW 「けど……一番愛してるのは%CSTR:일인칭%よね？」
-			PRINTFORML 　
-			PRINTFORML 「ほら、早く認めて『一番愛している』って言いなさい。」
-			PRINTFORML 「そうしないと、次から愛してあげないわ♪」
-			PRINTFORMW %CALLNAME%の我侭はなかなか終わりそうにない……
+			KSTR:(K++) = 「ねえ…%CSTR:이인칭%」
+			WSTR:(K++) = 快楽の余韻に顔を火照らせながら、%CALLNAME:MASTER%に抱きついたまま%CALLNAME%は顔を寄せる。
+			WSTR:(K++) = 「%CSTR:이인칭%が他のコにもえっちなコトしてるのは知ってるわ」
+			WSTR:(K++) = 「けど……一番愛してるのは%CSTR:일인칭%よね？」
+			KSTR:(K++) = 　
+			KSTR:(K++) = 「ほら、早く認めて『一番愛している』って言いなさい。」
+			KSTR:(K++) = 「そうしないと、次から愛してあげないわ♪」
+			WSTR:(K++) = %CALLNAME%の我侭はなかなか終わりそうにない……
 		ENDIF
 	;음란, 창부
 		IF RAND:3 == 0
-			PRINTFORMW 「もっと、もっとエッチなことしたいわ」
-			PRINTFORMW 「%CSTR:이인칭%、また呼んでね？」
+			WSTR:(K++) = 「もっと、もっとエッチなことしたいわ」
+			WSTR:(K++) = 「%CSTR:이인칭%、また呼んでね？」
 		ELSEIF RAND:2 == 0
-			PRINTFORMW 「もう終わり？」
-			PRINTFORML 「もっともっと気持ちイイこと、楽しみたいわ……」
-			PRINTFORMW むずがる子供のように%CALLNAME%は%CALLNAME:MASTER%に抱きつく。
-			PRINTFORM 「もっといっぱいセックスしたいわ。セーエキもっと
+			WSTR:(K++) = 「もう終わり？」
+			KSTR:(K++) = 「もっともっと気持ちイイこと、楽しみたいわ……」
+			WSTR:(K++) = むずがる子供のように%CALLNAME%は%CALLNAME:MASTER%に抱きつく。
+			KSTR:(K++) = 「もっといっぱいセックスしたいわ」
 			IF HAVE_PENIS()
-				PRINTFORML 出したいわ……あ、あんっ%ハート()%」
+				KSTR:(K++) = 「セーエキもっと出したいわ……あ、あんっ%ハート()%」
 			ELSE
-				PRINTFORML いっぱい飲みたいわ……あ、あんっ%ハート()%」
+				KSTR:(K++) = 「セーエキもっといっぱい飲みたいわ……あ、あんっ%ハート()%」
 			ENDIF
-			PRINTFORMW 我慢できなくなった%CALLNAME%は%CALLNAME:MASTER%の腕に股間を擦り付けて快楽を引き出している。
+			WSTR:(K++) = 我慢できなくなった%CALLNAME%は%CALLNAME:MASTER%の腕に股間を擦り付けて快楽を引き出している。
 		ELSE
-			PRINTFORML 「ん……ん…あ、……んっ……あん…」
-			PRINTFORMW まだ快感が身体から消えないのだろう、時折身体を痙攣させながら、%CALLNAME%は小さく喘いでいる
-			PRINTFORMW 荒い息をつきながら顔を火照らせ、情欲に濡れている瞳を%CALLNAME:MASTER%の股間に向けていた。
-			PRINTFORML 
-			PRINTFORML 「待って……ほら、まだできるわ……」
-			PRINTFORMW 押し倒したい気持ちを懸命に抑えながら、%CALLNAME:MASTER%は%CALLNAME%に背中を向けた。
+			KSTR:(K++) = 「ん……ん…あ、……んっ……あん…」
+			WSTR:(K++) = まだ快感が身体から消えないのだろう、時折身体を痙攣させながら、%CALLNAME%は小さく喘いでいる
+			WSTR:(K++) = 荒い息をつきながら顔を火照らせ、情欲に濡れている瞳を%CALLNAME:MASTER%の股間に向けていた。
+			KSTR:(K++) = 
+			KSTR:(K++) = 「待って……ほら、まだできるわ……」
+			WSTR:(K++) = 押し倒したい気持ちを懸命に抑えながら、%CALLNAME:MASTER%は%CALLNAME%に背中を向けた。
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		;PRINTFORMW 「あ……も、もう終わるの？」
+		;WSTR:(K++) = 「あ……も、もう終わるの？」
 		IF RAND:3 == 0
-			PRINTFORML 「今日もいっぱい虐めてくれてありがとうございました、%CSTR:이인칭%」
+			KSTR:(K++) = 「今日もいっぱい虐めてくれてありがとうございました、%CSTR:이인칭%」
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「次は……もっとお願い致しますわ」
+			KSTR:(K++) = 「次は……もっとお願い致しますわ」
 		ELSE
-			PRINTFORML 「ソコにある道具、まだ使ってないわ」
+			KSTR:(K++) = 「ソコにある道具、まだ使ってないわ」
 		ENDIF
-		;PRINTFORMW %CALLNAME%はまだ虐められたいようだが無視して背中を向けた。
+		;WSTR:(K++) = %CALLNAME%はまだ虐められたいようだが無視して背中を向けた。
 	ENDIF
 	CFLAG:219 = 4
 ENDIF
@@ -832,7 +840,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -886,7 +894,7 @@ SELECTCASE SELECTCOM
 					WSTR:(K++) = 「ビリビリ来ちゃって、ダメになっちゃうわ%ハート()%」
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					;체격차二段階以上の場合
+					;体格差二段階以上の場合
 					IF (체격(PLAYER) - 체격()) >= 10
 						KSTR:(K++) = 「これじゃあ、%CSTR:이인칭%のお人形さんみたいだわ」
 						KSTR:(K++) = 「いいわ……もっといっぱい……%CSTR:일인칭%でエッチなお人形遊びして%ハート()%」
@@ -910,42 +918,42 @@ SELECTCASE SELECTCOM
 			IF 함락( ) > 0 && (CFLAG:300 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					PRINTFORMW 「%CSTR:이인칭%の撫で方、優しくって……ふ、ぁっ、ぁん、いいわ、いいわっ♪」
-					PRINTFORM 「もっと、もっと触って……
+					WSTR:(K++) = 「%CSTR:이인칭%の撫で方、優しくって……ふ、ぁっ、ぁん、いいわ、いいわっ♪」
+					NSTR:(K++) = 「もっと、もっと触って……
 					IF TALENT:아내
-						PRINTFORM %CSTR:이인칭%の可愛い幼妻
+						NSTR:(K++) =  %CSTR:이인칭%の可愛い幼妻
 					ELSE
-						PRINTFORM %CSTR:일인칭%
+						NSTR:(K++) =  %CSTR:일인칭%
 					ENDIF
-					PRINTFORML の事いっぱい愛してぇ…%ハート()%」
-					PRINTFORMW 潤んだ目で見上げながら、%CALLNAME%は自ら身体を擦り付けてきている。
+					KSTR:(K++) = の事いっぱい愛してぇ…%ハート()%」
+					WSTR:(K++) = 潤んだ目で見上げながら、%CALLNAME%は自ら身体を擦り付けてきている。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					PRINTFORMW 「あっ、あっ、あんっ%ハート()%」
+					WSTR:(K++) = 「あっ、あっ、あんっ%ハート()%」
 					IF RAND:2 == 0
-						PRINTFORML 「もっと、もっと触って……おっぱいも、お\@ TALENT:남자 ? ちんちん # まんこ\@もぉ%ハート()%」
-						PRINTFORML 「そう、ここ、ココだわ♪」
-						PRINTFORMW 欲情に濡れた瞳で見上げながら、%CALLNAME%は身体を強く押し付け、更なる快楽を引き出そうとしている。
+						KSTR:(K++) = 「もっと、もっと触って……おっぱいも、お\@ TALENT:남자 ? ちんちん # まんこ\@もぉ%ハート()%」
+						KSTR:(K++) = 「そう、ここ、ココだわ♪」
+						WSTR:(K++) = 欲情に濡れた瞳で見上げながら、%CALLNAME%は身体を強く押し付け、更なる快楽を引き出そうとしている。
 					ELSE
-						PRINTFORM 「じらさないで
+						NSTR:(K++) =  「じらさないで
 						IF TALENT:후타나리
-							PRINTFORMW オチンチンとオマンコしてぇ」
+							WSTR:(K++) = オチンチンとオマンコしてぇ」
 						ELSEIF HAVE_PENIS()
-							PRINTFORMW オチンチンつかってぇ」
+							WSTR:(K++) = オチンチンつかってぇ」
 						ELSE
-							PRINTFORMW オマンコに何かちょ～だい」
+							WSTR:(K++) = オマンコに何かちょ～だい」
 						ENDIF
-						PRINTFORML 「もう我慢できないわぁ♪」
-						PRINTFORMW 欲情に濡れた瞳で見上げながら、%CALLNAME%はさらなる調教を懇願した。
+						KSTR:(K++) = 「もう我慢できないわぁ♪」
+						WSTR:(K++) = 欲情に濡れた瞳で見上げながら、%CALLNAME%はさらなる調教を懇願した。
 					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORMW 「ふぁぁっ%ハート()%」
+					WSTR:(K++) = 「ふぁぁっ%ハート()%」
 					IF RAND:2 == 0
-						PRINTFORMW 「%CSTR:일인칭%のやらしいおっぱいもお\@ TALENT:남자 ? ちんちん # まんこ\@も、%CSTR:이인칭%のモノなんだから」
-						PRINTFORMW 「もっと、好きなだけ弄くって鳴かせてればいいわ♪」
+						WSTR:(K++) = 「%CSTR:일인칭%のやらしいおっぱいもお\@ TALENT:남자 ? ちんちん # まんこ\@も、%CSTR:이인칭%のモノなんだから」
+						WSTR:(K++) = 「もっと、好きなだけ弄くって鳴かせてればいいわ♪」
 					ELSE
-						PRINTFORMW 「次は%CSTR:일인칭%が気持ち良くする番だわ」
+						WSTR:(K++) = 「次は%CSTR:일인칭%が気持ち良くする番だわ」
 					ENDIF
 				ENDIF
 				CFLAG:300 = 4
@@ -953,21 +961,21 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:300 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORML 「ひゃんっ！　さ、触り方が……」
-					PRINTFORMW （このまま続けられるとエッチな気持ちになりそうだわ……）
+					KSTR:(K++) = 「ひゃんっ！　さ、触り方が……」
+					WSTR:(K++) = （このまま続けられるとエッチな気持ちになりそうだわ……）
 				ELSE
-					PRINTFORML 「だめっ！　これ以上は」
-					PRINTFORMW 「%CSTR:일인칭%、おかしくなっちゃうわ！」
+					KSTR:(K++) = 「だめっ！　これ以上は」
+					WSTR:(K++) = 「%CSTR:일인칭%、おかしくなっちゃうわ！」
 				ENDIF
 				CFLAG:300 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:300 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORMW 「どうせするなら、もうちょっと優しく触ってくれると嬉しいわ……んっ」
+					WSTR:(K++) = 「どうせするなら、もうちょっと優しく触ってくれると嬉しいわ……んっ」
 				ELSE
-					PRINTFORML 「そんな事をされても」
-					PRINTFORMW 「き、気持ち良くなんてないわっ……んぁっ」
+					KSTR:(K++) = 「そんな事をされても」
+					WSTR:(K++) = 「き、気持ち良くなんてないわっ……んぁっ」
 				ENDIF
 				CFLAG:300 = 2
 			ENDIF
@@ -983,35 +991,35 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					IF TALENT:츤데레 || TALENT:반항적 || TALENT:건방짐 || TALENT:부끄럼쟁이
-						PRINTFORMW 「ううう……」
-						PRINTFORMW %CSTR:일인칭%は\@ TALENT:소인체형 ?# %CALLNAME:MASTER%の頭を抑えつけながら、 \@顔を真っ赤にして目を強く瞑っている
-						PRINTFORMW %CALLNAME:MASTER%の目の前に秘部が晒されていることが恥ずかしくて仕方ないようだ
+						WSTR:(K++) = 「ううう……」
+						WSTR:(K++) = %CSTR:일인칭%は\@ TALENT:소인체형 ?# %CALLNAME:MASTER%の頭を抑えつけながら、 \@顔を真っ赤にして目を強く瞑っている
+						WSTR:(K++) = %CALLNAME:MASTER%の目の前に秘部が晒されていることが恥ずかしくて仕方ないようだ
 					ELSE
-						PRINTFORMW 「んっ、く、ふぅ、んんっ」
-						PRINTFORMW 「え、へへ。%CSTR:이인칭%、%CSTR:일인칭%のお豆さんにキスしてるみたい……」
-						PRINTFORMW 「ちょっと妬けちゃうかも？ ふふふ」
+						WSTR:(K++) = 「んっ、く、ふぅ、んんっ」
+						WSTR:(K++) = 「え、へへ。%CSTR:이인칭%、%CSTR:일인칭%のお豆さんにキスしてるみたい……」
+						WSTR:(K++) = 「ちょっと妬けちゃうかも？ ふふふ」
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					PRINTFORMW 「そう！　もっと、もっと強く吸って！」
-					PRINTFORMW 「%CSTR:이인칭%の舌で%CSTR:일인칭%をおかしくして♪」
+					WSTR:(K++) = 「そう！　もっと、もっと強く吸って！」
+					WSTR:(K++) = 「%CSTR:이인칭%の舌で%CSTR:일인칭%をおかしくして♪」
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORML 「%CSTR:이인칭%、そこは汚いところ、舐めちゃ駄目だわ%ハート()%」
-					PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%が舐める度にビクリと身体を震わせている
+					KSTR:(K++) = 「%CSTR:이인칭%、そこは汚いところ、舐めちゃ駄目だわ%ハート()%」
+					WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%が舐める度にビクリと身体を震わせている
 				ENDIF
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:303 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「%CSTR:일인칭%のおまんこ舐めたい？」
-				PRINTFORMW 「%CSTR:이인칭%は本当にヘンタイね」
-				PRINTFORMW 「……ちょっとだけよ？」
+				KSTR:(K++) = 「%CSTR:일인칭%のおまんこ舐めたい？」
+				WSTR:(K++) = 「%CSTR:이인칭%は本当にヘンタイね」
+				WSTR:(K++) = 「……ちょっとだけよ？」
 			ENDIF
 			;그 이외
 			IF (CFLAG:303 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「ひゃんっ！？」
-				PRINTFORMW 「や、やだ、そんなところ舐めないでっ！」
-				PRINTFORML 「バカっ、ヘンタイっ！ おしっこするところを舐めて楽しいなんて頭オカシイわ！」
+				KSTR:(K++) = 「ひゃんっ！？」
+				WSTR:(K++) = 「や、やだ、そんなところ舐めないでっ！」
+				KSTR:(K++) = 「バカっ、ヘンタイっ！ おしっこするところを舐めて楽しいなんて頭オカシイわ！」
 			ENDIF
 			CFLAG:301 = 1
 		;2번째 이후
@@ -1019,30 +1027,30 @@ SELECTCASE SELECTCOM
 			IF 함락( ) > 0 && (CFLAG:301 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					PRINTFORML 「あ…あっ…そこダメッ」
+					KSTR:(K++) = 「あ…あっ…そこダメッ」
 					IF RAND:2 == 0 && TALENT:아내
-						PRINTFORMW 「エッチなお嫁さんになっちゃう%ハート()%」
+						WSTR:(K++) = 「エッチなお嫁さんになっちゃう%ハート()%」
 					ELSE
-						PRINTFORMW 「%CSTR:일인칭%、おかしくなっちゃう%ハート()%」
+						WSTR:(K++) = 「%CSTR:일인칭%、おかしくなっちゃう%ハート()%」
 					ENDIF
-					PRINTFORML 「けど、%CSTR:일인칭%が舐めるの上手いから……しょうがないわ」
-					PRINTFORMW %CALLNAME%は快感に震えながら、恥ずかしそうに股間を押し付けてきた。
+					KSTR:(K++) = 「けど、%CSTR:일인칭%が舐めるの上手いから……しょうがないわ」
+					WSTR:(K++) = %CALLNAME%は快感に震えながら、恥ずかしそうに股間を押し付けてきた。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					IF RAND:2 == 0
-						PRINTFORMW 「ひゃぅん%ハート()% クリちゃん気持ち良いわぁ%ハート()%」
-						PRINTFORMW 「もっとおまんこペロペロしてえ%ハート()%」
+						WSTR:(K++) = 「ひゃぅん%ハート()% クリちゃん気持ち良いわぁ%ハート()%」
+						WSTR:(K++) = 「もっとおまんこペロペロしてえ%ハート()%」
 					ELSE
-						PRINTFORMW 「あはっ%ハート()%　%CSTR:일인칭%のおまんこ、もうびしょびしょだわ……」
-						PRINTFORMW 「だから、早くエッチ、しよ%ハート()%」
+						WSTR:(K++) = 「あはっ%ハート()%　%CSTR:일인칭%のおまんこ、もうびしょびしょだわ……」
+						WSTR:(K++) = 「だから、早くエッチ、しよ%ハート()%」
 					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					IF RAND:2 == 0
-						PRINTFORMW 「%CSTR:일인칭%のおまんこ……あんっ、そんなに美味しい？」
+						WSTR:(K++) = 「%CSTR:일인칭%のおまんこ……あんっ、そんなに美味しい？」
 					ELSE
-						PRINTFORML 「%CSTR:일인칭%の舌がキモチ良くて…」
-						PRINTFORMW 「あんっ、ガマンできないわ…ごめんなさい……」
+						KSTR:(K++) = 「%CSTR:일인칭%の舌がキモチ良くて…」
+						WSTR:(K++) = 「あんっ、ガマンできないわ…ごめんなさい……」
 					ENDIF
 				ENDIF
 				CFLAG:301 = 4
@@ -1055,7 +1063,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:301 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					KSTR:(K++) = 「そ、そんなところ舐めるのが好きとか……머리……おかしいわ……んんっ」
+					KSTR:(K++) = 「そ、そんなところ舐めるのが好きとか……頭……おかしいわ……んんっ」
 				ELSE
 					KSTR:(K++) = 「やだ……%CSTR:이인칭%の舌、気持ちわるい……」
 				ENDIF
@@ -1073,16 +1081,16 @@ SELECTCASE SELECTCOM
 			IF 함락( ) > 0 && (CFLAG:303 < 3 || FLAG:7 == 2)
 				IF TALENT:처녀
 					IF HAVE_PENIS(PLAYER)
-						PRINTFORMW 「股に指を入れるの？　オチンチンじゃなくていいの？」
+						WSTR:(K++) = 「股に指を入れるの？　オチンチンじゃなくていいの？」
 					ELSE
-						PRINTFORMW 「オチンチン無いならしょうがないわ」
+						WSTR:(K++) = 「オチンチン無いならしょうがないわ」
 					ENDIF
 				ELSE
-					PRINTFORMW 「確かに前戯は必要だわ」
-					PRINTFORMW 「それともそういうプレイが好き？」
+					WSTR:(K++) = 「確かに前戯は必要だわ」
+					WSTR:(K++) = 「それともそういうプレイが好き？」
 				ENDIF
 			ELSE
-				PRINTFORMW 「え、指を挿れる？　無理よ、入らないわ！」
+				WSTR:(K++) = 「え、指を挿れる？　無理よ、入らないわ！」
 			ENDIF
 			CFLAG:303 = 1
 		ELSE
@@ -1090,47 +1098,43 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					IF RAND:2 == 0
-						PRINTFORML 「ん、あ、あっ……あ、そこ、いいわ……んっ！」
+						KSTR:(K++) = 「ん、あ、あっ……あ、そこ、いいわ……んっ！」
 					ELSE
-						PRINTFORML 「あぁ……、%CSTR:이인칭%の指の動き、エッチだわ…ひあっ！」
+						KSTR:(K++) = 「あぁ……、%CSTR:이인칭%の指の動き、エッチだわ…ひあっ！」
 					ENDIF
-					PRINTFORMW 濡れそぼった秘部を掻き回す指の感触に、%CALLNAME%は身体を震わせながら愛液を溢れさせた。
+					WSTR:(K++) = 濡れそぼった秘部を掻き回す指の感触に、%CALLNAME%は身体を震わせながら愛液を溢れさせた。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					IF RAND:2 == 0
-						PRINTFORML 「あ、あん！いいわ！…もっと！もっとぐちゅぐちゅほじってぇ！」
+						KSTR:(K++) = 「あ、あん！いいわ！…もっと！もっとぐちゅぐちゅほじってぇ！」
 					ELSE
-						PRINTFORML 「指なんかじゃ、も、物足りないわ」
-						PRINTFORML 「もっと大きいのちょーだい！」
-						PRINTFORM 言葉とは裏腹に
+						KSTR:(K++) = 「指なんかじゃ、も、物足りないわ」
+						KSTR:(K++) = 「もっと大きいのちょーだい！」
+						NSTR:(K++) =  言葉とは裏腹に
 					ENDIF
-					PRINTFORMW %CALLNAME%の膣内は貪欲に指を咥え込み、しゃぶるように柔らかな膣壁できつく締め付ける。
+					WSTR:(K++) = %CALLNAME%の膣内は貪欲に指を咥え込み、しゃぶるように柔らかな膣壁できつく締め付ける。
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					IF RAND:2 == 0
-						PRINTFORMW 「んふ、ん…別に、あっ、濡らさないでも挿れて、いいわ？あ、ふぁっ」
+						WSTR:(K++) = 「んふ、ん…別に、あっ、濡らさないでも挿れて、いいわ？あ、ふぁっ」
 					ELSE
-						PRINTFORML 「んふ、ん…%CSTR:일인칭%、奴隷だから」
-						PRINTFORMW 「もっとグリグリして…」
+						KSTR:(K++) = 「んふ、ん…%CSTR:일인칭%、奴隷だから」
+						WSTR:(K++) = 「もっとグリグリして…」
 					ENDIF
-				ENDIF
-				;함락완료 공통
-				IF !구상유무확인(0)
-					KSTR:(K++) = 
 				ENDIF
 				CFLAG:303 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:303 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORMW 「ん、あ、あん……指、気持ちいいわ……あ、あっ」
+				WSTR:(K++) = 「ん、あ、あん……指、気持ちいいわ……あ、あっ」
 				CFLAG:303 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:303 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORMW 「ん、こんなの……よくない…わ…あっ」
+					WSTR:(K++) = 「ん、こんなの……よくない…わ…あっ」
 				ELSE
-					PRINTFORMW 「いたっ！　もっと優しくしないと傷になっちゃうわ」
+					WSTR:(K++) = 「いたっ！　もっと優しくしないと傷になっちゃうわ」
 				ENDIF
 				CFLAG:303 = 2
 			ENDIF
@@ -1180,34 +1184,66 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:305 == 0
-			KSTR:(K++) =
+			IF 함락( ) > 0 && (CFLAG:305 < 3 || FLAG:7 == 2)
+				;연모, 친애
+				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
+					WSTR:(K++) = 「そこはエッチする場所じゃないわ」
+					WSTR:(K++) = 「けど……%CSTR:이인칭%がどうしてもシたいなら……いいわ%ハート()%」
+				;음란, 창부
+				ELSEIF 함락( ) > 0 && RESULTS == "음란"
+					KSTR:(K++) = 「お尻の準備運動ね」
+					IF RAND:2 == 0
+						WSTR:(K++) = 「裂けないようにするには確かに必要だわ」
+					ELSE
+						WSTR:(K++) = 「いきなりズブリ、でもいいのに%ハート()%」
+					ENDIF
+				;복종, 예속
+				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
+					KSTR:(K++) = 「そこはエッチする場所じゃないわ、%CSTR:이인칭%？」
+					WSTR:(K++) = %CALLNAME:MASTER%は構わず愛撫を続ける
+					KSTR:(K++) = 「ホ、ホンキなのね、%CSTR:이인칭%」
+					WSTR:(K++) = 「じゃあ……」
+					KSTR:(K++) = 　
+					KSTR:(K++) = 「%CSTR:일인칭%のオシリの穴、エッチな穴にしてください」
+					WSTR:(K++) = %CALLNAME%はかしこまった口調で調教の継続を懇願した
+				ENDIF
+			ELSE
+				WSTR:(K++) = 「お尻、触るの？…ひゃっ！？」
+				WSTR:(K++) = 「ち、違うわ。ソコは指なんて入れる場所じゃないわ！」
+			ENDIF
 			CFLAG:305 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:305 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					KSTR:(K++) = 
+					WSTR:(K++) = 「やっ、や……ああっ！」
+					WSTR:(K++) = %CALLNAME%は\@TALENT:유아체형 || TALENT:소인체형 ? 肉付きの薄い幼 # お\@尻を震わせながら、それでも素直に身を任せている。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					KSTR:(K++) = 
+					IF RAND:2 == 0
+						KSTR:(K++) = 「あはぁ♪　いい、いいわぁ」
+						KSTR:(K++) = 「お尻マンコ気持ちいいわぁ……ねえ、もっとぉ%ハート()%」
+						WSTR:(K++) = %CALLNAME%はアナルから湧き上がる快楽に身をすっかり任せ、尻を強く押し付けてきた。
+					ELSE
+						KSTR:(K++) = 「もっと太くて長いの頂戴ぃ%ハート()%」
+						WSTR:(K++) = 指での愛撫では物足りない%CALLNAME%は自分から腰を動かし、さらに快楽を引き出そうとしている。
+					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					KSTR:(K++) = 
-				ENDIF
-				;함락완료 공통
-				IF !구상유무확인(0)
-					KSTR:(K++) = 
+					KSTR:(K++) = 「あぁぁ、お尻ぃ♪グリグリされるの気持ちいいわぁ%ハート()%」
+					WSTR:(K++) = 望みどおり乱暴に指をアナルへ突き入れ、穴を拡げるように掻き回してやった。
 				ENDIF
 				CFLAG:305 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:305 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) = 
+				KSTR:(K++) = 「んくっ…ん、んあっ」
+				WSTR:(K++) = どうやら少しずつではあるが快感を受け入れているようだ。
 				CFLAG:305 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:305 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) =
+				WSTR:(K++) = 「だからくすぐったいってばぁ…や、ひゃん！」
 				CFLAG:305 = 2
 			ENDIF
 		ENDIF
@@ -1222,15 +1258,15 @@ SELECTCASE SELECTCOM
 			IF 함락( ) > 0 && FLAG:7 == 2
 				;ちっぱい
 				IF BUST() < 3
-					PRINTFORMW 「小さいおっぱいでごめんね…」
+					WSTR:(K++) = 「小さいおっぱいでごめんね…」
 				;でっぱい
 				ELSEIF BUST() > 3
-					PRINTFORMW 「どう？　大きいおっぱい%ハート()%」
+					WSTR:(K++) = 「どう？　大きいおっぱい%ハート()%」
 				ELSE
-					PRINTFORMW 「おっぱいもむと大きくなるってホント？」
+					WSTR:(K++) = 「おっぱいもむと大きくなるってホント？」
 				ENDIF
 			ELSE
-				PRINTFORMW 「ひゃっ！や、やん！…くすぐったいわ」
+				WSTR:(K++) = 「ひゃっ！や、やん！…くすぐったいわ」
 			ENDIF
 			CFLAG:306 = 1
 		ELSE
@@ -1240,36 +1276,37 @@ SELECTCASE SELECTCOM
 					IF ABL:종족 == 0 && RAND:2 == 0
 						;巨乳or爆乳〇学生
 						IF (BUST() > 3)
-							PRINTFORML 「まだ子供なのに、こんなにおっきな%CSTR:일인칭%のオッパイ」
-							PRINTFORML 「%CSTR:이인칭%の好きにしていいわ……%ハート()%」
+							KSTR:(K++) = 「まだ子供なのに、こんなにおっきな%CSTR:일인칭%のオッパイ」
+							KSTR:(K++) = 「%CSTR:이인칭%の好きにしていいわ……%ハート()%」
 						ELSE
-							PRINTFORML 「まだおっきくないけど、%CSTR:일인칭%のオッパイすきにしていいわ…」」
+							KSTR:(K++) = 「まだおっきくないけど、%CSTR:일인칭%のオッパイすきにしていいわ…」」
 						ENDIF
 					ELSE
-						PRINTFORMW 「%CALLNAME%のおっぱい…好き？　ん、あ……あっ、あん」
-						PRINTFORM 「……いいわ、%CSTR:이인칭%の好きにしてぇ……%CSTR:일인칭%も、
+						WSTR:(K++) = 「%CALLNAME%のおっぱい…好き？　ん、あ……あっ、あん」
+						KSTR:(K++) =  「……いいわ、%CSTR:이인칭%の好きにしてぇ……」
+						NSTR:(K++) = 「%CSTR:일인칭%も、
 							IF TALENT:아내
-								PRINTFORM エッチな旦那様
-								ELSE
-							PRINTFORM %CSTR:이인칭%
+								NSTR:(K++) =  エッチな旦那様
+							ELSE
+								NSTR:(K++) =  %CSTR:이인칭%
 							ENDIF
-						PRINTFORMW に、おっぱいふにふにしてもらうの、大好きだから……あ、あん、ひんっ！」
+						WSTR:(K++) = に、おっぱいふにふにしてもらうの、大好きだから……あ、あん、ひんっ！」
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					PRINTFORMW 「はっ、あ、あんっ！おっぱいいいわぁ…あん、あん！」
-					PRINTFORML 「もっと、もっと強くもみくちゃにしてぇ%ハート()%　あん！あんッ！」
-					PRINTFORMW %CALLNAME%は胸から伝わる快感に打ち震え、淫らに形を変える自らの乳房を見て恍惚としている……
+					WSTR:(K++) = 「はっ、あ、あんっ！おっぱいいいわぁ…あん、あん！」
+					KSTR:(K++) = 「もっと、もっと強くもみくちゃにしてぇ%ハート()%　あん！あんッ！」
+					WSTR:(K++) = %CALLNAME%は胸から伝わる快感に打ち震え、淫らに形を変える自らの乳房を見て恍惚としている……
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					IF RAND:2 == 0
-						PRINTFORML 「もっとぉ…もっと痛いくらいギュッてしてぇ」
-						PRINTFORML 「痛いのも気持ちいいから……」
-						PRINTFORMW せがむ%CALLNAME%をニヤニヤと眺めつつ優しく胸を揉みしだいた。
+						KSTR:(K++) = 「もっとぉ…もっと痛いくらいギュッてしてぇ」
+						KSTR:(K++) = 「痛いのも気持ちいいから……」
+						WSTR:(K++) = せがむ%CALLNAME%をニヤニヤと眺めつつ優しく胸を揉みしだいた。
 					ELSE
-						PRINTFORML 「おっぱいモミモミだけじゃなくて、もっとぉ…もっと…」
-						PRINTFORMW %CALLNAME%の懇願を無視して動きを止める%CALLNAME:PLAYER%
-						PRINTFORMW 「んっ……おあずけなんて酷いわ……」
+						KSTR:(K++) = 「おっぱいモミモミだけじゃなくて、もっとぉ…もっと…」
+						WSTR:(K++) = %CALLNAME%の懇願を無視して動きを止める%CALLNAME:PLAYER%
+						WSTR:(K++) = 「んっ……おあずけなんて酷いわ……」
 					ENDIF
 				ENDIF
 				CFLAG:306 = 4
@@ -1292,34 +1329,57 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:307 == 0
-			KSTR:(K++) =
+			;함락완료
+			IF 함락( ) > 0 
+				KSTR:(K++) = 「あんっ%ハート()%　乳首、ビリッときた……」
+				WSTR:(K++) = 「けど、これキモチいいわ%ハート()%」
+			ELSE
+				WSTR:(K++) = 「や、嫌ぁ！　乳首いじらないで！」
+			ENDIF
 			CFLAG:307 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:307 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					KSTR:(K++) = 
+					KSTR:(K++) = 「なんか赤ちゃんみたいね……あ、あん、いい、もっとぉ%ハート()%」
+					WSTR:(K++) = %CALLNAME%の乳首に何度も吸い付き、舌で愛撫する……
+					WSTR:(K++) = %CALLNAME%は鋭い快感に耐えながら、%CALLNAME:MASTER%の頭を愛しそうに撫でた。
+					IF TALENT:아내
+						KSTR:(K++) = 　
+						WSTR:(K++) = 「おっぱいの片方は旦那様の物らしいわ」
+						WSTR:(K++) = 「だから、%CSTR:이인칭%の好きにしていいわ%ハート()%」
+					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					KSTR:(K++) = 
+					KSTR:(K++) = 「ひゃあん！」
+					KSTR:(K++) = 「もっと強くっ！もっと激しく！乳首吸ってぇ！コリコリしてぇっ！」
+					WSTR:(K++) = %CALLNAME%の乳首を強く吸い付けると、%CALLNAME%は%CALLNAME:MASTER%の頭を押さえ込みながら自ら乳首を擦り付けてきた。
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					KSTR:(K++) = 
-				ENDIF
-				;함락완료 공통
-				IF !구상유무확인(0)
-					KSTR:(K++) = 
+					KSTR:(K++) = 「やあああぁぁぁ！乳首取れちゃうわぁぁ%ハート()%」
+					WSTR:(K++) = 強めに乳首を抓りながら引っ張ると%CALLNAME%は甘い声を上げ始めた。
+					WSTR:(K++) = 「はぁ…はぁ……」
+					KSTR:(K++) = 「そんなに乳首引っ張ったら乳首伸びちゃうわ」
+					WSTR:(K++) = それも困るので乳首を押し込むと再び甘い声が上がる。
+					WSTR:(K++) = それからしばらく乳首を引っ張っては押し込みし続けた。
 				ENDIF
 				CFLAG:307 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:307 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) = 
+				WSTR:(K++) = 「ん、あ…手つきがヤらしいわ…や、あ、あぁん」
 				CFLAG:307 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:307 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) =
+				NSTR:(K++) = 「ん…おっぱいばっかり……そんなに
+				IF BUST() > 2
+					NSTR:(K++) = 子供の小さい
+				ELSEIF BUST() < 3
+					NSTR:(K++) = 子供なのに大きな%CSTR:일인칭%の
+				ENDIF
+				WSTR:(K++) = おっぱいがいいの？」
+				WSTR:(K++) = 「どうしようもない変態だわ」
 				CFLAG:307 = 2
 			ENDIF
 		ENDIF
@@ -1332,21 +1392,21 @@ SELECTCASE SELECTCOM
 		IF CFLAG:308 == 0
 			;함락완료
 			IF 함락( ) > 0 && (CFLAG:308 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あんっ%ハート()%　身体中にビリッてきたわ」
-				PRINTFORMW 「けど、これ気持ちいいわ…%ハート()%」
+				KSTR:(K++) = 「あんっ%ハート()%　身体中にビリッてきたわ」
+				WSTR:(K++) = 「けど、これ気持ちいいわ…%ハート()%」
 			ELSE
-				PRINTFORMW 「え、おっぱい？　触っちゃダメだわ！」
+				WSTR:(K++) = 「え、おっぱい？　触っちゃダメだわ！」
 			ENDIF
 			CFLAG:308 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:308 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					PRINTFORMW 「ん、あんっ…えへへ、おっぱい撫でられるの、愛されてるのを感じて……好きだわ%ハート()%」
+					WSTR:(K++) = 「ん、あんっ…えへへ、おっぱい撫でられるの、愛されてるのを感じて……好きだわ%ハート()%」
 					IF BUST() > 2
-						PRINTFORMW 「だけど、まさか発育不良の呪いとか、かけてないわね？」
+						WSTR:(K++) = 「だけど、まさか発育不良の呪いとか、かけてないわね？」
 					ELSEIF BUST() < 3
-						PRINTFORMW 「大きいと、こういう時いいわ」
+						WSTR:(K++) = 「大きいと、こういう時いいわ」
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
@@ -1354,9 +1414,9 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「ねえ、もっと強くぅ…ちくびもコリコリってしてぇ%ハート()%」
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の乳首を軽くひねりながら反対の乳房にキスマークをつけている。
-					PRINTFORMW 「%CSTR:일인칭%のおっぱい、%CSTR:이인칭%の物だって証つけられちゃったわ%ハート()%」
-					PRINTFORMW 嬉しいか？と聞くと%CALLNAME%は照れくさそうに微笑んだ。 
+					WSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%の乳首を軽くひねりながら反対の乳房にキスマークをつけている。
+					WSTR:(K++) = 「%CSTR:일인칭%のおっぱい、%CSTR:이인칭%の物だって証つけられちゃったわ%ハート()%」
+					WSTR:(K++) = 嬉しいか？と聞くと%CALLNAME%は照れくさそうに微笑んだ。 
 				ENDIF
 				CFLAG:308 = 4
 			ENDIF
@@ -1367,14 +1427,14 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:308 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORM 「ん…おっぱいばっかり……そんなに%CSTR:일인칭%の
+				NSTR:(K++) = 「ん…おっぱいばっかり……そんなに%CSTR:일인칭%の
 				IF BUST() > 2
-					PRINTFORM 小さい
+					NSTR:(K++) = 小さい
 				ELSEIF BUST() < 3
-					PRINTFORM 子供なのに大きな
+					NSTR:(K++) = 子供なのに大きな
 				ENDIF
-				PRINTFORMW おっぱいがいいの？」
-				PRINTFORMW 「犯罪だわ」
+				WSTR:(K++) = おっぱいがいいの？」
+				WSTR:(K++) = 「犯罪だわ」
 				CFLAG:308 = 2
 			ENDIF
 		ENDIF
@@ -1385,35 +1445,171 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:309 == 0
-			KSTR:(K++) =
-			CFLAG:309 = 1
-		ELSE
-			IF 함락( ) > 0 && (CFLAG:309 < 3 || FLAG:7 == 2)
+			IF TALENT:소악마
+				;처녀
+				IF TALENT:처녀
+					KSTR:(K++) = 「どう…これが未使用で新品の%CSTR:일인칭%のオマンコ」
+				ENDIF
+				WSTR:(K++) = 「ほら…イれたいんでしょ？」
+				;相手が主導権を持っている
+				IF TEQUIP:주도권 == 1
+					IF RAND:3 == 0
+						WSTR:(K++) = 「ん～」
+						WSTR:(K++) = 「ダメ%ハート()%」
+					ELSEIF RAND:2 == 0
+						WSTR:(K++) = 「だ～め、おあずけ%ハート()%」
+					ELSE
+						WSTR:(K++) = 「%CSTR:이인칭%の鼻息荒くて丸わかりだわ♪」
+					ENDIF
+				;함락완료
+				ELSEIF 함락( ) > 0
+					WSTR:(K++) = 「いつでもいいわ♪」
+				ENDIF
+			;함락완료
+			ELSEIF 함락( ) > 0
+				WSTR:(K++) = 「自分で開かせるなんて……」
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					KSTR:(K++) = 
+					WSTR:(K++) = 「恥ずかしいけど、%CSTR:이인칭%が見たいのなら、いいわ%ハート()%」
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					KSTR:(K++) = 
+					;처녀
+					IF TALENT:처녀
+						KSTR:(K++) = 「ほら、膜つきのオマンコよ」
+						WSTR:(K++) = 「いつでも破っていいわ♪」
+					ELSE
+						KSTR:(K++) = 「ほら、子供なのに開通済みのオマンコよ」
+						WSTR:(K++) = 「ムラムラしたらいつでも挿れていいわ♪」
+					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					KSTR:(K++) = 
+					KSTR:(K++) =  「ほら、%CSTR:일인칭%のオマンコ」
+					WSTR:(K++) =  「いやらしい目でじっくり視姦して%ハート()%」
+					WSTR:(K++) =  「それで、飽きたら好きにしていいわ♪」
 				ENDIF
-				;함락완료 공통
-				IF !구상유무확인(0)
-					KSTR:(K++) = 
+			ELSE
+				WSTR:(K++) = 「え、ええ！自分で！」
+				IF RAND:2 == 0
+					WSTR:(K++) = 「信じられないわ、この変態……」
+				ELSE
+					WSTR:(K++) = 「なんで%CSTR:일인칭%がこんな奴なんかに……屈辱だわ」
 				ENDIF
-				CFLAG:309 = 4
 			ENDIF
-			;굴복각인Lv3
-			IF MARK:2 == 3 && (CFLAG:309 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) = 
-				CFLAG:309 = 3
-			ENDIF
-			;그 이외
-			IF (CFLAG:309 || FLAG:7 == 2) && !구상유무확인(0)
-				KSTR:(K++) =
-				CFLAG:309 = 2
+			CFLAG:309 = 1
+		;2번째 이후
+		ELSE
+			;처녀の場合
+			IF TALENT:처녀
+				IF 함락( ) > 0 && (CFLAG:309 < 3 || FLAG:7 == 2)
+					;연모, 친애
+					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
+						WSTR:(K++) = 「また？」
+						WSTR:(K++) = 「広げて見せるの、凄く恥ずかしいけど……」
+						KSTR:(K++) = 　
+						IF RAND:2 == 0
+							KSTR:(K++) = 「%CSTR:일인칭%の未使用処女マンコ、見せてあげるわ……」
+						ELSE
+							KSTR:(K++) = 「%CSTR:이인칭%にあげる初めては取っておいてあるわ」
+						ENDIF
+						WSTR:(K++) = 指で広げられた慎ましい秘部は、奥の処女膜を垣間見せつつ、薄く鮮やかなピンクの粘膜をひくひくさせながら、蜜を吐き出している。
+						NSTR:(K++) = 「%CSTR:일인칭%の初めて、早く奪って欲しいのに、
+						IF TALENT:아내
+							KSTR:(K++) = 結婚してもまだシてくれないんだから……初夜、楽しみにしてるのに……」
+						ELSEIF RAND:2 == 0
+							KSTR:(K++) = こんな事ばっかりさせるし……初めての時は優しくしてくれないと怒るわよ」
+						ELSE
+							KSTR:(K++) = こんな事ばっかりで……新しいカレシ、探した方がマシだわ」
+						ENDIF
+						WSTR:(K++) = %CALLNAME%は可愛らしく頬を膨らましている。
+					;음란, 창부	
+					ELSEIF 함락( ) > 0 && RESULTS == "음란"
+						IF RAND:2 == 0
+							KSTR:(K++) = 「期間限定の%CSTR:일인칭%の淫乱処女膜、いっぱい見てぇ%ハート()%」
+						ELSE
+							KSTR:(K++) = 「ねぇ……オマンコ、早く使わないと賞味期限が過ぎちゃうわ%ハート()%」
+						ENDIF
+						WSTR:(K++) = %CALLNAME%の秘部が左右から広げられる。
+						WSTR:(K++) = 蕩けきった処女肉は白く濁った涎を垂らし、男を求めているようだ。
+						KSTR:(K++) = 「%CSTR:이인칭%のせいでこんなにエッチになっちゃったわ」
+						WSTR:(K++) = 「責任とって早くグチュグチュズボズボ犯し欲しいわ%ハート()%」
+					;복종, 예속	
+					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
+						KSTR:(K++) = 「%CALLNAME%の処女膜、穴が開くほど見てください%ハート()%」
+						WSTR:(K++) = %CALLNAME%の指で広げられた秘所にはしっかりと純潔の証が残っている。
+						WSTR:(K++) = 「見るだけじゃなくて%CSTR:일인칭%の処女、%CSTR:이인칭%に破って欲しいわぁ♪」
+						IF RAND:2 == 0
+							KSTR:(K++) = 「動けない位きつく縛られて…血が出ても気にしないでガンガン突かれて…」
+						ELSE
+							KSTR:(K++) = 「後ろから獣みたいに犯されて……『やめて！』って泣き叫んでもガンガン突かれて…」
+						ENDIF
+						KSTR:(K++) = 「はぁぁ…%ハート()%考えただけで興奮しちゃうわ%ハート()%」
+						WSTR:(K++) = 処女穴はとろとろと愛液を出している。
+					ENDIF
+					CFLAG:309 = 4
+				ENDIF
+				;굴복각인Lv3
+				IF MARK:2 == 3 && (CFLAG:309 < 2 || FLAG:7 == 2) && !구상유무확인(0)
+					KSTR:(K++) = 「ん、やあ…恥ずかしいから見ないでぇ……ぁあ…やぁ」
+					WSTR:(K++) = 羞恥に震えながら、しかし%CALLNAME%は抵抗を見せずに濡れた秘部を開いて見せた。
+					CFLAG:309 = 3
+				ENDIF
+				;그 이외
+				IF (CFLAG:309 || FLAG:7 == 2) && !구상유무확인(0)
+					IF RAND:2 == 0
+						WSTR:(K++) = 「うう…恥ずかしいわ……」
+					ELSE
+						WSTR:(K++) = 「こんな事させて……いつか復讐してやるわ……」
+					ENDIF
+					CFLAG:309 = 2
+				ENDIF
+			ELSE
+				IF 함락( ) > 0 && (CFLAG:309 < 3 || FLAG:7 == 2)
+					;연모, 친애
+					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
+						KSTR:(K++) = 「……%CSTR:이인칭%、見てぇ」
+						WSTR:(K++) = 「%CSTR:일인칭%のオマンコ、%CSTR:이인칭%が恋しくてトロットロ……」
+						;結婚しているか
+						IF TALENT:아내
+							IF TALENT:임신
+								WSTR:(K++) = 「赤ちゃんいるけど……%CSTR:이인칭%が……欲しいわ%ハート()%」
+							ELSEIF RAND:2 == 0
+								WSTR:(K++) = 「こんなになるまでお嫁さんを待たせるなんて酷いわぁ%ハート(3)%」
+							ELSE
+								WSTR:(K++) = 「早く夫婦の子づくりセックスで、イチバン奥まで可愛がって欲しわ%ハート(3)%」
+							ENDIF
+						ELSE
+							IF RAND:2 == 0
+								WSTR:(K++) = 「%CSTR:이인칭%が気持ち良くなれるように頑張るから……%CSTR:이인칭%%ハート()%」
+								KSTR:(K++) = 「%CSTR:일인칭%も早く、奥まで愛して欲しいわ%ハート()%」
+							ELSE
+								KSTR:(K++) = 「%CSTR:이인칭%の好きな体位でいいわ%ハート()%」
+							ENDIF
+							WSTR:(K++) = 愛液で濡れそぼる秘部を恥ずかしげに見せ付けながら、%CALLNAME%は物欲しそうな瞳を%CALLNAME:MASTER%に向けた。
+						ENDIF
+
+					;음란, 창부	
+					ELSEIF 함락( ) > 0 && RESULTS == "음란"
+						KSTR:(K++) = 
+					;복종, 예속	
+					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
+						KSTR:(K++) = 
+					ENDIF
+					;함락완료 공통
+					IF !구상유무확인(0)
+						KSTR:(K++) = 
+					ENDIF
+					CFLAG:309 = 4
+				ENDIF
+				;굴복각인Lv3
+				IF MARK:2 == 3 && (CFLAG:309 < 2 || FLAG:7 == 2) && !구상유무확인(0)
+					KSTR:(K++) = 
+					CFLAG:309 = 3
+				ENDIF
+				;그 이외
+				IF (CFLAG:309 || FLAG:7 == 2) && !구상유무확인(0)
+					KSTR:(K++) =
+					CFLAG:309 = 2
+				ENDIF
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
@@ -1733,30 +1929,30 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					IF RAND:3 == 0
-						PRINTFORMW 「ちゅ…ん、ふぅ…」
-						PRINTFORMW 「%CSTR:이인칭%とキスすると、何だかふわふわして幸せだわ……」
-						PRINTFORMW 「…もっとちょうだい」
+						WSTR:(K++) = 「ちゅ…ん、ふぅ…」
+						WSTR:(K++) = 「%CSTR:이인칭%とキスすると、何だかふわふわして幸せだわ……」
+						WSTR:(K++) = 「…もっとちょうだい」
 					ELSEIF RAND:2 == 0
-						PRINTFORMW %CALLNAME%はうっとりした顔で何度も%CALLNAME:MASTER%の名を呼び、貪るようにキスを求めてくる。
-						PRINTFORMW 「ん、ちゅ、んむぅ……ぷはぁ。%CSTR:이인칭%、好き…大好き、%CSTR:이인칭%、%CSTR:이인칭%…%ハート()%」
+						WSTR:(K++) = %CALLNAME%はうっとりした顔で何度も%CALLNAME:MASTER%の名を呼び、貪るようにキスを求めてくる。
+						WSTR:(K++) = 「ん、ちゅ、んむぅ……ぷはぁ。%CSTR:이인칭%、好き…大好き、%CSTR:이인칭%、%CSTR:이인칭%…%ハート()%」
 					ELSE
-						PRINTFORML 「ちゅ、ちゅ、ちゅ、ちゅ……んれろぉ…んむ…むふぅ…んんん…」
-						PRINTFORMW 啄ばむように何度も唇にキスしたかと思うと、貪るように口内で舌を絡めあう。
-						PRINTFORMW 「んんんん……ぷはぁ。大好き…%CSTR:이인칭%……」
-						PRINTFORMW 「一日中だっていい……もっと、もっとキスしたいわ…」
+						KSTR:(K++) = 「ちゅ、ちゅ、ちゅ、ちゅ……んれろぉ…んむ…むふぅ…んんん…」
+						WSTR:(K++) = 啄ばむように何度も唇にキスしたかと思うと、貪るように口内で舌を絡めあう。
+						WSTR:(K++) = 「んんんん……ぷはぁ。大好き…%CSTR:이인칭%……」
+						WSTR:(K++) = 「一日中だっていい……もっと、もっとキスしたいわ…」
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					PRINTFORML 「んむぅ！んん…じゅる、ちゅ…んむ、ちゅぷ、むふん！」
-					PRINTFORMW %CALLNAME:MASTER%の顔を固定し、激しく口内を蹂躙する。
-					PRINTFORMW 「んはぁ…うふふ、%CSTR:이인칭%のよだれ、美味しいわ……ねえ、もっとちょうだぁい%ハート()%」
+					KSTR:(K++) = 「んむぅ！んん…じゅる、ちゅ…んむ、ちゅぷ、むふん！」
+					WSTR:(K++) = %CALLNAME:MASTER%の顔を固定し、激しく口内を蹂躙する。
+					WSTR:(K++) = 「んはぁ…うふふ、%CSTR:이인칭%のよだれ、美味しいわ……ねえ、もっとちょうだぁい%ハート()%」
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORML 「ん…ちゅ…はぁっ…んむぅ…」
-					PRINTFORMW %CALLNAME:MASTER%の歯一本一本に愛撫するかのような丁寧な舌遣いだ。
-					PRINTFORML 「んぷっ、じゅ…ぐちゅ…ちゅ」
-					PRINTFORMW お返しとばかりに舌を舐めると%CALLNAME%は自分の舌が%CALLNAME:MASTER%の舌を扱くように動く。
-					PRINTFORMW そのまま%CALLNAME%の口内愛撫を受け続けた。
+					KSTR:(K++) = 「ん…ちゅ…はぁっ…んむぅ…」
+					WSTR:(K++) = %CALLNAME:MASTER%の歯一本一本に愛撫するかのような丁寧な舌遣いだ。
+					KSTR:(K++) = 「んぷっ、じゅ…ぐちゅ…ちゅ」
+					WSTR:(K++) = お返しとばかりに舌を舐めると%CALLNAME%は自分の舌が%CALLNAME:MASTER%の舌を扱くように動く。
+					WSTR:(K++) = そのまま%CALLNAME%の口内愛撫を受け続けた。
 				ENDIF
 				CFLAG:312 = 4
 			ENDIF
@@ -1768,12 +1964,12 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:312 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0	
-					PRINTFORML 「んんっ、んーっ！」
-					PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%から逃れようとじたばたともがいている
+					KSTR:(K++) = 「んんっ、んーっ！」
+					WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%から逃れようとじたばたともがいている
 				ELSE
-					PRINTFORML 
-					PRINTFORMW 「ぷ、ぷはぁ～」
-					PRINTFORMW 「只でさえ気持ち悪いのに舐めまわさないでほしいわ！」
+					KSTR:(K++) = 
+					WSTR:(K++) = 「ぷ、ぷはぁ～」
+					WSTR:(K++) = 「只でさえ気持ち悪いのに舐めまわさないでほしいわ！」
 				ENDIF
 				CFLAG:312 = 2
 			ENDIF
@@ -1831,57 +2027,57 @@ SELECTCASE SELECTCOM
 			IF ABL:종족 == 0
 				;ランダム奴隷キャラの場合
 				IF CFLAG:이벤트가입 == 3 && RAND:5 == 0
-					PRINTFORMW 「捕まってた時の事？」
-					PRINTFORMW 「ＴＶもネットもない狭い部屋にいるだけ」
-					PRINTFORMW 「『価値が下がるから手を出すな』って偉い人が部下に言ってたから何もされらなかったわ」
+					WSTR:(K++) = 「捕まってた時の事？」
+					WSTR:(K++) = 「ＴＶもネットもない狭い部屋にいるだけ」
+					WSTR:(K++) = 「『価値が下がるから手を出すな』って偉い人が部下に言ってたから何もされらなかったわ」
 				ELSEIF RAND:4 == 0
-					PRINTFORMW 「クラスで初体験済んだ子？」
-					PRINTFORMW 「そう……３割くらいだわ」
+					WSTR:(K++) = 「クラスで初体験済んだ子？」
+					WSTR:(K++) = 「そう……３割くらいだわ」
 					IF TALENT:처녀
-						PRINTFORML 「当然、%CSTR:일인칭%はまだだわ」
+						KSTR:(K++) = 「当然、%CSTR:일인칭%はまだだわ」
 					ELSE
-						PRINTFORML 「%CSTR:일인칭%もその中に一人だわ♪」
+						KSTR:(K++) = 「%CSTR:일인칭%もその中に一人だわ♪」
 					ENDIF
-					PRINTFORMW そう言うと%CALLNAME%は%CALLNAME:MASTER%に抱きついた。
-					PRINTFORMW 「だから……」
-					PRINTFORMW 「早く、シ、マ、ショ%ハート()%」
+					WSTR:(K++) = そう言うと%CALLNAME%は%CALLNAME:MASTER%に抱きついた。
+					WSTR:(K++) = 「だから……」
+					WSTR:(K++) = 「早く、シ、マ、ショ%ハート()%」
 				ELSEIF RAND:3 == 0
-					PRINTFORMW 「学校の成績？」
-					PRINTFORML 「中の…上かだわ」
-					PRINTFORMW 目を逸らしながら%CALLNAME%は答えた。
+					WSTR:(K++) = 「学校の成績？」
+					KSTR:(K++) = 「中の…上かだわ」
+					WSTR:(K++) = 目を逸らしながら%CALLNAME%は答えた。
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「告白された事？」
-					PRINTFORMW 「あるわ」
-					PRINTFORMW 「けど、今は%CSTR:이인칭%が好きっ%ハート()%」
+					WSTR:(K++) = 「告白された事？」
+					WSTR:(K++) = 「あるわ」
+					WSTR:(K++) = 「けど、今は%CSTR:이인칭%が好きっ%ハート()%」
 				ELSE
-					PRINTFORMW 「駅前のお店また変わったわ」
-					PRINTFORMW 「ホント、魔物より不景気の方が怖いわ」
+					WSTR:(K++) = 「駅前のお店また変わったわ」
+					WSTR:(K++) = 「ホント、魔物より不景気の方が怖いわ」
 				ENDIF
 			ELSE
 				IF RAND:5 == 0
-					PRINTFORMW 「そういえばこの間、すっごくヘンな人間がいたわ」
-					PRINTFORMW 「まず髪型がすっごく変」
-					PRINTFORMW 「そして、急にバイクの音がしたと思ったら、その人の鼻歌だったわ」
-					PRINTFORMW 「ね、ヘンでしょ？」
+					WSTR:(K++) = 「そういえばこの間、すっごくヘンな人間がいたわ」
+					WSTR:(K++) = 「まず髪型がすっごく変」
+					WSTR:(K++) = 「そして、急にバイクの音がしたと思ったら、その人の鼻歌だったわ」
+					WSTR:(K++) = 「ね、ヘンでしょ？」
 				ELSEIF RAND:4 == 0
-					PRINTFORMW 「そういえばこの間、すっごく変な人間がいたわ」
-					PRINTFORML 「スキーとかしてる訳でもないのにゴーグル付けて」
-					PRINTFORMW 「それでね、ええと、なんだっけ……」
-					PRINTFORMW 「…そう！サ○エさん！アレに出てくる男の子にソックリだったわ！」
-					PRINTFORMW 「あんな人間、本当にいるなんて驚きだわ」
+					WSTR:(K++) = 「そういえばこの間、すっごく変な人間がいたわ」
+					KSTR:(K++) = 「スキーとかしてる訳でもないのにゴーグル付けて」
+					WSTR:(K++) = 「それでね、ええと、なんだっけ……」
+					WSTR:(K++) = 「…そう！サ○エさん！アレに出てくる男の子にソックリだったわ！」
+					WSTR:(K++) = 「あんな人間、本当にいるなんて驚きだわ」
 				ELSEIF RAND:3 == 0
-					PRINTFORMW 「この間、魔界でね。面白い事があったわ」
-					PRINTFORMW 「%CSTR:이인칭%には特別に教えてあげるわ♪」
+					WSTR:(K++) = 「この間、魔界でね。面白い事があったわ」
+					WSTR:(K++) = 「%CSTR:이인칭%には特別に教えてあげるわ♪」
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「ねぇ%CSTR:이인칭%。人間のお話を聞かせて」
-					PRINTFORMW 「最近、人間の事が気になって」
-					PRINTFORMW 「お\@(NO == 4104) ? じ # 母\@さん達は『人間なんて』って言ってたけど」
-					PRINTFORMW 「でも、%CSTR:이인칭%だって人間だわ」
-					PRINTFORMW 「だから、ね%ハート()%」
+					WSTR:(K++) = 「ねぇ%CSTR:이인칭%。人間のお話を聞かせて」
+					WSTR:(K++) = 「最近、人間の事が気になって」
+					WSTR:(K++) = 「お\@(NO == 4104) ? じ # 母\@さん達は『人間なんて』って言ってたけど」
+					WSTR:(K++) = 「でも、%CSTR:이인칭%だって人間だわ」
+					WSTR:(K++) = 「だから、ね%ハート()%」
 				ELSE
-					PRINTFORMW 「ひどい人間につかまると」
-					PRINTFORMW 「『合体工場送り』になって帰ってこれなくなるらしいわ」
-					PRINTFORMW 「けど、%CSTR:일인칭%は%CSTR:이인칭%と一緒だからそんな事はないわ%ハート()%」
+					WSTR:(K++) = 「ひどい人間につかまると」
+					WSTR:(K++) = 「『合体工場送り』になって帰ってこれなくなるらしいわ」
+					WSTR:(K++) = 「けど、%CSTR:일인칭%は%CSTR:이인칭%と一緒だからそんな事はないわ%ハート()%」
 				ENDIF
 			ENDIF
 			CFLAG:314 = 2
@@ -1894,20 +2090,20 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:315 == 0
-			PRINTFORMW 「え、%CSTR:일인칭%に？」
-			PRINTFORMW 「ありがとう、もらっておくわ」
+			WSTR:(K++) = 「え、%CSTR:일인칭%に？」
+			WSTR:(K++) = 「ありがとう、もらっておくわ」
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
 			IF RAND:3 == 0 && TALENT:170
-				PRINTFORMW 「モノで釣っても駄目よ、%CSTR:이인칭%」
-				PRINTFORMW 「けど、嬉しいからいいわ%ハート()%」
+				WSTR:(K++) = 「モノで釣っても駄目よ、%CSTR:이인칭%」
+				WSTR:(K++) = 「けど、嬉しいからいいわ%ハート()%」
 			ELSEIF RAND:2 == 0
-				PRINTFORMW 「『プレゼントの量と愛情は比例する』って聞いた事があるわ」
-				PRINTFORMW 「このままだと部屋から愛が溢れちゃうわね%ハート()%」
+				WSTR:(K++) = 「『プレゼントの量と愛情は比例する』って聞いた事があるわ」
+				WSTR:(K++) = 「このままだと部屋から愛が溢れちゃうわね%ハート()%」
 			ELSE
-				PRINTFORML 「またプレゼント。増えてく一方ね」
-				PRINTFORMW %CALLNAME%はプレゼントを抱え込んで小躍りしている
+				KSTR:(K++) = 「またプレゼント。増えてく一方ね」
+				WSTR:(K++) = %CALLNAME%はプレゼントを抱え込んで小躍りしている
 			ENDIF
 			CFLAG:315 = 2
 		ENDIF
@@ -1933,58 +2129,58 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:317 == 0
-			PRINTFORMW 「%CSTR:이인칭%とこうしてるの、なんだかくすぐったい気持ちだわ……%ハート()%」
+			WSTR:(K++) = 「%CSTR:이인칭%とこうしてるの、なんだかくすぐったい気持ちだわ……%ハート()%」
 			CFLAG:317 = 1
 		;2번째 이후
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
 			;風呂場でまったり
 			IF TEQUIP:샤워 || TEQUIP:목욕탕
 				IF 체격차() > 0 && 체격차() < 10
-					PRINTFORML 「はぁー……エッチもいいけど、こうやって一緒にゆっくりするのも幸せだわー」
+					KSTR:(K++) = 「はぁー……エッチもいいけど、こうやって一緒にゆっくりするのも幸せだわー」
 					IF RAND:2 == 0
-						PRINTFORMW %CALLNAME%の小さな身体を後ろから抱きかかえるようにして、湯船に浸かった…
-						PRINTFORML 
-						PRINTFORML 「って、おっぱい揉んでるこの手はなーに？」
-						PRINTFORMW 「このままシたいの？」
+						WSTR:(K++) = %CALLNAME%の小さな身体を後ろから抱きかかえるようにして、湯船に浸かった…
+						KSTR:(K++) = 
+						KSTR:(K++) = 「って、おっぱい揉んでるこの手はなーに？」
+						WSTR:(K++) = 「このままシたいの？」
 					ELSE
-						PRINTFORMW %CALLNAME%の小さな身体と抱き合うようにして、湯船に浸かった…
-						PRINTFORML 
-						PRINTFORMW 「……っ！？ ん、ふ…ちゅ、む……」
-						PRINTFORMW 「ぷ、はぁ、いきなりキスなんてズルいわ」
-						PRINTFORMW 「%CSTR:일인칭%が先にしようとおもってたのに%ハート()%」
+						WSTR:(K++) = %CALLNAME%の小さな身体と抱き合うようにして、湯船に浸かった…
+						KSTR:(K++) = 
+						WSTR:(K++) = 「……っ！？ ん、ふ…ちゅ、む……」
+						WSTR:(K++) = 「ぷ、はぁ、いきなりキスなんてズルいわ」
+						WSTR:(K++) = 「%CSTR:일인칭%が先にしようとおもってたのに%ハート()%」
 					ENDIF
 				ELSE
 					IF RAND:2 == 0
-						PRINTFORML 「はぁー……極楽だわー……」
-						PRINTFORMW %CALLNAME%と湯船にゆっくり浸かった……
+						KSTR:(K++) = 「はぁー……極楽だわー……」
+						WSTR:(K++) = %CALLNAME%と湯船にゆっくり浸かった……
 					ELSE
-						PRINTFORML 「ずっとこうしていたいけど、のぼせちゃうわ%ハート()%」
-						PRINTFORMW %CALLNAME%と湯船でイチャイチャした
+						KSTR:(K++) = 「ずっとこうしていたいけど、のぼせちゃうわ%ハート()%」
+						WSTR:(K++) = %CALLNAME%と湯船でイチャイチャした
 					ENDIF
 				ENDIF
 			ELSE
 				IF RAND:6 == 0
-					PRINTFORML 「ずっと、こうしてたいわ……」
-					PRINTFORMW %CALLNAME%はポツリとそう漏らすと、%CALLNAME:MASTER%の腕にすりよってきた。
-					PRINTFORMW 「好き……%CSTR:이인칭%、大好き……♪」
+					KSTR:(K++) = 「ずっと、こうしてたいわ……」
+					WSTR:(K++) = %CALLNAME%はポツリとそう漏らすと、%CALLNAME:MASTER%の腕にすりよってきた。
+					WSTR:(K++) = 「好き……%CSTR:이인칭%、大好き……♪」
 				ELSEIF RAND:5 == 0
-					PRINTFORML 「もっと、近くにいっていい？」
-					PRINTFORMW %CALLNAME%は膝の上に座ると、ゆっくりと背中を預けてきた。
-					PRINTFORMW 「ここ、好き……幸せだわ……」
+					KSTR:(K++) = 「もっと、近くにいっていい？」
+					WSTR:(K++) = %CALLNAME%は膝の上に座ると、ゆっくりと背中を預けてきた。
+					WSTR:(K++) = 「ここ、好き……幸せだわ……」
 				ELSEIF RAND:4 == 0
-					PRINTFORML 「%CSTR:일인칭%、%CSTR:이인칭%とこうしてるの、好きだわ……」
-					PRINTFORMW %CALLNAME%は信頼しきった瞳で%CALLNAME:MASTER%を見上げてくる。安らいだ時間が流れた。
+					KSTR:(K++) = 「%CSTR:일인칭%、%CSTR:이인칭%とこうしてるの、好きだわ……」
+					WSTR:(K++) = %CALLNAME%は信頼しきった瞳で%CALLNAME:MASTER%を見上げてくる。安らいだ時間が流れた。
 				ELSEIF RAND:3 == 0
-					PRINTFORML 「えいっ！」
-					PRINTFORMW %CALLNAME:MASTER%の膝の上に頭を乗せ、気持ち良さそうに丸くなる%CALLNAME%
-					PRINTFORMW 愛情の篭った眼差しでしばらく見上げ、猫のように%CALLNAME:MASTER%の下腹部に顔を寄せると寝息を立て始めた。
+					KSTR:(K++) = 「えいっ！」
+					WSTR:(K++) = %CALLNAME:MASTER%の膝の上に頭を乗せ、気持ち良さそうに丸くなる%CALLNAME%
+					WSTR:(K++) = 愛情の篭った眼差しでしばらく見上げ、猫のように%CALLNAME:MASTER%の下腹部に顔を寄せると寝息を立て始めた。
 				ELSEIF RAND:2 == 0
-					PRINTFORML 「あっ、コレ面白そうだわ、ぽりぽり」
-					PRINTFORMW %CALLNAME:PLAYER%と%CALLNAME:TARGET%はテレビを見ながらお菓子を食べている
-					PRINTFORMW 何をするでもなく穏やかな時間が流れていく……
+					KSTR:(K++) = 「あっ、コレ面白そうだわ、ぽりぽり」
+					WSTR:(K++) = %CALLNAME:PLAYER%と%CALLNAME:TARGET%はテレビを見ながらお菓子を食べている
+					WSTR:(K++) = 何をするでもなく穏やかな時間が流れていく……
 				ELSE
-					PRINTFORML 「次こそは負けないわ！」
-					PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%と一緒にゲームを楽しんだ……
+					KSTR:(K++) = 「次こそは負けないわ！」
+					WSTR:(K++) = %CALLNAME:PLAYER%は%CALLNAME:TARGET%と一緒にゲームを楽しんだ……
 				ENDIF
 			ENDIF
 			CFLAG:317 = 2
@@ -1996,8 +2192,8 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:318 == 0
-			PRINTFORMW 「お料理？」
-			PRINTFORMW 「うん、やってみるわ」
+			WSTR:(K++) = 「お料理？」
+			WSTR:(K++) = 「うん、やってみるわ」
 			CFLAG:318 = 1
 		;2번째 이후
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
@@ -2011,15 +2207,15 @@ SELECTCASE SELECTCOM
 		K_CALL:K = TRAIN_MESSAGE
 		;처음
 		IF CFLAG:319 == 0
-			PRINTFORMW 「歌？　そんなに見られて歌うのは恥ずかしいわ……」
+			WSTR:(K++) = 「歌？　そんなに見られて歌うのは恥ずかしいわ……」
 			CFLAG:319 = 1
 		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
 			IF RAND:2 == 0
-				PRINTFORMW 「～♪～～♪」
-				PRINTFORMW 「%CSTR:일인칭%の歌どうだった！？　もっと聞きたい？」
+				WSTR:(K++) = 「～♪～～♪」
+				WSTR:(K++) = 「%CSTR:일인칭%の歌どうだった！？　もっと聞きたい？」
 			ELSE
-				PRINTFORMW 「どう？　テレビでず～っと流れてるから覚えちゃったわ♪」
+				WSTR:(K++) = 「どう？　テレビでず～っと流れてるから覚えちゃったわ♪」
 			ENDIF
 			CFLAG:319 = 2
 		ENDIF
@@ -2111,29 +2307,29 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:422 == 0
 			IF RAND:2 == 0
-				PRINTFORMW 「オッパイにはさまれると気持ちいいの？」
-				PRINTFORMW 「なら、またやってあげるわ%ハート()%」
+				WSTR:(K++) = 「オッパイにはさまれると気持ちいいの？」
+				WSTR:(K++) = 「なら、またやってあげるわ%ハート()%」
 			ELSE
-				PRINTFORMW 「よちよち」
-				PRINTFORMW 「こうしているとまるで赤ちゃんみたいだわ」
+				WSTR:(K++) = 「よちよち」
+				WSTR:(K++) = 「こうしているとまるで赤ちゃんみたいだわ」
 			ENDIF
 			CFLAG:422 = 1
 		;2번째 이후
 		ELSEIF CFLAG:321 < 2 || FLAG:7 == 2
 			IF RAND:3 == 0
-				PRINTFORMW 「どう、オッパイではさまれてキモチいい？」
+				WSTR:(K++) = 「どう、オッパイではさまれてキモチいい？」
 				;挟む？　日本語でおｋ
 				IF BUST() < 2
-					PRINTFORML ………
-					PRINTFORMW 「！」
-					PRINTFORMW 「そ、のうちはさめるようになるわ！」
+					KSTR:(K++) = ………
+					WSTR:(K++) = 「！」
+					WSTR:(K++) = 「そ、のうちはさめるようになるわ！」
 				ENDIF
 			ELSEIF RAND:2 == 0
-				PRINTFORML 「わっ、いきなり舐めるなんて」
-				PRINTFORMW 「本当に赤ちゃんみたいだわ%ハート()%」
+				KSTR:(K++) = 「わっ、いきなり舐めるなんて」
+				WSTR:(K++) = 「本当に赤ちゃんみたいだわ%ハート()%」
 			ELSE
-				PRINTFORMW 「鼻息あらいわ、%CSTR:이인칭%」
-				PRINTFORMW 「子供オッパイにそんなにコウフンしてるの？」
+				WSTR:(K++) = 「鼻息あらいわ、%CSTR:이인칭%」
+				WSTR:(K++) = 「子供オッパイにそんなにコウフンしてるの？」
 			ENDIF
 			CFLAG:422 = 2
 		ENDIF
@@ -2183,18 +2379,18 @@ SELECTCASE SELECTCOM
 		IF CFLAG:322 == 0
 			IF CFLAG:330 == 0
 				;ブルブル震えて小さい何か＝電動式のネズミのおもちゃみたいなものと思ったようです
-				PRINTFORMW 「何？　猫用のオモチャにしては少し違うようだわ……」
-				PRINTFORMW 「…わ、な、何するの？」
-				PRINTFORMW 「…ひあぁっ！？」
+				WSTR:(K++) = 「何？　猫用のオモチャにしては少し違うようだわ……」
+				WSTR:(K++) = 「…わ、な、何するの？」
+				WSTR:(K++) = 「…ひあぁっ！？」
 				CFLAG:322 = 1
 			;乳首ローター経験済み
 			ELSE
-				PRINTFORML 「ま、またそのブルブル震える奴を使うの？」
-				PRINTFORMW 「そんなの許さないわ」
-				PRINTFORML  
-				PRINTFORMW 「…あれ、おっぱいに使うんじゃ…」
-				PRINTFORML 「…ひあぁっ！？」
-				PRINTFORMW 胸をガードしようとして防御がおろそかになっていた下半身にローターを当てられ%CALLNAME%は身悶えをしている
+				KSTR:(K++) = 「ま、またそのブルブル震える奴を使うの？」
+				WSTR:(K++) = 「そんなの許さないわ」
+				KSTR:(K++) =  
+				WSTR:(K++) = 「…あれ、おっぱいに使うんじゃ…」
+				KSTR:(K++) = 「…ひあぁっ！？」
+				WSTR:(K++) = 胸をガードしようとして防御がおろそかになっていた下半身にローターを当てられ%CALLNAME%は身悶えをしている
 			ENDIF
 			CFLAG:322 = 1
 		ELSE
@@ -2202,33 +2398,33 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					IF RAND:2 == 0
-						PRINTFORML 「あ、あん！あん！」
-						PRINTFORMW 「これ、も、いいけど……%CSTR:이인칭%が触ってくれた方がいいわぉ……ソコぉ、直接ぅ%ハート()%」
+						KSTR:(K++) = 「あ、あん！あん！」
+						WSTR:(K++) = 「これ、も、いいけど……%CSTR:이인칭%が触ってくれた方がいいわぉ……ソコぉ、直接ぅ%ハート()%」
 					ELSE
-						PRINTFORMW 「%CSTR:이인칭%…%CSTR:이인칭%がいいわぁ%ハート()%」
+						WSTR:(K++) = 「%CSTR:이인칭%…%CSTR:이인칭%がいいわぁ%ハート()%」
 					ENDIF
-					PRINTFORMW %CALLNAME%は震動の愉悦に浸りながら、潤みきった眼差しを%CALLNAME:MASTER%に向けてきた。
+					WSTR:(K++) = %CALLNAME%は震動の愉悦に浸りながら、潤みきった眼差しを%CALLNAME:MASTER%に向けてきた。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					PRINTFORMW 「このオモチャは大好きだわ%ハート()%」
-					PRINTFORMW 「こうすると、すぐに…あっ！ひっ！ああんッ！きもちよくッ！あんッ！なれるからぁっ！！」
+					WSTR:(K++) = 「このオモチャは大好きだわ%ハート()%」
+					WSTR:(K++) = 「こうすると、すぐに…あっ！ひっ！ああんッ！きもちよくッ！あんッ！なれるからぁっ！！」
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORMW 「あふ、ん、あぁ、おもちゃ気持ちわぉぁ、あ、ん、ふ」
-					PRINTFORML 「%CSTR:일인칭%も、ん、%CSTR:이인칭%専用のオモチャ、あん♪　なんだから」
-					PRINTFORMW 「後でいっぱい気持ちよく、させてあげるわ%ハート()%」
+					WSTR:(K++) = 「あふ、ん、あぁ、おもちゃ気持ちわぉぁ、あ、ん、ふ」
+					KSTR:(K++) = 「%CSTR:일인칭%も、ん、%CSTR:이인칭%専用のオモチャ、あん♪　なんだから」
+					WSTR:(K++) = 「後でいっぱい気持ちよく、させてあげるわ%ハート()%」
 				ENDIF
 				CFLAG:322 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:322 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「ん、ひ、ああっ」
-				PRINTFORMW 「ダメ、ぶ、ぶるぶるして気持ち良いわ……」
+				KSTR:(K++) = 「ん、ひ、ああっ」
+				WSTR:(K++) = 「ダメ、ぶ、ぶるぶるして気持ち良いわ……」
 				CFLAG:322 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:322 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORMW 「あ、あんまりそういうので弄くるのは良くない事だわ」
+				WSTR:(K++) = 「あ、あんまりそういうので弄くるのは良くない事だわ」
 				CFLAG:322 = 2
 			ENDIF
 		ENDIF
@@ -2240,49 +2436,49 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:323 == 0
 			IF RAND:2 == 0
-				PRINTFORMW 「それみた事あるわ」
-				PRINTFORMW 「肩に当ててマッサージする機械ね」
+				WSTR:(K++) = 「それみた事あるわ」
+				WSTR:(K++) = 「肩に当ててマッサージする機械ね」
 			ELSEIF BUST() > 4
-				PRINTFORMW 「胸が大きいのも大変だったりするのよ」
-				PRINTFORMW 「肩が重くてしょうがないわ」
+				WSTR:(K++) = 「胸が大きいのも大変だったりするのよ」
+				WSTR:(K++) = 「肩が重くてしょうがないわ」
 			ELSE
-				PRINTFORMW 「%CSTR:일인칭%、肩なんてこってないわ？」
+				WSTR:(K++) = 「%CSTR:일인칭%、肩なんてこってないわ？」
 			ENDIF
-			PRINTFORMW 「え、あれ……どこに……ふ、ふにゃぁぁっ！？」
+			WSTR:(K++) = 「え、あれ……どこに……ふ、ふにゃぁぁっ！？」
 			CFLAG:323 = 1
 		ELSE
 			IF 함락( ) > 0 && (CFLAG:323 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-					PRINTFORML 「ひゃん！ああん！」
-					PRINTFORML 「そこだめ、お豆だめえ！真っ白になるわ！　ひゃあ！あああん！」
-					PRINTFORMW %CALLNAME%は身体をがくがくと痙攣させ、呂律の回らない嬌声を上げ続ける。
+					KSTR:(K++) = 「ひゃん！ああん！」
+					KSTR:(K++) = 「そこだめ、お豆だめえ！真っ白になるわ！　ひゃあ！あああん！」
+					WSTR:(K++) = %CALLNAME%は身体をがくがくと痙攣させ、呂律の回らない嬌声を上げ続ける。
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					IF RAND:2 == 0
-						PRINTFORML 「ひぃ！あひゃあん！！　これッ！　気持ちよすぎるわぁぁ！！」
-						PRINTFORML 「ひゃん！ひゃんッ！　あぁあッ！　ひああああぁぁ！！」
+						KSTR:(K++) = 「ひぃ！あひゃあん！！　これッ！　気持ちよすぎるわぁぁ！！」
+						KSTR:(K++) = 「ひゃん！ひゃんッ！　あぁあッ！　ひああああぁぁ！！」
 					ELSE
-						PRINTFORML 「おま、おまめちゃん！　ひぁん！　ガチガチになってるわぁ！」
-						PRINTFORML 「ほぐひて！　マッサージ機で、ほぐひてぇ！」
+						KSTR:(K++) = 「おま、おまめちゃん！　ひぁん！　ガチガチになってるわぁ！」
+						KSTR:(K++) = 「ほぐひて！　マッサージ機で、ほぐひてぇ！」
 					ENDIF
-					PRINTFORMW %CALLNAME%は獣のように嬌声を上げながら、自ら進んでマッサージャを強く股間に押し付けている。
+					WSTR:(K++) = %CALLNAME%は獣のように嬌声を上げながら、自ら進んでマッサージャを強く股間に押し付けている。
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-					PRINTFORMW 「ひあああああ！壊れちゃう！　%CSTR:일인칭%壊れちゃうわぁぁぁ！」
+					WSTR:(K++) = 「ひあああああ！壊れちゃう！　%CSTR:일인칭%壊れちゃうわぁぁぁ！」
 				ENDIF
 				CFLAG:323 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:323 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORMW 「あ、アソコがび、ビリビリしてとんじゃう、とんじゃうわぁっ！」
+				WSTR:(K++) = 「あ、アソコがび、ビリビリしてとんじゃう、とんじゃうわぁっ！」
 				CFLAG:323 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:323 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「ま、またソレなの」
-				PRINTFORMW 「駄目よ、それ頭が真っ白になっちゃうわ」
-				PRINTFORMW 「あ、ゃ、ゃあんっ！」
+				KSTR:(K++) = 「ま、またソレなの」
+				WSTR:(K++) = 「駄目よ、それ頭が真っ白になっちゃうわ」
+				WSTR:(K++) = 「あ、ゃ、ゃあんっ！」
 				CFLAG:323 = 2
 			ENDIF
 		ENDIF
@@ -3245,110 +3441,110 @@ SELECTCASE SELECTCOM
 						;恋慕系陥落なのに処女喪失を助手に相手させるという、鬼ちく変態あなたへのプレゼント
 						IF ASSI > 0 && ASSIPLAY
 							IF TALENT:아내
-								PRINTFORML 「ねぇ、これはどういう事？」
-								PRINTFORML 「%CALLNAME:ASSI%に妻を差し出すとか正気じゃないわ！」
-								PRINTFORMW 枕元に座っている%CALLNAME:MASTER%に助けを求める%CALLNAME%
-								PRINTFORMW だが%CALLNAME%は何もせず、ただ%CALLNAME:ASSI%
+								KSTR:(K++) = 「ねぇ、これはどういう事？」
+								KSTR:(K++) = 「%CALLNAME:ASSI%に妻を差し出すとか正気じゃないわ！」
+								WSTR:(K++) = 枕元に座っている%CALLNAME:MASTER%に助けを求める%CALLNAME%
+								NSTR:(K++) = だが%CALLNAME%は何もせず、ただ%CALLNAME:ASSI%
 								IF HAVE_PENIS(ASSI)
-									PRINTFORM のペニスが
+									NSTR:(K++) = のペニスが
 								ELSE
-									PRINTFORM が履いているペニスバンドが
+									NSTR:(K++) = が履いているペニスバンドが
 								ENDIF
-								PRINTFORMW %CALLNAME%の膣内へゆっくりと入っていくのを見守るだけだった
-								PRINTFORML 　
-								PRINTFORMW 「うそ……%CSTR:일인칭%の初めてが……」
-								PRINTFORMW 「いたぃ……いたぃよぉ……」
-								PRINTFORML %CALLNAME:MASTER%に裏切られたショックと破瓜の痛みから
-								PRINTFORML いつもの強気ではなく泣きじゃくり助けを求める%CALLNAME%の顔と
-								PRINTFORML 初めての異物を迎え、血を流す%CALLNAME%の膣を見ながら
+								WSTR:(K++) = %CALLNAME%の膣内へゆっくりと入っていくのを見守るだけだった
+								KSTR:(K++) = 　
+								WSTR:(K++) = 「うそ……%CSTR:일인칭%の初めてが……」
+								WSTR:(K++) = 「いたぃ……いたぃよぉ……」
+								KSTR:(K++) = %CALLNAME:MASTER%に裏切られたショックと破瓜の痛みから
+								KSTR:(K++) = いつもの強気ではなく泣きじゃくり助けを求める%CALLNAME%の顔と
+								KSTR:(K++) = 初めての異物を迎え、血を流す%CALLNAME%の膣を見ながら
 								IF HAVE_PENIS(ASSI)
-									PRINTFORMW %CALLNAME:MASTER%は今までかけた手間が無駄では無かったことに股間を滾らせながら満足するのだった……
-									PRINTFORML 
-									PRINTFORMW 「何で……%CSTR:일인칭%がヒドイことされてるのに……コーフンしてるの……」
+									WSTR:(K++) = %CALLNAME:MASTER%は今までかけた手間が無駄では無かったことに股間を滾らせながら満足するのだった……
+									KSTR:(K++) = 
+									WSTR:(K++) = 「何で……%CSTR:일인칭%がヒドイことされてるのに……コーフンしてるの……」
 								ELSE
-									PRINTFORMW %CALLNAME:MASTER%は今までかけた手間が無駄では無かったことに満足するのだった……
+									WSTR:(K++) = %CALLNAME:MASTER%は今までかけた手間が無駄では無かったことに満足するのだった……
 								ENDIF
 								IF MARK:LOCAL:반발각인 < 3
-									PRINTFORML 　
-									PRINTFORMW 「絶対に許さないわ……」
+									KSTR:(K++) = 　
+									WSTR:(K++) = 「絶対に許さないわ……」
 									MARK:LOCAL:반발각인 = 3
 									JUEL:LOCAL:복종 = 0
 									JUEL:LOCAL:굴복 = 0
-									PRINTFORML 　
-									PRINTFORMW ＞%CALLNAME%の恭順の球が0になった
-									PRINTFORMW ＞%CALLNAME%の屈服の球が0になった
-									PRINTFORMW ＞%CALLNAME%の反発刻印が3になった
+									KSTR:(K++) = 　
+									WSTR:(K++) = ＞%CALLNAME%の恭順の球が0になった
+									WSTR:(K++) = ＞%CALLNAME%の屈服の球が0になった
+									WSTR:(K++) = ＞%CALLNAME%の反発刻印が3になった
 								ENDIF
 							ELSE
-								PRINTFORML 「%CSTR:일인칭%の初めては%CSTR:이인칭%とだと思ってたのに……」
-								PRINTFORML 「%CSTR:이인칭%に見られながら%CALLNAME:ASSI%の相手だなんて変だわ！」
-								PRINTFORML 「%CSTR:일인칭%との愛はウソだったの？　なんで？」
-								PRINTFORM 煩い%CALLNAME%を黙らせるように%CALLNAME:ASSI%
+								KSTR:(K++) = 「%CSTR:일인칭%の初めては%CSTR:이인칭%とだと思ってたのに……」
+								KSTR:(K++) = 「%CSTR:이인칭%に見られながら%CALLNAME:ASSI%の相手だなんて変だわ！」
+								KSTR:(K++) = 「%CSTR:일인칭%との愛はウソだったの？　なんで？」
+								NSTR:(K++) = 煩い%CALLNAME%を黙らせるように%CALLNAME:ASSI%
 								IF HAVE_PENIS(ASSI)
-									PRINTFORM のペニスが
+									NSTR:(K++) = のペニスが
 								ELSE
-									PRINTFORM が履いているペニスバンドが
+									NSTR:(K++) = が履いているペニスバンドが
 								ENDIF
-								PRINTFORMW %CALLNAME:ASSI%の膣内へ一気にと入っていく
-								PRINTFORML 
-								PRINTFORML 「えっ……あっ……いだぃっ……」
-								PRINTFORMW %CALLNAME%は裏切られたショックと破瓜の痛みから泣きながら呆然としてとしている……
+								WSTR:(K++) = %CALLNAME:ASSI%の膣内へ一気にと入っていく
+								KSTR:(K++) = 
+								KSTR:(K++) = 「えっ……あっ……いだぃっ……」
+								WSTR:(K++) = %CALLNAME%は裏切られたショックと破瓜の痛みから泣きながら呆然としてとしている……
 								IF MARK:LOCAL:반발각인 < 2
-									PRINTFORML 　
-									PRINTFORMW 「絶対に許さないわ……」
+									KSTR:(K++) = 　
+									WSTR:(K++) = 「絶対に許さないわ……」
 									MARK:LOCAL:반발각인 = 2
 									JUEL:LOCAL:복종 = 0
 									JUEL:LOCAL:굴복 = 0
-									PRINTFORML 　
-									PRINTFORMW ＞%CALLNAME%の恭順の球が0になった
-									PRINTFORMW ＞%CALLNAME%の屈服の球が0になった
-									PRINTFORMW ＞%CALLNAME%の反発刻印が2になった
+									KSTR:(K++) = 　
+									WSTR:(K++) = ＞%CALLNAME%の恭順の球が0になった
+									WSTR:(K++) = ＞%CALLNAME%の屈服の球が0になった
+									WSTR:(K++) = ＞%CALLNAME%の反発刻印が2になった
 								ENDIF
 							ENDIF
 						ELSE
 							IF TALENT:아내 && 체격차() > 1
-								PRINTFORMW 狭隘な\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 秘部\@に剛直を捻じ込むと、程無く何か千切れた感触がした。
-								PRINTFORMW 処女膜だとは分かっていたが、喰い絞めるというより限界まで拡幅している観のある膣自体の感触が不安を喚起し、思わず腰を止めて%CALLNAME%の瞳を覗き込む。
-								PRINTFORMW 涙に濡れたそこは、隠し切れない痛みと、堪えきれない歓びに溢れていた。
-								PRINTFORMW 「ぇっ、ぇっ、ぇへへへっっ……やっと、やぁっと、およめさんに……なれたわ……%ハート()%」
-								PRINTFORMW 「……うんっ、だいじょぶ……処女膜、だから……へーき、だわ？%ハート()%」
-								PRINTFORMW 「……だい、じょぶ……だから……ね？……奥、まで、シてね%ハート()%？　奥で、だして、ちゃんと、%CSTR:일인칭%を、おくさんに、してね？%ハート()%」
+								WSTR:(K++) = 狭隘な\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 秘部\@に剛直を捻じ込むと、程無く何か千切れた感触がした。
+								WSTR:(K++) = 処女膜だとは分かっていたが、喰い絞めるというより限界まで拡幅している観のある膣自体の感触が不安を喚起し、思わず腰を止めて%CALLNAME%の瞳を覗き込む。
+								WSTR:(K++) = 涙に濡れたそこは、隠し切れない痛みと、堪えきれない歓びに溢れていた。
+								WSTR:(K++) = 「ぇっ、ぇっ、ぇへへへっっ……やっと、やぁっと、およめさんに……なれたわ……%ハート()%」
+								WSTR:(K++) = 「……うんっ、だいじょぶ……処女膜、だから……へーき、だわ？%ハート()%」
+								WSTR:(K++) = 「……だい、じょぶ……だから……ね？……奥、まで、シてね%ハート()%？　奥で、だして、ちゃんと、%CSTR:일인칭%を、おくさんに、してね？%ハート()%」
 							ELSE
-								PRINTFORML 「大丈夫だよ…来て…」
-								PRINTFORML 「%CSTR:일인칭%の大事なもの、%CSTR:이인칭%にあげるわ」
-								PRINTFORMW 仰向けで手を広げながら、%CALLNAME%は愛情溢れる笑顔を向けてきた。
-								PRINTFORMW せり上がる恐怖に健気にも耐えながら、それでも身体を震わせている。
-								PRINTFORML %CALLNAME:MASTER%は%CALLNAME%に微笑みかけ、身体の力を抜くよう指示すると、
-								PRINTFORMW 優しく労わるようにペニスをまだ男を知らない膣内に沈み込ませていった。
-								PRINTFORML 「あ、ぁあ！つ…うう！」
-								PRINTFORMW 破瓜の痛みに耐えながら、目から涙をこぼしつつ%CALLNAME%は微笑んだ。
+								KSTR:(K++) = 「大丈夫だよ…来て…」
+								KSTR:(K++) = 「%CSTR:일인칭%の大事なもの、%CSTR:이인칭%にあげるわ」
+								WSTR:(K++) = 仰向けで手を広げながら、%CALLNAME%は愛情溢れる笑顔を向けてきた。
+								WSTR:(K++) = せり上がる恐怖に健気にも耐えながら、それでも身体を震わせている。
+								KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%に微笑みかけ、身体の力を抜くよう指示すると、
+								WSTR:(K++) = 優しく労わるようにペニスをまだ男を知らない膣内に沈み込ませていった。
+								KSTR:(K++) = 「あ、ぁあ！つ…うう！」
+								WSTR:(K++) = 破瓜の痛みに耐えながら、目から涙をこぼしつつ%CALLNAME%は微笑んだ。
 							ENDIF
 							IF ABL:종족 == 0
-								PRINTFORML 「%CSTR:일인칭%…ついに%CSTR:이인칭%と……うれしいわ…好き、大好き…」
+								KSTR:(K++) = 「%CSTR:일인칭%…ついに%CSTR:이인칭%と……うれしいわ…好き、大好き…」
 							ELSE
-								PRINTFORML 「悪魔でも…%CSTR:이인칭%とひとつになれるんだ…うれしいわ…好き、大好き…」
+								KSTR:(K++) = 「悪魔でも…%CSTR:이인칭%とひとつになれるんだ…うれしいわ…好き、大好き…」
 							ENDIF
-							PRINTFORMW %CALLNAME%は腕を%CALLNAME:MASTER%の背中に回しながら、深い口付けを何度も交わした。
+							WSTR:(K++) = %CALLNAME%は腕を%CALLNAME:MASTER%の背中に回しながら、深い口付けを何度も交わした。
 						ENDIF
 					;음란, 창부
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						IF RAND:2 == 0
-							PRINTFORML 「おちんちん、入れてくれるの？」
-							PRINTFORMW 待ちかねたエサを目の前にした犬のように、%CALLNAME%は目を輝かせる。
-							PRINTFORML 「…頂戴！%CSTR:이인칭%のおちんちんで、%CSTR:일인칭%の処女おマンコぐちゃぐちゃにして%ハート()%」
+							KSTR:(K++) = 「おちんちん、入れてくれるの？」
+							WSTR:(K++) = 待ちかねたエサを目の前にした犬のように、%CALLNAME%は目を輝かせる。
+							KSTR:(K++) = 「…頂戴！%CSTR:이인칭%のおちんちんで、%CSTR:일인칭%の処女おマンコぐちゃぐちゃにして%ハート()%」
 						ELSE
-							PRINTFORMW 「これで%CSTR:일인칭%も処女とサヨナラ」
-							PRINTFORML 「ハジメテのキツキツ穴で気持ちよくしてあげるわ♪」
+							WSTR:(K++) = 「これで%CSTR:일인칭%も処女とサヨナラ」
+							KSTR:(K++) = 「ハジメテのキツキツ穴で気持ちよくしてあげるわ♪」
 						ENDIF
-						PRINTFORMW %CALLNAME%は股を広げて秘所を剥き出しにすると、誘うように腰を浮かせ揺らめかせた。
+						WSTR:(K++) = %CALLNAME%は股を広げて秘所を剥き出しにすると、誘うように腰を浮かせ揺らめかせた。
 					;복종, 예속
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 						IF RAND:2 == 0
-							PRINTFORMW 「%CSTR:일인칭%の処女おマンコ、使ってくれるのね？」
-							PRINTFORMW 「これで%CSTR:일인칭%のおマンコも、%CSTR:이인칭%のモノだわ%ハート()%」
+							WSTR:(K++) = 「%CSTR:일인칭%の処女おマンコ、使ってくれるのね？」
+							WSTR:(K++) = 「これで%CSTR:일인칭%のおマンコも、%CSTR:이인칭%のモノだわ%ハート()%」
 						ELSE
-							PRINTFORML 「初めてのおマンコだけど」
-							PRINTFORMW 「%CSTR:이인칭%に喜んでもらえるように頑張るわ」
+							KSTR:(K++) = 「初めてのおマンコだけど」
+							WSTR:(K++) = 「%CSTR:이인칭%に喜んでもらえるように頑張るわ」
 						ENDIF
 					ENDIF
 					;함락완료 공통
@@ -3359,12 +3555,12 @@ SELECTCASE SELECTCOM
 				;그 이외
 				IF !구상유무확인(0)
 					IF RAND:2 == 0
-						PRINTFORMW 「や、やだ…%CSTR:일인칭%、初めてなの…」
-						PRINTFORML 「せめて……痛くしないで…」
-						PRINTFORMW 抵抗を諦めた%CALLNAME%はせめてもの懇願をした
+						WSTR:(K++) = 「や、やだ…%CSTR:일인칭%、初めてなの…」
+						KSTR:(K++) = 「せめて……痛くしないで…」
+						WSTR:(K++) = 抵抗を諦めた%CALLNAME%はせめてもの懇願をした
 					ELSE
-						PRINTFORMW 「子供相手にそんなコトしたら犯罪だわ」
-						PRINTFORMW 「だから、ね。やめるべきだわ」
+						WSTR:(K++) = 「子供相手にそんなコトしたら犯罪だわ」
+						WSTR:(K++) = 「だから、ね。やめるべきだわ」
 					ENDIF
 				ENDIF
 			;비처녀
@@ -3372,29 +3568,29 @@ SELECTCASE SELECTCOM
 				IF 함락( ) > 0
 					;연모, 친애
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-						PRINTFORMW 「うん、来て…」
-						PRINTFORML 「%CSTR:이인칭%が、欲しいわ……」
-						PRINTFORMW %CALLNAME%は手を広げながら%CALLNAME:MASTER%を誘う。
-						PRINTFORMW %CALLNAME:MASTER%は%CSTR:일인칭%を抱きしめながらゆっくりとペニスを挿入していった。
-						PRINTFORML 「あ、はぁ…%CSTR:이인칭%を中に感じるわ……うれしい…ん、あ、あん%ハート()%」
-						PRINTFORMW 結ばれた嬉しさに涙をこぼしながら、%CALLNAME%は自ら腰を動かしていった。
-						PRINTFORMW 「あん！あん！%CSTR:이인칭%、好き、大好き！ずっと…ずっと！ひゃあん！」
+						WSTR:(K++) = 「うん、来て…」
+						KSTR:(K++) = 「%CSTR:이인칭%が、欲しいわ……」
+						WSTR:(K++) = %CALLNAME%は手を広げながら%CALLNAME:MASTER%を誘う。
+						WSTR:(K++) = %CALLNAME:MASTER%は%CSTR:일인칭%を抱きしめながらゆっくりとペニスを挿入していった。
+						KSTR:(K++) = 「あ、はぁ…%CSTR:이인칭%を中に感じるわ……うれしい…ん、あ、あん%ハート()%」
+						WSTR:(K++) = 結ばれた嬉しさに涙をこぼしながら、%CALLNAME%は自ら腰を動かしていった。
+						WSTR:(K++) = 「あん！あん！%CSTR:이인칭%、好き、大好き！ずっと…ずっと！ひゃあん！」
 					;음란, 창부
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
-						PRINTFORML 「普通の体勢でセックスするのも気持ちいいわ%ハート()%」
-						PRINTFORMW %CALLNAME%は股を広げて誘うように両手を広げると、妖艶な流し目を%CALLNAME:MASTER%に送った。
-						PRINTFORMW 「はやくぅ…%CSTR:이인칭%のぶっといおちんちんで%CSTR:일인칭%のこと犯してぇ%ハート()%」
+						KSTR:(K++) = 「普通の体勢でセックスするのも気持ちいいわ%ハート()%」
+						WSTR:(K++) = %CALLNAME%は股を広げて誘うように両手を広げると、妖艶な流し目を%CALLNAME:MASTER%に送った。
+						WSTR:(K++) = 「はやくぅ…%CSTR:이인칭%のぶっといおちんちんで%CSTR:일인칭%のこと犯してぇ%ハート()%」
 					;복종, 예속
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-						PRINTFORML 「い……いよぉ%ハート()%」
+						KSTR:(K++) = 「い……いよぉ%ハート()%」
 						KSTR:(K++) = 「%CSTR:일인칭%のエッチなおマンコ、好きなだけ使って」
 						KSTR:(K++) = 「%CSTR:일인칭%は%CSTR:이인칭%の持ち物だから、どんな事をされても不満なんて言わないわ%ハート()%」
 					ENDIF
 				ENDIF
 				;그 이외
 				IF !구상유무확인(0)
-					PRINTFORMW 「%CSTR:일인칭%のおマンコ使いたいの？」
-					PRINTFORMW 「…あんまり、酷くしないでね」
+					WSTR:(K++) = 「%CSTR:일인칭%のおマンコ使いたいの？」
+					WSTR:(K++) = 「…あんまり、酷くしないでね」
 				ENDIF
 			ENDIF
 			CFLAG:332 = 1
@@ -3403,96 +3599,96 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					IF 체격차() > 1
-						PRINTFORML %CALLNAME%を組み敷くと、ガチガチに反り返ったペニスの角度を合わせて、ゆっくりと体重をかけながら強引に、濡れそぼった\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 질내\@にねじ込んでいく。
+						KSTR:(K++) = %CALLNAME%を組み敷くと、ガチガチに反り返ったペニスの角度を合わせて、ゆっくりと体重をかけながら強引に、濡れそぼった\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 膣内\@にねじ込んでいく。
 						IF TALENT:유아체형 || TALENT:소인체형
-							PRINTFORM 未成熟な%CALLNAME%の子供まんこでは、
+							NSTR:(K++) =M 未成熟な%CALLNAME%の子供まんこでは、
 						ELSE
-							PRINTFORM %CALLNAME%のおまんこにそのペニスはあまりに巨大で、
+							NSTR:(K++) = %CALLNAME%のおまんこにそのペニスはあまりに巨大で、
 						ENDIF
-						PRINTFORMW 先端が子宮頸部へ届いてしまっても、ペニスの６割程しか収まらずにいる。
-						PRINTFORMW 肉棒を収めきれないもどかしさと、竿全周を喰い絞める狭さと、体温の高さによる熱さが、心地良い。
+						WSTR:(K++) = 先端が子宮頸部へ届いてしまっても、ペニスの６割程しか収まらずにいる。
+						WSTR:(K++) = 肉棒を収めきれないもどかしさと、竿全周を喰い絞める狭さと、体温の高さによる熱さが、心地良い。
 					ENDIF
 					IF RAND:4 == 0
-						PRINTFORML 「んんっ%ハート()%　はぁん%ハート()%」
-						PRINTFORMW あの%CALLNAME%が性交時に自分から足を絡めてくる様になるとは…
-						PRINTFORML 
-						PRINTFORMW 「な、なにニヤニヤしてんのよ」
-						PRINTFORML %CALLNAME:MASTER%は%CALLNAME%の頭を撫でると再び腰を動かし始めた
-						PRINTFORMW 「ちょっ、さっきより激しいっ」
-						PRINTFORML 
-						PRINTFORMW 「すきっ%ハート()%　もっと、もっと%ハート()%」
+						KSTR:(K++) = 「んんっ%ハート()%　はぁん%ハート()%」
+						WSTR:(K++) = あの%CALLNAME%が性交時に自分から足を絡めてくる様になるとは…
+						KSTR:(K++) = 
+						WSTR:(K++) = 「な、なにニヤニヤしてんのよ」
+						KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%の頭を撫でると再び腰を動かし始めた
+						WSTR:(K++) = 「ちょっ、さっきより激しいっ」
+						KSTR:(K++) = 
+						WSTR:(K++) = 「すきっ%ハート()%　もっと、もっと%ハート()%」
 					ELSEIF RAND:3 == 0
-						PRINTFORMW 「好き…好き、しゅき、大好きっ！」
-						PRINTFORMW 「大好きだわ、%CSTR:이인칭%、だいしゅきなのぉっ！あん！ひゃん！はぁん！」
-						PRINTFORM %CALLNAME%は幸福と快楽に全てを任せきり、
+						WSTR:(K++) = 「好き…好き、しゅき、大好きっ！」
+						WSTR:(K++) = 「大好きだわ、%CSTR:이인칭%、だいしゅきなのぉっ！あん！ひゃん！はぁん！」
+						NSTR:(K++) = %CALLNAME%は幸福と快楽に全てを任せきり、
 						IF 체격차() > 1
-							PRINTFORMW きゅっ、きゅっ、と\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 질내\@を蠢かしている。
+							WSTR:(K++) = きゅっ、きゅっ、と\@TALENT:유아체형 || TALENT:소인체형 ? 幼膣 # 膣内\@を蠢かしている。
 						ELSE
-							PRINTFORMW 夢中で腰を動かし続ける。
+							WSTR:(K++) = 夢中で腰を動かし続ける。
 						ENDIF
 					ELSEIF RAND:2 == 0
-						PRINTFORMW 「ん、あん……、%CSTR:일인칭%、このカッコ好きだわ…」
-						PRINTFORML 「%CSTR:이인칭%の顔見れて、一杯『愛されてる』って感じるわ…%ハート()%」
-						PRINTFORMW %CALLNAME%は幸せそうに%CALLNAME:MASTER%に微笑みかけると、ゆっくりと腰を動かせ始めた。
-						PRINTFORMW 「ん、ん、あ、あ、…%CSTR:일인칭%も…あっ、あん…愛してるわ…あっ！あッ！…よぉ…ッ…あんッ！」
+						WSTR:(K++) = 「ん、あん……、%CSTR:일인칭%、このカッコ好きだわ…」
+						KSTR:(K++) = 「%CSTR:이인칭%の顔見れて、一杯『愛されてる』って感じるわ…%ハート()%」
+						WSTR:(K++) = %CALLNAME%は幸せそうに%CALLNAME:MASTER%に微笑みかけると、ゆっくりと腰を動かせ始めた。
+						WSTR:(K++) = 「ん、ん、あ、あ、…%CSTR:일인칭%も…あっ、あん…愛してるわ…あっ！あッ！…よぉ…ッ…あんッ！」
 					ELSE
-						PRINTFORML 「%CSTR:일인칭%のなか…%CSTR:이인칭%のおちんちんでいっぱいだわ…あっ、あっ」
-						PRINTFORMW %CALLNAME%は嬉しそうに自身の下腹部を撫でている。
-						PRINTFORMW 「嬉しくて、幸せで、気持ちよくて、%CSTR:일인칭%、溶けちゃうわ……もっと、もっといっぱい感じさせてぇ%ハート()%」
+						KSTR:(K++) = 「%CSTR:일인칭%のなか…%CSTR:이인칭%のおちんちんでいっぱいだわ…あっ、あっ」
+						WSTR:(K++) = %CALLNAME%は嬉しそうに自身の下腹部を撫でている。
+						WSTR:(K++) = 「嬉しくて、幸せで、気持ちよくて、%CSTR:일인칭%、溶けちゃうわ……もっと、もっといっぱい感じさせてぇ%ハート()%」
 						IF 체격차() > 1
-							PRINTFORMW %CALLNAME%は愉悦と歓喜の涙を流しながら、激しく腰を振る%CALLNAME:MASTER%の責めを受け止めている……
+							WSTR:(K++) = %CALLNAME%は愉悦と歓喜の涙を流しながら、激しく腰を振る%CALLNAME:MASTER%の責めを受け止めている……
 						ELSE
-							PRINTFORMW 愉悦と歓喜の涙を流しながら、%CALLNAME%は激しく腰を振っている……
+							WSTR:(K++) = 愉悦と歓喜の涙を流しながら、%CALLNAME%は激しく腰を振っている……
 						ENDIF
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
 					IF RAND:3 == 0
-						PRINTFORMW 「おまんこでセックスするの、だーいしゅきぃ%ハート()%」
-						PRINTFORML 「あん！あん！しゅき……%CSTR:일인칭%、好き、しゅきぃ%ハート()%」
-						PRINTFORMW %CALLNAME%は自ら腰を激しく動かし、津波のような愉悦に身をゆだねている。
-						PRINTFORMW 呂律の回らない、本能のままの嬌声を部屋に響かせていた。
+						WSTR:(K++) = 「おまんこでセックスするの、だーいしゅきぃ%ハート()%」
+						KSTR:(K++) = 「あん！あん！しゅき……%CSTR:일인칭%、好き、しゅきぃ%ハート()%」
+						WSTR:(K++) = %CALLNAME%は自ら腰を激しく動かし、津波のような愉悦に身をゆだねている。
+						WSTR:(K++) = 呂律の回らない、本能のままの嬌声を部屋に響かせていた。
 					ELSEIF RAND:2 == 0
-						PRINTFORML 「いい！いいのぉ！！セックス！セックスぅ！！気持ちいいわぁ！！」
-						PRINTFORMW 激しく腰を振りたくりながら、%CALLNAME%は快楽の海に没入している。
-						PRINTFORMW 「あんッ！あんッ！おちんちん、しゅきぃ！！もっとぉ！もっと%CSTR:일인칭%のこと犯してぇえ！んああ！！」
-						PRINTFORMW 自らの言葉が更に自身の興奮を煽っているのか、%CALLNAME%の蜜壷が吸い込むようにきゅっと締まった。
+						KSTR:(K++) = 「いい！いいのぉ！！セックス！セックスぅ！！気持ちいいわぁ！！」
+						WSTR:(K++) = 激しく腰を振りたくりながら、%CALLNAME%は快楽の海に没入している。
+						WSTR:(K++) = 「あんッ！あんッ！おちんちん、しゅきぃ！！もっとぉ！もっと%CSTR:일인칭%のこと犯してぇえ！んああ！！」
+						WSTR:(K++) = 自らの言葉が更に自身の興奮を煽っているのか、%CALLNAME%の蜜壷が吸い込むようにきゅっと締まった。
 					ELSE
-						PRINTFORML 「えへへ…%CSTR:이인칭%……いぃーっぱい、気持ちよくさせたげるわ……%ハート()%」
-						PRINTFORMW %CALLNAME%は腰を妖しくグラインドさせ、膣壁が物欲しそうに淫靡に蠕動する。
-						PRINTFORMW 「あ、あんっ…あはぁ%ハート()%　ほらぁ…セーエキいっぱい…%CSTR:일인칭%に出してぇ。いっぱいちょうだぁい%ハート()%」
+						KSTR:(K++) = 「えへへ…%CSTR:이인칭%……いぃーっぱい、気持ちよくさせたげるわ……%ハート()%」
+						WSTR:(K++) = %CALLNAME%は腰を妖しくグラインドさせ、膣壁が物欲しそうに淫靡に蠕動する。
+						WSTR:(K++) = 「あ、あんっ…あはぁ%ハート()%　ほらぁ…セーエキいっぱい…%CSTR:일인칭%に出してぇ。いっぱいちょうだぁい%ハート()%」
 					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					IF RAND:3 == 0
-						PRINTFORMW 「%CSTR:일인칭%のおマンコ、いっぱい使って%ハート()%」
+						WSTR:(K++) = 「%CSTR:일인칭%のおマンコ、いっぱい使って%ハート()%」
 					ELSEIF RAND:2 == 0
-						PRINTFORML 「%CSTR:이인칭%におマンコしてもらって」
-						PRINTFORMW 「%CSTR:일인칭%ってば幸せだわ%ハート()%」
+						KSTR:(K++) = 「%CSTR:이인칭%におマンコしてもらって」
+						WSTR:(K++) = 「%CSTR:일인칭%ってば幸せだわ%ハート()%」
 					ELSE
-						PRINTFORML 「おまんこ調教すごいわぉ」
-						PRINTFORMW 「エッチな調教されてるの、すごい気持ちいいわぁ」
+						KSTR:(K++) = 「おまんこ調教すごいわぉ」
+						WSTR:(K++) = 「エッチな調教されてるの、すごい気持ちいいわぁ」
 					ENDIF
 				ENDIF
 				CFLAG:332 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:332 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「あっ…はっ、んぁぁっ♪」
+				KSTR:(K++) = 「あっ…はっ、んぁぁっ♪」
 				IF RAND:2 == 0
-					PRINTFORMW 「き…気持ち良い…わ…ぁっ♪」
+					WSTR:(K++) = 「き…気持ち良い…わ…ぁっ♪」
 				ELSE
-					PRINTFORMW 「もう、ダメ…ダメだわぁ…ぁっ♪」
+					WSTR:(K++) = 「もう、ダメ…ダメだわぁ…ぁっ♪」
 				ENDIF
 				CFLAG:332 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:332 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORMW 「うっ、あっ、乱暴に、したら、許さないわっ、あっ」
+					WSTR:(K++) = 「うっ、あっ、乱暴に、したら、許さないわっ、あっ」
 				ELSE
-					PRINTFORMW 「こ、こっち見ないで…」
-					PRINTFORMW 「%CSTR:이인칭%の顔なんて見たくないわ……」
+					WSTR:(K++) = 「こ、こっち見ないで…」
+					WSTR:(K++) = 「%CSTR:이인칭%の顔なんて見たくないわ……」
 				ENDIF
 				CFLAG:332 = 2
 			ENDIF
@@ -5858,21 +6054,21 @@ SELECTCASE SELECTCOM
 			IF CFLAG:345 == 0
 				;함락완료
 				IF 함락(TARGET,PLAYER) > 0 && FLAG:7 == 2
-					PRINTFORMW 「ソレを口で咥えればいいのね」
-					PRINTFORMW 「初めてだけど、%CALLNAME:ASSI%のを参考にしてやってみるわ」
+					WSTR:(K++) = 「ソレを口で咥えればいいのね」
+					WSTR:(K++) = 「初めてだけど、%CALLNAME:ASSI%のを参考にしてやってみるわ」
 				ELSE
-					PRINTFORML 「ソレを口に!?　何考えてるの？」
-					PRINTFORMW 逃げようとする%CALLNAME%を二人ががりで押さえつけると口の中にペニスをねじ込んだ
-					PRINTFORMW 「ヘンな味だわ……」
+					KSTR:(K++) = 「ソレを口に!?　何考えてるの？」
+					WSTR:(K++) = 逃げようとする%CALLNAME%を二人ががりで押さえつけると口の中にペニスをねじ込んだ
+					WSTR:(K++) = 「ヘンな味だわ……」
 				ENDIF
 			ELSE
-				PRINTFORMW 「二人でするの？」
+				WSTR:(K++) = 「二人でするの？」
 				;함락완료
 				IF  함락(TARGET,PLAYER) > 0 && FLAG:7 == 2
-					PRINTFORMW 「ええ、期待に沿えるよう頑張るわ」
+					WSTR:(K++) = 「ええ、期待に沿えるよう頑張るわ」
 				ELSE
-					PRINTFORML 「%CALLNAME:ASSI%に任せて%CSTR:일인칭%は何もしなくてもいいわね？」
-					PRINTFORMW 逃げようとする%CALLNAME%の頭を掴むと股間へと押し付けた
+					KSTR:(K++) = 「%CALLNAME:ASSI%に任せて%CSTR:일인칭%は何もしなくてもいいわね？」
+					WSTR:(K++) = 逃げようとする%CALLNAME%の頭を掴むと股間へと押し付けた
 				ENDIF
 			ENDIF
 			CFLAG:366 = 1
@@ -5881,58 +6077,58 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
 					;調教相手も助手のバエルも妻の場合
-					IF TALENT:아내 && NO:ASSI == 270 && TALENT:ASSI:아내 && CFLAG:800 == 3
+					IF TALENT:아내 && ASSI > 0 && NO:ASSI == 270 && TALENT:ASSI:아내 && CFLAG:800 == 3
 						IF RAND:2 == 0
-							PRINTFORML 「駄目よ、%CSTR:이인칭%の精液は全部%CSTR:일인칭%のモノだわ」
-							PRINTFORML 「アンタなんかにはあげないわよ」
-							PRINTFORMW 負けじと%CALLNAME:MASTER%のペニスに食らいつく少女
-							PRINTFORMW 『負けたらあかんで』
-							PRINTFORML 『お前さんには新たな魔王を産んでもらうんや』
-							PRINTFORMW 少女はペニスを咥えながら頷いている
+							KSTR:(K++) = 「駄目よ、%CSTR:이인칭%の精液は全部%CSTR:일인칭%のモノだわ」
+							KSTR:(K++) = 「アンタなんかにはあげないわよ」
+							WSTR:(K++) = 負けじと%CALLNAME:MASTER%のペニスに食らいつく少女
+							WSTR:(K++) = 『負けたらあかんで』
+							KSTR:(K++) = 『お前さんには新たな魔王を産んでもらうんや』
+							WSTR:(K++) = 少女はペニスを咥えながら頷いている
 						ELSE
-							PRINTFORML 「%CALLNAME:ASSI%なんかより、%CSTR:일인칭%の口の方が気持ちいいよね？」
-							PRINTFORMW %CALLNAME%の言葉に触発され、%CALLNAME:ASSI%の舌使いは激しくなってきた
-							PRINTFORML 「ダ、ダメよ、%CSTR:이인칭%をキモチよくするのはお嫁さんの仕事だわ」
-							PRINTFORMW 二人は競う様に%CALLNAME:MASTER%のペニスに奉仕をしている…
+							KSTR:(K++) = 「%CALLNAME:ASSI%なんかより、%CSTR:일인칭%の口の方が気持ちいいよね？」
+							WSTR:(K++) = %CALLNAME%の言葉に触発され、%CALLNAME:ASSI%の舌使いは激しくなってきた
+							KSTR:(K++) = 「ダ、ダメよ、%CSTR:이인칭%をキモチよくするのはお嫁さんの仕事だわ」
+							WSTR:(K++) = 二人は競う様に%CALLNAME:MASTER%のペニスに奉仕をしている…
 						ENDIF
 					ELSE
 						IF RAND:2 == 0
-							PRINTFORMW 「ダメよ。%CSTR:이인칭%のセーエキは全部%CSTR:일인칭%のモノなんだから」
+							WSTR:(K++) = 「ダメよ。%CSTR:이인칭%のセーエキは全部%CSTR:일인칭%のモノなんだから」
 						ELSE
-							PRINTFORML 「%CSTR:일인칭%と%CALLNAME:ASSI%の舌、キモチいい？」
-							PRINTFORMW 「も～っと気持ちよくしてあげるわ%ハート()%」
+							KSTR:(K++) = 「%CSTR:일인칭%と%CALLNAME:ASSI%の舌、キモチいい？」
+							WSTR:(K++) = 「も～っと気持ちよくしてあげるわ%ハート()%」
 						ENDIF
 					ENDIF
 				;음란, 창부	
 				ELSEIF 함락( ) > 0 && RESULTS == "음란"
-					;助手が嫁
+					;조수が嫁
 					IF TALENT:ASSI:아내
 						IF RAND:2 == 0
-							PRINTFORMW 「%CALLNAME:ASSI%には悪いけど、%CSTR:이인칭%のセーエキ、%CSTR:일인칭%が全部飲んじゃうわ♪」
-							PRINTFORMW 「ね、%CSTR:이인칭%、いいよね？」
+							WSTR:(K++) = 「%CALLNAME:ASSI%には悪いけど、%CSTR:이인칭%のセーエキ、%CSTR:일인칭%が全部飲んじゃうわ♪」
+							WSTR:(K++) = 「ね、%CSTR:이인칭%、いいよね？」
 						ELSE
-							PRINTFORML 「%CALLNAME:ASSI%なんかより、%CSTR:일인칭%の方が上手よね？」
-							PRINTFORMW %CALLNAME%の言葉に触発され、%CALLNAME:ASSI%の舌使いは激しくなってきた
-							PRINTFORMW 「%CSTR:일인칭%だって負けないわ♪」
+							KSTR:(K++) = 「%CALLNAME:ASSI%なんかより、%CSTR:일인칭%の方が上手よね？」
+							WSTR:(K++) = %CALLNAME%の言葉に触発され、%CALLNAME:ASSI%の舌使いは激しくなってきた
+							WSTR:(K++) = 「%CSTR:일인칭%だって負けないわ♪」
 						ENDIF
 					ELSE
 						IF RAND:2 == 0
-							PRINTFORML 「どこに出してもいいわ」
-							PRINTFORMW 「二人で全部飲んであげるわ%ハート()%」
+							KSTR:(K++) = 「どこに出してもいいわ」
+							WSTR:(K++) = 「二人で全部飲んであげるわ%ハート()%」
 						ELSE
-							PRINTFORMW 「%CSTR:일인칭%と%CALLNAME:ASSI%の舌、気持ちいい？」
-							PRINTFORMW 「けど、まだセーエキ出しちゃダメ」
-							PRINTFORMW 「ガマンした方が気持ち良くシャセイできるわ♪」
+							WSTR:(K++) = 「%CSTR:일인칭%と%CALLNAME:ASSI%の舌、気持ちいい？」
+							WSTR:(K++) = 「けど、まだセーエキ出しちゃダメ」
+							WSTR:(K++) = 「ガマンした方が気持ち良くシャセイできるわ♪」
 						ENDIF
 					ENDIF
 				;복종, 예속	
 				ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
 					IF RAND:2 == 0
-						PRINTFORMW 「%CSTR:일인칭%も%CALLNAME:ASSI%に負けないくらい奉仕するわ」
-						PRINTFORMW 「だから、い～っぱい気持ちよくなってセーエキだしてね%ハート()%」
+						WSTR:(K++) = 「%CSTR:일인칭%も%CALLNAME:ASSI%に負けないくらい奉仕するわ」
+						WSTR:(K++) = 「だから、い～っぱい気持ちよくなってセーエキだしてね%ハート()%」
 					ELSE
-						PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%達のご奉仕はどう？」
-						PRINTFORMW 「不満だったら言ってね。もっと激しい事だってするわ%ハート()%」
+						WSTR:(K++) = 「%CSTR:이인칭%、%CSTR:일인칭%達のご奉仕はどう？」
+						WSTR:(K++) = 「不満だったら言ってね。もっと激しい事だってするわ%ハート()%」
 					ENDIF
 				ENDIF
 				CFLAG:366 = 4
@@ -5940,21 +6136,21 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:366 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORMW 「舐めているだけでいいの？」
-					PRINTFORMW 「せっかく二人にいるのに……」
+					WSTR:(K++) = 「舐めているだけでいいの？」
+					WSTR:(K++) = 「せっかく二人にいるのに……」
 				ELSE
-					PRINTFORMW 「%CSTR:일인칭%ももっと頑張るわ」
-					PRINTFORMW 「だから、%CALLNAME:ASSI%みたいに、その……」
+					WSTR:(K++) = 「%CSTR:일인칭%ももっと頑張るわ」
+					WSTR:(K++) = 「だから、%CALLNAME:ASSI%みたいに、その……」
 				ENDIF
 				CFLAG:366 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:366 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORMW 「%CSTR:일인칭%もシなきゃダメ？」
+					WSTR:(K++) = 「%CSTR:일인칭%もシなきゃダメ？」
 				ELSE
-					PRINTFORML 「なんで二人でする必要があるの？」
-					PRINTFORMW %CALLNAME%は不満をたれながらも奉仕をしている
+					KSTR:(K++) = 「なんで二人でする必要があるの？」
+					WSTR:(K++) = %CALLNAME%は不満をたれながらも奉仕をしている
 				ENDIF
 				CFLAG:366 = 2
 			ENDIF
@@ -8528,26 +8724,26 @@ SELECTCASE SELECTCOM
 			;처음
 			IF CFLAG:401 == 0
 				IF TALENT:아내 && RAND:2 == 0
-					PRINTFORML 「どう？　幼な妻は♪」
-					PRINTFORMW %CALLNAME%は嬉しそうにクルクルと回っている
+					KSTR:(K++) = 「どう？　幼な妻は♪」
+					WSTR:(K++) = %CALLNAME%は嬉しそうにクルクルと回っている
 				ELSE
-					PRINTFORMW 「これを着るの？」
-					PRINTFORMW 「テレビで見た若奥様って感じね」
+					WSTR:(K++) = 「これを着るの？」
+					WSTR:(K++) = 「テレビで見た若奥様って感じね」
 				ENDIF
 				CFLAG:401 = 1
 			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
 				IF RAND:3 == 0
-					PRINTFORML 「%CSTR:이인칭%がダンナさんで、%CSTR:일인칭%が奥さん……」
-					PRINTFORMW 「悪くはないわ」
+					KSTR:(K++) = 「%CSTR:이인칭%がダンナさんで、%CSTR:일인칭%が奥さん……」
+					WSTR:(K++) = 「悪くはないわ」
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「エプロン着させてどうするつもり？」
-					PRINTFORMW 「え、汚れても大丈夫なように？」
-					PRINTFORML 「その目……わかったわ、ナニがしたいの？」
-					PRINTFORMW %CALLNAME%はあきれた表情だがまんざらでもない様子だ
+					WSTR:(K++) = 「エプロン着させてどうするつもり？」
+					WSTR:(K++) = 「え、汚れても大丈夫なように？」
+					KSTR:(K++) = 「その目……わかったわ、ナニがしたいの？」
+					WSTR:(K++) = %CALLNAME%はあきれた表情だがまんざらでもない様子だ
 				ELSE
-					PRINTFORML 「ア・ナ・タ♪」
-					PRINTFORMW 「じょ、冗談よ！　からかっただけだわ！」
+					KSTR:(K++) = 「ア・ナ・タ♪」
+					WSTR:(K++) = 「じょ、冗談よ！　からかっただけだわ！」
 				ENDIF
 				CFLAG:401 = 2
 			ENDIF
@@ -8555,11 +8751,11 @@ SELECTCASE SELECTCOM
 		;해제
 			IF CFLAG:401 == 1 || FLAG:7 == 2
 				IF RAND:2 == 0
-					PRINTFORML 「こんなにしちゃって……」
-					PRINTFORMW 「何の為のエプロンなのか考えさせられるわ」
+					KSTR:(K++) = 「こんなにしちゃって……」
+					WSTR:(K++) = 「何の為のエプロンなのか考えさせられるわ」
 				ELSE
-					PRINTFORMW 「エプロン着ただけなのに大興奮だっったわね、%CSTR:이인칭%%ハート()%」
-					PRINTFORMW 「そんなにいいのならまた着てもいいわ」
+					WSTR:(K++) = 「エプロン着ただけなのに大興奮だっったわね、%CSTR:이인칭%%ハート()%」
+					WSTR:(K++) = 「そんなにいいのならまた着てもいいわ」
 				ENDIF
 			ENDIF
 		ENDIF
@@ -9919,7 +10115,7 @@ SELECTCASE SELECTCOM
 			;ABL:페르소나1데이터／스킬1 =
 			
 			;ABL:페르소나1데이터／습득스킬1 =
-			;ABL:ペルソナ1データ／습득LV1 =
+			;ABL:페르소나1데이터／습득LV1 =
  
 		ENDIF
 ;-------------------------------------------------
@@ -9960,15 +10156,15 @@ SELECTCASE SELECTCOM
 			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
-			;ABL:初期リンク悪魔공격상성
-			;ABL:初期リンク悪魔최저공격횟수
-			;ABL:初期リンク悪魔최대공격횟수
-			;ABL:初期リンク悪魔사거리
-			;ABL:初期リンク悪魔공격범위
-			;ABL:初期リンク悪魔추가효과
-			;ABL:初期リンク悪魔추가효과상성
-			;ABL:初期リンク悪魔추가효과명중률
-			;ABL:初期リンク悪魔추가효과최대명중률
+			;ABL:초기링크악마공격상성
+			;ABL:초기링크악마최저공격횟수
+			;ABL:초기링크악마최대공격횟수
+			;ABL:초기링크악마사거리
+			;ABL:초기링크악마공격범위
+			;ABL:초기링크악마추가효과
+			;ABL:초기링크악마추가효과상성
+			;ABL:초기링크악마추가효과명중률
+			;ABL:초기링크악마추가효과최대명중률
 		ENDIF
 ;-------------------------------------------------
 ;606,개조수술
@@ -10563,8 +10759,8 @@ ENDIF
 ;조수를범한다로 사정
 ;-------------------------------------------------
 IF TFLAG:7 > 0
-	K_CALL:K = PALAM_MESSAGE_A			
-	;대량사정					
+	K_CALL:K = PALAM_MESSAGE_A
+	;대량사정
 	IF TFLAG:7 > 1
 		IF (함락( ) > 0) && (CFLAG:232 < 3 || FLAG:7 == 2)
 			;연모, 친애	
@@ -10580,7 +10776,7 @@ IF TFLAG:7 > 0
 				WSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
-			;함락완료 공통	
+			;함락완료 공통
 			IF !구상유무확인(0)
 				WSTR:(K++) = 
 				CFLAG:232= 3
@@ -10589,15 +10785,15 @@ IF TFLAG:7 > 0
 		;굴복각인Lv3		
 		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 			WSTR:(K++) = 	
-			CFLAG:232= 2	
+			CFLAG:232= 2
 		ENDIF		
 		;그 이외		
 		IF (CFLAG:232 < 1 || FLAG:7 == 2) && !구상유무확인(0)
 			WSTR:(K++) = 	
-			CFLAG:232= 1	
-		ENDIF		
-	ENDIF	
-	;통상					
+			CFLAG:232= 1
+		ENDIF
+	ENDIF
+	;통상
 	IF !구상유무확인(0)
 		IF (함락( ) > 0) && (CFLAG:232 < 3 || FLAG:7 == 2)
 			;연모, 친애	
@@ -11027,28 +11223,28 @@ IF TFLAG:2 > 0
 				;함락완료 공통	
 				IF !구상유무확인(0)
 					IF RAND:2 == 0
-						PRINTFORML 「熱いわぁ……」
-						PRINTFORMW 「お腹の中……精液でいっぱい……%ハート()%」
+						KSTR:(K++) = 「熱いわぁ……」
+						WSTR:(K++) = 「お腹の中……精液でいっぱい……%ハート()%」
 					ELSE
-						PRINTFORMW 「あっ……」
-						PRINTFORMW 「すごい勢い……まだ出てる……」
+						WSTR:(K++) = 「あっ……」
+						WSTR:(K++) = 「すごい勢い……まだ出てる……」
 					ENDIF
 					CFLAG:237= 3
 				ENDIF
 			;굴복각인Lv3		
 			ELSEIF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「あっ…ぐっ……んあああッ……うううっ」
-				PRINTFORML 「まだ……でてる……」
-				PRINTFORMW 腸内に満たされる大量の精液の感触に、%CALLNAME%は身震いしながらひたすら堪えている。
+				KSTR:(K++) = 「あっ…ぐっ……んあああッ……うううっ」
+				KSTR:(K++) = 「まだ……でてる……」
+				WSTR:(K++) = 腸内に満たされる大量の精液の感触に、%CALLNAME%は身震いしながらひたすら堪えている。
 				CFLAG:237= 2	
 			;그 이외
 			ELSEIF (CFLAG:237 < 1 || FLAG:7 == 2) && !구상유무확인(0)
 				IF RAND:2 == 0
-					PRINTFORML 「うあっ、んぐ……」
-					PRINTFORMW 「おしりの中で、精液いっぱい出てる……」
+					KSTR:(K++) = 「うあっ、んぐ……」
+					WSTR:(K++) = 「おしりの中で、精液いっぱい出てる……」
 				ELSE
-					PRINTFORML 「あっ……」
-					PRINTFORMW 「本当にオシリにだしてるわ……」
+					KSTR:(K++) = 「あっ……」
+					WSTR:(K++) = 「本当にオシリにだしてるわ……」
 				ENDIF
 				CFLAG:237= 1
 			ENDIF
@@ -11072,58 +11268,58 @@ IF TFLAG:2 > 0
 				;함락완료 공통	
 				IF !구상유무확인(0)
 					IF RAND:2 == 0
-						PRINTFORMW 「お腹の中、精液で熱くなっちゃったわ……%ハート()%」
+						WSTR:(K++) = 「お腹の中、精液で熱くなっちゃったわ……%ハート()%」
 					ELSE
-						PRINTFORMW 「あっ……」
-						PRINTFORMW 「%CSTR:일인칭%のオシリ、気持ち良かったね……」
+						WSTR:(K++) = 「あっ……」
+						WSTR:(K++) = 「%CSTR:일인칭%のオシリ、気持ち良かったね……」
 					ENDIF
 					CFLAG:237= 3
 				ENDIF	
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORMW 「あっ…ぐっ……んあああッ……うううっ」
-				PRINTFORMW 腸内に注がれる精液の感触に、%CALLNAME%は身震いしながらひたすら堪えている。
+				WSTR:(K++) = 「あっ…ぐっ……んあああッ……うううっ」
+				WSTR:(K++) = 腸内に注がれる精液の感触に、%CALLNAME%は身震いしながらひたすら堪えている。
 				CFLAG:237= 2	
 			;그 이외
 			ELSEIF (CFLAG:237 < 1 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORML 「あっ……」
-				PRINTFORMW 「本当にオシリにだしてるわ……」
+				KSTR:(K++) = 「あっ……」
+				WSTR:(K++) = 「本当にオシリにだしてるわ……」
 				CFLAG:237= 1	
 			ENDIF
 		ENDIF
 	;V계 섹스
 	ELSE
-		;요정오나홀
+		;妖精オナホ
 		IF SELECTCOM == 154
 			;연모, 친애
 			IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-				PRINTFORML 「ああ！んあああ！……あ、ああ……%ハート()%」
-				PRINTFORMW 驚くほどに続いた射精に、%CALLNAME%は意識が飛びかけながらすべてを受け止めた。
-				PRINTFORMW 「ん、あ……あん……%CSTR:이인칭%……大好き……」
-				PRINTFORMW 「%CSTR:일인칭%、%CSTR:이인칭%のモノになれて幸せだわ……%ハート(2)%」
+				KSTR:(K++) = 「ああ！んあああ！……あ、ああ……%ハート()%」
+				WSTR:(K++) = 驚くほどに続いた射精に、%CALLNAME%は意識が飛びかけながらすべてを受け止めた。
+				WSTR:(K++) = 「ん、あ……あん……%CSTR:이인칭%……大好き……」
+				WSTR:(K++) = 「%CSTR:일인칭%、%CSTR:이인칭%のモノになれて幸せだわ……%ハート(2)%」
 				CFLAG:238= 4
 			;음란, 창부
 			ELSEIF 함락( ) > 0 && RESULTS == "음란"	
-				PRINTFORML 「んあああ！ああ……ぁあああ！！」
-				PRINTFORMW 自身の許容量を遥かに超える射精量に、%CALLNAME%はガクガクと身体を痙攣させ、限界を超える快楽に白目を剥く。
-				PRINTFORMW 「イッてる……わぁ……とまら……ないわぉ…%ハート()%」
-				PRINTFORMW 「ぁああ…%CSTR:일인칭%……壊れ…ちゃうぅ%ハート()%」
+				KSTR:(K++) = 「んあああ！ああ……ぁあああ！！」
+				WSTR:(K++) = 自身の許容量を遥かに超える射精量に、%CALLNAME%はガクガクと身体を痙攣させ、限界を超える快楽に白目を剥く。
+				WSTR:(K++) = 「イッてる……わぁ……とまら……ないわぉ…%ハート()%」
+				WSTR:(K++) = 「ぁああ…%CSTR:일인칭%……壊れ…ちゃうぅ%ハート()%」
 				CFLAG:238= 3
 			;복종, 예속
 			ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
-				PRINTFORMW 「ふあ！あ、ああああぁ！…あ……んぁ%ハート()%」
-				PRINTFORMW 「お腹の中ぁ……精液で…どろどろにされちゃったわぁ……」
-				PRINTFORML 
-				PRINTFORMW 「もう一回%CSTR:일인칭%の事、使ってみる？」
+				WSTR:(K++) = 「ふあ！あ、ああああぁ！…あ……んぁ%ハート()%」
+				WSTR:(K++) = 「お腹の中ぁ……精液で…どろどろにされちゃったわぁ……」
+				KSTR:(K++) = 
+				WSTR:(K++) = 「もう一回%CSTR:일인칭%の事、使ってみる？」
 				CFLAG:238= 3
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-				PRINTFORMW 「こんな扱い…… 熱ぃよぉ…」
+				WSTR:(K++) = 「こんな扱い…… 熱ぃよぉ…」
 				CFLAG:238 = 2
 			;그 이외
 			ELSEIF CFLAG:238 < 1 || FLAG:7 == 2
-				PRINTFORML 「……」
-				PRINTFORMW 「最悪だわ……」
+				KSTR:(K++) = 「……」
+				WSTR:(K++) = 「最悪だわ……」
 				CFLAG:238 = 1
 			ENDIF
 		;안쪽 자극 섹스계
@@ -11133,41 +11329,41 @@ IF TFLAG:2 > 0
 				IF (함락( ) > 0) && (CFLAG:238 < 3 || FLAG:7 == 2)
 					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-						PRINTFORML ペニスの先端を子宮口に直接押し付け、ありったけの精液を注ぎ込む。
-						PRINTFORML 「お、奥にぃぃ、ふぁ♪ ……すごっ…い…たくさん…出てるわぁ%ハート()%」
-						PRINTFORMW %CALLNAME%は恍惚の表情をしながら、まだ続いている射精の鼓動に酔いしれている。
+						KSTR:(K++) = ペニスの先端を子宮口に直接押し付け、ありったけの精液を注ぎ込む。
+						KSTR:(K++) = 「お、奥にぃぃ、ふぁ♪ ……すごっ…い…たくさん…出てるわぁ%ハート()%」
+						WSTR:(K++) = %CALLNAME%は恍惚の表情をしながら、まだ続いている射精の鼓動に酔いしれている。
 						CFLAG:238= 4
 					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						IF RAND:2 == 0
-							PRINTFORML 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
-							PRINTFORML 「ひぁぁあ！　一番奥に精液注がれてるぅ！」
-							PRINTFORML 「子宮の中、熱い精液でパンパンになって……気持ちよすぎるわぁ%ハート()%」
-							PRINTFORMW %CALLNAME%は子宮内を直接犯される快感に頭を真っ白にさせ、身体を歓喜に震わせていた。
+							KSTR:(K++) = 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
+							KSTR:(K++) = 「ひぁぁあ！　一番奥に精液注がれてるぅ！」
+							KSTR:(K++) = 「子宮の中、熱い精液でパンパンになって……気持ちよすぎるわぁ%ハート()%」
+							WSTR:(K++) = %CALLNAME%は子宮内を直接犯される快感に頭を真っ白にさせ、身体を歓喜に震わせていた。
 						ELSE
-							PRINTFORML 「すごい！　オマンコの奥に精液かかってるわ%ハート()%」
-							PRINTFORML 「%CSTR:이인칭%、溢れるくらい沢山入ってきたわ%ハート()%」
-							PRINTFORMW %CALLNAME%は子宮内に精液が届く様子を嬉しそうに逐一報告している
+							KSTR:(K++) = 「すごい！　オマンコの奥に精液かかってるわ%ハート()%」
+							KSTR:(K++) = 「%CSTR:이인칭%、溢れるくらい沢山入ってきたわ%ハート()%」
+							WSTR:(K++) = %CALLNAME%は子宮内に精液が届く様子を嬉しそうに逐一報告している
 						ENDIF
 						CFLAG:238= 3
 					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-						PRINTFORML 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
-						PRINTFORML 「ひぁぁあ！　%CSTR:일인칭%の子宮の中！」
-						PRINTFORML 「オチンチンと精液で一杯になってるわぁ！」
-						PRINTFORMW %CALLNAME%は肉棒と精液で子宮内を蹂躙される感触に頭を真っ白にさせている。
+						KSTR:(K++) = 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
+						KSTR:(K++) = 「ひぁぁあ！　%CSTR:일인칭%の子宮の中！」
+						KSTR:(K++) = 「オチンチンと精液で一杯になってるわぁ！」
+						WSTR:(K++) = %CALLNAME%は肉棒と精液で子宮内を蹂躙される感触に頭を真っ白にさせている。
 						CFLAG:238= 3
 					ENDIF
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORML 「ああ！奥にきてるわ！あ、ああ！ひゃあああ！」
-					PRINTFORML 「いっぱい！　いっぱいきてるわあああぁぁぁ！」
-					PRINTFORMW %CALLNAME%は奥に満ちる熱い感触に悲鳴のような嬌声をあげた。
+					KSTR:(K++) = 「ああ！奥にきてるわ！あ、ああ！ひゃあああ！」
+					KSTR:(K++) = 「いっぱい！　いっぱいきてるわあああぁぁぁ！」
+					WSTR:(K++) = %CALLNAME%は奥に満ちる熱い感触に悲鳴のような嬌声をあげた。
 					CFLAG:238= 2
 				;그 이외
 				ELSEIF (CFLAG:238 < 1 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORMW 「ひっ！やあ！」
-					PRINTFORMW 「あつい！　熱いのが沢山流れ込んでる！」
+					WSTR:(K++) = 「ひっ！やあ！」
+					WSTR:(K++) = 「あつい！　熱いのが沢山流れ込んでる！」
 					CFLAG:238= 1
 				ENDIF
 			ENDIF
@@ -11176,37 +11372,37 @@ IF TFLAG:2 > 0
 				IF (함락( ) > 0) && (CFLAG:238 < 3 || FLAG:7 == 2)
 					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"
-						PRINTFORML ペニスの先端を子宮口に直接押し付け、精液を注ぎ込む。
-						PRINTFORML 「お、奥にぃぃ、ふぁ♪ ……すごっ…い…%ハート()%」
-						PRINTFORMW %CALLNAME%は恍惚の表情をしながら射精の鼓動に酔いしれている。
+						KSTR:(K++) = ペニスの先端を子宮口に直接押し付け、精液を注ぎ込む。
+						KSTR:(K++) = 「お、奥にぃぃ、ふぁ♪ ……すごっ…い…%ハート()%」
+						WSTR:(K++) = %CALLNAME%は恍惚の表情をしながら射精の鼓動に酔いしれている。
 						CFLAG:238= 4
 					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"
 						IF RAND:2 == 0
-							PRINTFORML 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
-							PRINTFORML 「ひぁぁあ！一番奥に精液注がれてるぅ！……気持ちよすぎるわぁ%ハート()%」
-							PRINTFORMW %CALLNAME%は子宮内を直接犯される快感に頭を真っ白にさせ、身体を歓喜に震わせていた。
+							KSTR:(K++) = 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
+							KSTR:(K++) = 「ひぁぁあ！一番奥に精液注がれてるぅ！……気持ちよすぎるわぁ%ハート()%」
+							WSTR:(K++) = %CALLNAME%は子宮内を直接犯される快感に頭を真っ白にさせ、身体を歓喜に震わせていた。
 						ELSE
-							PRINTFORML 「すごい！　オマンコの奥に精液かかってるわ%ハート()%」
-							PRINTFORMW %CALLNAME%は子宮内に精液が届く様子を嬉しそうに逐一報告している
+							KSTR:(K++) = 「すごい！　オマンコの奥に精液かかってるわ%ハート()%」
+							WSTR:(K++) = %CALLNAME%は子宮内に精液が届く様子を嬉しそうに逐一報告している
 						ENDIF
 						CFLAG:238= 3
 					;복종, 예속
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"
-						PRINTFORML 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
-						PRINTFORML 「ひぁぁあ！　%CSTR:일인칭%の子宮の中にまでオチンチンが入ってきて」
-						PRINTFORML 「精液も出てるわぁ！」
-						PRINTFORMW %CALLNAME%は子宮内に叩きつけられる感触に頭を真っ白にさせている。
+						KSTR:(K++) = 肉棒で子宮口をこじ開け、子宮内に直に白濁液を注ぎ込む。
+						KSTR:(K++) = 「ひぁぁあ！　%CSTR:일인칭%の子宮の中にまでオチンチンが入ってきて」
+						KSTR:(K++) = 「精液も出てるわぁ！」
+						WSTR:(K++) = %CALLNAME%は子宮内に叩きつけられる感触に頭を真っ白にさせている。
 						CFLAG:238= 3
 					ENDIF
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORML 「ああ！奥にきてるわ！あ、ああ！ひゃあああ！いっぱい！あああああ！」
-					PRINTFORMW %CALLNAME%は奥に流し込まれる熱い感触に悲鳴のような嬌声をあげた。
+					KSTR:(K++) = 「ああ！奥にきてるわ！あ、ああ！ひゃあああ！いっぱい！あああああ！」
+					WSTR:(K++) = %CALLNAME%は奥に流し込まれる熱い感触に悲鳴のような嬌声をあげた。
 					CFLAG:238= 2
 				;그 이외
 				ELSEIF (CFLAG:238 < 1 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORMW 「ひっ！やあ！あつい！あついいい！」
+					WSTR:(K++) = 「ひっ！やあ！あつい！あついいい！」
 					CFLAG:238= 1
 				ENDIF
 			ENDIF
@@ -11218,47 +11414,47 @@ IF TFLAG:2 > 0
 				IF (함락( ) > 0) && (CFLAG:239 < 3 || FLAG:7 == 2)
 					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-						PRINTFORML 「あ、ああ！あつい！あああああ！」
-						PRINTFORML 「あ、はぁ……%CSTR:이인칭%の赤ちゃんの素が一杯入ってくるわぁ……%ハート()%」
+						KSTR:(K++) = 「あ、ああ！あつい！あああああ！」
+						KSTR:(K++) = 「あ、はぁ……%CSTR:이인칭%の赤ちゃんの素が一杯入ってくるわぁ……%ハート()%」
 						IF TALENT:임신
-							PRINTFORMW 「もぅ……これじゃあ、赤ちゃんが溺れちゃうわ%ハート()%」
+							WSTR:(K++) = 「もぅ……これじゃあ、赤ちゃんが溺れちゃうわ%ハート()%」
 						ELSE
-							PRINTFORMW %CALLNAME%はうっとりとしながら自身の下腹部をなでている。
+							WSTR:(K++) = %CALLNAME%はうっとりとしながら自身の下腹部をなでている。
 						ENDIF
 						CFLAG:239= 4
 					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"	
-						PRINTFORML 「あ、はぁ……すごい量の精液」
-						PRINTFORML 「最高だわぁ……%ハート()%」
-						PRINTFORMW %CALLNAME%の膣内は貪欲に精液を飲み込み、まだ欲しがるように淫靡に蠢き、肉棒を刺激する。
-						PRINTFORMW 「もっとぉ……もっと精液ちょうだぁい♪」
-						PRINTFORMW 「これで終わりなんて許さないわぁ%ハート()%」
+						KSTR:(K++) = 「あ、はぁ……すごい量の精液」
+						KSTR:(K++) = 「最高だわぁ……%ハート()%」
+						WSTR:(K++) = %CALLNAME%の膣内は貪欲に精液を飲み込み、まだ欲しがるように淫靡に蠢き、肉棒を刺激する。
+						WSTR:(K++) = 「もっとぉ……もっと精液ちょうだぁい♪」
+						WSTR:(K++) = 「これで終わりなんて許さないわぁ%ハート()%」
 						CFLAG:239= 3
 					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 						IF RAND:2 == 0
-							PRINTFORMW 「あ、はぁ……%CSTR:일인칭%のおマンコ、精液で一杯だわ%ハート()%」
-							PRINTFORMW 「気持ち良く射精してもらって、%CSTR:일인칭%も嬉しいわ」
+							WSTR:(K++) = 「あ、はぁ……%CSTR:일인칭%のおマンコ、精液で一杯だわ%ハート()%」
+							WSTR:(K++) = 「気持ち良く射精してもらって、%CSTR:일인칭%も嬉しいわ」
 						ELSE
-							PRINTFORMW 「あっ、熱いのが沢山……」
-							PRINTFORMW 「オマンコ使って頂き、ありがとうございます」
+							WSTR:(K++) = 「あっ、熱いのが沢山……」
+							WSTR:(K++) = 「オマンコ使って頂き、ありがとうございます」
 						ENDIF
 						CFLAG:239= 3
 					ENDIF
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORML 「あ、ああん！いっぱい、なのぉ！　どくどくってでてるわ！」
-					PRINTFORMW %CALLNAME%は身体を震わせながら大量の精液を受け止めている。その顔は発情期の雌のものと変わりがなかった。
+					KSTR:(K++) = 「あ、ああん！いっぱい、なのぉ！　どくどくってでてるわ！」
+					WSTR:(K++) = %CALLNAME%は身体を震わせながら大量の精液を受け止めている。その顔は発情期の雌のものと変わりがなかった。
 					CFLAG:239= 2
 				ENDIF
 				;그 이외
 				IF (CFLAG:239 < 1 || FLAG:7 == 2) && !구상유무확인(0)
 					IF RAND:2 == 0
-						PRINTFORMW 「あ！ああ！熱いのが沢山きてる！　いやああ！」
+						WSTR:(K++) = 「あ！ああ！熱いのが沢山きてる！　いやああ！」
 					ELSE
-						PRINTFORMW 「あ！ああ！　沢山入ってくる……」
-						PRINTFORMW 「許さない……絶対許さないわ！」
+						WSTR:(K++) = 「あ！ああ！　沢山入ってくる……」
+						WSTR:(K++) = 「許さない……絶対許さないわ！」
 					ENDIF
 					CFLAG:239= 1
 				ENDIF
@@ -11268,45 +11464,45 @@ IF TFLAG:2 > 0
 				IF (함락( ) > 0) && (CFLAG:239 < 3 || FLAG:7 == 2)
 					;연모, 친애	
 					IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-						PRINTFORML 「あ、ああ！あつい！あああああ！」
-						PRINTFORML 「あ、はぁ……%CSTR:이인칭%の赤ちゃんの素、入ってきてるのが判るわ……%ハート()%」
+						KSTR:(K++) = 「あ、ああ！あつい！あああああ！」
+						KSTR:(K++) = 「あ、はぁ……%CSTR:이인칭%の赤ちゃんの素、入ってきてるのが判るわ……%ハート()%」
 						IF TALENT:임신
-							PRINTFORMW 「もぅ……赤ちゃん驚いちゃうわよ%ハート()%」
+							WSTR:(K++) = 「もぅ……赤ちゃん驚いちゃうわよ%ハート()%」
 						ELSE
-							PRINTFORMW %CALLNAME%はうっとりとしながら自身の下腹部をなでている。
+							WSTR:(K++) = %CALLNAME%はうっとりとしながら自身の下腹部をなでている。
 						ENDIF
 						CFLAG:239= 4
 					;음란, 창부	
 					ELSEIF 함락( ) > 0 && RESULTS == "음란"	
-						PRINTFORML 「あ、はぁ……精液…気持ちいぃわぁ……%ハート()%」
-						PRINTFORMW %CALLNAME%の膣内は貪欲に精液を飲み込み、まだ欲しがるように淫靡に蠢き、肉棒を刺激する。
-						PRINTFORMW 「もっとぉ……もっと精液ちょうだぁい……もっと犯してぇ%ハート()%」
+						KSTR:(K++) = 「あ、はぁ……精液…気持ちいぃわぁ……%ハート()%」
+						WSTR:(K++) = %CALLNAME%の膣内は貪欲に精液を飲み込み、まだ欲しがるように淫靡に蠢き、肉棒を刺激する。
+						WSTR:(K++) = 「もっとぉ……もっと精液ちょうだぁい……もっと犯してぇ%ハート()%」
 						CFLAG:239= 3
 					;복종, 예속	
 					ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 						IF RAND:2 == 0
-							PRINTFORMW 「あ、はぁ……」
-							PRINTFORMW 「おマンコで射精してもらえて、%CSTR:일인칭%、嬉しいわ……」
+							WSTR:(K++) = 「あ、はぁ……」
+							WSTR:(K++) = 「おマンコで射精してもらえて、%CSTR:일인칭%、嬉しいわ……」
 						ELSE
-							PRINTFORMW 「あっ、熱いのが……」
-							PRINTFORMW 「オマンコ使って頂き、ありがとうございます」
+							WSTR:(K++) = 「あっ、熱いのが……」
+							WSTR:(K++) = 「オマンコ使って頂き、ありがとうございます」
 						ENDIF
 						CFLAG:239= 3
 					ENDIF
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && !구상유무확인(0)
-					PRINTFORML 「あ、ああん！　%CSTR:일인칭%のなかに！　どくどくってでてるわ！」
-					PRINTFORMW %CALLNAME%は身体を震わせながら射精を受け止めている。その顔は発情期の雌のものと変わりがなかった。
+					KSTR:(K++) = 「あ、ああん！　%CSTR:일인칭%のなかに！　どくどくってでてるわ！」
+					WSTR:(K++) = %CALLNAME%は身体を震わせながら射精を受け止めている。その顔は発情期の雌のものと変わりがなかった。
 					CFLAG:239= 2
 				ENDIF
 				;그 이외
 				IF (CFLAG:239 < 1 || FLAG:7 == 2) && !구상유무확인(0)
 					IF RAND:2 == 0
-						PRINTFORMW 「あ！ああ！あついのきてる！　いやああ！」
+						WSTR:(K++) = 「あ！ああ！あついのきてる！　いやああ！」
 					ELSE
-						PRINTFORML 「こんな事して……」
-						PRINTFORMW 「許さない……絶対許さないわ！」
+						KSTR:(K++) = 「こんな事して……」
+						WSTR:(K++) = 「許さない……絶対許さないわ！」
 					ENDIF
 					CFLAG:239= 1
 				ENDIF
@@ -11522,7 +11718,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
@@ -11549,11 +11745,11 @@ CALL 구상변수초기화
 IF NOWEX:0 > 0 && CFLAG:242 == 0
 	;함락완료
 	IF 함락() == 0
-		PRINTFORML 「やだっ、な、なにこれえ！あぁあああ！」
+		KSTR:(K++) = 「やだっ、な、なにこれえ！あぁあああ！」
 	ELSE
-		PRINTFORML 「ひゃ！あ、あああ！な、なにこれえ！あぁあああ！」
+		KSTR:(K++) = 「ひゃ！あ、あああ！な、なにこれえ！あぁあああ！」
 	ENDIF
-	PRINTFORMW %CALLNAME%は初めて体験する感覚に困惑し、%CALLNAME:MASTER%にぎゅっとしがみついて震えた。
+	WSTR:(K++) = %CALLNAME%は初めて体験する感覚に困惑し、%CALLNAME:MASTER%にぎゅっとしがみついて震えた。
 ENDIF
 
 ;-------------------------------------------------
@@ -11562,21 +11758,21 @@ ENDIF
 IF NOWEX:1 > 0 && CFLAG:243 == 0
 	;연모, 친애
 	IF (TALENT:연모 || TALENT:친애)
-		PRINTFORMW 「ああ！ああああ！」
-		PRINTFORML 「なにこれ、%CSTR:이인칭%、なんかキてる」
-		PRINTFORML 「コレ、キモチよくてアタマおかしくなっちゃうわ！」
-		PRINTFORML 「ダメ、ダメェ～！！」
-		PRINTFORMW %CALLNAME%は初めて感じる女としての絶頂に頭を真っ白にしながら身体を痙攣させている。
-	;음란, 창부、복종, 예속
+		WSTR:(K++) = 「ああ！ああああ！」
+		KSTR:(K++) = 「なにこれ、%CSTR:이인칭%、なんかキてる」
+		KSTR:(K++) = 「コレ、キモチよくてアタマおかしくなっちゃうわ！」
+		KSTR:(K++) = 「ダメ、ダメェ～！！」
+		WSTR:(K++) = %CALLNAME%は初めて感じる女としての絶頂に頭を真っ白にしながら身体を痙攣させている。
+	;음란, 창부、服従、隷属
 	ELSEIF (TALENT:음란 || TALENT:복종 || TALENT:창부 || TALENT:예속)
-		PRINTFORML 「ああん！ああああ！」
-		PRINTFORML 「なにこれ、お、おマンコ！おマンコ壊れる！壊れちゃうわ！　んぁあああ！」
-		PRINTFORMW %CALLNAME%は初めての女としての絶頂に、頭を真っ白にしながら身体を痙攣させた。
-		PRINTFORMW %CALLNAME:MASTER%にしがみつき、涙を流しながら身体を震わせている。
+		KSTR:(K++) = 「ああん！ああああ！」
+		KSTR:(K++) = 「なにこれ、お、おマンコ！おマンコ壊れる！壊れちゃうわ！　んぁあああ！」
+		WSTR:(K++) = %CALLNAME%は初めての女としての絶頂に、頭を真っ白にしながら身体を痙攣させた。
+		WSTR:(K++) = %CALLNAME:MASTER%にしがみつき、涙を流しながら身体を震わせている。
 	ELSE
-		PRINTFORML 「ああん！ああああ！」
-		PRINTFORML 「なにこれ…おなかの中から……や、やだよぉぉぉぉ！！」
-		PRINTFORMW %CALLNAME%は未知の感覚に涙を流しながら悲鳴を上げている。
+		KSTR:(K++) = 「ああん！ああああ！」
+		KSTR:(K++) = 「なにこれ…おなかの中から……や、やだよぉぉぉぉ！！」
+		WSTR:(K++) = %CALLNAME%は未知の感覚に涙を流しながら悲鳴を上げている。
 	ENDIF
 	CFLAG:243 = 1
 ENDIF
@@ -11587,13 +11783,13 @@ ENDIF
 IF NOWEX:2 > 0 && CFLAG:244 == 0
 	;함락완료
 	IF 함락() == 0
-		PRINTFORML 「お尻、オシリのナカ、ビリビリするわっ！」
-		PRINTFORML 「オシリ、オシリでイッちゃう、あああぁ！」
-		PRINTFORMW 排泄用器官での絶頂という今まで無かった経験に%CALLNAME%は身体を痙攣させながら愉悦に浸っている。
+		KSTR:(K++) = 「お尻、オシリのナカ、ビリビリするわっ！」
+		KSTR:(K++) = 「オシリ、オシリでイッちゃう、あああぁ！」
+		WSTR:(K++) = 排泄用器官での絶頂という今まで無かった経験に%CALLNAME%は身体を痙攣させながら愉悦に浸っている。
 	ELSE
-		PRINTFORML 「や、いやあ！お尻が！」
-		PRINTFORML 「お尻がキモチ良いなんてありえないわっ！　あああああ！」
-		PRINTFORMW %CALLNAME%は初めてのアナルでの絶頂に、羞恥に顔を真っ赤にさせつつも愉悦に身体を痙攣させている。
+		KSTR:(K++) = 「や、いやあ！お尻が！」
+		KSTR:(K++) = 「お尻がキモチ良いなんてありえないわっ！　あああああ！」
+		WSTR:(K++) = %CALLNAME%は初めてのアナルでの絶頂に、羞恥に顔を真っ赤にさせつつも愉悦に身体を痙攣させている。
 	ENDIF
 	CFLAG:244 = 1
 ENDIF
@@ -11604,13 +11800,13 @@ ENDIF
 IF NOWEX:3 > 0 && CFLAG:245 == 0
 	;함락완료
 	IF 함락() == 0
-		PRINTFORML 「あ！ぁあ！おっぱいいいわ！」
-		PRINTFORML 「キちゃう、キちゃうわ！」
-		PRINTFORMW %CALLNAME%は、初めての胸での絶頂に身体を限界まで仰け反らせながら震える。
+		KSTR:(K++) = 「あ！ぁあ！おっぱいいいわ！」
+		KSTR:(K++) = 「キちゃう、キちゃうわ！」
+		WSTR:(K++) = %CALLNAME%は、初めての胸での絶頂に身体を限界まで仰け反らせながら震える。
 	ELSE
-		PRINTFORML 「あ！ぁあ！おっぱい！」
-		PRINTFORML 「だめ、ダメええええ！」
-		PRINTFORMW %CALLNAME%は、初めての胸での絶頂に抗えず身体を限界まで仰け反らせながら震える。
+		KSTR:(K++) = 「あ！ぁあ！おっぱい！」
+		KSTR:(K++) = 「だめ、ダメええええ！」
+		WSTR:(K++) = %CALLNAME%は、初めての胸での絶頂に抗えず身体を限界まで仰け反らせながら震える。
 	ENDIF
 	CFLAG:245 = 1
 ENDIF
@@ -11622,40 +11818,40 @@ IF TFLAG:29 > 0
 	;함락완료
 	IF 함락() > 0 && FLAG:7 == 2
 		IF RAND:4 == 0
-			PRINTFORMW 「いく、イク！　%CSTR:일인칭%、イッちゃうわ！あああああ！！」
+			WSTR:(K++) = 「いく、イク！　%CSTR:일인칭%、イッちゃうわ！あああああ！！」
 		ELSEIF RAND:3 == 1
-			PRINTFORMW 「あっ、あっ！イッちゃ…！ふあぁ！あああああ！！」
+			WSTR:(K++) = 「あっ、あっ！イッちゃ…！ふあぁ！あああああ！！」
 		ELSEIF RAND:2 == 0
-			PRINTFORMW 「あんッ！あんッ！ひああッ！！ああああッッ！！……ッ！……ッッ！！」
+			WSTR:(K++) = 「あんッ！あんッ！ひああッ！！ああああッッ！！……ッ！……ッッ！！」
 		ELSE
 			;調教対象が悪魔か
 			IF ABL:종족 > 0 && ABL:PLAYER:종족 == 0
-				PRINTFORML 「あんッ！あんッ！」
-				PRINTFORMW 「人間相手にするエッチ、スゴイわぁ！」
+				KSTR:(K++) = 「あんッ！あんッ！」
+				WSTR:(K++) = 「人間相手にするエッチ、スゴイわぁ！」
 			ELSE
-				PRINTFORMW 「しゅごいわ、%CSTR:이인칭%！　キモチよくておかしくなっちゃうわ！」
+				WSTR:(K++) = 「しゅごいわ、%CSTR:이인칭%！　キモチよくておかしくなっちゃうわ！」
 			ENDIF
 		ENDIF
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && FLAG:7 == 2
 		IF RAND:2 == 0
-			PRINTFORMW 「や、あ！ああん！あああああああ！！」
+			WSTR:(K++) = 「や、あ！ああん！あああああああ！！」
 		ELSE
-			PRINTFORML 「あっ！　ああん！」
-			PRINTFORMW 「キモチいいのにまけちゃうわっ！」
+			KSTR:(K++) = 「あっ！　ああん！」
+			WSTR:(K++) = 「キモチいいのにまけちゃうわっ！」
 		ENDIF
 	;그 이외
 	ELSEIF FLAG:7 == 2
 		;羞恥プレイ中
 		IF RAND:3 == 0 && TEQUIP:30
-			PRINTFORML 「いや！いやあ！」
-			PRINTFORML 「%CSTR:일인칭%のハズカシイところ、みせないで」
-			PRINTFORMW 「ひ、ぁあああ！！」
+			KSTR:(K++) = 「いや！いやあ！」
+			KSTR:(K++) = 「%CSTR:일인칭%のハズカシイところ、みせないで」
+			WSTR:(K++) = 「ひ、ぁあああ！！」
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「ダメッ、イっちゃダメなのに！」
-			PRINTFORMW 「いや！　あっ、あぁっ%ハート()%」
+			KSTR:(K++) = 「ダメッ、イっちゃダメなのに！」
+			WSTR:(K++) = 「いや！　あっ、あぁっ%ハート()%」
 		ELSE
-			PRINTFORMW 「いや！いやあ！ひ、ぁあああ！！」
+			WSTR:(K++) = 「いや！いやあ！ひ、ぁあああ！！」
 		ENDIF
 	ENDIF
 	CFLAG:246= 1
@@ -11711,7 +11907,7 @@ LOCAL = K
 
 ;분유하고 있다
 IF TFLAG:11 > 0
-	PRINTFORMW 「あ……出ちゃた……」
+	WSTR:(K++) = 「あ……出ちゃた……」
 	IF (함락( ) > 0) && (CFLAG:248 < 3 || FLAG:7 == 2)
 		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
@@ -11730,14 +11926,14 @@ IF TFLAG:11 > 0
 		IF !구상유무확인(LOCAL)
 			IF RAND:3 == 0
 				IF TALENT:임신
-					PRINTFORMW 「まだ子供だけど、赤ちゃんできちゃったからしょうがないわ」
+					WSTR:(K++) = 「まだ子供だけど、赤ちゃんできちゃったからしょうがないわ」
 				ELSE
-					PRINTFORMW 「こんな身体にされちゃったら元に戻れないわ♪」
+					WSTR:(K++) = 「こんな身体にされちゃったら元に戻れないわ♪」
 				ENDIF
 			ELSEIF RAND:2 == 0
-				PRINTFORMW 「恥ずかしいけど気持ちよくって癖になっちゃうわ%ハート()%」
+				WSTR:(K++) = 「恥ずかしいけど気持ちよくって癖になっちゃうわ%ハート()%」
 			ELSE
-				PRINTFORMW 「恥ずかしいけど……%CSTR:이인칭%なら見ててもいいわ%ハート()%」
+				WSTR:(K++) = 「恥ずかしいけど……%CSTR:이인칭%なら見ててもいいわ%ハート()%」
 			ENDIF
 			CFLAG:248= 3
 		ENDIF
@@ -11747,10 +11943,10 @@ IF TFLAG:11 > 0
 	;그 이외
 	ELSEIF (CFLAG:248 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)
 		IF RAND:2 == 0
-			PRINTFORMW 「こんな身体、もう嫌だわ……」
+			WSTR:(K++) = 「こんな身体、もう嫌だわ……」
 		ELSE
-			PRINTFORMW 「子供だからオッパイ出ちゃいけないのに、%CSTR:이인칭%のせいで……」
-			PRINTFORMW 「許せないわ……」
+			WSTR:(K++) = 「子供だからオッパイ出ちゃいけないのに、%CSTR:이인칭%のせいで……」
+			WSTR:(K++) = 「許せないわ……」
 		ENDIF
 		CFLAG:248= 1
 	ENDIF
@@ -11769,28 +11965,28 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			IF RAND:2 == 0
-				PRINTFORMW 「恥ずかしいけど……気持ちよくって癖になっちゃうわ%ハート()%」
+				WSTR:(K++) = 「恥ずかしいけど……気持ちよくって癖になっちゃうわ%ハート()%」
 			ELSE
-				PRINTFORMW 「恥ずかしいけど……」
-				PRINTFORMW 「%CSTR:이인칭%なら……見ててもいいわ%ハート()%」
+				WSTR:(K++) = 「恥ずかしいけど……」
+				WSTR:(K++) = 「%CSTR:이인칭%なら……見ててもいいわ%ハート()%」
 			ENDIF
 			CFLAG:249= 4
 		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			IF RAND:2 == 0
-				PRINTFORMW 「こんな姿を見てニヤニヤするなんて」
-				PRINTFORMW 「%CSTR:이인칭%もとんだ変態だわ%ハート()%」
+				WSTR:(K++) = 「こんな姿を見てニヤニヤするなんて」
+				WSTR:(K++) = 「%CSTR:이인칭%もとんだ変態だわ%ハート()%」
 			ELSE
-				PRINTFORMW 「見られながらのおしっこ、気持ちいいわ%ハート()%」
+				WSTR:(K++) = 「見られながらのおしっこ、気持ちいいわ%ハート()%」
 			ENDIF
 			CFLAG:249= 3
 		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			IF RAND:2 == 0
-				PRINTFORML 「ごめんなさい、%CSTR:이인칭%」
-				PRINTFORMW 「けど、我慢できなかったの」
+				KSTR:(K++) = 「ごめんなさい、%CSTR:이인칭%」
+				WSTR:(K++) = 「けど、我慢できなかったの」
 			ELSE
-				PRINTFORMW 「後で掃除するから許してください……」
+				WSTR:(K++) = 「後で掃除するから許してください……」
 			ENDIF
 			CFLAG:249= 3
 		ENDIF	
@@ -11801,15 +11997,15 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 		ENDIF	
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:249 < 2 || FLAG:7 == 2) && !구상유무확인(LOCAL)
-		PRINTFORMW 「駄目、見ないで！」
-		PRINTFORML 
-		PRINTFORML 
-		PRINTFORMW 「恥ずかしいのに止まらない……」
+		WSTR:(K++) = 「駄目、見ないで！」
+		KSTR:(K++) = 
+		KSTR:(K++) = 
+		WSTR:(K++) = 「恥ずかしいのに止まらない……」
 		CFLAG:249= 2
 	;그 이외
 	ELSEIF (CFLAG:249 < 1 || FLAG:7 == 2) && !구상유무확인(LOCAL)
-		PRINTFORMW 「こんな姿を見てニヤニヤするなんて」
-		PRINTFORMW 「%CSTR:이인칭%もとんだ変態だわ」
+		WSTR:(K++) = 「こんな姿を見てニヤニヤするなんて」
+		WSTR:(K++) = 「%CSTR:이인칭%もとんだ変態だわ」
 		CFLAG:249= 1
 	ENDIF
 ENDIF
@@ -11863,99 +12059,100 @@ IF TFLAG:3 > 0
 	;연모나 친애이면서 주인의 섹스에 의한 처녀상실
 	IF TFLAG:20
 		IF RAND:4 == 0
-			PRINTFORML 「嬉しいわ……%CSTR:이인칭%が初めてもらってくれて……」
-			PRINTFORMW ベッドに残る処女の残滓を見つめ、%CALLNAME%は幸せそうな表情で%CALLNAME:MASTER%を見上げた。
+			KSTR:(K++) = 「嬉しいわ……%CSTR:이인칭%が初めてもらってくれて……」
+			WSTR:(K++) = ベッドに残る処女の残滓を見つめ、%CALLNAME%は幸せそうな表情で%CALLNAME:MASTER%を見上げた。
 			IF 체격차() > 1
-				PRINTFORMW 「すごく痛くて、身体が半分になるかと思ったけど……」
-				PRINTFORMW 「今はすごーく幸せだわ%ハート()%」
-				PRINTFORMW 「ねえ%CSTR:이인칭%、絶対離れないでね……」
+				WSTR:(K++) = 「すごく痛くて、身体が半分になるかと思ったけど……」
+				WSTR:(K++) = 「今はすごーく幸せだわ%ハート()%」
+				WSTR:(K++) = 「ねえ%CSTR:이인칭%、絶対離れないでね……」
 			ELSEIF ABL:종족 == 0
-				PRINTFORMW 「痛かったけど……」
-				PRINTFORMW 「%CSTR:일인칭%、すっご～く幸せ%ハート()%」
-				PRINTFORMW 「これでクラスの皆に自慢できるわ♪」
+				WSTR:(K++) = 「痛かったけど……」
+				WSTR:(K++) = 「%CSTR:일인칭%、すっご～く幸せ%ハート()%」
+				WSTR:(K++) = 「これでクラスの皆に自慢できるわ♪」
 			ELSE
-				PRINTFORMW 「%CSTR:일인칭%は悪魔で%CSTR:이인칭%は人間だから」
-				PRINTFORMW 「こんなコト、絶対ムリなんだって思ってたわ」
-				PRINTFORMW 「だから、絶対離さないでね……」
+				WSTR:(K++) = 「%CSTR:일인칭%は悪魔で%CSTR:이인칭%は人間だから」
+				WSTR:(K++) = 「こんなコト、絶対ムリなんだって思ってたわ」
+				WSTR:(K++) = 「だから、絶対離さないでね……」
 			ENDIF
 		ELSEIF RAND:3 == 0
-			PRINTFORMW 「%CSTR:이인칭%は%CSTR:일인칭%の初めてを持って行ったのだから」
-			PRINTFORMW 「責任を取って%CSTR:일인칭%を幸せにする義務があるわ%ハート()%」
+			WSTR:(K++) = 「%CSTR:이인칭%は%CSTR:일인칭%の初めてを持って行ったのだから」
+			WSTR:(K++) = 「責任を取って%CSTR:일인칭%を幸せにする義務があるわ%ハート()%」
 		ELSEIF RAND:2 == 0
-			PRINTFORML 「%CSTR:이인칭%に初めて奪われちゃったわ……%ハート()%」
-			PRINTFORMW 股から純潔の証を垂らしながら、%CALLNAME%は嬉しそうに微笑む。
-			PRINTFORMW 「もう完全に%CSTR:일인칭%は%CSTR:이인칭%のモノね」
-			PRINTFORMW 「なんだか嬉しいわ……%ハート()%」
+			KSTR:(K++) = 「%CSTR:이인칭%に初めて奪われちゃったわ……%ハート()%」
+			WSTR:(K++) = 股から純潔の証を垂らしながら、%CALLNAME%は嬉しそうに微笑む。
+			WSTR:(K++) = 「もう完全に%CSTR:일인칭%は%CSTR:이인칭%のモノね」
+			WSTR:(K++) = 「なんだか嬉しいわ……%ハート()%」
 		ELSE
 			IF ABL:종족 == 0
-				PRINTFORMW 「未成年だから結婚できないけど」
-				PRINTFORMW 「大きくなったら結婚だわ%ハート()%」
+				WSTR:(K++) = 「未成年だから結婚できないけど」
+				WSTR:(K++) = 「大きくなったら結婚だわ%ハート()%」
 			ELSE
-				PRINTFORMW 「知ってるー？」
-				PRINTFORMW 「悪魔の間では、初めてを奪った相手に一生奉仕しないといけない決まりなの」
-				PRINTFORML 
-				PRINTFORMW 「冗談よ♪」
-				PRINTFORMW 「でも、%CSTR:이인칭%は%CSTR:일인칭%の初めてもらったんだから、責任取って貰うわ」
+				WSTR:(K++) = 「知ってるー？」
+				WSTR:(K++) = 「悪魔の間では、初めてを奪った相手に一生奉仕しないといけない決まりなの」
+				KSTR:(K++) = 
+				WSTR:(K++) = 「冗談よ♪」
+				WSTR:(K++) = 「でも、%CSTR:이인칭%は%CSTR:일인칭%の初めてもらったんだから、責任取って貰うわ」
 			ENDIF
-			PRINTFORMW 「絶対の、約束だわ%ハート()%」
+			WSTR:(K++) = 「絶対の、約束だわ%ハート()%」
 		ENDIF
 	;그 이외의 때에 처녀상실
 	ELSE			
 		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-			PRINTFORML 「初めての相手は%CSTR:이인칭%って決めてたのに……」
-			PRINTFORMW 股から純潔の証を垂らしながら、%CALLNAME%は悲しそうな表情を浮かべている。
-			PRINTFORML 「けど%CSTR:일인칭%、%CSTR:이인칭%のコト好きだわ」
-			PRINTFORMW 「だから捨てないで」
+			KSTR:(K++) = 「初めての相手は%CSTR:이인칭%って決めてたのに……」
+			WSTR:(K++) = 股から純潔の証を垂らしながら、%CALLNAME%は悲しそうな表情を浮かべている。
+			KSTR:(K++) = 「けど%CSTR:일인칭%、%CSTR:이인칭%のコト好きだわ」
+			WSTR:(K++) = 「だから捨てないで」
 		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
 			IF RAND:5 && TEQUIP:비디오카메라 == 1
-				PRINTFORML 「このビデオ、親が見たら卒倒モノね♪」
+				KSTR:(K++) = 「このビデオ、親が見たら卒倒モノね♪」
 			ELSEIF RAND:4 == 0 && ABL:종족 == 0
-				PRINTFORML 「これでクラスメイトに馬鹿にされなくなるわ♪」
+				KSTR:(K++) = 「これでクラスメイトに馬鹿にされなくなるわ♪」
 			ELSEIF RAND:3 == 0 && ABL:종족 != 0
-				PRINTFORML 「ニンゲン相手に初エッチなんて%CSTR:일인칭%くらいなものだわ」
+				KSTR:(K++) = 「ニンゲン相手に初エッチなんて%CSTR:일인칭%くらいなものだわ」
 			ELSEIF RAND:2 == 0
-				PRINTFORMW 「これで煩わしいモノもなくなって、ヤり放題だわ♪」
-				PRINTFORML 「まずは百人斬りから目指すわ」
+				WSTR:(K++) = 「これで煩わしいモノもなくなって、ヤり放題だわ♪」
+				KSTR:(K++) = 「まずは百人斬りから目指すわ」
 			ELSE
-				PRINTFORML 「ちょっと痛かったけど、キモチよかったわ♪」
+				KSTR:(K++) = 「ちょっと痛かったけど、キモチよかったわ♪」
 			ENDIF
-			PRINTFORMW 股から流れる純潔の証を眺めながら、%CALLNAME%は嬉しそうに微笑んだ。
+			WSTR:(K++) = 股から流れる純潔の証を眺めながら、%CALLNAME%は嬉しそうに微笑んだ。
 		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
 			IF RAND:2 == 0
-				PRINTFORMW 「ちょっと痛かったけど、%CSTR:이인칭%が喜んでくれるなら嬉しいわ」
-				PRINTFORMW 「どうだった、楽しめた？」
+				WSTR:(K++) = 「ちょっと痛かったけど、%CSTR:이인칭%が喜んでくれるなら嬉しいわ」
+				WSTR:(K++) = 「どうだった、楽しめた？」
 			ELSE
-				PRINTFORML 「%CSTR:일인칭%のハジメテ、もらってくれてありがとうございます」
-				PRINTFORMW 「オトナのオンナにしてもらって、%CSTR:일인칭%、シアワセだわ」
+				KSTR:(K++) = 「%CSTR:일인칭%のハジメテ、もらってくれてありがとうございます」
+				WSTR:(K++) = 「オトナのオンナにしてもらって、%CSTR:일인칭%、シアワセだわ」
 			ENDIF
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3
 			IF RAND:2 == 0
-				PRINTFORMW 「%CSTR:일인칭%のはじめて……」
+				WSTR:(K++) = 「%CSTR:일인칭%のはじめて……」
 			ELSE
-				PRINTFORMW 「初めても%CALLNAME:MASTER%にとられちゃった……」
+				WSTR:(K++) = 「初めても%CALLNAME:MASTER%にとられちゃった……」
 			ENDIF
-			PRINTFORMW （もう降参するしか道はないの？）
-			PRINTFORMW 股から純潔の証を垂らしながら、%CALLNAME%は呆然としている。
+			WSTR:(K++) = （もう降参するしか道はないの？）
+			WSTR:(K++) = 股から純潔の証を垂らしながら、%CALLNAME%は呆然としている。
 		;그 이외
 		ELSE
 			IF RAND:4 == 0
-				PRINTFORML 「絶対に許さないわ……」
-				PRINTFORM こちらを睨み
+				KSTR:(K++) = 「絶対に許さないわ……」
+				NSTR:(K++) = こちらを睨み
 			ELSEIF RAND:3 == 0
-				PRINTFORML 「こんなロストバージン、ありえないわ……」
+				KSTR:(K++) = 「こんなロストバージン、ありえないわ……」
 			ELSEIF RAND:2 == 0
-				PRINTFORML 「うそ……%CSTR:일인칭%のハジメテが……」
+				KSTR:(K++) = 「うそ……%CSTR:일인칭%のハジメテが……」
 			ELSE
-				PRINTFORML 「もう家に帰して……」
+				KSTR:(K++) = 「もう家に帰して……」
 			ENDIF
-			PRINTFORMW 股から純潔の証を垂らしながら、%CALLNAME%は涙を浮かべている。
+			WSTR:(K++) = 股から純潔の証を垂らしながら、%CALLNAME%は涙を浮かべている。
 		ENDIF
 	ENDIF
 ENDIF
+
 ;-------------------------------------------------
 ;아무것도안한다 후
 ;-------------------------------------------------
@@ -11972,7 +12169,7 @@ IF SELECTCOM == 21
 			WSTR:(K++) =
 		ENDIF
 	ENDIF	
-	;欲情LV3以上 + 미약
+	;欲情LV3以上 + 媚薬
 	IF !구상유무확인(0) && PALAM:5 >= PALAMLV:3 && TEQUIP:26
 		;함락완료
 		IF 함락()
@@ -12089,8 +12286,8 @@ IF RESULT == 0
 	CATCH
 		CALL PALAM_MESSAGE_C
 	ENDCATCH
-	
 ENDIF
+
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
@@ -12129,15 +12326,15 @@ IF P > PALAMLV:4 && CFLAG:250 == 0
 	K_CALL:K = PALAM_MESSAGE_D
 	;로션을 사용한 경우
 	IF SELECTCOM == 180
-		PRINTFORMW 「こんなヘンなの塗って……ヌルヌルだわ……」
+		WSTR:(K++) = 「こんなヘンなの塗って……ヌルヌルだわ……」
 	;그 이외
 	ELSE
 		IF RAND:2 == 0
-			PRINTFORMW 「ぬ、濡れてなんかなわ！」
-			PRINTFORMW 「これは汗……汗だわ！　触られるから汗かいたわ！」
+			WSTR:(K++) = 「ぬ、濡れてなんかなわ！」
+			WSTR:(K++) = 「これは汗……汗だわ！　触られるから汗かいたわ！」
 		ELSE
-			PRINTFORML （どうしよう……気持ちよくて濡れてきちゃってる……）
-			PRINTFORMW %CALLNAME%は顔を上気させながら自分の秘部を見つめている。
+			KSTR:(K++) = （どうしよう……気持ちよくて濡れてきちゃってる……）
+			WSTR:(K++) = %CALLNAME%は顔を上気させながら自分の秘部を見つめている。
 		ENDIF
 	ENDIF
 	CFLAG:250 = 1
@@ -12151,22 +12348,22 @@ IF P > PALAMLV:3 && CFLAG:251 == 0
 	K_CALL:K = PALAM_MESSAGE_D
 	;미약을 사용한 경우
 	IF SELECTCOM == 181
-		;굴복각인Lv3以下　か　반발각인Lv3　の場合
+		;굴복각인Lv3以下　か　反発刻印Lv3　の場合
 		IF MARK:2 < 3 || MARK:3 == 3
-			PRINTFORML 「さっきの薬のせいで身体が熱い……」
-			PRINTFORMW %CALLNAME%はこちらを睨んでいる
+			KSTR:(K++) = 「さっきの薬のせいで身体が熱い……」
+			WSTR:(K++) = %CALLNAME%はこちらを睨んでいる
 		ELSE
-			PRINTFORMW 「さっきの薬のせいで身体が熱い……」
+			WSTR:(K++) = 「さっきの薬のせいで身体が熱い……」
 		ENDIF
 	;그 이외
 	ELSE
-		PRINTFORMW  %CALLNAME%の顔はほんのり赤くなっている
+		WSTR:(K++) =  %CALLNAME%の顔はほんのり赤くなっている
 		IF RAND:2 == 0
-			PRINTFORML 「違うわ……」
-			PRINTFORMW 「これは暑くて赤くなってるだけだわ」
+			KSTR:(K++) = 「違うわ……」
+			WSTR:(K++) = 「これは暑くて赤くなってるだけだわ」
 		ELSE
-			PRINTFORMW （心臓がドキドキして、全身が熱くなってきて……）
-			PRINTFORMW （%CSTR:일인칭%の身体、どうなってるの？）
+			WSTR:(K++) = （心臓がドキドキして、全身が熱くなってきて……）
+			WSTR:(K++) = （%CSTR:일인칭%の身体、どうなってるの？）
 		ENDIF
 	ENDIF
 	CFLAG:251 = 1
@@ -12179,11 +12376,11 @@ P = PALAM:7 + CUP:7
 IF P > PALAMLV:3 && CFLAG:252 == 0
 	K_CALL:K = PALAM_MESSAGE_D
 	IF RAND:3 == 0
-		PRINTFORMW （%CSTR:일인칭%、%CSTR:이인칭%に負けちゃた……）
+		WSTR:(K++) = （%CSTR:일인칭%、%CSTR:이인칭%に負けちゃた……）
 	ELSEIF RAND:2 == 0
-		PRINTFORMW （このヒトには逆らえないわ……）
+		WSTR:(K++) = （このヒトには逆らえないわ……）
 	ELSE
-		PRINTFORMW 「%CSTR:일인칭%の負けだわ」
+		WSTR:(K++) = 「%CSTR:일인칭%の負けだわ」
 	ENDIF
 	CFLAG:252 = 1
 ENDIF
@@ -12196,12 +12393,12 @@ IF P > PALAMLV:3 && CFLAG:253 == 0
 	K_CALL:K = PALAM_MESSAGE_D
 	;함락완료
 	IF 함락( ) > 0
-		PRINTFORMW 「やっぱり%CSTR:이인칭%と一緒にいると落ち着くわ……」
+		WSTR:(K++) = 「やっぱり%CSTR:이인칭%と一緒にいると落ち着くわ……」
 	;그 이외
 	ELSE
-		PRINTFORML 「%CSTR:이인칭%となら一緒にいても……」
-		PRINTFORML 「！」
-		PRINTFORMW 「な、何でもないわ、独り言よ！」
+		KSTR:(K++) = 「%CSTR:이인칭%となら一緒にいても……」
+		KSTR:(K++) = 「！」
+		WSTR:(K++) = 「な、何でもないわ、独り言よ！」
 	ENDIF
 	CFLAG:253 = 1
 ENDIF
@@ -12214,10 +12411,10 @@ IF P > PALAMLV:3 && CFLAG:254 == 0
 	K_CALL:K = PALAM_MESSAGE_D
 	;함락완료
 	IF 함락( ) > 0
-		PRINTFORMW 「何でそんな事するの？　可笑しいわ！」
+		WSTR:(K++) = 「何でそんな事するの？　可笑しいわ！」
 	;그 이외
 	ELSE
-		PRINTFORMW 「許して！　%CSTR:일인칭%が悪かったわ！」
+		WSTR:(K++) = 「許して！　%CSTR:일인칭%が悪かったわ！」
 	ENDIF
 	CFLAG:254 = 1
 ENDIF
@@ -12267,16 +12464,16 @@ IF TFLAG:22 == 3
 	K_CALL:K = MARK_MESSAGE_A	
 	;연모, 친애	
 	IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-		PRINTFORMW 「イタい、痛いわ！」
-		PRINTFORMW （あれ？　なんかちょっとイイかも♪）
+		WSTR:(K++) = 「イタい、痛いわ！」
+		WSTR:(K++) = （あれ？　なんかちょっとイイかも♪）
 	;음란, 창부	
 	ELSEIF 함락( ) > 0 && RESULTS == "음란"	
-		PRINTFORML （あっ…）
-		PRINTFORMW （痛いのも気持ちいいかも♪）
+		KSTR:(K++) = （あっ…）
+		WSTR:(K++) = （痛いのも気持ちいいかも♪）
 	;복종, 예속	
 	ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
-		PRINTFORMW 「痛いけど……」
-		PRINTFORMW 「嬉しいわ、%CSTR:이인칭%♪」
+		WSTR:(K++) = 「痛いけど……」
+		WSTR:(K++) = 「嬉しいわ、%CSTR:이인칭%♪」
 	ENDIF
 	;공통
 	IF !구상유무확인(LOCAL)
@@ -12294,25 +12491,25 @@ IF TFLAG:23 == 3
 	K_CALL:K = MARK_MESSAGE_P
 	;연모, 친애	
 	IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-		PRINTFORMW （%CSTR:이인칭%、好き、大好き……）
-		PRINTFORML （もっとずっと抱いて欲しい……%CSTR:이인칭%と一杯エッチな事したい%ハート()%）
-		PRINTFORMW %CALLNAME%は頬を紅潮させ、潤みきった瞳を%CALLNAME:MASTER%に向けていた。
+		WSTR:(K++) = （%CSTR:이인칭%、好き、大好き……）
+		KSTR:(K++) = （もっとずっと抱いて欲しい……%CSTR:이인칭%と一杯エッチな事したい%ハート()%）
+		WSTR:(K++) = %CALLNAME%は頬を紅潮させ、潤みきった瞳を%CALLNAME:MASTER%に向けていた。
 	;복종, 예속	
 	ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
-		PRINTFORML （%CSTR:일인칭%を虐めるだけじゃなくて、こんなに気持ちよくしてくれるなんて、%CSTR:이인칭%の事もっと好きになっちゃうよ）
-		PRINTFORMW %CALLNAME%は陶酔した表情で、幸せそうな瞳を%CALLNAME:MASTER%に向けていた。
+		KSTR:(K++) = （%CSTR:일인칭%を虐めるだけじゃなくて、こんなに気持ちよくしてくれるなんて、%CSTR:이인칭%の事もっと好きになっちゃうよ）
+		WSTR:(K++) = %CALLNAME%は陶酔した表情で、幸せそうな瞳を%CALLNAME:MASTER%に向けていた。
 	ELSE
 		IF RAND:3 == 0
-			PRINTFORMW 「あはぁ……好き、気持ちいいの大好き%ハート()%」
-			PRINTFORML 「%CSTR:일인칭%、もうえっちなことしか考えられないわ……%ハート()%」
+			WSTR:(K++) = 「あはぁ……好き、気持ちいいの大好き%ハート()%」
+			KSTR:(K++) = 「%CSTR:일인칭%、もうえっちなことしか考えられないわ……%ハート()%」
 		ELSEIF RAND:2 == 0
-			PRINTFORMW （気持ちいい……）
-			PRINTFORML （もう%CSTR:일인칭%、この気持ちよさ忘れられない……）
+			WSTR:(K++) = （気持ちいい……）
+			KSTR:(K++) = （もう%CSTR:일인칭%、この気持ちよさ忘れられない……）
 		ELSE
-			PRINTFORMW 「こんな気持ちいいの初めてだわ」
-			PRINTFORML 「もっとシてくれたら、%CSTR:일인칭%……」
+			WSTR:(K++) = 「こんな気持ちいいの初めてだわ」
+			KSTR:(K++) = 「もっとシてくれたら、%CSTR:일인칭%……」
 		ENDIF
-		PRINTFORMW %CALLNAME%はぼんやりと上気した顔で%CALLNAME:MASTER%を見つめていた。
+		WSTR:(K++) = %CALLNAME%はぼんやりと上気した顔で%CALLNAME:MASTER%を見つめていた。
 	ENDIF
 	;공통
 	IF !구상유무확인(LOCAL)
@@ -12332,34 +12529,34 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 	IF TFLAG:24 == 13
 		IF RAND:2 == 0 && ABL:종족 == 0
 			;人間の場合
-			PRINTFORML 「こんな気持ちいい事、学校じゃ教えてくれなかったわ♪」
-			PRINTFORML 「その……もっともっと教えて欲しいわ？」
-			PRINTFORMW %CALLNAME%は欲情の残る眼差しでさらなる調教を求めている。
+			KSTR:(K++) = 「こんな気持ちいい事、学校じゃ教えてくれなかったわ♪」
+			KSTR:(K++) = 「その……もっともっと教えて欲しいわ？」
+			WSTR:(K++) = %CALLNAME%は欲情の残る眼差しでさらなる調教を求めている。
 		ELSE
-			PRINTFORML （気持ちいいの好き……もっとメチャクチャにして欲しい）
-			PRINTFORML （何でも言うこと聞くから気持ちよくして欲しい）
-			PRINTFORMW %CALLNAME%は力無く横たわったまま、欲情の残る眼差しで%CALLNAME:MASTER%を見上げた。
+			KSTR:(K++) = （気持ちいいの好き……もっとメチャクチャにして欲しい）
+			KSTR:(K++) = （何でも言うこと聞くから気持ちよくして欲しい）
+			WSTR:(K++) = %CALLNAME%は力無く横たわったまま、欲情の残る眼差しで%CALLNAME:MASTER%を見上げた。
 		ENDIF
 	;공포와 고통에 의한 굴복
 	ELSEIF TFLAG:24 == 23
 		IF RAND:2 == 0
-			PRINTFORML （%CSTR:이인칭%に逆らっちゃダメなんだ…）
-			PRINTFORMW %CALLNAME%は力無く横たわったまま、虚ろな眼差しを天井に向けている……
+			KSTR:(K++) = （%CSTR:이인칭%に逆らっちゃダメなんだ…）
+			WSTR:(K++) = %CALLNAME%は力無く横たわったまま、虚ろな眼差しを天井に向けている……
 		ELSE
-			PRINTFORMW 「ごめんなさい、ごめんなさい！」
-			PRINTFORML 「イタイの、もうイヤ」
-			PRINTFORML 「%CSTR:일인칭%、言われた通りにするわ！」
-			;PRINTFORMW %CALLNAME%は床に頭を擦りつけて屈服の姿勢を示した……
+			WSTR:(K++) = 「ごめんなさい、ごめんなさい！」
+			KSTR:(K++) = 「イタイの、もうイヤ」
+			KSTR:(K++) = 「%CSTR:일인칭%、言われた通りにするわ！」
+			;WSTR:(K++) = %CALLNAME%は床に頭を擦りつけて屈服の姿勢を示した……
 		ENDIF
 	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
 		IF RAND:2 == 0 && ABL:종족 != 0
 			;悪魔の場合
-			PRINTFORML （悪魔なのに人間なんかに負けちゃった……）
+			KSTR:(K++) = （悪魔なのに人間なんかに負けちゃった……）
 		ELSE
-			PRINTFORML （もう%CSTR:일인칭%駄目……%CSTR:이인칭%から離れられないわ……）
+			KSTR:(K++) = （もう%CSTR:일인칭%駄目……%CSTR:이인칭%から離れられないわ……）
 		ENDIF
-		PRINTFORMW %CALLNAME%は力無く横たわったまま、虚ろな眼差しを天井に向けている……
+		WSTR:(K++) = %CALLNAME%は力無く横たわったまま、虚ろな眼差しを天井に向けている……
 	ENDIF
 	SIF !구상유무확인(LOCAL)
 		CALL MARK_MESSAGE_S
@@ -12376,16 +12573,16 @@ IF TFLAG:21 == 3
 		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
 			IF RAND:2 == 0
-				PRINTFORMW 「こんなの……信じられないわ！」
+				WSTR:(K++) = 「こんなの……信じられないわ！」
 			ELSE
-				PRINTFORMW 「いくら%CSTR:이인칭%でも、それ駄目だわ！」
+				WSTR:(K++) = 「いくら%CSTR:이인칭%でも、それ駄目だわ！」
 			ENDIF
 		;음란, 창부	
 		ELSEIF 함락( ) > 0 && RESULTS == "음란"	
-			PRINTFORMW 「それは気持ちよくないから嫌いだわ」
+			WSTR:(K++) = 「それは気持ちよくないから嫌いだわ」
 		;복종, 예속	
 		ELSEIF 함락(TARGET,PLAYER) > 0 && RESULTS == "복종"	
-			PRINTFORMW 「いくら%CSTR:이인칭%でも、これは酷いわ！」
+			WSTR:(K++) = 「いくら%CSTR:이인칭%でも、これは酷いわ！」
 		ENDIF	
 		;함락완료 공통	
 		IF !구상유무확인(LOCAL)
@@ -12458,7 +12655,7 @@ SELECTCASE TFLAG:13
 ;　　32:요바이 V/C
 ;　　33:요바이 A/C
 ;　　34:요바이 C/C
-;　　35:밤자위
+;　　35:밤 자위
 ;　　36:같이잔다
 ;　　37:起きたら隣で寝てる
 ;　　38:朝の足コキ
@@ -12496,9 +12693,9 @@ SELECTCASE TFLAG:13
 ;　　73:陰唇出(調教対象)
 ;　　74:음순노출(主人)
 ;　　75:음순노출(助手)
-;　　76:胸露出(調教対象)
-;　　77:胸露出(主人)
-;　　78:胸露出(助手)
+;　　76:가슴露出(調教対象)
+;　　77:가슴露出(主人)
+;　　78:가슴露出(助手)
 ;　　79:던전내 성욕처리：동료마와 섹스(당하는 측)
 ;　　80:던전내 성욕처리：동료마에게 봉사시킨다(봉사측)
 ;　　81:던전내 성욕처리：그 장소에서 자위
@@ -12541,7 +12738,7 @@ SELECTCASE TFLAG:13
 			K_CALL:K = EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;모유체질
+				;母乳体質
 				IF TALENT:149						
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)
@@ -12644,7 +12841,7 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;노래 부르면서
-				IF (TALENT:25 || TALENT:28) && ABL:14 >= 2						
+				IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)
 						WSTR:(K++) = 
@@ -12664,13 +12861,29 @@ SELECTCASE TFLAG:13
 				IF !구상유무확인(0)
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)
-						WSTR:(K++) = 
+						IF RAND:2 == 0
+							WSTR:(K++) = 「……いつまで寝ているつもり？」
+							WSTR:(K++) = 「もうすぐ朝食が出来るから、食器くらい並べて欲しいわ」
+						ELSE
+							WSTR:(K++) = 「ほら、朝食が飯が冷めちゃうわ」
+						ENDIF
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
-						WSTR:(K++) = 
+						IF RAND:2 == 0
+							KSTR:(K++) = 「……ほら、もうすぐ朝食が出来るから」
+							WSTR:(K++) = 「食べたら…エッチするわよ♪」
+						ELSE
+							KSTR:(K++) = 「どう？　裸エプロン♪」
+							WSTR:(K++) = %CALLNAME%はエプロンの裾をチラチラと捲って挑発しながら料理をしている
+						ENDIF
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
-						WSTR:(K++) = 
+						IF RAND:2 == 0
+							KSTR:(K++) = 「もうすぐご飯が出来るわ」
+							WSTR:(K++) = 「ちゃんと食べて力付けないと、%CSTR:이인칭%が悪魔のゴハンになっちゃうわ」
+						ELSE
+							WSTR:(K++) = 「%CSTR:이인칭%、ご飯が出来たわ」
+						ENDIF
 					ENDIF	
 					;함락완료 공통	
 					IF !구상유무확인(0)
@@ -13035,34 +13248,34 @@ SELECTCASE TFLAG:13
 	CASE 36
 			K_CALL:K = EVENT_MESSAGE
 			IF CFLAG:269 < 1 || FLAG:7 == 2
-				;ＮＴＲの場合
+				;ＮＴＲ의 경우
 				IF TALENT:ＮＴＲ >= 1
 					CALL EVENT_MESSAGE
-					PRINTFORML 「%NTRNAME(CFLAG:함락캐릭터)%、いっしょに寝るわ♪」
+					KSTR:(K++) = 「%NTRNAME(CFLAG:함락캐릭터)%、いっしょに寝るわ♪」
 				ELSE
 					IF TALENT:츤데레 && RAND:3 == 0
-						PRINTFORMW 夜、床に就こうとした%CALLNAME:E%の部屋に、枕を抱えた%CALLNAME:B%が訪ねてきた
-						PRINTFORML  
-						PRINTFORML 「%CSTR:이인칭%が寂しいと思ったら来てあげたわ」
-						PRINTFORMW 「ほら、%CSTR:일인칭%の寝るスペース作りなさいよ」
-						PRINTFORMW %CALLNAME:MASTER%が身体を動かすと%CALLNAME%は空いたスペースに入り込んだ
-						PRINTFORML 「早く電気を消しなさいよ、明日も早いんでしょ？」
-						PRINTFORMW やる事はまだあったが、%CALLNAME%に急かされたので寝る事にした…
-						PRINTFORML …………
-						PRINTFORML ………
-						PRINTFORML ……
-						PRINTFORMW …
-						PRINTFORMW （おやすみ…%ハート()%）
+						WSTR:(K++) = 夜、床に就こうとした%CALLNAME:E%の部屋に、枕を抱えた%CALLNAME:B%が訪ねてきた
+						KSTR:(K++) =  
+						KSTR:(K++) = 「%CSTR:이인칭%が寂しいと思ったら来てあげたわ」
+						WSTR:(K++) = 「ほら、%CSTR:일인칭%の寝るスペース作りなさいよ」
+						WSTR:(K++) = %CALLNAME:MASTER%が身体を動かすと%CALLNAME%は空いたスペースに入り込んだ
+						KSTR:(K++) = 「早く電気を消しなさいよ、明日も早いんでしょ？」
+						WSTR:(K++) = やる事はまだあったが、%CALLNAME%に急かされたので寝る事にした…
+						KSTR:(K++) = …………
+						KSTR:(K++) = ………
+						KSTR:(K++) = ……
+						WSTR:(K++) = …
+						WSTR:(K++) = （おやすみ…%ハート()%）
 					ELSEIF RAND:2 == 0
 						CALL EVENT_MESSAGE
-						PRINTFORMW 「%CSTR:이인칭%の傍だと安心するわ」
-						PRINTFORMW 「%CSTR:이인칭%の身体、あったかいし……大好き%ハート()%」
-						PRINTFORMW 「……すぅ」
+						WSTR:(K++) = 「%CSTR:이인칭%の傍だと安心するわ」
+						WSTR:(K++) = 「%CSTR:이인칭%の身体、あったかいし……大好き%ハート()%」
+						WSTR:(K++) = 「……すぅ」
 					ELSE
 						CALL EVENT_MESSAGE
-						PRINTFORML 「今夜はコレで遊ぶわ♪」
-						PRINTFORMW %CALLNAME%はお茶にトランプ、ゲーム機と色々なものをベッドに広げた
-						PRINTFORMW 「別のお遊びは明日になってから、ね%ハート()%」
+						KSTR:(K++) = 「今夜はコレで遊ぶわ♪」
+						WSTR:(K++) = %CALLNAME%はお茶にトランプ、ゲーム機と色々なものをベッドに広げた
+						WSTR:(K++) = 「別のお遊びは明日になってから、ね%ハート()%」
 					ENDIF
 					CFLAG:269 = 1
 				ENDIF
@@ -13107,46 +13320,46 @@ SELECTCASE TFLAG:13
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				IF RAND:3 == 0
-					PRINTFORMW 「え」
-					PRINTFORMW 「赤ちゃん？」
-					PRINTFORML 「…………」
-					PRINTFORMW 「%CSTR:이인칭%」
-					PRINTFORMW 「おもちゃ屋に行くわ」
-					PRINTFORML 「新しいお人形さんに服とお家を買いに行かないと」
-					PRINTFORML 「あとお友達も買いに行かないといけないわ」
-					PRINTFORMW 「お年玉が残ってるから早くいきましょ？」
+					WSTR:(K++) = 「え」
+					WSTR:(K++) = 「赤ちゃん？」
+					KSTR:(K++) = 「…………」
+					WSTR:(K++) = 「%CSTR:이인칭%」
+					WSTR:(K++) = 「おもちゃ屋に行くわ」
+					KSTR:(K++) = 「新しいお人形さんに服とお家を買いに行かないと」
+					KSTR:(K++) = 「あとお友達も買いに行かないといけないわ」
+					WSTR:(K++) = 「お年玉が残ってるから早くいきましょ？」
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「セーブしたところからやり直すわ」
-					PRINTFORML 「………」
-					PRINTFORML 「……」
-					PRINTFORMW 「ロードできないからリセットね」
-					PRINTFORMW 「リセットボタンはどこ？」
-					PRINTFORML 「………」
-					PRINTFORML 「……」
-					PRINTFORML 「これね」
-					PRINTFORMW %CALLNAME%は自分の腹を思い切り殴っている……
+					WSTR:(K++) = 「セーブしたところからやり直すわ」
+					KSTR:(K++) = 「………」
+					KSTR:(K++) = 「……」
+					WSTR:(K++) = 「ロードできないからリセットね」
+					WSTR:(K++) = 「リセットボタンはどこ？」
+					KSTR:(K++) = 「………」
+					KSTR:(K++) = 「……」
+					KSTR:(K++) = 「これね」
+					WSTR:(K++) = %CALLNAME%は自分の腹を思い切り殴っている……
 				ELSE
-					PRINTFORMW 「許さないわ」
-					PRINTFORML 
-					PRINTFORMW 「許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ　許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORMW 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
-					PRINTFORML 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
-					PRINTFORML 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
-					PRINTFORML 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
-					PRINTFORMW 壊れたスピーカーの様に同じ事を繰り返す%CALLNAME%を無視して、%CALLNAME:MASTER%は今日のスケジュールの確認を始めた……
+					WSTR:(K++) = 「許さないわ」
+					KSTR:(K++) = 
+					WSTR:(K++) = 「許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ　許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					WSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ　許さないわ」
+					KSTR:(K++) = 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
+					KSTR:(K++) = 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
+					KSTR:(K++) = 「だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ　だわ」
+					WSTR:(K++) = 壊れたスピーカーの様に同じ事を繰り返す%CALLNAME%を無視して、%CALLNAME:MASTER%は今日のスケジュールの確認を始めた……
 				ENDIF
 			;母親が恋慕か親愛持ち
 			ELSEIF (TALENT:3 || TALENT:6)
@@ -13154,111 +13367,111 @@ SELECTCASE TFLAG:13
 				IF CFLAG:102 == 1
 					IF ABL:종족 == 0
 						IF RAND:2 == 0
-							PRINTFORML 「%CSTR:일인칭%、大好きな%CSTR:이인칭%との子供が出来て、すっごく幸せだわ」
+							KSTR:(K++) = 「%CSTR:일인칭%、大好きな%CSTR:이인칭%との子供が出来て、すっごく幸せだわ」
 						ELSE
-							PRINTFORMW 「この年で母親なんて驚きだわ」
-							PRINTFORML 「けど、後悔なんてしてないわ」
+							WSTR:(K++) = 「この年で母親なんて驚きだわ」
+							KSTR:(K++) = 「けど、後悔なんてしてないわ」
 						ENDIF
 					ELSE
 						IF RAND:2 == 0
-							PRINTFORML 「悪魔でも、人間の子が産めるのね」
+							KSTR:(K++) = 「悪魔でも、人間の子が産めるのね」
 						ELSE
-							PRINTFORML 「この子は%CSTR:일인칭%と%CSTR:이인칭%、どちらにに似るのかしら」
+							KSTR:(K++) = 「この子は%CSTR:일인칭%と%CSTR:이인칭%、どちらにに似るのかしら」
 						ENDIF
 					ENDIF
-					PRINTFORMW 妊娠した事を知った%CALLNAME%はとても嬉しそうだ
+					WSTR:(K++) = 妊娠した事を知った%CALLNAME%はとても嬉しそうだ
 				;ＮＴＲ相手の子を妊娠
 				ELSEIF CFLAG:102 == CFLAG:함락캐릭터
 					IF RAND:2 == 0
-						PRINTFORMW 「赤ちゃんができたわ」
-						PRINTFORMW 「二人の愛の結晶だから無事に生まれて欲しいわ」
-						PRINTFORMW （%CSTR:일인칭%とあの人の赤ちゃんだけど♪）
+						WSTR:(K++) = 「赤ちゃんができたわ」
+						WSTR:(K++) = 「二人の愛の結晶だから無事に生まれて欲しいわ」
+						WSTR:(K++) = （%CSTR:일인칭%とあの人の赤ちゃんだけど♪）
 					ELSE
-						PRINTFORML 「せっかく授かった子供だもの」
-						PRINTFORMW 「%CSTR:일인칭%、この子を絶対に産むわ」
-						PRINTFORMW （あの人、喜んでくれるかな？）
+						KSTR:(K++) = 「せっかく授かった子供だもの」
+						WSTR:(K++) = 「%CSTR:일인칭%、この子を絶対に産むわ」
+						WSTR:(K++) = （あの人、喜んでくれるかな？）
 					ENDIF
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「赤ちゃんができたみたいだけど…」
-					PRINTFORML 
-					PRINTFORMW 「%CSTR:일인칭%が好きなのは%CSTR:이인칭%だけ！」
-					PRINTFORMW 「だからこれは間違いなの……」
-					PRINTFORML 
-					PRINTFORMW 「ごめんなさい」
-					PRINTFORMW 「次はちゃんと%CSTR:이인칭%の赤ちゃんつくるわ……」
+					WSTR:(K++) = 「赤ちゃんができたみたいだけど…」
+					KSTR:(K++) = 
+					WSTR:(K++) = 「%CSTR:일인칭%が好きなのは%CSTR:이인칭%だけ！」
+					WSTR:(K++) = 「だからこれは間違いなの……」
+					KSTR:(K++) = 
+					WSTR:(K++) = 「ごめんなさい」
+					WSTR:(K++) = 「次はちゃんと%CSTR:이인칭%の赤ちゃんつくるわ……」
 				ELSE
-					PRINTFORML 「%CSTR:이인칭%」
-					PRINTFORMW 「妊娠したわ」
-					PRINTFORMW 「けど、%CSTR:이인칭%との間に、じゃないの……」
+					KSTR:(K++) = 「%CSTR:이인칭%」
+					WSTR:(K++) = 「妊娠したわ」
+					WSTR:(K++) = 「けど、%CSTR:이인칭%との間に、じゃないの……」
 				ENDIF
 			;母親が淫乱か娼婦持ち
 			ELSEIF (TALENT:4 || TALENT:7)
-				PRINTFORMW 「%CSTR:일인칭%ね、赤ちゃんできたわ」
+				WSTR:(K++) = 「%CSTR:일인칭%ね、赤ちゃんできたわ」
 				;父親が主人公の場合
 				IF RAND:5 == 0 && CFLAG:102 == 1
-					PRINTFORMW 「子供を妊娠させるなんて、とんだヘンタイだわ%ハート()%」
+					WSTR:(K++) = 「子供を妊娠させるなんて、とんだヘンタイだわ%ハート()%」
 				ELSEIF RAND:4 == 0
-					PRINTFORMW 「あのときの%CSTR:이인칭%とのエッチで……だと思うわ」
+					WSTR:(K++) = 「あのときの%CSTR:이인칭%とのエッチで……だと思うわ」
 				ELSEIF RAND:3 == 0
-					PRINTFORMW 「大丈夫、妊娠中でもエッチは出来るから問題ないわ%ハート()%」
+					WSTR:(K++) = 「大丈夫、妊娠中でもエッチは出来るから問題ないわ%ハート()%」
 				ELSEIF RAND:3 == 0
-					PRINTFORML 「もう少ししたらお腹も大きくなるから」
-					PRINTFORMW 「そうしたらボテ腹プレイね♪」
+					KSTR:(K++) = 「もう少ししたらお腹も大きくなるから」
+					WSTR:(K++) = 「そうしたらボテ腹プレイね♪」
 				ELSE
-					PRINTFORMW 「女の子が生まれたら『親子丼』に挑戦だわ%ハート()%」
+					WSTR:(K++) = 「女の子が生まれたら『親子丼』に挑戦だわ%ハート()%」
 				ENDIF
 			;복종이나 예속 보유
 			ELSEIF (TALENT:5 || TALENT:8)
 				;父親が主人公の場合
 				IF RAND:3 == 0 && CFLAG:102 == 1
-					PRINTFORML 「この子が羨ましいわ」
-					PRINTFORMW 「生まれる前から%CSTR:이인칭%のモノなのだから」
+					KSTR:(K++) = 「この子が羨ましいわ」
+					WSTR:(K++) = 「生まれる前から%CSTR:이인칭%のモノなのだから」
 				ELSEIF RAND:2 == 0
-					PRINTFORML 「この子が生まれたら、%CSTR:이인칭%のエッチな奴隷にしてあげるの」
-					PRINTFORMW 「すっごく楽しみだわ%ハート()%」
+					KSTR:(K++) = 「この子が生まれたら、%CSTR:이인칭%のエッチな奴隷にしてあげるの」
+					WSTR:(K++) = 「すっごく楽しみだわ%ハート()%」
 				ELSE
-					PRINTFORML 「ちゃんと言われた様に妊娠したわ」
-					PRINTFORMW 「早く……ご褒美を頂戴♪」
+					KSTR:(K++) = 「ちゃんと言われた様に妊娠したわ」
+					WSTR:(K++) = 「早く……ご褒美を頂戴♪」
 				ENDIF
-			;陥落していない
+			;함락していない
 			ELSE
 				;父親が主人公の場合
 				IF CFLAG:102 == 1
 					IF RAND:3 == 0
-						PRINTFORMW （%CSTR:이인칭%の赤ちゃんなんて……）
-						PRINTFORMW （嘘よ、嘘だわ！）
-						PRINTFORMW だが、再検査の結果は変わらず『임신』だった……
+						WSTR:(K++) = （%CSTR:이인칭%の赤ちゃんなんて……）
+						WSTR:(K++) = （嘘よ、嘘だわ！）
+						WSTR:(K++) = だが、再検査の結果は変わらず『妊娠』だった……
 					ELSEIF RAND:2 == 0
-						PRINTFORMW 「%CSTR:이인칭%の子供が出来たわ……」
-						PRINTFORML 
-						PRINTFORMW 「このヒトデナシ！」
+						WSTR:(K++) = 「%CSTR:이인칭%の子供が出来たわ……」
+						KSTR:(K++) = 
+						WSTR:(K++) = 「このヒトデナシ！」
 					ELSE
 						IF ABL:종족 == 0
-							PRINTFORML 「年端もいかない子供を犯して」
+							KSTR:(K++) = 「年端もいかない子供を犯して」
 						ELSE
-							PRINTFORML 「自分より非力な小さな悪魔を犯して」
+							KSTR:(K++) = 「自分より非力な小さな悪魔を犯して」
 						ENDIF
-						PRINTFORMW 「妊娠させて気が済んだ？」
-						PRINTFORML 
-						PRINTFORMW 「この子に罪は無いから許してあげるけど、%CSTR:일인칭%はいつか殺すわ」
+						WSTR:(K++) = 「妊娠させて気が済んだ？」
+						KSTR:(K++) = 
+						WSTR:(K++) = 「この子に罪は無いから許してあげるけど、%CSTR:일인칭%はいつか殺すわ」
 					ENDIF
 				;ＮＴＲ相手の子を妊娠
 				ELSEIF CFLAG:102 == CFLAG:함락캐릭터
-					PRINTFORMW （あの人の赤ちゃんできちゃった）
+					WSTR:(K++) = （あの人の赤ちゃんできちゃった）
 					IF RAND:3 == 0
-						PRINTFORMW （%CSTR:이인칭%にバレないようにしないといけないわ……）
+						WSTR:(K++) = （%CSTR:이인칭%にバレないようにしないといけないわ……）
 					ELSEIF RAND:2 == 0
-						PRINTFORMW （この子は%CSTR:일인칭%が守らないと……）
+						WSTR:(K++) = （この子は%CSTR:일인칭%が守らないと……）
 					ELSE
-						PRINTFORMW 「%CSTR:일인칭%、絶対に産むわ……」
+						WSTR:(K++) = 「%CSTR:일인칭%、絶対に産むわ……」
 					ENDIF
 				;그 이외
 				ELSE
 					IF RAND:2 == 0
-						PRINTFORMW 「うそ……赤ちゃんできちゃったわ……」
+						WSTR:(K++) = 「うそ……赤ちゃんできちゃったわ……」
 					ELSE
-						PRINTFORMW 「どうしよう」
-						PRINTFORMW 「もう帰りたい……」
+						WSTR:(K++) = 「どうしよう」
+						WSTR:(K++) = 「もう帰りたい……」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -13269,13 +13482,13 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 12
 			K_CALL:K = EVENT_MESSAGE
-			;陥落している相手の子供を出産
+			;함락している相手の子供を出産
 			IF TALENT:ＮＴＲ > 0 && CFLAG:102 == CFLAG:함락캐릭터
-				PRINTFORML （あの人にちょっと似てるかも）
+				KSTR:(K++) = （あの人にちょっと似てるかも）
 				IF RAND:2 == 0
-					PRINTFORMW （今度あわせてあげよっと♪）
+					WSTR:(K++) = （今度あわせてあげよっと♪）
 				ELSE
-					PRINTFORMW （%CSTR:이인칭%、気づかないといいけど……）
+					WSTR:(K++) = （%CSTR:이인칭%、気づかないといいけど……）
 				ENDIF
 			;함락완료
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
@@ -13284,54 +13497,54 @@ SELECTCASE TFLAG:13
 					;父親が主人公の場合
 					IF CFLAG:102 == 1
 						IF RAND:3 == 0
-							PRINTFORMW 「見て……この辺が%CSTR:일인칭%にちょっと似ているわ」
+							WSTR:(K++) = 「見て……この辺が%CSTR:일인칭%にちょっと似ているわ」
 						ELSEIF RAND:2 == 0
-							PRINTFORMW 「ねぇ、この子の名前どうする？」
+							WSTR:(K++) = 「ねぇ、この子の名前どうする？」
 						ELSE
-							PRINTFORMW 「苦しかったけど……」
-							PRINTFORMW 「この子を見たら、そんな事どっかへ飛んで行ったわ%ハート()%」
+							WSTR:(K++) = 「苦しかったけど……」
+							WSTR:(K++) = 「この子を見たら、そんな事どっかへ飛んで行ったわ%ハート()%」
 						ENDIF
 					ELSE
 						IF RAND:3 == 0
-							PRINTFORMW 「ホントに産まれちゃった……」
+							WSTR:(K++) = 「ホントに産まれちゃった……」
 						ELSEIF RAND:2 == 0
-							PRINTFORMW 「%CSTR:이인칭%、この子どうしよう……」
+							WSTR:(K++) = 「%CSTR:이인칭%、この子どうしよう……」
 						ELSE
-							PRINTFORML 「ごめんなさい%CSTR:이인칭%」
-							PRINTFORMW 「本当は%CSTR:이인칭%との子供を産みたかったわ」
+							KSTR:(K++) = 「ごめんなさい%CSTR:이인칭%」
+							WSTR:(K++) = 「本当は%CSTR:이인칭%との子供を産みたかったわ」
 						ENDIF
 					ENDIF
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					IF RAND:3 == 0
-						PRINTFORMW 「実は……」
-						PRINTFORMW 「産んだ時の感覚がおチンチン抜かれる時に近かったんで」
-						PRINTFORMW 「ちょっとイっちゃったわ♪」
+						WSTR:(K++) = 「実は……」
+						WSTR:(K++) = 「産んだ時の感覚がおチンチン抜かれる時に近かったんで」
+						WSTR:(K++) = 「ちょっとイっちゃったわ♪」
 					ELSEIF RAND:2 == 0
-						PRINTFORMW 「早く大きくなって三人でエッチしようね%ハート()%」
+						WSTR:(K++) = 「早く大きくなって三人でエッチしようね%ハート()%」
 					ELSE
-						PRINTFORMW 「これでまたエッチできるわ♪」
+						WSTR:(K++) = 「これでまたエッチできるわ♪」
 					ENDIF
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					;父親が主人公以外の場合
 					IF CFLAG:102 != 1 && RAND:3 == 0
-						PRINTFORMW 「次は何との子供を産めばいいの、%CSTR:이인칭%？」
+						WSTR:(K++) = 「次は何との子供を産めばいいの、%CSTR:이인칭%？」
 					ELSEIF RAND:2 == 0
-						PRINTFORML 「はい」
-						PRINTFORMW 「できたよ、%CSTR:이인칭%♪」
+						KSTR:(K++) = 「はい」
+						WSTR:(K++) = 「できたよ、%CSTR:이인칭%♪」
 					ELSE
-						PRINTFORMW 「病室出たら、この子とセットでご奉仕するわ♪」
+						WSTR:(K++) = 「病室出たら、この子とセットでご奉仕するわ♪」
 					ENDIF
 				ENDIF	
 				CFLAG:272 = 2
 			ELSE
 				IF RAND:3 == 0
-					PRINTFORMW 「%CSTR:일인칭%、本当にママになっちゃった……」
+					WSTR:(K++) = 「%CSTR:일인칭%、本当にママになっちゃった……」
 				ELSEIF RAND:2 == 0
-					PRINTFORMW 「この子に罪は無いわ、この子には……」
+					WSTR:(K++) = 「この子に罪は無いわ、この子には……」
 				ELSE
-					PRINTFORMW 「このコどうしよう……」
+					WSTR:(K++) = 「このコどうしよう……」
 				ENDIF
 				CFLAG:272 = 1
 			ENDIF
@@ -13348,39 +13561,39 @@ SELECTCASE TFLAG:13
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
 						IF RAND:2 == 0
-							PRINTFORMW 「気になるのは判るけど、まだだから」
+							WSTR:(K++) = 「気になるのは判るけど、まだだから」
 						ELSE
-							PRINTFORML 「ほら、いま動いたでしょ♪」
-							PRINTFORMW %CALLNAME%のお腹に手を当てると生命の鼓動が感じられた
+							KSTR:(K++) = 「ほら、いま動いたでしょ♪」
+							WSTR:(K++) = %CALLNAME%のお腹に手を当てると生命の鼓動が感じられた
 						ENDIF
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
 						IF RAND:2== 0
-							PRINTFORMW 「しばらくエッチ禁止だから退屈だわ
+							WSTR:(K++) = 「しばらくエッチ禁止だから退屈だわ
 						ELSE
-							PRINTFORML 「%CSTR:일인칭%とシたくなったの？」
-							PRINTFORMW 「バレると先生に怒られるから、口でシげあげるわ♪」
+							KSTR:(K++) = 「%CSTR:일인칭%とシたくなったの？」
+							WSTR:(K++) = 「バレると先生に怒られるから、口でシげあげるわ♪」
 						ENDIF
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
 						IF RAND:2 == 0
-							PRINTFORMW 「ごめんなさい、%CSTR:이인칭%」
-							PRINTFORMW 「一人こんな所にいて奉仕できなくて」
+							WSTR:(K++) = 「ごめんなさい、%CSTR:이인칭%」
+							WSTR:(K++) = 「一人こんな所にいて奉仕できなくて」
 						ELSE
-							PRINTFORML 「%CSTR:일인칭%を使いたくなったのね」
-							PRINTFORMW 「口でなら奉仕できるわ」
+							KSTR:(K++) = 「%CSTR:일인칭%を使いたくなったのね」
+							WSTR:(K++) = 「口でなら奉仕できるわ」
 						ENDIF
 					ENDIF	
 					CFLAG:273 = 2
 				ELSE
 					IF RAND:3 == 0
-						PRINTFORMW 「何？　このお腹を笑いに来たの？」
+						WSTR:(K++) = 「何？　このお腹を笑いに来たの？」
 					ELSEIF RAND:2 == 0
-						PRINTFORMW 「こんな身体にされて……」
-						PRINTFORMW 「忌々しいったらないわ」
+						WSTR:(K++) = 「こんな身体にされて……」
+						WSTR:(K++) = 「忌々しいったらないわ」
 					ELSE
-						PRINTFORML 「今は安静だから許してあげるけど」
-						PRINTFORMW 「ここから出たら真っ先に殺してあげるわ」
+						KSTR:(K++) = 「今は安静だから許してあげるけど」
+						WSTR:(K++) = 「ここから出たら真っ先に殺してあげるわ」
 					ENDIF
 					CFLAG:273 = 1
 				ENDIF
@@ -13391,47 +13604,47 @@ SELECTCASE TFLAG:13
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
 						IF RAND:2 == 0
-							PRINTFORML 「遅いわ、%CSTR:이인칭%」
-							PRINTFORMW 「赤ちゃんも寂しがってるわ」
+							KSTR:(K++) = 「遅いわ、%CSTR:이인칭%」
+							WSTR:(K++) = 「赤ちゃんも寂しがってるわ」
 						ELSE
-							PRINTFORMW 「この子はどんな風に育つのかしら」
-							PRINTFORMW 「%CSTR:일인칭%みたいに危険な道に進まないといいのだけど……」
+							WSTR:(K++) = 「この子はどんな風に育つのかしら」
+							WSTR:(K++) = 「%CSTR:일인칭%みたいに危険な道に進まないといいのだけど……」
 						ENDIF
 					;음란, 창부
 					ELSEIF (TALENT:4 || TALENT:7)
 						IF RAND:2 == 0
-							PRINTFORMW 「%CSTR:이인칭%、赤ちゃんの様子見に来たの？」
-							PRINTFORMW 「まだ小さいから、三人でエッチするのは当分先だわ」
-							PRINTFORMW 「でも、その前に」
-							PRINTFORMW 「もう一人作っちゃう%ハート()%」
+							WSTR:(K++) = 「%CSTR:이인칭%、赤ちゃんの様子見に来たの？」
+							WSTR:(K++) = 「まだ小さいから、三人でエッチするのは当分先だわ」
+							WSTR:(K++) = 「でも、その前に」
+							WSTR:(K++) = 「もう一人作っちゃう%ハート()%」
 						ELSE
-							PRINTFORMW 「まだ本調子じゃないから激しいエッチは無理だけど」
-							PRINTFORML 「激しくなければ問題から……どう？」
-							PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の股間を見つめている
+							WSTR:(K++) = 「まだ本調子じゃないから激しいエッチは無理だけど」
+							KSTR:(K++) = 「激しくなければ問題から……どう？」
+							WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の股間を見つめている
 						ENDIF
 					;복종, 예속
 					ELSEIF (TALENT:5 || TALENT:8)
-						PRINTFORML 「ほら、%CSTR:일인칭%達のご主人様が来てくれたわ」
+						KSTR:(K++) = 「ほら、%CSTR:일인칭%達のご主人様が来てくれたわ」
 						IF RAND:2 == 0
-							PRINTFORMW %CALLNAME%は自分の子供を抱きかかえると、%CALLNAME:MASTER%の方に向けさせる
-							PRINTFORMW 「今のうちから……」
-							PRINTFORMW 「お尻にキスさせて、	服従の誓いをさせちゃう？」
+							WSTR:(K++) = %CALLNAME%は自分の子供を抱きかかえると、%CALLNAME:MASTER%の方に向けさせる
+							WSTR:(K++) = 「今のうちから……」
+							WSTR:(K++) = 「お尻にキスさせて、	服従の誓いをさせちゃう？」
 						ELSE
-							PRINTFORMW 「この子、このまま育てる？」
-							PRINTFORMW 「邪魔なら処分してもらうわ」
+							WSTR:(K++) = 「この子、このまま育てる？」
+							WSTR:(K++) = 「邪魔なら処分してもらうわ」
 						ENDIF
 					ENDIF	
 					CFLAG:273 = 4
 				ELSE
 					IF RAND:3 == 0
-						PRINTFORMW 「……」
-						PRINTFORMW 「何よ……」
+						WSTR:(K++) = 「……」
+						WSTR:(K++) = 「何よ……」
 					ELSEIF RAND:2 == 0
-						PRINTFORML 「こんな子供に出産までさせて気が済んだ？」
-						PRINTFORMW 「それなら早く解放して欲しいわ」
+						KSTR:(K++) = 「こんな子供に出産までさせて気が済んだ？」
+						WSTR:(K++) = 「それなら早く解放して欲しいわ」
 					ELSE
-						PRINTFORML 「今はこの子に害が及ぶから許してあげるけど」
-						PRINTFORMW 「ここから出たら真っ先に殺してあげるわ」
+						KSTR:(K++) = 「今はこの子に害が及ぶから許してあげるけど」
+						WSTR:(K++) = 「ここから出たら真っ先に殺してあげるわ」
 					ENDIF
 				ENDIF
 				IF (CFLAG:273 < 3 || FLAG:7 == 2) && !구상유무확인(0)
@@ -13480,6 +13693,19 @@ SELECTCASE TFLAG:13
 			ELSEIF CFLAG:275 < 1 || FLAG:7 == 2
 				WSTR:(K++) =
 				CFLAG:275 = 1
+			ENDIF
+
+		;-------------------------------------------------
+		;정식포장마차에서 실제로 일했을 때
+		;-------------------------------------------------
+	CASE 97
+			K_CALL:K = EVENT_MESSAGE
+			;労働成功時
+			IF TFLAG:86 % 10 == 0
+				KSTR:(K++) =
+			;労働失敗時
+			ELSE
+				KSTR:(K++) =
 			ENDIF
 
 		;-------------------------------------------------
@@ -13693,74 +13919,74 @@ SELECTCASE TFLAG:13
 	CASE 40
 		CALL EVENT_MESSAGE
 		IF RAND:3 == 0 && ABL:종족 == 0
-			PRINTFORML 
-			PRINTFORML ある家に届いた自分の子供から届いた一通の封筒
-			PRINTFORMW 家主は期待と恐れを抱きながら封を開けた…
-			PRINTFORML 
-			PRINTFORML 
-			PRINTFORML 中には花嫁衣装に身を包んで嬉しそうに微笑んでいる%CALLNAME%の写真
-			PRINTFORMW そして写真には%CALLNAME%の字で…
-			PRINTFORML 
-			PRINTFORML 『けっこんしました%ハート()%』
-			PRINTFORML 
-			PRINTFORMW と書いてあった…
+			KSTR:(K++) = 
+			KSTR:(K++) = ある家に届いた自分の子供から届いた一通の封筒
+			WSTR:(K++) = 家主は期待と恐れを抱きながら封を開けた…
+			KSTR:(K++) = 
+			KSTR:(K++) = 
+			KSTR:(K++) = 中には花嫁衣装に身を包んで嬉しそうに微笑んでいる%CALLNAME%の写真
+			WSTR:(K++) = そして写真には%CALLNAME%の字で…
+			KSTR:(K++) = 
+			KSTR:(K++) = 『けっこんしました%ハート()%』
+			KSTR:(K++) = 
+			WSTR:(K++) = と書いてあった…
 		ELSEIF RAND:2 == 0
-			PRINTFORMW ＞%CALLNAME:MASTER%が%CALLNAME%の\@ (TALENT:유아체형 || TALENT:소인체형) ? 小さな # \@手を取ると、その指にそっとエンゲージリングをはめた。
-			PRINTFORML 「え、なに、これ……え…ええ？」
-			PRINTFORMW 驚き、目を白黒させている%CALLNAME%に意図を伝えると、今度はぼろぼろと涙がこぼれ始めた。
-			PRINTFORMW 「い……いの？ 本当にいいの？」
+			WSTR:(K++) = ＞%CALLNAME:MASTER%が%CALLNAME%の\@ (TALENT:유아체형 || TALENT:소인체형) ? 小さな # \@手を取ると、その指にそっとエンゲージリングをはめた。
+			KSTR:(K++) = 「え、なに、これ……え…ええ？」
+			WSTR:(K++) = 驚き、目を白黒させている%CALLNAME%に意図を伝えると、今度はぼろぼろと涙がこぼれ始めた。
+			WSTR:(K++) = 「い……いの？ 本当にいいの？」
 			IF ABL:종족 == 0
 				;ランダム奴隷キャラの場合
 				IF RAND:2 == 0 && CFLAG:이벤트가입 == 3
-					PRINTFORMW 「冷たい牢屋に入れられた時……もうダメかと思ったわ」
-					PRINTFORMW 「けど、%CSTR:이인칭%が助けてくれて……」
+					WSTR:(K++) = 「冷たい牢屋に入れられた時……もうダメかと思ったわ」
+					WSTR:(K++) = 「けど、%CSTR:이인칭%が助けてくれて……」
 				ELSE
-					PRINTFORML 「%CSTR:일인칭%、まだ子供よ」
-					PRINTFORMW 「それに、バレたら捕まるわ。刑務所行きよ」
-					PRINTFORMW それでも良い、と思いを伝える%CALLNAME:MASTER%。
+					KSTR:(K++) = 「%CSTR:일인칭%、まだ子供よ」
+					WSTR:(K++) = 「それに、バレたら捕まるわ。刑務所行きよ」
+					WSTR:(K++) = それでも良い、と思いを伝える%CALLNAME:MASTER%。
 				ENDIF
 			ELSE
 				IF RAND:2 == 0
-					PRINTFORML 「%CSTR:일인칭%、悪魔よ」
-					PRINTFORMW 「それなのに結婚したいの？」
+					KSTR:(K++) = 「%CSTR:일인칭%、悪魔よ」
+					WSTR:(K++) = 「それなのに結婚したいの？」
 				ELSE
-					PRINTFORMW 「悪魔の、しかも子供相手に結婚したいなんて正気とは思えないわ」
-					PRINTFORM 年齢も
+					WSTR:(K++) = 「悪魔の、しかも子供相手に結婚したいなんて正気とは思えないわ」
+					NSTR:(K++) = 年齢も
 				ENDIF
-				PRINTFORMW 種族なんて関係ない、と思いを伝える%CALLNAME:MASTER%。
+				WSTR:(K++) = 種族なんて関係ない、と思いを伝える%CALLNAME:MASTER%。
 			ENDIF
-			PRINTFORML 
-			PRINTFORMW 「う、ひっく、グス、%CSTR:일인칭%なんかでホントに良いの？」
-			PRINTFORMW 「%CSTR:일인칭%、%CSTR:이인칭%のお嫁さんになっていいの？」
-			PRINTFORML 
-			PRINTFORMW 「う、ふ、えぅ、し、しかたないなわ、そこまで、ひっく、言うな、ら、」
-			PRINTFORML 「あ、あれ。おかしいな、涙、が、とまんない、ひっく」
-			PRINTFORMW 泣きじゃくる%CALLNAME%を胸元へと引き寄せ、抱き締める%CALLNAME:MASTER%。
-			PRINTFORML 
-			PRINTFORMW 「うん…ありがとう」
-			PRINTFORMW 「そこまで言うなら、%CSTR:이인칭%と一緒にいてあげるわ！」
-			PRINTFORMW 「だから、だから、ずっと、傍にいてね？ ……いさせてね？」
-			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%とずっと一緒にいると約束した。
-			PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の\@ TALENT:남자 ? [남편] # [아내] \@になった。
+			KSTR:(K++) = 
+			WSTR:(K++) = 「う、ひっく、グス、%CSTR:일인칭%なんかでホントに良いの？」
+			WSTR:(K++) = 「%CSTR:일인칭%、%CSTR:이인칭%のお嫁さんになっていいの？」
+			KSTR:(K++) = 
+			WSTR:(K++) = 「う、ふ、えぅ、し、しかたないなわ、そこまで、ひっく、言うな、ら、」
+			KSTR:(K++) = 「あ、あれ。おかしいな、涙、が、とまんない、ひっく」
+			WSTR:(K++) = 泣きじゃくる%CALLNAME%を胸元へと引き寄せ、抱き締める%CALLNAME:MASTER%。
+			KSTR:(K++) = 
+			WSTR:(K++) = 「うん…ありがとう」
+			WSTR:(K++) = 「そこまで言うなら、%CSTR:이인칭%と一緒にいてあげるわ！」
+			WSTR:(K++) = 「だから、だから、ずっと、傍にいてね？ ……いさせてね？」
+			WSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%とずっと一緒にいると約束した。
+			WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の\@ TALENT:남자 ? [夫] # [妻] \@になった。
 		ELSE
-			PRINTFORMW 「え、ケッコン？」
-			PRINTFORML 「いいわ」
-			PRINTFORMW 即答で答える%CALLNAME%。
-			PRINTFORML 
-			PRINTFORMW 「だって」
+			WSTR:(K++) = 「え、ケッコン？」
+			KSTR:(K++) = 「いいわ」
+			WSTR:(K++) = 即答で答える%CALLNAME%。
+			KSTR:(K++) = 
+			WSTR:(K++) = 「だって」
 			IF ABL:종족 == 0 && CFLAG:이벤트가입 == 3
-				PRINTFORM 「捕まってたのを助けてくれてから
+				NSTR:(K++) = 「捕まってたのを助けてくれてから
 			ELSE
-				PRINTFORM 「出会ってから色々して、
+				NSTR:(K++) = 「出会ってから色々して、
 			ENDIF
-			PRINTFORML いつも一緒にいたのが当たり前だったから」
-			PRINTFORMW 「これからも一緒にいるのは当然だわ♪」
-			PRINTFORML 
-			PRINTFORML ………
+			KSTR:(K++) = いつも一緒にいたのが当たり前だったから」
+			WSTR:(K++) = 「これからも一緒にいるのは当然だわ♪」
+			KSTR:(K++) = 
+			KSTR:(K++) = ………
 			IF RAND:2 == 0
-				PRINTFORMW 「今度ともヨロシクね、%CSTR:이인칭%%ハート()%」
+				WSTR:(K++) = 「今度ともヨロシクね、%CSTR:이인칭%%ハート()%」
 			ELSE
-				PRINTFORMW 「これで%CSTR:일인칭%と%CSTR:이인칭%は夫婦だわ%ハート()%」
+				WSTR:(K++) = 「これで%CSTR:일인칭%と%CSTR:이인칭%は夫婦だわ%ハート()%」
 			ENDIF
 		ENDIF
 		CFLAG:283 = 1
@@ -13771,97 +13997,97 @@ SELECTCASE TFLAG:13
 	CASE 41
 		CALL EVENT_MESSAGE
 		IF ABL:종족 == 0
-			PRINTFORML 
-			PRINTFORML ある家に届いた差出人が書いていないビデオ。
-			PRINTFORML 家主は期待と恐れを抱きながらビデオを再生した…
-			PRINTFORML 
-			PRINTFORMW 「パパ、ママ、見てますか？」
-			PRINTFORMW 画面の向こうの%CALLNAME%はこちらに手を振っている
-			PRINTFORML 
+			KSTR:(K++) = 
+			KSTR:(K++) = ある家に届いた差出人が書いていないビデオ。
+			KSTR:(K++) = 家主は期待と恐れを抱きながらビデオを再生した…
+			KSTR:(K++) = 
+			WSTR:(K++) = 「パパ、ママ、見てますか？」
+			WSTR:(K++) = 画面の向こうの%CALLNAME%はこちらに手を振っている
+			KSTR:(K++) = 
 			IF TALENT:처녀
-				PRINTFORMW 「%CSTR:일인칭%は%CSTR:이인칭%のところで元気にヤってるから心配いらないわ%ハート()%」
-				PRINTFORML 「ほら、まだココも元気だし%ハート()%」
-				PRINTFORMW カメラが引くと、%CALLNAME%は大きく股を開き膜の残る秘貝の中身を晒している
+				WSTR:(K++) = 「%CSTR:일인칭%は%CSTR:이인칭%のところで元気にヤってるから心配いらないわ%ハート()%」
+				KSTR:(K++) = 「ほら、まだココも元気だし%ハート()%」
+				WSTR:(K++) = カメラが引くと、%CALLNAME%は大きく股を開き膜の残る秘貝の中身を晒している
 				IF EXP:Ａ확장경험 > 30
-					PRINTFORML 「けど、こっちはたくさんベンキョウしたわ%ハート()%」
-					PRINTFORMW %CALLNAME%は両手で自分の尻を掴むと大きく開いた
-					PRINTFORML 「ほら♪　いまはこんなにオオキイのも入るわ♪」
-					PRINTFORMW 画面の向こうの両親に見せつける様に%CALLNAME%はペットボトルでアナルオナニーを始めた……
+					KSTR:(K++) = 「けど、こっちはたくさんベンキョウしたわ%ハート()%」
+					WSTR:(K++) = %CALLNAME%は両手で自分の尻を掴むと大きく開いた
+					KSTR:(K++) = 「ほら♪　いまはこんなにオオキイのも入るわ♪」
+					WSTR:(K++) = 画面の向こうの両親に見せつける様に%CALLNAME%はペットボトルでアナルオナニーを始めた……
 				ELSE
-					PRINTFORML 「それでね……♪」
-					PRINTFORMW %CALLNAME%はビデオを見ているであろう両親に自分の開発された身体を一つ一つ説明していった……
+					KSTR:(K++) = 「それでね……♪」
+					WSTR:(K++) = %CALLNAME%はビデオを見ているであろう両親に自分の開発された身体を一つ一つ説明していった……
 				ENDIF
 			ELSE
-				PRINTFORMW 「%CSTR:일인칭%はぁ…%CSTR:이인칭%のところでぇ……ゲンキにヤってるから…あぁん%ハート()%　心配いらないわ%ハート()%」
-				PRINTFORMW カメラが引くと、%CALLNAME%は%CALLNAME:MASTER%に後ろから貫かれているのが判る。
-				PRINTFORML 「テープはまだまだ続くから」
-				PRINTFORML 「%CSTR:일인칭%が元気にヤってるところ、たくさん見てね%ハート()%」
-				PRINTFORMW %CALLNAME%は嬌声を上げながらレンズの向こうの両親に元気な姿を披露した……
+				WSTR:(K++) = 「%CSTR:일인칭%はぁ…%CSTR:이인칭%のところでぇ……ゲンキにヤってるから…あぁん%ハート()%　心配いらないわ%ハート()%」
+				WSTR:(K++) = カメラが引くと、%CALLNAME%は%CALLNAME:MASTER%に後ろから貫かれているのが判る。
+				KSTR:(K++) = 「テープはまだまだ続くから」
+				KSTR:(K++) = 「%CSTR:일인칭%が元気にヤってるところ、たくさん見てね%ハート()%」
+				WSTR:(K++) = %CALLNAME%は嬌声を上げながらレンズの向こうの両親に元気な姿を披露した……
 			ENDIF
 		ELSE
-			PRINTFORMW 複雑な文様の魔法陣の上で、%CALLNAME%は目を閉じている。
-			PRINTFORML 儀式が終了すると、%CALLNAME%の背中に見たことのない紋章が浮かび上がった。
-			PRINTFORMW ＣＯＭＰを用いた契約ではない、太古より魔界に伝わる、悪魔が自ら進んで全てを捧げる古の盟約。
-			PRINTFORML 
-			PRINTFORML 「はあぁ…えへへ…%ハート()%　これで%CSTR:일인칭%はぜぇんぶ%CSTR:이인칭%のモノ…」
-			PRINTFORMW 儀式を終え、目を開いた%CALLNAME%はうっとりと頬を上気させると、内股をモゾモゾと摺り合わせた。
-			PRINTFORMW 「%CALLNAME%は%CSTR:이인칭%にぜんぶあげるわ……」
-			PRINTFORML 「このエッチな乳首も……やわらかーいおっぱいも」
-			PRINTFORMW 「グチュグチュになっていっつもおチンチン欲しがってるおマンコも…ん、あっ」
-			PRINTFORMW 「セーエキだぁい好きで…あ、あっ…おチンチンを突っ込むためにある…ん…お口マンコも…あはぁ」
-			PRINTFORML 「お尻も、おへそも、あっ、あんッ！…ぜんぶ、%CSTR:이인칭%のものだわ♪」
-			PRINTFORMW 「ぜんぶ%CSTR:이인칭%に滅茶苦茶に犯される…の……ん！んはぁあああ！」
-			PRINTFORMW %CALLNAME%は話しながら自らの身体を激しく愛撫する。それだけで達したのか、秘唇から潮を勢いよく噴き出させた。
-			PRINTFORMW 「はぁ、はぁ…あはぁ…%ハート()%　ほら、%CSTR:이인칭%、はやくぅ…はやく%CSTR:일인칭%を犯してぇ…ずっと、ずっと…いつまでも…%ハート()%」
-			PRINTFORML %CALLNAME%は自ら秘唇を広げて見せ、%CALLNAME:MASTER%を押し倒すと腰の上に馬乗りになり、
-			PRINTFORMW %CALLNAME:MASTER%の肉棒を奥まで咥え込むと、歓喜の嬌声と共に激しく腰を振り始めた。
+			WSTR:(K++) = 複雑な文様の魔法陣の上で、%CALLNAME%は目を閉じている。
+			KSTR:(K++) = 儀式が終了すると、%CALLNAME%の背中に見たことのない紋章が浮かび上がった。
+			WSTR:(K++) = ＣＯＭＰを用いた契約ではない、太古より魔界に伝わる、悪魔が自ら進んで全てを捧げる古の盟約。
+			KSTR:(K++) = 
+			KSTR:(K++) = 「はあぁ…えへへ…%ハート()%　これで%CSTR:일인칭%はぜぇんぶ%CSTR:이인칭%のモノ…」
+			WSTR:(K++) = 儀式を終え、目を開いた%CALLNAME%はうっとりと頬を上気させると、内股をモゾモゾと摺り合わせた。
+			WSTR:(K++) = 「%CALLNAME%は%CSTR:이인칭%にぜんぶあげるわ……」
+			KSTR:(K++) = 「このエッチな乳首も……やわらかーいおっぱいも」
+			WSTR:(K++) = 「グチュグチュになっていっつもおチンチン欲しがってるおマンコも…ん、あっ」
+			WSTR:(K++) = 「セーエキだぁい好きで…あ、あっ…おチンチンを突っ込むためにある…ん…お口マンコも…あはぁ」
+			KSTR:(K++) = 「お尻も、おへそも、あっ、あんッ！…ぜんぶ、%CSTR:이인칭%のものだわ♪」
+			WSTR:(K++) = 「ぜんぶ%CSTR:이인칭%に滅茶苦茶に犯される…の……ん！んはぁあああ！」
+			WSTR:(K++) = %CALLNAME%は話しながら自らの身体を激しく愛撫する。それだけで達したのか、秘唇から潮を勢いよく噴き出させた。
+			WSTR:(K++) = 「はぁ、はぁ…あはぁ…%ハート()%　ほら、%CSTR:이인칭%、はやくぅ…はやく%CSTR:일인칭%を犯してぇ…ずっと、ずっと…いつまでも…%ハート()%」
+			KSTR:(K++) = %CALLNAME%は自ら秘唇を広げて見せ、%CALLNAME:MASTER%を押し倒すと腰の上に馬乗りになり、
+			WSTR:(K++) = %CALLNAME:MASTER%の肉棒を奥まで咥え込むと、歓喜の嬌声と共に激しく腰を振り始めた。
 		ENDIF
-		PRINTFORMW ・・・
-		PRINTFORMW ・・・・・・
-		PRINTFORMW ・・・・・・・・・
-		PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の[음마]となった。
+		WSTR:(K++) = ・・・
+		WSTR:(K++) = ・・・・・・
+		WSTR:(K++) = ・・・・・・・・・
+		WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の[淫魔]となった。
 
 		;-------------------------------------------------
 		;;[전속노예]취득시 예속 전제
 		;-------------------------------------------------
 	CASE 42
 		CALL EVENT_MESSAGE
-		;PRINTFORML 
+		;KSTR:(K++) = 
 		IF RAND:2 == 0
-			PRINTFORML %CALLNAME:MASTER%は%CALLNAME%に首輪を投げて渡した
-			PRINTFORMW %CALLNAME%は手に取って鋲付きの首輪を眺めている
-			PRINTFORML 
-			PRINTFORMW 「これを%CSTR:일인칭%に……」
-			PRINTFORMW %CALLNAME%は首輪に刻まている自分の名前よりも
-			PRINTFORMW 首輪の内側にも付いている鋲が気になっているようだ
-			PRINTFORM 「これを着けたら、もう%CSTR:일인칭%って
+			KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%に首輪を投げて渡した
+			WSTR:(K++) = %CALLNAME%は手に取って鋲付きの首輪を眺めている
+			KSTR:(K++) = 
+			WSTR:(K++) = 「これを%CSTR:일인칭%に……」
+			WSTR:(K++) = %CALLNAME%は首輪に刻まている自分の名前よりも
+			WSTR:(K++) = 首輪の内側にも付いている鋲が気になっているようだ
+			NSTR:(K++) = 「これを着けたら、もう%CSTR:일인칭%って
 			IF ABL:종족 == 0
-				PRINTFORMW 人間以下の扱いになっちゃうわ……」
+				WSTR:(K++) = 人間以下の扱いになっちゃうわ……」
 			ELSE
-				PRINTFORMW %CSTR:이인칭%の所有物だわ……」
+				WSTR:(K++) = %CSTR:이인칭%の所有物だわ……」
 			ENDIF
-			PRINTFORMW 少しの沈黙の後、%CALLNAME%は意を決して首輪を首に巻き、鋲の痛みに顔を歪めながらベルトを締めた
+			WSTR:(K++) = 少しの沈黙の後、%CALLNAME%は意を決して首輪を首に巻き、鋲の痛みに顔を歪めながらベルトを締めた
 		ELSE
-			PRINTFORMW 「エッチな事も恥ずかしいのも嫌いではないわ」
-			PRINTFORMW 「けど、%CSTR:이인칭%のモノになれるんだったら……」
-			PRINTFORMW 「どうなってもイイわ%ハート()%」
-			PRINTFORML 
-			PRINTFORML その言葉を聞いた%CALLNAME:MASTER%は%CALLNAME%に首輪を投げて渡した
-			PRINTFORMW プレートの部分には既に%CALLNAME%の名前が入っている
+			WSTR:(K++) = 「エッチな事も恥ずかしいのも嫌いではないわ」
+			WSTR:(K++) = 「けど、%CSTR:이인칭%のモノになれるんだったら……」
+			WSTR:(K++) = 「どうなってもイイわ%ハート()%」
+			KSTR:(K++) = 
+			KSTR:(K++) = その言葉を聞いた%CALLNAME:MASTER%は%CALLNAME%に首輪を投げて渡した
+			WSTR:(K++) = プレートの部分には既に%CALLNAME%の名前が入っている
 			IF ABL:종족 != 0 && RAND:2 == 0
-				PRINTFORML 「これで%CSTR:이인칭%の所有物だわ」
-				PRINTFORML 「人間の奴隷になったダメダメ悪魔の%CSTR:일인칭%を今後ともヨロシク%ハート()%」
-				PRINTFORMW これからの『楽しい生活』を想像し、笑みを浮かべながら%CALLNAME%は自ら首輪を首に巻きつけた
+				KSTR:(K++) = 「これで%CSTR:이인칭%の所有物だわ」
+				KSTR:(K++) = 「人間の奴隷になったダメダメ悪魔の%CSTR:일인칭%を今後ともヨロシク%ハート()%」
+				WSTR:(K++) = これからの『楽しい生活』を想像し、笑みを浮かべながら%CALLNAME%は自ら首輪を首に巻きつけた
 			ELSE
-				PRINTFORML 「プレートに既に名前が入っているなんて、さすが%CSTR:이인칭%だわ」
-				PRINTFORMW %CALLNAME%は感心しながら自ら首輪を首に巻きつけた
-				PRINTFORMW 「はい、リード♪」
+				KSTR:(K++) = 「プレートに既に名前が入っているなんて、さすが%CSTR:이인칭%だわ」
+				WSTR:(K++) = %CALLNAME%は感心しながら自ら首輪を首に巻きつけた
+				WSTR:(K++) = 「はい、リード♪」
 			ENDIF
 		ENDIF
-		PRINTFORMW ・・・
-		PRINTFORMW ・・・・・・
-		PRINTFORMW ・・・・・・・・・
-		PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の[노리개]となった。
+		WSTR:(K++) = ・・・
+		WSTR:(K++) = ・・・・・・
+		WSTR:(K++) = ・・・・・・・・・
+		WSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の[玩具]となった。
 		CFLAG:285 = 1
 
 		;-------------------------------------------------
@@ -13888,7 +14114,7 @@ SELECTCASE TFLAG:13
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;그 외
+				;기타
 				IF !구상유무확인(0)
 					WSTR:(K++) =
 				ENDIF	
@@ -13912,7 +14138,7 @@ SELECTCASE TFLAG:13
 						WSTR:(K++) = 
 					ENDIF	
 				ENDIF
-				;그 외
+				;기타
 				IF !구상유무확인(0)
 					WSTR:(K++) =
 				ENDIF	
@@ -14500,7 +14726,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		;-------------------------------------------------
 		;던전내 성욕처리：동료마에게 봉사시킨다
-		;봉사받는 쪽
+		;봉사당하는 쪽
 		;PLAYER에 봉사하는 쪽의 번호가 들어있습니다
 		;-------------------------------------------------
 	CASE 84
@@ -14840,7 +15066,7 @@ SELECTCASE TFLAG:투기장패배
 			ELSEIF TALENT:5 || TALENT:8
 				WSTR:(K++) = 
 			ENDIF
-			;그 외
+			;기타
 			IF !구상유무확인(0)
 				WSTR:(K++) = 
 			ENDIF
@@ -14937,15 +15163,15 @@ RETURN 1
 @ENEMY_BATTLE_EVENT_PUB303_3, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;			KSTR:(K++) = ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			KSTR:(K++) = ┃%"",72,LEFT%┃
+;			WSTR:(K++) = ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;			KSTR:(K++) = ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			KSTR:(K++) = ┃%"",72,LEFT%┃
+;			WSTR:(K++) = ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
 @BATTLE_EVENT_PUB303_3, ARG, ARG:1, ARG:2
@@ -15212,7 +15438,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 337) || RANGE(CFLAG:ARG:입력행동,34
 		ELSEIF RAND:2 == 0
 			LOCALS:10 = 噛み砕いてあげるわ
 		ENDIF
-	;그 외
+	;기타
 	ELSE
 		IF RAND:2 == 0
 			LOCALS:10 = 
@@ -15244,7 +15470,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		IF RAND:2 == 0
 			LOCALS:10 = かかってきなさい！
 		ENDIF
-	;그 외
+	;기타
 	ELSE
 		LOCALS:10 = 
 	ENDIF
@@ -15309,19 +15535,41 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 ;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2993) 
 	IF CFLAG:ARG:입력행동 != 2994 && RAND:3 == 0
-		;回復技の時は言わないようにする
+		;회복技の時は言わないようにする
 		LOCALS:10 = 元の世界に帰りなさい！
 	ELSEIF RAND:2 == 0
 		LOCALS:10 = みんなの希望は%CSTR:일인칭%が守るわ！
 	ELSE
 		LOCALS:10 = 愛と、勇気の、この技で
 	ENDIF
+
 ;-------------------------------------------------
-;그 외
+;기타
 ;-------------------------------------------------
 ELSE
 	LOCALS:10 = 
 ENDIF
+
+;--------------------------------------------------
+;ボイコット時
+;	CASE文からバエル用に最低限の部分だけ残す
+;--------------------------------------------------
+@BATTLE_BOYCOTT_MESSAGE_PUB303_3,ARG,ARG:1 = 0
+	;ボイコットした場合に表示する口上
+	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+	;사용한 스킬의 이름을 LOCALS에 대입
+	LOCALS = %RESULTS%
+	SETCOLOR COLOR("RED")
+	IF RAND:3 == 0
+		LOCALS:10 = そんな命令、お断りだわ
+	ELSEIF RAND:2 == 0
+		LOCALS:10 = 却下だわ、そんなの
+	ELSE
+		LOCALS:10 = それが人に物を頼む態度？
+	ENDIF
+
+	RESETCOLOR
+
 ;-------------------------------------------------
 ;진・그 외
 ;-------------------------------------------------

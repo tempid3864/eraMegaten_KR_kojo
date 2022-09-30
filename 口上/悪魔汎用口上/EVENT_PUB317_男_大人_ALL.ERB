@@ -11,13 +11,16 @@
 ;道具で「オンナ」「ふたなり」にした場合は多分変になる
 ;
 ;対応悪魔（CSVより）
-;마왕：로키/라바나/오르커스/타나토스
-;귀신：토르/후토미미/토나티우/하리・하라　　　　　　　　　　　　증장천/광목천/지국천/ビジャモンテン
-;마신：미샤구지님/　　　　　　　　　　　　브라흐마/
-;타천사：오세
+;魔王：ロキ/ラーヴァナ/オーカス/タナトス
+;鬼神：トール/フトミミ/トナティウ/ハリ・ハラ　　　　　　　　　　　　ゾウチョウテン/コウモクテン/ジコクテン/ビジャモンテン
+;魔神：ミシャグジさま/　　　　　　　　　　　　ブラフマー/
+;堕天使：オセ
 ;
 ;調べたら意外と少なかった……というか少なッ！
 ;かつ意外なのが対応してた
+
+;	Edit	Date			Author					Reason
+;	002	2022/07/10		しめじ				戦闘時の台詞追加
 ;-------------------------------------------------
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -9647,109 +9650,186 @@ ENDSELECT
 ;CALL GAME_CONTINUE
 ;RETURN 0
 
-
-@ENEMY_BATTLE_EVENT_PUB317, ARG, ARG:1, ARG:2
-IF TFLAG:전투이벤트 == 1
-;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ENDIF
-IF TFLAG:전투이벤트 == 2
-;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ENDIF
-
 @BATTLE_EVENT_PUB317, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"いくぞ!　合わせろ",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"付き合ってやる。",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
+;撃破した
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"身の程を知れ。",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 11 && ARG:2 < 0
+;흡수された
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	IF RAND:2 == 0
+		PRINTFORML ┃%"クソッ！",72,LEFT%┃
+	ELSE
+		PRINTFORML ┃%"抜かったな…",72,LEFT%┃
+	ENDIF
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 12
+;被弾した時の口上
+	IF BASE:ARG:ＨＰ <= 0
+	;死亡した
+		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		IF RAND:2 == 0
+			PRINTFORML ┃%"先に…失礼する…",72,LEFT%┃
+		ELSE
+			PRINTFORML ┃%"……それでは、な…",72,LEFT%┃
+		ENDIF
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF 현HP비율(ARG) < 15
+	;HP残り１５％以下
+		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"……少し、危ういか…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF ARG:2 < 0
+	;흡수した
+	;ｸﾏｰ
+		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		IF RAND:3 == 0
+			PRINTFORML ┃%"残念だったな",72,LEFT%┃
+		ELSEIF RAND:2 == 0
+			PRINTFORML ┃%"こちらを助けてくれるとは、余裕のあることだ",72,LEFT%┃
+		ELSE
+			PRINTFORML ┃%"ありがとう、と言うべきか？",72,LEFT%┃
+		ENDIF
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF ARG:2 == 0
+	;무효
+		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		IF RAND:2 == 0
+			PRINTFORML ┃%"効かんよ",72,LEFT%┃
+		ELSE
+			PRINTFORML ┃%"何がしたいのだ？",72,LEFT%┃
+		ENDIF
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		IF RAND:3 == 0
+			PRINTFORML ┃%"グッ…！",72,LEFT%┃
+		ELSEIF RAND:2 == 0
+			PRINTFORML ┃%"覚えていろよ…！",72,LEFT%┃
+		ELSE
+			PRINTFORML ┃%"あまり、" + CSTR:11 + "を怒らせるなよ…。",72,LEFT%┃
+		ENDIF
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+IF TFLAG:전투이벤트 == 15
+;반사당했다
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"クソッ…" + CSTR:11 + "としたことが…。",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 16
+;반사했다
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"因果応報、というやつだな",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 17
+;外した
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"チッ！　外したか！",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 18
+;回避
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	IF RAND:2 == 0
+		PRINTFORML ┃%"どこを見ている。",72,LEFT%┃
+	ELSE
+		PRINTFORML ┃%"とんだ節穴だな。",72,LEFT%┃
+	ENDIF
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
 
 @BATTLE_MESSAGE_PUB317,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-;IF CFLAG:ARG:입력행동 == 
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;	PRINTFORML ┃%"",72,LEFT%┃
-;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+IF CFLAG:ARG:입력행동 == 2302
+	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"この後は任せるぞ、" + CSTR:12 + "。",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-;ELSEIF ARG:1 > 0
+ELSEIF ARG:1 > 0
 	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
-;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	;사용한 스킬의 이름을 LOCALS에 대입
-;	LOCALS = %RESULTS%
+	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+	;사용한 스킬의 이름을 LOCALS에 대입
+	LOCALS = %RESULTS%
 
-;	SELECTCASE ARG:1
-;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"영맹")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "……알았다",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"교활")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "か、見ていろよ！",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"잔학")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"현명")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"타천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"우애")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;상태변화로는 교만 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"교만")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	SELECTCASE ARG:1
+		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"영맹")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "……了解だ",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"교활")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "か、見ていろよ！",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"잔학")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "！　いい悲鳴を聴かせてくれよ！",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"현명")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "か、了解した",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"천사")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "。悔改めよ",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"타천사")
+			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"少し、眠るといい…",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"우애")
+			PRINTFORML ┏>＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "。無理はしないことだ。",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;상태변화로는 교만 보유자의 충성도가 상승
+		CASE GETNUM(TALENT,"교만")
+			PRINTFORML ┏>＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "。せいぜい馬鹿を晒すといい。",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;특수로는 냉정 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"냉정")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
-;		CASE GETNUM(TALENT,"우둔")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;허심 보유자는 최저 ２만큼 충성도가 상승
-;		CASE GETNUM(TALENT,"허심")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;	ENDSELECT
+		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
+		CASE GETNUM(TALENT,"우둔")
+			PRINTFORML ┏>＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "？　" + CSTR:12 + "が言うなら間違いないな。",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		;허심 보유자는 최저 ２만큼 충성도가 상승
+		CASE GETNUM(TALENT,"허심")
+			PRINTFORML ┏>＠%CALLNAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%LOCALS + "…",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDSELECT
 ;ELSE
 ;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
-;ENDIF
-
+ENDIF
