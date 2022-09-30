@@ -1,8 +1,8 @@
 ﻿;-------------------------------------------------
-;玄武の中の人・無입っ子구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;玄武の中の人・無口っ子口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
-;女体化四성수・ハーレム漫画とか大好きな人向けの구상。
-;各々のイメージとかけ離れた代物ですので、ご사용の際は『깨달음悟』の上でお願いします。
+;女体化四聖獣・ハーレム漫画とか大好きな人向けの口上。
+;各々のイメージとかけ離れた代物ですので、ご使用の際は『覚悟』の上でお願いします。
 ;晴明絡みの内容はありません、あしからず。
 ;
 ;-------------------------------------------------
@@ -30,12 +30,12 @@
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;【사용CFLAG】
-;　800：전투구상用。조교初回に「아무것도안한다」を選ぶことで制御できる。詳しくは전투구상のあたり参照。
-;　　　　0：디폴트、喋らない
-;　　　　1：強힘な스킬を사용すると喋る。
-;　　　　2：통상の스킬を사용しても喋る。
-;　　　　3：통상공격ですら喋る。
+;【使用CFLAG】
+;　800：戦闘口上用。調教初回に「何もしない」を選ぶことで制御できる。詳しくは戦闘口上のあたり参照。
+;　　　　0：デフォルト、喋らない
+;　　　　1：強力なスキルを使用すると喋る。
+;　　　　2：通常のスキルを使用しても喋る。
+;　　　　3：通常攻撃ですら喋る。
 ;
 ;-------------------------------------------------
 
@@ -70,13 +70,13 @@ PRINTFORML    　대폭적인 소질 변경을 전제한 대사이므로 기존�
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（872_1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
-;소질변경を엑스트라모드構文へと移動
+;素質変更をエキストラモード構文へと移動
 ;--------------------------------------------------
 @EVENTTRAIN_K872_1
 ;--------------------------------------------------
 ;엑스트라모드 구문　CFLAG:220을 사용
-;소질변경はこちらに移動。
-;一応、구상側での想定소질・女体化だけ・변화させないの三단계を用意
+;素質変更はこちらに移動。
+;一応、口上側での想定素質・女体化だけ・変化させないの三段階を用意
 ;--------------------------------------------------
 IF CFLAG:220 == 0
 	PRINTL 이 대사는 여체화 등의 소질 변경이 전제인 대사입니다.
@@ -89,7 +89,7 @@ IF CFLAG:220 == 0
 	INPUT
 	IF RESULT == 0
 		PRINTFORMW ―가슴 약한 과묵소녀 모드로 소질, 의상을 변경합니다―
-		;처녀にするというなら、경험と능력も一応ゼロにしておいた方がいいと思うのだ
+		;처녀にするというなら、経験と能力も一応ゼロにしておいた方がいいと思うのだ
 		ABL:TARGET:4 = 0
 		EXP:TARGET:0 = 0
 
@@ -133,8 +133,8 @@ IF CFLAG:220 == 0
 	CFLAG:TARGET:그외 = 1113
 	TEQUIP:TARGET:그외 = 1113
 
-	;女体化のみ……とは言え、これだと거체とか残っちゃいますけどね。一応、절벽も소거しておく。
-	;디폴트だと처녀ですし、中途半端なんで消した方がいい気がしなくもない……
+	;女体化のみ……とは言え、これだと巨体とか残っちゃいますけどね。一応、絶壁も消去しておく。
+	;デフォルトだと処女ですし、中途半端なんで消した方がいい気がしなくもない……
 	ELSEIF RESULT == 1
 		PRINTFORMW ―성별만 변경합니다―
 		CSTR:이인칭 = 서머너
@@ -178,10 +178,10 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW COMP에서 나타난 것은 검고 거대한 거북……이 아니라, 검정 고스로리복을 입은 소녀였다.
 	PRINTFORMW %CALLNAME%의 거체는 아무데도 없어, 뭔가를 잘못 봤나 하고 눈을 의심했다.
 	PRINTFORMW 그러고 보면 요즘 너무 힘을 썼던 느낌도 든다.
-	PRINTFORMW 눈을 비비고 크게 심호흡해서 %조사처리(CALLNAME:MASTER,"는")% 마음을 가라앉혔다.
+	PRINTFORMW 눈을 비비고 크게 심호흡해서 %마스터는% 마음을 가라앉혔다.
 	PRINTFORMW 역시 눈앞에 있는 건 검정 고스로리 소녀. 환각 부류는 아닌 모양이다.
 	PRINTFORMW 「……%CSTR:이인칭%, %CSTR:일인칭%한테…… 용무?」
-	PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 부른 건 %CALLNAME%이지, 이런 소녀가 아니다.
+	PRINTFORMW %마스터가% 부른 건 %CALLNAME%이지, 이런 소녀가 아니다.
 	PRINTFORMW 방 어디를 봐도 %CALLNAME%의 거체는 눈에 띄지 않았다.
 	PRINTFORMW 설마 COMP가 고장 났나? 그렇게 생각하면 이 상황은 매우 위험한 게 아닐까.
 	PRINTFORMW 「……%CSTR:이인칭%」
@@ -192,15 +192,15 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「……%CSTR:일인칭%, 수행(水行)을 관장하는, 현천상제(玄天上帝), 로다」
 	PRINTFORMW 「사성수, 그 중 하나이자…… 북방 천상을…… 수호하는, 자, 로다」
 	PRINTFORMW 「……여기, 좁으, 니까, %CSTR:일인칭%, 배려한…… 건데, 폐가, 됐어……?」
-	PRINTFORMW 이 모습은 %조사처리(CALLNAME,"가")% %조사처리(CALLNAME:MASTER,"를")% 배려해준 결과라는 모양이다.
+	PRINTFORMW 이 모습은 %조사처리(CALLNAME,"가")% %마스터를% 배려해준 결과라는 모양이다.
 	PRINTFORMW 과연. 그렇게 생각하면 다소의 축소화도 성별의 전환도, 너그럽게 보자는 기분도 든다.
 	PRINTFORMW ……미안, 거짓말 좀 쳤다.
 	PRINTFORMW 하지만 앞으로 할 일을 생각하면 오히려 하기 쉬워졌다고 기뻐해도 될지도 모른다.
 	PRINTFORMW 불러낸 목적을 전하자 %조사처리(CALLNAME,"는")% 갸우뚱하며 앵무새처럼 대꾸했다.
 	PRINTFORMW 「……조교?」
 	PRINTFORMW 조교다.
-	PRINTFORMW 「…………%조사처리(CSTR:일인칭,"를")%?」
-	PRINTFORMW %조사처리(CSTR:일인칭,"를")%.
+	PRINTFORMW 「…………%일인칭을%?」
+	PRINTFORMW %일인칭을%.
 	PRINTFORMW 「…………………………싫어」
 	CFLAG:201 = 1
 	RETURN 0
@@ -233,7 +233,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 ;함락
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
-	;もはや현무だということを忘れそうになる。
+	;もはやゲンブだということを忘れそうになる。
 	IF TALENT:3
 		IF CFLAG:미조교함락 == 1
 			;조교하지 않고 연모를 단 경우
@@ -241,7 +241,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 뭔가를 잘못 봤나 싶어 눈을 비비고 있으려니, 소녀는 타박타박 다가와서 옷자락을 잡았다.
 			PRINTFORMW 「………%CSTR:이인칭%」
 			PRINTFORMW 「%CSTR:일인칭%…… 부른, 거, 지……?
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 부른 건 %CALLNAME%이지, 이런 소녀가 아니다.
+			PRINTFORMW %마스터가% 부른 건 %CALLNAME%이지, 이런 소녀가 아니다.
 			PRINTFORMW 그렇게 큰 생물을 못 보고 놓칠 리는 없지만……COMP의 고장을 의심하고 있자、소녀는 볼을 부풀렸다。
 			PRINTFORMW 「%CSTR:일인칭%…… %CALLNAME%……」
 			PRINTFORMW 우물거리는 듯한 목소리가 전한 말에、귀를 의심했다。
@@ -258,7 +258,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 「거북、이、될테……니、까…………」
 			PRINTFORMW 「시、싫어하지、말아、줘…………！」
 			PRINTFORMW %CALLNAME%의 얼굴이 꽉 눌린 근처가 ,  미지근하게 젖었다.。
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 한숨을 쉬고 나선, 놀랐을 뿐이라고 %CALLNAME%에게 말했다。
+			PRINTFORMW %마스터는% 한숨을 쉬고 나선, 놀랐을 뿐이라고 %CALLNAME%에게 말했다。
 			PRINTFORMW 「…………그런、거야？」
 			PRINTFORMW 「……다행이、다……%CSTR:일인칭%、꾸몄는、데도……미、미움、받으면、어쩌지、하고……」
 			PRINTFORMW 「미………미움、받으면、어、어쩌지……하고…………웃……우우……！」
@@ -269,10 +269,10 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW ……
 			PRINTFORMW 겨우 차분해진 %조사처리(CALLNAME,"는")% 、어색한 듯 얼굴을 숙이고선 얼버무리듯 절했다。
 			PRINTFORMW 「……웅…… %CSTR:이인칭%」
-			PRINTFORMW 「……%CSTR:일인칭%, 수행(水行)을 관장하는, 현천상제(玄天上帝), 로다」
+			PRINTFORMW 「%CSTR:일인칭%, 수행(水行)을 관장하는, 현천상제(玄天上帝), 로다」
 			PRINTFORMW 「사성수, 그 중 하나이자…… 북방 천상을…… 수호하는, 자, 로다」
 			PRINTFORMW ―――그리고.
-			PRINTFORMW 「……영원토록, %조사처리(CSTR:이인칭,"를")% 수호하는, 자……로다」
+			PRINTFORMW 「……영원토록, %이인칭을% 수호하는, 자……로다」
 			PRINTFORMW 「………앞, 으로, 잘 부탁, 해%UNICODE(0x2661)%」
 		ELSE
 			PRINTFORMW %조사처리(CALLNAME,"는")% 불려나오자마자 무릎을 꿇고 절하며 조아렸다.
@@ -308,18 +308,18 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW %조사처리(CALLNAME,"는")% 결심한 듯 고개를 들었다、
 			PRINTFORMW 「ㅍ……폐、가 되지、않는다면……면………아」
 			PRINTFORMW 익숙하지 않으면서도、자신의 마음을 전하는 %CALLNAME%에게、그 이상 말하게 할 생각은 들지 않았다。
-			PRINTFORMW 살짝 껴안아주자、%조사처리(CALLNAME,"는")% 살짝 몸을 떨며、%조사처리(CALLNAME:MASTER,"를")% 마주안았다。
+			PRINTFORMW 살짝 껴안아주자、%조사처리(CALLNAME,"는")% 살짝 몸을 떨며、%마스터를% 마주안았다。
 			PRINTFORMW 「……웅…… %CSTR:이인칭%」
 			PRINTFORMW 「……%CSTR:일인칭%, 수행(水行)을 관장하는, 현천상제(玄天上帝), 로다」
 			PRINTFORMW 「사성수, 그 중 하나이자…… 북방 천상을…… 수호하는, 자, 로다」
 			PRINTFORMW ―――그리고.
-			PRINTFORMW 「……영원토록, %조사처리(CSTR:이인칭,"를")% 수호하는, 자……로다」
+			PRINTFORMW 「……영원토록, %이인칭을% 수호하는, 자……로다」
 			PRINTFORMW 「………앞, 으로, 잘 부탁, 해%UNICODE(0x2661)%」
 		ENDIF
 	;음란
-	;음란無입っ娘っていいよね。
+	;음란無口っ娘っていいよね。
 	ELSEIF TALENT:4
-		PRINTFORMW 「……%CSTR:이인칭%…… %CSTR:이인칭%……」
+		PRINTFORMW 「……%CSTR:이인칭%……%CSTR:이인칭%……」
 		PRINTFORMW %조사처리(CALLNAME,"는")% 부르자마자、잠꼬대처럼 %CALLNAME:MASTER%의 이름을 부르며 안겨왔다。
 		PRINTFORMW 기분 탓인지 평소보다 높게 느껴지는 체온은、%CALLNAME%의 고양을 더 없을 만큼 나타냈다。
 		PRINTFORMW 「%CSTR:이인칭%、좋아……%UNICODE(0x2661)%」
@@ -327,7 +327,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 「……준비、는、괘、괜찮으니까……빠、빠빠、빨리、빨리잇……！」
 		PRINTFORMW 습기에 찬 음부를 %CALLNAME:MASTER%의 발에 문지르며、%조사처리(CALLNAME,"는")% 느슨한 얼굴로 정을 요구한다。
 		PRINTFORMW 요구된 것이라면 어쩔 수 없다。
-		PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 침대에 넘어뜨리며、가슴에 손을 댔다。
+		PRINTFORMW %마스터는% %조사처리(CALLNAME,"를")% 침대에 넘어뜨리며、가슴에 손을 댔다。
 		PRINTFORMW 「아…………！　부、부ㅌ、부탁합、니、다……%CSTR:이인칭%%UNICODE(0x2661)%」
 	;복종
 	ELSEIF TALENT:5
@@ -335,10 +335,10 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 불려나온 %조사처리(CALLNAME,"는")% 여느 때보다 더 과묵했다.
 		PRINTFORMW 조용한 저항이라는 분위기도 아니어서 미심쩍어하는 %CALLNAME:MASTER%의 시선을 깨닫자, 무릎을 굽히고 절했다.
 		PRINTFORMW 「……%CSTR:이인칭%. ……」
-		PRINTFORMW 한마디、%조사처리(CALLNAME:MASTER,"를")% 부르자마자 이마를 바닥에 문지르는 %CALLNAME%。
+		PRINTFORMW 한마디、%마스터를% 부르자마자 이마를 바닥에 문지르는 %CALLNAME%。
 		PRINTFORMW 자신의 서투른 말투가 기분 나빴다고 생각하고 있을 것이다。
 		PRINTFORMW 가만히 순종한 것은 감탄스럽지만 아무 말 없는 것도 화가 난다。
-		PRINTFORMW 숙인 머리를 밟은 %조사처리(CALLNAME:MASTER,"가")% 짧게, 말하라고 명령하자.
+		PRINTFORMW 숙인 머리를 밟은 %마스터가% 짧게, 말하라고 명령하자.
 		PRINTFORMW 「……죄, 죄송, 합니……」
 		PRINTFORMW 아무래도、제대로 말하도록 가르칠 필요가 있는 것 같다。
 	ENDIF
@@ -398,7 +398,7 @@ IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 		PRINTFORMW 평상시와 같은 더듬거림은 찾아볼 수 없는 ,  날카로운 한마디에 무심코 숨을 들이켰다。
 		PRINTFORMW 「……%CSTR:일인칭%、수행(水行)을 관장하는, 현천상제(玄天上帝), 로다」
 		PRINTFORMW 「%CSTR:일인칭%에게、해를 끼치지 마……」
-		PRINTFORMW 싫증나도록 들은 저주의 말은 무시한 채、%조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 침대에 쓰러뜨렸다。
+		PRINTFORMW 싫증나도록 들은 저주의 말은 무시한 채、%마스터는% %조사처리(CALLNAME,"를")% 침대에 쓰러뜨렸다。
 		PRINTFORMW 「……목숨이、아깝지 않아…………？」
 	ENDIF
 	CFLAG:202 = 4
@@ -429,7 +429,7 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	;통상
 	ELSE
 		PRINTFORMW 「……다、다른 건……안、해……？」
-		PRINTFORMW 왠지 불쌍해 보이는 %CALLNAME%의 말투에는 답하지 않고、%조사처리(CALLNAME:MASTER,"는")% 거리를 좁힌다。
+		PRINTFORMW 왠지 불쌍해 보이는 %CALLNAME%의 말투에는 답하지 않고、%마스터는% 거리를 좁힌다。
 		PRINTFORMW 순간、%CALLNAME%의 눈동자가 흔들린 듯 했다。
 		PRINTFORMW 「………싫어、그만……읏」
 	ENDIF
@@ -469,26 +469,26 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	IF TALENT:170
 		;妊娠中
 		IF TALENT:153
-			;父親が당신
+			;父親があなた
 			IF CFLAG:102 == 1
-				PRINTFORMW 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 보고선 미소지었다。
+				PRINTFORMW 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% %마스터를% 보고선 미소지었다。
 				PRINTFORMW 「아……파파%UNICODE(0x2661)%」
 				PRINTFORMW 「후후%UNICODE(0x2661)%　이봐요、파파……왔어、요？」
 				PRINTFORMW 「…………………무우」
 				PRINTFORMW 「%CSTR:이인칭%………이 아이、부끄럼쟁이야」
 				PRINTFORMW ……음、아직 여러가지로 빠르다고 생각한다。
-			;당신以外
+			;あなた以外
 			ELSE
-				PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 방에 들어오자、가슴에 뛰어들었다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 방에 들어오자、가슴에 뛰어들었다。
 				PRINTFORMW 「………미안、해」
 				PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%의、뱃속、에……%CSTR:일인칭%……っ！」
 				PRINTFORMW 흐느끼는 %CALLNAME%의 목소리는、그 이상 말할 수 없었다。
-				PRINTFORMW %CALLNAME%의 어깨를 부드럽게 안은 채、%조사처리(CALLNAME:MASTER,"는")% 잠시 그대로 있었다……
+				PRINTFORMW %CALLNAME%의 어깨를 부드럽게 안은 채、%마스터는% 잠시 그대로 있었다……
 			ENDIF
 		;발정중
 		ELSEIF (위험일()) == 2 || (위험일()) == 3
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 말하기도 전에、%조사처리(CALLNAME,"가")% 가슴에 뛰어들었다。
-			PRINTFORMW 받아내지 못한 %조사처리(CALLNAME:MASTER,"를")% 넘어뜨리고선 %조사처리(CALLNAME,"는")% 오로지 가랑이를 비벼댔다。
+			PRINTFORMW %마스터가% 말하기도 전에、%조사처리(CALLNAME,"가")% 가슴에 뛰어들었다。
+			PRINTFORMW 받아내지 못한 %마스터를% 넘어뜨리고선 %조사처리(CALLNAME,"는")% 오로지 가랑이를 비벼댔다。
 			PRINTFORMW 「하아……하아……%CSTR:이인칭%……%CSTR:이인칭%……엇！」
 			PRINTFORMW 「……응、읏……읏……っ%UNICODE(0x2661)%」
 			PRINTFORMW 발정해 버린 %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 입술을 빼앗더니、 숨이 멎을 기세로 들이마셨다。
@@ -498,7 +498,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW %조사처리(CALLNAME,"는")% 싱글벙글 무구한 미소를 띠었다。
 			PRINTFORMW 「%CSTR:이인칭%……아이、만들래……？」
 			PRINTFORMW 「……%CSTR:일인칭%의 거기、두근、거……려？」
-			PRINTFORMW 부끄러운 기색도 없는 태도에、%조사처리(CALLNAME:MASTER,"는")% 빨려가듯 %조사처리(CALLNAME,"를")% 쓰러뜨리고 있었다。
+			PRINTFORMW 부끄러운 기색도 없는 태도에、%마스터는% 빨려가듯 %조사처리(CALLNAME,"를")% 쓰러뜨리고 있었다。
 		;통상
 		ELSE
 			;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
@@ -530,17 +530,17 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ELSEIF TALENT:3 || TALENT:6
 		;妊娠中
 		IF TALENT:153
-			;父親が당신
+			;父親があなた
 			IF CFLAG:102 == 1
-				PRINTFORMW 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 보고선 미소지었다。
+				PRINTFORMW 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% %마스터를% 보고선 미소지었다。
 				PRINTFORMW 「아……파파%UNICODE(0x2661)%」
 				PRINTFORMW 「후후%UNICODE(0x2661)%　이봐요、파파……왔어、요？」
 				PRINTFORMW 「…………………무우」
 				PRINTFORMW 「%CSTR:이인칭%………이 아이、부끄럼쟁이야」
 				PRINTFORMW ……음、아직 여러가지로 빠르다고 생각한다。
-			;당신以外
+			;あなた以外
 			ELSE
-				PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 방에 들어오자、가슴에 뛰어들었다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 방에 들어오자、가슴에 뛰어들었다。
 				PRINTFORMW 「………미안、해」
 				PRINTFORMW 「%CSTR:일인칭%、%CSTR:일인칭%의、뱃속、에……%CSTR:일인칭%……앗！」
 				PRINTFORMW 「……버리지、말아……줘」
@@ -548,7 +548,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			ENDIF
 		;발정중
 		ELSEIF (위험일()) == 2 || (위험일()) == 3
-			PRINTFORMW %조사처리(CALLNAME,"는")% 발을 모으고、눈을 치켜뜬 채 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+			PRINTFORMW %조사처리(CALLNAME,"는")% 발을 모으고、눈을 치켜뜬 채 %마스터를% 보았다。
 			PRINTFORMW 「……%CSTR:이인칭%……참기、힘들……힘들、어……」
 			PRINTFORMW 「돼……？　저기……참지、않、아도……돼？」
 			PRINTFORMW 대답하기도 전에、%조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 뛰어들었다。
@@ -575,7 +575,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW ……지금、말했잖아？　라고 하면 또 때릴 테니 자중했다。
 			ELSE
 				PRINTFORMW 「%CSTR:이인칭%……」
-				PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")% ………기다리는 거……특기、아니、야」
+				PRINTFORMW 「……%일인칭은%………기다리는 거……특기、아니、야」
 				PRINTFORMW 「너무…………기다리게、하면」
 				PRINTFORMW 「웅………밀어닥칠、꺼야？」
 				PRINTFORMW 농담같은 말투지만 、%CALLNAME%의 눈은 진심이었다。
@@ -585,7 +585,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ELSEIF TALENT:4 || TALENT:7
 		;妊娠中
 		IF TALENT:153
-			PRINTFORMW 배를 쓰다듬고 있는 %조사처리(CALLNAME,"는")% 、%조사처리(CALLNAME:MASTER,"를")% 보며 수상하게 미소지었다。
+			PRINTFORMW 배를 쓰다듬고 있는 %조사처리(CALLNAME,"는")% 、%마스터를% 보며 수상하게 미소지었다。
 			PRINTFORMW 「……%CSTR:일인칭%、임신……하고、있는데%UNICODE(0x2661)%」
 			PRINTFORMW 「응훗……괜찮、아？」
 			PRINTFORMW 「…………이 아이、도……밀크、마시고 싶어해……섯%UNICODE(0x2661)%」
@@ -598,7 +598,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 발정해 버린 %CALLNAME%의 눈에는、%CALLNAME:MASTER%의 가랑이 밖에 보이지 않는다。
 		;위험일
 		ELSEIF (위험일()) == 1
-			PRINTFORMW %조사처리(CALLNAME,"는")% 콘돔 풍선을 입에 문 채로、열띤 눈으로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+			PRINTFORMW %조사처리(CALLNAME,"는")% 콘돔 풍선을 입에 문 채로、열띤 눈으로 %마스터를% 보았다。
 			PRINTFORMW 「%CSTR:이인칭%、오늘、이지……？　안에 싸면、안되는 날……말이야」
 			PRINTFORMW 「……그러니까」
 			PRINTFORMW 라고 말한 %조사처리(CALLNAME,"는")% 풍선의 내용물을、덧니로 둘로 찢었다。
@@ -617,7 +617,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「……응、%CSTR:일인칭%、암캐……암캐、암캐……이니까……%UNICODE(0x2661)%」
 				PRINTFORMW 「나쁜 짓、해、줘어……………길들여、줘%UNICODE(0x2661)%」
 			ELSE
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 방에 들어가자、%조사처리(CALLNAME,"는")% 달려들어 목을 부둥켜 안았다。
+				PRINTFORMW %마스터가% 방에 들어가자、%조사처리(CALLNAME,"는")% 달려들어 목을 부둥켜 안았다。
 				PRINTFORMW 「%CSTR:이인칭%……응、읏…………혀、내밀어줘……？」
 				PRINTFORMW 억지로 입을 맞추고、마치 범하는 듯한 움직임으로 %CALLNAME:MASTER%의 입속을 유린했다。
 			ENDIF
@@ -626,7 +626,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	ELSEIF TALENT:5 || TALENT:8
 		;妊娠中
 		IF TALENT:153
-			PRINTFORMW 편안한 듯한 표정으로 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% 、%조사처리(CALLNAME:MASTER,"를")% 보자 표정을 굳혔다。
+			PRINTFORMW 편안한 듯한 표정으로 배를 쓰다듬고 있던 %조사처리(CALLNAME,"는")% 、%마스터를% 보자 표정을 굳혔다。
 			PRINTFORMW 「아……………벌、입니……까？」
 			PRINTFORMW 부들부들 작게 떨면서、%조사처리(CALLNAME,"는")% 자신의 배를 소중한 듯이 감싸안았다。
 			PRINTFORMW 임신 중에 처벌할 생각은 없었지만、%CALLNAME:MASTER%보다도 아이의 쪽을 더 소중히 여기는 것 같다。
@@ -637,7 +637,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			PRINTFORMW 「……하아……하아……하아」
 			PRINTFORMW 「%CSTR:이인칭%……저、저기……」
 			PRINTFORMW 무언가 말하고 싶은 듯이 힐끗힐끗 이쪽을 보고 있는%CALLNAME%。
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 손 하나도 움직이지 말고 제대로 부탁이라도 해봐、라고 말했다。
+			PRINTFORMW %마스터는% 손 하나도 움직이지 말고 제대로 부탁이라도 해봐、라고 말했다。
 			PRINTFORMW 「죄、죄송、합니다………저의、질내에……질내에、주세요……옷！」
 			PRINTFORMW 「더……뎌는、아、안돼、못쓰게 되、되어버립니다……%UNICODE(0x2661)%」
 			PRINTFORMW 「엉망、진창、으로…………해줘……」
@@ -698,8 +698,8 @@ DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	PRINTFORMW 「……죽인다」
-	PRINTFORMW 날카롭게 튀어나온 말은、%조사처리(CALLNAME:MASTER,"를")% 겁먹게 할 정도의 박력이 있었다。
-	PRINTFORMW 등을 돌리지 않고、%조사처리(CALLNAME,"를")% 응시한 채로 %조사처리(CALLNAME:MASTER,"는")% COMP에 되돌렸다。
+	PRINTFORMW 날카롭게 튀어나온 말은、%마스터를% 겁먹게 할 정도의 박력이 있었다。
+	PRINTFORMW 등을 돌리지 않고、%조사처리(CALLNAME,"를")% 응시한 채로 %마스터는% COMP에 되돌렸다。
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
@@ -724,19 +724,19 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	IF TALENT:170
 		;妊娠中
 		IF TALENT:153
-			;父親が당신
+			;父親があなた
 			IF CFLAG:102 == 1
 				PRINTFORMW 「미안……해？」
 				PRINTFORMW 「……%CSTR:일인칭%、체력……떨어져、서」
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 신경 쓰지 말라고 하자……。
+				PRINTFORMW %마스터가% 신경 쓰지 말라고 하자……。
 				PRINTFORMW 「……응후%UNICODE(0x2661)%　……용서해、주다、니」
 				PRINTFORMW 「파파、상냥하……네%UNICODE(0x2661)%」
 				PRINTFORMW 그렇게 말하며 %조사처리(CALLNAME,"는")% 배를 쓰다듬었다。
-			;당신以外
+			;あなた以外
 			ELSE
 				PRINTFORMW 「……미안……해？」
 				PRINTFORMW 「%CSTR:일인칭%……%CSTR:일인칭%……」
-				PRINTFORMW 계속 사죄를 반복하는 %CALLNAME%의 머리를 %조사처리(CALLNAME:MASTER,"는")% 쓰다듬었다。
+				PRINTFORMW 계속 사죄를 반복하는 %CALLNAME%의 머리를 %마스터는% 쓰다듬었다。
 				PRINTFORMW 이 정도로 %CALLNAME%의 마음이 풀린다고는 생각하지 않지만、적어도……
 			ENDIF
 		;발정중
@@ -755,7 +755,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			PRINTFORMW 「……격렬、해%UNICODE(0x2661)%」
 			PRINTFORMW 「조금、쉬면……괜찮아……갠찬、으니、까……」
 			PRINTFORMW 그렇게 말하며 %조사처리(CALLNAME,"는")% 코 하고、쓰러져、숨소리를 내기 시작했다。
-			PRINTFORMW 감기 걸리지 않도록、이불을 덮어준 뒤 %조사처리(CALLNAME:MASTER,"는")% 방을 떠났다。
+			PRINTFORMW 감기 걸리지 않도록、이불을 덮어준 뒤 %마스터는% 방을 떠났다。
 		ENDIF
 	;연모, 친애
 	ELSEIF TALENT:3 || TALENT:6
@@ -764,15 +764,15 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			IF CFLAG:102 == 1
 				PRINTFORMW 「미안……해？」
 				PRINTFORMW 「……%CSTR:일인칭%、체력……떨어져、서」
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 신경 쓰지 말라고 하자……。
+				PRINTFORMW %마스터가% 신경 쓰지 말라고 하자……。
 				PRINTFORMW 「……응후%UNICODE(0x2661)%　……용서해、주다、니」
 				PRINTFORMW 「파파、상냥하……네%UNICODE(0x2661)%」
 				PRINTFORMW 그렇게 말하며 %조사처리(CALLNAME,"는")% 배를 쓰다듬었다。
-			;당신以外
+			;あなた以外
 			ELSE
 				PRINTFORMW 「……미안……해？」
 				PRINTFORMW 「%CSTR:일인칭%……%CSTR:일인칭%……」
-				PRINTFORMW 계속 사죄를 반복하는 %CALLNAME%의 머리를 %조사처리(CALLNAME:MASTER,"는")% 쓰다듬었다。
+				PRINTFORMW 계속 사죄를 반복하는 %CALLNAME%의 머리를 %마스터는% 쓰다듬었다。
 				PRINTFORMW 이 정도로 %CALLNAME%의 마음이 풀린다고는 생각하지 않지만、적어도……
 			ENDIF
 		;발정중
@@ -821,12 +821,12 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			PRINTFORMW 「가……감、사……합、니다……%UNICODE(0x2661)%」
 			PRINTFORMW 「………뱃속의、아이……에게 닿을 것、같아……서」
 			PRINTFORMW 힘을 다한 나머지、뱃속의 아이를 걱정하고 있는 %CALLNAME%。
-			PRINTFORMW ……뭔가 재미는 없지만、%조사처리(CALLNAME:MASTER,"는")% 조교를 끝내고、방을 뒤로 했다。
+			PRINTFORMW ……뭔가 재미는 없지만、%마스터는% 조교를 끝내고、방을 뒤로 했다。
 		;발정중
 		ELSEIF (위험일()) == 2 || (위험일()) == 3
 			PRINTFORMW 「대단했습……니다……%UNICODE(0x2661)%」
 			PRINTFORMW 칠칠치 못하게 침을 늘어뜨리면서 %조사처리(CALLNAME,"는")% 얼빠진 눈으로 말했다。
-			PRINTFORMW 체액으로 만들어진 웅덩이에 %조사처리(CALLNAME:MASTER,"가")% 눈짓을 주면……
+			PRINTFORMW 체액으로 만들어진 웅덩이에 %마스터가% 눈짓을 주면……
 			PRINTFORMW 「아…………%CSTR:일인칭%의 혀、로……깨끗하、게……」
 			PRINTFORMW 「깨끗하、게………………」
 			PRINTFORMW 혀를 쭉 늘린 채로、%조사처리(CALLNAME,"는")% 웅덩이에 무너지듯이 쓰러지고 말았다。
@@ -845,13 +845,13 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	IF TALENT:170
 		;妊娠中
 		IF TALENT:153
-			;父親が당신
+			;父親があなた
 			IF CFLAG:102 == 1
 				PRINTFORMW 「응………끝이、네？」
 				PRINTFORMW 「………그럼、파파%UNICODE(0x2661)%」
 				PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 손을 잡고선、자신의 배로 끌어당겼다。
 				PRINTFORMW 「셋이、서………잠깐、이야기、해%UNICODE(0x2661)%」
-			;당신以外
+			;あなた以外
 			ELSE
 				PRINTFORMW 「……%CSTR:이인칭%」
 				PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 팔을 조심스래 잡았다。
@@ -883,12 +883,12 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	ELSEIF TALENT:3 || TALENT:6
 		;妊娠中
 		IF TALENT:153
-			;父親が당신
+			;父親があなた
 			IF CFLAG:102 == 1
 				PRINTFORMW 「응……이걸로、끝……？」
 				PRINTFORMW 「………파파、상냥하……네%UNICODE(0x2661)%」
 				PRINTFORMW %조사처리(CALLNAME,"는")% 배를 쓰다듬으며 웃었다。
-			;당신以外
+			;あなた以外
 			ELSE
 				PRINTFORMW 「……%CSTR:이인칭%」
 				PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 팔을 조심스럽게 잡았다。
@@ -922,7 +922,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 		;발정중
 		ELSEIF (위험일()) == 2 || (위험일()) == 3
 			PRINTFORMW 「……헤으……아……우우……%UNICODE(0x2661)%」
-			PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% ……아직……아지익……%UNICODE(0x2661)%」
+			PRINTFORMW 「%일인칭은% ……아직……아지익……%UNICODE(0x2661)%」
 			PRINTFORMW 매달려오면서도 사타구니를 문질러 오는 %조사처리(CALLNAME,"를")% 억지로 떼어냈다。
 			PRINTFORMW 「아……이번、에는……그런、플레이………？」
 			PRINTFORMW 발정해 버린 %조사처리(CALLNAME,"는")% 방치플레이이라고도 생각했는지、황홀한 표정으로 몸을 떨었다。
@@ -946,7 +946,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 「………………아」
 			PRINTFORMW 「……아니、아무것도……아니、에요」
 			PRINTFORMW 뱃속에 아이가 있으면서도、%조사처리(CALLNAME,"는")% 아직 부족하다고 말하는 것처럼 신음했다。
-			PRINTFORMW %CALLNAME%의 그 모습에 %조사처리(CALLNAME:MASTER,"는")% 만족하면서、방을 뒤로 했다。
+			PRINTFORMW %CALLNAME%의 그 모습에 %마스터는% 만족하면서、방을 뒤로 했다。
 		;발정중
 		ELSEIF (위험일()) == 2 || (위험일()) == 3
 			PRINTFORMW 「…………아」
@@ -1029,7 +1029,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORMW 「……이거、좋아%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、츄、더……해%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%에게 졸라지는 대로 격렬히 입을 맞췄다。
+						PRINTFORMW %마스터는% %CALLNAME%에게 졸라지는 대로 격렬히 입을 맞췄다。
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
@@ -1047,7 +1047,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORMW 「……이거、좋아%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、츄、더……해%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%에게 졸라지는 대로 격렬히 입을 맞췄다。
+						PRINTFORMW %마스터는% %CALLNAME%에게 졸라지는 대로 격렬히 입을 맞췄다。
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -1194,7 +1194,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (위험일()) == 2 || (위험일()) == 3
 						PRINTFORMW 「……읏……간지、러、워？」
 						PRINTFORMW 「근질글질、해 줘……」
-						PRINTFORMW 의도적으로 시선을 무시한 채 %조사처리(CALLNAME:MASTER,"는")% 손가락을 출납했다。
+						PRINTFORMW 의도적으로 시선을 무시한 채 %마스터는% 손가락을 출납했다。
 						
 					;위험일
 					ELSEIF (위험일()) == 1
@@ -1216,7 +1216,7 @@ SELECTCASE SELECTCOM
 					ELSEIF (위험일()) == 2 || (위험일()) == 3
 						PRINTFORMW 「……읏……간지、러、워？」
 						PRINTFORMW 「근질글질、해 줘……」
-						PRINTFORMW 의도적으로 시선을 무시한 채 %조사처리(CALLNAME:MASTER,"는")% 손가락을 출납했다。
+						PRINTFORMW 의도적으로 시선을 무시한 채 %마스터는% 손가락을 출납했다。
 					;위험일
 					ELSEIF (위험일()) == 1
 						PRINTFORMW 「……%CSTR:이인칭%、소、손가락、으론……」
@@ -1231,7 +1231,7 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「……읏……간지러、업다、고？」
 						PRINTFORMW 「근질근질、해줘……」
-						PRINTFORMW 의도적으로 시선을 무시하고 있는 %조사처리(CALLNAME:MASTER,"는")% 손가락을 넣고 빼는 것을 반복했다。
+						PRINTFORMW 의도적으로 시선을 무시하고 있는 %마스터는% 손가락을 넣고 빼는 것을 반복했다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「%CSTR:이인칭%……%CSTR:일인칭%、의 것은……어떻、습니까？」
@@ -1356,11 +1356,11 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「읏……읏%UNICODE(0x2661)%」
 					PRINTFORMW 「앗、오、오싹오싹、해버리며언……시、시러……%UNICODE(0x2661)%」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 몸에 힘이 빠져서 %조사처리(CALLNAME:MASTER,"가")% 해버리는 대로 되어버리고 있다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 몸에 힘이 빠져서 %마스터가% 해버리는 대로 되어버리고 있다。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「응크읏！　……조、조금、놀랐을……뿐、입니다%UNICODE(0x2661)%」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 몸에 힘이 빠져서 %조사처리(CALLNAME:MASTER,"가")% 해버리는 대로 되어버리고 있다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 몸에 힘이 빠져서 %마스터가% 해버리는 대로 되어버리고 있다。
 				ENDIF
 				CFLAG:305 = 4
 			;굴복각인Lv3
@@ -1520,7 +1520,7 @@ SELECTCASE SELECTCOM
 			PRINTFORMW 「아、읏……。……！？　아、싫、지금껀、아냣！」
 			PRINTFORMW 달콤한 한숨을 토해놓고선、뭐가 아니란 거냐。
 			PRINTFORMW 「방、금、껀、노、놀라……서엇、앗、싫엇！？」
-			PRINTFORMW 변명이 끝나기도 전에、%조사처리(CALLNAME:MASTER,"는")% 애무를 재개했다。
+			PRINTFORMW 변명이 끝나기도 전에、%마스터는% 애무를 재개했다。
 			CFLAG:308 = 1
 		;2번째 이후
 		ELSE
@@ -1540,7 +1540,7 @@ SELECTCASE SELECTCOM
 					;통상
 					ELSE
 						PRINTFORMW 「아、후아앗、냐아……앗%UNICODE(0x2661)%」
-						PRINTFORMW 여전히 가슴이 약한 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 하는 대로 쾌락을 탐했다。
+						PRINTFORMW 여전히 가슴이 약한 %조사처리(CALLNAME,"는")% %마스터가% 하는 대로 쾌락을 탐했다。
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
@@ -1556,7 +1556,7 @@ SELECTCASE SELECTCOM
 					;통상
 					ELSE
 						PRINTFORMW 「아、후아앗、냐아……앗%UNICODE(0x2661)%」
-						PRINTFORMW 여전히 가슴이 약한 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 하는 대로 쾌락을 탐했다。
+						PRINTFORMW 여전히 가슴이 약한 %조사처리(CALLNAME,"는")% %마스터가% 하는 대로 쾌락을 탐했다。
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -1693,7 +1693,7 @@ SELECTCASE SELECTCOM
 					;통상
 					ELSE
 						PRINTFORMW 「가슴、은、약한、데에……엣！」
-						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%조사처리(CSTR:일인칭,"를")%……싫어、해……？」
+						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%일인칭을%……싫어、해……？」
 						PRINTFORMW 슬픈 표정을 짓는 %CALLNAME%에게、귀여워、라고만 했는데도、얼굴을 확 붉게 물들였다。
 						PRINTFORMW 「……바보오、그、그런、걸、말해버리면……아우、싫、핫、머、멈출 수、웃～～～ッ%UNICODE(0x2661)%」
 					ENDIF
@@ -1712,7 +1712,7 @@ SELECTCASE SELECTCOM
 					;통상
 					ELSE
 						PRINTFORMW 「가슴、은、약한、데에……엣！」
-						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%조사처리(CSTR:일인칭,"를")%……싫어、해……？」
+						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%일인칭을%……싫어、해……？」
 						PRINTFORMW 슬픈 표정을 짓는 %CALLNAME%에게、귀여워、라고만 했는데도、얼굴을 확 붉게 물들였다。
 						PRINTFORMW 「……바보오、그、그런、걸、말해버리면……아우、싫、핫、머、멈출 수、우～～～웃%UNICODE(0x2661)%」
 					ENDIF
@@ -1730,7 +1730,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
 				PRINTFORMW 「………응、응、응、아、앙、아、앗……%UNICODE(0x2661)%」
 				PRINTFORMW 「……명령、이니까、읏、거역할 수、없으니까……읏%UNICODE(0x2661)%」
-				PRINTFORMW 더 이상 %조사처리(CALLNAME:MASTER,"가")% 무엇 하나 하지 않아도 %조사처리(CALLNAME,"는")% 가슴자위를 언제까지고 계속할 것 같다。
+				PRINTFORMW 더 이상 %마스터가% 무엇 하나 하지 않아도 %조사처리(CALLNAME,"는")% 가슴자위를 언제까지고 계속할 것 같다。
 				CFLAG:310 = 3
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
@@ -1768,7 +1768,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:이인칭%의、손、이라면、바로、야？바로、바로、바ㄹ……훗、쿳、응으……읏！」
 					;통상
 					ELSE
-						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%조사처리(CSTR:일인칭,"를")%……싫어、해……？」
+						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%일인칭을%……싫어、해……？」
 						PRINTFORMW 슬픈 표정을 짓는 %CALLNAME%에게、귀여워、라고만 했는데도、얼굴을 확 붉게 물들였다。
 						PRINTFORMW 「……바보오、그、그런、걸、말해버리면……아우、싫、핫、머、멈출 수、우～～～웃%UNICODE(0x2661)%」
 					ENDIF
@@ -1786,7 +1786,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:이인칭%의、손、이라면、바로、야？바로、바로、바ㄹ……훗、쿳、응으……읏！」
 					;통상
 					ELSE
-						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%조사처리(CSTR:일인칭,"를")%……싫어、해……？」
+						PRINTFORMW 「……스스로、하라니、%CSTR:이인칭%、%일인칭을%……싫어、해……？」
 						PRINTFORMW 슬픈 표정을 짓는 %CALLNAME%에게、귀여워、라고만 했는데도、얼굴을 확 붉게 물들였다。
 						PRINTFORMW 「……바보오、그、그런、걸、말해버리면……아우、싫、핫、머、멈출 수、웃～～～ッ%UNICODE(0x2661)%」
 					ENDIF
@@ -1979,7 +1979,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW %조사처리(CALLNAME,"는")% 부우 하고、심통이 났는지 삐친 듯이 외면했다。
 					PRINTFORMW 「%조사처리(CSTR:이인칭,"랑")%、언제、든……하려고、이、닦았、는데」
 					PRINTFORMW 「……늦어」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 사과하자、%조사처리(CALLNAME,"는")% 쿵하고 이마를 가슴에 댔다。
+					PRINTFORMW %마스터가% 사과하자、%조사처리(CALLNAME,"는")% 쿵하고 이마를 가슴에 댔다。
 					PRINTFORMW 「………화내지、않았、어？」
 					PRINTFORMW 「……%CSTR:일인칭%의、마음이、정리될 때、까지……간직해서、다행이야」
 					PRINTFORMW 「퍼스트、키스……니까、ね%UNICODE(0x2661)%」
@@ -2049,14 +2049,14 @@ SELECTCASE SELECTCOM
 
 ;-------------------------------------------------
 ;21,아무것도안한다
-;조교初回に選ぶことで、전투구상用のCFLAGを制御する。
+;調教初回に選ぶことで、戦闘口上用のCFLAGを制御する。
 ;-------------------------------------------------
 	CASE 21
 		CALL TRAIN_MESSAGE
-		;조교の最初に選んだ場合
-		;전투時구상범위について
+		;調教の最初に選んだ場合
+		;戦闘時口上範囲について
 		IF PREVCOM == -1
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 싸울 때의 %조사처리(CALLNAME,"를")% 떠올렸다。
+			PRINTFORMW %마스터는% 싸울 때의 %조사처리(CALLNAME,"를")% 떠올렸다。
 			PRINTFORMW 그다지 말수가 많은 편이 아닌 %CALLNAME%지만、전투에선 목소리를 참는 것처럼 보인다。
 			PRINTFORMW 「…………%CSTR:이인칭%、뭐야？」
 			
@@ -2164,7 +2164,7 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:313 == 0
 			PRINTFORMW 「……휴식？」
 			PRINTFORMW 「……………」
-			PRINTFORMW 아무것도 하지 않는 %조사처리(CALLNAME:MASTER,"를")% 의심스럽게 생각하는 것일까。
+			PRINTFORMW 아무것도 하지 않는 %마스터를% 의심스럽게 생각하는 것일까。
 			PRINTFORMW %조사처리(CALLNAME,"는")% 의아한 얼굴인 채 데굴 하고 뒹굴며、쉬었다。
 			CFLAG:313 = 1
 		;2번째 이후
@@ -2185,7 +2185,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 라 말하면서도、껴안고만 있는 걸 보면、아직 걱정하고 있는 듯 하다。
 					;위험일
 					ELSEIF (위험일()) == 1
-						PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 껴안고선、실실 웃었다。
+						PRINTFORMW %조사처리(CALLNAME,"는")% %마스터를% 껴안고선、실실 웃었다。
 						PRINTFORMW 「……%CSTR:이인칭%의 냄새……%UNICODE(0x2661)%」
 						PRINTFORMW 「………………행복해%UNICODE(0x2661)%」
 					;통상
@@ -2199,7 +2199,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW 「……거북이라면……할 수 없었으、니까……%UNICODE(0x2661)%」
 						ELSEIF Local:1 == 1
 							PRINTFORMW 휴식한다 말하자 %조사처리(CALLNAME,"는")% 데굴 하고 누웠다。
-							PRINTFORMW 음료수라도 마실까하고 %조사처리(CALLNAME:MASTER,"가")% 일어나려하자、
+							PRINTFORMW 음료수라도 마실까하고 %마스터가% 일어나려하자、
 							PRINTFORMW 「……안돼」
 							PRINTFORMW 「……떨어지면、안돼」
 							PRINTFORMW 결국 둘이서 손을 잡고 음료수를 찾으러 갔다。
@@ -2207,7 +2207,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 옆에 허리를 내리곤、몸을 기댔다。
 							PRINTFORMW 「휴식……해？」
 							PRINTFORMW 「……%CSTR:이인칭%는、언제나……바、빠」
-							PRINTFORMW 「……하루、쉬어도……%조사처리(CSTR:일인칭,"는")% 、좋、아……？」
+							PRINTFORMW 「……하루、쉬어도……%일인칭은% 、좋、아……？」
 							PRINTFORMW 「함께……라면%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
@@ -2215,8 +2215,8 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:3 || TALENT:6
 					;발정중
 					IF (위험일()) == 2 || (위험일()) == 3
-						PRINTFORMW %조사처리(CALLNAME,"는")% 눈을 치뜬 채 머뭇머뭇 %조사처리(CALLNAME:MASTER,"를")% 보았다。
-						PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")% 、피곤한거、아니……야？」
+						PRINTFORMW %조사처리(CALLNAME,"는")% 눈을 치뜬 채 머뭇머뭇 %마스터를% 보았다。
+						PRINTFORMW 「……%일인칭은% 、피곤한거、아니……야？」
 						PRINTFORMW 「이、이봐……자？」
 						PRINTFORMW 깡충거리며 그 자리에서 뛰는 모습을 마음껏 만끽했다。
 					;위험일
@@ -2299,13 +2299,13 @@ SELECTCASE SELECTCOM
 				ELSE
 					;妊娠中
 					IF TALENT:153
-						;父親が당신
+						;父親があなた
 						IF CFLAG:102 == 1
 							PRINTFORMW 「……파파%UNICODE(0x2661)%」
 							PRINTFORMW 「아기……이름、생각、했어？」
 							PRINTFORMW 생글생글 웃는 %조사처리(CALLNAME,"과")% 함께、아이의 이름을 생각하기로 했다。
 							PRINTFORMW 「응……곤잘레스、라던지……강할거 같지 않아？」
-						;당신以外
+						;あなた以外
 						ELSE
 							PRINTFORMW 「……%CSTR:이인칭%」
 							PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 무릎 위에 올라가、응석 부리듯 고개를 비볐다。
@@ -2316,14 +2316,14 @@ SELECTCASE SELECTCOM
 						ENDIF
 					;발정중
 					ELSEIF (위험일()) == 2 || (위험일()) == 3
-						PRINTFORMW %조사처리(CALLNAME,"는")% 열띤 시선으로 %조사처리(CALLNAME:MASTER,"를")% 보고있었다。
-						PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 、말야……수행을、관장하는……자」
+						PRINTFORMW %조사처리(CALLNAME,"는")% 열띤 시선으로 %마스터를% 보고있었다。
+						PRINTFORMW 「%일인칭은% 、말야……수행을、관장하는……자」
 						PRINTFORMW 「수행은、타액도 관장하……니까……에또……그……」
 						PRINTFORMW 「……………츄、해줘？」
 						PRINTFORMW 도중부터 구실을 붙이는 게 귀찮아진 것 같다。
 					;위험일
 					ELSEIF (위험일()) == 1
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%에게 팔로 꽉 껴안겨、꼼짝 할 수 없게 됐다。
+						PRINTFORMW %마스터는% %CALLNAME%에게 팔로 꽉 껴안겨、꼼짝 할 수 없게 됐다。
 						PRINTFORMW 「……%조사처리(CSTR:일인칭,"랑")%、%CSTR:이인칭%의、아이……는」
 						PRINTFORMW 「어떤、아이……일까……？」
 						PRINTFORMW 「……분명、귀여울……꺼야」
@@ -2376,7 +2376,7 @@ SELECTCASE SELECTCOM
 					;위험일
 					ELSEIF (위험일()) == 1
 						PRINTFORMW 「……%CSTR:이인칭%、무릎」
-						PRINTFORMW 「무릎 위、에……%조사처리(CSTR:일인칭,"를")% 、올려」
+						PRINTFORMW 「무릎 위、에……%일인칭을% 、올려」
 						PRINTFORMW 부탁도 뭣도 아닌、%CALLNAME%의 명령대로 무릎 위에 앉히자。
 						PRINTFORMW 평소와 달리 %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 바짝 붙었다。
 						PRINTFORMW 「읏……%CSTR:이인칭%。아이、생기면……이런 느낌、이구나%UNICODE(0x2661)%」
@@ -2385,7 +2385,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						LOCAL = RAND:3
 						IF LOCAL == 0
-							PRINTFORMW 「……애초、에、오행、은、쇼에、불과해」
+							PRINTFORMW 「……애초、에、오행、은、상(象)에、불과해」
 							PRINTFORMW 「Ａ나、Ｂ、간지、랑、같은……단순한、기호」
 							PRINTFORMW 「수행、은、오행의 다섯번째……란、정도의、의미」
 							PRINTFORMW 「사실、물을 어떻게、라던지……%CSTR:일인칭%、그러한 전설、그다지、없어」
@@ -2394,7 +2394,7 @@ SELECTCASE SELECTCOM
 							PRINTFORMW ……그걸 이쪽에 물어봐도。
 						ELSEIF LOCAL == 1
 							PRINTFORMW 「후에……？　%CSTR:일인칭%、의、타입……？」
-							PRINTFORMW 「………수・수속성……？」
+							PRINTFORMW 「………수・빙속성……？」
 							PRINTFORMW 아니、그거 말고。
 							PRINTFORMW 남성의 취향、이란 의미라고 덧붙이자、%조사처리(CALLNAME,"는")% 수상쩍은 미소를 띠었다。
 							PRINTFORMW 「……알고 있으면、서%UNICODE(0x2661)%」
@@ -2427,7 +2427,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:170
 				;妊娠中
 				IF TALENT:153
-					;父親が당신
+					;父親があなた
 					IF CFLAG:102 == 1
 						PRINTFORMW %조사처리(CALLNAME,"는")% 싱글벙글 웃으며、%CALLNAME:MASTER%의 뺨에 입을 맞췄다。
 						PRINTFORMW 「……읏」
@@ -2435,7 +2435,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 대가를 요구되지 않는 선물은、%CALLNAME%에게 특별한 것 같다。
 						PRINTFORMW 「인간은……좋겠、네……」
 						PRINTFORMW 「……아기、낳으면……%CSTR:일인칭%、잔뜩、선물、줄、생각%UNICODE(0x2661)%」
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 「……%CSTR:이인칭%、고마워%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 선물을 받자、살그머니 %CALLNAME:MASTER%에게 바싹 다가갔다。
@@ -2447,7 +2447,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 목을 끌어안고선、볼을 비벼댔다。
 					PRINTFORMW 「～～～～っ%UNICODE(0x2661)%」
 					PRINTFORMW 「……엣찌、보다……기쁠、지도%UNICODE(0x2661)%」
-					PRINTFORMW 「%CSTR:이인칭%에겐……%조사처리(CSTR:일인칭,"는")% 、여자……구、나%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:이인칭%에겐……%일인칭은% 、여자……구、나%UNICODE(0x2661)%」
 				;위험일
 				ELSEIF (위험일()) == 1
 					PRINTFORMW %조사처리(CALLNAME,"는")% 싱글벙글 웃으며、%CALLNAME:MASTER%의 뺨에 입을 맞췄다。
@@ -2464,7 +2464,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……♪」
 						PRINTFORMW 깡충깡충 뛰면서 %조사처리(CALLNAME,"는")% 기쁨을 표현했다。
 						PRINTFORMW 「……%CSTR:일인칭%도、%CSTR:이인칭%한테……선물、하고、싶어」
-						PRINTFORMW 「%조사처리(CSTR:일인칭,"를")% 、받아、줄、래……？」
+						PRINTFORMW 「%일인칭을% 、받아、줄、래……？」
 						PRINTFORMW 「아……이미、%CSTR:일인칭%、%CSTR:이인칭% 꺼……였지%UNICODE(0x2661)%」
 					ELSEIF LOCAL == 1
 						PRINTFORMW %조사처리(CALLNAME,"는")% 선물을 받자마자、방의 구석에 처박혔다。
@@ -2479,7 +2479,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……%CSTR:이인칭%」
 						PRINTFORMW 「%CSTR:일인칭%、말야？　……실은、금전운도、다루고、있어？」
 						PRINTFORMW 「에또、그러니까……」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 잠자코 고개를 가로젓자、%조사처리(CALLNAME,"는")% 킥하고 웃었다。
+						PRINTFORMW %마스터가% 잠자코 고개를 가로젓자、%조사처리(CALLNAME,"는")% 킥하고 웃었다。
 						PRINTFORMW 「……그럴거라、생각했어%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭%……지금、%CSTR:일인칭%……굉장히、행복해……%UNICODE(0x2661)%」
 					ENDIF
@@ -2498,9 +2498,9 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「……평생、걸려도、못……갚겠네%UNICODE(0x2661)%」
 				;통상
 				ELSE
-					PRINTFORMW %조사처리(CALLNAME,"는")% 선물을 받자、%조사처리(CALLNAME:MASTER,"를")% 껴안았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 선물을 받자、%마스터를% 껴안았다。
 					PRINTFORMW 「……이게、%조사처리(CSTR:일인칭,"가")% 할수 있는、최대한의、감사%UNICODE(0x2661)%」
-					PRINTFORMW 「%조사처리(CSTR:이인칭,"를")% ……앞으로、계속……지킬、께」
+					PRINTFORMW 「%이인칭을% ……앞으로、계속……지킬、께」
 				ENDIF
 			ENDIF
 			CFLAG:315 = 2
@@ -2558,13 +2558,13 @@ SELECTCASE SELECTCOM
 			ELSE
 				;妊娠中
 				IF TALENT:153
-					;父親が당신
+					;父親があなた
 					IF CFLAG:102 == 1
 						PRINTFORMW %CALLNAME%의 배에 손을 대자、손을 잡혔다。
 						PRINTFORMW 「……잡、았、다%UNICODE(0x2661)%」
 						PRINTFORMW 「에헤헤、오늘、은、쭉……이대로……야？」
 						PRINTFORMW 그것은 여러가지로 곤란하다。
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 「……%CSTR:이인칭%%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 등에 붙어、꼭 껴안았다。
@@ -2590,7 +2590,7 @@ SELECTCASE SELECTCOM
 					IF LOCAL == 0
 						PRINTFORMW %조사처리(CALLNAME,"는")% 정좌한 채 무릎을 탕탕 두드렸다。
 						PRINTFORMW 「응……무릎、베게。……어때？」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 하라는 대로 누웠다。
+						PRINTFORMW %마스터는% 하라는 대로 누웠다。
 					ELSEIF LOCAL == 1
 						PRINTFORMW 등 위에 올라탄 %조사처리(CALLNAME,"가")% 허리를 힘차게 지압했다。
 						PRINTFORMW 「……%CSTR:이인칭%……여기、너무、사용했어」
@@ -2622,14 +2622,14 @@ SELECTCASE SELECTCOM
 			IF TALENT:170
 				;妊娠中
 				IF TALENT:153
-					;父親が당신
+					;父親があなた
 					IF CFLAG:102 == 1
 						PRINTFORMW 태교에 좋은 곡을 구비해、둘이서 듣고 있자……
 						PRINTFORMW 「……색ー……색ー……」
 						PRINTFORMW ……어느새、%조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에 기댄 채 잠들어 버렸다。
 						PRINTFORMW 가끔은、이런 시간도 나쁘지 않을지도 모른다。
 						PRINTFORMW 「에헤헤………파파%UNICODE(0x2661)%」
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 「……응」
 						PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 어깨에 턱을 올린 채、축 기댔다。
@@ -2665,11 +2665,11 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「그럼……좋아%UNICODE(0x2661)%　」
 					ELSEIF LOCAL == 1
 						PRINTFORMW 둘이서 아무것도 하지 않은 채、조용히 보냈다。
-						PRINTFORMW 가끔 %조사처리(CALLNAME,"가")% 흘끗 %조사처리(CALLNAME:MASTER,"를")% 보고선 웃고 있다。
+						PRINTFORMW 가끔 %조사처리(CALLNAME,"가")% 흘끗 %마스터를% 보고선 웃고 있다。
 						PRINTFORMW 「………♪　………♪」
 						PRINTFORMW %CALLNAME%의 콧노래가 귀에 쏙쏙 들어온다。
 					ELSE
-						PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 지켜보고 있었다。
+						PRINTFORMW %조사처리(CALLNAME,"는")% %마스터를% 지켜보고 있었다。
 						PRINTFORMW 「……웅……웅、웅」
 						PRINTFORMW 「………%CSTR:이인칭%、은……멋있어」
 						PRINTFORMW 「응……？　확인、했을……뿐%UNICODE(0x2661)%
@@ -2681,7 +2681,7 @@ SELECTCASE SELECTCOM
 				;발정중
 				IF (위험일()) == 2 || (위험일()) == 3
 					PRINTFORMW 「……느긋한、것도、좋지……만」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 글썽이는 눈동자로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 글썽이는 눈동자로 %마스터를% 보았다。
 					PRINTFORMW 「………우～～……잠시만、참을……께」
 					PRINTFORMW 「잠깐만……이니、까？　진짜、잠깐、이니까？」
 					PRINTFORMW 그렇게 몇번이나 거듭 다짐받았다。
@@ -2734,8 +2734,8 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 빨래판으로 손빨래를 하고 있는 %조사처리(CALLNAME,"를")% 보고있으니、멋진 솜씨에 놀랐다。
 					PRINTFORMW 이것도 수 행에 친밀한 현무의 성질인 것일까、라고 감탄하고 있으니。
 					PRINTFORMW 「아니、야……？」
-					PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 위해……배웠、어」
-					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 、지금、신님이、아니라……아내……니、까」
+					PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 위해……배웠、어」
+					PRINTFORMW 「%일인칭은% 、지금、신님이、아니라……아내……니、까」
 					PRINTFORMW 「……꼼수、없、음%UNICODE(0x2661)%」
 				ELSEIF LOCAL == 1
 					PRINTFORMW %조사처리(CALLNAME,"과")% 둘이서 부엌에 섰다。
@@ -2763,7 +2763,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「…………%CSTR:이인칭%。……여자애、옷은……섬세、해」
 					PRINTFORMW 「………이건、양보、못、해？」
 					PRINTFORMW 뾰로통해진 %CALLNAME%에게 진심 설교를 당했다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 얌전히 시트를 담당하기로 했다。
+					PRINTFORMW %마스터는% 얌전히 시트를 담당하기로 했다。
 				ELSEIF LOCAL == 1
 					PRINTFORMW 「%CSTR:이인칭%、이쪽、은、%CSTR:일인칭%……할、께？」
 					PRINTFORMW 「……후훗%UNICODE(0x2661)%」
@@ -2800,7 +2800,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:170
 				IF ABL:14 >= 9
 					PRINTFORMW 「―――――――ッ♪」
-					PRINTFORMW 단 한 마디로 %조사처리(CALLNAME:MASTER,"는")% 떨면서、눈물을 흘리고 있는 자신을 깨달았다。
+					PRINTFORMW 단 한 마디로 %마스터는% 떨면서、눈물을 흘리고 있는 자신을 깨달았다。
 					PRINTFORMW ――그리고、생각해낸다。
 					PRINTFORMW %조사처리(CALLNAME,"가")% 담당하는 수행은、오정(五情)이라면 『슬픔』　오지(五志)라면 『두려움』이다。
 					PRINTFORMW 슬프면서도 끔찍한  %CALLNAME%의 노랫소리는、그럼에도 귀를 막고싶은 생각이 들지 않았다。
@@ -2808,9 +2808,9 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 규、하고 껴안는 %CALLNAME%의 안에서、수행을 담당하는 신임을 확실히 느꼈다。
 				ELSEIF ABL:14 >= 7
 					PRINTFORMW 「～～～ッ♪　～～～～ッ♪」
-					PRINTFORMW %CALLNAME%의 노랫소리에、정신이 든 %조사처리(CALLNAME:MASTER,"는")% 자신의 몸을 껴안고 있었다。
+					PRINTFORMW %CALLNAME%의 노랫소리에、정신이 든 %마스터는% 자신의 몸을 껴안고 있었다。
 					PRINTFORMW ……이 감정은、대체？
-					PRINTFORMW 「………안심、해？　%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의 것……이니까」
+					PRINTFORMW 「………안심、해？　%일인칭은% 、%CSTR:이인칭%의 것……이니까」
 					PRINTFORMW 「무서워하지……말아줘？」
 					PRINTFORMW ……대체、무슨 의미일까。
 				ELSEIF ABL:14 >= 5
@@ -2840,17 +2840,17 @@ SELECTCASE SELECTCOM
 			ELSE
 				IF ABL:14 >= 9
 					PRINTFORMW 「―――♪」
-					PRINTFORMW 단 한 마디로 %조사처리(CALLNAME:MASTER,"는")% 떨면서、눈물을 흘리고 있는 자신을 깨달았다。
+					PRINTFORMW 단 한 마디로 %마스터는% 떨면서、눈물을 흘리고 있는 자신을 깨달았다。
 					PRINTFORMW ――그리고、생각해낸다。
 					PRINTFORMW %조사처리(CALLNAME,"가")% 담당하는 수행은、오정(五情)이라면 『슬픔』　오지(五志)라면 『두려움』이다。
 					PRINTFORMW 슬프면서도 끔찍한  %CALLNAME%의 노랫소리는、그럼에도 귀를 막고싶은 생각이 들지 않았다。
 					PRINTFORMW 「……쿡%UNICODE(0x2661)%」
 				ELSEIF ABL:14 >= 7
 					PRINTFORMW 「～～～ッ♪　～～～～ッ♪」
-					PRINTFORMW %CALLNAME%의 노랫소리에、정신이 든 %조사처리(CALLNAME:MASTER,"는")% 자신의 몸을 껴안고 있었다。
+					PRINTFORMW %CALLNAME%의 노랫소리에、정신이 든 %마스터는% 자신의 몸을 껴안고 있었다。
 					PRINTFORMW ……이 감정은、대체？
 					PRINTFORMW 「……쿡%UNICODE(0x2661)%」
-					PRINTFORMW 「……무서워、하지……않아도 돼？　%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의、아군……이니까」
+					PRINTFORMW 「……무서워、하지……않아도 돼？　%일인칭은% 、%CSTR:이인칭%의、아군……이니까」
 					PRINTFORMW ……대체、무슨 의미일까。
 				ELSEIF ABL:14 >= 5
 					PRINTFORMW 「～～……っ♪　～～～♪」
@@ -2944,7 +2944,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 말을 내뱉을 때마다 몸을 흔들었다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 말을 내뱉을 때마다 몸을 흔들었다。
 					PRINTFORMW 「읏、앗、긋、그、래요……쓰레기、같은、암캐、이……니까%UNICODE(0x2661)%」
 					PRINTFORMW 「……교、교육、해줘……%UNICODE(0x2661)%　%CSTR:이인칭%、가、아……잔뜩%UNICODE(0x2661)%」
 				;복종, 예속
@@ -3040,7 +3040,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 「이거……다시 한번……하자%UNICODE(0x2661)%」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 고개를 돌리지 말라고 명령하니、%조사처리(CALLNAME,"는")% 새빨간 얼굴인 채로 화면을 응시했다。
+				PRINTFORMW %마스터가% 고개를 돌리지 말라고 명령하니、%조사처리(CALLNAME,"는")% 새빨간 얼굴인 채로 화면을 응시했다。
 				PRINTFORMW 「네、에……앞、앞으로、를 위해、서……」
 				PRINTFORMW 「공부……할께요……%UNICODE(0x2661)%」
 			ENDIF
@@ -3368,7 +3368,7 @@ SELECTCASE SELECTCOM
 				;그 이외
 				ELSE
 					PRINTFORMW 「……그런、거、까지」
-					PRINTFORMW 이를 갈면서 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 매섭게 째려보았다。
+					PRINTFORMW 이를 갈면서 %조사처리(CALLNAME,"는")% %마스터를% 매섭게 째려보았다。
 				ENDIF
 				CFLAG:326 = 1
 			;2번째 이후
@@ -3816,7 +3816,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 분유를 촉구하는 착유기의 움직임에 %조사처리(CALLNAME,"는")% 농락당하고 있다。
 						PRINTFORMW 손가락을 물고 침을 흘리는 모습은、얼이 빠진 눈과 함께 음란한 모습으로서는 비교할 곳이 없을 정도다。
 						PRINTFORMW 「밀크、나와、버려%UNICODE(0x2661)%　%CSTR:이인칭%에게、길들여진、가슴、에서%UNICODE(0x2661)%」
-						PRINTFORMW 「%조사처리(CSTR:일인칭,"를")% 、이렇、게、만든 것%UNICODE(0x2661)%　책임、져줘야……해%UNICODE(0x2661)%
+						PRINTFORMW 「%일인칭을% 、이렇、게、만든 것%UNICODE(0x2661)%　책임、져줘야……해%UNICODE(0x2661)%
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW %조사처리(CALLNAME,"는")% 네 발로 엎드린 상태에서 착유기가 주어오는 쾌락을 참으며、목구멍에서 소리를 내고 있다。
@@ -3865,7 +3865,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -3875,14 +3875,14 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……っ」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
 						PRINTFORMW 대답 대신、%조사처리(CALLNAME,"를")% 침대에 쓰러뜨렸다。
 						PRINTFORMW 「읏……네、……%CSTR:일인칭%의、첫 사람이、돼 줘……%UNICODE(0x2661)%」
 					;음란, 창부
@@ -3892,7 +3892,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「전혀、손、대주지 않으、니까……여자에게、흥미、없는 걸까、라고、걱정……했어%UNICODE(0x2661)%」
 						PRINTFORMW 「……%CSTR:일인칭%의、여기……%조사처리(CSTR:이인칭,"가")%、처음%UNICODE(0x2661)%」
 						PRINTFORMW 「기억에 남을、정도로……엉망진창으로、해줘%UNICODE(0x2661)%」
-						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %조사처리(CSTR:이인칭,"를")% 받아들여왔다。
+						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %이인칭을% 받아들여왔다。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 「…………네%UNICODE(0x2661)%」
@@ -3908,12 +3908,12 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 팔로 가슴을 가려、태아처럼 둥그렇게 움츠린 채、경계를 드러냈다。
 					PRINTFORMW 무릎을 가랑이 아래에 들이밀고선、억지로 다리를 벌려、팔을 잡아 가슴을 숨기지 못하게 했다。
 					PRINTFORMW 「싫………어………엇！」
-					PRINTFORMW 계약만 아니었다면、당장이라도 %조사처리(CALLNAME:MASTER,"를")% 날려 버렸을 것이다
+					PRINTFORMW 계약만 아니었다면、당장이라도 %마스터를% 날려 버렸을 것이다
 					PRINTFORMW 하지만、%조사처리(CALLNAME,"를")% 묶은 계약은 보통 수준의 저항조차 허락하지 않았다。
 					PRINTFORMW 허리를 나눠 넣어、다리가 벌어졌다。그 중심에 시선을 떨어뜨렸다。
 					PRINTFORMW 「……설、마……？」
 					PRINTFORMW 그 설마다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
+					PRINTFORMW %마스터는% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
 				ENDIF
 			;그 이외
 			ELSE
@@ -3925,12 +3925,12 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「읏%UNICODE(0x2661)%　화난、거、아냐%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %조사처리(CSTR:이인칭,"를")% 받아들여왔다。
+						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %이인칭을% 받아들여왔다。
 						PRINTFORMW 「응후훗%UNICODE(0x2661)%　……연인、같、네%UNICODE(0x2661)%」
 						PRINTFORMW 「잔뜩……해줘야、해%UNICODE(0x2661)%」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %조사처리(CSTR:이인칭,"를")% 받아들여왔다。
+						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %이인칭을% 받아들여왔다。
 						PRINTFORMW 「……연인、같……%UNICODE(0x2661)%」
 						PRINTFORMW 「………응、아무것도、아닙……니다」
 					ENDIF
@@ -3960,12 +3960,12 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「―――――――읏%UNICODE(0x2661)%　―――읏%UNICODE(0x2661)%」
 					PRINTFORMW 목소리가 나지 않도록、오로지 찔러서 파고들어오는 쾌락에 견디고 있는 %조사처리(CALLNAME,"를")% 보고、
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 자신의 것이、점점 더 딱딱해지는 것을 느꼈다。
+					PRINTFORMW %마스터는% 자신의 것이、점점 더 딱딱해지는 것을 느꼈다。
 				ENDIF
 			;함락してない
 			ELSE
 				PRINTFORMW 「………엣쿠、힛쿠……웃」
-				PRINTFORMW %조사처리(CALLNAME,"는")% 눈물을 흘렸지만 %조사처리(CALLNAME:MASTER,"는")% 거리낌없이 허리를 흔들었다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% 눈물을 흘렸지만 %마스터는% 거리낌없이 허리를 흔들었다。
 			ENDIF
 			CALL TRAIN_MESSAGE
 			CFLAG:332 = 2
@@ -3988,7 +3988,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -3998,14 +3998,14 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……옷」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
 						PRINTFORMW 대답 대신、%조사처리(CALLNAME,"를")% 껴안았다。
 						PRINTFORMW 안아올린 %조사처리(CALLNAME,"를")% 엎드린 형태로 내리게 해、엉덩이를 치켜들게 했다。
 						PRINTFORMW %조사처리(CALLNAME,"가")% 놀란 듯 목소리를 높이기에、싫은가、하고 묻자。
@@ -4018,7 +4018,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「전혀、손、대주지 않으、니까……여자에게、흥미、없는 걸까、라고、걱정……했어%UNICODE(0x2661)%」
 						PRINTFORMW 「……%CSTR:일인칭%의、여기……%조사처리(CSTR:이인칭,"가")%、처음、이야%UNICODE(0x2661)%」
 						PRINTFORMW 「기억에 남을、정도로……엉망진창으로、해줘%UNICODE(0x2661)%」
-						PRINTFORMW 명령받은 대로、암캐 같은 포즈로 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 유혹했다。
+						PRINTFORMW 명령받은 대로、암캐 같은 포즈로 %조사처리(CALLNAME,"는")% %마스터를% 유혹했다。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 「…………네%UNICODE(0x2661)%」
@@ -4033,14 +4033,14 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「뭐、하……는거、야？」
 					PRINTFORMW 팔로 가슴을 가려、태아처럼 둥그렇게 움츠린 채、경계를 드러냈다。
 					PRINTFORMW 무릎을 가랑이 아래에 들이밀고선、억지로 다리를 벌려、팔을 잡아 가슴을 숨기지 못하게 했다。
-					PRINTFORMW 모양 좋은 가슴을 잠시 봐라 봐、%조사처리(CALLNAME:MASTER,"는")% 잡은 팔을 당겨、%조사처리(CALLNAME,"를")% 납작 엎드리게 했다。
+					PRINTFORMW 모양 좋은 가슴을 잠시 봐라 봐、%마스터는% 잡은 팔을 당겨、%조사처리(CALLNAME,"를")% 납작 엎드리게 했다。
 					PRINTFORMW 「싫………어………엇！」
-					PRINTFORMW 계약만 아니었다면、당장이라도 %조사처리(CALLNAME:MASTER,"를")% 날려 버렸을 것이다
+					PRINTFORMW 계약만 아니었다면、당장이라도 %마스터를% 날려 버렸을 것이다
 					PRINTFORMW 하지만、%조사처리(CALLNAME,"를")% 묶은 계약은 보통 수준의 저항조차 허락하지 않았다。
 					PRINTFORMW 허리를 나눠 넣어、다리가 벌어졌다。그 중심에 시선을 떨어뜨렸다。
 					PRINTFORMW 「……설、마……？」
 					PRINTFORMW 그 설마다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
+					PRINTFORMW %마스터는% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
 				ENDIF
 			;그 이외
 			ELSE
@@ -4075,7 +4075,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 「이、이런 모습……은、부끄러워……%UNICODE(0x2661)%」
-					PRINTFORMW 주저주저하며 수치심을 참고 있는 듯 하지만、엉덩이의 움직임은 %조사처리(CALLNAME:MASTER,"를")% 유혹하는 것처럼 보였다……
+					PRINTFORMW 주저주저하며 수치심을 참고 있는 듯 하지만、엉덩이의 움직임은 %마스터를% 유혹하는 것처럼 보였다……
 					PRINTFORMW 「햐아웃%UNICODE(0x2661)%　읏%UNICODE(0x2661)%　아、%CSTR:이인칭%……격렬햇%UNICODE(0x2661)%」
 					PRINTFORMW 최근 깨달은 것이지만、%조사처리(CALLNAME,"는")% 뒤에서의 공격에 약한 것 같다。
 					PRINTFORMW 침착하달까、안정을 취하고 있는 것처럼 보인다。
@@ -4118,7 +4118,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -4159,7 +4159,7 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 「우、웃기지……싫어、엇……！」
-					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %조사처리(CALLNAME:MASTER,"는")% 망설임없이 페니스를 밀어넣었다。
+					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %마스터는% 망설임없이 페니스를 밀어넣었다。
 				ENDIF
 			ENDIF
 			CALL TRAIN_MESSAGE
@@ -4217,7 +4217,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -4258,7 +4258,7 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 「우、웃기지……싫어、엇……！」
-					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %조사처리(CALLNAME:MASTER,"는")% 망설임없이 페니스를 밀어넣었다。
+					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %마스터는% 망설임없이 페니스를 밀어넣었다。
 				ENDIF
 			ENDIF
 			CALL TRAIN_MESSAGE
@@ -4284,14 +4284,14 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「%조사처리(CSTR:이인칭,"가")%、%조사처리(CSTR:이인칭,"가")%、안、에、안……에에%UNICODE(0x2661)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 무릎을 꿇은 채로 높이 들려진 %CALLNAME%의 허리는、저항 없이 %조사처리(CALLNAME:MASTER,"를")% 단단히 조이고 삼키고 있다。
+					PRINTFORMW 무릎을 꿇은 채로 높이 들려진 %CALLNAME%의 허리는、저항 없이 %마스터를% 단단히 조이고 삼키고 있다。
 					PRINTFORMW 「응、후우……우、움직여도、상관없어……요%UNICODE(0x2661)%」
 					PRINTFORMW 「주、준비、는……되어있……어요%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:335 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:335 < 3 || FLAG:7 == 2)
-				PRINTFORMW 약한 저항 후、%조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 항문을 푹푹 찔렀다。
+				PRINTFORMW 약한 저항 후、%마스터는% %CALLNAME%의 항문을 푹푹 찔렀다。
 				PRINTFORMW %조사처리(CALLNAME,"는")% 알고 있는지 모르는지、움직임에 맞추어 숨을 내뿜고 있었다。
 				PRINTFORMW 「훗……하앗……어째、서、이러……언！」
 				CFLAG:335 = 3
@@ -4372,7 +4372,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「여、여기……약한、고옷%UNICODE(0x2661)%　……조、좀더、괴、괴롭、괴롭혀줘……%UNICODE(0x2661)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW %조사처리(CALLNAME,"는")% 가슴을 쑥 내밀어오며、%조사처리(CALLNAME:MASTER,"가")% 행위를 끝날 때 그대로 있었다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 가슴을 쑥 내밀어오며、%마스터가% 행위를 끝날 때 그대로 있었다。
 					PRINTFORMW 「앗、앗、시럿……%UNICODE(0x2661)%　%CSTR:이인칭%……즈、즐겨주면……%UNICODE(0x2661)%」
 					PRINTFORMW 「%CSTR:일인칭%도、기、기뻐……%UNICODE(0x2661)%　%CSTR:이인칭%에、겟、써、져서……읏%UNICODE(0x2661)%」
 				ENDIF
@@ -4409,7 +4409,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -4419,15 +4419,15 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……옷」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
-						PRINTFORMW 대답 대신 %조사처리(CALLNAME:MASTER,"는")% 눕고선、%CALLNAME%에게 올라타라 했다。
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
+						PRINTFORMW 대답 대신 %마스터는% 눕고선、%CALLNAME%에게 올라타라 했다。
 						PRINTFORMW 「……처음、인데、그런 식？」
 						PRINTFORMW 기막힌 어조로 말한 것도 잠시。
 						PRINTFORMW %조사처리(CALLNAME,"는")% 슬쩍 %CALLNAME:MASTER%의 위에 올라、자신의 그곳으로 %CALLNAME:MASTER%의 것에 입을 맞췄다。
@@ -4454,7 +4454,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 느릿느릿 시키는 대로、%CALLNAME:MASTER%에 올라탄 %조사처리(CALLNAME,"는")% 눈에 눈물을 머금어……
 					PRINTFORMW 「………이런、게……아、냐」
 					PRINTFORMW 「처、음……인、대……이런……이런……아」
-					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%조사처리(CALLNAME:MASTER,"는")% 스스로 허리를 쳐올렸다。
+					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%마스터는% 스스로 허리를 쳐올렸다。
 				ENDIF
 			;그 이외
 			ELSE
@@ -4490,7 +4490,7 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 가슴에 손을 올려、불안한 듯 물었다。
 					PRINTFORMW 「%CSTR:일인칭%……무겁지、않아？」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 쓴웃음을 짓고선、고개를 가로젓자……
+					PRINTFORMW %마스터가% 쓴웃음을 짓고선、고개를 가로젓자……
 					PRINTFORMW 「응……%CSTR:일인칭%、확실히、여자애、됐구……나%UNICODE(0x2661)%」
 					PRINTFORMW %조사처리(CALLNAME,"는")% 꽃이 핀 얼굴로 웃었다。
 					PRINTFORMW 
@@ -4498,7 +4498,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 					PRINTFORMW 「읏！？　햣！　앗、읏！？　아、%CSTR:이인칭%……가、갑자기、앗%UNICODE(0x2661)%　격렬하게……%UNICODE(0x2661)%」
 					PRINTFORMW 「읏！　앗！　앗%UNICODE(0x2661)%　우、우응！　%CSTR:일인칭%앗%UNICODE(0x2661)%　%CSTR:일인칭%……%UNICODE(0x2661)%」
-					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의……여자、야……앗%UNICODE(0x2661)%」
+					PRINTFORMW 「%일인칭은% 、%CSTR:이인칭%의……여자、야……앗%UNICODE(0x2661)%」
 					PRINTFORMW 「가、같이……네%UNICODE(0x2661)%　같、이……가……%UNICODE(0x2661)%」
 					
 				;음란, 창부
@@ -4549,7 +4549,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -4672,7 +4672,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -4682,16 +4682,16 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……옷」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
 						PRINTFORMW 대답 대신 %조사처리(CALLNAME,"를")% 끌어안았다。
-						PRINTFORMW 낯선 자세에 당황한 %CALLNAME%에게 입맞춘 채、%조사처리(CALLNAME:MASTER,"는")% 자신의 것을 여성기에 비볐다。
+						PRINTFORMW 낯선 자세에 당황한 %CALLNAME%에게 입맞춘 채、%마스터는% 자신의 것을 여성기에 비볐다。
 						PRINTFORMW 「이、대로……라、니%UNICODE(0x2661)%　우웅、싫지 않、아%UNICODE(0x2661)%」
 						PRINTFORMW 「……네……%CSTR:일인칭%의、첫 사람이、되어줘……%UNICODE(0x2661)%」
 					;음란, 창부
@@ -4706,7 +4706,7 @@ SELECTCASE SELECTCOM
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 「…………네%UNICODE(0x2661)%」
 						PRINTFORMW 소중하게 지금까지 지켜온 처녀를、뚫려버리는 순간을 상상해서 %조사처리(CALLNAME,"는")% 몸을 떨었다。
-						PRINTFORMW 꽉 끌어안도록 명령하자、망설이면서도 %조사처리(CALLNAME,"는")% 명령을 따라、눈을 치켜뜨고 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 꽉 끌어안도록 명령하자、망설이면서도 %조사처리(CALLNAME,"는")% 명령을 따라、눈을 치켜뜨고 %마스터를% 보았다。
 						PRINTFORMW 「……연인、같아……%UNICODE(0x2661)%」
 						PRINTFORMW 「아……。……아무、것도、아닙……니다」
 						PRINTFORMW 「%CSTR:일인칭%의、깨끗한 그대로、의、여기……더럽혀、주세요%UNICODE(0x2661)%」
@@ -4714,10 +4714,10 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 거듭된 조교는、%CALLNAME%의 저항의지를 송두리째 없앴다。
-					PRINTFORMW 느릿느릿 시키는 대로、%조사처리(CALLNAME:MASTER,"를")% 껴안은 %CALLNAME%의 눈에서 눈물이 흘렀다。
+					PRINTFORMW 느릿느릿 시키는 대로、%마스터를% 껴안은 %CALLNAME%의 눈에서 눈물이 흘렀다。
 					PRINTFORMW 「………이런、게……아、냐」
 					PRINTFORMW 「처、음……인、대……이런……이런……아」
-					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%조사처리(CALLNAME:MASTER,"는")% 스스로 허리를 쳐올렸다。
+					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%마스터는% 스스로 허리를 쳐올렸다。
 				ENDIF
 				;그 이외
 			ELSE
@@ -4772,7 +4772,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 가슴이 약한 %조사처리(CALLNAME,"를")% 생각해 중점적으로 비틀어 주자、왠지 뾰로통해졌다。
 					PRINTFORMW 「……웅、기분은、좋지……만、말야？」
 					PRINTFORMW 「응……자♪」
-					PRINTFORMW 양손을 편 %조사처리(CALLNAME,"가")% 、무엇을 원하는지 깨달은、%조사처리(CALLNAME:MASTER,"는")% 마주안았다。
+					PRINTFORMW 양손을 편 %조사처리(CALLNAME,"가")% 、무엇을 원하는지 깨달은、%마스터는% 마주안았다。
 					PRINTFORMW 「웃%UNICODE(0x2661)%」
 					PRINTFORMW 「앗、이、이렇게、하、하、며……언%UNICODE(0x2661)%」
 					PRINTFORMW 「%CSTR:일인칭%……안심……할 수 있어%UNICODE(0x2661)%」
@@ -4822,7 +4822,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -4832,16 +4832,16 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……っ」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
 						PRINTFORMW 대답 대신 %조사처리(CALLNAME,"를")% 끌어안았다。
-						PRINTFORMW 등을 돌린 채 안겨、어리둥절한 %CALLNAME%에게 입맞추곤、%조사처리(CALLNAME:MASTER,"는")% 자신의 것을 여성기에 비볐다。
+						PRINTFORMW 등을 돌린 채 안겨、어리둥절한 %CALLNAME%에게 입맞추곤、%마스터는% 자신의 것을 여성기에 비볐다。
 						PRINTFORMW 「이、대로……라、니%UNICODE(0x2661)%　우웅、싫지 않、아%UNICODE(0x2661)%」
 						PRINTFORMW 「……네……%CSTR:일인칭%의、첫 사람이、되어줘……%UNICODE(0x2661)%」
 					;음란, 창부
@@ -4856,7 +4856,7 @@ SELECTCASE SELECTCOM
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 「…………네%UNICODE(0x2661)%」
 						PRINTFORMW 소중하게 지금까지 지켜온 처녀를、뚫려버리는 순간을 상상해서 %조사처리(CALLNAME,"는")% 몸을 떨었다。
-						PRINTFORMW 꽉 끌어안도록 명령하자、망설이면서도 %조사처리(CALLNAME,"는")% 명령을 따라、눈을 치켜뜨고 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 꽉 끌어안도록 명령하자、망설이면서도 %조사처리(CALLNAME,"는")% 명령을 따라、눈을 치켜뜨고 %마스터를% 보았다。
 						PRINTFORMW 「……연인、같아……%UNICODE(0x2661)%」
 						PRINTFORMW 「아……。……아무、것도、아닙……니다」
 						PRINTFORMW 「%CSTR:일인칭%의、깨끗한 그대로、의、여기……더럽혀、주세요%UNICODE(0x2661)%」
@@ -4864,10 +4864,10 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 거듭된 조교는、%CALLNAME%의 저항의지를 송두리째 없앴다。
-					PRINTFORMW 느릿느릿 시키는 대로、%조사처리(CALLNAME:MASTER,"를")% 껴안은 %CALLNAME%의 눈에서 눈물이 흘렀다。
+					PRINTFORMW 느릿느릿 시키는 대로、%마스터를% 껴안은 %CALLNAME%의 눈에서 눈물이 흘렀다。
 					PRINTFORMW 「………이런、게……아、냐」
 					PRINTFORMW 「처、음……인、대……이런……이런……아」
-					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%조사처리(CALLNAME:MASTER,"는")% 스스로 허리를 쳐올렸다。
+					PRINTFORMW 앉을 기미가 보이지 않는 %CALLNAME%에 초조해져、%마스터는% 스스로 허리를 쳐올렸다。
 				ENDIF
 			ELSE
 				;함락완료
@@ -4969,7 +4969,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -5010,7 +5010,7 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 「우、웃기지……싫어、엇……！」
-					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %조사처리(CALLNAME:MASTER,"는")% 망설임없이 페니스를 밀어넣었다。
+					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %마스터는% 망설임없이 페니스를 밀어넣었다。
 				ENDIF
 			ENDIF
 			CALL TRAIN_MESSAGE
@@ -5075,7 +5075,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -5116,7 +5116,7 @@ SELECTCASE SELECTCOM
 				;함락してない
 				ELSE
 					PRINTFORMW 「우、웃기지……싫어、엇……！」
-					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %조사처리(CALLNAME:MASTER,"는")% 망설임없이 페니스를 밀어넣었다。
+					PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 저항했지만 %마스터는% 망설임없이 페니스를 밀어넣었다。
 				ENDIF
 			ENDIF
 			CALL TRAIN_MESSAGE
@@ -5179,7 +5179,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………………………………………………에？」
 						PRINTFORMW 「……………………거짓말」
 						PRINTFORMW 그렇게 불쑥 중얼거리던、%CALLNAME%의 눈꼬리에서、눈물이 뚝뚝 떨어졌다。
-						PRINTFORMW ……역시、%조사처리(CALLNAME:MASTER,"가")% 처음의 상대가 되는 건 싫은 것일까。
+						PRINTFORMW ……역시、%마스터가% 처음의 상대가 되는 건 싫은 것일까。
 						PRINTFORMW 억지로 할 생각도 안 들고、전언을 철회하자、이번엔 주르륵 눈물을 흘렸다。
 						PRINTFORMW 「아、아니얏！　%CSTR:일인칭%、기、기뻐、서……엇！」
 						PRINTFORMW 「저、정말、로……좋、아？」
@@ -5189,14 +5189,14 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、랑、하고싶지、않나보다……라고……옷」
 						PRINTFORMW ――%조사처리(CALLNAME,"는")% 、눈물을 흘리며 계속했다。
 						PRINTFORMW %CALLNAME:MASTER%도 아무말 않고、%CALLNAME%의 말을 기다렸다
-						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%조사처리(CSTR:일인칭,"를")% 、아、안을 수 있을텐데……」
+						PRINTFORMW 「%CSTR:이인칭%、는、어、언제든、%일인칭을% 、아、안을 수 있을텐데……」
 						PRINTFORMW 「어、어째서、일까、라고、계속、계속、생각해서……엇」
 						PRINTFORMW 「………%CSTR:이인칭%、은」
 						PRINTFORMW 「실은、호모、아닐까、하고……아얏」
 						PRINTFORMW 역시 그건 묵과할 수 없었다。
 						PRINTFORMW 그래서 딱밤을 날리니、%조사처리(CALLNAME,"는")% 에헤헤、하고 웃었다。
 						PRINTFORMW 「…………착각、이라、다행이다%UNICODE(0x2661)%」
-						PRINTFORMW 「……%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 、좋아해도……괜찮、지？」
+						PRINTFORMW 「……%CSTR:일인칭%、%이인칭을% 、좋아해도……괜찮、지？」
 						PRINTFORMW 대답 대신、%조사처리(CALLNAME,"를")% 침대에 쓰러뜨렸다。
 						PRINTFORMW 「읏……네、……%CSTR:일인칭%의、첫 사람이、돼 줘……%UNICODE(0x2661)%」
 					;음란, 창부
@@ -5206,7 +5206,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「전혀、손、대주지 않으、니까……여자에게、흥미、없는 걸까、라고、걱정……했어%UNICODE(0x2661)%」
 						PRINTFORMW 「……%CSTR:일인칭%의、여기……%조사처리(CSTR:이인칭,"가")%、처음%UNICODE(0x2661)%」
 						PRINTFORMW 「기억에 남을、정도로……엉망진창으로、해줘%UNICODE(0x2661)%」
-						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %조사처리(CSTR:이인칭,"를")% 받아들여왔다。
+						PRINTFORMW 이불에 벌러덩 위를 보고 누워서、%조사처리(CALLNAME,"는")% %이인칭을% 받아들여왔다。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						PRINTFORMW 「…………네%UNICODE(0x2661)%」
@@ -5222,12 +5222,12 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 팔로 가슴을 가려、태아처럼 둥그렇게 움츠린 채、경계를 드러냈다。
 					PRINTFORMW 무릎을 가랑이 아래에 들이밀고선、억지로 다리를 벌려、팔을 잡아 가슴을 숨기지 못하게 했다。
 					PRINTFORMW 「싫………어………엇！」
-					PRINTFORMW 계약만 아니었다면、당장이라도 %조사처리(CALLNAME:MASTER,"를")% 날려 버렸을 것이다
+					PRINTFORMW 계약만 아니었다면、당장이라도 %마스터를% 날려 버렸을 것이다
 					PRINTFORMW 하지만、%조사처리(CALLNAME,"를")% 묶은 계약은 보통 수준의 저항조차 허락하지 않았다。
 					PRINTFORMW 허리를 나눠 넣어、다리가 벌어졌다。그 중심에 시선을 떨어뜨렸다。
 					PRINTFORMW 「……설、마……？」
 					PRINTFORMW 그 설마다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
+					PRINTFORMW %마스터는% %CALLNAME%의 처녀를 찢기 위해、허리를 밀어넣었다。
 				ENDIF
 			;그 이외
 			ELSE
@@ -5274,12 +5274,12 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「―――――――읏%UNICODE(0x2661)%　―――읏%UNICODE(0x2661)%」
 					PRINTFORMW 목소리를 내지 않도록、오직 찔러서 파고들어오는 쾌락에 견디는 %CALLNAME%의 모습에、
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 자신의 것이、점점 더 딱딱해지는 것을 느꼈다。
+					PRINTFORMW %마스터는% 자신의 것이、점점 더 딱딱해지는 것을 느꼈다。
 				ENDIF
 			;함락してない
 			ELSE
 				PRINTFORMW 「………엣쿠、힛쿠……웃」
-				PRINTFORMW %조사처리(CALLNAME,"는")% 눈물을 흘렸지만 %조사처리(CALLNAME:MASTER,"는")% 거리낌없이 허리를 흔들었다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% 눈물을 흘렸지만 %마스터는% 거리낌없이 허리를 흔들었다。
 				CFLAG:420 = 2
 			ENDIF
 		ENDIF
@@ -5301,7 +5301,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「시、심하게 해버리면、%CSTR:일인칭%……치질……에、걸릴지도、몰라」
 						PRINTFORMW 「%CSTR:이인칭%는、가、가끔、괴、굉장히……격렬、하니、까%UNICODE(0x2661)%」
 						PRINTFORMW %조사처리(CALLNAME,"는")% 이것저것 말하지만、요약하자면 하고싶지 않다、는 것 같다。
-						PRINTFORMW 하지만、%조사처리(CALLNAME:MASTER,"가")% 노골적으로 낙담하자、태도가 일변했다。
+						PRINTFORMW 하지만、%마스터가% 노골적으로 낙담하자、태도가 일변했다。
 						PRINTFORMW 「……우～……조、좋아、한 번、한 번、뿐……이、야……？」
 						PRINTFORMW 누워서 떡먹기구만。
 					;음란, 창부
@@ -5421,7 +5421,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……%CSTR:일인칭%도、멈출 수、없으니까%UNICODE(0x2661)%」
 					;통상
 					ELSE
-						PRINTFORMW 손가락을 능숙하게 다뤄 귀두에서 장대까지、완급을 조절한 자극에、%조사처리(CALLNAME:MASTER,"는")% 무심코 신음했다。
+						PRINTFORMW 손가락을 능숙하게 다뤄 귀두에서 장대까지、완급을 조절한 자극에、%마스터는% 무심코 신음했다。
 						PRINTFORMW 「응훗%UNICODE(0x2661)%」
 						PRINTFORMW 「이런、거、가르쳐 준 건……%CSTR:이인칭% 이니、까？」
 						PRINTFORMW 「……차분히……차분하게……괴롭혀、줄께%UNICODE(0x2661)%」
@@ -5441,7 +5441,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……%CSTR:일인칭%도、멈출 수、없으니까%UNICODE(0x2661)%」
 					;통상
 					ELSE
-						PRINTFORMW 손가락을 능숙하게 다뤄 귀두에서 장대까지、완급을 조절한 자극에、%조사처리(CALLNAME:MASTER,"는")% 무심코 신음했다。
+						PRINTFORMW 손가락을 능숙하게 다뤄 귀두에서 장대까지、완급을 조절한 자극에、%마스터는% 무심코 신음했다。
 						PRINTFORMW 「응훗%UNICODE(0x2661)%」
 						PRINTFORMW 「이런、거、가르쳐 준 건……%CSTR:이인칭% 이니、까？」
 						PRINTFORMW 「……차분히……차분하게……괴롭혀、줄께%UNICODE(0x2661)%」
@@ -5599,19 +5599,19 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「아、아……가、가슴、범해지고、있어……%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:일인칭%의、가슴、물컹、물컹、하고……%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、앗、아아……%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 무얼 해도、지금의 %CALLNAME%에겐 들리지 않을지도 모른다……。
+						PRINTFORMW %마스터가% 무얼 해도、지금의 %CALLNAME%에겐 들리지 않을지도 모른다……。
 					;위험일
 					ELSEIF (위험일()) == 1
 						PRINTFORMW 「정마알……%CSTR:일인칭%、거기、약한、데에……%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭% 이외엔……안 시켜、줘？」
-						PRINTFORMW 불룩 뺨을 부풀린 채 %조사처리(CALLNAME,"는")% 그렇게 말하고선、눈을 치켜뜬 채 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 불룩 뺨을 부풀린 채 %조사처리(CALLNAME,"는")% 그렇게 말하고선、눈을 치켜뜬 채 %마스터를% 보았다。
 						PRINTFORMW 「……%CSTR:이인칭%」
 						PRINTFORMW 「같이……기분 좋아……지자%UNICODE(0x2661)%」
 					;통상
 					ELSE
 						PRINTFORMW 「정마알……%CSTR:일인칭%、거기、약한、데에……%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭% 이외엔……안 시켜、줘？」
-						PRINTFORMW 불룩 뺨을 부풀린 채 %조사처리(CALLNAME,"는")% 그렇게 말하고선、눈을 치켜뜬 채 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 불룩 뺨을 부풀린 채 %조사처리(CALLNAME,"는")% 그렇게 말하고선、눈을 치켜뜬 채 %마스터를% 보았다。
 						PRINTFORMW 「……%CSTR:이인칭%」
 						PRINTFORMW 「같이……기분 좋아……지자%UNICODE(0x2661)%」
 					ENDIF
@@ -5641,7 +5641,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「아、아……가、가슴、범해지고 있、어……%UNICODE(0x2661)%」
 					PRINTFORMW 「%CSTR:일인칭%의、가슴、물컹、물컹、하면서……%UNICODE(0x2661)%」
 					PRINTFORMW 「읏、앗、아아……%UNICODE(0x2661)%」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 무슨 말을 하더라도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……。
+					PRINTFORMW %마스터가% 무슨 말을 하더라도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「하아우……%UNICODE(0x2661)%」
@@ -5713,7 +5713,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW %조사처리(CALLNAME,"는")% 비열에서 떨어지는 애액을、정성들여 페니스에 문질러 발랐다。
 						PRINTFORMW 「……하아……%CSTR:이인칭%……%CSTR:이인칭%……%UNICODE(0x2661)%」
 						PRINTFORMW 「기분……좋아？　조、좋은、거지……？　차、참을 수、없는、거지……？」
-						PRINTFORMW 그렇게 말하며、기세를 타는 %CALLNAME%의 허리를 %조사처리(CALLNAME:MASTER,"는")% 눌렀다。
+						PRINTFORMW 그렇게 말하며、기세를 타는 %CALLNAME%의 허리를 %마스터는% 눌렀다。
 						PRINTFORMW 혼잡한 틈을 타서 질내에 넣으려고 했던 것이 멈춰져서、%조사처리(CALLNAME,"는")% 볼을 부풀렸다。
 						PRINTFORMW 「………구두쇠」
 					;위험일
@@ -5723,7 +5723,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……넣어、도……좋、아%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭%……라면……%CSTR:일인칭%、%CSTR:일인칭%……%UNICODE(0x2661)%」
 						PRINTFORMW 그렇게 간청해 오신다면야 어쩔 수 없다。
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 보류라고 말하자、스마타를 속행했다。
+						PRINTFORMW %마스터가% 보류라고 말하자、스마타를 속행했다。
 						PRINTFORMW 「……심술쟁이」
 					;통상
 					ELSE
@@ -5737,13 +5737,13 @@ SELECTCASE SELECTCOM
 					PRINTFORMW %조사처리(CALLNAME,"는")% 비열에서 떨어지는 애액을、정성들여 페니스에 문질러 발랐다。
 					PRINTFORMW 「……하아……%CSTR:이인칭%……%CSTR:이인칭%……%UNICODE(0x2661)%」
 					PRINTFORMW 「기분……좋아？　조、좋은、거지……？　차、참을 수、없는、거지……？」
-					PRINTFORMW 그렇게 말하며、기세를 타는 %CALLNAME%의 허리를 %조사처리(CALLNAME:MASTER,"는")% 눌렀다。
+					PRINTFORMW 그렇게 말하며、기세를 타는 %CALLNAME%의 허리를 %마스터는% 눌렀다。
 					PRINTFORMW 혼잡한 틈을 타서 질내에 넣으려고 했던 것이 멈춰져서、%조사처리(CALLNAME,"는")% 볼을 부풀렸다。
 					PRINTFORMW 「………구두쇠」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 소중한 부분으로 봉사할 것을 명령받은、%조사처리(CALLNAME,"는")% 미소지었다。
-					PRINTFORMW 「……%CSTR:이인칭%……넣어도、%조사처리(CSTR:일인칭,"는")% ……」
+					PRINTFORMW 「……%CSTR:이인칭%……넣어도、%일인칭은% ……」
 					PRINTFORMW 「히우%UNICODE(0x2661)%　……아、아……죄송、해요……옷」
 				ENDIF
 				CFLAG:347 = 4
@@ -5817,7 +5817,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……에헤헤……실패……♪」
 						PRINTFORMW 「다음에는、천천히……할、께？」
 						PRINTFORMW 「%CSTR:이인칭%、연습、시켜……%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME,"는")% 밀착한 채로、온몸으로 %조사처리(CALLNAME:MASTER,"를")% 만끽하기 시작했다。
+						PRINTFORMW %조사처리(CALLNAME,"는")% 밀착한 채로、온몸으로 %마스터를% 만끽하기 시작했다。
 						PRINTFORMW 「읏……이거、야……하네%UNICODE(0x2661)%」
 					;통상
 					ELSE
@@ -5825,7 +5825,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 목욕탕의 타일에 콩、하며 머리를 부딪쳐、
 						PRINTFORMW 「……에헤헤……실패%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭%、연습、시켜……줘%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME,"는")% 밀착한 채로、온몸으로 %조사처리(CALLNAME:MASTER,"를")% 만끽하기 시작했다。
+						PRINTFORMW %조사처리(CALLNAME,"는")% 밀착한 채로、온몸으로 %마스터를% 만끽하기 시작했다。
 						PRINTFORMW 「읏……이거、야……하네%UNICODE(0x2661)%」
 					ENDIF
 				;음란, 창부
@@ -5872,7 +5872,7 @@ SELECTCASE SELECTCOM
 				IF TALENT:170
 					PRINTFORMW 「아직도……하는、거야？」
 					PRINTFORMW 「괜찮、지만……」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 손가락을 가슴팍에 콕콕 찌르면서、힐끗 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 손가락을 가슴팍에 콕콕 찌르면서、힐끗 %마스터를% 보았다。
 					PRINTFORMW 「………다른 여자아이한테、이런 거、부탁하면……안、돼？」
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
@@ -5896,7 +5896,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앗、%CSTR:이인칭%……괘、괜찮아……？」
 					PRINTFORMW 「……조、좀더、세、세게……？」
 					PRINTFORMW 「그、그게、저기……우우～……이、이렇게……？」
-					PRINTFORMW 슥삭슥삭 문질러져서、다른 의미로 %조사처리(CALLNAME:MASTER,"는")% 기절했다。
+					PRINTFORMW 슥삭슥삭 문질러져서、다른 의미로 %마스터는% 기절했다。
 				ENDIF
 				CFLAG:349 = 4
 			;굴복각인Lv3
@@ -5945,7 +5945,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「……간지럽힐、꺼야？」
 					PRINTFORMW 「그래도、좋、다면……응훗%UNICODE(0x2661)%」
 					PRINTFORMW 톡톡 입술에서 혀를 빼고 내밀어오는 %CALLNAME%。
-					PRINTFORMW 그 도전을 %조사처리(CALLNAME:MASTER,"는")% 받아들였고……그리고 패배했다。
+					PRINTFORMW 그 도전을 %마스터는% 받아들였고……그리고 패배했다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5990,7 +5990,7 @@ SELECTCASE SELECTCOM
 			PRINTFORMW 「……손으로、하는 쪽이……빠른、데도」
 			PRINTFORMW 「일부러라니……바보、인거야？」
 			PRINTFORMW 모멸로 가득 찬 시선을 향해 왔다。
-			PRINTFORMW ……하지만、%조사처리(CALLNAME:MASTER,"는")% 알고 있다。
+			PRINTFORMW ……하지만、%마스터는% 알고 있다。
 			PRINTFORMW %조사처리(CALLNAME,"는")% 가슴이 약해。
 			PRINTFORMW 지금도 밀려오는 쾌락에、필사적으로 견디고 있는 것이겠지。
 			PRINTFORMW 그걸 상상하기만 해도、내 그곳이 딱딱하게 발기해가는 느낌이 들었다。
@@ -6004,21 +6004,21 @@ SELECTCASE SELECTCOM
 					;발정중
 					IF (위험일()) == 2 || (위험일()) == 3
 						PRINTFORMW 철퍽철퍽 소리를 내면서、%조사처리(CALLNAME,"는")% 가슴으로 페니스를 자극하고 있다。
-						PRINTFORMW 「……가、가슴으로、%조사처리(CSTR:이인칭,"를")% ……범하고、있어……%UNICODE(0x2661)%」
+						PRINTFORMW 「……가、가슴으로、%이인칭을% ……범하고、있어……%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、앗、아아……%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 무슨 말을 해도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……
+						PRINTFORMW %마스터가% 무슨 말을 해도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……
 					;위험일
 					ELSEIF (위험일()) == 1
 						PRINTFORMW 「응진짜……%CSTR:일인칭%、여기、약한、데도……%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭% 말고는……시켜주지、않아？」
-						PRINTFORMW 불룩 볼을 푸풀리고 %조사처리(CALLNAME,"는")% 그렇게 말하곤、눈을 치켜뜨고 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 불룩 볼을 푸풀리고 %조사처리(CALLNAME,"는")% 그렇게 말하곤、눈을 치켜뜨고 %마스터를% 보았다。
 						PRINTFORMW 「……%CSTR:이인칭%」
 						PRINTFORMW 「같이……기분 좋게、되……자%UNICODE(0x2661)%」
 					;통상
 					ELSE
 						PRINTFORMW 「응진짜……%CSTR:일인칭%、여기、약한、데도……%UNICODE(0x2661)%」
 						PRINTFORMW 「%CSTR:이인칭% 말고는……시켜주지、않아？」
-						PRINTFORMW 불룩 볼을 푸풀리고 %조사처리(CALLNAME,"는")% 그렇게 말하곤、눈을 치켜뜨고 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 불룩 볼을 푸풀리고 %조사처리(CALLNAME,"는")% 그렇게 말하곤、눈을 치켜뜨고 %마스터를% 보았다。
 						PRINTFORMW 「……%CSTR:이인칭%」
 						PRINTFORMW 「같이……기분 좋게、되……자%UNICODE(0x2661)%」
 					ENDIF
@@ -6049,9 +6049,9 @@ SELECTCASE SELECTCOM
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 철퍽철퍽 소리를 내면서、%조사처리(CALLNAME,"는")% 가슴으로 페니스를 자극하고 있다。
-						PRINTFORMW 「……가、가슴으로、%조사처리(CSTR:이인칭,"를")% ……범하고、있어……%UNICODE(0x2661)%」
+						PRINTFORMW 「……가、가슴으로、%이인칭을% ……범하고、있어……%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、앗、아아……%UNICODE(0x2661)%」
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 무슨 말을 해도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……
+						PRINTFORMW %마스터가% 무슨 말을 해도、지금의 %CALLNAME%에게는 들리지 않을지도 모른다……
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「하아우……%UNICODE(0x2661)%」
@@ -6101,7 +6101,7 @@ SELECTCASE SELECTCOM
 					IF (위험일()) == 2 || (위험일()) == 3
 						PRINTFORMW 
 						PRINTFORMW %조사처리(CALLNAME,"는")% 자신의 가슴을 마구 주무르며、입으론 %CALLNAME:MASTER%의 페니스에 봉사했다。
-						PRINTFORMW 예측할 수 없는 가슴과 혀의 기술에 %조사처리(CALLNAME:MASTER,"는")% 아무 말도 못한 채、당하기만 했다。
+						PRINTFORMW 예측할 수 없는 가슴과 혀의 기술에 %마스터는% 아무 말도 못한 채、당하기만 했다。
 						PRINTFORMW 「으무웃%UNICODE(0x2661)%　아믓%UNICODE(0x2661)%　읏、읏……%UNICODE(0x2661)%」
 						PRINTFORMW 「츗……응……응후훗%UNICODE(0x2661)%」
 						PRINTFORMW 「……이제、한계야？」
@@ -6131,7 +6131,7 @@ SELECTCASE SELECTCOM
 					IF (위험일()) == 2 || (위험일()) == 3
 						PRINTFORMW 
 						PRINTFORMW %조사처리(CALLNAME,"는")% 자신의 가슴을 마구 주무르며、입으론 %CALLNAME:MASTER%의 페니스에 봉사했다。
-						PRINTFORMW 예측할 수 없는 가슴과 혀의 기술에 %조사처리(CALLNAME:MASTER,"는")% 아무 말도 못한 채、당하기만 했다。
+						PRINTFORMW 예측할 수 없는 가슴과 혀의 기술에 %마스터는% 아무 말도 못한 채、당하기만 했다。
 						PRINTFORMW 「으무웃%UNICODE(0x2661)%　아믓%UNICODE(0x2661)%　읏、읏……%UNICODE(0x2661)%」
 						PRINTFORMW 「츗……응……응후훗%UNICODE(0x2661)%」
 						PRINTFORMW 「……이제、한계야？」
@@ -6159,7 +6159,7 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW %조사처리(CALLNAME,"는")% 스스로 자신의 가슴을 주무르면서、입은 %CALLNAME:MASTER%의 페니스에 봉사했다。
-					PRINTFORMW 예상치 못한 가슴과 혀의 기술에 %조사처리(CALLNAME:MASTER,"는")% 아무 말도 못하고、하는 대로 당하고 있었다。
+					PRINTFORMW 예상치 못한 가슴과 혀의 기술에 %마스터는% 아무 말도 못하고、하는 대로 당하고 있었다。
 					PRINTFORMW 「으무웃%UNICODE(0x2661)%　아믓%UNICODE(0x2661)%　읏、읏……%UNICODE(0x2661)%」
 					PRINTFORMW 「츗……응……응후훗%UNICODE(0x2661)%」
 					PRINTFORMW 「……이제、한계？」
@@ -6186,7 +6186,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 「읏、훗、후웁、읏……。푸아……하아、하아……아무웃！」
 				PRINTFORMW 「……히겨、히겨로……츄르……괘、괜찮、아……？」
 				PRINTFORMW ……도중에 말하지 않으면、만점이었다。
-				PRINTFORMW 그렇게 말하며 %조사처리(CALLNAME:MASTER,"는")% 、추가시험을 하기로 했다。
+				PRINTFORMW 그렇게 말하며 %마스터는% 、추가시험을 하기로 했다。
 				PRINTFORMW 「우냐아、안ㄷ……응긋！？　믓、읏……！」
 				CFLAG:352 = 3
 			;그 이외
@@ -6197,7 +6197,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 「츄웃……할짝……읏、츄우……읏！」
 				PRINTFORMW 「……이、이거、무리……야、양쪽、이라니、할수 없……응우웁！？」
 				PRINTFORMW 머리를 눌러 변명을 봉했다。
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 허리를 움직이면、조금은 하기 쉬워질 것이다。
+				PRINTFORMW %마스터가% 허리를 움직이면、조금은 하기 쉬워질 것이다。
 				PRINTFORMW 밀어넣어진 페니스에、단순히 구멍화한 입을 범해 주었다。
 				PRINTFORMW 「응응응우웁웃……응그믓……。푸하앗、시、싫어……싫어어……！」
 				CFLAG:352 = 2
@@ -6682,7 +6682,7 @@ SELECTCASE SELECTCOM
 			PRINTFORMW 「………그래、서？」
 			PRINTFORMW 상처가 없는 것도 아니고、아픔을 느끼지 않는 것도 아닐 텐데、%조사처리(CALLNAME,"는")% 태연한 반응을 돌려주었다。
 			PRINTFORMW 아무래도、한 두 방으로는 부족한 것 같다。
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 재차、커다란 채찍을 휘둘렀다。
+			PRINTFORMW %마스터는% 재차、커다란 채찍을 휘둘렀다。
 			CFLAG:356 = 1
 		;2번째 이후
 		ELSE
@@ -6711,14 +6711,14 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 					PRINTFORMW 「아히잇！　햐앗！　아웃……아웃……♪」
 					PRINTFORMW 「……후、훈육해……줘%UNICODE(0x2661)%」
-					PRINTFORMW 「………잔뜩、상처、새겨서……%조사처리(CSTR:일인칭,"를")% ……」
+					PRINTFORMW 「………잔뜩、상처、새겨서……%일인칭을% ……」
 					PRINTFORMW 「내가、%CSTR:이인칭%의、것、이라는……흔적、주、세요……%UNICODE(0x2661)%」
 				ENDIF
 				CFLAG:356 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:356 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
-				PRINTFORMW 일부러 간격을 넓혀、방심할 때까지 기다렸다가、%조사처리(CALLNAME:MASTER,"는")% 채찍을 휘둘렀다。
+				PRINTFORMW 일부러 간격을 넓혀、방심할 때까지 기다렸다가、%마스터는% 채찍을 휘둘렀다。
 				PRINTFORMW 아무리 %조사처리(CALLNAME,"라")%고 해도、방심했던 순간에 오는 일격은 견뎌낼 수 없던 것 같다。
 				PRINTFORMW 「칫……！　……끅……읏！」
 				PRINTFORMW 「………………ㄲ、끝……？　아그웃！」
@@ -6728,7 +6728,7 @@ SELECTCASE SELECTCOM
 			ELSEIF CFLAG:356 < 2 || FLAG:7 == 2
 				PRINTFORMW 
 				PRINTFORMW 「……즐거、워？」
-				PRINTFORMW 비명 하나 새지 않고 있는 %CALLNAME%에、%조사처리(CALLNAME:MASTER,"는")% 재차 채찍을 들어올렸다。
+				PRINTFORMW 비명 하나 새지 않고 있는 %CALLNAME%에、%마스터는% 재차 채찍을 들어올렸다。
 				CFLAG:356 = 2
 			ENDIF
 		ENDIF
@@ -6792,7 +6792,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 
 				PRINTFORMW 「……아플、뿐……아플、뿐……그러니、까……！」
 				PRINTFORMW %조사처리(CALLNAME,"는")% 이를 악물고 열기를 견디려 하고 있다。
-				PRINTFORMW 눈물겨운 노력에 감동받아、%조사처리(CALLNAME:MASTER,"는")% 양초를 수직으로 세웠다。
+				PRINTFORMW 눈물겨운 노력에 감동받아、%마스터는% 양초를 수직으로 세웠다。
 				PRINTFORMW 밀랍의 물방울은 흘러내리지 않고、끈을 중심으로 해서 생긴 크레이터에 고인다。
 				PRINTFORMW 방울방울 불빛에 물방울이 뜨거워지고……적당한 시기를 봐서、늘어뜨렸다。
 				PRINTFORMW 「―――――――――――――――으읏！！！」
@@ -6968,7 +6968,7 @@ SELECTCASE SELECTCOM
 				ELSEIF CFLAG:360 < 2 || FLAG:7 == 2
 					PRINTFORMW 
 					PRINTFORMW 밧줄을 한손에 가까이 가져가면、%조사처리(CALLNAME,"는")% 격렬하게 저항해 왔다。
-					PRINTFORMW 하지만、계약에 묶인 몸으로는 %조사처리(CALLNAME:MASTER,"를")% 상처입히는 것도 하지 못하고、하는 대로 당해버렸다。
+					PRINTFORMW 하지만、계약에 묶인 몸으로는 %마스터를% 상처입히는 것도 하지 못하고、하는 대로 당해버렸다。
 					PRINTFORMW 「……큿……！」
 					CFLAG:360 = 2
 				ENDIF
@@ -7006,7 +7006,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「………%CSTR:일인칭%、시끄러、워？」
 						PRINTFORMW 볼개그를 건네받은 %조사처리(CALLNAME,"는")%、어깨를 축 늘어트리며 풀이 죽어 있다。
 						PRINTFORMW ……볼개그를 끼우고 있는 %조사처리(CALLNAME,"를")% 보고 싶었을 뿐이야。
-						PRINTFORMW 그렇게 말하면、%조사처리(CALLNAME,"는")% 얼굴을 붉히며、눈을 치켜뜨고 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+						PRINTFORMW 그렇게 말하면、%조사처리(CALLNAME,"는")% 얼굴을 붉히며、눈을 치켜뜨고 %마스터를% 보았다。
 						PRINTFORMW 「어、어떻게 해서라도、라고……ㅁ、말한다면……아、아므……음……」
 						PRINTFORMW 「……허태애？」
 						PRINTFORMW 고개를 갸웃거리는 %CALLNAME%의 불안한 얼굴에、무언가가 눈을 떠버릴 것만 같다。
@@ -7325,7 +7325,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「……%CSTR:이인칭%」
-					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% ……%CSTR:이인칭% 전용、의、오나홀……입니다」
+					PRINTFORMW 「%일인칭은% ……%CSTR:이인칭% 전용、의、오나홀……입니다」
 					PRINTFORMW 「……ㅆ、써、주셔도……」
 				ENDIF
 				CFLAG:432 = 4
@@ -7362,7 +7362,7 @@ SELECTCASE SELECTCOM
 			ELSE
 				PRINTFORMW 입으로의 봉사를 명령하자、%조사처리(CALLNAME,"는")% 페니스에 혀를 뻗으려고 했다。
 				PRINTFORMW 천천히 가까이 다가오고 있는 %CALLNAME%의 머리。
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 머리를 양손으로 잡고、단숨에 끌어당겼다。
+				PRINTFORMW %마스터는% %CALLNAME%의 머리를 양손으로 잡고、단숨에 끌어당겼다。
 				PRINTFORMW 「후에……에엣！？　아……우웁！？」
 			ENDIF
 			CALL TRAIN_MESSAGE
@@ -7474,7 +7474,7 @@ SELECTCASE SELECTCOM
 			PRINTFORMW 
 			PRINTFORMW 앞구멍과 뒷구멍에서 찔러넣었던 주먹을 펴서、서로 마주보는 듯한 모양으로 육벽을 사이에 두었다。
 			PRINTFORMW 「힛！？　아……아……아……아……！？」
-			PRINTFORMW 딱 좋은 기회라고 생각하며、%조사처리(CALLNAME:MASTER,"는")% 손가락을 기어올려서、쾌락을 주는 스폿을 찾아내갔다。
+			PRINTFORMW 딱 좋은 기회라고 생각하며、%마스터는% 손가락을 기어올려서、쾌락을 주는 스폿을 찾아내갔다。
 			PRINTFORMW 체내를 능욕당하는 쾌감에、%조사처리(CALLNAME,"는")% 이젠、위의 입도 다물지 못하는 것 같았다。
 			PRINTFORMW 「아아……아아……%CSTR:일인칭%……%CSTR:일인칭%……어」
 			PRINTFORMW 「개발……당해、서……구석구석 조사、당해、서……%UNICODE(0x2661)%」
@@ -7491,7 +7491,7 @@ SELECTCASE SELECTCOM
 			PRINTFORMW %조사처리(CALLNAME,"는")% 쭈뼛쭈뼛 넓적다리를 비비면서、숨을 거칠게 몰아쉬었다。
 			PRINTFORMW 「화……화장、실……」
 			PRINTFORMW 「……부탁、이야……나、나올거 같애……」
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 살짝 웃고선、몸부림치는 %CALLNAME%에게、여기서 해라、고 명령했다。
+			PRINTFORMW %마스터는% 살짝 웃고선、몸부림치는 %CALLNAME%에게、여기서 해라、고 명령했다。
 			PRINTFORMW 「………그、런、거……하、할수、아」
 			PRINTFORMW 「아、안대애……지、진짜、로、정말、로……싸버、아……！？」
 			CFLAG:373 = 1
@@ -7504,7 +7504,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「………………」
 					PRINTFORMW %CALLNAME%의 시선이 몹시 차갑다。
 					PRINTFORMW ……이상하네。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 단지 방뇨가 보고 싶다 말하곤 관찰했을 뿐이다。
+					PRINTFORMW %마스터는% 단지 방뇨가 보고 싶다 말하곤 관찰했을 뿐이다。
 					PRINTFORMW 굳미 말하자면、그 꼴을 실황 중계한 것은 불필요했다는 느낌이 없지 않다。
 					PRINTFORMW 혹시、실황의 내용이 마음에 들지 않은 걸까。
 					PRINTFORMW 「～～～～～～～～～～～바보옷！」
@@ -7513,7 +7513,7 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 황홀한 표정으로、%조사처리(CALLNAME,"는")% 방광 속에 있는 내용물을 전부 내보냈다。
 					PRINTFORMW %조사처리(CALLNAME,"는")% 잃어버린 체온을 맞추기 위해서、몸서리를 한 번 치고。
-					PRINTFORMW 그리고 그러고 나서、녹는 듯한 미소로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+					PRINTFORMW 그리고 그러고 나서、녹는 듯한 미소로 %마스터를% 보았다。
 					PRINTFORMW 「읏……흥분、했어？」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
@@ -7620,7 +7620,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「우아、아、아아아아아아아아아아아으으으으읏！！」
 						PRINTFORMW 
 						PRINTFORMW 부끄러운 소리를 내버린 %조사처리(CALLNAME,"는")% 、반광란해선 펑펑 울었다。
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 어쩔 수 없이、울음이 그칠 때까지 아픈 배를 문질러 주기로 했다。
+						PRINTFORMW %마스터는% 어쩔 수 없이、울음이 그칠 때까지 아픈 배를 문질러 주기로 했다。
 						PRINTFORMW 「너무、해……훌쩍……%CSTR:일인칭%、여자애、라……구？」
 						PRINTFORMW 「……좀 더、소중하게……여겨줘？」
 					;음란, 창부
@@ -7683,7 +7683,7 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 「…………………」
 					PRINTFORMW 마개를 뽑았을 때의 자세로 굳어버린 %조사처리(CALLNAME,"는")% 놀랄만큼 오랫동안 그러고 있었다。
-					PRINTFORMW 역시 이건 심했나、하고 %조사처리(CALLNAME:MASTER,"가")% 반성하려던 순간。
+					PRINTFORMW 역시 이건 심했나、하고 %마스터가% 반성하려던 순간。
 					PRINTFORMW ―――기、기、기
 					PRINTFORMW 하는 소리가 들리는 걸로 착각할 정도의、기름 떨어진 기계 같은 움직임으로 이쪽을 보았다。
 					PRINTFORMW 그리곤、투덜투덜 중얼대기 시작했다。
@@ -7698,7 +7698,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「……빠져、버렸다」
-					PRINTFORMW 압박감이 없어진 배를 문지르며、%조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 보았다。
+					PRINTFORMW 압박감이 없어진 배를 문지르며、%조사처리(CALLNAME,"는")% %마스터를% 보았다。
 					PRINTFORMW 다음의 지시를 기다리고 있는 것인지、지그시 보면서 아무 말도 하지 않는다。
 					PRINTFORMW ……이건 이거대로 즐겁지만、의욕이 나질 않는다。
 				ENDIF
@@ -8358,7 +8358,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 손가락 사이를 로션의 실이 걸렸다。
 					PRINTFORMW 「……응、거미、집……같아」
 					PRINTFORMW 「…………」
-					PRINTFORMW 잠시 실을 바라보고 있던 %조사처리(CALLNAME,"는")% 、무얼 생각했는지 %조사처리(CALLNAME:MASTER,"를")% 껴안았다。
+					PRINTFORMW 잠시 실을 바라보고 있던 %조사처리(CALLNAME,"는")% 、무얼 생각했는지 %마스터를% 껴안았다。
 					PRINTFORMW 「읏%UNICODE(0x2661)%　잡았、다……%UNICODE(0x2661)%」
 					PRINTFORMW 「………놓치지 않、아♪」
 					PRINTFORMW ……우선、로션으로 장난치지 말라고、주의만 해 뒀다。
@@ -8425,7 +8425,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……왜냐면、%CSTR:일인칭%……%CSTR:일인칭%、말이야？」
 						PRINTFORMW 「%CSTR:일인칭%……항상、참고、있으니……까」
 						PRINTFORMW 「%조사처리(CSTR:이인칭,"과")%、꼬옥하고……싶어、싶은、데도……」
-						PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의……부인、이니까%UNICODE(0x2661)%」
+						PRINTFORMW 「……%일인칭은% 、%CSTR:이인칭%의……부인、이니까%UNICODE(0x2661)%」
 						PRINTFORMW 
 						PRINTFORMW 약지의 반지가、반짝 빛났던……것 같은 느낌이 들었다。
 						PRINTFORMW 
@@ -8442,7 +8442,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「……왜냐면、%CSTR:일인칭%……%CSTR:일인칭%、말이야？」
 						PRINTFORMW 「%CSTR:일인칭%……항상、참고、있으니……까」
 						PRINTFORMW 「%조사처리(CSTR:이인칭,"과")%、꼬옥하고……싶어、싶은、데도……」
-						PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의……부인、이니까%UNICODE(0x2661)%」
+						PRINTFORMW 「……%일인칭은% 、%CSTR:이인칭%의……부인、이니까%UNICODE(0x2661)%」
 						PRINTFORMW 
 						PRINTFORMW 약지의 반지가、반짝 빛났던……것 같은 느낌이 들었다。
 						PRINTFORMW 
@@ -8513,7 +8513,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「……부끄럽、고」
 					PRINTFORMW 「이상한、곳……보이고 싶지、않아」
 					PRINTFORMW 규우、하고 %CALLNAME:MASTER%에 안겨 %조사처리(CALLNAME,"는")% 불쑥 말했다。
-					PRINTFORMW 「…………%조사처리(CSTR:이인칭,"를")%……좋아、하니까」
+					PRINTFORMW 「…………%이인칭을%……좋아、하니까」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「……으～……읏%UNICODE(0x2661)%」
@@ -8526,7 +8526,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「…………읏」
 					PRINTFORMW 「차、참……아？」
 					PRINTFORMW 「……아니、면………？」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 힐끗 기대로 가득 찬 눈으로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 힐끗 기대로 가득 찬 눈으로 %마스터를% 보았다。
 				ENDIF
 				CFLAG:394 = 4
 			;굴복각인Lv3
@@ -8568,7 +8568,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「절대로―――――――안대앳！！」
 						PRINTFORMW 
 						PRINTFORMW 여태까지 본 적이 없을 정도로 단호하게、%조사처리(CALLNAME,"는")% 거절의 의사를 보였다。
-						PRINTFORMW 후우ー후우ー、하며 콧김도 거칠고、%조사처리(CALLNAME:MASTER,"는")% 하는 수 없이 촬영을 잠시 중단했다。
+						PRINTFORMW 후우ー후우ー、하며 콧김도 거칠고、%마스터는% 하는 수 없이 촬영을 잠시 중단했다。
 						PRINTFORMW 이제와서는 이 정도로 부끄러워할 일은 없을 거라고 생각했는데도……예측이 물렀던 것 같다。
 						PRINTFORMW 「………아냐、앗！」
 						PRINTFORMW 「%CSTR:일인칭%、만、나온다면……좋、지만」
@@ -8594,7 +8594,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:일인칭%、는、지、지금부터……어、%CSTR:이인칭%에게……」
 						PRINTFORMW 「그、게……그、으……」
 						PRINTFORMW 테이프의 녹화 분량에는 한계가 있다。
-						PRINTFORMW 길어질 것 같은 말을 끊고、%조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 바로 밀어 넘어뜨렸다。
+						PRINTFORMW 길어질 것 같은 말을 끊고、%마스터는% %조사처리(CALLNAME,"를")% 바로 밀어 넘어뜨렸다。
 					ENDIF
 					CFLAG:395 = 4
 				;굴복각인Lv3
@@ -8733,7 +8733,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「…………얌전히、기다……려？」
-					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% 、기다ㄹ……우우……」
+					PRINTFORMW 「%일인칭은% 、기다ㄹ……우우……」
 					PRINTFORMW 「…………아무것도、아니……에요」
 				ENDIF
 				CFLAG:397 = 4
@@ -8795,7 +8795,7 @@ SELECTCASE SELECTCOM
 				ELSEIF CFLAG:398 < 2 || FLAG:7 == 2
 					PRINTFORMW 「………무슨、의미、가……？」
 					PRINTFORMW 굳이 말하자면、지금 %조사처리(CALLNAME,"가")% 얼굴을 돌리고 있다。
-					PRINTFORMW 그렇게 말해주자、%조사처리(CALLNAME,"는")% 이를 갈며 %조사처리(CALLNAME:MASTER,"를")% 노려봤다。
+					PRINTFORMW 그렇게 말해주자、%조사처리(CALLNAME,"는")% 이를 갈며 %마스터를% 노려봤다。
 					CFLAG:398 = 2
 				ENDIF
 			ENDIF
@@ -8907,9 +8907,9 @@ SELECTCASE SELECTCOM
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「목욕탕……들어가고、싶어라%UNICODE(0x2661)%」
 						PRINTFORMW 샤워기로 몸을 씻으라고 명령하면、%조사처리(CALLNAME,"는")% 그렇게 졸라 왔다。
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")%씨익 웃으며、%CALLNAME%의 피부에 샤워기의 머리부분을 가까이 했다。
+						PRINTFORMW %마스터는%씨익 웃으며、%CALLNAME%의 피부에 샤워기의 머리부분을 가까이 했다。
 						PRINTFORMW 「응히웃！？　아……%CSTR:이인칭%、거기……는……♪」
-						PRINTFORMW 쏴아쏴아 소리를 내는 샤워기의 머리를 대고、%조사처리(CALLNAME:MASTER,"는")% 다시 한번 물어보았다。
+						PRINTFORMW 쏴아쏴아 소리를 내는 샤워기의 머리를 대고、%마스터는% 다시 한번 물어보았다。
 						PRINTFORMW 아직도 목욕이 좋아、라고。
 						PRINTFORMW 「……우웅%UNICODE(0x2661)%　……샤워……좋아%UNICODE(0x2661)%」
 					;복종, 예속
@@ -9247,7 +9247,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"를")% 부르는 소리가 계속 울리고 있었다…
+					PRINTFORMW %마스터를% 부르는 소리가 계속 울리고 있었다…
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -10134,7 +10134,7 @@ IF CFLAG:106
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「여기、로………좋、아？」
-				PRINTFORMW 「응후후%UNICODE(0x2661)%　%조사처리(CSTR:일인칭,"는")% ……언제라도、좋、아%UNICODE(0x2661)%」
+				PRINTFORMW 「응후후%UNICODE(0x2661)%　%일인칭은% ……언제라도、좋、아%UNICODE(0x2661)%」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW %조사처리(CALLNAME,"는")% 슥삭슥삭 허벅지로 %CSTR:이인칭%의 페니스를 문질러 왔다。
@@ -10201,7 +10201,7 @@ IF CFLAG:106
 				PRINTFORMW 「우야아………앗」
 				PRINTFORMW 「……우～……미끈미끈、해서、따뜻하……」
 				PRINTFORMW 「우～……흘려버린、거、같아……」
-				PRINTFORMW %조사처리(CALLNAME,"는")% '지이'하고 원망스러운 표정으로 %조사처리(CSTR:이인칭,"를")% 보았다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% '지이'하고 원망스러운 표정으로 %이인칭을% 보았다。
 			;연모, 친애
 			ELSEIF TALENT:3 || TALENT:6
 				PRINTFORMW 「……무우」
@@ -10216,7 +10216,7 @@ IF CFLAG:106
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 「으우우……응%UNICODE(0x2661)%」
 				PRINTFORMW 「%CSTR:이인칭%……다、다음은、여기……에요？」
-				PRINTFORMW %조사처리(CALLNAME,"는")% 하얗게 물든 애널을 손가락으로 만지작거리며、%조사처리(CALLNAME:MASTER,"를")% 유혹했다。
+				PRINTFORMW %조사처리(CALLNAME,"는")% 하얗게 물든 애널을 손가락으로 만지작거리며、%마스터를% 유혹했다。
 			ENDIF
 			CFLAG:228 = 3
 		;굴복각인Lv3
@@ -10316,7 +10316,7 @@ IF TFLAG:9 == 1
 	;그 이외
 	ELSEIF CFLAG:231 < 2 || FLAG:7 == 2
 		PRINTFORMW 「……………」
-		PRINTFORMW 정액을 쏟아낸 %조사처리(CALLNAME:MASTER,"를")% %조사처리(CALLNAME,"는")% 차가운 시선으로 보았다。
+		PRINTFORMW 정액을 쏟아낸 %마스터를% %조사처리(CALLNAME,"는")% 차가운 시선으로 보았다。
 		CFLAG:231 = 2
 	ENDIF
 ENDIF
@@ -10372,14 +10372,14 @@ IF TFLAG:0 > 0
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「읏……할짝…………꾸울꺽%UNICODE(0x2661)%」
 				PRINTFORMW 혀로 페니스를 휘감아、%조사처리(CALLNAME,"는")% 단숨에 정액을 전부 마셨다。
-				PRINTFORMW 요도에 남은 분량도 방출시켜、%조사처리(CALLNAME:MASTER,"가")% 한숨을 돌리면……
+				PRINTFORMW 요도에 남은 분량도 방출시켜、%마스터가% 한숨을 돌리면……
 				PRINTFORMW 「응～……츄츗……날름날름날름……응츄우우우……%UNICODE(0x2661)%」
 				PRINTFORMW 「응후훗………끝……%UNICODE(0x2661)%」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 「응큿……응큿………츗%UNICODE(0x2661)%」
 				PRINTFORMW 요도에 남은 분량도 방출시켜、아무것도 나오지 않게 된 페니스를 %조사처리(CALLNAME,"는")% 혀로 만지작거리는 것을 계속했다。
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 아무것도 말하지 않으면、아마 계속하고 있겠지。
+				PRINTFORMW %마스터가% 아무것도 말하지 않으면、아마 계속하고 있겠지。
 			ENDIF
 			CFLAG:233 = 4
 		;굴복각인Lv3
@@ -10395,7 +10395,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 목 안에 직접 분사된 정액。
 			PRINTFORMW 입에 손가락을 넣어봐야 목구멍 아래로 들어간 게 닿을 리 없다.。
 			PRINTFORMW 「우웃………토、토해야……토해야 돼……！」
-			PRINTFORMW 손가락을 더욱 깊이 넣으려는 걸、%조사처리(CALLNAME:MASTER,"는")% 막았다。
+			PRINTFORMW 손가락을 더욱 깊이 넣으려는 걸、%마스터는% 막았다。
 			PRINTFORMW 그냥 두면、스스로 목을 뚫고 자살할 수 있다。
 			CFLAG:233 = 2
 		ENDIF
@@ -10423,14 +10423,14 @@ IF TFLAG:0 > 0
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「읏……할짝…………꾸울꺽%UNICODE(0x2661)%」
 				PRINTFORMW 혀로 페니스를 휘감아、%조사처리(CALLNAME,"는")% 단숨에 정액을 전부 마셨다。
-				PRINTFORMW 요도에 남은 분량도 방출시켜、%조사처리(CALLNAME:MASTER,"가")% 한숨을 돌리면……
+				PRINTFORMW 요도에 남은 분량도 방출시켜、%마스터가% 한숨을 돌리면……
 				PRINTFORMW 「응～……츄츗……날름날름날름……응츄우우우……%UNICODE(0x2661)%」
 				PRINTFORMW 「응후훗………끝……%UNICODE(0x2661)%」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 「응큿……응큿………츗%UNICODE(0x2661)%」
 				PRINTFORMW 요도에 남은 분량도 방출시켜、아무것도 나오지 않게 된 페니스를 %조사처리(CALLNAME,"는")% 혀로 만지작거리는 것을 계속했다。
-				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 아무것도 말하지 않으면、아마 계속하고 있겠지。
+				PRINTFORMW %마스터가% 아무것도 말하지 않으면、아마 계속하고 있겠지。
 			ENDIF
 			CFLAG:233 = 4
 		;굴복각인Lv3
@@ -10481,7 +10481,7 @@ IF TFLAG:1 > 0
 			PRINTFORMW 그리고、손바닥에 고인 정액에 입을 가까이 하고、날름날름거리며 핥기 시작했다。
 			PRINTFORMW 「날름……날르……ㅁ、츗……쥬쥬우……%UNICODE(0x2661)%」
 			PRINTFORMW 「……흩어진 것도……청소……%UNICODE(0x2661)%」
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 싼 모든 것들을 위장에 넣으려고 하는 것처럼、탐욕스럽게 %조사처리(CALLNAME,"는")% 혀를 움직였다。
+			PRINTFORMW %마스터가% 싼 모든 것들을 위장에 넣으려고 하는 것처럼、탐욕스럽게 %조사처리(CALLNAME,"는")% 혀를 움직였다。
 		ENDIF
 		CFLAG:234 = 4
 	;굴복각인Lv3
@@ -10577,7 +10577,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 512 || SELECTCOM == 515
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -10585,7 +10585,7 @@ IF TFLAG:2 > 0
 				;아내
 				IF TALENT:170
 					PRINTFORMW 「아………아……앗！」
-					PRINTFORMW 애널에서 넘쳐흐를 정도로 정액을 흘러넣으며、%조사처리(CALLNAME:MASTER,"는")% 크게 숨을 내쉬었다。
+					PRINTFORMW 애널에서 넘쳐흐를 정도로 정액을 흘러넣으며、%마스터는% 크게 숨을 내쉬었다。
 					PRINTFORMW 하지만、넣어지는 쪽인 %조사처리(CALLNAME,"는")%……
 					PRINTFORMW 「～～～～～～바보옷！」
 					PRINTFORMW 「어、엉덩이……엉덩이、안에………우우～～～」
@@ -10672,7 +10672,7 @@ IF TFLAG:2 > 0
 				ELSE
 					PRINTFORMW 「……응후우%UNICODE(0x2661)%」
 					PRINTFORMW 「뱃속、가득……차버렸어%UNICODE(0x2661)%」
-					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 껴안자、귓가에서 속삭였다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 껴안자、귓가에서 속삭였다。
 					PRINTFORMW 「……낳아도……돼？」
 				ENDIF
 			;음란, 창부
@@ -10771,7 +10771,7 @@ IF TFLAG:2 > 0
 				ELSE
 					PRINTFORMW 「……응후우%UNICODE(0x2661)%」
 					PRINTFORMW 「뱃속、가득……차버렸어%UNICODE(0x2661)%」
-					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 껴안자、귓가에서 속삭였다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 껴안자、귓가에서 속삭였다。
 					PRINTFORMW 「……낳아도……돼？」
 				ENDIF
 			;음란, 창부
@@ -11278,7 +11278,7 @@ IF P > PALAMLV:3 && CFLAG:246 == 0
 	IF SELECTCOM == 181
 		PRINTFORMW 
 		PRINTFORMW 「……읏！　야、약이……약、이……잇！」
-		PRINTFORMW 가쁘게 호흡하던、%조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 죽일듯한 눈으로 노려봤다。
+		PRINTFORMW 가쁘게 호흡하던、%조사처리(CALLNAME,"는")% %마스터를% 죽일듯한 눈으로 노려봤다。
 	;그 이외
 	ELSE
 		PRINTFORMW 
@@ -11298,7 +11298,7 @@ IF P > PALAMLV:3 && CFLAG:247 == 0
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9
 		PRINTFORMW 
-		PRINTFORMW 「……네……%조사처리(CSTR:일인칭,"는")% ……%CSTR:이인칭%의……노예………입니다%UNICODE(0x2661)%」
+		PRINTFORMW 「……네……%일인칭은% ……%CSTR:이인칭%의……노예………입니다%UNICODE(0x2661)%」
 	;그 이외
 	ELSE
 		PRINTFORMW 
@@ -11326,7 +11326,7 @@ IF P > PALAMLV:3 && CFLAG:248 == 0
 		PRINTFORMW 「%CSTR:이인칭%……」
 		PRINTFORMW 「……피곤하지……않아？」
 		PRINTFORMW %조사처리(CALLNAME,"는")%、무심코 나온 말에、입을 막으며 놀라있다。
-		PRINTFORMW 「어라……어째서、%CSTR:일인칭%……%조사처리(CSTR:이인칭,"를")%、걱정……한거、야？」
+		PRINTFORMW 「어라……어째서、%CSTR:일인칭%……%이인칭을%、걱정……한거、야？」
 		PRINTFORMW 「……어라。…………어째서？」
 	ENDIF
 	CFLAG:248 = 1
@@ -11463,7 +11463,7 @@ IF TFLAG:23 == 3
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
 			PRINTFORMW 「앗、하아……아아……아아……%UNICODE(0x2661)%」
-			PRINTFORMW 질질 침을 흘리며、%조사처리(CALLNAME,"는")% 정욕으로 가득찬 눈으로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+			PRINTFORMW 질질 침을 흘리며、%조사처리(CALLNAME,"는")% 정욕으로 가득찬 눈으로 %마스터를% 보았다。
 			PRINTFORMW 「……이런 거………%CSTR:일인칭%、처음이야……%UNICODE(0x2661)%」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
@@ -11477,7 +11477,7 @@ IF TFLAG:23 == 3
 		PRINTFORMW 
 		PRINTFORMW 「읏、핫、앗、아、아、아、아……――――앗！！！」
 		PRINTFORMW 「………방금、껀……바、방금꺼어…………%UNICODE(0x2661)%」
-		PRINTFORMW %조사처리(CALLNAME,"는")% 풀린 눈으로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+		PRINTFORMW %조사처리(CALLNAME,"는")% 풀린 눈으로 %마스터를% 보았다。
 	ENDIF
 ENDIF
 
@@ -11641,7 +11641,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 「잠、깐、만……앗、앞으로、조금、만……%UNICODE(0x2661)%」
 						PRINTFORMW 「읏、앗、앗、하아、하아……으웃%UNICODE(0x2661)%」
 						PRINTFORMW 마지막 스퍼트를 끝내고、힘차게 %CALLNAME%의 모유가 흩날렸다。
-						PRINTFORMW ……아무래도 좋지만、이 이불은 %조사처리(CALLNAME:MASTER,"가")% 씻어야 하는 것일까。
+						PRINTFORMW ……아무래도 좋지만、이 이불은 %마스터가% 씻어야 하는 것일까。
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 파이즈리의 쾌감에 취한건지、%조사처리(CALLNAME,"는")% 정신 없이 페니스를 문지르고 있다。
@@ -11672,7 +11672,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 「영찻……영찻……아、%CSTR:이인칭%……」
 						PRINTFORMW 「……좋은、아침………입니다………」
 						PRINTFORMW 아쉬운 듯이 페니스를 보는 %CALLNAME%。
-						PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 어쩔 수 없이、계속해도 좋다는 허가를 말해 주었다。
+						PRINTFORMW %마스터는% 어쩔 수 없이、계속해도 좋다는 허가를 말해 주었다。
 						PRINTFORMW 「………엣、앗………네엣♪」
 					ENDIF
 				ENDIF
@@ -11691,7 +11691,7 @@ SELECTCASE TFLAG:13
 					IF RAND:2 == 0
 						PRINTFORMW 
 						PRINTFORMW 「읏、읏、읏……%CSTR:이인칭%……%CSTR:이인칭%……%UNICODE(0x2661)%」
-						PRINTFORMW 아무래도、%조사처리(CALLNAME:MASTER,"가")% 일어난 걸 모를 정도로 열중하고 있다。
+						PRINTFORMW 아무래도、%마스터가% 일어난 걸 모를 정도로 열중하고 있다。
 						PRINTFORMW 허리를 찌르는 걸로 자기 주장을 하자、간신히 %CALLNAME%의 눈에 이성이 돌아왔다。
 						PRINTFORMW 「햐앙앗%UNICODE(0x2661)%　……아……%CSTR:이인칭%……일어났、어？」
 						PRINTFORMW 「………………에또、그……이、이거、는……그……」
@@ -11711,7 +11711,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 「……………………봤、어？」
 						PRINTFORMW 뭐랄까、듣고있었다。
 						PRINTFORMW 「―――――――」"STONE"
-						PRINTFORMW 석화한 %CALLNAME%의 치료를 위해、%조사처리(CALLNAME:MASTER,"는")% 아침식사를 포기했다。
+						PRINTFORMW 석화한 %CALLNAME%의 치료를 위해、%마스터는% 아침식사를 포기했다。
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
@@ -11727,7 +11727,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「……………………봤、어？」
 					PRINTFORMW 뭐랄까、듣고있었다。
 					PRINTFORMW 「―――――――」"STONE"
-					PRINTFORMW 석화한 %CALLNAME%의 치료를 위해、%조사처리(CALLNAME:MASTER,"는")% 아침식사를 포기했다。
+					PRINTFORMW 석화한 %CALLNAME%의 치료를 위해、%마스터는% 아침식사를 포기했다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -11816,7 +11816,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「아……。……응、안녕%UNICODE(0x2661)%」
 					PRINTFORMW 「……저기、말야。……%CSTR:이인칭% 의……자는 얼굴……보고있었、어」
 					PRINTFORMW 「그러니까、말야……？　왠지……츄、하고싶어、져서……」
-					PRINTFORMW 어디까지나 직설적인 %CALLNAME%의 말에、이번엔 %조사처리(CALLNAME:MASTER,"가")% 얼굴이 붉어졌다。
+					PRINTFORMW 어디까지나 직설적인 %CALLNAME%의 말에、이번엔 %마스터가% 얼굴이 붉어졌다。
 					PRINTFORMW 「………아、아침밥……다、다 됐어、요……？」
 					PRINTFORMW 「시、시시、식으……니까……우……빠、빨리！」
 					PRINTFORMW 얼굴을 시뻘개진 %CALLNAME%에 손을 잡혀、더 이상 이 화제는 잇지 못했다。
@@ -11889,16 +11889,16 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 양손양발을 움츠려 거북처럼 누운 %CALLNAME%에게 붙잡혀、어찌 된 건가하고 생각하고 있자……
 						PRINTFORMW 
 						PRINTFORMW 「……쭉……지킬、테니까……」
-						PRINTFORMW 「누구도……%조사처리(CSTR:이인칭,"를")% ……상처입히게、하지、않이……」
+						PRINTFORMW 「누구도……%이인칭을% ……상처입히게、하지、않이……」
 						PRINTFORMW 
 						PRINTFORMW 시야엔 %조사처리(CALLNAME,"로")% 가득하다。
-						PRINTFORMW 그래도 손을 더듬어 알람시계를 찾아내、잡으려 하자、%조사처리(CALLNAME:MASTER,"는")% 멀리 날렸다。
+						PRINTFORMW 그래도 손을 더듬어 알람시계를 찾아내、잡으려 하자、%마스터는% 멀리 날렸다。
 						PRINTFORMW ……가끔은、조금 늦잠자는 것도 나쁘지 않다。
 						PRINTFORMW 그렇게、생각했다。
 					ELSEIF LOCAL == 1
 						PRINTFORMW 
 						PRINTFORMW 「응♪　……%CSTR:이인칭%……안녕、의……츄、는？」
-						PRINTFORMW 아직 잠이 덜 깬 %CALLNAME%의 머리를 탁 하고 치자、%조사처리(CALLNAME:MASTER,"는")% 이불에서 나왔다。
+						PRINTFORMW 아직 잠이 덜 깬 %CALLNAME%의 머리를 탁 하고 치자、%마스터는% 이불에서 나왔다。
 						PRINTFORMW 「……우우……추、워……」
 						PRINTFORMW ……북방 수호자가 뭐라 하는거냐。
 					ELSE
@@ -11917,7 +11917,7 @@ SELECTCASE TFLAG:13
 					IF RAND:2 == 0
 						PRINTFORMW 
 						PRINTFORMW 「응♪　……%CSTR:이인칭%……안녕、의……츄、는？」
-						PRINTFORMW 아직 잠이 덜 깬 %CALLNAME%의 머리를 탁 하고 치자、%조사처리(CALLNAME:MASTER,"는")% 이불에서 나왔다。
+						PRINTFORMW 아직 잠이 덜 깬 %CALLNAME%의 머리를 탁 하고 치자、%마스터는% 이불에서 나왔다。
 						PRINTFORMW 「……우우……추、워……」
 						PRINTFORMW ……북방 수호자가 뭐라 하는거냐。
 					ELSE
@@ -11965,7 +11965,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 
 					PRINTFORMW 「응후후……………%UNICODE(0x2661)%」
 					PRINTFORMW 「……일어、났어？　……응、좋은 아침。……응후후…………」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 이미 눈을 뜨고 있는데도、%조사처리(CALLNAME,"는")% 발의 움직임을 멈추지 않는다。
+					PRINTFORMW %마스터가% 이미 눈을 뜨고 있는데도、%조사처리(CALLNAME,"는")% 발의 움직임을 멈추지 않는다。
 					PRINTFORMW 가학심에 불이 붙어 버렸는지、움직임은 오히려 가속하고 있어서……
 					PRINTFORMW 「……참는、건……독……이야？」
 					PRINTFORMW 「괜찮、아……내가、마지막까지………해、줄께……%UNICODE(0x2661)%」
@@ -11975,7 +11975,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 엄청 부드러운 감촉에 실눈을 뜨면、%조사처리(CALLNAME,"는")% 흠칫거리면서 가랑이에 발을 닿게 하고 있었다。
 					PRINTFORMW 「…………아、%CSTR:이인칭%……이、일어났、어？」
 					PRINTFORMW 「……이、일어났、으면……ㄱ、괜찮……지？」
-					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"가")% 한마디만 말해도、당장이라도 발을 뺀다、라고 말하는 듯한 모습이다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% %마스터가% 한마디만 말해도、당장이라도 발을 뺀다、라고 말하는 듯한 모습이다。
 					PRINTFORMW 자다 일어나서 사정은 알 수 없지만、가만히 돌이켜 생각해 보면……
 					PRINTFORMW ……언제쯤이었나、다음에 깨울 때에는 풋잡으로、라고 말해던 기분이 든다。
 					PRINTFORMW 하지만、집에 돌아갈 때까지가 소풍이고、임신시킬 때까지가 레이프이며、쌀때까지가 풋잡이다。
@@ -12045,7 +12045,7 @@ SELECTCASE TFLAG:13
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
 					PRINTFORMW 「……정말%UNICODE(0x2661)%」
-					PRINTFORMW 「%조사처리(CALLNAME:MASTER,"가")% ……이상한 일、들만……하、니까%UNICODE(0x2661)%」
+					PRINTFORMW 「%마스터가% ……이상한 일、들만……하、니까%UNICODE(0x2661)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -12099,7 +12099,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 방을 나가려고 하면、%조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 팔을 잡았다。
 					PRINTFORMW 「아……………」
 					PRINTFORMW 무의식적인 행동이었겠지만、그렇다고 손을 떼지도 못하고 있는 %CALLNAME%。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 어쩔 수 없이、%CALLNAME%의 어깨를 껴안았다。
+					PRINTFORMW %마스터는% 어쩔 수 없이、%CALLNAME%의 어깨를 껴안았다。
 				ENDIF
 				CFLAG:265 = 1
 			ENDIF
@@ -12229,14 +12229,14 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-						PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+						PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 						PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-					PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+					PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 					PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -12272,14 +12272,14 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-						PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+						PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 						PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-					PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+					PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 					PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -12315,14 +12315,14 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-						PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+						PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 						PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-					PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+					PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 					PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -12358,14 +12358,14 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-						PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+						PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 						PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-					PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+					PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 					PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -12401,14 +12401,14 @@ SELECTCASE TFLAG:13
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-						PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+						PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 						PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 
 					PRINTFORMW 「잘 수、없……어……%UNICODE(0x2661)%」
-					PRINTFORMW 「……%조사처리(CALLNAME:MASTER,"를")%……생각、해서……읏♪」
+					PRINTFORMW 「……%마스터를%……생각、해서……읏♪」
 					PRINTFORMW 「세겨、넣어줘……%CSTR:이인칭%、를……%CSTR:이인칭%、를……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -12499,7 +12499,7 @@ SELECTCASE TFLAG:13
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 
-					PRINTFORMW 「……알？　……%조사처리(CSTR:일인칭,"는")% 、괜찮、지만」
+					PRINTFORMW 「……알？　……%일인칭은% 、괜찮、지만」
 					PRINTFORMW 「우우……맛……없……네……」
 					PRINTFORMW 황색사탕을『산란약』이라고 설명하여、%CALLNAME%에게 먹였다。
 					PRINTFORMW 알을 낳는 정도라면、이라고 설명하면 별다른 저항도 없었지만……
@@ -12513,7 +12513,7 @@ SELECTCASE TFLAG:13
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
-					PRINTFORMW 「……알？　……%조사처리(CSTR:일인칭,"는")% 、괜찮、지만」
+					PRINTFORMW 「……알？　……%일인칭은% 、괜찮、지만」
 					PRINTFORMW 「우우……맛……없……네……」
 					PRINTFORMW 황색사탕을『산란약』이라고 설명하여、%CALLNAME%에게 먹였다。
 					PRINTFORMW 알을 낳는 정도라면、이라고 설명하면 별다른 저항도 없었지만……
@@ -12527,7 +12527,7 @@ SELECTCASE TFLAG:13
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
-					PRINTFORMW 「……알？　……%조사처리(CSTR:일인칭,"는")% 、괜찮、지만」
+					PRINTFORMW 「……알？　……%일인칭은% 、괜찮、지만」
 					PRINTFORMW 「우우……맛……없……네……」
 					PRINTFORMW 황색사탕을『산란약』이라고 설명하여、%CALLNAME%에게 먹였다。
 					PRINTFORMW 알을 낳는 정도라면、이라고 설명하면 별다른 저항도 없었지만……
@@ -12537,7 +12537,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「……%CSTR:일인칭%、%CSTR:일인칭%、그、그런、거…………아、가앗！？」
 					PRINTFORMW ……%CALLNAME%의 산란이 끝날 때까지、앞으로 좀 더 걸릴 것이다。
 					PRINTFORMW 
-					PRINTFORMW 「………%조사처리(CSTR:일인칭,"는")% 、노예……%조사처리(CSTR:일인칭,"는")% 、노예……엣！」
+					PRINTFORMW 「………%일인칭은% 、노예……%일인칭은% 、노예……엣！」
 					PRINTFORMW 「그러니、까……따……라…………아앗！！」
 					ENDIF
 				CFLAG:270 = 2
@@ -12559,7 +12559,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 
 				PRINTFORMW 「…………………」
 				PRINTFORMW 겉으로 보기에는 아무것도 변화가 없는 것처럼 보이는 %CALLNAME%。
-				PRINTFORMW 하지만、배가 불러지고 있어도、아무것도 변화가 없다는 듯이 보이는 %CALLNAME%의 행동에 %조사처리(CALLNAME:MASTER,"는")% 그 상태를 살펴보았다。
+				PRINTFORMW 하지만、배가 불러지고 있어도、아무것도 변화가 없다는 듯이 보이는 %CALLNAME%의 행동에 %마스터는% 그 상태를 살펴보았다。
 			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 				;아내
@@ -12620,7 +12620,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:272 < 2 || FLAG:7 == 2)
 				;아내
 				IF TALENT:170
-					;父親が당신
+					;父親があなた
 					IF CFLAG:102 == 1
 						PRINTFORMW 
 						PRINTFORMW 「…………고생……했다%UNICODE(0x2661)%」
@@ -12629,7 +12629,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 하지만……
 						PRINTFORMW 「에헤헤……%CSTR:일인칭%……제대로、여자아이……됐、어%UNICODE(0x2661)%」
 						PRINTFORMW 「………파파%UNICODE(0x2661)%」
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 「…………낳아버렸、어」
 						PRINTFORMW %CALLNAME%의 눈엔 아무런 감정도 떠오르지 않고 있었다。
@@ -12638,12 +12638,12 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
-					;父親が당신
+					;父親があなた
 					IF CFLAG:102 == 1
 						PRINTFORMW 「……태어났、어……？」
 						PRINTFORMW 「에헤헤……%CSTR:일인칭%、힘냈……어♪」
 						PRINTFORMW 「읏……이 아이、도♪」
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 「…………낳아버렸、어」
 						PRINTFORMW %CALLNAME%의 눈엔 아무런 감정도 떠오르지 않고 있었다。
@@ -12681,7 +12681,7 @@ SELECTCASE TFLAG:13
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:273 < 2 || FLAG:7 == 2)
 					;아내
 					IF TALENT:170
-						;父親が당신
+						;父親があなた
 						IF CFLAG:102 == 1
 							IF RAND:2 == 0
 								PRINTFORMW 
@@ -12695,28 +12695,28 @@ SELECTCASE TFLAG:13
 								PRINTFORMW 「%CSTR:이인칭%도、%CSTR:일인칭%도……사이좋게、될 수、있게……」
 								PRINTFORMW 「…………아직、모를……까나♪」
 							ENDIF
-						;당신以外
+						;あなた以外
 						ELSE
 							PRINTFORMW 
 							PRINTFORMW 「아……%CSTR:이인칭%」
-							PRINTFORMW 힘없이 침대에 누운、%조사처리(CALLNAME,"는")% 울먹이는 눈동자로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+							PRINTFORMW 힘없이 침대에 누운、%조사처리(CALLNAME,"는")% 울먹이는 눈동자로 %마스터를% 보았다。
 							PRINTFORMW 「……싫、어」
 							PRINTFORMW 「…………%CSTR:일인칭%、낳고 싶지……않아…！」
 						ENDIF
 					;연모, 친애
 					ELSEIF TALENT:3 || TALENT:6
-						;父親が당신
+						;父親があなた
 						IF CFLAG:102 == 1
 							PRINTFORMW 
 							PRINTFORMW %조사처리(CALLNAME,"는")% 배에 손을 댄 체、기대에 찬 눈으로 보았다。
 							PRINTFORMW 「응……좋은 애가、돼야……해？」
 							PRINTFORMW 「%CSTR:이인칭%도、%CSTR:일인칭%도……사이좋게、될 수、있게……」
 							PRINTFORMW 「…………아직、모를……까나♪」
-						;당신以外
+						;あなた以外
 						ELSE
 							PRINTFORMW 
 							PRINTFORMW 「아……%CSTR:이인칭%」
-							PRINTFORMW 힘없이 침대에 누운、%조사처리(CALLNAME,"는")% 울먹이는 눈동자로 %조사처리(CALLNAME:MASTER,"를")% 보았다。
+							PRINTFORMW 힘없이 침대에 누운、%조사처리(CALLNAME,"는")% 울먹이는 눈동자로 %마스터를% 보았다。
 							PRINTFORMW 「……싫、어」
 							PRINTFORMW 「…………%CSTR:일인칭%、낳고 싶지……않아…！」
 						ENDIF
@@ -12744,7 +12744,7 @@ SELECTCASE TFLAG:13
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:273 < 4 || FLAG:7 == 2)
 					;아내
 					IF TALENT:170
-						;父親が당신
+						;父親があなた
 						IF CFLAG:111 == NO:MASTER
 							IF RAND:2 == 0
 								PRINTFORMW 
@@ -12760,30 +12760,30 @@ SELECTCASE TFLAG:13
 								PRINTFORMW 「%CSTR:이인칭%도……그렇게、생각해……？」
 								PRINTFORMW 「응훗%UNICODE(0x2661)%　……그럼、다행이야%UNICODE(0x2661)%」
 							ENDIF
-						;당신以外
+						;あなた以外
 						ELSE
 							PRINTFORMW 
 							PRINTFORMW 「……커다래、졌、네」
 							PRINTFORMW 유방을 빠는 아이를 보고、%조사처리(CALLNAME,"는")% 차갑게 중얼거렸다。
 							PRINTFORMW 「…………성가셔」
-							PRINTFORMW %CALLNAME%의 한마디에、%조사처리(CALLNAME:MASTER,"는")% 등골이 얼어붙었다。
+							PRINTFORMW %CALLNAME%의 한마디에、%마스터는% 등골이 얼어붙었다。
 						ENDIF
 					;연모, 친애
 					ELSEIF TALENT:3 || TALENT:6
-						;父親が당신
+						;父親があなた
 						IF CFLAG:111 == NO:MASTER
 							PRINTFORMW 
 							PRINTFORMW %조사처리(CALLNAME,"는")% 아이의 등을 두드리며、자장가를 부르고 있다。
 							PRINTFORMW 「～～～♪　후후……귀여워%UNICODE(0x2661)%」
 							PRINTFORMW 「%CSTR:이인칭%도……그렇게、생각해……？」
 							PRINTFORMW 「응훗%UNICODE(0x2661)%　……그럼、다행이야%UNICODE(0x2661)%」
-						;당신以外
+						;あなた以外
 						ELSE
 							PRINTFORMW 
 							PRINTFORMW 「……커다래、졌、네」
 							PRINTFORMW 유방을 빠는 아이를 보고、%조사처리(CALLNAME,"는")% 차갑게 중얼거렸다。
 							PRINTFORMW 「…………성가셔」
-							PRINTFORMW %CALLNAME%의 한마디에、%조사처리(CALLNAME:MASTER,"는")% 등골이 얼어붙었다。
+							PRINTFORMW %CALLNAME%의 한마디에、%마스터는% 등골이 얼어붙었다。
 						ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
@@ -12816,13 +12816,13 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || TALENT:9) && (CFLAG:274 < 2 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;父親が당신
+					;父親があなた
 					IF CFLAG:111 == NO:MASTER
 						PRINTFORMW 
 						PRINTFORMW 「……인간、은……금새、커지……네」
 						PRINTFORMW 「…………남동생도、여동생도……금새……려나？」
 						PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 팔을 잡고、쿠후훗、하고 웃었다。
-					;당신以外
+					;あなた以外
 					ELSE
 						PRINTFORMW 
 						PRINTFORMW 「…………%CSTR:이인칭%」
@@ -12889,7 +12889,7 @@ SELECTCASE TFLAG:13
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						PRINTFORMW 
-						PRINTFORMW 「……%조사처리(CSTR:이인칭,"를")%、위해……하겠、지만」
+						PRINTFORMW 「……%이인칭을%、위해……하겠、지만」
 						PRINTFORMW 「%조사처리(CSTR:이인칭,"가")%、제일……먹어 줬으면……하는、데%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
@@ -13102,14 +13102,14 @@ SELECTCASE TFLAG:13
 				;아내
 				IF TALENT:170
 					PRINTFORMW 「………체크……할거야……！」
-					PRINTFORMW 여부를 가리지않는 말에、%조사처리(CALLNAME:MASTER,"는")% 얌전히 비디오를 건냈다。
+					PRINTFORMW 여부를 가리지않는 말에、%마스터는% 얌전히 비디오를 건냈다。
 					PRINTFORMW 「……응、%CSTR:이인칭%의、얼굴……안、나와」
 					PRINTFORMW 「%CSTR:일인칭%、는、좋……지만、%CSTR:이인칭%는、안되」
 					PRINTFORMW ……남자 중에는 거기까지 팬층이 많은 건가。
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 「………체크……할거야……！」
-					PRINTFORMW 여부를 가리지않는 말에、%조사처리(CALLNAME:MASTER,"는")% 얌전히 비디오를 건냈다。
+					PRINTFORMW 여부를 가리지않는 말에、%마스터는% 얌전히 비디오를 건냈다。
 					PRINTFORMW 「……응、%CSTR:이인칭%의、얼굴……안、나와」
 					PRINTFORMW 「%CSTR:일인칭%、는、좋……지만、%CSTR:이인칭%는、안되」
 					PRINTFORMW ……남자 중에는 거기까지 팬층이 많은 건가。
@@ -13143,8 +13143,8 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 
 					PRINTFORMW 「…………읏、힘낼……께♪」
 					PRINTFORMW 꽃이 피어나는 듯한、가련한 미소를 보이는 %CALLNAME%。
-					PRINTFORMW 이제와서는、%조사처리(CALLNAME:MASTER,"가")% 걱정할 만한 단계는 오래 전에 지나와 있었다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 등을 두드려주고、무대로 내보냈다。
+					PRINTFORMW 이제와서는、%마스터가% 걱정할 만한 단계는 오래 전에 지나와 있었다。
+					PRINTFORMW %마스터는% %CALLNAME%의 등을 두드려주고、무대로 내보냈다。
 					PRINTFORMW …………
 					PRINTFORMW ………
 					PRINTFORMW ……
@@ -13164,9 +13164,9 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「…………너무 힘낸、걸까？」
 				ELSEIF ABL:14 >= 5
 					PRINTFORMW 「………응……해、볼께？」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 겁먹지 않고、%조사처리(CALLNAME:MASTER,"를")% 눈을 치켜뜨고 바라보았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 겁먹지 않고、%마스터를% 눈을 치켜뜨고 바라보았다。
 					PRINTFORMW 편애도 있는 것이겠지만、%CALLNAME%의 	노래는 상당한 실력이다。
-					PRINTFORMW 확실하게 보장하면서 손가락 도장을 찍어준、%조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 무대에 내보냈다。
+					PRINTFORMW 확실하게 보장하면서 손가락 도장을 찍어준、%마스터는% %조사처리(CALLNAME,"를")% 무대에 내보냈다。
 					PRINTFORMW …………
 					PRINTFORMW ………
 					PRINTFORMW ……
@@ -13202,8 +13202,8 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 
 					PRINTFORMW 「…………읏、힘낼……께♪」
 					PRINTFORMW 꽃이 피어나는 듯한、가련한 미소를 보이는 %CALLNAME%。
-					PRINTFORMW 이제와서는、%조사처리(CALLNAME:MASTER,"가")% 걱정할 만한 단계는 오래 전에 지나와 있었다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 등을 두드려주고、무대로 내보냈다。
+					PRINTFORMW 이제와서는、%마스터가% 걱정할 만한 단계는 오래 전에 지나와 있었다。
+					PRINTFORMW %마스터는% %CALLNAME%의 등을 두드려주고、무대로 내보냈다。
 					PRINTFORMW …………
 					PRINTFORMW ………
 					PRINTFORMW ……
@@ -13223,9 +13223,9 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「…………너무 힘낸、걸까？」
 				ELSEIF ABL:14 >= 5
 					PRINTFORMW 「………응……해、볼께？」
-					PRINTFORMW %조사처리(CALLNAME,"는")% 겁먹지 않고、%조사처리(CALLNAME:MASTER,"를")% 눈을 치켜뜨고 바라보았다。
+					PRINTFORMW %조사처리(CALLNAME,"는")% 겁먹지 않고、%마스터를% 눈을 치켜뜨고 바라보았다。
 					PRINTFORMW 편애도 있는 것이겠지만、%CALLNAME%의 	노래는 상당한 실력이다。
-					PRINTFORMW 확실하게 보장하면서 손가락 도장을 찍어준、%조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 무대에 내보냈다。
+					PRINTFORMW 확실하게 보장하면서 손가락 도장을 찍어준、%마스터는% %조사처리(CALLNAME,"를")% 무대에 내보냈다。
 					PRINTFORMW …………
 					PRINTFORMW ………
 					PRINTFORMW ……
@@ -13298,7 +13298,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 
 						PRINTFORMW 꼼짝도 하지 않고、%조사처리(CALLNAME,"는")% 구멍이라고 말할 수 있는 모든 구멍을 더렵혀진 채로 있었다。
 						PRINTFORMW 「……%CSTR:이인칭%……%CSTR:이인칭%……」
-						PRINTFORMW 「%CSTR:이인칭%……%조사처리(CSTR:일인칭,"를")% ……봐줘……%UNICODE(0x2661)%」
+						PRINTFORMW 「%CSTR:이인칭%……%일인칭을% ……봐줘……%UNICODE(0x2661)%」
 					ENDIF
 				CFLAG:281 = 1
 				CALL EVENT_MESSAGE
@@ -13420,7 +13420,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 멋쩍은 듯 뺨을 긁는 %CALLNAME:MASTER%。
 					PRINTFORMW 그 모습을 보고선、%조사처리(CALLNAME,"는")% 문득 알아차렸다。
 					PRINTFORMW ―――이、사람은……。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME,"를")% 이때까지、한번이라도 신으로 다루었던가？
+					PRINTFORMW %마스터는% %조사처리(CALLNAME,"를")% 이때까지、한번이라도 신으로 다루었던가？
 					PRINTFORMW 인간소녀처럼、욕망을 분출해、유린해、그리고……다정하게 대했다。
 					PRINTFORMW 숭상하는 것도 아니고、사역하는 것도 아닌。
 					PRINTFORMW 단지、인간으로써、여자로써。
@@ -13435,13 +13435,13 @@ SELECTCASE TFLAG:13
 					PRINTFORMW ……역시、싫었던 걸까。
 					PRINTFORMW ……조교사를 생업으로 하는 인간의 아내가 되는 건。
 					PRINTFORMW 그렇게 생각했을 때、자신이 상상 이상으로 낙담하고 있는 걸 깨달았다。
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 안타까워하고 있자、%조사처리(CALLNAME,"가")% 가슴에 뛰어들어왔다。
+					PRINTFORMW %마스터가% 안타까워하고 있자、%조사처리(CALLNAME,"가")% 가슴에 뛰어들어왔다。
 					PRINTFORMW 「………%CSTR:일인칭%、말했……었지？」
 					PRINTFORMW 「영원히、지킨다……고%UNICODE(0x2661)%」
 					PRINTFORMW 「………지켜도、좋、아？」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 고개를 저었다。
+					PRINTFORMW %마스터는% 고개를 저었다。
 					PRINTFORMW 「………지켜、줄、꺼야？」
-					PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 고개를 끄덕였다
+					PRINTFORMW %마스터는% 고개를 끄덕였다
 					PRINTFORMW ……………
 					PRINTFORMW …………
 					PRINTFORMW ………
@@ -13487,7 +13487,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 흰 살갖에 애처롭게 새겨진 음마의 낙인을 보고、%조사처리(CALLNAME,"는")% 한숨을 내쉬었다。
 					PRINTFORMW 신으로 모셔져서、수호신으로 추앙받던 자신이、인간의 성노예가 되었다。
 					PRINTFORMW 지금의 %CALLNAME%에게는、그 굴욕감조차도 쾌감에 지나지 않았다。
-					PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")% 、%CSTR:이인칭%의 것……입니다%UNICODE(0x2661)%」
+					PRINTFORMW 「……%일인칭은% 、%CSTR:이인칭%의 것……입니다%UNICODE(0x2661)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
@@ -13636,7 +13636,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW 
 						PRINTFORMW （연습、인데……。연습、일텐、데……엣！）
 						PRINTFORMW （……어째서、%조사처리(CSTR:이인칭,"가")% 아니……야？）
-						PRINTFORMW （%CSTR:일인칭%、%조사처리(CSTR:이인칭,"를")% 위해서……하고 싶은、데도……！）
+						PRINTFORMW （%CSTR:일인칭%、%이인칭을% 위해서……하고 싶은、데도……！）
 					ENDIF
 				;그 외
 				ELSE
@@ -13911,8 +13911,8 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 「――――――――――읏！！」
 				PRINTFORMW 「죄、죄송、해……죄송、해요……옷！」
 				PRINTFORMW 얼굴을 찌부리며、%조사처리(CALLNAME,"는")% 오로지 사과만을 반복했다。
-				PRINTFORMW 울다 지쳐 잠들때 까지、%조사처리(CALLNAME:MASTER,"는")% %CALLNAME%의 머리를 부드럽게 쓰다듬었다。
-				PRINTFORMW 「%조사처리(CSTR:일인칭,"를")%……이제、놓지말아、줘……！」
+				PRINTFORMW 울다 지쳐 잠들때 까지、%마스터는% %CALLNAME%의 머리를 부드럽게 쓰다듬었다。
+				PRINTFORMW 「%일인칭을%……이제、놓지말아、줘……！」
 			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
 			ELSE
 				PRINTFORMW 
@@ -13996,7 +13996,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW ――고드름이 연상되는 절대영도의 목소리.
 				PRINTFORMW 허를 찔린 남자는……아니、마음의 준비를 하였다고 해도 남자는 비슷하게 부들부들 떨었을 것이다。
 				PRINTFORMW 거대한 짐승의 기척을 등에 짊어진 %조사처리(CALLNAME,"는")% 키득, 하고 웃으며 말했다.
-				PRINTFORMW 「……%조사처리(CSTR:일인칭,"는")%, 공부하러, 왔을 뿐」
+				PRINTFORMW 「……%일인칭은%, 공부하러, 왔을 뿐」
 				PRINTFORMW 「너희는――― 교재」
 				PRINTFORMW %조사처리(CALLNAME,"는")% 치마 속에서 속옷을 벗어내어 멍하게 굳은 남자의 얼굴에 내던진다.
 				PRINTFORMW 속옷을 줍는것도、피하는 것도 아니라、 멍하니 얼굴을 보는 것을 확인한、%조사처리(CALLNAME,"는")% 만족스럽게 끄덕였다.
@@ -14101,7 +14101,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW ――그래、이건 그져……『자위』에 불과하다。
 				PRINTFORMW 
 				PRINTFORMW 바이브나 로터를 바라보는 눈으로、%조사처리(CALLNAME,"는")% 한장、또 한장씩 옷을 벗어갔다……
-				PRINTFORMW 「%조사처리(CSTR:일인칭,"를")% ……기분좋게、해줘？　……아저씨%UNICODE(0x2661)%」
+				PRINTFORMW 「%일인칭을% ……기분좋게、해줘？　……아저씨%UNICODE(0x2661)%」
 				PRINTFORMW 
 				PRINTFORMW …………
 				PRINTFORMW ………
@@ -14286,7 +14286,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW ……되도록、%CALLNAME:MASTER%에 가까운 인간을。
 				PRINTFORMW 
 				PRINTFORMW 「……없、네」
-				PRINTFORMW %CALLNAME%에게 있어서、%조사처리(CALLNAME:MASTER,"는")% 유일무이한 존재다。
+				PRINTFORMW %CALLNAME%에게 있어서、%마스터는% 유일무이한 존재다。
 				PRINTFORMW 비록 몸집이 비슷하다고 하더라도、그 내용물을 비교하면 급제점에 이르는 사람 따위 있을 리가 없다。
 				PRINTFORMW %조사처리(CALLNAME,"는")% 크게 한숨을 내쉬며、옆을 지나가는 한 남자의 어깨를 잡았다。
 				PRINTFORMW 「……。당신、으로……좋、아」
@@ -14410,20 +14410,20 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 등 뒤에 커다란 짐승의 아우라를 휘감고、%조사처리(CALLNAME,"는")% 조용히 내뱉는다。
 				PRINTFORMW %조사처리(NTRNAME(好きな人ID),"가")% 굳은 것을 보고는、%조사처리(CALLNAME,"는")% 질린다는듯한 목소리로 말한다。
 				PRINTFORMW 「……한심해」
-				PRINTFORMW 「이 정도、로……%조사처리(CSTR:일인칭,"를")% 、돌아보게 한다……고？」
+				PRINTFORMW 「이 정도、로……%일인칭을% 、돌아보게 한다……고？」
 				PRINTFORMW 「……흥」
 				PRINTFORMW ――%조사처리(CALLNAME,"는")% 비웃었다。
-				PRINTFORMW 「%CSTR:이인칭%는、%조사처리(CSTR:일인칭,"를")% ……안 무서워해」
-				PRINTFORMW 「%CSTR:이인칭%는、%조사처리(CSTR:일인칭,"를")% ……굴복시켰어」
-				PRINTFORMW 「%CSTR:이인칭%는、%조사처리(CSTR:일인칭,"를")% ………사랑해、줬、어」
+				PRINTFORMW 「%CSTR:이인칭%는、%일인칭을% ……안 무서워해」
+				PRINTFORMW 「%CSTR:이인칭%는、%일인칭을% ……굴복시켰어」
+				PRINTFORMW 「%CSTR:이인칭%는、%일인칭을% ………사랑해、줬、어」
 				PRINTFORMW 
 				PRINTFORMW ―――하지만
 				PRINTFORMW 
-				PRINTFORMW 「%CSTR:이인칭%는、%조사처리(CSTR:일인칭,"를")% ……신경、쓰지、않아」
+				PRINTFORMW 「%CSTR:이인칭%는、%일인칭을% ……신경、쓰지、않아」
 				PRINTFORMW 침울해진 %조사처리(CALLNAME,"를")% 보고、%NTRNAME(好きな人ID)%는 위로의 말을 꺼냈다。
 				PRINTFORMW 그러나、그것이 오히려 %CALLNAME%의 분노를 샀다。
 				PRINTFORMW 「―――입을、다물어」
-				PRINTFORMW 「네가、너、같은게……%조사처리(CSTR:이인칭,"를")% 、말하지마」
+				PRINTFORMW 「네가、너、같은게……%이인칭을% 、말하지마」
 				PRINTFORMW 빠득、하고 %CALLNAME%의 어금니가 울렸다。
 				PRINTFORMW 금방이라도 %NTRNAME(好きな人ID)%의 고개를 떨굴것 같던 분노였지만、그것은 순식간에 사라졌다。
 				PRINTFORMW 「……뭐、좋아」
@@ -14436,9 +14436,9 @@ SELECTCASE TFLAG:13
 				PRINTFORMW （%CSTR:이인칭%에게……버려질、지도）
 				PRINTFORMW （……그치만、그치만……！）
 				PRINTFORMW （…………아무리、그래도、좋으니까……！）
-				PRINTFORMW （%조사처리(CSTR:이인칭,"가")%、%조사처리(CSTR:일인칭,"를")% 、봐준다면……っ！）
+				PRINTFORMW （%조사처리(CSTR:이인칭,"가")%、%일인칭을% 、봐준다면……っ！）
 				PRINTFORMW 
-				PRINTFORMW ―――%조사처리(CSTR:이인칭,"를")% 향한、마음도……한번、버린다。
+				PRINTFORMW ―――%이인칭을% 향한、마음도……한번、버린다。
 				PRINTFORMW 
 				PRINTFORMW 「……알았、으면……해」
 				PRINTFORMW 그렇게 말하며、%조사처리(CALLNAME,"는")% 침대에 누워、%조사처리(NTRNAME(好きな人ID),"를")% 유혹했다。
@@ -14516,7 +14516,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 
 				PRINTFORMW 골목에서 뛰어 온 %조사처리(NTRNAME(好きな人ID),"를")%、%조사처리(CALLNAME,"는")% 손바닥으로 밀쳤다。
 				PRINTFORMW 「……늦어」
-				PRINTFORMW 「%조사처리(CSTR:일인칭,"를")% 、기다리게 해도 좋은、사람은……%CSTR:이인칭%、뿐」
+				PRINTFORMW 「%일인칭을% 、기다리게 해도 좋은、사람은……%CSTR:이인칭%、뿐」
 				PRINTFORMW 엎드려 고개를 숙이는 %NTRNAME(好きな人ID)%에게 시선을 두지않고、%조사처리(CALLNAME,"는")% 빠르게 걷기 시작헀다。
 				PRINTFORMW 목적지는、따로 정하지 않았다。아니、정할 필요도 없다。
 				PRINTFORMW 어디를 가든、무엇을 하든。
@@ -14712,7 +14712,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 「……―――――읏！！！　……크읏。……기세……타지、마」
 				PRINTFORMW （……%CSTR:일인칭%、바보、야）
 				PRINTFORMW （이런、바보같은、걸……해서……。질내에、사정、해……）
-				PRINTFORMW （…………%CSTR:이인칭%。바보같은、%조사처리(CSTR:일인칭,"를")% ……빨리、빨리、멈쳐줘……！）
+				PRINTFORMW （…………%CSTR:이인칭%。바보같은、%일인칭을% ……빨리、빨리、멈쳐줘……！）
 				PRINTFORMW 
 			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
 				;예ＮＴＲ
@@ -14952,7 +14952,7 @@ SELECTCASE TFLAG:13
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「………핧、아？」
 					PRINTFORMW 쭈뼛쭈뼛 허벅지를 비비며%조사처리(CALLNAME,"는")% 、눈물을 흘리며 빌었다。
-                                                ;복종, 예속
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「………핧、아？」
 					PRINTFORMW 쭈뼛쭈뼛 허벅지를 비비며%조사처리(CALLNAME,"는")% 、눈물을 흘리며 빌었다。
@@ -15103,20 +15103,20 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;●전투구상
-;CFLAG:800：喋る범위を制御している。조교初回に「아무것도안한다」を選ぶことで制御できる。
-;　　　　0：디폴트、喋らない
-;　　　　1：強힘な스킬を사용すると喋る。
-;　　　　2：통상の스킬を사용しても喋る。
-;　　　　3：통상공격ですら喋る。
+;●戦闘口上
+;CFLAG:800：喋る範囲を制御している。調教初回に「何もしない」を選ぶことで制御できる。
+;　　　　0：デフォルト、喋らない
+;　　　　1：強力なスキルを使用すると喋る。
+;　　　　2：通常のスキルを使用しても喋る。
+;　　　　3：通常攻撃ですら喋る。
 ;-------------------------------------------------
 
 ;=================================================================================
 ;●メモ
-;強힘っぽい스킬は기본的に２で書いている（選出は趣味）（でも実用も兼ねてるといいなあ）
+;強力っぽいスキルは基本的に２で書いている（選出は趣味）（でも実用も兼ねてるといいなあ）
 ;COOPは、自分始動は1、他人始動は2で。
-;また、현무＝亀→방어系充実？ってことで、壁やカーンなどの방어系스킬は1で喋ります。
-;まあ초기습득とかみるとそんなこともないんですけどね。
+;また、ゲンブ＝亀→防御系充実？ってことで、壁やカーンなどの防御系スキルは1で喋ります。
+;まあ初期習得とかみるとそんなこともないんですけどね。
 ;
 ;초기소지스킬
 ;・아이스브레스
@@ -15178,12 +15178,12 @@ ENDIF
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	;사용한 스킬의 이름을 LOCALS에 대입
 	LOCALS = %RESULTS%
-	;↑汎用소녀구상からお借りしました/메어리の人　　←메어리구상からお借りしました/조마구상(1)加筆した人
+	;↑汎用少女口上からお借りしました/メアリの人　　←メアリ口上からお借りしました/造魔口上(1)加筆した人
 
 
 ;ATTACK
-;この구상だと유아체형＋남자でない＋타격で、ATTACKが『ポカポカ叩く』になりますのでそこは用意
-;さらに細かく分けたければ조마구상を参照するがよかろうなのだァ
+;この口上だと小柄体型＋オトコでない＋打撃で、ATTACKが『ポカポカ叩く』になりますのでそこは用意
+;さらに細かく分けたければ造魔口上を参照するがよかろうなのだァ
 IF CFLAG:ARG:입력행동 == 0 && CFLAG:800 >= 3
 	IF TALENT:ARG:유아체형 && (TALENT:ARG:남자 == 0 || TALENT:ARG:오토코노코)
 		SELECTCASE ABL:ARG:공격상성
@@ -15280,8 +15280,8 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
 	ENDIF
 
 ;타격
-;四神相応から현무ちゃんの体重は『山』並…うわ、なにをする、やめろー
-;なので현무ちゃん＝スモウレスｒ……命だけはお助け下され
+;四神相応からゲンブちゃんの体重は『山』並…うわ、なにをする、やめろー
+;なのでゲンブちゃん＝スモウレスｒ……命だけはお助け下され
 ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 	;뇌진왕모의발차기or예광구리가라축
 	IF (CFLAG:ARG:입력행동 == 207 || CFLAG:ARG:입력행동 == 226) && CFLAG:800 >= 1
@@ -15308,7 +15308,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 	ENDIF
 
 ;전술
-;ちなみに他の3体は全員전술の계승타입あり。현무だけない。
+;ちなみに他の3体は全員戦技の継承タイプあり。ゲンブだけない。
 ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
 	;베어먹기
 	IF CFLAG:ARG:입력행동 == 326 && CFLAG:800 >= 1
@@ -15335,8 +15335,8 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
 	ENDIF
 
 ;회복
-;護りきれなかったということで、不本意そーに、でも필요だから頑張る系がいいと思います
-;護る、という台詞自体は연모・친애ルートのみのキーワードなので、연모を조건にしようかと。
+;護りきれなかったということで、不本意そーに、でも必要だから頑張る系がいいと思います
+;護る、という台詞自体は恋慕・親愛ルートのみのキーワードなので、恋慕を条件にしようかと。
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	;리캄도라
 	IF CFLAG:ARG:입력행동 == 419 && CFLAG:800 >= 1
@@ -15389,7 +15389,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 ;방어
 ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
 	;테트라칸
-	;テストして驚いたけど、현무、おっそろしく발が遅い。반사できねえ。
+	;テストして驚いたけど、ゲンブ、おっそろしく足が遅い。反射できねえ。
 	IF CFLAG:ARG:입력행동 == 602 && CFLAG:800 >= 1
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
@@ -15552,7 +15552,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
 ;파마
 ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
 	;빛의벽
-	;주살무효　당신は인간なので……いや、普通に殴った方が速いだろ多分
+	;주살無効　あなたは人間なので……いや、普通に殴った方が速いだろ多分
 	IF CFLAG:ARG:입력행동 == 1317 && CFLAG:800 >= 1
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"……사신이 명하니……빛이여、있으라",72,LEFT%┃
@@ -15567,8 +15567,8 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
 	;죽어줄래？
-	;北方→北の空→……北斗칠성→北斗側が死をつかさどってたな大陸側の民話で→北斗のナックル
-	;↑実際北斗칠성の神格化なので、どんぴしゃだったり……
+	;北方→北の空→……北斗七星→北斗側が死をつかさどってたな大陸側の民話で→北斗のナックル
+	;↑実際北斗七星の神格化なので、どんぴしゃだったり……
 	IF CFLAG:ARG:입력행동 == 1408 && CFLAG:800 >= 1
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"……보여？　북쪽의、칠백……그 간성이",72,LEFT%┃
@@ -15589,7 +15589,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
 ;지변
 ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599)
 	;포미러버
-	;청룡用のネタ：『恋っぽい事しようぜえ』
+	;セイリュウ用のネタ：『恋っぽい事しようぜえ』
 	;こやつはどーしたものか
 	;IF CFLAG:ARG:입력행동 == 1520 && CFLAG:800 >= 1
 	;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -15630,7 +15630,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
 		PRINTFORML ┃%"――현천상제가 수행에 조서를 내리니……흘러서、으깨고――부셔라",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;물의벽
-	;화염무효　わりと使える方ではあると思う。壁系스킬の中では。一応。
+	;화염무효　わりと使える方ではあると思う。壁系スキルの中では。一応。
 	ELSEIF CFLAG:ARG:입력행동 == 1609 && CFLAG:800 >= 1
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"수극화……" + CSTR:일인칭 + "에게、불은……통하지、않아",72,LEFT%┃
@@ -15645,9 +15645,9 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
 ;질풍
 ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
 	;대기의벽
-	;1UU、1/5、飛行、防衛。ダブルシンボルながら파워１と、青にしては珍しい気がしなくもない。
-	;飛行戦힘も止められるのでリミテッドで青が濃いならかなり使いやすい。
-	;……あ、지변무효です。イメージ的にはレビテト。
+	;1UU、1/5、飛行、防衛。ダブルシンボルながらパワー１と、青にしては珍しい気がしなくもない。
+	;飛行戦力も止められるのでリミテッドで青が濃いならかなり使いやすい。
+	;……あ、地変無効です。イメージ的にはレビテト。
 	IF CFLAG:ARG:입력행동 == 1723 && CFLAG:800 >= 1
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"――토허수모。……텅 빈 땅에서……물은、멈출 수 없어",72,LEFT%┃
@@ -15787,7 +15787,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 ;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 
-;本来は『충성도が上昇する～』の下にあるENDIFを사용しますけど、分かりやすさ優先でここ置いた方がいい気もしますの
+;本来は『忠誠度が上昇する～』の下にあるENDIFを使用しますけど、分かりやすさ優先でここ置いた方がいい気もしますの
 ENDIF
 
 ;ELSEIF ARG:1 > 0

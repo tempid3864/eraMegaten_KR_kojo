@@ -2,80 +2,80 @@
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:TALK_PUB1704.ERB
-;	Facility	:오세の구상処理
+;	Facility	:オセの口上処理
 ;
 ;	Licence		:ライセンスフリー
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2011/06/24		오세구상の人			とりあえず공개→
-;	002		2011/06/25		오세구상の人			
+;	001		2011/06/24		オセ口上の人			とりあえず公開→
+;	002		2011/06/25		オセ口上の人			
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;-------------------------------------------------
 ;;초기소질
 ;반항적,츤데레,부끄럼없음,혀놀림,고양이혀,자위하기쉬움,악취민감,쾌감에솔직,
 ;Ｃ민감,Ｂ민감,절벽,회복빠름,남자,영맹,타천사
 ;;獣人
-;짐승,인간화
-;Lv36（초기）時のMAXMAG용량：759240
+;獣,人化
+;Lv36（初期）時のMAXMAG容量：759240
 ;-------------------------------------------------
 ;現状
 ;-------------------------------------------------
-;오세の구상です
+;オセの口上です
 ;加筆とかどんとこいだと思います
 ;
-;真3とSJが混ざった若干若者입調？오세で妄想中
-;というか作者は그외の오세を殆ど知りません、というか이벤트오세と雑魚として出てくる오세が割と違う気が…
-;오세の소질＋体型＋性別が초기상태である事前提に書いてますので、それらの변화には対応していません
-;性別변화に対応させる場合は一気にしますが当分する気はありません
+;真3とSJが混ざった若干若者口調？オセで妄想中
+;というか作者はその他のオセを殆ど知りません、というかイベントオセと雑魚として出てくるオセが割と違う気が…
+;オセの素質＋体型＋性別が初期状態である事前提に書いてますので、それらの変化には対応していません
+;性別変化に対応させる場合は一気にしますが当分する気はありません
 ;
-;당신と오세がイチャイチャする事が前提な為、음란・복종ルートは割と疎かです
-;その為연모、特に친애、伴侶계약後の상태を重視しています
+;あなたとオセがイチャイチャする事が前提な為、淫乱・服従ルートは割と疎かです
+;その為恋慕、特に親愛、伴侶契約後の状態を重視しています
 ;
-;이름を呼ぶ場合があります
-;「당신」だと色々と変な事になる場合があるので、이름プレイ권장です
+;名前を呼ぶ場合があります
+;「あなた」だと色々と変な事になる場合があるので、名前プレイ推奨です
 ;
-;조교자が♀だという前提でまず書いています　플레이어が♂に関係するメインな조교（A섹스等）はとりあえず後回し
+;調教者が♀だという前提でまず書いています　プレイヤーが♂に関係するメインな調教（Aセックス等）はとりあえず後回し
 ;優先度♀＞♂＞♂♀
 ;
 ;NTR要素は今の所オフ前提です
 ;
 ;-------------------------------------------------
-;ある程度完成したと思われる이벤트
+;ある程度完成したと思われるイベント
 ;-------------------------------------------------
-;오세が機嫌を治す
-;結婚계약
-;婚約반지프레젠트
+;オセが機嫌を治す
+;結婚契約
+;婚約指輪プレゼント
 ;
 ;-------------------------------------------------
 ;メモ
 ;-------------------------------------------------
-;嫌われ中のペナルティ未実装（연모系程そこそこキツくて음란복종系は殆ど影響無し程度で予定）
-;반지프레젠트はもう少し色々バラケさせたい
-;デート이벤트とかやりたい
-;その前に조교コマンドある程度埋めようか？
+;嫌われ中のペナルティ未実装（恋慕系程そこそこキツくて淫乱服従系は殆ど影響無し程度で予定）
+;指輪プレゼントはもう少し色々バラケさせたい
+;デートイベントとかやりたい
+;その前に調教コマンドある程度埋めようか？
 ;
-;오세の타입は攻でスタート（なので弄らない）
-;조교ほったらかすような長い時間を使うっぽい自作이벤트では最後にBEGIN AFTERTRAINを使う（選択肢選んだら조교종료する旨を記載する事）
+;オセのタイプは攻でスタート（なので弄らない）
+;調教ほったらかすような長い時間を使うっぽい自作イベントでは最後にBEGIN AFTERTRAINを使う（選択肢選んだら調教終了する旨を記載する事）
 ;
-;●오세타입作業途中
+;●オセタイプ作業途中
 ;
 ;
 ;-------------------------------------------------
-;사용중＆사용予定フラグ　×→思惑してる이벤트が未実装
+;使用中＆使用予定フラグ　×→思惑してるイベントが未実装
 ;-------------------------------------------------
-;　　800～899　스테이터스関係　　
-;　CFLAG:800　당신への印象【0】好意　【1】嫌悪　【10】水に流した
-;×CFLAG:801　오세の타입	【0～127】攻　【128】中間　【129～256】受
+;　　800～899　ステータス関係　　
+;　CFLAG:800　あなたへの印象【0】好意　【1】嫌悪　【10】水に流した
+;×CFLAG:801　オセのタイプ	【0～127】攻　【128】中間　【129～256】受
 ;×CFLAG:850　貴重酒ストック【0～】n本
 ;
-;　　900～998　이벤트＋추가구상関係　　
-;　CFLAG:900　伴侶이벤트	【1】반지あげた　【2】반지あげなかった　【3】高い반지買った　【4】高い반지あげた
-;　CFLAG:901　사정멈추기구상
+;　　900～998　イベント＋追加口上関係　　
+;　CFLAG:900　伴侶イベント	【1】指輪あげた　【2】指輪あげなかった　【3】高い指輪買った　【4】高い指輪あげた
+;　CFLAG:901　射精止め口上
 ;
 ;-------------------------------------------------
-;†오세の타입変動판정場所　▲工事中→各コマンド実行時がまだ
+;†オセのタイプ変動判定場所　▲工事中→各コマンド実行時がまだ
 ;-------------------------------------------------
 ;各コマンド実行時
 ;★一部関数にしてみた
@@ -83,7 +83,7 @@
 ;---------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;-------------------------------------------------
-;↓오세구상開始↓
+;↓オセ口上開始↓
 ;-------------------------------------------------
 
 ;--------------------------------------------------
@@ -93,7 +93,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 오세個人구상
+PRINTFORML 오세 개인 구상
 ;구상설명문
 PRINTFORML  　
 ;--------------------------------------------------
@@ -105,7 +105,7 @@ PRINTFORML  　
 
 
 ;-------------------------------------------------
-;＠조교開始時に체크する事があればここ
+;＠調教開始時にチェックする事があればここ
 ;-------------------------------------------------
 
 
@@ -182,7 +182,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「……뭐 좋아、%CSTR:이인칭%의 놀이에 어울려 주지」
 	PRINTFORMW 「%CSTR:이인칭%이(가) %CSTR:일인칭%을 굴복시킬 수 있을지……그 솜씨를 보고싶군」
 	PRINTFORMW %CALLNAME:TARGET%는 겁없는 미소를 띠며、그 씩씩한 나신을 %CALLNAME:MASTER%의 앞에 노출시켰다…
-		;＠충성도が3000以下だと초기주도권を奪われる＆しばらく返してもらえない
+		;＠忠誠度が3000以下だと初期主導権を奪われる＆しばらく返してもらえない
 		IF BASE:충성도 <= 3000
 			CFLAG:초기주도권 = 1
 			TEQUIP:주도권 = 1
@@ -212,7 +212,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 	PRINTFORMW 「……」
 	PRINTFORMW 여느 때처럼 %CALLNAME:TARGET%를 호출하면、%CALLNAME:TARGET%은(는) 한숨을 토하면서 체념한 표정을 %CALLNAME:MASTER%에게 향했다。
 	PRINTFORMW 「어째서 이렇게 끈질긴건가、%CSTR:이인칭%은(는)……」
-	PRINTFORMW 「아、아、알겠다、%이인칭을% 인정해 주도록 하지……어느 정도의 일은 따라주겠다」
+	PRINTFORMW 「알겠다、알겠어、%이인칭을% 인정해 주도록 하지……어느 정도의 일은 따라주겠다」
 	PRINTFORMW %CALLNAME:TARGET%의 패배 선언에、%CALLNAME:MASTER%은(는) 웃음을 띠었다……
 	CFLAG:201 = 4
 	RETURN 0
@@ -220,7 +220,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:3
-		;반항적を소거する
+		;反抗的を消去する
 			TALENT:반항적 = 0
 		IF CFLAG:미조교함락 == 1
 			;조교하지 않고 연모를 단 경우
@@ -311,7 +311,7 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
 	ENDIF
 	CFLAG:201 = 6
 	RETURN 0
-;남편の계약後（친애、오세が남편）
+;남편の계약後（친애、オセが夫）
 ELSEIF CFLAG:201 < 7 && TALENT:6 && TALENT:171
 		PRINTFORMW 「……？ 어이、왜 그러는가 %CALLNAME:MASTER%」
 		PRINTFORMW 호출한 %CALLNAME:TARGET%는 항상 같다。특별히 아무런 변함이 없다。
@@ -332,9 +332,9 @@ ELSEIF CFLAG:201 < 7 && TALENT:6 && TALENT:171
 			TEQUIP:주도권 = 1
 	CFLAG:201 = 7
 	RETURN 0
-;主人公が오세の아이を身篭った（친애、오세が남편、主人公が妊娠している、오세の아이を妊娠中）
+;主人公がオセの子供を身篭った（親愛、オセが夫、主人公が妊娠している、オセの子供を妊娠中）
 ;ELSEIF CFLAG:201 < 8 && TALENT:6 && TALENT:171 && TALENT:MASTER:153 == 1 && CFLAG:MASTER:임신확정후의부친판정 == 1704
-;		PRINTFORMW 어ー 없어 (장난 아니라 진짜 이렇게 작성되어 있음)
+;		PRINTFORMW にゃーん
 ;	CFLAG:201 = 8
 ;	RETURN 0
 ENDIF
@@ -781,7 +781,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、오세が남편、당신が조교
+					;친애、オセが夫、당신が조교
 					IF TALENT:6 && TALENT:171 && ASSIPLAY == 0
 						IF RAND:2 == 0
 							PRINTFORMW 「응、하아……%CALLNAME:MASTER%……」
@@ -861,9 +861,9 @@ SELECTCASE SELECTCOM
 ;2,펠라한다
 ;-------------------------------------------------
 	CASE 2
-		;타입変動
+		;タイプ変動
 		CFLAG:801 -=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 
@@ -905,10 +905,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						CALL TRAIN_MESSAGE
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							IF TEQUIP:주도권
 									PRINTFORML 「하앗、그읏！……좋았어、%CALLNAME:MASTER%！좀 더 혀를 사용해라！」
@@ -1042,8 +1042,8 @@ SELECTCASE SELECTCOM
 ;4,애널핥기
 ;-------------------------------------------------
 	CASE 4
-		;타입変動
-		;주도권があると下降
+		;タイプ変動
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 
@@ -1124,12 +1124,12 @@ SELECTCASE SELECTCOM
 ;5,애널애무
 ;-------------------------------------------------
 	CASE 5
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
-		;애널광なら上昇
+		;尻穴狂いなら上昇
 		SIF TALENT:애널광
 			CFLAG:801 += 1
 		;道具使ってるなら上昇
@@ -1140,7 +1140,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:305 == 0
 			PRINTFORMW 「무、무엇을……잠깐、기다려！하윽！？」
 			PRINTFORM %CALLNAME:PLAYER%은(는) %CALLNAME:TARGET%의 제지를 무시하면서 
-		;윤활のPALAMLV3이상
+		;潤滑のPALAMLV3以上
 		SIF PALAM:4 >= PALAMLV:3
 			PRINT 액체に塗れた
 			PRINTFORMW 애널에 손가락을 천천히 삽입했다……
@@ -1194,9 +1194,9 @@ SELECTCASE SELECTCOM
 ;6,가슴주무르기
 ;-------------------------------------------------
 	CASE 6
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 
@@ -1223,10 +1223,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						CALL TRAIN_MESSAGE
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							;Ｂ감각が4이상
 							IF ABL:Ｂ감각 >= 4
@@ -1313,9 +1313,9 @@ SELECTCASE SELECTCOM
 ;7,유두자극
 ;-------------------------------------------------
 	CASE 7
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 	
@@ -1335,10 +1335,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						CALL TRAIN_MESSAGE
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							;Ｂ감각が4이상
 							IF ABL:Ｂ감각 >= 4
@@ -1426,9 +1426,9 @@ SELECTCASE SELECTCOM
 ;8,가슴애무
 ;-------------------------------------------------
 	CASE 8
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 
@@ -1455,10 +1455,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:308 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						CALL TRAIN_MESSAGE
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							;Ｂ감각が4이상
 							IF ABL:Ｂ감각 >= 4
@@ -1580,7 +1580,7 @@ SELECTCASE SELECTCOM
 ;10,가슴자위
 ;-------------------------------------------------
 	CASE 10
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
 		;카메라촬영中なら上昇
 		SIF TEQUIP:28
@@ -1628,7 +1628,7 @@ SELECTCASE SELECTCOM
 ;11,자위　　CALL OSE_JII_1_K1704　　CALL OSE_JII_2_K1704
 ;-------------------------------------------------
 	CASE 11
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
 		;카메라촬영中なら上昇
 		SIF TEQUIP:28
@@ -1744,9 +1744,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:436 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							IF RAND:2 == 0
 								PRINTFORML %CALLNAME:TARGET%의 굵고 긴、촉감이 좋은 꼬리를 애무하고 있을 때
@@ -1761,7 +1761,7 @@ SELECTCASE SELECTCOM
 							ENDIF
 						ENDIF
 					ELSE
-						;당신以外が조교
+						;あなた以外が調教
 						PRINTFORMW %CALLNAME:TARGET%는 꼬리가 애무되는 느낌을 참고 있는 것 같다……
 					ENDIF
 				;음란, 창부
@@ -1792,8 +1792,8 @@ SELECTCASE SELECTCOM
 ;20,키스한다
 ;-------------------------------------------------
 	CASE 20
-		;타입変動
-		;주도권があると下降
+		;タイプ変動
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
 	
@@ -1834,7 +1834,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						PRINTFORMW 「……%CALLNAME:MASTER%」
 						IF RAND:4 == 0
@@ -2051,7 +2051,7 @@ SELECTCASE SELECTCOM
 									PRINTFORMW 기쁨에 어쩔 줄 몰라하는 %CALLNAME:TARGET%를 보면서
 									PRINTFORMW %CALLNAME:MASTER%은(는) 내심 선물해서 다행이라고 생각했다……
 									
-									;高い반지프레젠트/당신に친애부여/오세が매각に/당신への호감도＋25000/스트레스が0に/최대체력기력＋1000/충성도＋7500
+									;高い指輪プレゼント/あなたに親愛付与/オセが売却不可に/あなたへの好感度＋25000/ストレスが0に/最大体力気力＋1000/忠誠度＋7500
 									CFLAG:900 = 4
 									TALENT:MASTER:친애 = 1
 									CFLAG:매각불가플래그 = 1
@@ -2084,12 +2084,12 @@ SELECTCASE SELECTCOM
 							CFLAG:850 += 1
 						ENDIF
 					ENDIF
-				;嫌われてる＋貴重なお酒1本이상＋친애＋순종Lv7이상＋반발각인Lv0
+				;嫌われてる＋貴重なお酒1本以上＋親愛＋従順Lv7以上＋反発刻印Lv0
 				ELSEIF CFLAG:800 == 1 && CFLAG:850 >= 1 && TALENT:6 && ABL:0 >= 7 && MARK:3 == 0
 					IF TFLAG:17 == 0 || TFLAG:17 == 1 || TFLAG:17 == 2 || TFLAG:17 == 3 || TFLAG:17 == 4 || TFLAG:17 == 5
 						PRINTFORMW %CALLNAME:TARGET%는 언짢은 듯한 얼굴로 침묵하고 있다……
-						;水というか酒に流す이벤트
-						;嫌われてる＋貴重なお酒1本이상、친애、순종がLv9이상、반발각인Lv0
+						;水というか酒に流すイベント
+						;嫌われてる＋貴重なお酒1本以上、親愛、従順がLv9以上、反発刻印Lv0
 						IF CFLAG:800 == 1 && CFLAG:850 >= 1 &&TALENT:6 && ABL:0 >= 9 &&  MARK:3 == 0
 							PRINTFORMW 노력해서 %CALLNAME:TARGET%를 위해 사왔지만
 							PRINTFORMW 「…………」
@@ -2167,7 +2167,7 @@ SELECTCASE SELECTCOM
 					ENDIF
 				ENDIF
 
-			;他の人が프레젠트
+			;他の人がプレゼント
 			ELSE
 				CALL TRAIN_MESSAGE
 			ENDIF
@@ -2199,7 +2199,7 @@ SELECTCASE SELECTCOM
 			CFLAG:317 = 1
 		;2번째 이후
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
-			;嫌われてない＋오세と남편婦＋반지未프레젠트＋당신とまったり
+			;嫌われてない＋オセと夫婦＋指輪未プレゼント＋あなたとまったり
 			IF (CFLAG:800 == 0 || CFLAG:800 == 10) && (TALENT:아내 || TALENT:남편) && TALENT:친애 && CFLAG:900 == 3 && ASSIPLAY == 0
 				PRINTFORMW %CALLNAME:TARGET%는 %CALLNAME:MASTER%과(와) 느긋한 시간을 보내고 있었다。
 				PRINTFORMW 그런 와중에、숨겨둔 작은 상자의 내용물을 어떻게 할 지 %CALLNAME:MASTER%은(는) 고민하고 있었다。
@@ -2560,20 +2560,20 @@ SELECTCASE SELECTCOM
 ;45,애널바이브
 ;-------------------------------------------------
 	CASE 45
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
-		;애널광なら上昇
+		;尻穴狂いなら上昇
 		SIF TALENT:애널광
 			CFLAG:801 += 1
 
 	IF TEQUIP:14
 		;처음
 		IF CFLAG:327 == 0
-			PRINTFORMW
-			PRINTFORM %CALLNAME:PLAYER%은(는)
+			PRINTFORMW 「
+			PRINTFORM %CALLNAME:PLAYER%は
 			CALL TRAIN_MESSAGE
 			CFLAG:327 = 1
 		;2번째 이후
@@ -2612,12 +2612,12 @@ SELECTCASE SELECTCOM
 ;46,애널비즈
 ;-------------------------------------------------
 	CASE 46
-		;타입変動
+		;タイプ変動
 		CFLAG:801 +=1
-		;주도권があると下降
+		;主導権があると下降
 		SIF TEQUIP:주도권
 			CFLAG:801 -= 1
-		;애널광なら上昇
+		;尻穴狂いなら上昇
 		SIF TALENT:애널광
 			CFLAG:801 += 1
 
@@ -2742,10 +2742,10 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:330 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
 						CALL TRAIN_MESSAGE
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							;Ｂ감각が4이상
 							IF ABL:Ｂ감각 >= 4
@@ -3096,9 +3096,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:336 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							PRINTFORMW 「구우웃、하、하아……읏！」
 							IF RAND:4 == 0
@@ -3990,9 +3990,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편
+						;オセが夫
 						IF TALENT:171
 							PRINTFORML 「%CALLNAME:MASTER%……」
 							PRINTFORMW %CALLNAME:TARGET%는 조르는 것처럼 %CALLNAME:MASTER%에게 허리를 내밀었다。
@@ -4102,7 +4102,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:MASTER:처녀 && ASSIPLAY == 0 && (CFLAG:800 == 0 || CFLAG:800 == 10)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					;오세が남편
+					;オセが夫
 					IF TALENT:171
 						PRINTFORMW 「이제 와서 그만두라고……말하지 마라？」
 						PRINTFORMW %CALLNAME:MASTER%이(가) %CALLNAME:TARGET%와 결혼하기 전까지、이것은 누구에게도 허락한 적이 없는、최초의 행위였다。
@@ -4159,9 +4159,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:425 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편で弾数有り
+						;オセが夫で弾数有り
 						IF TALENT:171 && CFLAG:11 > 0
 							CALL TRAIN_MESSAGE
 							IF RAND:4 == 0
@@ -4262,7 +4262,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:MASTER:처녀 && ASSIPLAY == 0 && (CFLAG:800 == 0 || CFLAG:800 == 10)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;오세が남편
+					;オセが夫
 					IF TALENT:171
 						PRINTFORMW 「이제 와서 그만두라고……말하지 마라？」
 						PRINTFORMW %CALLNAME:MASTER%이(가) %CALLNAME:TARGET%와 결혼하기 전까지、이것은 누구에게도 허락한 적이 없는、최초의 행위였다。
@@ -4320,9 +4320,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:426 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편で弾数有り
+						;オセが夫で弾数有り
 						IF TALENT:171 && CFLAG:11 > 0
 							CALL TRAIN_MESSAGE
 							IF RAND:4 == 0
@@ -4416,7 +4416,7 @@ SELECTCASE SELECTCOM
 			IF TALENT:MASTER:처녀 && ASSIPLAY == 0 && (CFLAG:800 == 0 || CFLAG:800 == 10)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;오세が남편
+					;オセが夫
 					IF TALENT:171
 						PRINTFORMW 「이제 와서 그만두라고……말하지 마라？」
 						PRINTFORMW %CALLNAME:MASTER%이(가) %CALLNAME:TARGET%와 결혼하기 전까지、이것은 누구에게도 허락한 적이 없는、최초의 행위였다。
@@ -4472,9 +4472,9 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:427 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;친애、당신自身が조교
+					;친애、あなた自身が調教
 					IF TALENT:6 && ASSIPLAY == 0
-						;오세が남편で弾数有り
+						;オセが夫で弾数有り
 						IF TALENT:171 && CFLAG:11 > 0
 							IF RAND:4 == 0
 								CALL TRAIN_MESSAGE
@@ -4816,7 +4816,7 @@ SELECTCASE SELECTCOM
 			;연모系함락時
 			IF TALENT:연모 && TALENT:친애
 				PRINTFORMW 
-			;未함락時
+			;未陥落時
 			ELSE
 				IF  TEQUIP:주도권 == 1
 					PRINTFORMW 아직 주도권을 %CALLNAME:TARGET%가 잡고 있고、%CALLNAME:TARGET%는 굴복한 것도 아니다。
@@ -6867,7 +6867,7 @@ SELECTCASE SELECTCOM
 					;당신が조교している
 					IF ASSIPLAY == 0
 						PRINTFORMW %CALLNAME:PLAYER%은(는) 빨고 있던 %CALLNAME:TARGET%의 페니스에서 입을 뗐다。
-					;당신以外が조교している
+					;あなた以外が調教している
 					ELSE
 						PRINTFORMW %CALLNAME:MASTER%은(는) %CALLNAME:ASSI%에게 다음 명령을 내리고、%CALLNAME:ASSI%에게 %CALLNAME:TARGET%에 대한 봉사를 중단시켰다。
 					ENDIF
@@ -6877,7 +6877,7 @@ SELECTCASE SELECTCOM
 					;당신が조교している
 					IF ASSIPLAY == 0
 						PRINTFORMW %CALLNAME:PLAYER%은(는)、명령에 따라 짐승의 입과 혀로 %CALLNAME:PLAYER%의 페니스를 계속 애무하고 %CALLNAME:TARGET%를 한 번 가게 했다。
-					;당신以外が조교している
+					;あなた以外が調教している
 					ELSE
 						PRINTFORMW %CALLNAME:MASTER%은(는) %CALLNAME:ASSI%에게 다음 명령을 내리고、%CALLNAME:ASSI%의 페니스를 빨아서 %CALLNAME:TARGET%를 한 번 가게 했다。
 					ENDIF
@@ -6887,7 +6887,7 @@ SELECTCASE SELECTCOM
 					;당신が조교している
 					IF ASSIPLAY == 0
 						PRINTFORMW %CALLNAME:PLAYER%은(는)、명령에 따라 짐승의 입과 혀로 %CALLNAME:PLAYER%의 음순을 계속 애무하고 %CALLNAME:TARGET%를 한 번 가게 했다。
-					;당신以外が조교している
+					;あなた以外が調教している
 					ELSE
 						PRINTFORMW %CALLNAME:MASTER%은(는) %CALLNAME:ASSI%에게 다음 명령을 내리고、%CALLNAME:ASSI%의 음순을 빨아서 %CALLNAME:TARGET%를 한 번 가게 했다。
 					ENDIF
@@ -7907,7 +7907,7 @@ IF (SELECTCOM == 64 || SELECTCOM == 92 || SELECTCOM == 93 || SELECTCOM == 94 || 
 ENDIF
 
 ;-------------------------------------------------
-;오세の타입変動
+;오세のタイプ変動
 ;-------------------------------------------------
 CALL OSE_TYPE_CHANGE_1_K1704
 
@@ -7961,7 +7961,7 @@ IF TFLAG:15 >0
 ENDIF
 
 ;-------------------------------------------------
-;오세の타입変動
+;오세のタイプ変動
 ;-------------------------------------------------
 CALL OSE_TYPE_CHANGE_2_K1704
 
@@ -7992,24 +7992,24 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 ;-------------------------------------------------
-;노예의 절정시의 텍스트　절정≠사정＝절정みたいなイメージで
+;노예의 절정시의 텍스트　絶頂≠射精＝絶頂みたいなイメージで
 ;-------------------------------------------------
 ;-------------------------------------------------
-;처음 C절정　남자はC절정＝사정なので除外　♀時だけでいいから後回し
+;처음 C절정　オトコはC絶頂＝射精なので除外　♀時だけでいいから後回し
 ;-------------------------------------------------
 ;	IF NOWEX:0 > 0 && CFLAG:241 == 0
 ;		PRINTFORMW 
 ;		CFLAG:241 = 1
 ;	ENDIF	
 ;-------------------------------------------------
-;처음 V절정　남자にVは無いのでとりあえず除外
+;처음 V절정　オトコにVは無いのでとりあえず除外
 ;-------------------------------------------------
 ;IF NOWEX:1 > 0 && CFLAG:242 == 0
 ;	PRINTFORMW 
 ;	CFLAG:242 = 1
 ;ENDIF
 ;-------------------------------------------------
-;＠A절정　사정してない場合のみ　初回のみ사정の有無を無視
+;＠A絶頂　射精してない場合のみ　初回のみ射精の有無を無視
 ;-------------------------------------------------
 ;처음
 	IF NOWEX:2 > 0 && CFLAG:243 == 0
@@ -8078,7 +8078,7 @@ ENDIF
 	ENDIF
 
 ;-------------------------------------------------
-;＠B절정　사정してない場合のみ　初回のみ사정の有無を無視
+;＠B絶頂　射精してない場合のみ　初回のみ射精の有無を無視
 ;-------------------------------------------------
 	;처음
 	IF NOWEX:3 > 0 && CFLAG:244 == 0
@@ -8147,14 +8147,14 @@ ENDIF
 	ENDIF
 
 ;-------------------------------------------------
-;절정▲　分けてみたので삭제　사용フラグはCFLAG:245
+;절정▲　分けてみたので削除　使用フラグはCFLAG:245
 ;-------------------------------------------------
 ;～
 ;
 ;-------------------------------------------------
-;＠절정（사정しない場合）
+;＠絶頂（射精しない場合）
 ;-------------------------------------------------
-;ＣとＶを除く절정時
+;ＣとＶを除く絶頂時
 IF TFLAG:29 > 0 && TFLAG:10 == 0 && NOWEX:0 == 0 && NOWEX:1 == 0
 	PRINTFORM %CALLNAME:TARGET%는 
 	;강절정
@@ -8189,11 +8189,11 @@ IF TFLAG:29 > 0 && TFLAG:10 == 0 && NOWEX:0 == 0 && NOWEX:1 == 0
 ENDIF
 
 ;-------------------------------------------------
-;＠사정멈추기してる場合　
+;＠射精止めしてる場合　
 ;-------------------------------------------------
-;조교대상이사정していない時のみ
+;調教対象が射精していない時のみ
 IF TFLAG:10 == 0
-	;사정멈추기中
+	;사정止め中
 	IF BASE:2 >= MAXBASE:2 && TEQUIP:42 && FLAG:7 == 2
 		PRINTFORM %CALLNAME:TARGET%의 
 		;불결分岐
@@ -8244,7 +8244,7 @@ IF TFLAG:10 > 0
 			IF TALENT:6
 				;COM「펠라한다」で사정
 				IF SELECTCOM == 2
-					;오세が남편で당신が相手
+					;オセが夫で당신が相手
 					IF TALENT:남편 && ASSIPLAY == 0
 						IF RAND:4 == 0
 							PRINTFORMW 「이제 내겠어……흘리지 말고 마셔！그오오옷！」
@@ -8267,7 +8267,7 @@ IF TFLAG:10 > 0
 					ENDIF
 				;COM「가슴주무르기・유두攻め・가슴애무」で사정
 				ELSEIF SELECTCOM == 6 || SELECTCOM == 7 || SELECTCOM == 8
-					;오세が남편で당신が相手
+					;オセが夫で당신が相手
 					IF TALENT:남편 && ASSIPLAY == 0
 						IF RAND:4 == 0
 							PRINTFORMW 「긋、아、%CALLNAME:MASTER%……더、읏、크아아앗！！」
@@ -8288,7 +8288,7 @@ IF TFLAG:10 > 0
 							PRINTFORMW 「아……하、크읏！」
 						ENDIF
 					ENDIF
-				;오세が남편時にCOM「역강간」で사정
+				;オセが夫時にCOM「역강간」で사정
 				ELSEIF SELECTCOM == 64 && TALENT:남편
 					IF RAND:3 == 0
 						PRINTFORMW 「그웃……응、이제 그만、나온다！」
@@ -8299,7 +8299,7 @@ IF TFLAG:10 > 0
 					ENDIF
 				;COM「정상위시킨다、후배위시킨다、기승위한다」で사정
 				ELSEIF SELECTCOM == 92 || SELECTCOM == 93 || SELECTCOM == 94
-					;오세が남편で당신が相手
+					;オセが夫で당신が相手
 					IF TALENT:남편 && ASSIPLAY == 0
 						IF RAND:5 == 0
 							PRINTFORMW 「그웃、후、안에 내겠어 %CALLNAME:MASTER%！！」
@@ -8839,7 +8839,7 @@ IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 ENDIF
 
 ;-------------------------------------------------
-;오세の타입変動
+;オセのタイプ変動
 ;-------------------------------------------------
 CALL OSE_TYPE_CHANGE_3_K1704
 
@@ -11032,10 +11032,10 @@ ENDIF
 
 
 ;--------------------------------------------------------------------------------------------------
-;★오세の타입変動に関係した関数
+;★오세のタイプ変動に関係した関数
 ;--------------------------------------------------------------------------------------------------
 ;-------------------------------------------------
-;†조교자の사정による오세の타입変動　CFLAG:801
+;†조교자の사정による오세のタイプ変動　CFLAG:801
 ;-------------------------------------------------
 @OSE_TYPE_CHANGE_1_K1704
 ;오세の입に사정
@@ -11043,9 +11043,9 @@ IF TFLAG:0 > 0
 	CFLAG:801 += 1
 ;오세に中出し
 ELSEIF TFLAG:2 > 0
-	;애널に中出し
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2) || SELECTCOM == 514
-		;당신が中出し
+	;アナルに中出し
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 512 || SELECTCOM == 514
+		;あなたが中出し
 		IF ASSIPLAY == 0
 			;함락완료
 			IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
@@ -11053,7 +11053,7 @@ ELSEIF TFLAG:2 > 0
 				;친애なら上昇
 				SIF TALENT:친애
 					CFLAG:801 += 1
-				;오세が남편なら下降
+				;オセが夫なら下降
 				SIF TALENT:남편
 					CFLAG:801 -= 1
 			ELSE
@@ -11063,7 +11063,7 @@ ELSEIF TFLAG:2 > 0
 		ELSE
 			CFLAG:801 += 1
 		ENDIF
-	;애널광なら上昇
+	;尻穴狂いなら上昇
 	SIF TALENT:애널광
 		CFLAG:801 += 3
 	ENDIF
@@ -11082,7 +11082,7 @@ SIF ABL:정액중독 >= 4 && (TFLAG:0 > 0 || TFLAG:2 > 0 )
 	CFLAG:801 += 2
 
 ;-------------------------------------------------
-;†촉수による오세の타입変動（촉수コマンドは一括）　CFLAG:801
+;†촉수による오세のタイプ変動（촉수コマンドは一括）　CFLAG:801
 ;-------------------------------------------------
 @OSE_TYPE_CHANGE_2_K1704
 ;애널촉수、촉수유두자극、촉수긴박、촉수관장、촉수구욕、촉수페니스자극を実行した場合
@@ -11094,7 +11094,7 @@ IF GROUPMATCH(SELECTCOM , 162 , 164 , 166 , 167 , 168 , 169 )
 	;촉수가 사정して촉수중독Lv4이상なら上昇
 	SIF TFLAG:15 >0 && ABL:촉수중독 >= 4
 		CFLAG:801 += 3
-	;애널コマンドで애널광なら上昇
+	;애널コマンドで尻穴狂いなら上昇
 	SIF TALENT:애널광 && (SELECTCOM == 162 || SELECTCOM == 167)
 		CFLAG:801 += 3
 	;입内or中出しで정액중독Lv4이상なら上昇
@@ -11103,7 +11103,7 @@ IF GROUPMATCH(SELECTCOM , 162 , 164 , 166 , 167 , 168 , 169 )
 ENDIF
 
 ;-------------------------------------------------
-;†오세の절정or사정による오세の타입変動　CFLAG:801
+;†오세の절정or사정による오세のタイプ変動　CFLAG:801
 ;-------------------------------------------------
 @OSE_TYPE_CHANGE_3_K1704
 ;절정の판정
@@ -11116,7 +11116,7 @@ IF NOWEX:2 > 0
 	ELSEIF TFLAG:29 > 0
 		CFLAG:801 += 1
 	ENDIF
-	;애널광なら上昇
+	;尻穴狂いなら上昇
 	SIF TALENT:애널광
 		CFLAG:801 += 2
 ENDIF
@@ -11137,7 +11137,7 @@ ENDIF
 IF TFLAG:10 > 0
 	IF GROUPMATCH(SELECTCOM , 4 , 5 , 45 , 46 , 62 , 63 , 67 , 70 , 71 , 73 , 500 , 512 , 514 )
 		CFLAG:801 += 2
-		;애널광なら上昇
+		;尻穴狂いなら上昇
 		SIF TALENT:애널광
 			CFLAG:801 += 2
 	;조교자に中出しで下降
@@ -11152,10 +11152,10 @@ IF TFLAG:10 > 0
 		;相手が당신で친애なら下降
 		SIF TALENT:친애 && ASSIPLAY == 0
 			CFLAG:801 -= 1
-		;相手が당신で오세が남편なら下降
+		;相手が당신でオセが夫なら下降
 		SIF TALENT:남편 && ASSIPLAY == 0
 			CFLAG:801 -= 2
-		;애널광なら上昇
+		;尻穴狂いなら上昇
 		SIF TALENT:애널광
 			CFLAG:801 += 2
 	;펠라한다、파이즈리한다で사정

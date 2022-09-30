@@ -1,7 +1,7 @@
 ﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K4301_ALL.ERB
-;	Facility	:クー・フーリン구상
+;	Facility	:クー・フーリン口上
 ;
 ;	Licence		:ライセンスフリー・改変自由
 ;
@@ -9,11 +9,11 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		?????					?????
-;	002		2013/05/03		RKSI					作成・原型쟌느구상様に多謝
+;	002		2013/05/03		RKSI					作成・原型ジャンヌ口上様に多謝
 ;	003		2014/06/26		セーロGUN				加筆改変自由とのことだったので思いついた部分を中心に埋めるつもりが
-;											気がつけば머리悪そうな記述と文章ばっかりに
-;	004		2014/06/30		セーロGUN				一部コマンド구상の加筆수정とリードミーに色々書き忘れてたことの추가
-;	004		2014/07/26		セーロGUN				구상の加筆수정とねじれ수정。改変前リードミーの同梱しなおし
+;											気がつけば頭悪そうな記述と文章ばっかりに
+;	004		2014/06/30		セーロGUN				一部コマンド口上の加筆修正とリードミーに色々書き忘れてたことの追加
+;	004		2014/07/26		セーロGUN				口上の加筆修正とねじれ修正。改変前リードミーの同梱しなおし
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
@@ -21,14 +21,14 @@
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;eraMegaten専用　조교時及び공격時구상テンプレート
+;eraMegaten専用　調教時及び攻撃時口上テンプレート
 
 ;4301と4301를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 4301,Y1は1、4301は01のように変えてください
-;また、特定個人の구상ではなく、회화타입別に対応させたい場合は
-;K4301_1をPUB(회화타입の번호)に置き換えてください。
-;例）픽시の구상を作りたいなら4301⇒501に置き換え
-;　　회화타입：女、淑女ならK4301_1⇒PUB304に置き換え
+;また、特定個人の口上ではなく、会話タイプ別に対応させたい場合は
+;K4301_1をPUB(会話タイプの番号)に置き換えてください。
+;예）ピクシーの口上を作りたいなら4301⇒501に置き換え
+;　　会話タイプ：女、淑女ならK4301_1⇒PUB304に置き換え
 
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -62,7 +62,7 @@ PRINTFORML  　이 전용 구상은 당신의 이미지와 크게 어긋날 가�
 ;--------------------------------------------------
 @EVENTTRAIN_K4301
 DRAWLINE
-;초회の場合、このファイルを사용するかどうか質問
+;초회の場合、このファイルを使用するかどうか質問
 	PRINTFORMW 이 전용구상은 당신이 생각했던 이미지와 크게 다를 수 있습니다. 적용해도 좋겠습니까？
 	PRINTFORMW 
 	CALL INPUT_YN,"예","아니오"
@@ -83,18 +83,18 @@ DRAWLINE
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀모드로 이행합니까？
-;	PRINTL [0] 예
-;	PRINTL [1] 아니오
+;	PRINTL 処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW 처녀모드에 대응해 소질과 능력을 변경합니다―
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―통상모드로 조교를 개시합니다―
+;		PRINTFORMW ―通常モードで調教を開始します―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -153,7 +153,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 		PRINTFORML 「……좀 봐달라고、정말」
 		PRINTFORMW 믿을 수 없다는 듯 정줄은 놓기 직전인 %CALLNAME%을 앞에 두고、%조사처리(CALLNAME:MASTER,"는")% 조교를 시작했다。
 
-	; 雄犬＋女당신
+	; 雄犬＋女あなた
 	ELSEIF TALENT:남자 == 1 && TALENT:MASTER:남자 == 0 && TALENT:MASTER:오토코노코 == 0
 		PRINTFORM 「그럭저럭、%CSTR:12% 같은
 		IF (TALENT:MASTER:유아체형 == 1 || TALENT:MASTER:소인체형 == 1)
@@ -174,7 +174,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 		PRINTFORML 「끼야아ー！？　이 사람 변태！　변태입니다！？」
 		PRINTFORMW 뭔가 %CALLNAME%의 목소리가 혼란으로 이상하게 됐지만 유감스럽게도 %CALLNAME%의 목소리를 듣고 그녀의 아군이 되는 인간은 여기 없었다。
 
-	; 雌犬＋男당신
+	; 雌犬＋男あなた
 	ELSEIF TALENT:남자 == 0 && TALENT:MASTER:남자 == 1
 		PRINTFORML 약물에 의해 변화된 %CALLNAME%의 몸은 약간 근육이 있지만 미인이라 말해도 좋은 여성이었다。
 		PRINTFORMW %CALLNAME%의 어깨에 손을 걸치자。
@@ -183,7 +183,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 		PRINTFORMW 「하아아～용서해달라구」
 		PRINTFORMW 큰 한숨은、듣지 않은 걸로 했다。
 
-	; 雌犬＋女당신
+	; 雌犬＋女あなた
 	ELSEIF TALENT:남자 == 0 && TALENT:MASTER:남자 == 0
 		PRINTFORML 약물에 의해 변화된 %CALLNAME%의 몸은 약간 근육이 있지만 미인이라 말해도 좋은 여성이었다。
 		PRINTFORMW %CALLNAME%의 옷에 손을 대자。
@@ -570,14 +570,12 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					IF TEQUIP:미약 == 1
 						PRINTFORMW 
+					ELSEIF RAND:2 == 0
+						PRINTFORML 「크…후……」
+						PRINTFORMW %CALLNAME:TARGET%은 애무에 완전히 몸을 맡기고 있다。
 					ELSE
-						IF RAND:2 == 0
-							PRINTFORML 「크…후……」
-							PRINTFORMW %CALLNAME:TARGET%은 애무에 완전히 몸을 맡기고 있다。
-						ELSE
-							PRINTFORML 「못 참겠어... %CSTR:11%도 %CSTR:12%의 몸 만지게 해줘!」
-						ENDIF
-						IF RAND:2 == 0
+						PRINTFORML 「못 참겠어！%CSTR:11%도 %CSTR:12%의 몸 만지게 해줘!」
+						IF RAND:2 == 1
 							PRINTFORMW %CALLNAME:TARGET%은 %CALLNAME:MASTER%의 몸을 핥으며 %CALLNAME:MASTER%의 성기를 만지작거리고 있다。
 						ELSE
 							PRINTFORMW 흥분한 %CALLNAME:TARGET%을 COMP 제어를 통해 억누르며 애무를 계속했다。
@@ -686,7 +684,7 @@ SELECTCASE SELECTCOM
 ;2,펠라한다
 ;-------------------------------------------------
 	CASE 2
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -1378,7 +1376,6 @@ SELECTCASE SELECTCOM
 				PRINTFORML 지금은 한 그릇 더。
 				PRINTFORMW 「리필해줄 것도 없잖아」
 				PRINTFORML 칭칭。
-				;PRINTFORML 칭칭(개가 뒷발로 서서 몸을 듦/(속어)남성기)
 				IF TALENT:남자 || TALENT:오토코노코 || TALENT:후타나리
 					PRINTFORMW 「안 하겠다고 했잖아! 아까부터 뭐야!?」
 				ELSE
@@ -2028,7 +2025,6 @@ SELECTCASE SELECTCOM
 							;ヤリチン
 							IF (EXP:MASTER:성교경험 - EXP:MASTER:Ａ경험 - EXP:MASTER:Ｖ경험) > 500
 								PRINTFORMW 아마 %CALLNAME%의 배 이상으로 경험이 있다고 하니、%CALLNAME%은 얼굴을 찡그린다。
-								;PRINTFORMW 「%CSTR:12%･･･농담하지 않고 찔릴 거야」
 								PRINTFORMW 「%CSTR:12%･･･농담 아니고 안 찔려?」
 								PRINTFORMW 너한테 듣고 싶지는 않다고 이야기하며 %CALLNAME%의 비소에 육봉을 찔러 넣는다。
 								PRINTFORMW 「으극!? 젠장･･･%CSTR:11%에게는 용서할 수 없는 일이야」
@@ -3196,7 +3192,7 @@ SELECTCASE SELECTCOM
 ;파이즈리한다
 ;-------------------------------------------------
 	CASE 91
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3235,7 +3231,7 @@ SELECTCASE SELECTCOM
 ;정상위시킨다
 ;-------------------------------------------------
 	CASE 92
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3424,7 +3420,7 @@ SELECTCASE SELECTCOM
 ;후배위시킨다
 ;-------------------------------------------------
 	CASE 93
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3616,7 +3612,7 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 	CASE 94
 		CALL TRAIN_MESSAGE
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3721,7 +3717,7 @@ SELECTCASE SELECTCOM
 ;애널정상위시킨다
 ;-------------------------------------------------
 	CASE 95
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3760,7 +3756,7 @@ SELECTCASE SELECTCOM
 ;애널후배위시킨다
 ;-------------------------------------------------
 	CASE 96
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF
@@ -3799,7 +3795,7 @@ SELECTCASE SELECTCOM
 ;애널기승위한다
 ;-------------------------------------------------
 	CASE 97
-		;ねじれてたら주도권取られる
+		;ねじれてたら主導権取られる
 		IF TEQUIP:미약 == 1
 			TEQUIP:주도권 = 1
 		ENDIF

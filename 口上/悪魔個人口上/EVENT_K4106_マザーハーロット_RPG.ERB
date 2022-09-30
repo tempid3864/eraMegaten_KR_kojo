@@ -3,7 +3,7 @@ LOCAL:1 = 1
 LOCAL = CFLAG:ARG:입력행동
 LOCALS = では行くぞ
 
-;붕괴してる場合は구상표시しない
+;崩壊してる場合は口上表示しない
 SIF TALENT:ARG:9
 	RETURN 0
 
@@ -38,7 +38,7 @@ IF RESULT == 1 && RAND:3 == 0
 			IF RAND:2
 				LOCALS = さぁ遊舞に付き合っておくれ…バラバラにならぬように耐えてみせよ…
 			ELSE
-				LOCALS = 『힘押シノミガ마인ノ本領デハ無イ』
+				LOCALS = 『力押シノミガ魔人ノ本領デハ無イ』
 			ENDIF
 		;화염
 		CASE 4
@@ -57,7 +57,7 @@ IF RESULT == 1 && RAND:3 == 0
 		;전격
 		CASE 6
 			IF RAND:2
-				LOCALS = 아픔によって痺れる心地を味わうがいい…
+				LOCALS = 痛みによって痺れる心地を味わうがいい…
 			ELSE
 				LOCALS = 痺れ果ててそこでだらしのない姿を晒すがいい
 			ENDIF
@@ -73,7 +73,7 @@ IF RESULT == 1 && RAND:3 == 0
 			IF RAND:2
 				LOCALS = さて、どのように嬲ってくれようか…
 			ELSE
-				LOCALS = 嫌だ嫌だと言っても신경には効くからのう
+				LOCALS = 嫌だ嫌だと言っても神経には効くからのう
 			ENDIF
 		;정신
 		CASE 9
@@ -95,14 +95,14 @@ IF RESULT == 1 && RAND:3 == 0
 		;지변
 		CASE 12
 			IF RAND:2
-				LOCALS = 토사の味はどうじゃ
+				LOCALS = 土砂の味はどうじゃ
 			ELSE
 				LOCALS = 土塊に身を裂かれる気分はどうじゃ…
 			ENDIF
 		;수격
 		CASE 13
 			IF RAND:2
-				LOCALS = 冷水を浴びせてやろう…눈を開けられぬ程ののう
+				LOCALS = 冷水を浴びせてやろう…目を開けられぬ程ののう
 			ELSE
 				LOCALS = こういう使い方もあるのでのう…
 			ENDIF
@@ -114,7 +114,7 @@ IF RESULT == 1 && RAND:3 == 0
 			IF RAND:2
 				LOCALS = さぁ圧縮してやろう…肉の一片までもな
 			ELSE
-				LOCALS = 叩き堕ちよ、중력の鎖は万有だからのう
+				LOCALS = 叩き堕ちよ、重力の鎖は万有だからのう
 			ENDIF
 		;핵열
 		CASE 16
@@ -126,7 +126,7 @@ IF RESULT == 1 && RAND:3 == 0
 		;만능
 		CASE 17
 			LOCALS = ホッホッホ…喰らうがいい…！
-		;사이코
+		;サイコ
 		;CASE 18
 		CASEELSE
 			LOCALS = 狂乱の音の色はいつ聞いても甘美じゃのう
@@ -142,7 +142,7 @@ ELSEIF RESULT == 2
 	ELSE
 		IF FLAG:(CFLAG:ARG:타겟) == 0 && 함락(ARG)
 			IF RAND:2
-				LOCALS = 마인を落としておいて先に逝くなど許さぬぞ。
+				LOCALS = 魔人を落としておいて先に逝くなど許さぬぞ。
 			ELSE
 				LOCALS = 全く…肝が冷える…これが終わったら温めておくれ
 			ENDIF
@@ -154,27 +154,27 @@ ELSEIF RESULT == 2
 			ENDIF
 		ENDIF
 	ENDIF
-;상태변화
+;状態変化
 ;ELSEIF RESULT == 3
 ;特殊
 ;ELSEIF RESULT == 4
-;상태회복
+;状態回復
 ELSEIF RESULT == 5
 	LOCALS = ほれ、しゃんと立て。
 ENDIF
 
 
-;천년의저주
+;千年の呪怨
 IF LOCAL == 1414
 	SELECTCASE RAND:3
 	CASE 0
-		LOCALS = 마인の身に満ちた死の呪詛を少しは喰ろうてみるかえ？
+		LOCALS = 魔人の身に満ちた死の呪詛を少しは喰ろうてみるかえ？
 	CASE 1
-		LOCALS = ホッホッホ…주원によって朽ち果てよ
+		LOCALS = ホッホッホ…呪怨によって朽ち果てよ
 	CASEELSE
 		LOCALS = 呪詛とともに消え堕ちよ塵芥
 	ENDSELECT
-;마계의조사
+;魔界の調べ
 ELSEIF LOCAL == 1132
 	SELECTCASE RAND:3
 	CASE 0
@@ -184,7 +184,7 @@ ELSEIF LOCAL == 1132
 	CASEELSE
 		LOCALS = さぁ、音に酔いしれよ
 	ENDSELECT
-;방전
+;放電
 ELSEIF LOCAL == 910
 	SELECTCASE RAND:3
 	CASE 0
@@ -192,29 +192,29 @@ ELSEIF LOCAL == 910
 	CASE 1
 		LOCALS = 脳髄まで痺れて酔いしれよ…
 	CASEELSE
-		LOCALS = さぁ、전격にて逝ってしまえ…！
+		LOCALS = さぁ、電撃にて逝ってしまえ…！
 	ENDSELECT
-;불결이가득찬황금의잔
+;汚れに満ちた金の杯
 ELSEIF LOCAL == 2068
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		SELECTCASE RAND:3
 		CASE 0
-			LOCALS = ふふ…純然成る愛のために、削がれた불결を受けるがいい！
+			LOCALS = ふふ…純然成る愛のために、削がれた汚れを受けるがいい！
 		CASE 1
-			LOCALS = わらわの大元の불결じゃ。飲み下せると思うでないぞ…！
+			LOCALS = わらわの大元の汚れじゃ。飲み下せると思うでないぞ…！
 		CASEELSE
-			LOCALS = 古き불결がなんじらにはお似合いじゃ。
+			LOCALS = 古き汚れがなんじらにはお似合いじゃ。
 		ENDSELECT
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		SELECTCASE RAND:3
 		CASE 0
-			LOCALS = アハ、アハハハハ、溶け落ちよ我が불결によって！
+			LOCALS = アハ、アハハハハ、溶け落ちよ我が汚れによって！
 		CASE 1
-			LOCALS = さぁ、불결の中で淫蕩の限りを尽くそうぞ
+			LOCALS = さぁ、汚れの中で淫蕩の限りを尽くそうぞ
 		CASEELSE
-			LOCALS = アハハハ、世の理に満ちよ불결と쾌락よ！
+			LOCALS = アハハハ、世の理に満ちよ汚れと快楽よ！
 		ENDSELECT
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
@@ -228,21 +228,21 @@ ELSEIF LOCAL == 2068
 		ENDSELECT
 	;그 이외
 	ELSE
-		LOCALS = ホッホッホ喰らうがいい、我が불결を！
+		LOCALS = ホッホッホ喰らうがいい、我が汚れを！
 	ENDIF
 ;デクンダ
 ELSEIF LOCAL == 505
-	LOCALS = 입直しをせねばな。
-;스쿤다
+	LOCALS = 口直しをせねばな。
+;スクンダ
 ELSEIF LOCAL == 507
-	LOCALS = その速度、눈障りじゃ
+	LOCALS = その速度、目障りじゃ
 ;デカジャ
 ELSEIF LOCAL == 509
 	LOCALS = 仕切りなおしじゃ…フェアに行かねばな
-;기합
+;気合
 ELSEIF LOCAL == 511
 	LOCALS = さぁて…いくかのう…！
-;컨센트레이트
+;コンセントレイト
 ELSEIF LOCAL == 512
 	LOCALS = さぁ集中じゃ…
 ;雄たけび
@@ -252,10 +252,10 @@ ELSEIF LOCAL == 514
 ELSEIF LOCAL == 515
 	LOCALS = つまらぬ…つまらん…児戯にもならぬぞ愚図が
 
-;이악물기
+;食いしばり
 ELSEIF LOCAL == 2406
-	LOCALS = 마인を舐めるなよ…
-;불굴의투지
+	LOCALS = 魔人を舐めるなよ…
+;不屈の闘志
 ELSEIF LOCAL == 2407
 	LOCALS = この程度で…朽ちてたまるものか…！
 
@@ -297,9 +297,9 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS = さらばじゃ、邪魔者
 			ELSE
 				IF RAND:2
-					LOCALS = さぁ、これが死という極上の쾌락じゃ
+					LOCALS = さぁ、これが死という極上の快楽じゃ
 				ELSE
-					LOCALS = 大淫婦の팔に抱かれて昇天するがいい
+					LOCALS = 大淫婦の腕に抱かれて昇天するがいい
 				ENDIF
 			ENDIF
 		;약점을 찔렀다. 즉 COOP
@@ -329,17 +329,17 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS = 心地よくしてやろう…そんなに硬くなるな
 			ENDIF
-		;무효화された
+		;무효化された
 		ELSEIF ARG:2 == 0
 			IF 함락(ARG) && RAND:2
 				LOCALS = …利かぬか
 			ELSE
-				LOCALS = 마인の一撃を意にも介さんか…
+				LOCALS = 魔人の一撃を意にも介さんか…
 			ENDIF
 		;흡수された
 		ELSEIF ARG:2 < 0
 			IF RAND:2
-				LOCALS = ほう…흡수するか
+				LOCALS = ほう…吸収するか
 			ELSE
 				LOCALS = むぅ…吸い取るか…
 			ENDIF
@@ -361,7 +361,7 @@ SELECTCASE TFLAG:전투이벤트
 		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF 함락(ARG) && RAND:2
-				LOCALS = この程度で마인を殺しきれると思い上がるでないぞ…！
+				LOCALS = この程度で魔人を殺しきれると思い上がるでないぞ…！
 			ELSE
 				IF RAND:2
 					LOCALS = …思ったよりもやるのう
@@ -386,7 +386,7 @@ SELECTCASE TFLAG:전투이벤트
 			IF RAND:2
 				LOCALS = 今何かしたかの…？
 			ELSE
-				LOCALS = 마인を舐めるなよ、つまらぬ事で時間を使わせるな
+				LOCALS = 魔人を舐めるなよ、つまらぬ事で時間を使わせるな
 			ENDIF
 		;흡수
 		ELSEIF ARG:2 < 0
@@ -397,7 +397,7 @@ SELECTCASE TFLAG:전투이벤트
 			ENDIF
 		ENDIF
 	CASE 15
-		;被반사
+		;被反射
 		PRINTFORMW ARG:2 = {ARG:2}
 		IF RAND:2
 			LOCALS = …弾くか
@@ -405,21 +405,21 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS = ふむ、これを弾くか
 		ENDIF
 	CASE 16
-		;반사
+		;反射
 		IF RAND:2
 			LOCALS = ほれ、返してやろう
 		ELSE
 			LOCALS = 相手を見定めて放つことだ。さもなければ…ほら、こうなる。
 		ENDIF
 	CASE 17
-		;적회피
+		;敵回避
 		IF RAND:2
 			LOCALS = 避けたか…
 		ELSE
 			LOCALS = 避けたな…つれないのう
 		ENDIF
 	CASE 18
-		;自分회피
+		;自分回避
 		IF RAND:2
 			LOCALS = なんじゃ今のは
 		ELSE

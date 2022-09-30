@@ -1,17 +1,18 @@
 ﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:EVENT_K1620_크툴루_1_ALL.ERB
-;	Facility	:크툴루구상
+;	Module		:EVENT_K1620_クトゥルー_1_ALL.ERB
+;	Facility	:クトゥルー口上
 ;	Licence		:ライセンスフリー。ご自由にどうぞ
 ;
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2013/11/13		NEO						新造。옷？
+;	001		2013/11/13		NEO						新造。ヲッ？
 ;	002		2013/12/04		NEO						ざっと加筆ー
 ;	003		2014/01/24		NEO						意見表明を兼ねつつの急ぎ加筆。詳しくはRead meの方で。
 ;	004		2014/01/30		NEO						もう加筆とかする気はあんまりなかったのですがデバッグは別腹
+;	005		2018/09/19		NEO						0.05。なんと4年半ぶりである。
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
@@ -30,47 +31,47 @@
 ;-------------------------------------------------
 ;●メモ
 ;-------------------------------------------------
-;・『옷？』
-;　현무ちゃんとかあっち系。변신先は、はやりモノ。
-;　기본的に日本語を喋りません。
+;・『ヲッ？』
+;　ゲンブちゃんとかあっち系。変身先は、はやりモノ。
+;　基本的に日本語を喋りません。
 ;　ただし強いテレパシーを持っている模様。
-;　テレパシーは平仮名限定。また、함락後のみにしています。
-;　『ヲ』『ッ』『ー』『……』『！』『？』『ン』だけがセリフになります。기본は。
+;　テレパシーは平仮名限定。また、陥落後のみにしています。
+;　『ヲ』『ッ』『ー』『……』『！』『？』『ン』だけがセリフになります。基本は。
 ;・『無知系』
-;　기본的にのんき。
-;　호기심とか満載です。
+;　基本的にのんき。
+;　好奇心とか満載です。
 ;　夢見てるらしいのでその辺乙女でもいいかもねッ☆
-;・『크툴루っぽいなにか』
-;　머리に蛸みたいなのが乗ってて、それに촉수生えてる感じ。
+;・『クトゥルーっぽいなにか』
+;　頭に蛸みたいなのが乗ってて、それに触手生えてる感じ。
 ;　フリーダムだよ！！！
 ;
-;　また、크툴루には、海中に沈んでいるという설정もあります。
+;　また、クトゥルーには、海中に沈んでいるという設定もあります。
 ;　水を司る……とダーレスさんが言ってますが、別にそんなこともないっぽい。
 ;
 ;・各ルートについて
-;　연모：よくなついた猫、あるいは蛸
-;　음란：夢を見るよりこっちの方がいいわ系
-;　복종：촉수ネタ満載。自밧줄自縛系。
-;　……설정的には、旧支配者ですらなく、あくまで旧支配者を伺うことができる程度の存在だとか。どっちゃねん。
+;　恋慕：よくなついた猫、あるいは蛸
+;　淫乱：夢を見るよりこっちの方がいいわ系
+;　服従：触手ネタ満載。自縄自縛系。
+;　……設定的には、旧支配者ですらなく、あくまで旧支配者を伺うことができる程度の存在だとか。どっちゃねん。
 ;
 ;-------------------------------------------------
 
 ;-------------------------------------------------
-;●사용CFLAG
+;●使用CFLAG
 ;-------------------------------------------------
 ;○800番台：システム関連フラグ（の予定）
-;　800：전투구상の범위、兼初回조교フラグ。조교初回、아무것도안한다を選ぶことで制御가능。
+;　800：戦闘口上の範囲、兼初回調教フラグ。調教初回、何もしないを選ぶことで制御可能。
 ;		0/1：無言（選択無言が１な感じで）
-;		2（디폴트）：必殺技チックなもののみ
-;		3：통상の스킬でも喋る
-;		4：통상공격でも喋る！
+;		2（デフォルト）：必殺技チックなもののみ
+;		3：通常のスキルでも喋る
+;		4：通常攻撃でも喋る！
 ;
-;○그외
-;　220：エキストラ構文。また、TSしたかどうかを一応판정。
+;○その他
+;　220：エキストラ構文。また、TSしたかどうかを一応判定。
 ;
 ;
 ;　１０ごとに用途を限定して使うと空きは出るが整理はしやすいと思う
-;　◆◆◆그외使ってるかも知れないので추가前に検索重点◆◆◆
+;　◆◆◆その他使ってるかも知れないので追加前に検索重点◆◆◆
 ;
 ;-------------------------------------------------
 
@@ -117,7 +118,7 @@ PRINTFORML  　당신 안의 이미지와 크게 다를수도 있습니다
 @EVENTTRAIN_K1620
 ;--------------------------------------------------
 ;엑스트라모드 구문　CFLAG:220을 사용
-;백호ちゃん구상から失敬
+;ビャッコちゃん口上から失敬
 ;--------------------------------------------------
 IF CFLAG:220 == 0
 	PRINTL 이 구상은 여체화 등의 소질 변경이 전제인 구상입니다。
@@ -130,7 +131,7 @@ IF CFLAG:220 == 0
 	INPUT
 	IF RESULT == 0
 		PRINTFORMW ―옷。―
-		;호칭변경
+		;呼び名変更
 		;変換ミスで平仮名でセリフ書いてしまったのだけど「あ、これはこれで」ってなったのでこっちも平仮名化
 		CSTR:일인칭 = 나
 		CSTR:이인칭 = 인간
@@ -138,7 +139,7 @@ IF CFLAG:220 == 0
 		TALENT:TARGET:0 = 1
 		ABL:TARGET:4 = 0
 		EXP:TARGET:0 = 0
-		;인간화
+		;人化
 		TALENT:인간화 = 1
 		TALENT:부정형 = 0
 		TALENT:갈퀴발 = 0
@@ -160,8 +161,8 @@ IF CFLAG:220 == 0
 			CFLAG:220 = 2
 		ENDIF
 
-		;머리は촉수的なアレなのでなにもなし
-		;장갑、망토、全身타이즈。下半身のアレはどうしようか迷った末なにもなし、타이즈だ타이즈。
+		;頭は触手的なアレなのでなにもなし
+		;手袋、マント、全身タイツ。下半身のアレはどうしようか迷った末なにもなし、タイツだタイツ。
 		;ノーパンノーブラ
 		CFLAG:초기모자 = 0
 		CFLAG:모자 = 0
@@ -221,8 +222,7 @@ ENDIF
 ;-------------------------------------------------
 DRAWLINE
 ;첫조교시
-;IF CFLAG:201 == 0 && TALENT:연모 == 0
-IF CFLAG:201 == 0
+IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW ――솔직하게。본 것만으로 SAN치를 내릴 수 있는 무언가는 조교하고 싶지 않았기 때문에。
 	PRINTFORMW 계약을 방패로、우연히 주운 전생의 비약을 먹여보았다。
 	PRINTFORMW 「slkmfさl;dgんさrjがぽwr食いじゃk魔dfklvどｆｂんどｆんｂｄｆｄｆｋｍｌだｋｇんｌｄｒｆ」
@@ -240,7 +240,7 @@ IF CFLAG:201 == 0
 	PRINTFORMW ……잘은 모르겠지만、약의 영향 때문인지 발성기관이 이상하게 된 것 같다。
 	PRINTFORMW 뭐어 우선은 조교를 진행하자……
 	PRINTFORMW 　
-	;この구상で女体化とかした場合
+	;この口上で女体化とかした場合
 	IF CFLAG:220 == 2
 		;이상경험
 		EXP:이상경험 += 1
@@ -267,24 +267,27 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORMW 「WOW！」
-	PRINTFORMW ――여기에 와 신 패턴이라고！？
+	PRINTFORMW ――여기까지 와서 신 패턴이라고！？
 	CFLAG:201 = 4
 	RETURN 0
 ;함락
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
 	IF TALENT:3
-;		IF CFLAG:미조교함락 == 1
+		IF CFLAG:미조교함락 == 1
 			;조교하지 않고 연모를 단 경우
-;			PRINTFORMW 
-;		ELSE
-			PRINTFORMW 「응ー……」
-			PRINTFORMW %조사처리(CALLNAME,"는")% 조금 목의 각도적으로 괴로워하면서도、%CALLNAME:MASTER%에게 뺨을 비비고 있었다。
-			PRINTFORMW 촉촉히 젖은 피부가 %CALLNAME:MASTER%에게 달라붙어……달라붙어온다？
-			PRINTFORMW 「옷」
-			PRINTFORMW ――촉수였었다。
-			PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%의 피부를 입으로 빨아들이면서、손발을 촉수로 연결하고 있다。
-			PRINTFORMW 문득、우뢰와 같은、땅울림과도 같은、심연의 저편에서부터 울려 퍼지는 듯한――목소리가、들려왔다。
+			PRINTFORMW ――正直。見ただけでSAN値が削れるようなサムシングは調教したくなかったのだが。
+			PRINTFORMW 「ヲっ」
+			PRINTFORMW よう、とばかりに、“彼女”は手をあげた。
+			PRINTFORMW 頭に蛸っぽいサムシングを乗せた美少女である。
+			PRINTFORMW なんだこの状況――と天を仰いでいると、胸に衝撃が入った。
+			PRINTFORMW 「……ヲッ」
+			PRINTFORMW 声が胸下から聞こえてくる。抱き付かれているらしい。
+			PRINTFORMW 少々体温は低いが、人間の体温だ。
+			PRINTFORMW 肢体はやわらかで、どこかあまいにおいもする。
+			PRINTFORMW 言葉は分からないが、懐かれているらしいというのは分かる。
+			PRINTFORMW ――触手が四肢に絡みついてきているからだ。
+			PRINTFORMW ふと、遠雷のような、地鳴りのような、海の底から響いてくるような――声が、聞こえてきた。
 			PRINTFORMW 　
 			PRINTFORMW “놓치지 않아”“옷”“%조사처리(CSTR:이인칭,"는")%”“……옷”“%CSTR:일인칭%의 것이다”
 			PRINTFORMW “%CSTR:일인칭%다”“옷”“껴안아”“옷……”“%CSTR:일인칭%도 껴안는다”
@@ -294,8 +297,27 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW ……그럼、이것도 악몽인 것인가？
 			PRINTFORMW 살을 맞닿은 채 생각한다。
 			PRINTFORMW ――뭐 여자는 여자니까 상관없나, 란 걸로。
-			PRINTFORMW 꼭 껴안고、그리고 느긋하게 촉수를 풀어、안고、침대로 향했다……
-;		ENDIF
+			PRINTFORMW 꼭 껴안고、그리고 느긋하게 촉수를 풀어、안고、침대로 향했다。
+			PRINTFORMW ……ところでこの偶然拾った転生の秘薬はどうしよう。
+		ELSE
+			PRINTFORMW 「ンー……」
+			PRINTFORMW %CALLNAME%はちょっと首の角度的に苦しそうにしながらも、%CALLNAME:MASTER%に頬をこすりつけている。
+			PRINTFORMW しっとりとした肌が%CALLNAME:MASTER%に吸いつい……吸いついてくる？
+			PRINTFORMW 「ヲッ」
+			PRINTFORMW ――触手だった。
+			PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の肌を口でも吸いながら、手足と触手をからめている。
+			PRINTFORMW ふと、遠雷のような、地鳴りのような、海の底から響いてくるような――声が、聞こえてきた。
+			PRINTFORMW 　
+			PRINTFORMW “にがさない”“ヲッ”“%CSTR:이인칭%は”“……ヲッ”“%CSTR:일인칭%のものだ”
+			PRINTFORMW “%CSTR:일인칭%のだ”“ヲッ”“だきしめて”“ヲッ……”“%CSTR:일인칭%もだきしめる”
+			PRINTFORMW “たてまつれ”“あがめよ”“そのみをささげよ”“……ヲッ”
+			PRINTFORMW 　
+			PRINTFORMW クトゥルーは、強大なテレパスを持ち、ルルイエが浮上した際には芸術家や子供等、感受性の強い者に悪夢を見せるという。
+			PRINTFORMW ……では、これは悪夢なのか？
+			PRINTFORMW 肌を触れあわせながら思う。
+			PRINTFORMW ――まあ女は女だしまあいいか、と。
+			PRINTFORMW 抱きしめ、それからゆっくりと触手を解き、抱え上げ、ベッドへと向かった……
+		ENDIF
 	;음란
 	ELSEIF TALENT:4
 		PRINTFORMW 「응ー……」
@@ -823,8 +845,8 @@ SELECTCASE SELECTCOM
 ;-------------------------------------------------
 ;6,가슴주무르기
 ;6.7.8は一番下においてます。ひでぇコンパチ。
-;307番は14.클리애무で사용。
-;308番は浣腸＋プラグで사용……の予定。
+;307番は14.クリ愛撫で使用。
+;308番は浣腸＋プラグで使用……の予定。
 ;-------------------------------------------------
 	CASE 6
 		CALL TRAIN_MESSAGE
@@ -865,17 +887,17 @@ SELECTCASE SELECTCOM
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「옷……」
-					PRINTFORMW  %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
+					PRINTFORMW %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「옷……」
-					PRINTFORMW  %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
+					PRINTFORMW %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
 				ENDIF
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
 				PRINTFORMW 「옷……」
-				PRINTFORMW  %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
+				PRINTFORMW %조사처리(CALLNAME,"는")% 힐끔힐끔 %CALLNAME:MASTER%의 가랑이를 보고 있다……
 				CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
@@ -921,7 +943,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
 				PRINTFORMW 「……오？」
-				PRINTFORMW  %조사처리(CALLNAME,"는")% 단순하게 자신의 가슴을 비비고 있다……
+				PRINTFORMW %조사처리(CALLNAME,"는")% 단순하게 자신의 가슴을 비비고 있다……
 				CFLAG:310 = 2
 			ENDIF
 		ENDIF
@@ -1126,12 +1148,12 @@ CASE 14
 
 ;-------------------------------------------------
 ;21,아무것도안한다
-;전투구상制御できるぞぇ
+;戦闘口上制御できるぞぇ
 ;-------------------------------------------------
 	CASE 21
 		CALL TRAIN_MESSAGE
-		;조교の最初に選んだ場合
-		;전투時구상범위について/함락済みだとコスプレ구상についても
+		;調教の最初に選んだ場合
+		;戦闘時口上範囲について/陥落済みだとコスプレ口上についても
 		IF PREVCOM == -1
 			PRINTFORMW 조교 전에、전투 시의 소리에 대해 지시하기로 했다……
 			PRINTFORMW 「……옷？」
@@ -1221,9 +1243,23 @@ CASE 14
 			CFLAG:314 = 1
 		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
-			PRINTFORMW 「옷、오ー」
-			PRINTFORMW 무슨 말을 하는지 전혀 모르겠다。
-			PRINTFORMW 그렇다면、둘이서 함께 수화의 연습을――텔레파시 있잖아！
+			IF RAND:2 == 0
+				PRINTFORMW 「옷、오ー」
+				PRINTFORMW 무슨 말을 하는지 전혀 모르겠다。
+				PRINTFORMW 그렇다면、둘이서 함께 수화의 연습을――텔레파시 있잖아！
+			ELSE
+				PRINTFORMW 「ヲッ、ヲー、ヲヲ」
+				PRINTFORMW うんうん。
+				PRINTFORMW 「ヲ。ヲ？」
+				PRINTFORMW そうかもしれない。
+				IF RAND:2 == 0
+					PRINTFORMW 「ヲ。ヲッヲ……%UNICODE(0x2661)%」
+					PRINTFORMW なにやら満足げに頷いてくれているが、何を喋っているのかさっぱりわからない……
+				ELSE
+					PRINTFORMW 「…………ヲヲヲ？」
+					PRINTFORMW なにやら疑わし気にこちらを見てくるが、何を喋っていたのかさっぱりわからない……！
+				ENDIF
+			ENDIF
 			CFLAG:314 = 2
 		ENDIF
 ;-------------------------------------------------
@@ -1413,30 +1449,32 @@ CASE 14
 ;-------------------------------------------------
 	CASE 30
 		CALL TRAIN_MESSAGE
+				;연모想定のコンパチ
+				PRINTFORMW 「ヲゥヲゥ」
+				PRINTFORMW %CALLNAME%は、%CALLNAME:MASTER%の頭を抱き込んで来る。
+				PRINTFORMW ……が、ちょっと肌がしっとりしてるので、ぱふぱふっていうか、ぺたぺたと言うか……
+				PRINTFORMW 「ヲ……%UNICODE(0x2661)%」
+				PRINTFORMW ……まあ、満足そうだしいいか……
+
+
 		;처음
 		IF CFLAG:422 == 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
 			ENDIF
 			CFLAG:422 = 1
 		;2번째 이후
 		ELSEIF CFLAG:422 < 2 || FLAG:7 == 2
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
 			ENDIF
 			CFLAG:422 = 2
 		ENDIF
@@ -4651,7 +4689,12 @@ CASE 14
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:392 == 0
-			PRINTFORMW 
+			PRINTFORMW 「ヲっ、ヲヲヲー……」
+			PRINTFORMW %CALLNAME%はぬとぬととローションで手遊びをしている。
+			PRINTFORMW そして真顔になってこちらに向き直った。
+			PRINTFORMW 蛸っぽい何かが口を開き――
+			PRINTFORMW 「(ヲロロロロロロ)」
+			PRINTFORMW ――おわぁあああああ戻しなさい！ 戻しなさい！！！
 			CFLAG:392 = 1
 		;2번째 이후
 		ELSE
@@ -4659,22 +4702,31 @@ CASE 14
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:392 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「ヲ？ ヲ？」
+					PRINTFORMW 吐く？ 吐く？ と、視線で%CALLNAME%は訴えかけてくる。
+					PRINTFORMW やめてください、となだめながら、ローションを塗り広げた……
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
+					PRINTFORMW 「ヲ？ ヲ？」
+					PRINTFORMW 吐く？ 吐く？ と、視線で%CALLNAME%は訴えかけてくる。
+					PRINTFORMW もう吐いてるじゃないか、と突っ込むのも疲れた……
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW 「ヲっ」
+					PRINTFORMW ローションボトルを開こうとすると、%CALLNAME%はボトルを出してきた。
+					PRINTFORMW ……デフォルメされた%CALLNAME%の図柄が印刷されている。
+					PRINTFORMW 使わないぞ、と言うと、%CALLNAME%は不満そうに口を尖らせた……
 				ENDIF
 				CFLAG:392 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:392 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW ヲロロロロロロ、と出しそうになる蛸の口を押さえつつ、片手でボトルを開封する。
+				PRINTFORMW 勿体ない、と言いたげな視線が突き刺さる……
 				CFLAG:392 = 3
 			;그 이외
 			ELSEIF CFLAG:392 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW ヲロロロロロロ、と出しそうになる蛸の口を押さえつつ、片手でボトルを開封する。
+				PRINTFORMW 勿体ない、と言いたげな視線が突き刺さる……
 				CFLAG:392 = 2
 			ENDIF
 		ENDIF
@@ -4686,7 +4738,13 @@ CASE 14
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:393 == 0
-			PRINTFORMW 
+			PRINTFORMW 「ヲ……？」
+			PRINTFORMW 差し出した薬を、%CALLNAME%は受け取り、首をかしげた。
+			PRINTFORMW 「ンー……」
+			PRINTFORMW そして上へと放り投げ、蛸っぽい何かの口でそれを呑みこんだ。
+			PRINTFORMW ……それで効くのか？
+			PRINTFORMW 「……ン……%UNICODE(0x2661)%」
+			PRINTFORMW ……それで効くのか！？
 			CFLAG:393 = 1
 		;2번째 이후
 		ELSE
@@ -4694,22 +4752,39 @@ CASE 14
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:393 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW %CALLNAME%は、口を開き、小さな舌を出す。
+					PRINTFORMW 錠剤型のそれを舌に乗せれば、ゆっくりと口を閉じ、こくり、と、音を立てて呑みこんだ。
+					PRINTFORMW 「……ン……%UNICODE(0x2661)%」
+					PRINTFORMW ぶるり、と%CALLNAME%の腰が震える。
+					PRINTFORMW ……そうそう、こういうのでいいんだよこういうので。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
+					PRINTFORMW %CALLNAME%は、口を開き、小さな舌を出す。
+					PRINTFORMW 錠剤型のそれを舌に乗せれば、ゆっくりと口を閉じ、こくり、と、音を立てて呑みこんだ。
+					PRINTFORMW 「……ン……%UNICODE(0x2661)%」
+					PRINTFORMW ぶるり、と%CALLNAME%の腰が震える。
+					PRINTFORMW ……そうそう、こういうのでいいんだよこういうので。
+					PRINTFORMW 頷いていると、横に触手が伸びているのが見えた。
+					PRINTFORMW なんだ、と思うと、――触手がビンを開こうとしていた。
+					PRINTFORMW 待て待て待て待て。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
+					PRINTFORMW %CALLNAME%は、口を開き、小さな舌を出す。
+					PRINTFORMW 錠剤型のそれを舌に乗せれば、ゆっくりと口を閉じ、こくり、と、音を立てて呑みこんだ。
+					PRINTFORMW 「……ン……%UNICODE(0x2661)%」
+					PRINTFORMW ぶるり、と%CALLNAME%の腰が震える。
+					PRINTFORMW ……そうそう、こういうのでいいんだよこういうので。
 				ENDIF
 				CFLAG:393 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW %CALLNAME%は媚薬を下の上に乗せ、%CALLNAME:MASTER%に見せつけるように飲み下した。
+				PRINTFORMW ……相変わらず蛸っぽい何かの方で飲むんだなあ。
 				CFLAG:393 = 3
 			;그 이외
 			ELSEIF CFLAG:393 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW %CALLNAME%は媚薬を下の上に乗せ、%CALLNAME:MASTER%に見せつけるように飲み下した。
+				PRINTFORMW ……相変わらず蛸っぽい何かの方で飲むんだなあ。
 				CFLAG:393 = 2
 			ENDIF
 		ENDIF
@@ -8538,8 +8613,8 @@ SELECTCASE TSTR:END종별
 			PRINTFORMW 「……옷♪」
 			PRINTFORMW 　
 			PRINTFORMW 　
-;			PRINTFORMW 　　　　　　　　―― Ending No.11620A (크툴루엔드)
-			PRINTFORMW 　　　　　　　　―― Ending No.11620A (크툴루엔드)
+;			PRINTFORMW 　　　　　　　　―― Ending No.101620A (크툴루엔드)
+			PRINTFORMW 　　　　　　　　―― Ending No.101620A (크툴루엔드)
 		;음란 1체 엔딩
 		ELSEIF TALENT:음마 && CFLAG:21 == 1
 			DRAWLINE
@@ -8566,8 +8641,8 @@ SELECTCASE TSTR:END종별
 			PRINTFORMW 「……옷♪」
 			PRINTFORMW 　
 			PRINTFORMW 　
-;			PRINTFORMW 　　　　　　　　―― Ending No.11620B (크툴루엔드)
-			PRINTFORMW 　　　　　　　　―― Ending No.11620B (크툴루엔드)
+;			PRINTFORMW 　　　　　　　　―― Ending No.101620B (크툴루엔드)
+			PRINTFORMW 　　　　　　　　―― Ending No.101620B (크툴루엔드)
 		;복종 1체 엔딩
 		ELSEIF TALENT:노리개 && CFLAG:21 == 1
 			DRAWLINE
@@ -8598,8 +8673,8 @@ SELECTCASE TSTR:END종별
 			PRINTFORMW 「……옷♪」
 			PRINTFORMW 　
 			PRINTFORMW 　
-;			PRINTFORMW 　　　　　　　　―― Ending No.11620C (크툴루엔드)
-			PRINTFORMW 　　　　　　　　―― Ending No.11620C (크툴루엔드)
+;			PRINTFORMW 　　　　　　　　―― Ending No.101620C (크툴루엔드)
+			PRINTFORMW 　　　　　　　　―― Ending No.101620C (크툴루엔드)
 		ENDIF
 	;CASE "조교사경영END"
 	;CASE "희대의조교사END"
@@ -8616,12 +8691,12 @@ RETURN 1
 ;전투구상
 ;-------------------------------------------------
 ;=================================================================================
-;CFLAG:800：喋る범위を制御している。조교初回に「아무것도안한다」を選ぶことで制御できる。
-;　　　　1：디폴트、喋らない
-;　　　　2：強힘な스킬を사용すると喋る。
-;　　　　3：통상の스킬を사용しても喋る。
-;　　　　4：통상공격ですら喋る。
-;強힘っぽい스킬は기본的に２で書いている（選出は趣味）（でも実用も兼ねてるといいなあ）
+;CFLAG:800：喋る範囲を制御している。調教初回に「何もしない」を選ぶことで制御できる。
+;　　　　1：デフォルト、喋らない
+;　　　　2：強力なスキルを使用すると喋る。
+;　　　　3：通常のスキルを使用しても喋る。
+;　　　　4：通常攻撃ですら喋る。
+;強力っぽいスキルは基本的に２で書いている（選出は趣味）（でも実用も兼ねてるといいなあ）
 ;
 ;=================================================================================
 
@@ -8670,7 +8745,7 @@ ENDIF
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	;사용한 스킬의 이름을 LOCALS에 대입
 	LOCALS = %RESULTS%
-	;↑汎用소녀구상からお借りしました/메어리の人　　←메어리구상からお借りしました/조마구상(1)加筆した人
+	;↑汎用少女口上からお借りしました/メアリの人　　←メアリ口上からお借りしました/造魔口上(1)加筆した人
 	;ぽんこつちゃんと同じく、多分まったく意味がないが置いておく
 
 
@@ -9276,10 +9351,10 @@ ENDIF
 
 ;-------------------------------------------------
 ;6.7.8.オパーイモミング
-;조마ちゃん구상（１）からコピペ。
-;一本化。307、308と空きができたけれど、클리애무と浣腸＋プラグで사용。
-;オパーイ揉むか유두ぐにぐにするかは、宗派によってはやっぱ違うものなんでしょうけど、自分はそこまで속성ねえので。
-;カンッペキ손抜きなんで誰か。誰かお願い。
+;造魔ちゃん口上（１）からコピペ。
+;一本化。307、308と空きができたけれど、クリ愛撫と浣腸＋プラグで使用。
+;オパーイ揉むか乳首ぐにぐにするかは、宗派によってはやっぱ違うものなんでしょうけど、自分はそこまで属性ねえので。
+;カンッペキ手抜きなんで誰か。誰かお願い。
 ;-------------------------------------------------
 @K_1620_1_OPAI_MOMINGU
 		;처음

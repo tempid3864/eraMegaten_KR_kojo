@@ -1,6 +1,16 @@
 ﻿;-------------------------------------------------
-;쿠즈류 아마네구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;정신세계内限定
+;九頭竜 天音口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;정신世界内限定
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:EVENT_K3263_.ERB
+;	Facility	:マインドアマネ
+;
+;	Modification Data:
+;	Edit	Date			Author				Reason
+;	001		2011/06/09頃	不明				新規作成
+;	002		2021/02/05		名無し				口上が無い部分を削除して軽量化
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -21,22 +31,6 @@
 ;	TCVAR:0 = 1
 ;SIF FLAG:7 == 0
 ;	FLAG:7 = 2
-
-;--------------------------------------------------
-;구상셀렉트 기능：구상설명
-;--------------------------------------------------
-;이 함수의 주석처리를 해제하면, 구상의 선택시에 선택지로 후보에 오릅니다
-;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
-;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
-;예： EVENTTRAIN_K3263 → EVENTTRAIN_K3263_12
-;--------------------------------------------------
-@셀렉트구상설명_K3263,ARG = 0
-SIF ARG == 1
-	RETURN 0
-;구상명
-PRINTFORML %NAME%개인구상
-;구상설명문
-PRINTFORML    %NAME%의 기본적인 개인 구상입니다。
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（3263을 캐릭터번호로 치환）
@@ -142,8 +136,8 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ELSEIF TALENT:5
 		PRINTFORMW 
 	ENDIF
-	IF 투기장플래그:11:0 == 0
-		투기장플래그:11:0 = 1
+	IF DB:100:11 == 0
+		DB:100:11 = 1
 		PRINTFORMW (아마네의 마음을 이렇게까지 바꿀 줄이야……이 사람은……)
 	ENDIF
 	CFLAG:201 = 5
@@ -162,7 +156,7 @@ IF ASSI < 0
 	;처음
 ;	IF CFLAG:203 == 0
 		;함락완료＋함락시 첫 구상이 발생완료
-;		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
+;		IF 함락() && CFLAG:201 >= 5
 ;			PRINTFORMW 
 		;그 이외
 ;		ELSE
@@ -367,17 +361,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:300 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:300 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:300 < 3 || FLAG:7 == 2)
@@ -403,17 +388,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:301 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:301 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:301 < 3 || FLAG:7 == 2)
@@ -439,17 +415,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:302 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:302 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:302 < 3 || FLAG:7 == 2)
@@ -475,17 +442,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:303 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:303 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:303 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:303 < 3 || FLAG:7 == 2)
@@ -511,17 +469,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:304 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:304 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
@@ -547,17 +496,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:305 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:305 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
@@ -583,17 +523,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:306 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:306 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
@@ -619,17 +550,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:307 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:307 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
@@ -655,17 +577,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:308 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:308 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:308 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:308 < 3 || FLAG:7 == 2)
@@ -691,17 +604,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:309 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
@@ -727,17 +631,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:310 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:310 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
@@ -763,17 +658,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:311 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:311 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:311 < 3 || FLAG:7 == 2)
@@ -802,17 +688,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:312 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:312 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
@@ -838,17 +715,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:313 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:313 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:313 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:313 < 3 || FLAG:7 == 2)
@@ -970,17 +838,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:320 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:320 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:320 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:320 < 3 || FLAG:7 == 2)
@@ -1001,29 +860,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:321 == 0
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+				;カット
 		CFLAG:321 = 1
 		;2번째 이후
 		ELSEIF CFLAG:321 < 2 || FLAG:7 == 2
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+				;カット
 		CFLAG:321 = 2
 		ENDIF
 
@@ -1042,17 +883,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:322 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:322 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:322 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:322 < 3 || FLAG:7 == 2)
@@ -1078,17 +910,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:323 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:323 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:323 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:323 < 3 || FLAG:7 == 2)
@@ -1115,17 +938,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:324 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:324 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:324 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:324 < 3 || FLAG:7 == 2)
@@ -1157,17 +971,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:325 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:325 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:325 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:325 < 3 || FLAG:7 == 2)
@@ -1204,17 +1009,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:326 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:326 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:326 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:326 < 3 || FLAG:7 == 2)
@@ -1246,17 +1042,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:327 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:327 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:327 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:327 < 3 || FLAG:7 == 2)
@@ -1289,17 +1076,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:328 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:328 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:328 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:328 < 3 || FLAG:7 == 2)
@@ -1331,17 +1109,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:329 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:329 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:329 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:329 < 3 || FLAG:7 == 2)
@@ -1372,17 +1141,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:330 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:330 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:330 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:330 < 3 || FLAG:7 == 2)
@@ -1409,17 +1169,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:331 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:331 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:331 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:331 < 3 || FLAG:7 == 2)
@@ -1459,17 +1210,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:332 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:332 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:332 < 3 || FLAG:7 == 2)
@@ -1501,17 +1243,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:333 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:333 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:333 < 3 || FLAG:7 == 2)
@@ -1537,17 +1270,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:334 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:334 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:334 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:334 < 3 || FLAG:7 == 2)
@@ -1573,17 +1297,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:335 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:335 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:335 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:335 < 3 || FLAG:7 == 2)
@@ -1609,17 +1324,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:336 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:336 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:336 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:336 < 3 || FLAG:7 == 2)
@@ -1645,17 +1351,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:337 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:337 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:337 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:337 < 3 || FLAG:7 == 2)
@@ -1687,17 +1384,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:338 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:338 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:338 < 3 || FLAG:7 == 2)
@@ -1723,17 +1411,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:339 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:339 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:339 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:339 < 3 || FLAG:7 == 2)
@@ -1765,17 +1444,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:340 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:340 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:340 < 3 || FLAG:7 == 2)
@@ -1807,17 +1477,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:341 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:341 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:341 < 3 || FLAG:7 == 2)
@@ -1843,17 +1504,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:342 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:342 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:342 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:342 < 3 || FLAG:7 == 2)
@@ -1879,17 +1531,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:343 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:343 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:343 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:343 < 3 || FLAG:7 == 2)
@@ -1921,17 +1564,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:420 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:420 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:420 < 3 || FLAG:7 == 2)
@@ -1957,17 +1591,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:421 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:421 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:421 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:421 < 3 || FLAG:7 == 2)
@@ -1996,17 +1621,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:344 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:344 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:344 < 3 || FLAG:7 == 2)
@@ -2032,17 +1648,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:345 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:345 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:345 < 3 || FLAG:7 == 2)
@@ -2068,17 +1675,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:346 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:346 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:346 < 3 || FLAG:7 == 2)
@@ -2104,17 +1702,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:347 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:347 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:347 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:347 < 3 || FLAG:7 == 2)
@@ -2140,17 +1729,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:348 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:348 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:348 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:348 < 3 || FLAG:7 == 2)
@@ -2176,17 +1756,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:349 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:349 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:349 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:349 < 3 || FLAG:7 == 2)
@@ -2212,17 +1783,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:350 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:350 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:350 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:350 < 3 || FLAG:7 == 2)
@@ -2248,17 +1810,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:351 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:351 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:351 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:351 < 3 || FLAG:7 == 2)
@@ -2284,17 +1837,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:352 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:352 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:352 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:352 < 3 || FLAG:7 == 2)
@@ -2315,29 +1859,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:353 == 0
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+				;カット
 		CFLAG:353 = 1
 		;2번째 이후
 		ELSEIF CFLAG:353 < 2 || FLAG:7 == 2
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+				;カット
 		CFLAG:353 = 2
 		ENDIF
 
@@ -2357,17 +1883,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:423 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2392,17 +1909,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:424 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2427,17 +1935,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:425 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2462,17 +1961,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:426 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2497,17 +1987,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:427 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2532,17 +2013,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:428 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2567,17 +2039,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:429 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2602,17 +2065,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:430 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -2641,17 +2095,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:354 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:354 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:354 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:354 < 3 || FLAG:7 == 2)
@@ -2677,17 +2122,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:355 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:355 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:355 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:355 < 3 || FLAG:7 == 2)
@@ -2713,17 +2149,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:356 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:356 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:356 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:356 < 3 || FLAG:7 == 2)
@@ -2749,17 +2176,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:357 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:357 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:357 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:357 < 3 || FLAG:7 == 2)
@@ -2785,17 +2203,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:358 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:358 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:358 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:358 < 3 || FLAG:7 == 2)
@@ -2822,17 +2231,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:359 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:359 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:359 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:359 < 3 || FLAG:7 == 2)
@@ -2864,17 +2264,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:360 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:360 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:360 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:360 < 3 || FLAG:7 == 2)
@@ -2906,17 +2297,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:361 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:361 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:361 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:361 < 3 || FLAG:7 == 2)
@@ -2950,17 +2332,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:362 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:362 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:362 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:362 < 3 || FLAG:7 == 2)
@@ -2986,17 +2359,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:363 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:363 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:363 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:363 < 3 || FLAG:7 == 2)
@@ -3022,17 +2386,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:364 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:364 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:364 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:364 < 3 || FLAG:7 == 2)
@@ -3058,17 +2413,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:365 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:365 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:365 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:365 < 3 || FLAG:7 == 2)
@@ -3094,17 +2440,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:366 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:366 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:366 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:366 < 3 || FLAG:7 == 2)
@@ -3130,17 +2467,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:367 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:367 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:367 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:367 < 3 || FLAG:7 == 2)
@@ -3166,17 +2494,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:368 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:368 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
@@ -3202,17 +2521,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:368 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:432 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
@@ -3241,17 +2551,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:369 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:369 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:369 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:369 < 3 || FLAG:7 == 2)
@@ -3325,17 +2626,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:373 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:373 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:373 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:373 < 3 || FLAG:7 == 2)
@@ -3361,17 +2653,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:374 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:374 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:374 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:374 < 3 || FLAG:7 == 2)
@@ -3398,17 +2681,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:375 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:375 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:375 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:375 < 3 || FLAG:7 == 2)
@@ -3439,17 +2713,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:376 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:376 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:376 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:376 < 3 || FLAG:7 == 2)
@@ -3476,17 +2741,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:377 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:377 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:377 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:377 < 3 || FLAG:7 == 2)
@@ -3601,17 +2857,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:382 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:382 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:382 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:382 < 3 || FLAG:7 == 2)
@@ -3648,17 +2895,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:383 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:383 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:383 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:383 < 3 || FLAG:7 == 2)
@@ -3684,17 +2922,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:384 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:384 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:384 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:384 < 3 || FLAG:7 == 2)
@@ -3720,17 +2949,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:385 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:385 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:385 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:385 < 3 || FLAG:7 == 2)
@@ -3756,17 +2976,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:386 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:386 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:386 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:386 < 3 || FLAG:7 == 2)
@@ -3792,17 +3003,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:387 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:387 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:387 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:387 < 3 || FLAG:7 == 2)
@@ -3828,17 +3030,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:388 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:388 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:388 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:388 < 3 || FLAG:7 == 2)
@@ -3864,17 +3057,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:389 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:389 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:389 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:389 < 3 || FLAG:7 == 2)
@@ -3901,17 +3085,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:390 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:390 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:390 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:390 < 3 || FLAG:7 == 2)
@@ -3942,17 +3117,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:391 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:391 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:391 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:391 < 3 || FLAG:7 == 2)
@@ -3981,17 +3147,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:392 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:392 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:392 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:392 < 3 || FLAG:7 == 2)
@@ -4017,17 +3174,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:393 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:393 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:393 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
@@ -4053,17 +3201,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:394 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:394 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:394 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:394 < 3 || FLAG:7 == 2)
@@ -4090,17 +3229,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:395 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:395 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:395 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:395 < 3 || FLAG:7 == 2)
@@ -4132,17 +3262,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:396 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:396 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:396 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
@@ -4173,17 +3294,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:397 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:397 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:397 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:397 < 3 || FLAG:7 == 2)
@@ -4210,17 +3322,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:398 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:398 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:398 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:398 < 3 || FLAG:7 == 2)
@@ -4251,17 +3354,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:399 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:399 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:399 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:399 < 3 || FLAG:7 == 2)
@@ -4292,17 +3386,8 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				;함락완료
-				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:400 < 4 || FLAG:7 == 2)
-					;연모, 친애
-					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
-					;음란, 창부
-					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
-					;복종, 예속
-					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
-					ENDIF
+				IF 함락() && (CFLAG:400 < 4 || FLAG:7 == 2)
+				;カット
 					CFLAG:400 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:400 < 3 || FLAG:7 == 2)
@@ -4353,17 +3438,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:402 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:402 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:402 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:402 < 3 || FLAG:7 == 2)
@@ -4389,17 +3465,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:403 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:403 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:403 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:403 < 3 || FLAG:7 == 2)
@@ -4425,17 +3492,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:404 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:404 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:404 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:404 < 3 || FLAG:7 == 2)
@@ -4461,17 +3519,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:405 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:405 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:405 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:405 < 3 || FLAG:7 == 2)
@@ -4497,17 +3546,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:406 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:406 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:406 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:406 < 3 || FLAG:7 == 2)
@@ -4533,17 +3573,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:368 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:368 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:431 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:368 < 3 || FLAG:7 == 2)
@@ -4569,17 +3600,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:433 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -4605,17 +3627,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:434 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -4650,17 +3663,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:407 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:407 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:407 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:407 < 3 || FLAG:7 == 2)
@@ -4685,17 +3689,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:408 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:408 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:408 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:408 < 3 || FLAG:7 == 2)
@@ -4720,17 +3715,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:409 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:409 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:409 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:409 < 3 || FLAG:7 == 2)
@@ -4755,17 +3741,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:410 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:410 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:410 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:410 < 3 || FLAG:7 == 2)
@@ -4796,17 +3773,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:411 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:411 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:411 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:411 < 3 || FLAG:7 == 2)
@@ -4838,17 +3806,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:412 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:412 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:412 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:412 < 3 || FLAG:7 == 2)
@@ -4870,17 +3829,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:419 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:419 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:419 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:419 < 3 || FLAG:7 == 2)
@@ -4905,17 +3855,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:413 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:413 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:413 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:413 < 3 || FLAG:7 == 2)
@@ -4940,17 +3881,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:414 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
@@ -4975,17 +3907,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:415 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:415 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:415 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:415 < 3 || FLAG:7 == 2)
@@ -5010,17 +3933,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:416 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:416 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:416 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:416 < 3 || FLAG:7 == 2)
@@ -5045,17 +3959,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:417 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:417 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:417 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:417 < 3 || FLAG:7 == 2)
@@ -5080,17 +3985,8 @@ SELECTCASE SELECTCOM
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:418 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:418 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:418 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:418 < 3 || FLAG:7 == 2)
@@ -5148,7 +4044,7 @@ IF CFLAG:106
 	;머리카락
 	IF CFLAG:106 == 1
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:221 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:221 = 3
 		;굴복각인Lv3
@@ -5163,7 +4059,7 @@ IF CFLAG:106
 	;얼굴
 	ELSEIF CFLAG:106 == 2
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:222 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:222 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:222 = 3
 		;굴복각인Lv3
@@ -5178,7 +4074,7 @@ IF CFLAG:106
 	;가슴
 	ELSEIF CFLAG:106 == 3
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:223 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:223 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:223 = 3
 		;굴복각인Lv3
@@ -5193,7 +4089,7 @@ IF CFLAG:106
 	;배
 	ELSEIF CFLAG:106 == 4
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:224 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:224 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:224 = 3
 		;굴복각인Lv3
@@ -5208,7 +4104,7 @@ IF CFLAG:106
 	;겨드랑이
 	ELSEIF CFLAG:106 == 5
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:225 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:225 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:225 = 3
 		;굴복각인Lv3
@@ -5223,7 +4119,7 @@ IF CFLAG:106
 	;허벅지
 	ELSEIF CFLAG:106 == 6
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:226 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:226 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:226 = 3
 		;굴복각인Lv3
@@ -5238,7 +4134,7 @@ IF CFLAG:106
 	;가랑이
 	ELSEIF CFLAG:106 == 7
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:227 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:227 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:227 = 3
 		;굴복각인Lv3
@@ -5253,7 +4149,7 @@ IF CFLAG:106
 	;엉덩이
 	ELSEIF CFLAG:106 == 8
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:228 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:228 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:228 = 3
 		;굴복각인Lv3
@@ -5270,7 +4166,7 @@ IF CFLAG:106
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72)
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
+			IF 함락() && (CFLAG:229 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:229 = 3
 			;굴복각인Lv3
@@ -5284,7 +4180,7 @@ IF CFLAG:106
 			ENDIF
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)
+			IF 함락() && (CFLAG:230 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
 				CFLAG:230 = 3
 			;굴복각인Lv3
@@ -5308,7 +4204,7 @@ ENDIF
 IF TFLAG:9 == 1
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:231 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:231 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:231 = 3
 	;굴복각인Lv3
@@ -5328,7 +4224,7 @@ ENDIF
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:232 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:232 = 3
 	;굴복각인Lv3
@@ -5348,7 +4244,7 @@ ENDIF
 IF TFLAG:0 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:233 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:233 = 3
 	;굴복각인Lv3
@@ -5368,7 +4264,7 @@ ENDIF
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:234 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:234 = 3
 	;굴복각인Lv3
@@ -5388,7 +4284,7 @@ ENDIF
 IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:235 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:235 = 3
 	;굴복각인Lv3
@@ -5410,7 +4306,7 @@ IF TFLAG:2 > 0
 	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:237 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:237 = 3
 		;굴복각인Lv3
@@ -5425,7 +4321,7 @@ IF TFLAG:2 > 0
 	;섹스계
 	ELSE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)
+		IF 함락() && (CFLAG:238 < 3 || FLAG:7 == 2)
 			PRINTFORMW 
 			CFLAG:238 = 3
 		;굴복각인Lv3
@@ -5446,7 +4342,7 @@ ENDIF
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:239 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:239 = 3
 	;굴복각인Lv3
@@ -5495,7 +4391,7 @@ ENDIF
 IF TFLAG:15 >0
 	CALL PALAM_MESSAGE_E
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:240 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:240 = 3
 	;굴복각인Lv3
@@ -5576,7 +4472,7 @@ ENDIF
 IF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:245 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:245 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:245 = 3
 	;굴복각인Lv3
@@ -5596,7 +4492,7 @@ ENDIF
 ;사정하고 있다
 IF TFLAG:10 > 0
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:246 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:246 = 3
 	;굴복각인Lv3
@@ -5616,7 +4512,7 @@ ENDIF
 ;분유하고 있다
 IF TFLAG:11 > 0
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:247 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:247 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:247 = 3
 	;굴복각인Lv3
@@ -5636,7 +4532,7 @@ ENDIF
 ;방뇨하고 있다
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 	;함락완료
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:248 < 3 || FLAG:7 == 2)
+	IF 함락() && (CFLAG:248 < 3 || FLAG:7 == 2)
 		PRINTFORMW 
 		CFLAG:248 = 3
 	;굴복각인Lv3
@@ -5845,16 +4741,7 @@ IF TFLAG:22 == 3
 	CALL MARK_MESSAGE_A
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-		;연모, 친애
-		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 
-		ENDIF
+				;カット
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -5867,16 +4754,7 @@ IF TFLAG:23 == 3
 	CALL MARK_MESSAGE_P
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-		;연모, 친애
-		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 
-		ENDIF
+				;カット
 	ELSE
 		PRINTFORMW 
 	ENDIF
@@ -5906,22 +4784,13 @@ IF TFLAG:21 == 3
 	CALL MARK_MESSAGE_R
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
-		;연모, 친애
-		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
-		;음란, 창부
-		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 
-		;복종, 예속
-		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 
-		ENDIF
+				;カット
 	ELSE
 		PRINTFORMW 
 	ENDIF
-	IF 투기장플래그:11:0 == 0
-		투기장플래그:11:0 = 2
-		PRINTFORMW (아마네の心をここまで黒く染めるとは……この者……)
+	IF DB:100:11 == 0
+		DB:100:11 = 2
+		PRINTFORMW (アマネの心をここまで黒く染めるとは……この者……)
 	ENDIF
 
 ENDIF
@@ -5944,17 +4813,8 @@ SELECTCASE TFLAG:13
 	CASE 1
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:261 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:261 = 1
 		ENDIF
 
@@ -5965,17 +4825,8 @@ SELECTCASE TFLAG:13
 	CASE 2
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:262 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:262 = 1
 		ENDIF
 
@@ -5986,17 +4837,8 @@ SELECTCASE TFLAG:13
 	CASE 3
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:263 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:263 = 1
 		ENDIF
 
@@ -6007,17 +4849,8 @@ SELECTCASE TFLAG:13
 	CASE 24
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:263 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:263 = 1
 		ENDIF
 
@@ -6028,17 +4861,8 @@ SELECTCASE TFLAG:13
 	CASE 25
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:263 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:263 = 1
 		ENDIF
 
@@ -6049,17 +4873,8 @@ SELECTCASE TFLAG:13
 	CASE 26
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:263 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:263 = 1
 		ENDIF
 
@@ -6070,17 +4885,8 @@ SELECTCASE TFLAG:13
 	CASE 30
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:263 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:263 = 1
 		ENDIF
 
@@ -6106,17 +4912,8 @@ SELECTCASE TFLAG:13
 	CASE 5
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:265 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:265 = 1
 		ENDIF
 
@@ -6127,17 +4924,8 @@ SELECTCASE TFLAG:13
 	CASE 6
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:266 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:266 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:266 = 2
 		ELSEIF CFLAG:266 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6151,17 +4939,8 @@ SELECTCASE TFLAG:13
 	CASE 7
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:267 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:267 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:267 = 2
 		ELSEIF CFLAG:267 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6175,17 +4954,8 @@ SELECTCASE TFLAG:13
 	CASE 8
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:268 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:268 = 2
 		ELSEIF CFLAG:268 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6199,17 +4969,8 @@ SELECTCASE TFLAG:13
 	CASE 9
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6220,17 +4981,8 @@ SELECTCASE TFLAG:13
 	CASE 31
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6241,17 +4993,8 @@ SELECTCASE TFLAG:13
 	CASE 32
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6262,17 +5005,8 @@ SELECTCASE TFLAG:13
 	CASE 33
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6283,17 +5017,8 @@ SELECTCASE TFLAG:13
 	CASE 34
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6304,17 +5029,8 @@ SELECTCASE TFLAG:13
 	CASE 35
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6325,17 +5041,8 @@ SELECTCASE TFLAG:13
 	CASE 36
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:269 = 1
 		ENDIF
 
@@ -6345,17 +5052,8 @@ SELECTCASE TFLAG:13
 	CASE 10
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:270 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:270 = 2
 		ELSEIF CFLAG:270 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6403,17 +5101,8 @@ SELECTCASE TFLAG:13
 	CASE 12
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:272 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:272 = 2
 		ELSEIF CFLAG:272 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6429,17 +5118,8 @@ SELECTCASE TFLAG:13
 		;출산전
 		IF TALENT:153
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 2 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:273 < 2 || FLAG:7 == 2)
+				;カット
 				CFLAG:273 = 2
 			ELSEIF CFLAG:273 < 1 || FLAG:7 == 2
 				PRINTFORMW 
@@ -6448,17 +5128,8 @@ SELECTCASE TFLAG:13
 		;출산후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 
-				ENDIF
+			IF 함락() && (CFLAG:273 < 4 || FLAG:7 == 2)
+				;カット
 				CFLAG:273 = 4
 			ELSEIF CFLAG:273 < 3 || FLAG:7 == 2
 				PRINTFORMW 
@@ -6473,17 +5144,8 @@ SELECTCASE TFLAG:13
 	CASE 14
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:274 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:274 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:274 = 2
 		ELSEIF CFLAG:274 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6571,17 +5233,8 @@ SELECTCASE TFLAG:13
 	CASE 19
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:278 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:278 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:278 = 2
 		ELSEIF CFLAG:278 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6643,17 +5296,8 @@ SELECTCASE TFLAG:13
 	CASE 23
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:282 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:282 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:282 = 2
 		ELSEIF CFLAG:282 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6667,17 +5311,8 @@ SELECTCASE TFLAG:13
 	CASE 30
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 2 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:283 < 2 || FLAG:7 == 2)
+				;カット
 			CFLAG:283 = 2
 		ELSEIF CFLAG:283 < 1 || FLAG:7 == 2
 			PRINTFORMW 
@@ -6691,17 +5326,8 @@ SELECTCASE TFLAG:13
 	CASE 40
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:283 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:283 = 1
 		ENDIF
 
@@ -6711,17 +5337,8 @@ SELECTCASE TFLAG:13
 	CASE 41
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:284 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:284 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:284 = 1
 		ENDIF
 
@@ -6731,17 +5348,8 @@ SELECTCASE TFLAG:13
 	CASE 42
 		CALL EVENT_MESSAGE
 		;함락완료
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
-			;연모, 친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
-			;음란, 창부
-			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 
-			;복종, 예속
-			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 
-			ENDIF
+		IF 함락() && (CFLAG:285 < 1 || FLAG:7 == 2)
+				;カット
 			CFLAG:285 = 1
 		ENDIF
 	CASEELSE

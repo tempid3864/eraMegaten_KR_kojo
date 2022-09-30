@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;○○구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
-;・주작
+;・スザク
 ;　→縦ロールお嬢様系。白ゴスにするかどうかは検討中。
-;　→お嬢様なのでＡ민감に。四象でいうと老陽なので老陰の현무と相性イ마이チ
+;　→お嬢様なのでＡ敏感に。四象でいうと老陽なので老陰のゲンブと相性イマイチ
 ;
 ;10/5
-;ただの츤데레にしかならない
+;ただのツンデレにしかならない
 ;
 ;コンセプト：地の文があるから台詞だけにしてみよう
 ;
@@ -41,9 +41,9 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML %NAME%個人구상
+PRINTFORML %NAME% 개인구상
 ;구상설명문
-PRINTFORML    %NAME%の기본的な個人구상です。
+PRINTFORML    %NAME%の基本的な個人口上です。
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -143,7 +143,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 아름다운 긴 머리카락、의지가 강해보니는 날카로운 눈동자
 	;衣装による違いを作るか……
 	;IF RAND:2 == 0
-		;PRINTFORML はだけた블라우스の가슴元からは品の良いレースの下着を身に着けたはちきれんばかりの가슴の谷間が覗き、
+		;PRINTFORML はだけたブラウスの胸元からは品の良いレースの下着を身に着けたはちきれんばかりの胸の谷間が覗き、
 		;PRINTFORMW さらけだされた形の良いへそが色香を強調する
 	;ELSE
 		PRINTFORML 프릴장식의 위아한 흰색 고스로리풍 원피스드레스에 각선미가 엿보이는
@@ -341,7 +341,7 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8) && 의뢰플래그:22
 		;オリジナル요정王女より引用
 		PRINTFORMW 「고대하고잇었다%ハート()%　오늘은 어떤일을 하며 귀여워해 주겠느냐？」
 		PRINTFORMW ＣＯＭＰ에서 %CALLNAME%를 소환하자 방안에 달콤한 암컷의 체취가 서린다
-		PRINT 호출된 %CALLNAME%는 
+		PRINTFORM 호출된 %CALLNAME%는 
 		;거유
 		;전신복、상의
 		IF (TALENT:111 || TALENT:112) && (TEQUIP:전신복 > 0 || TEQUIP:겉옷 > 0 || TEQUIP:전신속옷 > 0 || TEQUIP:속옷（상） > 0 || TEQUIP:옷 > 0 )
@@ -377,9 +377,9 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8) && 의뢰플래그:22
 	ELSEIF TALENT:8
 		PRINTFORMW 
 ;		;第一級封印指定（笑）
-;		;朱雀さんは元々새なのでお仕置きになっていないのではないでしょうか（提案
-;		IF 요리기능Lv >= X
-;			PRINTFORMW %CALLNAME:MASTER%に命じられて손요리を振舞う事になった%CALLNAME%
+;		;朱雀さんは元々鳥なのでお仕置きになっていないのではないでしょうか（提案
+;		IF 料理技能Lv >= X
+;			PRINTFORMW %CALLNAME:MASTER%に命じられて手料理を振舞う事になった%CALLNAME%
 ;			IF TIME == 0
 ;				PRINTFORM 朝食
 ;			ELSEIF TIME == 1
@@ -389,14 +389,14 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8) && 의뢰플래그:22
 ;			ELSE
 ;				PRINTFORM 夕食
 ;			ENDIF
-;			PRINTFORMW 自ら厨房に立ち、%CALLNAME:MASTER%に振舞う요리を用意した%CALLNAME%
+;			PRINTFORMW 自ら厨房に立ち、%CALLNAME:MASTER%に振舞う料理を用意した%CALLNAME%
 ;			PRINTFORMW 彼女が食卓を訪れると既にその場には%CALLNAME:MASTER%の姿があった
-;			PRINTFORMW 一礼し%CALLNAME:MASTER%へと振舞われる%CALLNAME%の손요리
-;			PRINTFORMW %CALLNAME:MASTER%は요리を一瞥すると席を立った
+;			PRINTFORMW 一礼し%CALLNAME:MASTER%へと振舞われる%CALLNAME%の手料理
+;			PRINTFORMW %CALLNAME:MASTER%は料理を一瞥すると席を立った
 ;			PRINTFORMW 「申し訳ありません…%CSTR:이인칭%」
-;			PRINTFORMW 何か粗相があったのではないかと怯えた表情を浮かべ%CALLNAME%は肩をすくませると%CALLNAME:MASTER%の前に跪き深く머리を垂れる
+;			PRINTFORMW 何か粗相があったのではないかと怯えた表情を浮かべ%CALLNAME%は肩をすくませると%CALLNAME:MASTER%の前に跪き深く頭を垂れる
 ;		ELSE
-;			PRINTFORMW 折りしも조교の時間と食事の時間が重なった事もあり%CALLNAME%と%CALLNAME:MASTER%は共に食事をとることになった
+;			PRINTFORMW 折りしも調教の時間と食事の時間が重なった事もあり%CALLNAME%と%CALLNAME:MASTER%は共に食事をとることになった
 ;			PRINTFORM %CALLNAME:MASTER%と
 ;			IF TIME == 0
 ;				PRINTFORM 朝食
@@ -412,46 +412,46 @@ ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8) && 의뢰플래그:22
 ;			PRINTFORMW そんな%CALLNAME%へと%CALLNAME:MASTER%は改めて今の%CALLNAME%の立場を問いかける
 ;			PRINTFORMW 「はい…申し訳ありません、%CSTR:이인칭%。%CSTR:일인칭%は%CSTR:이인칭%の奴隷です……」
 ;		ENDIF
-;		PRINT 罰を깨달음悟しジッと身体を堅くする%CALLNAME%の눈の前に
+;		PRINT 罰を覚悟しジッと身体を堅くする%CALLNAME%の目の前に
 ;		IF  ASSI > 0
-;			PRINT %CALLNAME:ASSI%の손により
+;			PRINT %CALLNAME:ASSI%の手により
 ;		ELSE
-;			PRINT %CALLNAME:MASTER%の손により
+;			PRINT %CALLNAME:MASTER%の手により
 ;		ENDIF
 ;		PRINTFORMW 犬用の餌皿が用意された
 ;		PRINT 皿には
-;		IF 요리기능Lv >= X
-;			PRINT %CALLNAME%の作った요리が
+;		IF 料理技能Lv >= X
+;			PRINT %CALLNAME%の作った料理が
 ;		ELSE
-;			PRINT 用意されていた요리が
+;			PRINT 用意されていた料理が
 ;		ENDIF
-;		PRINTFORMW 乗せられ、%CALLNAME%は요리と%CALLNAME:MASTER%を交互に見つめ許しを乞い顔を曇らせる
+;		PRINTFORMW 乗せられ、%CALLNAME%は料理と%CALLNAME:MASTER%を交互に見つめ許しを乞い顔を曇らせる
 ;		PRINTFORMW %CSTR:이인칭%の意図を理解しながらも%CALLNAME%のプライドが邪魔をするのか、彼女は動こうとはしない
-;		PRINTFORMW 命令されなければ解らない様な奴隷に育てた覚えはないと%CALLNAME:MASTER%は嘆息しつつも요리に손心を加えてやることにした
+;		PRINTFORMW 命令されなければ解らない様な奴隷に育てた覚えはないと%CALLNAME:MASTER%は嘆息しつつも料理に手心を加えてやることにした
 ;		IF  ASSI > 0 
 ;			IF TALENT:139 == 1
-;				PRINTFORMW %CALLNAME:MASTER%に命じられた%CALLNAME:ASSI%の손により%CALLNAME%の肉棒がしごきあげられ迸る정액が%CALLNAME%の눈の前の餌皿の요리を彩った
+;				PRINTFORMW %CALLNAME:MASTER%に命じられた%CALLNAME:ASSI%の手により%CALLNAME%の肉棒がしごきあげられ迸る精液が%CALLNAME%の目の前の餌皿の料理を彩った
 ;			ELSEIF TALENT:ASSI:139 == 1 && TALENT:ASSI:140 == 1)
-;				PRINTFORMW %CALLNAME:MASTER%に命じられた%CALLNAME:ASSI%により白濁した액체が%CALLNAME%の눈の前の餌皿の요리を彩った
+;				PRINTFORMW %CALLNAME:MASTER%に命じられた%CALLNAME:ASSI%により白濁した液体が%CALLNAME%の目の前の餌皿の料理を彩った
 ;			ELSEIF TALENT:MASTER:139 == 1 && TALENT:MASTER:140 == 1
-;				PRINTFORMW %CALLNAME%の눈の前で%CALLNAME:PLAYER%は肉棒をしごき、やがて白濁した액체が餌皿の上の요리へとかけられる
+;				PRINTFORMW %CALLNAME%の目の前で%CALLNAME:PLAYER%は肉棒をしごき、やがて白濁した液体が餌皿の上の料理へとかけられる
 ;			ELSE
-;				PRINTFORMW %CALLNAME%の눈の前の요리に%CALLNAME:MASTER%があらかじめ用意してきた特製ザーメンミルクをたっぷりとかけられた
+;				PRINTFORMW %CALLNAME%の目の前の料理に%CALLNAME:MASTER%があらかじめ用意してきた特製ザーメンミルクをたっぷりとかけられた
 ;			ENDIF
 ;		ENDIF
 ;		PRINTFORMW 「ひっ…」
-;		PRINTFORMW 悲鳴をあげる%CALLNAME%の머리카락をつかみ요리へと顔を近づけさせる%CALLNAME:MASTER%
+;		PRINTFORMW 悲鳴をあげる%CALLNAME%の髪をつかみ料理へと顔を近づけさせる%CALLNAME:MASTER%
 ;		PRINTFORMW 「食べます…食べますから…許してください……%CSTR:이인칭%」
-;		PRINTFORMW 彼女の端正な顔は%CALLNAME:MASTER%に対する공포で歪み、%CALLNAME%は四つん這いになるとゆっくりと舌を伸ばした
-;		PRINTFORMW やがて…食卓にはピチャピチャと言う音と共に요리を租借する音が続き、悲しげに顔をしかめながら%CALLNAME%は손を使わず입だけで与えられた食事をたいらげていった……
+;		PRINTFORMW 彼女の端正な顔は%CALLNAME:MASTER%に対する恐怖で歪み、%CALLNAME%は四つん這いになるとゆっくりと舌を伸ばした
+;		PRINTFORMW やがて…食卓にはピチャピチャと言う音と共に料理を租借する音が続き、悲しげに顔をしかめながら%CALLNAME%は手を使わず口だけで与えられた食事をたいらげていった……
 	ENDIF
 	CFLAG:201 = 6
 	RETURN 0
 ENDIF
 ;-------------------------------------------------
-;임신後初回の開始이벤트
-;主人か그외の조수が父親 CFLAG5210
-;特定の조수が父親 CFLAG6011-6015
+;妊娠後初回の開始イベント
+;主人かその他の助手が父親 CFLAG5210
+;特定の助手が父親 CFLAG6011-6015
 ;-------------------------------------------------
 IF TALENT:임신 == 1 && CFLAG:810 == 0 
 	;당신による임신
@@ -1124,7 +1124,7 @@ SELECTCASE SELECTCOM
 				IF RAND:2 == 0
 					PRINTFORMW 「특별히 봉사시켜주겠다」
 				ELSE
-					PRINTFORMW 「ご봉사させてください、でしょ？」
+					PRINTFORMW 「ご奉仕させてください、でしょ？」
 				ENDIF
 			ENDIF
 			CFLAG:301 = 1

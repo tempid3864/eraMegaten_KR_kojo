@@ -1,8 +1,8 @@
 ﻿;-------------------------------------------------
-;밴시구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;バンシー口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;泣き女
 ;연모:서머너大好き、空回りして泣く
-;음란:음란、自分の음란さに泣く
+;음란:음란、自分の淫乱さに泣く
 ;복종:わからん、なんだこれ
 ;【権利関係のあれこれ】
 ;ライセンスフリーです。以下七つを認めます。
@@ -53,7 +53,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 밴시個人구상
+PRINTFORML 밴시 개인구상
 ;구상설명문
 PRINTFORML  　
 ;--------------------------------------------------
@@ -67,7 +67,7 @@ PRINTFORML  　
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 처녀モードに移行しますか?
+;	PRINTL 処女モードに移行しますか？
 ;	PRINTL [0] はい
 ;	PRINTL [1] いいえ
 ;	$INPUT_LOOP
@@ -2148,26 +2148,6 @@ CASE 14
 			IF TALENT:0
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8)
 					PRINTFORMW 「우우우우우、싫어、이런 식은 싫어、우우、혹시 나를 싫어해?  우우에에에엥!」
-					IF TALENT:3 || TALENT:6
-					;연모계 함락일 경우
-						PRINTFORMW 「……뭐? 내, 내 처녀막은, 내 순결의 진정한 주인은 나……라고?」
-						PRINTFORMW 「즉, ……어, 억지로 빼앗지는…… 않는다는 거네? 이정도밖에 안 되는 나를……엄연히 봐주고 있다는……」
-						PRINTFORMW 「………」
-						PRINTFORMW 「……………」
-						PRINTFORMW 「…………………」
-						PRINTFORMW 「……나, 우우, 결심했어」
-						PRINTFORMW 「……나 말이야, 역시 서, 서머너한테…………처음을 줄래…」
-						PRINTFORMW 「왜일까, 딱히 주고 싶은 다른 사람도 없고…우읏, 우우우, 그래서……」
-						PRINTFORMW 「……게다가 말이야, 우흣, 나…… 서, 서머너를 조, 좋아하니까 말이…야♡」
-						PRINTFORMW 「그, 그러니깐…… 내 처음을…… 받아주지, 히잇, 않을래애?♡」
-						PRINTFORMW 그렇게 말하면서 %조사처리(CALLNAME,"는")% 누워있는 %CALLNAME:MASTER%의 위에 살며시 올라탔다
-						PRINTFORMW 그리고는 두 집게손가락으로 비밀의 입술을 활짝 연 채, 조갯살 안 속에 있는 음순과 처녀막에 귀두를 댔다
-						PRINTFORMW 「……으흣, 우우웃, 무…무섭기는 하지마안, 우엣」
-						PRINTFORMW 「그, 그래도……하아, 나는 서머너를, 조, 좋아하니까… 사랑하니까♡」
-						PRINTFORMW 「서머너♡  부디 내 순결을……, 받아주세요♡♡」
-						PRINTFORMW 그 말과 동시에 %조사처리(CALLNAME,"는")%, 천천히 허리를 내려, 귀두로 하여금 처녀막을 찢게 했다
-						PRINTFORMW 찌지-직 거리는 소리가 선명히 들리면서 천천히, %CALLNAME%의 허리가 점차 아래로 내려갔다
-					ENDIF
 				ELSE
 					PRINTFORMW 「우゛아゛아゛아゛앙、우゛에゛에゛에゛゛엥!」
 				ENDIF
@@ -2184,12 +2164,15 @@ CASE 14
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
-				CALL AEGI_K506
-				IF RAND:3 == 0
+			CALL AEGI_K506
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
 					PRINTFORMW 「하우웃、히우웃、한가득、기분、아우、좋게 되어、줘♡」
-				ELSEIF RAND:2 == 0
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「하우웃、히우웃、멈출 수가 없어!  아후、기분 좋아…앗」
-				ELSE
+				;복종, 예속
+				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「하우웃、히우웃、잘、아우、할 수 있다면…、응응읏、칭찬해…줘…엇」
 				ENDIF
 				CFLAG:338 = 4
@@ -4908,7 +4891,7 @@ CASE 14
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:399 == 0
-				PRINTFORMW 「목욕하러…? 서머너와 내가?」
+				PRINTFORMW 
 				CFLAG:399 = 1
 			;2번째 이후
 			ELSE
@@ -6097,18 +6080,18 @@ IF CFLAG:106
 	;콘돔
 	ELSEIF CFLAG:106 == 9
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
-		IF GROUPMATCH(TFLAG:60 , 1 , 2 , 3 , 4 , 5) || GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)
+		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「……피임、싫은데……안에、갖고 싶어………우우우」
+				PRINTFORMW 
 				CFLAG:229 = 3
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2)
-				PRINTFORMW 「……피임해…줬구나……귀찮았을…텐데…」
+				PRINTFORMW 
 				CFLAG:229 = 2
 			;그 이외
 			ELSEIF CFLAG:229 < 1 || FLAG:7 == 2
-				PRINTFORMW 「우우、……번거로운데도 이렇게 피임을 해주다니……정말、고마워………우우읏」
+				PRINTFORMW 
 				CFLAG:229 = 1
 			ENDIF
 		ELSE
@@ -6329,7 +6312,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6356,11 +6339,14 @@ IF TFLAG:2 > 0
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
-			IF RAND:3 == 0
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「우우……아、아기쨩 생겨버려……우우、………」
-			ELSEIF RAND:2 == 0
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「우아아아아……、조조、좋아아……、우우우우우우」
-			ELSE
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 「우우、……이、이렇게나 깊이……우우、우우우우우우우우」
 			ENDIF
 			CFLAG:238 = 4
@@ -6377,10 +6363,16 @@ IF TFLAG:2 > 0
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 4 || FLAG:7 == 2)
-			IF RAND:2 == 0
-				PRINTFORMW 「우아아아아……、조조、좋아아……、우우우우우우」
-			ELSE
-				PRINTFORMW 「우우……아、아기쨩 생겨버려……우우、………」
+			;연모, 친애
+			IF TALENT:3 || TALENT:6
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF TALENT:4 || TALENT:7
+				PRINTFORMW 
+				PRINTFORMW 
+			;복종, 예속
+			ELSEIF TALENT:5 || TALENT:8
+				PRINTFORMW 
 			ENDIF
 			CFLAG:239 = 4
 		;굴복각인Lv3
@@ -7036,11 +7028,12 @@ SELECTCASE TFLAG:13
 					;노래 부르면서인지 아닌지
 					IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 						PRINTFORMW 「우아앗! 드、들었어? 부、부끄…우에에에에엥!」
+						PRINTFORMW 울며 달아나는 %조사처리(CALLNAME,"를")% 붙잡은 뒤 식사를 했다。
 					ELSE
 						PRINTFORMW 「엣또、저기、하、같이 밥먹고 싶다、라니」
 						PRINTFORMW 「……………、우우우읏、미미미안해」
+						PRINTFORMW 울며 달아나는 %조사처리(CALLNAME,"를")% 붙잡은 뒤 식사를 했다。
 					ENDIF
-					PRINTFORMW 울며 달아나는 %조사처리(CALLNAME,"를")% 붙잡은 뒤 식사를 했다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					;노래 부르면서인지 아닌지
@@ -7460,7 +7453,7 @@ SELECTCASE TFLAG:13
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 2 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						;%CALLNAME:MASTER%の아이
+						;%CALLNAME:MASTER%の子供
 						IF CFLAG:102 == 1
 							PRINTFORMW 「저기…、배、마、만져줄래?　서、서머너의、아、아기쨩이야……」
 						ELSE
@@ -8607,10 +8600,10 @@ ENDIF
 ;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
 ;ENDIF
 
-;喘ぎの差異が上손く出せない!なら、いっそのこと統一してしまえ!
+;喘ぎの差異が上手く出せない！なら、いっそのこと統一してしまえ！
 @AEGI_K506
 ;地の文
-LOCALS:1 = %조사처리(CALLNAME,"는")%、
+LOCALS:1 = 밴시는、
 IF GROUPMATCH(SELECTCOM , 61 , 63 , 507);후배위
 	LOCAL:1 = RAND:4
 	SELECTCASE LOCAL:1
@@ -8650,8 +8643,8 @@ IF GROUPMATCH(SELECTCOM , 62 , 63 , 67 , 70 , 71 , 73 );애널
 	ENDSELECT
 ENDIF
 
-	;乱数の범위
-	;아이마스크の범위0～4の五個、行動の범위43～59の十七個
+	;乱数の範囲
+	;アイマスクの範囲0～4の五個、行動の範囲43～59の十七個
 	LOCAL:2 = 60
 	LOCAL:3 = 0
 	IF TEQUIP:아이마스크 == 1
@@ -9004,6 +8997,8 @@ SELECTCASE LOCAL:1
 	PRINTFORMW 「모、몰래 들어온 건……、그、그러니까、………우우우、…아、죄、죄송합니다………」
 	CASE 1
 	PRINTFORMW 「보、봉사할고、……우우、온거……야………」
+
+
 	CASEELSE
 ENDSELECT
 ENDIF
@@ -9041,4 +9036,4 @@ SELECTCASE LOCAL:1
 ENDSELECT
 
 ;メモ
-;LOCAL:1乱数、LOCAL:2 LOCAL:3랜덤地の文범위、LOCALS:1랜덤地の文、STRLENS(LOCALS:1)長さ판정
+;LOCAL:1乱数、LOCAL:2 LOCAL:3ランダム地の文範囲、LOCALS:1ランダム地の文、STRLENS(LOCALS:1)長さ判定

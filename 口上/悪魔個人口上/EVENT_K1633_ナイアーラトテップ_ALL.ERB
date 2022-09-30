@@ -1,10 +1,10 @@
 ﻿;-------------------------------------------------
-;ナイアーラトテップ好き勝手구상
-;独自色が強すぎる쿨気取りだだ甘なニャル様、妄想が過ぎて誰おま상태
-;制作にあたり先達者様方の구상を色々参考にさせて頂いたことを、この場で感謝いたします
+;ナイアーラトテップ好き勝手口上
+;独自色が強すぎるクール気取りだだ甘なニャル様、妄想が過ぎて誰おま状態
+;制作にあたり先達者様方の口上を色々参考にさせて頂いたことを、この場で感謝いたします
 ;-------------------------------------------------
-;초기構想	 ：쿨だけど甘く責めてくれるニャル様
-;出来上がったもの：연모、だだ甘のニャル様　음란、気持ち良ければＳもＭもいけるド음란
+;初期構想	 ：クールだけど甘く責めてくれるニャル様
+;出来上がったもの：恋慕、だだ甘のニャル様　淫乱、気持ち良ければＳもＭもいけるド淫乱
 ;責めはどこに行った……？
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
@@ -28,7 +28,7 @@
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		Jガン					新規作成
-;	002		2020/10/24		　名無し				가운純な記述ミスの修正
+;	002		2020/10/24		　名無し				単純な記述ミスの修正
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -37,7 +37,7 @@
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 口上の誤字・脱字の修正         |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
 ;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
@@ -57,7 +57,7 @@
 ;이미 구상이 있는 캐릭터나 회화타입의 다른 버전의 구상을 작성할 때 이용해주세요
 ;이 때, 이 함수를 포함한 이 파일 내의 함수명 전체에 _임의의1-49(범용구상이면 1-9)의 숫자를 추가해주세요
 ;예： EVENTTRAIN_K1633_1 → EVENTTRAIN_K1633_1_12
-;-------------------------------------------------- translated by 패러독스 인터랙티브 갤러리 번역총대 전략번역군
+;--------------------------------------------------
 @셀렉트구상설명_K1633_1,ARG = 0
 SIF ARG == 1
 	RETURN 0
@@ -75,7 +75,7 @@ PRINTFORML    꽤나 독자적인 이미지로 진행하고 있습니다. 냐루
 CALL 구상변수초기화
 ;--------------------------------------------------
 ;엑스트라모드 구문　CFLAG:220을 사용
-;현무ちゃんから拝借させていただきました
+;ゲンブちゃんから拝借させていただきました
 ;--------------------------------------------------
 IF CFLAG:220 == 0
 	PRINTL 이 구상은 여체화 등 소질 변경이 전제된 구상입니다.
@@ -96,7 +96,7 @@ IF CFLAG:220 == 0
 		TALENT:TARGET:남자 = 0
 		TALENT:TARGET:프라이드높음 = 0
 		TALENT:TARGET:호기심 = 0
-		TALENT:TARGET: 새드= 0
+		TALENT:TARGET:새드= 0
 		TALENT:TARGET:교활 = 0
 		TALENT:TARGET:현명 = 0
 		TALENT:TARGET:아픔에강함 = 0
@@ -120,9 +120,12 @@ IF CFLAG:220 == 0
 		TALENT:TARGET:Ｖ민감 = 1
 		TALENT:TARGET:금단의지식 = 1
 	
-		CFLAG:TARGET:초기전신복 = 335
-		CFLAG:TARGET:전신복 = 335
-		TEQUIP:TARGET:전신복 = 335
+		CFLAG:TARGET:초기옷 = 107
+		CFLAG:TARGET:옷 = 107
+		TEQUIP:TARGET:옷 = 107
+		CFLAG:TARGET:초기하의 = 201
+		CFLAG:TARGET:하의 = 201
+		TEQUIP:TARGET:하의 = 201
 		CFLAG:TARGET:초기속옷（상） = 507
 		CFLAG:TARGET:속옷（상） = 507
 		TEQUIP:TARGET:속옷（상） = 507
@@ -132,9 +135,9 @@ IF CFLAG:220 == 0
 		CFLAG:TARGET:초기양말 = 804
 		CFLAG:TARGET:양말 = 804
 		TEQUIP:TARGET:양말 = 804
-		CFLAG:TARGET:초기신발 = 911
-		CFLAG:TARGET:신발 = 911
-		TEQUIP:TARGET:신발 = 911
+		CFLAG:TARGET:초기신발 = 909
+		CFLAG:TARGET:신발 = 909
+		TEQUIP:TARGET:신발 = 909
 
 	ELSEIF RESULT == 1
 		PRINTFORMW ―성별만 변경합니다―
@@ -603,7 +606,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:300 < 3 || FLAG:7 == 2)
-					;通す
+					;통과
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:300 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					ENDIF
@@ -658,7 +661,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:445 < 3 || FLAG:7 == 2)
-					;通す
+					;통과
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:445 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:445 < 4 || FLAG:7 == 2)
@@ -726,7 +729,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:301 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:301 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -785,7 +788,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:302 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:302 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -855,7 +858,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:303 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:303 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -914,7 +917,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:304 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:304 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -971,7 +974,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:305 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:305 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -1023,7 +1026,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:446 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:446 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:446 < 4 || FLAG:7 == 2)	
@@ -1063,7 +1066,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:306 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:306 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -1148,7 +1151,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:447 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:447 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:447 < 4 || FLAG:7 == 2)	
@@ -1195,7 +1198,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:307 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:307 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:307 < 4 || FLAG:7 == 2)	
@@ -1235,7 +1238,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:448 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:448 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:448 < 4 || FLAG:7 == 2)	
@@ -1283,7 +1286,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:308 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:308 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:308 < 4 || FLAG:7 == 2)	
@@ -1325,7 +1328,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:449 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:449 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:449 < 4 || FLAG:7 == 2)	
@@ -1366,7 +1369,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:309 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:309 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -1414,7 +1417,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:310 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:310 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -1461,7 +1464,7 @@ SELECTCASE SELECTCOM
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:311 < 3 || FLAG:7 == 2)
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:311 < 3 || FLAG:7 == 2)
 				;연모, 친애	
 				ENDIF
@@ -1512,7 +1515,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:435 < 4 || FLAG:7 == 2)	
@@ -1546,7 +1549,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:450 < 4 || FLAG:7 == 2)	
@@ -1586,7 +1589,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:436 < 4 || FLAG:7 == 2)	
@@ -1620,7 +1623,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:451 < 4 || FLAG:7 == 2)	
@@ -1660,7 +1663,7 @@ CASE 14
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -1714,7 +1717,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:444 < 4 || FLAG:7 == 2)	
@@ -1748,7 +1751,7 @@ CASE 15
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:452 < 4 || FLAG:7 == 2)	
@@ -1807,7 +1810,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:312 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:312 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -1875,7 +1878,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:313 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:313 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -2133,7 +2136,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -2265,7 +2268,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:322 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:322 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -2308,7 +2311,7 @@ CASE 15
 					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:323 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:323 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:323 < 4 || FLAG:7 == 2)	
@@ -2346,7 +2349,7 @@ CASE 15
 			;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:324 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:324 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:324 < 4 || FLAG:7 == 2)	
@@ -2389,7 +2392,7 @@ CASE 15
 			;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:325 < 4 || FLAG:7 == 2)	
@@ -2441,7 +2444,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -2495,7 +2498,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:327 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:327 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:327 < 4 || FLAG:7 == 2)	
@@ -2538,7 +2541,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:328 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:328 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:328 < 4 || FLAG:7 == 2)	
@@ -2581,7 +2584,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:329 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:329 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:329 < 4 || FLAG:7 == 2)	
@@ -2624,7 +2627,7 @@ CASE 15
 		;2번째 이후
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:330 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:330 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -2669,7 +2672,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:331 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:331 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:331 < 4 || FLAG:7 == 2)	
@@ -2714,7 +2717,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:453 < 4 || FLAG:7 == 2)	
@@ -2756,7 +2759,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:454 < 4 || FLAG:7 == 2)	
@@ -2799,7 +2802,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:455 < 4 || FLAG:7 == 2)	
@@ -2841,7 +2844,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:456 < 4 || FLAG:7 == 2)	
@@ -2883,7 +2886,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:457 < 4 || FLAG:7 == 2)	
@@ -2925,7 +2928,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:458 < 4 || FLAG:7 == 2)	
@@ -2967,7 +2970,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:459 < 4 || FLAG:7 == 2)	
@@ -3069,7 +3072,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -3287,7 +3290,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:333 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:333 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -3470,7 +3473,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:334 < 4 || FLAG:7 == 2)	
@@ -3514,7 +3517,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:335 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:335 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:335 < 4 || FLAG:7 == 2)	
@@ -3597,7 +3600,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:337 < 4 || FLAG:7 == 2)	
@@ -3698,7 +3701,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:338 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:338 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -3718,67 +3721,33 @@ CASE 15
 						KSTR:(K++) = 「어때？　기분 좋은가？」
 						WSTR:(K++) = 니츄니츄 결합부에서 애액에 젖어, 허리를 흔드는 %조사처리(CALLNAME,"는")% %CALLNAME:PLAYER%에게 묻는다.
 						WSTR:(K++) = 확실히 기분은 좋다……하지만.
-						IF TEQUIP:주도권
-							KSTR:(K++) = 「어림없다, 훗훗…　그대는 지금 주도권을 완전히 상실한 상태다%UNICODE(0x2661)%」
-							WSTR:(K++) = %조사처리(CALLNAME:PLAYER,"는")% 더욱 큰 쾌락을 얻고자 자신의 허리를 움직이려 했으나, 이상하게도 몸이 꼼짝도 하지 않았다!
-							WSTR:(K++) = 「한낱 피조물 주제에 함부로 날뛰려 하다니, 아무래도 분수를 모르는 것 같군」
-							WSTR:(K++) = 강력한 탄압심에 휩싸인 %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:PLAYER,"를")% 질내로 더욱 옥죄기 시작했다!
-							WSTR:(K++) = 「그런 피래미에게는…‥ 벌을 주어야, 겠지……？ 후후%UNICODE(0x2661)%」
-						ELSE
-							KSTR:(K++) = 「엣？　앗, 잠, 아아────%UNICODE(0x2661)%」
-							WSTR:(K++) = 더욱 큰 쾌락을 얻기 위해, %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME%의 허리를 양손으로 잡고, 크게 허리를 밀어올리기 시작했다.
-							KSTR:(K++) = 「시럿, 아아！　이, 거……크으, 으으으～……！」
-							WSTR:(K++) = 자신의 페이스가 흐트러진 %CALLNAME%었지만, 지지 않겠다는 듯 질내를 조인다.
-							WSTR:(K++) = 「나쁜 아이에게는…‥ 벌을 주어야, 겠지……？」
-						ENDIF
+						KSTR:(K++) = 「엣？　앗, 잠, 아아────%UNICODE(0x2661)%」
+						WSTR:(K++) = 더욱 큰 쾌락을 얻기 위해, %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME%의 허리를 양손으로 잡고, 크게 허리를 밀어올리기 시작했다.
+						KSTR:(K++) = 「시럿, 아아！　이, 거……크으, 으으으～……！」
+						WSTR:(K++) = 자신의 페이스가 흐트러진 %CALLNAME%었지만, 지지 않겠다는 듯 질내를 조인다.
+						WSTR:(K++) = 「나쁜 아이에게는…‥ 벌을 주어야, 겠지……？」
 						WSTR:(K++) = 입맛을 다시는 %CALLNAME%의 표정은, 그럼에도 열락에 물들어 있었다.
 					ELSE
 						WSTR:(K++) = 「핫, 앙────흣……！　응────！？」
 						IF TALENT:거유 == 1 || TALENT:폭유 == 1
 							KSTR:(K++) = 허리를 흔들 때마다, 그 탐스럽게 맺힌 두 개의 가슴이 크게 튄다.
-							IF TEQUIP:주도권
-								WSTR:(K++) = 그런 걸 눈앞에 두었음에도 불구하고, 손을 뻗고 싶은 욕망을 필사적으로 억누를 수밖에 없었다.
-								WSTR:(K++) = 이에 이를 가학적으로 내려다보는 %CALLNAME%의 눈동자는, 행복과 쾌락으로 물들어 있다.
-							ELSE
-								WSTR:(K++) = 그런 걸 눈앞에 두고 손을 뻗지 않을 이가 있으랴. %조사처리(CALLNAME:PLAYER,"는")% 망설임없이 요염하게 유혹하는 가슴을 주무른다.
-								WSTR:(K++) = 「후훗…… 큰 가슴, 좋아해？　……그래, 다행이네%UNICODE(0x2661)%」
-								WSTR:(K++) = 이를 내려다보는 %CALLNAME%의 눈동자는, 행복으로 물들어 있다.
-							ENDIF
+							WSTR:(K++) = 그런 걸 눈앞에 두고 손을 뻗지 않을 이가 있으랴. %조사처리(CALLNAME:PLAYER,"는")% 망설임없이 요염하게 유혹하는 가슴을 주무른다.
+							WSTR:(K++) = 「후훗…… 큰 가슴, 좋아해？　……그래, 다행이네%UNICODE(0x2661)%」
+							WSTR:(K++) = 이를 내려다보는 %CALLNAME%의 눈동자는, 행복으로 물들어 있다.
 						ELSEIF TALENT:빈유 == 1
-							IF TEQUIP:주도권
-								WSTR:(K++) = 주무르기에는 조금 부족한 가슴이었으나, 그것조차 만지지 못하기에 %조사처리(CALLNAME:PLAYER,"는")% 애가 엄청 탔다.
-								WSTR:(K++) = 「응%UNICODE(0x2661)% 앙, 하아……하아……%UNICODE(0x2661)%」
-								WSTR:(K++) = 허나 %조사처리(CALLNAME,"는")% 그런 %조사처리(CALLNAME:PLAYER,"를")% 아랑곳하지 않고 요염하게 허리를 움직여 페니스를 점차 빳빳하게 만들어갔다.
-							ELSE
-								KSTR:(K++) = 주무르기에는 조금 부족한 가슴이었지만, 몸을 튕길 때마다 살짝 흔들리는 유방은 매력적이었다.
-								WSTR:(K++) = 참을 수 없어 손을 뻗은 %조사처리(CALLNAME:PLAYER,"가")% 가슴을 잡고, 부드럽게 애무한다.
-								WSTR:(K++) = 「앗, 아아아아────%UNICODE(0x2661)%」
-								WSTR:(K++) = 그 자극에 %CALLNAME%의 몸은 움찔 하고 크게 튄다.
-							ENDIF
+							KSTR:(K++) = 주무르기에는 조금 부족한 가슴이었지만, 몸을 튕길 때마다 살짝 흔들리는 유방은 매력적이었다.
+							WSTR:(K++) = 참을 수 없어 손을 뻗은 %조사처리(CALLNAME:PLAYER,"가")% 가슴을 잡고, 부드럽게 애무한다.
+							WSTR:(K++) = 「앗, 아아아아────%UNICODE(0x2661)%」
+							WSTR:(K++) = 그 자극에 %CALLNAME%의 몸은 움찔 하고 크게 튄다.
 						ELSEIF TALENT:절벽 == 1
-							IF TEQUIP:주도권
-								WSTR:(K++) = 비록 만질 수 있는 부분이 없더라도, %조사처리(CALLNAME:PLAYER,"는")% 어떻게든 자신도 공세를 취하고 싶었다.
-								WSTR:(K++) = 하지만 주도권이 없는 %조사처리(CALLNAME:PLAYER,"는")% 그저 누운 채 헐떡거리는 것밖에는 할 수 없다.
-								WSTR:(K++) = 이 상황에 가학심과 정복감이 충만해진 %조사처리(CALLNAME,"는")% 소악마스러운 미소를 지으면서 더욱 격렬한 허리놀림을 선보였다.
-								WSTR:(K++) = 이에 꿈틀거리는 육벽이 페니스를 강하게 조이자, 이를 참을 수 없었던 %조사처리(CALLNAME:PLAYER,"는")% 야릇한 신음소리를 흘렸다.
-							ELSE
-								WSTR:(K++) = 갑자기 유두를 잡히자, %조사처리(CALLNAME,"는")% 목소리를 높인다.
-								WSTR:(K++) = 「무, 무엇을 하고……햐앗！？」
-								KSTR:(K++) = 하지만 아픔에 의한 게 아닌, 쾌감에 의해 %조사처리(CALLNAME,"는")% 질내를 꾹 하고 조인다.
-								WSTR:(K++) = 꿈틀거리는 육벽이 페니스를 강하게 조이자, 그것에는 참을 수 없었던 %CALLNAME:PLAYER%도 소리를 흘리게 되었다.
-							ENDIF
+							WSTR:(K++) = 갑자기 유두를 잡히자, %조사처리(CALLNAME,"는")% 목소리를 높인다.
+							WSTR:(K++) = 「무, 무엇을 하고……햐앗！？」
+							KSTR:(K++) = 하지만 아픔에 의한 게 아닌, 쾌감에 의해 %조사처리(CALLNAME,"는")% 질내를 꾹 하고 조인다.
+							WSTR:(K++) = 꿈틀거리는 육벽이 페니스를 강하게 조이자, 그것에는 참을 수 없었던 %CALLNAME:PLAYER%도 소리를 흘리게 되었다.
 						ELSE
-							IF TEQUIP:주도권
-								WSTR:(K++) = 「가슴 만지고 싶지? 자신도 뭔가를 하고 싶지?%UNICODE(0x2661)%」
-								WSTR:(K++) = 「하지만 안-돼%UNICODE(0x2661)% 지금은 이쪽의 턴이거든%UNICODE(0x2661)% 따라서 편하게 누워서 천장의 얼룩만 세면 돼%UNICODE(0x2661)%」
-								WSTR:(K++) = 「후웃…하아……으으응%UNICODE(0x2661)% 잠깐만 기다려, 얼른 기분좋게 해서 승천시켜주지%UNICODE(0x2661)%」
-								WSTR:(K++) = 페니스에 조여오는 압력이 점차 거세지자, %조사처리(CALLNAME:PLAYER,"는")% 그 쾌락에 못 이겨 헉헉대기 시작했다.
-								WSTR:(K++) = 그런 %CALLNAME:PLAYER%의 모습을 사랑스러운 듯이 바라보며, %조사처리(CALLNAME,"는")% 허리를 계속 흔들었다.
-							ELSE
-								WSTR:(K++) = 흔들리는 가슴에 손을 뻗어, 사양 않고 주무른다.
-								WSTR:(K++) = 「후훗, 정말이지……욕심쟁이%UNICODE(0x2661)%」
-								WSTR:(K++) = 그 행위를 사랑스러운 듯 바라보며, %조사처리(CALLNAME,"는")% 허리를 계속 흔들었다.
-							ENDIF
+							WSTR:(K++) = 흔들리는 가슴에 손을 뻗어, 사양 않고 주무른다.
+							WSTR:(K++) = 「후훗, 정말이지……욕심쟁이%UNICODE(0x2661)%」
+							WSTR:(K++) = 그 행위를 사랑스러운 듯 바라보며, %조사처리(CALLNAME,"는")% 허리를 계속 흔들었다.
 						ENDIF
 					ENDIF
 					CFLAG:338= 4
@@ -3830,7 +3799,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:339 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:339 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:339 < 4 || FLAG:7 == 2)	
@@ -3935,7 +3904,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:340 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:340 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4065,7 +4034,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4136,7 +4105,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:342 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:342 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:342 < 4 || FLAG:7 == 2)	
@@ -4173,7 +4142,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:343 < 4 || FLAG:7 == 2)	
@@ -4253,7 +4222,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4310,7 +4279,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:421 < 4 || FLAG:7 == 2)	
@@ -4370,7 +4339,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:460 < 4 || FLAG:7 == 2)	
@@ -4412,7 +4381,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4484,7 +4453,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345< 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345< 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4553,7 +4522,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4660,7 +4629,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4714,7 +4683,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4782,7 +4751,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4851,7 +4820,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:350 < 4 || FLAG:7 == 2)	
@@ -4890,7 +4859,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -4936,7 +4905,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -5018,7 +4987,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -5060,7 +5029,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -5104,7 +5073,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:461 < 4 || FLAG:7 == 2)	
@@ -5150,7 +5119,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:424 < 4 || FLAG:7 == 2)	
@@ -5234,7 +5203,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:425 < 4 || FLAG:7 == 2)	
@@ -5344,7 +5313,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:426 < 4 || FLAG:7 == 2)	
@@ -5449,7 +5418,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:427 < 4 || FLAG:7 == 2)	
@@ -5519,7 +5488,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:428 < 4 || FLAG:7 == 2)	
@@ -5555,7 +5524,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:429 < 4 || FLAG:7 == 2)	
@@ -5591,7 +5560,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:430 < 4 || FLAG:7 == 2)	
@@ -5656,7 +5625,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -5730,7 +5699,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:480 < 4 || FLAG:7 == 2)	
@@ -5770,7 +5739,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:354 < 4 || FLAG:7 == 2)	
@@ -5807,7 +5776,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:355 < 4 || FLAG:7 == 2)	
@@ -5844,7 +5813,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:356 < 4 || FLAG:7 == 2)	
@@ -5881,7 +5850,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:357 < 4 || FLAG:7 == 2)	
@@ -5918,7 +5887,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:358 < 4 || FLAG:7 == 2)	
@@ -5956,7 +5925,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:359 < 4 || FLAG:7 == 2)	
@@ -5999,7 +5968,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:360 < 4 || FLAG:7 == 2)	
@@ -6042,7 +6011,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:361 < 4 || FLAG:7 == 2)	
@@ -6085,7 +6054,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:463 < 4 || FLAG:7 == 2)	
@@ -6127,7 +6096,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:464 < 4 || FLAG:7 == 2)	
@@ -6171,7 +6140,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:362 < 4 || FLAG:7 == 2)	
@@ -6210,7 +6179,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:363 < 4 || FLAG:7 == 2)	
@@ -6266,7 +6235,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:364 < 4 || FLAG:7 == 2)	
@@ -6416,7 +6385,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:365 < 4 || FLAG:7 == 2)	
@@ -6460,7 +6429,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:366 < 4 || FLAG:7 == 2)	
@@ -6556,7 +6525,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:367 < 4 || FLAG:7 == 2)	
@@ -6630,7 +6599,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)	
 				;연모, 친애と음란, 창부
 				ELSEIF TALENT:3 || TALENT:4 || TALENT:6 || TALENT:7 && (CFLAG:368 < 4 || FLAG:7 == 2)	
@@ -6709,7 +6678,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:432 < 4 || FLAG:7 == 2)	
@@ -6746,7 +6715,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:465 < 4 || FLAG:7 == 2)	
@@ -6783,7 +6752,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:466 < 4 || FLAG:7 == 2)	
@@ -6824,7 +6793,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -6934,7 +6903,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:373 < 4 || FLAG:7 == 2)	
@@ -6971,7 +6940,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:374 < 4 || FLAG:7 == 2)	
@@ -7009,7 +6978,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:375 < 4 || FLAG:7 == 2)	
@@ -7050,7 +7019,7 @@ CASE 15
 			CFLAG:376 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:376 < 4 || FLAG:7 == 2)	
@@ -7088,7 +7057,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:377 < 4 || FLAG:7 == 2)	
@@ -7226,7 +7195,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:467 < 4 || FLAG:7 == 2)	
@@ -7262,7 +7231,7 @@ CASE 15
 			CFLAG:468 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:468 < 4 || FLAG:7 == 2)	
@@ -7298,7 +7267,7 @@ CASE 15
 			CFLAG:469 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:469 < 4 || FLAG:7 == 2)	
@@ -7346,7 +7315,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -7402,7 +7371,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:383 < 4 || FLAG:7 == 2)	
@@ -7453,7 +7422,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:384 < 4 || FLAG:7 == 2)	
@@ -7495,7 +7464,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:385 < 4 || FLAG:7 == 2)	
@@ -7537,7 +7506,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:386 < 4 || FLAG:7 == 2)	
@@ -7579,7 +7548,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:387 < 4 || FLAG:7 == 2)	
@@ -7621,7 +7590,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -7663,7 +7632,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:389 < 4 || FLAG:7 == 2)	
@@ -7702,7 +7671,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:390 < 4 || FLAG:7 == 2)	
@@ -7753,7 +7722,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:391 < 4 || FLAG:7 == 2)	
@@ -7793,7 +7762,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:470 < 4 || FLAG:7 == 2)	
@@ -7835,7 +7804,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:471 < 4 || FLAG:7 == 2)	
@@ -7877,7 +7846,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:472 < 4 || FLAG:7 == 2)	
@@ -7919,7 +7888,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:473 < 4 || FLAG:7 == 2)	
@@ -7961,7 +7930,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:474 < 4 || FLAG:7 == 2)	
@@ -8003,7 +7972,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:475 < 4 || FLAG:7 == 2)	
@@ -8048,7 +8017,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:392 < 4 || FLAG:7 == 2)	
@@ -8090,7 +8059,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -8135,7 +8104,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:394 < 4 || FLAG:7 == 2)	
@@ -8173,7 +8142,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -8229,7 +8198,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -8276,7 +8245,7 @@ CASE 15
 				;2번째 이후								
 				ELSE				
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)			
-						;通す		
+						;통과		
 						IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
 						;연모, 친애		
 						;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:396 < 4 || FLAG:7 == 2)		
@@ -8464,7 +8433,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:398 < 4 || FLAG:7 == 2)	
@@ -8508,7 +8477,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ENDIF
@@ -8558,7 +8527,7 @@ CASE 15
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:400 < 4 || FLAG:7 == 2)	
@@ -8644,7 +8613,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:402 < 4 || FLAG:7 == 2)	
@@ -8684,7 +8653,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:403 < 4 || FLAG:7 == 2)	
@@ -8721,7 +8690,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:404 < 4 || FLAG:7 == 2)	
@@ -8809,7 +8778,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:406 < 4 || FLAG:7 == 2)	
@@ -8846,7 +8815,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:431 < 4 || FLAG:7 == 2)	
@@ -8882,7 +8851,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:437 < 4 || FLAG:7 == 2)	
@@ -8918,7 +8887,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:438 < 4 || FLAG:7 == 2)	
@@ -8959,7 +8928,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:433 < 4 || FLAG:7 == 2)	
@@ -9000,7 +8969,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:434 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:434 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:434 < 4 || FLAG:7 == 2)	
@@ -9037,7 +9006,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:476 < 4 || FLAG:7 == 2)	
@@ -9081,7 +9050,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:477 < 4 || FLAG:7 == 2)	
@@ -9117,7 +9086,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:478 < 4 || FLAG:7 == 2)	
@@ -9216,7 +9185,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:408 < 4 || FLAG:7 == 2)	
@@ -9276,7 +9245,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:409 < 4 || FLAG:7 == 2)	
@@ -9313,7 +9282,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ENDIF
@@ -9363,7 +9332,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:411 < 4 || FLAG:7 == 2)	
@@ -9404,7 +9373,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:412 < 4 || FLAG:7 == 2)	
@@ -9442,7 +9411,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:413 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:413 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:413 < 4 || FLAG:7 == 2)	
@@ -9489,7 +9458,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:414 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:414 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:414 < 4 || FLAG:7 == 2)	
@@ -9554,7 +9523,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:415 < 4 || FLAG:7 == 2)	
@@ -9602,7 +9571,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:416 < 4 || FLAG:7 == 2)	
@@ -9698,7 +9667,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:418 < 4 || FLAG:7 == 2)	
@@ -9800,7 +9769,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:419 < 4 || FLAG:7 == 2)	
@@ -9836,7 +9805,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:439 < 4 || FLAG:7 == 2)	
@@ -9886,7 +9855,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:440 < 4 || FLAG:7 == 2)	
@@ -9936,7 +9905,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:441 < 4 || FLAG:7 == 2)	
@@ -9977,7 +9946,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -10140,7 +10109,7 @@ IF CFLAG:106
 	;머리카락
 	IF CFLAG:106 == 1				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 3 || FLAG:7 == 2)	
@@ -10160,7 +10129,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 2				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 3 || FLAG:7 == 2)	
@@ -10180,7 +10149,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 3				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 3 || FLAG:7 == 2)	
@@ -10200,7 +10169,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 4				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 3 || FLAG:7 == 2)	
@@ -10220,7 +10189,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 5				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 3 || FLAG:7 == 2)	
@@ -10240,7 +10209,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 6				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 3 || FLAG:7 == 2)	
@@ -10260,7 +10229,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 7				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 3 || FLAG:7 == 2)	
@@ -10280,7 +10249,7 @@ IF CFLAG:106
 	ENDIF
 	IF CFLAG:106 == 8				 && !구상유무확인(0)
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 3 || FLAG:7 == 2)	
@@ -10302,7 +10271,7 @@ IF CFLAG:106
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 3 || FLAG:7 == 2)	
@@ -10320,7 +10289,7 @@ IF CFLAG:106
 			ENDIF
 		ELSE					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 3 || FLAG:7 == 2)	
@@ -10349,7 +10318,7 @@ ENDIF
 IF TFLAG:9 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)	
 		;연모, 친애	
 		ENDIF
@@ -10395,7 +10364,7 @@ ENDIF
 IF TFLAG:7 > 0
 	K_CALL:K = PALAM_MESSAGE_A	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 3 || FLAG:7 == 2)	
@@ -10456,7 +10425,7 @@ IF TFLAG:0 > 0
 	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ENDIF
@@ -10492,7 +10461,7 @@ IF TFLAG:0 > 0
 	;그 이외의 입사정
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ENDIF
@@ -10560,7 +10529,7 @@ ENDIF
 IF TFLAG:1 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ENDIF
@@ -10621,7 +10590,7 @@ IF TFLAG:34 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ENDIF
@@ -10681,7 +10650,7 @@ ENDIF
 IF TFLAG:16 == 1
 	K_CALL:K = PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:236 < 4 || FLAG:7 == 2)	
@@ -10715,7 +10684,7 @@ IF TFLAG:2 > 0
 	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:237 < 4 || FLAG:7 == 2)	
@@ -10747,7 +10716,7 @@ IF TFLAG:2 > 0
 	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ENDIF
@@ -10808,7 +10777,7 @@ IF TFLAG:2 > 0
 	;그 외 섹스계
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ENDIF
@@ -10880,7 +10849,7 @@ ENDIF
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	K_CALL:K = PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 3 || FLAG:7 == 2)	
@@ -10939,7 +10908,7 @@ ENDIF
 IF TFLAG:15 >0
 	K_CALL:K = PALAM_MESSAGE_E
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 3 || FLAG:7 == 2)	
@@ -11076,7 +11045,7 @@ LOCAL = K
 IF TFLAG:29 > 1
 	K_CALL:K = PALAM_MESSAGE_B
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ENDIF
@@ -11159,7 +11128,7 @@ IF TFLAG:29 > 1
 ELSEIF TFLAG:29 > 0
 	K_CALL:K = PALAM_MESSAGE_B	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ENDIF
@@ -11264,7 +11233,7 @@ SIF 구상유무확인(LOCAL) && K > 0
 LOCAL = K
 IF TFLAG:10 > 0	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 3 || FLAG:7 == 2)	
@@ -11356,7 +11325,7 @@ SIF 구상유무확인(LOCAL) && K > 0
 LOCAL = K
 IF TFLAG:11 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 3 || FLAG:7 == 2)	
@@ -11383,7 +11352,7 @@ SIF 구상유무확인(LOCAL) && K > 0
 LOCAL = K
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 3 || FLAG:7 == 2)	
@@ -11721,7 +11690,7 @@ CALL 구상변수초기화
 
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
-;--------------------------------------------------살려줘어어
+;--------------------------------------------------
 ;IF NO:MASTER == Y1
 ;	CALL KOJO_MESSAGE_EVENT_PY1_K1633_1
 ;	RETURN 0
@@ -13776,7 +13745,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 3
-;아군 파티에서의 피소환시의 대사
+;아군 파티에서의 피소환시의 대사	
 ;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛

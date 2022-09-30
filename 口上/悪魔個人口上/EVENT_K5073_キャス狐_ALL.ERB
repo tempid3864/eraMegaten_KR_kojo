@@ -1,8 +1,8 @@
 ﻿;-------------------------------------------------
-;캐스여우（타마모）구상
+;キャス狐（タマモ）口上
 ;
-;午後6時くらい氏が作成したeraTYPE-MOONのキャス여우구상 k132がベース。
-;eramegaten仕様に변경追記しています。
+;午後6時くらい氏が作成したeraTYPE-MOONのキャス狐口上 k132がベース。
+;eramegaten仕様に変更追記しています。
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -22,17 +22,17 @@
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K5073_ALL.ERB
-;	Facility	:회화타입：조교時구상
+;	Facility	:회화타입：調教時口上
 ;
 ;	Modification Data:
 ;	Edit	Date		Author		Reason
-;	001	2020/01/27	三사키		新規作成 
-;       002	2020/02/04	三사키		煩雑になったので種々履歴をリセット　以下やり残し　연모ルートの他はモチベーションが維持できないヨ！
-;						各COMの衣装別分岐、これ埋めるのってかなり厳ｓ。전투時구상だけでも추가出来るとRPG的に遊んでる人にも着せ替えの楽しみが増えるけど…。
-;						「주법・吸精」を気功（大）としたがMP흡수공격で実装出来ないだろうか。
-;						「주법・옥천붕」男性特攻（クリティカル率超高）・데미지관통（방어힘無効なのかな？）を反映したい。「常世사키き裂く大殺界」の方が위력が高いのはちょっと…
-;						各COM구상内でCOMと違う行動を行った際、内容に沿った経験を付加出来ると幅が広がる。
-;						我儘を聞き入れて구상枠を추가してくださった方に改めて感謝致します。
+;	001	2020/01/27	三咲		新規作成 
+;       002	2020/02/04	三咲		煩雑になったので種々履歴をリセット　以下やり残し　恋慕ルートの他はモチベーションが維持できないヨ！
+;						各COMの衣装別分岐、これ埋めるのってかなり厳ｓ。戦闘時口上だけでも追加出来るとRPG的に遊んでる人にも着せ替えの楽しみが増えるけど…。
+;						「呪法・吸精」を気功（大）としたがMP吸収攻撃で実装出来ないだろうか。
+;						「呪法・玉天崩」男性特攻（クリティカル率超高）・ダメージ貫通（防御力無効なのかな？）を反映したい。「常世咲き裂く大殺界」の方が威力が高いのはちょっと…
+;						各COM口上内でCOMと違う行動を行った際、内容に沿った経験を付加出来ると幅が広がる。
+;						我儘を聞き入れて口上枠を追加してくださった方に改めて感謝致します。
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -41,7 +41,7 @@
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 口上の誤字・脱字の修正         |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
 ;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
@@ -66,9 +66,9 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML キャス여우구상　eraTYPE-MOONからの移植版
+PRINTFORML 캐스여우 구상　eraTYPE-MOON으로부터의 이식판
 ;구상설명문
-PRINTFORML    Fate/EXTRAで♂マスターと相思相愛キャス여우のイメージです。
+PRINTFORML    Fate/EXTRA에서의 ♂마스터와 상사상애 캐스여우의 이미지입니다。
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（5073을 캐릭터번호로 치환）
@@ -102,24 +102,6 @@ IF CFLAG:220 == 0
 		PRINTFORMW ―통상모드로 조교를 시작합니다―
 	ELSE
 		GOTO INPUT_LOOP
-	ENDIF
-	PRINTL 
-	PRINTL 이 캐릭터는 [구현]이라는 소질을 갖고 있습니다。
-	PRINTL 이 소질은 물리적으로 형성된 [후타나리]와는 다르게 공상구현화 같은 형이상학적인 힘으로
-	PRINTL 사타구니에 '물건'을 만들어 달고 있습니다. 아무튼 달려있다는 건 동일합니다.
-	PRINTL [구현]소질을 없애서 '물건'을 없애드릴까요?
-	PRINTL [0] 예
-	PRINTL [1] 아니오
-	$MAGIC_FUTA_LOOP
-	INPUT
-	IF RESULT == 0
-		PRINTFORMW ―[구현]소질을 삭제합니다―
-		TALENT:TARGET:146 = 0
-		
-	ELSEIF RESULT == 1
-		PRINTFORMW ―[구현]을 그대로 놔둡니다―
-	ELSE
-		GOTO MAGIC_FUTA_LOOP
 	ENDIF
 	CFLAG:220 = 1
 ENDIF
@@ -213,7 +195,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ENDIF
 	CFLAG:201 = 5
 	RETURN 0
-;上位함락구상
+;上位陥落口上
 ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
 	;친애
 	IF TALENT:6
@@ -1774,9 +1756,9 @@ SELECTCASE SELECTCOM
 			CFLAG:307 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「타마모의가슴でよければ……」
-			PRINTFORMW 타마모의むき出しの유두に吸い付き、強く吸引しながら유두を甘噛みした。
-			PRINTFORMW 「っ、は앗、앙、きゅう……おっぱい、出てしまいそう……」
+			PRINTFORMW 「タマモの胸でよければ……」
+			PRINTFORMW タマモのむき出しの乳首に吸い付き、強く吸引しながら乳首を甘噛みした。
+			PRINTFORMW 「っ、はあっ、あんっ、きゅう……おっぱい、出てしまいそう……」
 			CFLAG:307 = 3
 		;그 이외
 		ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
@@ -2255,7 +2237,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:435 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:435 < 4 || FLAG:7 == 2)	
@@ -2289,7 +2271,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:450 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:450 < 4 || FLAG:7 == 2)	
@@ -2331,7 +2313,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:436 < 3 || FLAG:7 == 2)	
 					;친애
 					ELSEIF TALENT:6
@@ -2374,7 +2356,7 @@ SELECTCASE SELECTCOM
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:451 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:451 < 4 || FLAG:7 == 2)	
@@ -2415,7 +2397,7 @@ CASE 14
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:442 < 3 || FLAG:7 == 2)	
 					;친애
 					ELSEIF TALENT:6
@@ -2466,7 +2448,7 @@ CASE 15
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)	
 					;친애
 					ELSEIF TALENT:6
@@ -2509,7 +2491,7 @@ CASE 15
 			;2번째 이후			
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:452 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:452 < 4 || FLAG:7 == 2)	
@@ -2751,116 +2733,48 @@ CASE 15
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:321 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				IF TFLAG:60 == 1 || TFLAG:60 == 5 || TFLAG:60 == 7 || TFLAG:60 == 11
-				;후배위, 정상위, 후배위애널, 정상위애널
+				;친애
+				IF TALENT:6
+					;春色の現代衣装
+					IF TEQUIP:옷 == 121 && TEQUIP:하의 == 201 && TEQUIP:양말 == 806
+						PRINTFORMW 「달링와 함께의 시간을 보내는……이만큼에서도 행복한 걸%UNICODE(0x2661)%」
+						PRINTFORMW 타마모는 당신에게 다가와 어깨에 몸을 기댔다……
+						PRINTFORMW 「이대로도 좋습니다……인내 할 수 없게 되면, 언제라도 덮쳐도 좋으니까요%UNICODE(0x2661)%」
 					;메이드복
-					IF TEQUIP:전신복 == 308
-						PRINTFORMW 「너무 심술궂어요, 마스터…♡」
-						PRINTFORMW 「그렇게 살살 허리를 흔드는 것으로 저를 애태우시다니, 점점 참을 수 없게 되어버려요오♡」
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 「아、아무것도……하시지 않습니까？」
+						PRINTFORMW 타마모는 신체를 움츠러들게 해 불안한듯한 모습을 보였지만 자유롭게 행동하게 하고 있다。
 					;세일러복
 					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-						;동급생
+						;同級生
 						IF TEQUIP:하의 == 201
-							PRINTFORMW 「뭐해? 피스톤 강도가 내려가서 별로 기준이 좋지 않다고?」
-						;상급생
+							PRINTFORML 「아무것도안한다, 이렇게 말한다면, 볼 정도로……별로 좋지만」
+							PRINTFORMW 타마모는 빠는 것 같은 시선에 노출되어 있지만, 그것은 그렇지만도 않은 것 같다……
+						;上級生
 						ELSEIF TEQUIP:하의 == 205
-							PRINTFORMW 「어라라, 허리 흔드는 게 그렇게 힘드니?」
-							PRINTFORMW 「그럼 이왕 그렇게 된 거, 이쪽이 주도권을 잡아볼까나?」
-						;하급생
+							PRINTFORML 「자, 내가 무엇인가 해요♪」
+							PRINTFORMW 아무것도안한다로 있으면、타마모선배는 이쪽에 덤벼들어, 목덜미에 코를 문질렀다……
+						;下級生
 						ELSEIF TEQUIP:하의 == 207
-							PRINTFORMW 「선배는 정말 헤타레군요. 이걸로 헥헥대다니…」
-							PRINTFORMW 「그럼 차라리 저에게 맡겨주는 게 어때요? 후후♪」
+							PRINTFORML 「선배는 인내 하지 않아 좋아？」
+							PRINTFORMW 타마모쨩은 가슴을 슬쩍 보여주거나 스커트를 조금씩 넘겨、이쪽이 움직이고 싶어지도록 권하고 있다……
 						ENDIF
+					;魔法소녀옷（드레스）装着時
+					ELSEIF TEQUIP:전신복 == 304
+						PRINTFORML 「부끄럽기 때문에……그렇게 직시하지 말아 주세요……」
+						PRINTFORMW 러블리 타마모는 이쪽의 시선을 받아 뺨을 붉혀 수치에 귀와 꼬리를 진동시키고 있다……
+					;魔法소녀옷（ビキニ）装着時
+					ELSEIF TEQUIP:전신속옷 == 715 && TEQUIP:겉옷 == 1002
+						PRINTFORML 「무엇입니까……보지 말아 주세」
+						PRINTFORMW 러블리 타마모는 움츠러들어, 이쪽의 시선으로부터 조금이라도 피부를 숨기려 하고 있다……
 					ELSE
-					;그 외
-						PRINTFORMW 「어라, 마스터? 갑자기 허리놀림이 약해졌는데, 무슨 일 있는 건가요?」
-						PRINTFORMW 「아… 쉬고 싶으신 거군요? 그런데 그렇게 말씀해놓고서 허리는 멈추지 않으신다니, 후훗♡ 완전히 저의 포로가 되어버리신 거군요♡♡」
-					ENDIF
-				ELSEIF TFLAG:60 == 2 || TFLAG:60 == 3 || TFLAG:60 == 4 || TFLAG:60 == 8 || TFLAG:60 == 9 || TFLAG:60 == 10
-				;대면위, 배면위, 기승위, 역강간당한다, 기승위애널, 대면위애널, 배면위애널
-					;메이드복
-					IF TEQUIP:전신복 == 308
-						PRINTFORMW 「너무 심술궂어요, 마스터…♡」
-						PRINTFORMW 「저는 이렇게… 읏♡ 정성을 담아 봉사하고 있는데엣♡♡ 혼자서만… 저를 괴롭히는 듯한 눈으로 바라보시다닛♡ 아앙♡」
-						PRINTFORMW 「더는 안돼요♡ 느껴버려오오♡」
-					;세일러복
-					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-						;동급생
-						IF TEQUIP:하의 == 201
-							PRINTFORMW 「왜 쉬고 있는거야? 엄청 기분 좋으니까… 그쪽도 흔들지?」
-						;상급생
-						ELSEIF TEQUIP:하의 == 205
-							PRINTFORMW 「있내할 수 없어? 그럼 이쪽이 기분좋게 해줄게♪」
-						;하급생
-						ELSEIF TEQUIP:하의 == 207
-							PRINTFORMW 「헤헤헷♪ 더 이상 참을 수 없지, 선배♡」
-						ENDIF
-					ELSE
-					;그 외
-						PRINTFORMW 「맡겨주세요, 마스터…♡」
-						PRINTFORMW 「저 혼자서라도 마스터를 기쁘게 해드리리게요♡ 읏, 아앙♡」
-					ENDIF
-				ELSE
-				;그냥 휴식
-					;친애
-					IF TALENT:6
-						;春色の現代衣装
-						IF TEQUIP:옷 == 121 && TEQUIP:하의 == 201 && TEQUIP:양말 == 806
-							PRINTFORMW 「달링와 함께의 시간을 보내는……이만큼에서도 행복한 걸%UNICODE(0x2661)%」
-							PRINTFORMW 타마모는 당신에게 다가와 어깨에 몸을 기댔다……
-							PRINTFORMW 「이대로도 좋습니다……인내 할 수 없게 되면, 언제라도 덮쳐도 좋으니까요%UNICODE(0x2661)%」
-						;메이드복
-						ELSEIF TEQUIP:전신복 == 308
-							PRINTFORML 「아、아무것도……하시지 않습니까？」
-							PRINTFORMW 타마모는 신체를 움츠러들게 해 불안한듯한 모습을 보였지만 자유롭게 행동하게 하고 있다。
-						;세일러복
-						ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-							;同級生
-							IF TEQUIP:하의 == 201
-								PRINTFORML 「아무것도안한다, 이렇게 말한다면, 볼 정도로……별로 좋지만」
-								PRINTFORMW 타마모는 빠는 것 같은 시선에 노출되어 있지만, 그것은 그렇지만도 않은 것 같다……
-							;上級生
-							ELSEIF TEQUIP:하의 == 205
-								PRINTFORML 「자, 내가 무엇인가 해요♪」
-								PRINTFORMW 아무것도안한다로 있으면、타마모선배는 이쪽에 덤벼들어, 목덜미에 코를 문질렀다……
-							;下級生
-							ELSEIF TEQUIP:하의 == 207
-								PRINTFORML 「선배는 인내 하지 않아 좋아？」
-								PRINTFORMW 타마모쨩은 가슴을 슬쩍 보여주거나 스커트를 조금씩 넘겨、이쪽이 움직이고 싶어지도록 권하고 있다……
-							ENDIF
-						;魔法소녀옷（드레스）装着時
-						ELSEIF TEQUIP:전신복 == 304
-							PRINTFORML 「부끄럽기 때문에……그렇게 직시하지 말아 주세요……」
-							PRINTFORMW 러블리 타마모는 이쪽의 시선을 받아 뺨을 붉혀 수치에 귀와 꼬리를 진동시키고 있다……
-						;魔法소녀옷（ビキニ）装着時
-						ELSEIF TEQUIP:전신속옷 == 715 && TEQUIP:겉옷 == 1002
-							PRINTFORML 「무엇입니까……보지 말아 주세」
-							PRINTFORMW 러블리 타마모는 움츠러들어, 이쪽의 시선으로부터 조금이라도 피부를 숨기려 하고 있다……
-						ELSE
-							K:1 = RAND:3
-							IF K:1 == 0
-								PRINTFORMW 「이쪽으로부터 무엇인가 하는 것은 자유롭네요〜%UNICODE(0x2661)%」
-								PRINTFORMW 타마모는 이쪽에 기대어 그대로 떨어지려 하지 않는다……
-								PRINTFORMW 「이것이 타마모류 숨돌리기라는 것입니다！」
-							ELSEIF K:1 == 1
-								PRINTFORMW 「응〜〜〜〜%UNICODE(0x2661)%」
-								PRINTFORML 조금 휴식이라고 이야기하자、타마모는는 크게 기지개를 켰다。
-								PRINTFORMW 귀와 꼬리도 핀과 위를 향하고 있다……
-							ELSE
-								PRINTFORMW 「지이이이이……」
-								PRINTFORML 아무것도 하지 않는 상태로、타마모를 가만히 응시하고 있자니, 저 편도 이쪽을 응시해 왔다。
-								PRINTFORMW 타마모의 눈동자를 보고 있으면、무엇인가 빨려 들여갈 것 같은 기분이 되어 진다……
-							ENDIF
-						ENDIF
-					;연모
-					ELSEIF TALENT:3
 						K:1 = RAND:3
 						IF K:1 == 0
-							PRINTFORMW 「이쪽으로부터 무엇인가 하는 것은 자유롭네요〜」
+							PRINTFORMW 「이쪽으로부터 무엇인가 하는 것은 자유롭네요〜%UNICODE(0x2661)%」
 							PRINTFORMW 타마모는 이쪽에 기대어 그대로 떨어지려 하지 않는다……
 							PRINTFORMW 「이것이 타마모류 숨돌리기라는 것입니다！」
 						ELSEIF K:1 == 1
-							PRINTFORMW 「응〜〜〜〜♪」
+							PRINTFORMW 「응〜〜〜〜%UNICODE(0x2661)%」
 							PRINTFORML 조금 휴식이라고 이야기하자、타마모는는 크게 기지개를 켰다。
 							PRINTFORMW 귀와 꼬리도 핀과 위를 향하고 있다……
 						ELSE
@@ -2868,6 +2782,22 @@ CASE 15
 							PRINTFORML 아무것도 하지 않는 상태로、타마모를 가만히 응시하고 있자니, 저 편도 이쪽을 응시해 왔다。
 							PRINTFORMW 타마모의 눈동자를 보고 있으면、무엇인가 빨려 들여갈 것 같은 기분이 되어 진다……
 						ENDIF
+					ENDIF
+				;연모
+				ELSEIF TALENT:3
+					K:1 = RAND:3
+					IF K:1 == 0
+						PRINTFORMW 「이쪽으로부터 무엇인가 하는 것은 자유롭네요〜」
+						PRINTFORMW 타마모는 이쪽에 기대어 그대로 떨어지려 하지 않는다……
+						PRINTFORMW 「이것이 타마모류 숨돌리기라는 것입니다！」
+					ELSEIF K:1 == 1
+						PRINTFORMW 「응〜〜〜〜♪」
+						PRINTFORML 조금 휴식이라고 이야기하자、타마모는는 크게 기지개를 켰다。
+						PRINTFORMW 귀와 꼬리도 핀과 위를 향하고 있다……
+					ELSE
+						PRINTFORMW 「지이이이이……」
+						PRINTFORML 아무것도 하지 않는 상태로、타마모를 가만히 응시하고 있자니, 저 편도 이쪽을 응시해 왔다。
+						PRINTFORMW 타마모의 눈동자를 보고 있으면、무엇인가 빨려 들여갈 것 같은 기분이 되어 진다……
 					ENDIF
 				ENDIF
 			;음란, 창부
@@ -3459,7 +3389,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:320 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:320 < 4 || FLAG:7 == 2)	
@@ -3743,7 +3673,7 @@ CASE 15
 			;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:325 < 4 || FLAG:7 == 2)	
@@ -3794,7 +3724,7 @@ CASE 15
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:326 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:326 < 4 || FLAG:7 == 2)	
@@ -3844,20 +3774,20 @@ CASE 15
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				K:1 = RAND:3
-				IF K:1 == 0
-					PRINTFORML 「우아아……들어가 있습니다……바이브、내 안에……」
-					PRINTFORMW 타마모의 항문은 바이브를 근본까지 삼켰다……무엇인가 부끄러워하고 있다。
-					PRINTFORMW 「우우……보지 말아주세요, 퍼진 엉덩이의 구멍, 보지 말아 주세요……」
-				ELSEIF K:1 == 1
-					PRINTFORML 「아, , 히!　그런 것, 격렬하게, 하면！！」
-					PRINTFORMW 바이브를 전후 시키자、타마모는 견딜 수 없다는 듯이 헐떡였다……
-					PRINTFORMW 「히, 히!　구, 아, 히아!　아히, 아, 아！！」
-				ELSE
-					PRINTFORML 「하힛、잇、키、으으으으읏！」
-					PRINTFORMW 타마모의 국문[菊門]은 바이브를 입에 물고 넣어, 빼고 꽂기 할 때에 크게 벌어졌다。
-					PRINTFORMW 「그렇게, 보면, 안돼, 아!　보면, 보면, 안돼！！」
-				ENDIF
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORML 「우아아……들어가 있습니다……바이브、내 안에……」
+				PRINTFORMW 타마모의 항문은 바이브를 근본까지 삼켰다……무엇인가 부끄러워하고 있다。
+				PRINTFORMW 「우우……보지 말아주세요, 퍼진 엉덩이의 구멍, 보지 말아 주세요……」
+			ELSEIF K:1 == 1
+				PRINTFORML 「아, , 히!　그런 것, 격렬하게, 하면！！」
+				PRINTFORMW 바이브를 전후 시키자、타마모는 견딜 수 없다는 듯이 헐떡였다……
+				PRINTFORMW 「히, 히!　구, 아, 히아!　아히, 아, 아！！」
+			ELSE
+				PRINTFORML 「하힛、잇、키、으으으으읏！」
+				PRINTFORMW 타마모의 국문[菊門]은 바이브를 입에 물고 넣어, 빼고 꽂기 할 때에 크게 벌어졌다。
+				PRINTFORMW 「그렇게, 보면, 안돼, 아!　보면, 보면, 안돼！！」
+			ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				;PRINTFORMW 
@@ -3916,20 +3846,20 @@ ENDIF
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				K:1 = RAND:3
-				IF K:1 == 0
-					PRINTFORML 「아, 아, 아, 엉덩이, 엉덩이가！」
-					PRINTFORMW 타마모는 는 비즈가 뽑아지는 감각이 마음에 든 것 같다。
-					PRINTFORMW 「마음에 들어서, 뭔가 아, 아아아……」
-				ELSEIF K:1 == 1
-					PRINTFORML 「후읏、우아、응!　이것, 아！」
-					PRINTFORMW 항문에 비즈를 삽입하면, 타마모는 상스럽고 외쳤다。
-					PRINTFORMW 「히!　그런, 쑤컹쑤컹 하면, 나！！」
-				ELSE
-					PRINTFORML 「히, 하, 하힛, 좋은！！」
-					PRINTFORMW 비즈를 격렬하게 출납하자, 타마모는 여자답지 않은 소리를 높였다……
-					PRINTFORMW 「히야、아, 응, 구아, 아아아아！！」
-				ENDIF
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORML 「아, 아, 아, 엉덩이, 엉덩이가！」
+				PRINTFORMW 타마모는 는 비즈가 뽑아지는 감각이 마음에 든 것 같다。
+				PRINTFORMW 「마음에 들어서, 뭔가 아, 아아아……」
+			ELSEIF K:1 == 1
+				PRINTFORML 「후읏、우아、응!　이것, 아！」
+				PRINTFORMW 항문에 비즈를 삽입하면, 타마모는 상스럽고 외쳤다。
+				PRINTFORMW 「히!　그런, 쑤컹쑤컹 하면, 나！！」
+			ELSE
+				PRINTFORML 「히, 하, 하힛, 좋은！！」
+				PRINTFORMW 비즈를 격렬하게 출납하자, 타마모는 여자답지 않은 소리를 높였다……
+				PRINTFORMW 「히야、아, 응, 구아, 아아아아！！」
+			ENDIF
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				;PRINTFORMW 
@@ -4141,7 +4071,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:453 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:453 < 4 || FLAG:7 == 2)	
@@ -4185,7 +4115,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:454 < 4 || FLAG:7 == 2)	
@@ -4230,7 +4160,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:455 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:455 < 4 || FLAG:7 == 2)	
@@ -4274,7 +4204,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:456 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:456 < 4 || FLAG:7 == 2)	
@@ -4318,7 +4248,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:457 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:457 < 4 || FLAG:7 == 2)	
@@ -4362,7 +4292,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:458 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:458 < 4 || FLAG:7 == 2)	
@@ -4406,7 +4336,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:459 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:459 < 4 || FLAG:7 == 2)	
@@ -4493,9 +4423,11 @@ ENDIF
 			CFLAG:332 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)	
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:332 < 3 || FLAG:7 == 2)	
 				;친애
-				;마스터様の方からアクションが앗てもいいな
+				;ダンナ様の方からアクションがあってもいいな
 				IF TALENT:6
 					;春色の現代衣装
 					IF TEQUIP:옷 == 121 && TEQUIP:하의 == 201 && TEQUIP:양말 == 806
@@ -4508,11 +4440,8 @@ ENDIF
 						PRINTFORMW 「응, 응응, , 응응응%UNICODE(0x2661)%　달링、너무 좋아%UNICODE(0x2661)%　가득 범해%UNICODE(0x2661)%%UNICODE(0x2661)%」
 					;메이드복
 					ELSEIF TEQUIP:전신복 == 308
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORML 「……마스터에, 범해지고 있다……아!　움직이는 것, 안됩니다……%UNICODE(0x2661)%」
-							PRINTFORML 싫어하는 타마모의 질내에 억지로 페니스를 삽입한다。태도와는 정반대로 질육[膣肉]은 자지를 상냥하게 맞아들여 주었다。
-						ENDIF
+						PRINTFORML 「……마스터에, 범해지고 있다……아!　움직이는 것, 안됩니다……%UNICODE(0x2661)%」
+						PRINTFORML 싫어하는 타마모의 질내에 억지로 페니스를 삽입한다。태도와는 정반대로 질육[膣肉]은 자지를 상냥하게 맞아들여 주었다。
 						PRINTFORML 손발을 비틀며 피하려하는 타마모를 어르듯이, 뺨이나 목에 키스 마크를 해 나간다。
 						PRINTFORML 조금씩 약해지는 저항을 즐기면서, 타마모의 육체를 탐냈다……
 						PRINTFORMW 「하우%UNICODE(0x2661)%　부드럽게 하는 건, 더 안됩니다%UNICODE(0x2661)%%UNICODE(0x2661)%」
@@ -4587,22 +4516,27 @@ ENDIF
 						PRINTFORMW 허리를 잡아, 맹렬하게 찔러 넣으면, 타마모는 질로 그것을 환영했다……
 						PRINTFORMW 「은 히, 히, 하, , 대단한 , 격렬한게, 좋다！！」
 					ENDIF
+				;	CFLAG:332= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:332 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:332= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:332 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:332= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:332= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:332 = 2
 			ENDIF
 		ENDIF
-		
+	ENDIF
 ;-------------------------------------------------
 ;61,후배위
 ;-------------------------------------------------
@@ -4655,7 +4589,11 @@ ENDIF
 			CFLAG:333 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:333 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:333 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:333 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:333 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -4712,8 +4650,7 @@ ENDIF
 							PRINTFORMW 「아, 아, 안돼……히!　훑어 내면, 좀 더 안돼%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORML 「아、후앗！？　마스터、마스터！　약한 곳만 찌른다！」
@@ -4728,19 +4665,25 @@ ENDIF
 						PRINTFORMW 흔들리는 꼬리를 잡자, 질의 파도가 한층 늘어났다……
 						PRINTFORMW 「아, 아, 안돼……히!　훑어 내면, 좀 더 안돼！」
 					ENDIF
+				ENDIF
+					CFLAG:333= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:333 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:333= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:333 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 	
+					PRINTFORMW 
+					CFLAG:333= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:333= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:333 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:333 = 2
 			ENDIF
 		ENDIF
 
@@ -4751,50 +4694,57 @@ ENDIF
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:334 == 0
-			;연모・친애
-			IF TALENT:3 || TALENT:6
-				PRINTFORML 「엉덩이까지 주인님의 물건으로 되어 버립니다……」
-				PRINTFORMW 타마모는 천천히 엉덩이를 향해 엉덩이살을 벌려 보였다。
-				PRINTFORMW 「부끄럽지만……주인님이라면, 좋아요よ」
-			;함락でない
-			ELSE
-				PRINTFORMW 「뭐, 진짜입니까？」
-				PRINTFORMW 「주인님의 부탁이라고 들으면 거절할 수 없습니다만……」
-				PRINTFORMW 「무우……알았습니다」
-			ENDIF
-			CFLAG:334 = 1
+		;연모・친애
+		IF TALENT:3 || TALENT:6
+			PRINTFORML 「엉덩이까지 주인님의 물건으로 되어 버립니다……」
+			PRINTFORMW 타마모는 천천히 엉덩이를 향해 엉덩이살을 벌려 보였다。
+			PRINTFORMW 「부끄럽지만……주인님이라면, 좋아요よ」
+		;함락でない
+		ELSE
+			PRINTFORMW 「뭐, 진짜입니까？」
+			PRINTFORMW 「주인님의 부탁이라고 들으면 거절할 수 없습니다만……」
+			PRINTFORMW 「무우……알았습니다」
+		ENDIF
+		CFLAG:334 = 1
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:334 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				IF TALENT:3 || TALENT:6 && (CFLAG:334 < 4 || FLAG:7 == 2)	
-					K:1 = RAND:3
-					IF K:1 == 0
-						PRINTFORML 「아!　……주인님의, 두꺼워……」
-						PRINTFORMW 타마모의의 장내는 꿈틀거리면서, 페니스를 환영하고 있다。
-						PRINTFORMW 「응, 벗기는 , 앙!　있고, 갑자기, 쑤컹쑤컹 하면, 히！！」
-					ELSEIF K:1 == 1
-						PRINTFORML 「히, 아, 는!　구, 하, 앙！！」
-						PRINTFORMW 허리를 잡아 격렬하게 빼고 꽂기 하자, 타마모는 머리를 흔들며 교성을 내질렀다……
-						PRINTFORMW 「하, 아, 아!　아!　격렬합니다!　너무 격렬해！！」
-					ELSE
-						PRINTFORML 「어、어떻습니까？　타마모의、엉덩이는……？」
-						PRINTFORMW 타마모의 엉덩이 구멍은 페니스에 극상의 쾌감을 가져오고 있다……
-						PRINTFORMW 「이나……부끄럽지만, 기쁩니다…♪」
-					ENDIF
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:334 < 4 || FLAG:7 == 2)	
+				K:1 = RAND:3
+				IF K:1 == 0
+					PRINTFORML 「아!　……주인님의, 두꺼워……」
+					PRINTFORMW 타마모의의 장내는 꿈틀거리면서, 페니스를 환영하고 있다。
+					PRINTFORMW 「응, 벗기는 , 앙!　있고, 갑자기, 쑤컹쑤컹 하면, 히！！」
+				ELSEIF K:1 == 1
+					PRINTFORML 「히, 아, 는!　구, 하, 앙！！」
+					PRINTFORMW 허리를 잡아 격렬하게 빼고 꽂기 하자, 타마모는 머리를 흔들며 교성을 내질렀다……
+					PRINTFORMW 「하, 아, 아!　아!　격렬합니다!　너무 격렬해！！」
+				ELSE
+					PRINTFORML 「어、어떻습니까？　타마모의、엉덩이는……？」
+					PRINTFORMW 타마모의 엉덩이 구멍은 페니스에 극상의 쾌감을 가져오고 있다……
+					PRINTFORMW 「이나……부끄럽지만, 기쁩니다…♪」
+				ENDIF
+				CFLAG:334= 4
 				;음란, 창부	
-				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:334 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:334 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:334= 4
 				;복종, 예속	
-				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:334 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:334 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:334= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:334= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:334 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:334 = 2
 			ENDIF
 		ENDIF
 
@@ -4810,22 +4760,29 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:335 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:335 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				IF TALENT:3 || TALENT:6 && (CFLAG:335 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:335 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:335= 4
 				;음란, 창부	
-				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:335 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 	
+				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:335 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:335= 4
 				;복종, 예속	
-				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:335 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:335 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:335= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:335= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:335 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:335 = 2
 			ENDIF
 		ENDIF
 
@@ -4841,23 +4798,30 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:336 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:336 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				IF TALENT:3 || TALENT:6 && (CFLAG:336 < 4 || FLAG:7 == 2)	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:336 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「아하하하학! 좋아요 그 표정! 견딜 수 없어요! 아！」
 					PRINTFORMW 정복감과 쾌락에 만취하면서 허리를 거절한다%CALLNAME%。
+					CFLAG:336= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:336 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:336= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:336 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+				;	CFLAG:336= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:336= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:336 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:336 = 2
 			ENDIF
 		ENDIF
 
@@ -4873,7 +4837,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:337 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:337 < 4 || FLAG:7 == 2)	
@@ -4907,7 +4871,6 @@ ENDIF
 		;처음
 		IF CFLAG:338 == 0
 			;처녀
-			IF TALENT:0
 				IF TALENT:3 || TALENT:6
 					PRINTFORML 「그、그러면 아……넣습니다？」
 					PRINTFORMW ……느려도 좋으니까。
@@ -4947,38 +4910,29 @@ ENDIF
 				ENDIF
 			ENDIF
 			CFLAG:338 = 1
-		;2번째 이후
-		ELSE
+		;2번째 이후						
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:338 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:338 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:338 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
 					IF TEQUIP:83 == 103
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORMW 「이봐요……달링의, 전부 삼켜……아핫%UNICODE(0x2661)%」
-							PRINTFORML 이쪽과 손을 연결해, 손가락을 걸면서、타마모는 단단하게 우뚝 선 자지를 근본까지 삼켜, 쾌감에 신체를 진동시켰다。
-							PRINTFORML 음락의 물결은 페니스에도 전해져、장대도 성기 뒷부분도 귀두도 질육[膣肉]에 빠짐없이 애무되어 버린다。
-							PRINTFORMW 삽입만으로 이미 녹는 것 같은 쾌감을 받는 중、타마모가 본격적으로 허리를 움직이기 시작했다……
-						ENDIF
+						PRINTFORMW 「이봐요……달링의, 전부 삼켜……아핫%UNICODE(0x2661)%」
+						PRINTFORML 이쪽과 손을 연결해, 손가락을 걸면서、타마모는 단단하게 우뚝 선 자지를 근본까지 삼켜, 쾌감에 신체를 진동시켰다。
+						PRINTFORML 음락의 물결은 페니스에도 전해져、장대도 성기 뒷부분도 귀두도 질육[膣肉]에 빠짐없이 애무되어 버린다。
+						PRINTFORMW 삽입만으로 이미 녹는 것 같은 쾌감을 받는 중、타마모가 본격적으로 허리를 움직이기 시작했다……
 						PRINTFORML 「아흣、응, 구%UNICODE(0x2661)%　달링 굉장해、타마모、못끄게 되어 버린다%UNICODE(0x2661)%
 						PRINTFORMW 　타마모에 너무 딱 맞아, 이상해져버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
 					;메이드복
 					ELSEIF TEQUIP:전신복 == 308
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORMW 「아, 아……자지, 들어 와 버리는……%UNICODE(0x2661)%」
-							PRINTFORML 주인에게 봉사를 명령받은 타마모는、큰 눈동자에 눈물을 머금으면서、페니스를 스스로 맞아들였다。
-						ENDIF
-						IF TEQUIP:주도권
-							PRINTFORML 그녀는 %CALLNAME:MASTER%의 위에서 자지를 보지로 문 채 M자로 쪼그려 앉은 채로
-							PRINTFORMW 두 손을 무릎에 댄 채 천천히 허리를 움직이기 시작했다。
-							PRINTFORMW 「앙, 후아앙%UNICODE(0x2661)%　매우 애처로워서 가버릴 것 같아요, 마스터어%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						ELSE
-							PRINTFORML 훌륭한 봉사정신의 포상으로서 아래로부터 허리를 밀어 올려 준다。
-							PRINTFORMW 불의의 충격에 이쪽에 넘어져버린 타마모를 받아 들여 껴안으면서 계속 범했다……
-							PRINTFORMW 「이런, 기습, 후앗%UNICODE(0x2661)%　심합니다, 마스터%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						ENDIF
+						PRINTFORMW 「아, 아……자지, 들어 와 버리는……%UNICODE(0x2661)%」
+						PRINTFORML 주인에게 봉사를 명령받은 타마모는、큰 눈동자에 눈물을 머금으면서、페니스를 스스로 맞아들였다。
+						PRINTFORML 훌륭한 봉사정신의 포상으로서 아래로부터 허리를 밀어 올려 준다。
+						PRINTFORMW 불의의 충격에 이쪽에 넘어져버린 타마모를 받아 들여 껴안으면서 계속 범했다……
+						PRINTFORMW 「이런, 기습, 후앗%UNICODE(0x2661)%　심합니다, 마스터%UNICODE(0x2661)%%UNICODE(0x2661)%」
 					;세일러복
 					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
 						;同級生
@@ -5006,17 +4960,12 @@ ENDIF
 					ELSE
 						K:1 = RAND:3
 						IF K:1 == 0
-							;삽입하지 않은 경우
-							IF TFLAG:60 == 0
-								PRINTFORMW 「응 아 아!　안쪽까지, 왔습니다……주인님의 물건, 멋져%UNICODE(0x2661)%」
-								PRINTFORMW 타마모가 뿌리까지 페니스를 삼키자、순간에 강렬한 공격이 시작되었다……
-							ENDIF
+							PRINTFORMW 「응 아 아!　안쪽까지, 왔습니다……주인님의 물건, 멋져%UNICODE(0x2661)%」
+							PRINTFORMW 타마모가 뿌리까지 페니스를 삼키자、순간에 강렬한 공격이 시작되었다……
 							PRINTFORML 「하아……아……주인님, 주인님, 기분 좋습니까%UNICODE(0x2661)%
 							PRINTFORMW 　나는, 기분, 좋아요！」
 						ELSEIF K:1 == 1
-							;삽입하지 않은 경우
-							SIF TFLAG:60 == 0
-								PRINTFORMW 「하아……%UNICODE(0x2661)%　주인님의, 물건 먹어 버렸다……%UNICODE(0x2661)%」
+							PRINTFORMW 「하아……%UNICODE(0x2661)%　주인님의, 물건 먹어 버렸다……%UNICODE(0x2661)%」
 							PRINTFORMW 타마모가 허리를 상하시킬 때에, 강렬한 쾌감이 닿았다……
 							PRINTFORMW 「응, 후~, 나!　좋은, 주인님, 정말 멋져%UNICODE(0x2661)%」
 						ELSE
@@ -5025,21 +4974,15 @@ ENDIF
 							PRINTFORMW 「아, 아!　좋은, , 두는, 좋습니다%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORML 「응 아 아!　안쪽까지, 왔습니다……주인님의 물건, 멋져♪」
-							PRINTFORMW 타마모가 뿌리까지 페니스를 삼키자、순간에 강렬한 공격이 시작되었다……
-						ENDIF
+						PRINTFORML 「응 아 아!　안쪽까지, 왔습니다……주인님의 물건, 멋져♪」
+						PRINTFORMW 타마모가 뿌리까지 페니스를 삼키자、순간에 강렬한 공격이 시작되었다……
 						PRINTFORML 「하아……아……주인님, 주인님, 기분 좋습니까？
 						PRINTFORMW 　나는, 기분, 좋아요！」
 					ELSEIF K:1 == 1
-						;삽입하지 않은 경우
-						SIF TFLAG:60 == 0
-							PRINTFORML 「하아……♪　주인님의, 물건 먹어 버렸다……」
+						PRINTFORML 「하아……♪　주인님의, 물건 먹어 버렸다……」
 						PRINTFORMW 타마모가 허리를 상하시킬 때에, 강렬한 쾌감이 닿았다………
 						PRINTFORMW 「응, 후~, 나!　좋은, 주인님, 정말 멋져！」
 					ELSE
@@ -5047,22 +4990,27 @@ ENDIF
 						PRINTFORMW 타마모는 페니스의 자극이 마음에 든 것 같다……
 						PRINTFORMW 「아, 아!　좋은, , 두는, 좋습니다！」
 					ENDIF
+				ENDIF
+					CFLAG:338= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:338 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:338= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:338 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:338= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:338= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:338 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:338 = 2
 			ENDIF
-		ENDIF
-		
+
 ;-------------------------------------------------
 ;67,기승위애널
 ;-------------------------------------------------
@@ -5073,24 +5021,31 @@ ENDIF
 			PRINTFORMW 
 			CFLAG:339 = 1
 		;2번째 이후					
-		ELSE
+		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:339 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:339 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				IF TALENT:3 || TALENT:6 && (CFLAG:339 < 4 || FLAG:7 == 2)	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:339 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:339= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:339 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:339= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:339 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:339= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:339= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:339 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+					PRINTFORMW 
+				CFLAG:339 = 2
 			ENDIF
 		ENDIF
 
@@ -5146,7 +5101,11 @@ ENDIF
 			CFLAG:340 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:340 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:340 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:340 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:340 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -5206,8 +5165,7 @@ ENDIF
 							PRINTFORMW 「하, 아, 앗,!　후~, 너무 좋아요……%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORML 「츄、하음、아무、히응！　대단히, 주인님, 대단해！」
@@ -5225,19 +5183,25 @@ ENDIF
 						PRINTFORML 아래 입을 찌르면서 위의 입을 막는다. 산소 결핍이 될 것 같은 것도 상관하지 않고, 타마모의 단 입술을 몇번이나 몇번이나 맛보았다……
 						PRINTFORMW 「하, 아, 앗,!　후~, 너무 좋아요……」
 					ENDIF
+				ENDIF
+					CFLAG:340= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:340 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:340= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:340 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:340= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:340= 3
 				ENDIF	
 			;그 이외
 			ELSEIF CFLAG:340 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:340 = 2
 			ENDIF
 		ENDIF
 
@@ -5296,7 +5260,11 @@ ENDIF
 			CFLAG:341 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:341 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:341 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -5355,8 +5323,7 @@ ENDIF
 							PRINTFORMW 　미안해요%UNICODE(0x2661)%　주인님%UNICODE(0x2661)%　사과할테니까, 좀 더 해 주세요%UNICODE(0x2661)%%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORML 「아, 하아……♪　마스터, 거기、그곳이 좋습니다！」
@@ -5371,19 +5338,25 @@ ENDIF
 						PRINTFORML 사람을 의자 취급하는 타마모에게 주는 벌로 허리를 강하게 움직이기 시작했다……
 						PRINTFORMW 「앙!　겨, 격렬합니다!　아, 아, 나!　아 응！！」
 					ENDIF
+				ENDIF
+					CFLAG:341= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:341 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:341= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:341 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:341= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:341= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:341 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:341 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
@@ -5398,7 +5371,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:342 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:342 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:342 < 4 || FLAG:7 == 2)	
@@ -5436,7 +5409,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:343 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:343 < 4 || FLAG:7 == 2)	
@@ -5514,7 +5487,11 @@ ENDIF
 			CFLAG:420 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:420 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:420 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -5525,11 +5502,8 @@ ENDIF
 						PRINTFORMW 「달링의, 또 커져%UNICODE(0x2661)%　달링！　달링！　격렬해요%UNICODE(0x2661)%」
 					;메이드복
 					ELSEIF TEQUIP:전신복 == 308
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORML 「히쿠웃！　그대로, 범하다니%UNICODE(0x2661)%」
-							PRINTFORML 속옷을 벗길 시간도 아깝고、타마모의 질에 억지로 삽입했다。
-						ENDIF
+						PRINTFORML 「히쿠웃！　그대로, 범하다니%UNICODE(0x2661)%」
+						PRINTFORML 속옷을 벗길 시간도 아깝고、타마모의 질에 억지로 삽입했다。
 						PRINTFORML 소폭의 피스톤으로、쾌락으로부터 피할 틈을 주지 않고, 굴복시켜 준다。
 						PRINTFORML 추잡한 울음 소리를 울리는 메이드를, 차분히 귀여워했다……
 						PRINTFORMW 「후아앗%UNICODE(0x2661)%　이런, 억지로는!　싫은데, 싫은데%UNICODE(0x2661)%%UNICODE(0x2661)%」
@@ -5546,38 +5520,37 @@ ENDIF
 							;PRINTFORML 「」
 						;ENDIF
 					ELSE
-						;삽입하지 않은 경우
-						IF TFLAG:60 == 0
-							PRINTFORML 「주인님이 바라신다면, 타마모는 언제라도 좋아요……%UNICODE(0x2661)%」
-							PRINTFORML 타마모는 스스로 속옷을 비켜 놓아, 받아들일 수 있도록 자세를 취했다。
-							PRINTFORML 사양 하지 않고 삽입해、페니스로 질내를 휘젓는다……
-						ENDIF
+						PRINTFORML 「주인님이 바라신다면, 타마모는 언제라도 좋아요……%UNICODE(0x2661)%」
+						PRINTFORML 타마모는 스스로 속옷을 비켜 놓아, 받아들일 수 있도록 자세를 취했다。
+						PRINTFORML 사양 하지 않고 삽입해、페니스로 질내를 휘젓는다……
 						PRINTFORML 「히아!　앙, 앙!　자지, 츄츄하고 있다！
 						PRINTFORMW 　입고 있는 쪽이, 흥분됩니까？　흐웃%UNICODE(0x2661)%」
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
-					;삽입하지 않은 경우
-					IF TFLAG:60 == 0
-						PRINTFORML 「주인님이 바라신다면, 타마모는 언제라도 좋아요……」
-						PRINTFORML 타마모는 스스로 속옷을 비켜 놓아, 받아들일 수 있도록 자세를 취했다。
-						PRINTFORML 사양 하지 않고 삽입해、페니스로 질내를 휘젓는다……
-					ENDIF
+				ELSE
+					PRINTFORML 「주인님이 바라신다면, 타마모는 언제라도 좋아요……」
+					PRINTFORML 타마모는 스스로 속옷을 비켜 놓아, 받아들일 수 있도록 자세를 취했다。
+					PRINTFORML 사양 하지 않고 삽입해、페니스로 질내를 휘젓는다……
 					PRINTFORML 「히아!　앙, 앙!　자지, 츄츄하고 있다！
 					PRINTFORMW 　입고 있는 쪽이, 흥분됩니까？　흐웃！」
+				ENDIF
+					CFLAG:420= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:420 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:420= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:420 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:420= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 
+					CFLAG:420= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:420 < 2 || FLAG:7 == 2
 				PRINTFORMW 
+				CFLAG:420 = 2
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
@@ -5592,7 +5565,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:421 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:421 < 4 || FLAG:7 == 2)	
@@ -5665,7 +5638,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:460 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:460 < 4 || FLAG:7 == 2)	
@@ -5705,7 +5678,11 @@ ENDIF
 			CFLAG:344 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:344 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:344 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -5784,18 +5761,23 @@ ENDIF
 						PRINTFORMW 귀두에 전해지는 타마모의 부드러움이、한층 흥분을 부추긴다……
 						PRINTFORMW 「위도 아래도, 가득 키스해요……츄♪」
 					ENDIF
+				ENDIF
+					CFLAG:344= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:344 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:344= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:344 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:344= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORML 「알겠습니다……그럼, 실례합니다」
 					PRINTFORMW 타마모는 페니스를 리드미컬하게 잡아당겨 정확하게 쾌감을 주어 온다。
 					PRINTFORMW 「주인님의, 딱딱해지고 있습니다……기분, 좋으신가요？」
 					PRINTFORMW  불안한 듯한 타마모의 머리를 쓰다듬어 주자、안심한듯한 표정을 지었다……
+					CFLAG:344= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:344 < 2 || FLAG:7 == 2
@@ -5803,6 +5785,7 @@ ENDIF
 				PRINTFORMW 타마모의 손은 매끈매끈해서, 손대어지는 것만으로 강하게 흥분한다。
 				PRINTFORMW 「히야！　또、커져서……대단해」
 				PRINTFORMW 잡아당겨질 때 딱딱함이 늘어나 가는 것을 자각했다……
+				CFLAG:344 = 2
 			ENDIF
 		ENDIF
 
@@ -5818,7 +5801,11 @@ ENDIF
 			CFLAG:345 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:345 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:345 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -5874,8 +5861,7 @@ ENDIF
 							PRINTFORMW 「주인님의, 맛있다……%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORML 「알겠습니다……가만히 하고 있어 주세요？」
@@ -5894,22 +5880,27 @@ ENDIF
 						PRINTFORMW 귀두 아래를 정성스럽게 청소한다. 타마모의 혀가 야하게 보인다……
 						PRINTFORMW 「주인님의, 맛있다……」
 					ENDIF
+				ENDIF
+					CFLAG:345= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:345 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:345= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:345 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:345= 4
 				;굴복각인Lv3	
 				ELSE	
-					PRINTFORML 「주인님……입으로 훑어 드릴께요」
-					PRINTFORMW 이쪽의 흥분을 간파한 것인지、타마모는 스스로 봉사를 자청했다。
-					PRINTFORML 「레로……히응、모고옷、츄、응응……푸앗！　어떻나요」
-					PRINTFORMW 타마모의 펠라 솜씨는 매우 능숙했기에、쥐어짜이는 것도 시간 문제였다……
+				PRINTFORML 「주인님……입으로 훑어 드릴께요」
+				PRINTFORMW 이쪽의 흥분을 간파한 것인지、타마모는 스스로 봉사를 자청했다。
+				PRINTFORML 「레로……히응、모고옷、츄、응응……푸앗！　어떻나요」
+				PRINTFORMW 타마모의 펠라 솜씨는 매우 능숙했기에、쥐어짜이는 것도 시간 문제였다……
+					CFLAG:345= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:345 < 2 || FLAG:7 == 2
-				K:1 = RAND:3
+			K:1 = RAND:3
 				IF K:1 == 0
 					PRINTFORMW 「주인님……、아무……히하히히히아？」
 					PRINTFORMW 타마모는 페니스를 문채로、무엇인가 말하고 있다。
@@ -5926,6 +5917,7 @@ ENDIF
 					PRINTFORMW 열이 들어간 혀 기술에, 무심코 허리가 뛰어 버린다……
 					PRINTFORMW 「응흣！　후아……허리가 움직여버릴 정도로 기분이 좋네요……」
 				ENDIF
+				CFLAG:345 = 2
 			ENDIF
 		ENDIF
 
@@ -5941,7 +5933,11 @@ ENDIF
 			CFLAG:346 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:346 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:346 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -6000,8 +5996,7 @@ ENDIF
 							PRINTFORMW 「이나, 너무 강제적입니다……♪　가슴, 주인님의 것으로 되어 버린다……%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORMW 「가득, 기분 좋게 해 드리네요……」
@@ -6021,38 +6016,44 @@ ENDIF
 						PRINTFORMW 부드러운 쌍구를 모두 범하기 위해, 타마모를 밀어 넘어뜨리기 골짜기를 유린한다……
 						PRINTFORMW 「이나, 너무 강제적입니다……♪　가슴, 주인님의 것으로 되어 버린다……」
 					ENDIF
+				ENDIF
+					CFLAG:346= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:346 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:346= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:346 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:346= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 「가슴으로 잡아당깁니까?　맡겨 주세요」
 					PRINTFORMW 타마모에 파이즈리한다를 부탁하자、곧바로 가슴봉사를 시작했다。
 					PRINTFORMW 「응、응、응흣……어떠신가요, 주인님？」
 					PRINTFORMW 타마모의 유압과 마찰은 언제라도 기분 좋다, 쾌감이 복받쳐 오는 것을 느꼈다……
-				ENDIF	
+					CFLAG:346= 3
+				ENDIF		
 			;그 이외
 			ELSEIF CFLAG:346 < 2 || FLAG:7 == 2
-				K:1 = RAND:3
-				IF K:1 == 0
-					PRINTFORMW 「가슴으로 잡아당깁니까?　맡겨 주세요♪」
-					PRINTFORMW 타마모는 즐거운 모습으로 봉사를 시작했다。가슴으로 치켜세우는 모습은 실로 선정적이다。
-					PRINTFORMW 「주인님의 눈、야합니다……보여지는 것만으로도 가버릴것 같아요……」
-					PRINTFORMW 말과는 정반대로 움직여에는 여유가 보인다. 이쪽은 그다지 인내 할 수 있을 것 같진 않다……
-				ELSEIF K:1 == 1
-					PRINTFORMW 「아……가슴이、범해지고 있다……」
-					PRINTFORMW 타마모의 가슴골짜기에 페니스를 찔러 넣는다。
-					PRINTFORMW 가슴을 범하는 정복감、요염한 시선、귀두에 걸리는 달콤한 숨결。모든 것이 강렬하게 쾌감을 자극한다……
-					PRINTFORMW 「좀 더……타마모를 주인님의 것으로 해 주세요……」
-				ELSE
-					PRINTFORMW 「주인님은 가슴 정말 좋아하네요ー」
-					PRINTFORMW 타마모의 그 풍만한 가슴에 페니스를 찔러 넣는다。
-					PRINTFORMW 페니스가 가슴[乳肉]을 밀어 헤치는 감촉에 떨려 버린다……
-					PRINTFORMW 「나의 가슴 안에서, 사정하고 있다……언제라도 사용해주세요」
-				ENDIF
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORMW 「가슴으로 잡아당깁니까?　맡겨 주세요♪」
+				PRINTFORMW 타마모는 즐거운 모습으로 봉사를 시작했다。가슴으로 치켜세우는 모습은 실로 선정적이다。
+				PRINTFORMW 「주인님의 눈、야합니다……보여지는 것만으로도 가버릴것 같아요……」
+				PRINTFORMW 말과는 정반대로 움직여에는 여유가 보인다. 이쪽은 그다지 인내 할 수 있을 것 같진 않다……
+			ELSEIF K:1 == 1
+				PRINTFORMW 「아……가슴이、범해지고 있다……」
+				PRINTFORMW 타마모의 가슴골짜기에 페니스를 찔러 넣는다。
+				PRINTFORMW 가슴을 범하는 정복감、요염한 시선、귀두에 걸리는 달콤한 숨결。모든 것이 강렬하게 쾌감을 자극한다……
+				PRINTFORMW 「좀 더……타마모를 주인님의 것으로 해 주세요……」
+			ELSE
+				PRINTFORMW 「주인님은 가슴 정말 좋아하네요ー」
+				PRINTFORMW 타마모의 그 풍만한 가슴에 페니스를 찔러 넣는다。
+				PRINTFORMW 페니스가 가슴[乳肉]을 밀어 헤치는 감촉에 떨려 버린다……
+				PRINTFORMW 「나의 가슴 안에서, 사정하고 있다……언제라도 사용해주세요」
+			ENDIF
+				CFLAG:346 = 2
 			ENDIF
 		ENDIF
 
@@ -6069,7 +6070,11 @@ ENDIF
 			CFLAG:347 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:347 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:347 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -6123,8 +6128,7 @@ ENDIF
 							PRINTFORMW 「주인님、너무 뜨거워서、떨리고 있습니다……대단해……%UNICODE(0x2661)%」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORMW 「후끈후끈한 자지가、타마모의 보지에 들러붙어……후아아」
@@ -6141,18 +6145,23 @@ ENDIF
 						PRINTFORMW 가랑이에 페니스가 닿자、타마모는 그것만으로 절정해버렸는지 믐을 바르르 떨었다。
 						PRINTFORMW 「대단해……대단해……」
 					ENDIF
+				ENDIF
+					CFLAG:347= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:347 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:347= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:347 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:347= 4
 				;굴복각인Lv3	
 				ELSE	
-					PRINTFORMW 「타마모의 보지로、봉하사겠습니다……」
-					PRINTFORMW 타마모의 비순[秘唇]을 페니스로 느낄 때, 강렬한 흥분이 울컥거려 온다。
-					PRINTFORMW 「하아！　주인님、그런, 강하게 하면、아웃！？」
-					PRINTFORMW 욕망대로、타마모의 가랑이을 엉망으로 문질렀다……
+				PRINTFORMW 「타마모의 보지로、봉하사겠습니다……」
+				PRINTFORMW 타마모의 비순[秘唇]을 페니스로 느낄 때, 강렬한 흥분이 울컥거려 온다。
+				PRINTFORMW 「하아！　주인님、그런, 강하게 하면、아웃！？」
+				PRINTFORMW 욕망대로、타마모의 가랑이을 엉망으로 문질렀다……
+					CFLAG:347= 3
 				ENDIF	
 			;그 이외
 			ELSEIF CFLAG:347 < 2 || FLAG:7 == 2
@@ -6160,6 +6169,7 @@ ENDIF
 				PRINTFORMW 타마모는 비순[秘唇]으로 페니스를 비비며、자극을 주기 시작했다。허리를 움직이는 타마모의 모습은 음란하기 짝이 없다……
 				PRINTFORMW 「응…………주인님의, 벌벌 하고 있는……좀 더, 봉사하고 싶어져버린다」
 				PRINTFORMW 그렇게 말하곤, 타마모는 허리를 강하게 꽉 눌러 더욱 크게 움직였다……
+				CFLAG:347 = 2
 			ENDIF
 		ENDIF
 
@@ -6177,7 +6187,11 @@ ENDIF
 			CFLAG:348 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:348 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:348 < 4 || FLAG:7 == 2)	
 				K:1 = RAND:4
 				IF K:1 == 0
 					PRINTFORMW 「그러면、갑니다〜！」
@@ -6196,12 +6210,27 @@ ENDIF
 					PRINTFORMW 타마모는 넋을 잃어……아니, 너무 넋을 잃어 녹아 버릴 것 같은 얼굴이 되어 있다。
 					PRINTFORMW 「이대로 녹아버리는 것도 생각보다는 숙원일지도…………」
 				ENDIF
+				;	CFLAG:348= 4
+				;음란, 창부	
+				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:348 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:348= 4
+				;복종, 예속	
+				;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:348 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:348= 4
+				;굴복각인Lv3	
+				ELSE	
+					PRINTFORMW 
+					CFLAG:348= 3
+				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:348 < 2 || FLAG:7 == 2
 				PRINTFORMW 「주인님신체, 씩씩한……남자의 가슴、두근두근해버립니다……」
 				PRINTFORMW 여기는 타마모의 육감적인 몸매에 쭉 당하고 있을 뿐이다。
 				PRINTFORMW 「아하, 똑같네요……자, 나의 몸, 가득 즐겨 주세요」
 				PRINTFORMW 타마모의 온몸을 사용한 애무에, 완전히 빠져 버렸다……
+				CFLAG:348 = 2
 			ENDIF
 		ENDIF
 
@@ -6218,7 +6247,11 @@ ENDIF
 			CFLAG:349 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:349 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:349 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -6271,8 +6304,7 @@ ENDIF
 							PRINTFORMW 「또 사정……주인님, 딱딱합니다……」
 						ENDIF
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					K:1 = RAND:3
 					IF K:1 == 0
 						PRINTFORMW 「하아……자지의 뜨거움이, 전해져옵니다……」
@@ -6287,34 +6319,40 @@ ENDIF
 						PRINTFORMW 발의 자극도 자극이지만、타마모의 발이라는 사실이 흥분을 재촉한다……
 						PRINTFORMW 「또 사정……주인님, 딱딱합니다……」
 					ENDIF
+				ENDIF
+					CFLAG:349= 4
 				;음란, 창부	
 				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:349 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:349= 4
 				;복종, 예속	
 				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:349 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 
+					CFLAG:349= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 「나의 발로 좋으신가요……알겠습니다」
 					PRINTFORMW 타마모는 발 뒤를 교묘하게 사용해、페니스에 쾌감을 주기 시작했따。
 					PRINTFORMW 「어떻습니까 주인님？　여기가 좋습니까？」
+					CFLAG:349= 3
 				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:349 < 2 || FLAG:7 == 2
-				K:1 = RAND:3
-				IF K:1 == 0
-					PRINTFORMW 「어、어떻습니까?　아프지 않습니까？」
-					PRINTFORMW 타마모의 발다루기는 아직 어색하지만, 그것이 오히려 기분 좋다。
-					PRINTFORMW 「그런가……다행입니다……주인님에게 쾌감을 드리지 못하고 있었다면, 할복 자살할 정도의 문제니까요！」
-				ELSEIF K:1 == 1
-					PRINTFORMW 「어와……이렇게, 일까요？」
-					PRINTFORMW 타마모의 손가락끝이 페니스를, 자극한다。
-					PRINTFORMW 「아, 비쿤은……기분이 좋은, 응이군요？」
-				ELSE
-					PRINTFORMW 「역시 손하곤 다르네요……」
-					PRINTFORMW 아직 발의 움직임은 나쁘지만、그래도 타마모는 잘하고 있……아얏！？
-					PRINTFORMW 「죄、죄송합니다！！　무심코 힘이 들어가버려서……！」
-				ENDIF
+			K:1 = RAND:3
+			IF K:1 == 0
+				PRINTFORMW 「어、어떻습니까?　아프지 않습니까？」
+				PRINTFORMW 타마모의 발다루기는 아직 어색하지만, 그것이 오히려 기분 좋다。
+				PRINTFORMW 「그런가……다행입니다……주인님에게 쾌감을 드리지 못하고 있었다면, 할복 자살할 정도의 문제니까요！」
+			ELSEIF K:1 == 1
+				PRINTFORMW 「어와……이렇게, 일까요？」
+				PRINTFORMW 타마모의 손가락끝이 페니스를, 자극한다。
+				PRINTFORMW 「아, 비쿤은……기분이 좋은, 응이군요？」
+			ELSE
+				PRINTFORMW 「역시 손하곤 다르네요……」
+				PRINTFORMW 아직 발의 움직임은 나쁘지만、그래도 타마모는 잘하고 있……아얏！？
+				PRINTFORMW 「죄、죄송합니다！！　무심코 힘이 들어가버려서……！」
+			ENDIF
+				CFLAG:349 = 2
 			ENDIF
 		ENDIF
 
@@ -6332,7 +6370,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:350 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:350 < 4 || FLAG:7 == 2)	
@@ -6375,7 +6413,11 @@ ENDIF
 			CFLAG:351 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:351 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:351 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -6423,12 +6465,27 @@ ENDIF
 					PRINTFORML 강렬한 쾌감과 정복감이 울컥거려, 더욱 격렬하게 허리를 털었다……
 					PRINTFORMW 「후끈후끈 뜨거운 자지、가 지금 시원하게 해드리겠습니다……♪」
 				ENDIF
+					CFLAG:351= 4
+				;음란, 창부	
+				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:351 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:351= 4
+				;복종, 예속	
+				;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:351 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:351= 4
+				;굴복각인Lv3	
+				ELSE	
+					PRINTFORMW 
+					CFLAG:351= 3
+				ENDIF	
 			;그 이외		
 			ELSEIF CFLAG:351 < 2 || FLAG:7 == 2
 				PRINTFORMW 「주인님？　가득 찔러도 좋아요……」
 				PRINTFORMW 타마모에 이끌리는 대로 골짜기에 찔러 넣어 매끄러운 가슴[乳肉]을 즐긴다る。
 				PRINTFORMW 「주인님, 대단한 , 짐승 보고 싶은, 이에요！」
 				PRINTFORMW 이렇게 음란한 신체를 지닌 타마모가 나쁘다。욕망대로 가슴을 마구 범했다……
+				CFLAG:351 = 2
 			ENDIF
 		ENDIF
 
@@ -6446,7 +6503,11 @@ ENDIF
 			CFLAG:352 = 1
 		;2번째 이후					
 		ELSE			
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)		
+				;통과	
+				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:352 < 3 || FLAG:7 == 2)	
+				;연모, 친애	
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:352 < 4 || FLAG:7 == 2)	
 				;친애
 				IF TALENT:6
 					;春色の現代衣装
@@ -6489,20 +6550,23 @@ ENDIF
 						PRINTFORML 타마모는 더욱, 좌우의 유방를 따로 따로 움직이면서、자지 끄트머리를 혀로 간질였다……
 						PRINTFORMW 「서방님의 자지, 쫑긋쫑긋 해……가득 봉사해드릴테니까요%UNICODE(0x2661)%」
 					ENDIF
-				;연모
-				ELSEIF TALENT:3
+				ELSE
 					PRINTFORML 「가슴과、입의 동시공격 입니다…츄、하뭇」
 					PRINTFORML 자지를 가슴[乳肉]에 싸인 채로 귀두를 애무당하는 것을, 참지 못하고 허리가 떠 버린다。
 					PRINTFORML 「무큣！？　놀랐습니다、……주인님、기분 좋으시죠？　좀 더 해드릴게요…」
 					PRINTFORML 타마모의 공세는 멈추지 않고、좌우의 유방를 따로 따로 움직이면서、자지 끄트머리를 혀로 간질였다……
 					PRINTFORML 「서방님의 자지, 쫑긋쫑긋 해……가득 봉사해드릴테니까요」
 					PRINTFORMW 봉사하는 모습이 사랑스럽다。뺨을 어루만지자, 타마모는 기쁜듯한 표정을 하면서 더욱 빠르게 입을 움직였다……
+				ENDIF
+					CFLAG:352= 4
 				;음란, 창부	
-				ELSEIF TALENT:4 || TALENT:7 && (CFLAG:352 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:352 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:352= 4
 				;복종, 예속	
-				ELSEIF TALENT:5 || TALENT:8 && (CFLAG:352 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+				;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:352 < 4 || FLAG:7 == 2)	
+				;	PRINTFORMW 
+				;	CFLAG:352= 4
 				;굴복각인Lv3	
 				ELSE	
 					PRINTFORMW 「주인님……츄、、、츄」
@@ -6518,6 +6582,7 @@ ENDIF
 				PRINTFORMW 「이것은, 특훈이군요 ……도와주실 수, 있습니까？」
 				PRINTFORMW 오히려 이쪽으로부터 부탁하고 싶은 일이다. 얼마든지 교제하자……
 				PRINTFORMW 「응、츄、감사합니다、주인님……잔뜩、특훈합시다」
+				CFLAG:352 = 2
 			ENDIF
 		ENDIF
 
@@ -6578,7 +6643,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -6620,7 +6685,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:423 < 4 || FLAG:7 == 2)	
@@ -6656,7 +6721,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:461 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:461 < 4 || FLAG:7 == 2)	
@@ -6695,7 +6760,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:424 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:424 < 4 || FLAG:7 == 2)	
@@ -6732,7 +6797,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:425 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:425 < 4 || FLAG:7 == 2)	
@@ -6769,7 +6834,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:426 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:426 < 4 || FLAG:7 == 2)	
@@ -6806,7 +6871,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:427 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:427 < 4 || FLAG:7 == 2)	
@@ -6843,7 +6908,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:428 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:428 < 4 || FLAG:7 == 2)	
@@ -6880,7 +6945,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:429 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:429 < 4 || FLAG:7 == 2)	
@@ -6917,7 +6982,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:430 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:430 < 4 || FLAG:7 == 2)	
@@ -6943,7 +7008,7 @@ ENDIF
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;98,모유飲ませる 함락완료만
+;98,母乳飲ませる 陥落済みのみ
 ;-------------------------------------------------
 	CASE 98
 		CALL TRAIN_MESSAGE
@@ -6986,7 +7051,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:462 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:462 < 4 || FLAG:7 == 2)	
@@ -7023,7 +7088,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:480 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:480 < 4 || FLAG:7 == 2)	
@@ -7064,7 +7129,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:354 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:354 < 4 || FLAG:7 == 2)	
@@ -7102,7 +7167,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:355 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:355 < 4 || FLAG:7 == 2)	
@@ -7140,7 +7205,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:356 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:356 < 4 || FLAG:7 == 2)	
@@ -7178,7 +7243,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:357 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:357 < 4 || FLAG:7 == 2)	
@@ -7216,7 +7281,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:358 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:358 < 4 || FLAG:7 == 2)	
@@ -7257,7 +7322,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:359 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:359 < 4 || FLAG:7 == 2)	
@@ -7305,7 +7370,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:360 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:360 < 4 || FLAG:7 == 2)	
@@ -7350,7 +7415,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:361 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:361 < 4 || FLAG:7 == 2)	
@@ -7395,7 +7460,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:463 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:463 < 4 || FLAG:7 == 2)	
@@ -7439,7 +7504,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:464 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:464 < 4 || FLAG:7 == 2)	
@@ -7485,7 +7550,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:362 < 4 || FLAG:7 == 2)	
@@ -7523,7 +7588,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:363 < 4 || FLAG:7 == 2)	
@@ -7561,7 +7626,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:364 < 4 || FLAG:7 == 2)	
@@ -7616,7 +7681,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:365 < 4 || FLAG:7 == 2)	
@@ -7655,7 +7720,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:366 < 4 || FLAG:7 == 2)	
@@ -7722,7 +7787,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:367 < 4 || FLAG:7 == 2)	
@@ -7790,7 +7855,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:368 < 4 || FLAG:7 == 2)	
@@ -7828,7 +7893,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:432 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:432 < 4 || FLAG:7 == 2)	
@@ -7866,7 +7931,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:465 < 4 || FLAG:7 == 2)	
@@ -7904,7 +7969,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:466 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:466 < 4 || FLAG:7 == 2)	
@@ -7945,7 +8010,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:369 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:369 < 4 || FLAG:7 == 2)	
@@ -8038,7 +8103,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:373 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:373 < 4 || FLAG:7 == 2)	
@@ -8076,7 +8141,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:374 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:374 < 4 || FLAG:7 == 2)	
@@ -8115,7 +8180,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:375 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:375 < 4 || FLAG:7 == 2)	
@@ -8158,7 +8223,7 @@ ENDIF
 			CFLAG:376 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:376 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:376 < 4 || FLAG:7 == 2)	
@@ -8197,7 +8262,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:377 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:377 < 4 || FLAG:7 == 2)	
@@ -8356,7 +8421,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:467 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:467 < 4 || FLAG:7 == 2)	
@@ -8393,7 +8458,7 @@ ENDIF
 			CFLAG:468 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:468 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:468 < 4 || FLAG:7 == 2)	
@@ -8430,7 +8495,7 @@ ENDIF
 			CFLAG:469 = 1
 		;2번째 이후		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:469 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:469 < 4 || FLAG:7 == 2)	
@@ -8477,7 +8542,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:382 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:382 < 4 || FLAG:7 == 2)	
@@ -8527,7 +8592,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:383 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:383 < 4 || FLAG:7 == 2)	
@@ -8565,7 +8630,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:384 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:384 < 4 || FLAG:7 == 2)	
@@ -8603,7 +8668,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:385 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:385 < 4 || FLAG:7 == 2)	
@@ -8641,7 +8706,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:386 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:386 < 4 || FLAG:7 == 2)	
@@ -8679,7 +8744,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:387 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:387 < 4 || FLAG:7 == 2)	
@@ -8717,7 +8782,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:388 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:388 < 4 || FLAG:7 == 2)	
@@ -8755,7 +8820,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:389 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:389 < 4 || FLAG:7 == 2)	
@@ -8794,7 +8859,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:390 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:390 < 4 || FLAG:7 == 2)	
@@ -8838,7 +8903,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:391 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:391 < 4 || FLAG:7 == 2)	
@@ -8877,7 +8942,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:470 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:470 < 4 || FLAG:7 == 2)	
@@ -8921,7 +8986,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:471 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:471 < 4 || FLAG:7 == 2)	
@@ -8965,7 +9030,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:472 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:472 < 4 || FLAG:7 == 2)	
@@ -9009,7 +9074,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:473 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:473 < 4 || FLAG:7 == 2)	
@@ -9053,7 +9118,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:474 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:474 < 4 || FLAG:7 == 2)	
@@ -9097,7 +9162,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:475 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:475 < 4 || FLAG:7 == 2)	
@@ -9145,7 +9210,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:392 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:392 < 4 || FLAG:7 == 2)	
@@ -9194,7 +9259,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:393 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:393 < 4 || FLAG:7 == 2)	
@@ -9238,7 +9303,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:394 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:394 < 4 || FLAG:7 == 2)	
@@ -9276,7 +9341,7 @@ ENDIF
 			;2번째 이후					
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:395 < 4 || FLAG:7 == 2)	
@@ -9324,7 +9389,7 @@ ENDIF
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:396 < 4 || FLAG:7 == 2)	
@@ -9370,7 +9435,7 @@ ENDIF
 				;2번째 이후								
 				ELSE				
 					IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)			
-						;通す		
+						;통과		
 						IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:396 < 3 || FLAG:7 == 2)		
 						;연모, 친애		
 						;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:396 < 4 || FLAG:7 == 2)		
@@ -9410,7 +9475,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)		
-				;통과		
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:397 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:397 < 4 || FLAG:7 == 2)	
@@ -9463,7 +9528,7 @@ ENDIF
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:398 < 4 || FLAG:7 == 2)	
@@ -9511,7 +9576,7 @@ ENDIF
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:399 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:399 < 4 || FLAG:7 == 2)	
@@ -9611,7 +9676,7 @@ ENDIF
 			;2번째 이후						
 			ELSE			
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)		
-					;通す	
+					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:400 < 4 || FLAG:7 == 2)	
@@ -9713,7 +9778,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:402 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:402 < 4 || FLAG:7 == 2)	
@@ -9758,7 +9823,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:403 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:403 < 4 || FLAG:7 == 2)	
@@ -9796,7 +9861,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:404 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:404 < 4 || FLAG:7 == 2)	
@@ -9886,7 +9951,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:406 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:406 < 4 || FLAG:7 == 2)	
@@ -9924,7 +9989,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:431 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:431 < 4 || FLAG:7 == 2)	
@@ -9961,7 +10026,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:437 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:437 < 4 || FLAG:7 == 2)	
@@ -9999,7 +10064,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:438 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:344 < 4 || FLAG:7 == 2)	
@@ -10121,7 +10186,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:433 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:433 < 4 || FLAG:7 == 2)	
@@ -10158,7 +10223,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:434 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:434 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:434 < 4 || FLAG:7 == 2)	
@@ -10195,7 +10260,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:476 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:476 < 4 || FLAG:7 == 2)	
@@ -10232,7 +10297,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:477 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:477 < 4 || FLAG:7 == 2)	
@@ -10269,7 +10334,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:478 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:478 < 4 || FLAG:7 == 2)	
@@ -10369,7 +10434,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:408 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:408 < 4 || FLAG:7 == 2)	
@@ -10424,7 +10489,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:409 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:409 < 4 || FLAG:7 == 2)	
@@ -10461,7 +10526,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:410 < 4 || FLAG:7 == 2)	
@@ -10504,7 +10569,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:411 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:411 < 4 || FLAG:7 == 2)	
@@ -10547,7 +10612,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:412 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:412 < 4 || FLAG:7 == 2)	
@@ -10586,7 +10651,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:413 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:413 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:413 < 4 || FLAG:7 == 2)	
@@ -10627,7 +10692,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:414 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:414 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:414 < 4 || FLAG:7 == 2)	
@@ -10666,7 +10731,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:415 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:415 < 4 || FLAG:7 == 2)	
@@ -10703,7 +10768,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:416 < 4 || FLAG:7 == 2)	
@@ -10794,7 +10859,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:418 < 4 || FLAG:7 == 2)	
@@ -10846,7 +10911,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:419 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:419 < 4 || FLAG:7 == 2)	
@@ -10883,7 +10948,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:439 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:439 < 4 || FLAG:7 == 2)	
@@ -10934,7 +10999,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:440 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:440 < 4 || FLAG:7 == 2)	
@@ -10985,7 +11050,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:441 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:441 < 4 || FLAG:7 == 2)	
@@ -11027,7 +11092,7 @@ ENDIF
 		;2번째 이후					
 		ELSE			
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:479 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:479 < 4 || FLAG:7 == 2)	
@@ -11150,7 +11215,7 @@ ENDSELECT
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG 관련（5073을 캐릭터번호로 치환）
-;パラメータ変化などをトリガーにした구상 CFLAG 221〜260を사용
+;파라미터 변화 등을 트리거로 한 구상 CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_A（5073을 캐릭터번호로 치환）
@@ -11182,7 +11247,7 @@ ENDIF
 ;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;사정개소변경時のテキスト 有効時はここで関数終了
+;사정장소 변경시의 텍스트 유효시 여기서 함수 종료
 ;-------------------------------------------------
 
 
@@ -11191,7 +11256,7 @@ IF CFLAG:106
 	;머리카락
 	IF CFLAG:106 == 1				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:221 < 3 || FLAG:7 == 2)	
@@ -11214,7 +11279,7 @@ IF CFLAG:106
 	;얼굴
 	ELSEIF CFLAG:106 == 2				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 3 || FLAG:7 == 2)	
@@ -11253,7 +11318,7 @@ IF CFLAG:106
 	;가슴
 	ELSEIF CFLAG:106 == 3				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 3 || FLAG:7 == 2)	
@@ -11276,7 +11341,7 @@ IF CFLAG:106
 	;배
 	ELSEIF CFLAG:106 == 4				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:224 < 3 || FLAG:7 == 2)	
@@ -11299,7 +11364,7 @@ IF CFLAG:106
 	;겨드랑이
 	ELSEIF CFLAG:106 == 5				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:225 < 3 || FLAG:7 == 2)	
@@ -11322,7 +11387,7 @@ IF CFLAG:106
 	;허벅지
 	ELSEIF CFLAG:106 == 6				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:226 < 3 || FLAG:7 == 2)	
@@ -11345,7 +11410,7 @@ IF CFLAG:106
 	;가랑이
 	ELSEIF CFLAG:106 == 7				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:227 < 3 || FLAG:7 == 2)	
@@ -11368,7 +11433,7 @@ IF CFLAG:106
 	;엉덩이
 	ELSEIF CFLAG:106 == 8				
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:228 < 3 || FLAG:7 == 2)	
@@ -11393,7 +11458,7 @@ IF CFLAG:106
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:229 < 3 || FLAG:7 == 2)	
@@ -11411,7 +11476,7 @@ IF CFLAG:106
 			ENDIF
 		ELSE					
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)		
-				;通す	
+				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 2 || FLAG:7 == 2)	
 				;함락완료	
 				;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:230 < 3 || FLAG:7 == 2)	
@@ -11440,7 +11505,7 @@ ENDIF
 IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:231 < 2 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:231 < 4 || FLAG:7 == 2)	
@@ -11492,7 +11557,7 @@ ENDIF
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:232 < 3 || FLAG:7 == 2)	
@@ -11518,7 +11583,7 @@ IF TFLAG:0 > 0
 	;이라마치오로 사정
 	IF SELECTCOM == 140
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:233 < 4 || FLAG:7 == 2)	
@@ -11549,7 +11614,7 @@ IF TFLAG:0 > 0
 	;그 이외의 입사정
 	ELSE
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:233 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:233 < 4 || FLAG:7 == 2)	
@@ -11586,7 +11651,7 @@ ENDIF
 IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:234 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:234 < 4 || FLAG:7 == 2)	
@@ -11623,7 +11688,7 @@ IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A
 	;함락완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:235 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:235 < 4 || FLAG:7 == 2)	
@@ -11656,7 +11721,7 @@ ENDIF
 IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:236 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:236 < 4 || FLAG:7 == 2)	
@@ -11690,7 +11755,7 @@ IF TFLAG:2 > 0
 	;애널섹스계
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:237 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:237 < 4 || FLAG:7 == 2)	
@@ -11717,7 +11782,7 @@ IF TFLAG:2 > 0
 	;안쪽 자극 섹스계
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)		
-			;通す	
+			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:238 < 3 || FLAG:7 == 2)	
 			;연모, 친애	
 			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:238 < 4 || FLAG:7 == 2)	
@@ -11744,437 +11809,460 @@ IF TFLAG:2 > 0
 		ENDIF
 	;그 외 섹스계
 	ELSE
-		;연모, 친애
-		IF TALENT:3 || TALENT:6
-			;속옷비켜삽입으로사정
-			IF SELECTCOM == 72
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「캬！　달링도 참、너무 급하다%UNICODE(0x2661)%」
-					PRINTFORML 속옷을 채 벗기지도 않은 삽입에, 타마모는 환희의 소리를 높이고 있다。
-					PRINTFORML 연인의, 딱딱하게 서 있는 페니스를 잡아 몇번이고 피스톤 한다。
-					PRINTFORML 서로 절정하는 타이밍에 맞춰, 욕망을 발했다……
-					PRINTFORML 「히야아아앗%UNICODE(0x2661)%　달링이, 가득%UNICODE(0x2661)%　달링의 정액、쿨렁쿨렁 나오고 있는%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 꽉 누른 허리의 끝에서, 비육[秘肉]에 쌓인 페니스가, 몇번이고 맥동 했다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「질내는 싫습니다！　더 이상 움직이지 말아 주세요！」
-					PRINTFORML 속옷도 채 벗지 못한태 범해진 타마모는、페니스의 한계를 눈치챈것 같다。
-					PRINTFORML 날뛰기 전에 허리 사용을 한층 격렬하게 해, 뛰어오르는 쾌락을 안쪽에서 개방했다……
-					PRINTFORML 「아아%UNICODE(0x2661)%　뜨거운 것이、안에서、나와 버린다……%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 질내사정되어 울고 있는 타마모에게、농후한 정액을 남김없이 털어놓는다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「앗앗앗！　격렬합니다、주인님%UNICODE(0x2661)%」
-					PRINTFORML 타마모는 속옷을 입은 채로 범해지는 행위에 흥분는 한편、속옷 한 장이 갈라지는 틈마저 답답하게 느끼다。
-					PRINTFORML 채워지지 않은 거리를 채우기 위해、를 꼭 껴안으면서 허리를 꽉 누른다。이에 응하듯 타마모도 허리를 움직여 쾌감에, 욕망을 함께 했다……
-					PRINTFORML 서로 손을 잡고、타마모는 쾌락에 떨리는 페니스를 받아들여、자신도 쾌감에 눈물지으며 하얀 정액을 삼켰다。
-					PRINTFORMW 「하아……%UNICODE(0x2661)%　안쪽이、주인님의 것으로, 따듯합니다……%UNICODE(0x2661)%」
-				ENDIF
-			;정상위で사정
-			ELSEIF SELECTCOM == 60 || TFLAG:60 == 5
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「알고있어, 달링의 자지、사정하고 싶지？ 가득 내도 좋아%UNICODE(0x2661)%」
-					PRINTFORML 페니스가 부푼 곳을 짐작 했는지、타마모가 양발를 이쪽의 허리에 감아 온다。
-					PRINTFORML 쾌감에 황홀해하면서, 상냥한 미소를 띄우는 타마모를 강하게 끌어안는다。
-					PRINTFORML 밀착한 연인의 질내에、더없는 마음을 풀어 발했다……
-					PRINTFORML 「나오고 있다!　도푸도푸는, 나오고 있는%UNICODE(0x2661)%　전부, 안에 싸줘%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 맥박치는 페니스를 질육[膣肉]이 감싸, 마지막 한방울까지 모두 사정했다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORMW 「안 돼、질내사정만큼은、제발 용서해주세요!　싫어 놔줘!」
-					PRINTFORMW 질내사정으로부터 필사적으로 피하려고 하는 타마모의 허리를 잡아 허리를 꽉 누른다。
-					PRINTFORMW 안쪽을 조금씩 찔러 쾌감을 한계까지 높이고 나서、최후에 자궁에 키스하듯 사정한다……
-					PRINTFORML 「후아아아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다, ……마스터의 정액이, 가장 안쪽에……%UNICODE(0x2661)%」
-					PRINTFORMW 눈물을 흘리며 굴복한 메이드의 질내에, 한방울도 남기지 않고 모든 것을 쏟았다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「안에、안에다 싸주세요！　주인님의 정액、주세요！」
-					PRINTFORML 질내사정를 간원하는 타마모의 요청에 응해、페니스를 가장 안쪽까지 찔러넣는다。
-					PRINTFORML 비육[秘肉]을 밀어 헤쳐 쾌감이 인내를 웃돌아, 허리를 밀착시킨 채로 사정했다……
-					PRINTFORML 쾌락대로 정액을 발할 때、타마모의 질은 페니스를 원하는 것처럼、질내절정을 받아들였따。
-					PRINTFORML 「아、하아……%UNICODE(0x2661)%　쿨렁쿨렁, 나오고 있는 ……주인, 님……%UNICODE(0x2661)%」
-					PRINTFORMW 정액을 받아들이는 쾌감에 잠긴 타마모의 입술에 키스하면서、마지막 한방울 까지 모조리 쏟아부었다……
-				ENDIF
-			;후배위で사정
-			ELSEIF SELECTCOM == 61 || TFLAG:60 == 1
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「확실하게 질내사정해？　보지안, 달링으로 가득 해 주었으면 하는 것%UNICODE(0x2661)%」
-					PRINTFORML 타마모의 질은 페니스에 휘감겨, 사정을 재촉하고 있다。
-					PRINTFORML 숨을 헐떡이면서도、한결같이 봉사하는 타마모가、사랑스러워 어쩔수가 없다。
-					PRINTFORML 그녀의 소망을 실현하기 위해、한계치 직전까지 피스톤을 계속해 마지막 1번의 찌르기로 허리를 밀착시켰다……
-					PRINTFORML 「꺄우우%UNICODE(0x2661)%　왔다、달링%UNICODE(0x2661)%　정액, 많아 나온다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 흘러넘칠 정도의 사정임에도 불구하고、아직도 페니스는 사정을 계속하고 있다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「이런 모습은、임신해버린다!　싫습니다！」
-					PRINTFORML 엉덩이를 털어 페니스를 뽑으려고 하는 타마모를 뒤로부터 껴안아 분홍 엉덩이에 허리를 두드려 붙인다。
-					PRINTFORML 격렬한 피스톤으로 본능적으로 내려 와 버린 자궁에, 농후한 정액을 발사해 주었다……
-					PRINTFORML 「아, 야 아 아%UNICODE(0x2661)%%UNICODE(0x2661)%　안돼, 는데, 안에 쿨렁쿨렁 나오고 있습니다……%UNICODE(0x2661)%」
-					PRINTFORMW 힘없이 넘어진 타마모의 질내에、사정이 계속되고 있다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「아아아!　자지, 부풀어!　안에, 정액！！」
-					PRINTFORML 타마모의 허리를 잡아, 안쪽을 찌르도록(듯이) 격렬하게 허리를 움직여, 몰아넣음을 걸친다. 비육[秘肉]이 페니스를 붙잡아 지지하고 있다。
-					PRINTFORML 꼬리를 살짝 깨무는 것과 동시에、허리를 강하게 박아넣으며 사정했다……
-					PRINTFORML 타마모는 등을 뒤로 젖히면서, 정자를 받아 들였다。페니스가 맥박쳐、정액이 자궁에 흘러들 때에, 핀과 선 귀가 떨렸다た……
-					PRINTFORML 「주인님의, 안쪽에, 넘치고 있는……%UNICODE(0x2661)%　하아아……%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 입에서 떨고 있던 꼬리를 개방하자、타마모는 힘없이 앞으로 넘어져、꼬리와 팔을 얽혀왔다……
-				ENDIF
-			;기승위で사정
-			ELSEIF SELECTCOM == 66 || TFLAG:60 == 4
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「가득 움직여 줄테니까、잔뜩 질내사정해줘야해%UNICODE(0x2661)%　달링%UNICODE(0x2661)%」
-					PRINTFORML 헌신적으로 허리를 흔드는 타마모때문에、사정하는 일 밖에 생각할 수 없게 되어 버린다。
-					PRINTFORML 연결돤 손의 떨림으로, 이쪽의 한계를 감지했는지, 타마모의 허리 사용이 격렬해진다。
-					PRINTFORML 지나친 기분 좋음에、페니스를 밀어 올리면서, 쌓아둔 정액을 토해냈다……
-					PRINTFORML 「히응%UNICODE(0x2661)%　와、제일 안쪽에、오고 있다%UNICODE(0x2661)%%UNICODE(0x2661)%　정액이 도퓻도퓻、기분 좋아%UNICODE(0x2661)%」
-					PRINTFORMW 부드러운 육체가 음란하게 얽혀, 요도의 마지막 한방울까지 모두를 짜 놓쳤다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORMW 「싫어、싫어어!　제발、질내사정만은 용서해주세요!」
-					IF TEQUIP:주도권
-						PRINTFORMW 타마모는 그렇게 말하고 있지만、사랑하고 있는 %CALLNAME:MASTER%의 정액을 어떻게든 짜내기 위해 미친듯이 허리를 흔들고 있다。
-						PRINTFORMW 어느새 %CALLNAME:MASTER%의 사정이 임박했음을 감지한 그녀는、사정의 순간을 가장 안쪽에서 맞이할수 있도록 허리를 꽉 누른 채、연모의 정에 취한 얼굴로 그 순간을 기다렸다。
-						PRINTFORMW 그 기세에 압도당한 %조사처리(CALLNAME:MASTER,"는")% 한심한 신음소리만을 울리며、울컥거려 온 백탁을 비육[秘肉]에 감싸져 짜내졌다!
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)		
+			;통과	
+			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:239 < 3 || FLAG:7 == 2)	
+			;연모, 친애	
+			ELSEIF TALENT:3 || TALENT:6 && (CFLAG:239 < 4 || FLAG:7 == 2)	
+			;친애
+			IF TALENT:6
+				;正常位で射精
+				IF SELECTCOM == 60
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「캬！　달링도 참、너무 급하다%UNICODE(0x2661)%」
+						PRINTFORML 속옷을 채 벗기지도 않은 삽입에, 타마모는 환희의 소리를 높이고 있다。
+						PRINTFORML 연인의, 딱딱하게 서 있는 페니스를 잡아 몇번이고 피스톤 한다。
+						PRINTFORML 서로 절정하는 타이밍에 맞춰, 욕망을 발했다……
+						PRINTFORML 「히야아아앗%UNICODE(0x2661)%　달링이, 가득%UNICODE(0x2661)%　달링의 정액、쿨렁쿨렁 나오고 있는%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 꽉 누른 허리의 끝에서, 비육[秘肉]에 쌓인 페니스가, 몇번이고 맥동 했다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「질내는 싫습니다！　더 이상 움직이지 말아 주세요！」
+						PRINTFORML 속옷도 채 벗지 못한태 범해진 타마모는、페니스의 한계를 눈치챈것 같다。
+						PRINTFORML 날뛰기 전에 허리 사용을 한층 격렬하게 해, 뛰어오르는 쾌락을 안쪽에서 개방했다……
+						PRINTFORML 「아아%UNICODE(0x2661)%　뜨거운 것이、안에서、나와 버린다……%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 질내사정되어 울고 있는 타마모에게、농후한 정액을 남김없이 털어놓는다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
 					ELSE
-						PRINTFORMW 타마모는 페니스를 뽑으려고 하지만, 범해지면서 힘이 빠진 탓인지, 허리를 들어 올릴 수 없다。
-						PRINTFORMW 떨리는 비육[秘肉]을 아래로부터 밀어 올려 울컥거려 온 백탁을 최안쪽에 쏟았다……
+						PRINTFORML 　
+						PRINTFORML 「앗앗앗！　격렬합니다、주인님%UNICODE(0x2661)%」
+						PRINTFORML 타마모는 속옷을 입은 채로 범해지는 행위에 흥분는 한편、속옷 한 장이 갈라지는 틈마저 답답하게 느끼다。
+						PRINTFORML 채워지지 않은 거리를 채우기 위해、를 꼭 껴안으면서 허리를 꽉 누른다。이에 응하듯 타마모도 허리를 움직여 쾌감에, 욕망을 함께 했다……
+						PRINTFORML 서로 손을 잡고、타마모는 쾌락에 떨리는 페니스를 받아들여、자신도 쾌감에 눈물지으며 하얀 정액을 삼켰다。
+						PRINTFORML 「하아……%UNICODE(0x2661)%　안쪽이、주인님의 것으로, 따듯합니다……%UNICODE(0x2661)%」
+						PRINTFORMW 精液を受け止める快感にわななくタマモの唇に口付け、キスをしながら最後の一滴まで流し込んだ……
 					ENDIF
-					PRINTFORML 「뜨거운 게、나오고 있다%UNICODE(0x2661)%　싫어어어엇%UNICODE(0x2661)%%UNICODE(0x2661)%　수정, 해 버린다…%UNICODE(0x2661)%」
-					IF TEQUIP:주도권
-						PRINTFORMW 타마모는 극도로 치닫은 쾌락으로 탈진 상태가 된 %CALLNAME:MASTER%에게 키스를 한 후、넋을 잃은 표정으로 또다시 허리를 흔들기 시작했다。
+				;後背位で射精
+				ELSEIF SELECTCOM == 61
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「알고있어, 달링의 자지、사정하고 싶지？ 가득 내도 좋아%UNICODE(0x2661)%」
+						PRINTFORML 페니스가 부푼 곳을 짐작 했는지、타마모가 양발를 이쪽의 허리에 감아 온다。
+						PRINTFORML 쾌감에 황홀해하면서, 상냥한 미소를 띄우는 타마모를 강하게 끌어안는다。
+						PRINTFORML 밀착한 연인의 질내에、더없는 마음을 풀어 발했다……
+						PRINTFORML 「나오고 있다!　도푸도푸는, 나오고 있는%UNICODE(0x2661)%　전부, 안에 싸줘%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 맥박치는 페니스를 질육[膣肉]이 감싸, 마지막 한방울까지 모두 사정했다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORMW 「안 돼、질내사정만큼은、제발 용서해주세요!　싫어 놔줘!」
+						PRINTFORMW 질내사정으로부터 필사적으로 피하려고 하는 타마모의 허리를 잡아 허리를 꽉 누른다。
+						PRINTFORMW 안쪽을 조금씩 찔러 쾌감을 한계까지 높이고 나서、최후에 자궁에 키스하듯 사정한다……
+						PRINTFORML 「후아아아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다, ……마스터의 정액이, 가장 안쪽에……%UNICODE(0x2661)%」
+						PRINTFORMW 눈물을 흘리며 굴복한 메이드의 질내에, 한방울도 남기지 않고 모든 것을 쏟았다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
 					ELSE
+						PRINTFORML 　
+						PRINTFORML 「안에、안에다 싸주세요！　주인님의 정액、주세요！」
+						PRINTFORML 질내사정를 간원하는 타마모의 요청에 응해、페니스를 가장 안쪽까지 찔러넣는다。
+						PRINTFORML 비육[秘肉]을 밀어 헤쳐 쾌감이 인내를 웃돌아, 허리를 밀착시킨 채로 사정했다……
+						PRINTFORML 쾌락대로 정액을 발할 때、타마모의 질은 페니스를 원하는 것처럼、질내절정을 받아들였따。
+						PRINTFORML 「아、하아……%UNICODE(0x2661)%　쿨렁쿨렁, 나오고 있는 ……주인, 님……%UNICODE(0x2661)%」
+						PRINTFORMW 정액을 받아들이는 쾌감에 잠긴 타마모의 입술에 키스하면서、마지막 한방울 까지 모조리 쏟아부었다……
+					ENDIF
+				;騎乗位で射精
+				ELSEIF SELECTCOM == 66
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「확실하게 질내사정해？　보지안, 달링으로 가득 해 주었으면 하는 것%UNICODE(0x2661)%」
+						PRINTFORML 타마모의 질은 페니스에 휘감겨, 사정을 재촉하고 있다。
+						PRINTFORML 숨을 헐떡이면서도、한결같이 봉사하는 타마모가、사랑스러워 어쩔수가 없다。
+						PRINTFORML 그녀의 소망을 실현하기 위해、한계치 직전까지 피스톤을 계속해 마지막 1번의 찌르기로 허리를 밀착시켰다……
+						PRINTFORML 「꺄우우%UNICODE(0x2661)%　왔다、달링%UNICODE(0x2661)%　정액, 많아 나온다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 흘러넘칠 정도의 사정임에도 불구하고、아직도 페니스는 사정을 계속하고 있다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「이런 모습은、임신해버린다!　싫습니다！」
+						PRINTFORML 엉덩이를 털어 페니스를 뽑으려고 하는 타마모를 뒤로부터 껴안아 분홍 엉덩이에 허리를 두드려 붙인다。
+						PRINTFORML 격렬한 피스톤으로 본능적으로 내려 와 버린 자궁에, 농후한 정액을 발사해 주었다……
+						PRINTFORML 「아, 야 아 아%UNICODE(0x2661)%%UNICODE(0x2661)%　안돼, 는데, 안에 쿨렁쿨렁 나오고 있습니다……%UNICODE(0x2661)%」
+						PRINTFORMW 힘없이 넘어진 타마모의 질내에、사정이 계속되고 있다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「아아아!　자지, 부풀어!　안에, 정액！！」
+						PRINTFORML 타마모의 허리를 잡아, 안쪽을 찌르도록(듯이) 격렬하게 허리를 움직여, 몰아넣음을 걸친다. 비육[秘肉]이 페니스를 붙잡아 지지하고 있다。
+						PRINTFORML 꼬리를 살짝 깨무는 것과 동시에、허리를 강하게 박아넣으며 사정했다……
+						PRINTFORML 타마모는 등을 뒤로 젖히면서, 정자를 받아 들였다。페니스가 맥박쳐、정액이 자궁에 흘러들 때에, 핀과 선 귀가 떨렸다た……
+						PRINTFORMW 「주인님의, 안쪽에, 넘치고 있는……%UNICODE(0x2661)%　하아아……%UNICODE(0x2661)%%UNICODE(0x2661)%」
+					ENDIF
+				;対面座位で射精
+				ELSEIF SELECTCOM == 68
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「가득 움직여 줄테니까、잔뜩 질내사정해줘야해%UNICODE(0x2661)%　달링%UNICODE(0x2661)%」
+						PRINTFORML 헌신적으로 허리를 흔드는 타마모때문에、사정하는 일 밖에 생각할 수 없게 되어 버린다。
+						PRINTFORML 연결돤 손의 떨림으로, 이쪽의 한계를 감지했는지, 타마모의 허리 사용이 격렬해진다。
+						PRINTFORML 지나친 기분 좋음에、페니스를 밀어 올리면서, 쌓아둔 정액을 토해냈다……
+						PRINTFORML 「히응%UNICODE(0x2661)%　와、제일 안쪽에、오고 있다%UNICODE(0x2661)%%UNICODE(0x2661)%　정액이 도퓻도퓻、기분 좋아%UNICODE(0x2661)%」
+						PRINTFORML 　후아……위도 아래도、녹아버릴 정도로 황홀하다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 부드러운 육체가 음란하게 얽혀, 요도의 마지막 한방울까지 모두를 짜 놓쳤다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「싫어、싫어어!　제발、질내사정만은 용서해주세요!」
+						PRINTFORML 타마모는 페니스를 뽑으려고 하지만, 범해지면서 힘이 빠진 탓인지, 허리를 들어 올릴 수 없다。
+						PRINTFORML 떨리는 비육[秘肉]을 아래로부터 밀어 올려 울컥거려 온 백탁을 최안쪽에 쏟았다……
+						PRINTFORML 「뜨거운 게、나오고 있다%UNICODE(0x2661)%　싫어어어엇%UNICODE(0x2661)%%UNICODE(0x2661)%　수정, 해 버린다…%UNICODE(0x2661)%」
 						PRINTFORMW 탈진한 타마모를 지탱하면서、한 방울도 나오지 않게 될 때까지 허리를 계속 움직였다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「앙%UNICODE(0x2661)%　좋아요, 주인님, 참지 말고%UNICODE(0x2661)%」
+						PRINTFORML 위에 올라탄 타마모가 허리를 흔들 때에 강렬한 쾌감이 페니스를 지나며 쾌감이 한계를 돌파한다。
+						PRINTFORML 자궁입구에 귀두가 키스한 순간、페니스가 튀어오르듯이、타마모의의 안쪽에 사정했다……
+						PRINTFORML 질내를 꿈틀거리며、사정을 환영하는 타마모와 손을 맡잡고, 황홀한 쾌락을 즐겼다。
+						PRINTFORMW 「하우……꿀럭, 꿀럭, 가득 오고 있습니다……임신, 해버릴지도……%UNICODE(0x2661)%%UNICODE(0x2661)%」
 					ENDIF
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+				;背面座位で射精
+				ELSEIF SELECTCOM == 69
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「달링이 질내사정 해 줄 때까지, 떼어 놓지 않기 때문에%UNICODE(0x2661)%」
+						PRINTFORML 전신을 밀착시키면서 질내사정을 조르는 타마모에게、강한 포옹으로 응답한다。
+						PRINTFORML 음란하면서 부드러운 살갗을 느끼며、팡팡하고 강하게 허리를 움직인다。
+						PRINTFORML 한계직전까지 참고 있던 정액을、타마모와 키스하며 사정했다……
+						PRINTFORML 「응읏！　응뭇%UNICODE(0x2661)%　응、츄、흐우우우웃%UNICODE(0x2661)%%UNICODE(0x2661)%
+						PRINTFORMW 넋을 잃은 타마모에게、사랑을 계속 퍼부었다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「놔주세요！　자지、뽑아줘세요！」
+						PRINTFORML 부풀어오른 페니스에 타마모는 위기를 헤아렸지만, 강하게 앉겨 있었기에, 계속해서 범해질 수 밖에 없다。
+						PRINTFORML 메이드 질내에 급소를 찌를 수 있도록, 한층 더 강하게 허리를 꽉 눌러 귀두를 자궁에 밀착시켰다……
+						PRINTFORML 「싫어어어엇%UNICODE(0x2661)%　안에、들어오고 있다%UNICODE(0x2661)%　뽑아、주세요%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 등을 활처럼 꺽어、떨리는 타마모에게、최후의 한방울까지 모두 사정해주었다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「ふぅっ！　すごいの、ごしゅじんさま、おちんちんすごいっ%UNICODE(0x2661)%」
+						PRINTFORML タマモを後ろから抱き締めながら、ペニスを奥の奥まで差し込み、極上の膣内を味わった。
+						PRINTFORML 腰を動かす度に尻肉が密着し、豊満な胸が揺れる。肌触りの良い柔肌をまさぐりながら、膣奥で欲望を開放した……
+						PRINTFORML しっかりと腰を掴まれたタマモは自らも尻を押し付け、子宮で精液を残らず受け止めた。
+						PRINTFORMW 「あぅぅ……おなか、やけちゃう……なかだし、ぜんぶください……%UNICODE(0x2661)%」
+					ENDIF
+				;下着ずらし挿入で射精
+				ELSEIF SELECTCOM == 72
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「달링！　안에 싸줄때까지、이야기하지 말아줘%UNICODE(0x2661)%」
+						PRINTFORML 타마모는 이쪽에 전신을 맡겨 머지않아 찾아올 사정을 애타게 기다리고 있다。
+						PRINTFORML 팔를 이쪽의 목에 감고 고개돌린 타마모를 확실하게 응시하며 껴안는다。
+						PRINTFORML 튀는 엉덩이에 허리로 꽉 눌러 안쪽의 안쪽까지 페니스를 삽입하며 사정했다……
+						PRINTFORML 「꺄읏%UNICODE(0x2661)%　달링의 정액%UNICODE(0x2661)%　타마모、임신해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 달콤한 환희를 높이는 타마모의 질내에서、페니스가 몇번이고 두근거렸다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「떼어 놓아 주세요!　이대로는、질내에！」
+						PRINTFORML 뒤로부터 안겨있던 타마모는, 질내의 팽창을 감지했지만, 이미 늦었다。
+						PRINTFORML 정성스럽게 질육[膣肉]을 탐내, 수컷의 본능을 한계까지 날카로워지게 하고 나서, 첨단을 강하게 찔러 넣었다……
+						PRINTFORML 「히쿠우우웃%UNICODE(0x2661)%　안돼、안에는 안돼！　히야아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORML 비명을 울리는 타마모의 안쪽을 노려、농후한 정액을 쏟아주었다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「후우！ 주인님, 자지 대단한%UNICODE(0x2661)%」
+						PRINTFORML 타마모를 뒤로부터 껴안으면서, 페니스를 안쪽의 안쪽까지 쑤셔, 극상의 쾌락을 맛보았다。
+						PRINTFORML 허리를 움직일 때에 엉덩이가 밀착해, 풍만한 가슴이 흔들린다. 촉감이 좋은 부드러운 살갗을 만지면서, 질 안쪽에서 욕망을 개방했다……
+						PRINTFORML 제대로 허리를 잡힌 타마모는 스스로도 엉덩이를 꽉 눌러 자궁으로 정액을 남김없이 받아 들였다。
+						PRINTFORMW 「아우……배、따듯해집니다……안에、모두 토해 주세요……%UNICODE(0x2661)%」
+					ENDIF
+				;挿入Gスポ責めで사정
+				ELSEIF SELECTCOM == 506
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「히응！　타마모、이상해진다!　이상해져버린다%UNICODE(0x2661)%」
+						PRINTFORML 타마모의 민감한곳 중에서, 특히 약한 부분을 페니스로 괴롭혀 준다。
+						PRINTFORML 약점을 켜져 번민도에, 동일한 쾌감을 돌려주는것 처럼, 질이 페니스에에 휘감겨 온다。
+						PRINTFORML 용서가 없는 호된 고문이, 끝나기까지 그리 오랜 시간은 걸리지 않았다……
+						PRINTFORML 「아아앗%UNICODE(0x2661)%　나오고 있다, 가득%UNICODE(0x2661)%　달링의 것으로 채워져버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 타마모를 껴안으면서、사정의 쾌감에 허리를 계속 진동시켰다……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「히앗！　거기 안 됨, 만지면 안됩니다!　, 도망치지 않으면%UNICODE(0x2661)%」
+						PRINTFORML 민감한 부위를 끈질기게 괴롭혀져、타마모는 사정을 목전에 두고도 저항할 수가 없다。
+						PRINTFORML 쾌락에 괴로워 하는 메이드의 질내에、사양하지 않고 페니스를 깊게 찔러 넣는다……
+						PRINTFORML 「히야웃%UNICODE(0x2661)%　실어、나오고 있다%UNICODE(0x2661)%　안쪽이、기분 좋다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 쾌감에 녹아 버린 질은, 받아 들인 정액을 삼켜 갔다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「거기, 거기는 안돼!　이상해져버리니까%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORML 질내의 한층 더 약한 곳을 귀두로 괴롭히자 , 타마모는 달콤한 비명을 올려 허리를 비틀었따. 그 움직임이 페니스에게 한층 더 쾌감을 가져왔다。
+						PRINTFORML 타마모를 기분 좋게 하기 위해서 몇번이나 몇번이나 약점을 왕복해, 동일한 쾌감을 준다。타마모의 허리가 크게 휘는 동시에 질내사정했다……
+						PRINTFORML 흠칫흠칫 경련하는 타마모를 껴안아, 허리의 안쪽에 용서 없이 정액을 쏟는다。정액이 흘러넘치면서 타마모의 꼬리를 더렵혔다。
+						PRINTFORMW 「하……하……주인님 너무 심해요……%UNICODE(0x2661)%」
+					ENDIF
+				;삽입자궁구자극で사정
+				ELSEIF SELECTCOM == 507
+					;春色の現代衣装
+					IF TEQUIP:83 == 103
+						PRINTFORML 　
+						PRINTFORML 「이대로는、임신해버린다%UNICODE(0x2661)%　자궁에 사정되서、임신해버린다%UNICODE(0x2661)%」
+						PRINTFORML 타마모는 자궁입를 범하는 페니스를 느껴、사정을 받아들이기 위한 자세를 취했다。
+						PRINTFORML 질내사정하고 싶어하는 사랑스러운 연인를 위해서、마지막 스퍼트를 걸친다。
+						PRINTFORML 허리를 조금씩 움직여,쾌감을 최대까지 높이고 나서, 자궁에 깊게 키스했다……
+						PRINTFORML 「아아아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　달링、달링%UNICODE(0x2661)%　너무 좋아%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORMW 濃厚な精液が、タマモの子宮へたっぷりと注ぎ込まれていった……
+					;메이드복
+					ELSEIF TEQUIP:전신복 == 308
+						PRINTFORML 　
+						PRINTFORML 「안쪽을 찌르면, 안됩니다!　자궁이 갖고 싶어해 버린다%UNICODE(0x2661)%」
+						PRINTFORML 지속적으로 자극을 받은 타마모의 자궁은、본인의 저항히 허무하게 정액을 받아들이기 위한 자세를 취했다。
+						PRINTFORML 자궁에 페니스를 밀착시킨 상태로、사정을 위해 허리를 움직인다。
+						PRINTFORML 마지막 찌르기와 동시에 자궁에 귀두를 처넣어、도망갈수 없는 가장 안쪽에 정액을 토해냈다……
+						PRINTFORML 「히야아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%%UNICODE(0x2661)%　정액이、들어、오고있다……수정、해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORML 아직도 귀두를 떼어 놓지 않는 자궁에, 몇번이고 페니스가 맥박쳤다……
+					;세일러복
+					ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
+						;同級生
+						IF TEQUIP:하의 == 201
+							PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
+							PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
+							PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
+						;上級生
+						ELSEIF TEQUIP:하의 == 205
+							PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
+							PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
+							PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
+							PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
+						;下級生
+						ELSEIF TEQUIP:하의 == 207
+							PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
+							PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
+							PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
+							PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+							PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+						ENDIF
+					;그 이외
+					ELSE
+						PRINTFORML 　
+						PRINTFORML 「앙！　하아、응！　아、임、임신하고 싶습니다%UNICODE(0x2661)%%UNICODE(0x2661)%」
+						PRINTFORML 타마모의 가장 안쪽에 귀두를 꽉 눌러 내려 온 자궁을 자극한다。자궁이 귀두에 달라붙어、정액이 가지고 싶다고 조르는 것을 느낀다。
+						PRINTFORML 꼭 껴안고 목덜미에 키스하면서、몇번이고 자궁을 밀어올린다。비육[秘肉]이 페니스에 달라붙어 쾌감이 절정에 이르는 것과 동시에 허리를 강하게 찔러넣어, 자궁에 직접 정액을 쏟아부었다……
+						PRINTFORML 쾌감에 쩔리는 페니스를 자극해、한방울도 남김없이 정액을 짜낸다。껴앉고 있는 타마모와 편안한 대화를 나누면서 최고의 쾌락을 즐겼다。
+						PRINTFORMW 「하우……안쪽에서 떨고 있습니다……정액, 기분 좋아……%UNICODE(0x2661)%%UNICODE(0x2661)%」
 					ENDIF
 				;그 이외
 				ELSE
-					PRINTFORML 　
-					PRINTFORML 「앙%UNICODE(0x2661)%　좋아요, 주인님, 참지 말고%UNICODE(0x2661)%」
-					PRINTFORML 위에 올라탄 타마모가 허리를 흔들 때에 강렬한 쾌감이 페니스를 지나며 쾌감이 한계를 돌파한다。
-					PRINTFORML 자궁입구에 귀두가 키스한 순간、페니스가 튀어오르듯이、타마모의의 안쪽에 사정했다……
-					PRINTFORML 질내를 꿈틀거리며、사정을 환영하는 타마모와 손을 맡잡고, 황홀한 쾌락을 즐겼다。
-					PRINTFORMW 「하우……꿀럭, 꿀럭, 가득 오고 있습니다……임신, 해버릴지도……%UNICODE(0x2661)%%UNICODE(0x2661)%」
-				ENDIF
-			;대면좌위で사정
-			ELSEIF SELECTCOM == 68 || TFLAG:60 == 2
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「달링이 질내사정 해 줄 때까지, 떼어 놓지 않기 때문에%UNICODE(0x2661)%」
-					PRINTFORML 전신을 밀착시키면서 질내사정을 조르는 타마모에게、강한 포옹으로 응답한다。
-					PRINTFORML 음란하면서 부드러운 살갗을 느끼며、팡팡하고 강하게 허리를 움직인다。
-					PRINTFORML 한계직전까지 참고 있던 정액을、타마모와 키스하며 사정했다……
-					PRINTFORML 「응읏！　응뭇%UNICODE(0x2661)%　응、츄、흐우우우웃%UNICODE(0x2661)%%UNICODE(0x2661)%
-					PRINTFORML 　후아……위도 아래도、녹아버릴 정도로 황홀하다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 넋을 잃은 타마모에게、사랑을 계속 퍼부었다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「놔주세요！　자지、뽑아줘세요！」
-					PRINTFORML 부풀어오른 페니스에 타마모는 위기를 헤아렸지만, 강하게 앉겨 있었기에, 계속해서 범해질 수 밖에 없다。
-					PRINTFORML 메이드 질내에 급소를 찌를 수 있도록, 한층 더 강하게 허리를 꽉 눌러 귀두를 자궁에 밀착시켰다……
-					PRINTFORML 「싫어어어엇%UNICODE(0x2661)%　안에、들어오고 있다%UNICODE(0x2661)%　뽑아、주세요%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 등을 활처럼 꺽어、떨리는 타마모에게、최후의 한방울까지 모두 사정해주었다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
+					K:1 = RAND:6
+					IF K:1 == 0
+						PRINTFORML 「응읏……주인님、안쪽에서 느낍니다……」
+						PRINTFORMW 타마모의 질내에 사정하자、타마모는 크게 몸을 떨었다……
+						PRINTFORMW 「아, 아……아직, 나오고 있는……뜨겁다……%UNICODE(0x2661)%」
+					ELSEIF K:1 == 1
+						PRINTFORML 「앗、아아、뜨거운 , 가득 들어 옵니다」
+						PRINTFORMW 타마모의 질은 정액을 받아 들여 더욱 정액을 짜내기 위해 움직였다……
+						PRINTFORMW 「하아……주인님……너무 좋아……%UNICODE(0x2661)%」
+					ELSEIF K:1 == 2
+						PRINTFORML 「안, 에, 주세요!　주인님의！　주인님의 정액！」
+						PRINTFORMW 소망 대로 타마모의 질내에 사정했다……
+						PRINTFORMW 「아……는, 아……안에, 가득……나오고 있는……%UNICODE(0x2661)%」
+					ELSEIF K:1 == 3
+						PRINTFORMW 「주인님의 정액……안에……히응%UNICODE(0x2661)%」
+						PRINTFORMW 「이렇게 사정하시면……아기가 생겨버려요……%UNICODE(0x2661)%」
+					ELSEIF K:1 == 4
+						PRINTFORML 「사정하시나요? ? 낼 테면 안으로, 안에 싸주세요！」
+						PRINTFORMW 타마모의 소원에 응하도록、마음껏 질내사정했다……
+						PRINTFORMW 「응, 아……뜨거운 것, 들어오고 있는……주인님의 정액……%UNICODE(0x2661)%」
+					ELSE
+						PRINTFORMW 「정액, 주인님의……따뜻하다……」
+						PRINTFORMW 대량의 정액이、타마모의 안쪽을 범했다……
+						PRINTFORMW 「……%UNICODE(0x2661)%」
 					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「だきしめてっ、ますたぁ、ますたぁっ！　응、응뭇、하뭇%UNICODE(0x2661)%」
-					PRINTFORML 타마모と身体を密着させ、쾌감を与え合う。最奥を掻き回すような페니스の動きに、타마모의腰がわなないた。
-					PRINTFORML 唇を重ねながら強く타마모を抱き締め、征옷欲のままに욕망を解き放つ。膣奥に白濁液を叩きつけた……
-					PRINTFORML 首に손を回し抱きつく타마모의身体が雌の本能に震え、질내はしゃくりあげる페니스に絡み付き、一滴残らず정액を受け止めようとしている。
-					PRINTFORMW 「후아……あつあつのせーえき、まだわたしを犯してる……%UNICODE(0x2661)%　ますたーに支配されちゃう……%UNICODE(0x2661)%」
-				ENDIF
-			;배면좌위で사정
-			ELSEIF SELECTCOM == 69 || TFLAG:60 == 3
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「달링！　안에 싸줄때까지、이야기하지 말아줘%UNICODE(0x2661)%」
-					PRINTFORML 타마모는 이쪽에 전신을 맡겨 머지않아 찾아올 사정을 애타게 기다리고 있다。
-					PRINTFORML 팔를 이쪽의 목에 감고 고개돌린 타마모를 확실하게 응시하며 껴안는다。
-					PRINTFORML 튀는 엉덩이에 허리로 꽉 눌러 안쪽의 안쪽까지 페니스를 삽입하며 사정했다……
-					PRINTFORML 「꺄읏%UNICODE(0x2661)%　달링의 정액%UNICODE(0x2661)%　타마모、임신해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 달콤한 환희를 높이는 타마모의 질내에서、페니스가 몇번이고 두근거렸다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「떼어 놓아 주세요!　이대로는、질내에！」
-					PRINTFORML 뒤로부터 안겨있던 타마모는, 질내의 팽창을 감지했지만, 이미 늦었다。
-					PRINTFORML 정성스럽게 질육[膣肉]을 탐내, 수컷의 본능을 한계까지 날카로워지게 하고 나서, 첨단을 강하게 찔러 넣었다……
-					PRINTFORML 「히쿠우우웃%UNICODE(0x2661)%　안돼、안에는 안돼！　히야아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORML 비명을 울리는 타마모의 안쪽을 노려、농후한 정액을 쏟아주었다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「후우！ 주인님, 자지 대단한%UNICODE(0x2661)%」
-					PRINTFORML 타마모를 뒤로부터 껴안으면서, 페니스를 안쪽의 안쪽까지 쑤셔, 극상의 쾌락을 맛보았다。
-					PRINTFORML 허리를 움직일 때에 엉덩이가 밀착해, 풍만한 가슴이 흔들린다. 촉감이 좋은 부드러운 살갗을 만지면서, 질 안쪽에서 욕망을 개방했다……
-					PRINTFORML 제대로 허리를 잡힌 타마모는 스스로도 엉덩이를 꽉 눌러 자궁으로 정액을 남김없이 받아 들였다。
-					PRINTFORMW 「아우……배、따듯해집니다……안에、모두 토해 주세요……%UNICODE(0x2661)%」
-				ENDIF
-			;挿入Gスポ責めで사정
-			ELSEIF SELECTCOM == 506
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「히응！　타마모、이상해진다!　이상해져버린다%UNICODE(0x2661)%」
-					PRINTFORML 타마모의 민감한곳 중에서, 특히 약한 부분을 페니스로 괴롭혀 준다。
-					PRINTFORML 약점을 켜져 번민도에, 동일한 쾌감을 돌려주는것 처럼, 질이 페니스에에 휘감겨 온다。
-					PRINTFORML 용서가 없는 호된 고문이, 끝나기까지 그리 오랜 시간은 걸리지 않았다……
-					PRINTFORML 「아아앗%UNICODE(0x2661)%　나오고 있다, 가득%UNICODE(0x2661)%　달링의 것으로 채워져버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 타마모를 껴안으면서、사정의 쾌감에 허리를 계속 진동시켰다……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「히앗！　거기 안 됨, 만지면 안됩니다!　, 도망치지 않으면%UNICODE(0x2661)%」
-					PRINTFORML 민감한 부위를 끈질기게 괴롭혀져、타마모는 사정을 목전에 두고도 저항할 수가 없다。
-					PRINTFORML 쾌락에 괴로워 하는 메이드의 질내에、사양하지 않고 페니스를 깊게 찔러 넣는다……
-					PRINTFORML 「히야웃%UNICODE(0x2661)%　실어、나오고 있다%UNICODE(0x2661)%　안쪽이、기분 좋다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 쾌감에 녹아 버린 질은, 받아 들인 정액을 삼켜 갔다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「거기, 거기는 안돼!　이상해져버리니까%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORML 질내의 한층 더 약한 곳을 귀두로 괴롭히자 , 타마모는 달콤한 비명을 올려 허리를 비틀었따. 그 움직임이 페니스에게 한층 더 쾌감을 가져왔다。
-					PRINTFORML 타마모를 기분 좋게 하기 위해서 몇번이나 몇번이나 약점을 왕복해, 동일한 쾌감을 준다。타마모의 허리가 크게 휘는 동시에 질내사정했다……
-					PRINTFORML 흠칫흠칫 경련하는 타마모를 껴안아, 허리의 안쪽에 용서 없이 정액을 쏟는다。정액이 흘러넘치면서 타마모의 꼬리를 더렵혔다。
-					PRINTFORMW 「하……하……주인님 너무 심해요……%UNICODE(0x2661)%」
-				ENDIF
-			;삽입자궁구자극で사정
-			ELSEIF SELECTCOM == 507
-				;春色の現代衣装
-				IF TEQUIP:83 == 103
-					PRINTFORML 　
-					PRINTFORML 「이대로는、임신해버린다%UNICODE(0x2661)%　자궁에 사정되서、임신해버린다%UNICODE(0x2661)%」
-					PRINTFORML 타마모는 자궁입를 범하는 페니스를 느껴、사정을 받아들이기 위한 자세를 취했다。
-					PRINTFORML 질내사정하고 싶어하는 사랑스러운 연인를 위해서、마지막 스퍼트를 걸친다。
-					PRINTFORML 허리를 조금씩 움직여,쾌감을 최대까지 높이고 나서, 자궁에 깊게 키스했다……
-					PRINTFORML 「아아아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　달링、달링%UNICODE(0x2661)%　너무 좋아%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORMW 濃厚な정액が、타마모의자궁へたっぷりと注ぎ込まれていった……
-				;메이드복
-				ELSEIF TEQUIP:전신복 == 308
-					PRINTFORML 　
-					PRINTFORML 「안쪽을 찌르면, 안됩니다!　자궁이 갖고 싶어해 버린다%UNICODE(0x2661)%」
-					PRINTFORML 지속적으로 자극을 받은 타마모의 자궁은、본인의 저항히 허무하게 정액을 받아들이기 위한 자세를 취했다。
-					PRINTFORML 자궁에 페니스를 밀착시킨 상태로、사정을 위해 허리를 움직인다。
-					PRINTFORML 마지막 찌르기와 동시에 자궁에 귀두를 처넣어、도망갈수 없는 가장 안쪽에 정액을 토해냈다……
-					PRINTFORML 「히야아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%%UNICODE(0x2661)%　정액이、들어、오고있다……수정、해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORML 아직도 귀두를 떼어 놓지 않는 자궁에, 몇번이고 페니스가 맥박쳤다……
-				;세일러복
-				ELSEIF TEQUIP:옷 == 102 && TEQUIP:MASTER:겉옷 == 1003
-					;同級生
-					IF TEQUIP:하의 == 201
-						PRINTFORML 「싫어싫어엇%UNICODE(0x2661)%　당신의 정액, 안에 싸면 안돼엣%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORML 너무 빠른 수정 행위로부터 빠지려고 한 타마모였지만、범해지는 쾌락에는 거역하지 못하고 있다。
-						PRINTFORML 제대로 껴안으면서 최안쪽을 찔러, 동급생인 그녀의 자궁까지 모두 범하는 백탁을 발했다……
-						PRINTFORML 「앗%UNICODE(0x2661)%　아아아아앗%UNICODE(0x2661)%%UNICODE(0x2661)%　안에 나오고 있다%UNICODE(0x2661)%　당신의 정액、자궁이 기뻐해버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 타마모에게 허리를 밀착시켜, 한 방울 남김없이 쏟았다……
-					;上級生
-					ELSEIF TEQUIP:하의 == 205
-						PRINTFORML 「질내사정이 아니면 안되어요%UNICODE(0x2661)%　너의 정액%UNICODE(0x2661)%　나의 것이니까%UNICODE(0x2661)%」
-						PRINTFORML 정액을 요구해 허리를 흔드는 타마모 선배를 위해서, 이쪽도 안쪽을 찌르는 움직임으로 응한다。
-						PRINTFORML 질내의 페니스가 사정을 재촉하듯 빠르게 움직여、욕망대로 허리를 밀어 올렸다……
-						PRINTFORML 「히아아아아%UNICODE(0x2661)%%UNICODE(0x2661)%　후배 군의, 왔다%UNICODE(0x2661)%　배 가득%UNICODE(0x2661)%　뜨거워진다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 선배의 자궁을 대량의 백탁액이 다 메웠다……
-					;下級生
-					ELSEIF TEQUIP:하의 == 207
-						PRINTFORML 「선배라면 좋아%UNICODE(0x2661)%　내 안을%UNICODE(0x2661)%　선배로 가득하게 해%UNICODE(0x2661)%」
-						PRINTFORML 솔직하고 정열적인 고백에、타마모쨩의 질내를 페니스로 꽉 채운다。
-						PRINTFORML 사정를 재촉하는 쾌락에 거역하지 않으며、자궁입구에 귀두를 꽉 누르면서, 욕망을 풀어 발했다……
-						PRINTFORML 「히웃%UNICODE(0x2661)%%UNICODE(0x2661)%　아아아앙%UNICODE(0x2661)%%UNICODE(0x2661)%　선배가、안쪽으로%UNICODE(0x2661)%　나 녹아버린다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-						PRINTFORMW 정액의 뜨거움에 떨리는 후배의 질내에、사양없이 모두 사정했다……
-					ENDIF
-				;그 이외
-				ELSE
-					PRINTFORML 　
-					PRINTFORML 「앙！　하아、응！　아、임、임신하고 싶습니다%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					PRINTFORML 타마모의 가장 안쪽에 귀두를 꽉 눌러 내려 온 자궁을 자극한다。자궁이 귀두에 달라붙어、정액이 가지고 싶다고 조르는 것을 느낀다。
-					PRINTFORML 꼭 껴안고 목덜미에 키스하면서、몇번이고 자궁을 밀어올린다。비육[秘肉]이 페니스에 달라붙어 쾌감이 절정에 이르는 것과 동시에 허리를 강하게 찔러넣어, 자궁에 직접 정액을 쏟아부었다……
-					PRINTFORML 쾌감에 쩔리는 페니스를 자극해、한방울도 남김없이 정액을 짜낸다。껴앉고 있는 타마모와 편안한 대화를 나누면서 최고의 쾌락을 즐겼다。
-					PRINTFORMW 「하우……안쪽에서 떨고 있습니다……정액, 기분 좋아……%UNICODE(0x2661)%%UNICODE(0x2661)%」
 				ENDIF
 			;그 이외
 			ELSE
@@ -12182,75 +12270,48 @@ IF TFLAG:2 > 0
 				IF K:1 == 0
 					PRINTFORML 「응읏……주인님、안쪽에서 느낍니다……」
 					PRINTFORMW 타마모의 질내에 사정하자、타마모는 크게 몸을 떨었다……
-					PRINTFORMW 「아, 아……아직, 나오고 있는……뜨겁다……%UNICODE(0x2661)%」
+					PRINTFORMW 「아, 아……아직, 나오고 있는……뜨겁다……」
 				ELSEIF K:1 == 1
 					PRINTFORML 「앗、아아、뜨거운 , 가득 들어 옵니다」
 					PRINTFORMW 타마모의 질은 정액을 받아 들여 더욱 정액을 짜내기 위해 움직였다……
-					PRINTFORMW 「하아……주인님……너무 좋아……%UNICODE(0x2661)%」
+					PRINTFORMW 「하아……주인님……너무 좋아…」
 				ELSEIF K:1 == 2
 					PRINTFORML 「안, 에, 주세요!　주인님의！　주인님의 정액！」
-					PRINTFORMW 소망 대로 타마모의 질내에 사정했다……
-					PRINTFORMW 「아……는, 아……안에, 가득……나오고 있는……%UNICODE(0x2661)%」
+					PRINTFORMW 소망 대로 타마모의 질내에 사정했다………
+					PRINTFORMW 「아……는, 아……안에, 가득……나오고 있는………」
 				ELSEIF K:1 == 3
-					PRINTFORMW 「주인님의 정액……안에……히응%UNICODE(0x2661)%」
-					PRINTFORMW 「이렇게 사정하시면……아기가 생겨버려요……%UNICODE(0x2661)%」
+					PRINTFORMW 「주인님의 정액……안에……히응」
+					PRINTFORMW 「이렇게 사정하시면……아기가 생겨버려요…」
 				ELSEIF K:1 == 4
 					PRINTFORML 「사정하시나요? ? 낼 테면 안으로, 안에 싸주세요！」
 					PRINTFORMW 타마모의 소원에 응하도록、마음껏 질내사정했다……
-					PRINTFORMW 「응, 아……뜨거운 것, 들어오고 있는……주인님의 정액……%UNICODE(0x2661)%」
+					PRINTFORMW 「응, 아……뜨거운 것, 들어오고 있는……주인님의 정액……」
 				ELSE
-					PRINTFORMW 「정액, 주인님의……따뜻하다……」
-					PRINTFORMW 대량의 정액이、타마모의 안쪽을 범했다……
-					PRINTFORMW 「……%UNICODE(0x2661)%」
+					PRINTFORMW 「정액, 주인님의……따뜻하다………」
+					PRINTFORMW 대량의 정액이、타마모의 안쪽을 범했다…
+					PRINTFORMW 「이렇게 가득……나, 임신했을지도……」
 				ENDIF
 			ENDIF
-		;그 이외
-		ELSE
-			K:1 = RAND:6
-			IF K:1 == 0
-				PRINTFORML 「응읏……주인님、안쪽에서 느낍니다……」
-				PRINTFORMW 타마모의 질내에 사정하자、타마모는 크게 몸을 떨었다……
-				PRINTFORMW 「아, 아……아직, 나오고 있는……뜨겁다……」
-			ELSEIF K:1 == 1
-				PRINTFORML 「앗、아아、뜨거운 , 가득 들어 옵니다」
-				PRINTFORMW 타마모의 질은 정액을 받아 들여 더욱 정액을 짜내기 위해 움직였다……
-				PRINTFORMW 「하아……주인님……너무 좋아…」
-			ELSEIF K:1 == 2
-				PRINTFORML 「안, 에, 주세요!　주인님의！　주인님의 정액！」
-				PRINTFORMW 소망 대로 타마모의 질내에 사정했다………
-				PRINTFORMW 「아……는, 아……안에, 가득……나오고 있는………」
-			ELSEIF K:1 == 3
-				PRINTFORMW 「주인님의 정액……안에……히응」
-				PRINTFORMW 「이렇게 사정하시면……아기가 생겨버려요…」
-			ELSEIF K:1 == 4
-				PRINTFORML 「사정하시나요? ? 낼 테면 안으로, 안에 싸주세요！」
-				PRINTFORMW 타마모의 소원에 응하도록、마음껏 질내사정했다……
-				PRINTFORMW 「응, 아……뜨거운 것, 들어오고 있는……주인님의 정액……」
-			ELSE
-				PRINTFORMW 「정액, 주인님의……따뜻하다………」
-				PRINTFORMW 대량의 정액이、타마모의 안쪽을 범했다…
-				PRINTFORMW 「이렇게 가득……나, 임신했을지도……」
-			ENDIF
-			CFLAG:239= 4
-		ENDIF
-		;음란, 창부	
-		;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:239 < 4 || FLAG:7 == 2)
-		;	PRINTFORMW 
-		;	CFLAG:239= 4
-		;복종, 예속	
-		;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:239 < 4 || FLAG:7 == 2)	
-		;	PRINTFORMW 
-		;	CFLAG:239= 4
-		;굴복각인Lv3	
-		;ELSE	
-		;	PRINTFORMW 
-		;	CFLAG:239= 3
-		;ENDIF
+
+				CFLAG:239= 4
+			;음란, 창부	
+			ELSEIF TALENT:4 || TALENT:7 && (CFLAG:239 < 4 || FLAG:7 == 2)	
+				PRINTFORMW 
+				CFLAG:239= 4
+			;복종, 예속	
+			ELSEIF TALENT:5 || TALENT:8 && (CFLAG:239 < 4 || FLAG:7 == 2)	
+				PRINTFORMW 
+				CFLAG:239= 4
+			;굴복각인Lv3	
+			ELSE	
+				PRINTFORMW 
+				CFLAG:239= 3
+			ENDIF	
 		;그 이외		
-		;ELSEIF CFLAG:239 < 2 || FLAG:7 == 2
-		;	PRINTFORMW 
-		;	CFLAG:239 = 2
-		;ENDIF
+		ELSEIF CFLAG:239 < 2 || FLAG:7 == 2
+			PRINTFORMW 
+			CFLAG:239 = 2
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -12260,7 +12321,7 @@ ENDIF
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 3 || FLAG:7 == 2)	
@@ -12314,7 +12375,7 @@ ENDIF
 IF TFLAG:15 >0
 	CALL PALAM_MESSAGE_E
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:241 < 3 || FLAG:7 == 2)	
@@ -12427,7 +12488,7 @@ ENDIF
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:246 < 4 || FLAG:7 == 2)	
@@ -12461,7 +12522,7 @@ IF TFLAG:29 > 1
 ELSEIF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:246 < 3 || FLAG:7 == 2)	
 		;연모, 친애	
 		ELSEIF TALENT:3 || TALENT:6 && (CFLAG:246 < 4 || FLAG:7 == 2)	
@@ -12494,7 +12555,7 @@ ENDIF
 ;사정하고 있다
 IF TFLAG:10 > 0	
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:247 < 3 || FLAG:7 == 2)	
@@ -12518,7 +12579,7 @@ ENDIF
 ;분유하고 있다
 IF TFLAG:11 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:248 < 3 || FLAG:7 == 2)	
@@ -12542,7 +12603,7 @@ ENDIF
 ;방뇨하고 있다
 IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)		
-		;通す	
+		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 2 || FLAG:7 == 2)	
 		;함락완료	
 		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:249 < 3 || FLAG:7 == 2)	
@@ -14184,7 +14245,7 @@ SELECTCASE TFLAG:13
 	CASE 48
 		CALL EVENT_MESSAGE
 		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET) で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET) 로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
 		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 		
 		IF (CFLAG:291 < 1 || FLAG:7 == 2)
@@ -14204,7 +14265,7 @@ SELECTCASE TFLAG:13
 	CASE 49
 		CALL EVENT_MESSAGE
 		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
-		;再함락先のキャラ→ FAVORITE_1_ID(TARGET) で取得可能、名前は%NTRNAME(FAVORITE_1_ID(TARGET))%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET) 로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
 		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
 					
 		IF (CFLAG:292 < 1 || FLAG:7 == 2)
@@ -15223,7 +15284,7 @@ ELSEIF CFLAG:ARG:입력행동 == 0
 	ELSE
 		LOCALS:10 = 해치웁시다！
 	ENDIF
-;ELSEIF CFLAG:ARG:입력행동 == (스킬番号)
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
 ;	LOCALS:10 = 
 ;섹시댄스
 ELSEIF CFLAG:ARG:입력행동 == 1212
@@ -15234,7 +15295,7 @@ ELSEIF CFLAG:ARG:입력행동 == 1213
 ;파이널누드
 ELSEIF CFLAG:ARG:입력행동 == 1214
 	LOCALS:10 = 나의 진심、보여드립니다♪
-;気功シリーズを영혼숨결と見立てる　ネタが出てこない上に気功ってどのタイミングで喋るの？
+;気功シリーズを魂息吹と見立てる　ネタが出てこない上に気功ってどのタイミングで喋るの？
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,2411, 2413)
 ;	IF RAND:2 == 0
 ;		LOCALS:10 = 

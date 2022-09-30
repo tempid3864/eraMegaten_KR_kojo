@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;모코이구상
-;ほとんどハッカーズと라이도우の회화文の使い回しです。
+;モコイ口上
+;ほとんどハッカーズとライドウの会話文の使い回しです。
 ;エロは追及してません。
-;まあ모코이相手だしこんなもんで勘弁してください。
-;でも入れれば조교한다ときちょっとだけ楽しいかも…？
+;まあモコイ相手だしこんなもんで勘弁してください。
+;でも入れれば調教するときちょっとだけ楽しいかも…？
 ;
 ;ライセンスオールフリーです。改変・再配布自由。
-;加筆수정大募集中。
+;加筆修正大募集中。
 ;-------------------------------------------------
 ;------------------------------------------------------------------------------------
 ;ライセンスについて
@@ -55,10 +55,10 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 모코이구상
+PRINTFORML 모코이 구상
 ;구상설명문
-PRINTFORML 조교時모코이がガインでしゃべります。エロくはないです。
-PRINTFORML 당신の中のイメージと大きく食い違う가능性があります。
+PRINTFORML 調教時モコイがガインでしゃべります。エロくはないです。
+PRINTFORML あなたの中のイメージと大きく食い違う可能性があります。
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
@@ -4310,7 +4310,7 @@ CASE 14
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:393 == 0
-			PRINTFORMW 
+			PRINTFORMW 「」
 			CFLAG:393 = 1
 		;2번째 이후
 		ELSE
@@ -5978,7 +5978,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -8138,129 +8138,107 @@ ENDSELECT
 
 
 @ENEMY_BATTLE_EVENT_K453, ARG, ARG:1, ARG:2
-;IF TFLAG:전투이벤트 == 1
-;적でのデビルＣＯ－ＯＰ발동시의 대사
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;	PRINTFORML ┃%"ボク가 적의 부랄을 걷어찼어, 지금이 기회데쓰~!",72,LEFT%┃
-;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;ENDIF
-;IF TFLAG:전투이벤트 == 2
+IF TFLAG:전투이벤트 == 1
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 2
 ;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;	PRINTFORML ┃%"엉덩이 맴매를 허벌나게 해줄게",72,LEFT%┃
-;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;ENDIF
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
 
 @BATTLE_EVENT_K453, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
-;아군 파티에서 데빌ＣＯ－ＯＰ발동에 관한 대사
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"ボク가 적의 부랄을 걷어찼어、지금이 기회데쓰~!",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ELSEIF TFLAG:전투이벤트 == 2
-;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"엉덩이 맴매를 허벌나게 해줄게",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;공격해서 해치웠을 경우
-ELSEIF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
-	IF RAND:2 == 0
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"테이크 다운이야、형씨",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ELSE
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"チミ는 이미 KO라구",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDIF
-;피탄(사망)
-ELSEIF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"미안 친구、먼저 잠들고 있을게",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;이악물기と不屈（擬似的に無理やり動かしてます）
-ELSEIF TFLAG:전투이벤트 == 12 && (BASE:ARG:ＨＰ == 1 || BASE:ARG:ＨＰ == MAXBASE:ARG:ＨＰ)
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"딴따라라! 모코이군은 죽지 않는데쓰!!",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;피탄(사망 안했음)
-ELSEIF TFLAG:전투이벤트 == 12
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"생존보고야 서머너군~",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;반사당했다
-ELSEIF TFLAG:전투이벤트 == 15
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"우옷! ボク를 놀라게 하다니 정말 대단해",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;빗나갔다
-ELSEIF TFLAG:전투이벤트 == 17
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"ボク는 스쿠카쟈가 필요한 거 같아",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;회피
-ELSEIF TFLAG:전투이벤트 == 18
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"모코이군은 원숭이처럼 잘 피한다구?",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;전투 승리
-ELSEIF TFLAG:전투이벤트 == 90	
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"팡파레를 울리자구、친구♪",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;레벨 업했다
-ELSEIF TFLAG:전투이벤트 == 91
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"모코이군도 커질 수 있어",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
-
+IF TFLAG:전투이벤트 == 2
+;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
 
 
 @BATTLE_MESSAGE_K453,ARG,ARG:1 = 0
-;통상공격
-IF CFLAG:ARG:입력행동 == 0
-	IF RAND:2 == 0
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"ボク의 부메랑은 조금 아플거야",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ELSE
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"날라까기를 받아봐~",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDIF
-;비구계
-ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
-	IF CFLAG:ARG:입력행동 == 115
-	;모코이부메랑
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"ボク의 십팔번! 부메랑 댄스으~!",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ELSE
-	;그 외
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"날라까기 스킬이야~ 아마 끝내줄거야♪",72,LEFT%┃
-		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDIF
-;타격계
-ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"모코이군- 펀치!",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;전술계
-ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"ボク는 머리아픈 공격은 싫어어",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;파티 전원회복
-ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"ボク의 손은 약손이야 친구~",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;방어계
-ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"창이 있으면 방패가 있는 법이야 チミ",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ENDIF
+
+;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
+;IF CFLAG:ARG:입력행동 == 
+;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;	PRINTFORML ┃%"",72,LEFT%┃
+;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+;ELSEIF ARG:1 > 0
+	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
+
+;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+;	;사용한 스킬의 이름을 LOCALS에 대입
+;	LOCALS = %RESULTS%
+
+;	SELECTCASE ARG:1
+;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"영맹")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"교활")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"잔학")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"현명")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"천사")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"타천사")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"우애")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;상태변화로는 교만 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"교만")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;특수로는 냉정 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"냉정")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
+;		CASE GETNUM(TALENT,"우둔")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;허심 보유자는 최저 ２만큼 충성도가 상승
+;		CASE GETNUM(TALENT,"허심")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;	ENDSELECT
+;ELSE
+;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
+;ENDIF
 

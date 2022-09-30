@@ -8,29 +8,30 @@
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2011/01/20		名無し					新規作成　애무の最初まで埋める
-;	002		2011/01/23		名無し＋코시로구상の人	코시로구상の人の기승위구상取り込み
-;													애무계とコミュニケーション系を適当に埋める
+;	001		2011/01/20		名無し					新規作成　愛撫の最初まで埋める
+;	002		2011/01/23		名無し＋古代口上の人	古代口上の人の騎乗位口上取り込み
+;													愛撫系とコミュニケーション系を適当に埋める
 ;	003		2011/01/25		名無し					どこ埋めたのか判然としなくなってきた
-;	004		2011/01/28		名無し					0.280用수정ファイル２と同期
+;	004		2011/01/28		名無し					0.280用修正ファイル２と同期
 ;													既存の部分に追記
 ;	005		2011/01/27		ななし					BATTLE_MESSAGE_K1408_1の引数を新しいフォーマットに対応
 ;	006		2011/01/31		名無し					0.281R1と同期
-;													각인系と初めて～系を埋め、ほかもちょっとづつ追記＆패턴増やす
-;													연모の方向性を転向、呪いが解けたお姫様的な패턴に
-;	007		2011/02/03		名無し					모무노후から변이したときに소질が其のまんまなのを구상のほうで수정するように
-;													정상위と後輩位、촉수소환と촉수삽입埋める
-;													できるだけ_Rename.csvの記述を使うように변경
-;	008		2011/02/08		名無し					0.281R1+수정４と同期、加筆
+;													刻印系と初めて～系を埋め、ほかもちょっとづつ追記＆パターン増やす
+;													恋慕の方向性を転向、呪いが解けたお姫様的なパターンに
+;	007		2011/02/03		名無し					モムノフから変異したときに素質が其のまんまなのを口上のほうで修正するように
+;													正常位と後輩位、触手召喚と触手挿入埋める
+;													できるだけ_Rename.csvの記述を使うように変更
+;	008		2011/02/08		名無し					0.281R1+修正４と同期、加筆
 ;	009		2011/02/18		名無し					0.283と同期、加筆
-;	010		2011/06/14		IMI						구상適用選択肢추가
+;	010		2011/06/14		IMI						口上適用選択肢追加
+;	010		2020/11/04		Kz					乳首責め加筆
 ;-------------------------------------------------
-;○○구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
-;1408=1408、아라하바키구상です。
+;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;1408=1408、アラハバキ口上です。
 ;ライセンスフリー
 ;コンセプトは自由
 ;
-;なお、조교初回の구상は【여신転生】eraMegaten【페르세포네LV16】>>586を参考にしております
+;なお、調教初回の口上は【女神転生】eraMegaten【ペルセポネLV16】>>586を参考にしております
 ;問題のある場合はご連絡ください
 ;
 ;メモ
@@ -85,7 +86,7 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 아라하바키個人구상
+PRINTFORML 아라하바키 개인 구상
 ;구상설명문
 PRINTFORML  　이 구상은 당신이 생각하는 이미지와 매우 다를 수 있습니다.
 
@@ -144,8 +145,8 @@ PRINTFORML  　이 구상은 당신이 생각하는 이미지와 매우 다를 �
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0
-	;もし모무노후から변이したせいで소질がそのままだったらここで直す
-	;とりあえず꿋꿋함＆솔직함＆보수적＆헌신적な악마は모무노후しかいないだろうと思うことにする
+	;もしモムノフから変異したせいで素質がそのままだったらここで直す
+	;とりあえず気丈＆素直＆保守的＆献身的な悪魔はモムノフしかいないだろうと思うことにする
 	IF TALENT:12 && TALENT:13 && TALENT:24 && TALENT:63
 		PRINTFORMW 모무노후를 동료마로 하고부터 얼마만큼의 시간이 흘렀을까――
 		PRINTFORMW 그는 힘을 모아、믿음직한 동료마로서 이쪽에 봉사해주고 있다。
@@ -166,8 +167,8 @@ IF CFLAG:201 == 0
 		PRINTFORMW 「주사위는 던져졌다！　오키나와니까！　그럼 조★교 스타ー트！」
 		PRINTFORMW 아、하는 겁니까、조교。
 		
-		;소질を아라하바키仕様に변경する
-		;잔학はもう受け継いでるはず
+		;素質をアラハバキ仕様に変更する
+		;残虐はもう受け継いでるはず
 		
 		TALENT:꿋꿋함 = 0
 		TALENT:솔직함 = 0
@@ -497,13 +498,13 @@ RETURN 0
 DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
-	;見る機会が多いところだから패턴増やそう
+	;見る機会が多いところだからパターン増やそう
 	
-	;고통각인があるなら
+	;苦痛刻印があるなら
 	IF MARK:0 >= 1
 		PRINTFORMW 조교를 끝낸 %CALLNAME%의 전신이 쩌쩍 금이 가고、틈새로부터 공기가 분출했다。
 		PRINTFORMW 아무래도 독가스인 것 같다。
-	;고통がなくて쾌락각인があったら
+	;苦痛がなくて快楽刻印があったら
 	ELSEIF MARK:1 >= 1
 		PRINTFORML 「벼 별로 기분 좋거나 하지 않았으니까！」
 		PRINTFORML 「%CSTR:이인칭%가 너무 불쌍해서 어울려준거야！」
@@ -1045,13 +1046,27 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;7,유두괴롭히기
+;7,유두자극
 ;-------------------------------------------------
 	CASE 7
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:307 == 0
-			PRINTFORMW 
+			PRINTFORM 乳首を捻りチューニングを合わせていくと%CALLNAME%の口から突然、
+			;昼
+			IF TIME == 1
+				PRINTFORMW 
+				PRINTFORML 「乳頭の色は！？」
+				PRINTFORMW という落語家の声が聞こえてきた。
+			;夜
+			ELSEIF TIME == 3
+				PRINTFORMW ビンゴの番号を読み上げるモヒカンの局アナの声が聞こえてきた。
+			;그 이외
+			ELSE
+				PRINTFORMW 交通情報が聞こえてきた。
+				PRINTFORML 
+				PRINTFORMW 「本日の首都高湾岸線、羽田インターチェンジ付近でオボログルマによる接触事故のため、3㎞の渋滞です」
+			ENDIF
 			CFLAG:307 = 1
 		;2번째 이후
 		ELSE
@@ -1070,11 +1085,11 @@ SELECTCASE SELECTCOM
 				CFLAG:307 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW 乳首を捻れば捻るほどどこかにいるキャロルJのギターのエフェクトが強くなっていく。
 				CFLAG:307 = 3
 			;그 이외
 			ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 金庫の鍵開け業者になった気分だ。
 				CFLAG:307 = 2
 			ENDIF
 		ENDIF
@@ -1461,7 +1476,7 @@ SELECTCASE SELECTCOM
 			PRINTFORML 香　釈　得　花　其清
 			PRINTFORML 亭　春　君　傾　　平
 			PRINTFORML 北　風　王　国　三調
-			PRINTFORML 寄　無　오비　両　　詞
+			PRINTFORML 寄　無　帯　両　　詞
 			PRINTFORML 欄　限　笑　相　　　
 			PRINTFORML 干　恨　看　歓　　　
 			PRINTFORMW 
@@ -1480,16 +1495,16 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:320 == 0
-			;연모で매도ってそりゃ남편婦喧嘩ですよ
+			;연모で罵倒ってそりゃ夫婦喧嘩ですよ
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 계기는 매우 사소한 일이었다.
-					;가사がヘタなら요리がまずい
+					;家事がヘタなら料理がまずい
 					IF ABL:12 < 3
 						PRINTFORMW 오늘 아침의 된장국에 국물이 들어 있지 않았던 것을 지적했던 것이다.
-					;歌が下손なら耳障り
+					;歌が下手なら耳障り
 					ELSEIF ABL:14 < 2
 						PRINTFORMW %CALLNAME%가 음치라고 말했던 것이다.
-					;아이がいるなら아이のこと
+					;子供がいるなら子供のこと
 					;どれも該当しないなら身体の相性
 						PRINTFORMW 최근 밤의 생활이 잘 맞지 않는 것 같은 생각이 든다.
 					ELSE
@@ -1503,7 +1518,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 「……%CSTR:일인칭%는、%CSTR:이인칭%를 사랑하고 있는데」
 				PRINTFORMW 「어째서 그렇게 심한 말 하는거야……」
 				PRINTFORMW 결국,%CALLNAME%가 기분을 푸는데는 꽤 시간이 걸렸다.
-
+				
 			ELSE
 				PRINTFORMW %CALLNAME:MASTER%가 잔뜩 쌓인 불만을 털어 놓자、%CALLNAME%의 표면에 문자가 떠오르기 시작했다.
 				PRINTFORMW %CALLNAME:MASTER%가 꺼낸 말이었다.
@@ -1658,7 +1673,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 	;上でも書いたけど
-	;いかなる場合であろうと、40,로터を사용したら道具を使った順番を초기化する。
+	;いかなる場合であろうと、40,ローターを使用したら道具を使った順番を初期化する。
 	DRAWLINE
 	PRINTFORMW 다음의 도구는 무엇일까.
 	PRINTFORMW 선택사항은 여러가지 있지만 과연……
@@ -1667,7 +1682,7 @@ SELECTCASE SELECTCOM
 	CFLAG:500 = 1
 	DRAWLINE
 ;-------------------------------------------------
-;41,Ｅ안마기
+;41,전기마사지기
 ;-------------------------------------------------
 	CASE 41
 		CALL TRAIN_MESSAGE
@@ -1728,7 +1743,7 @@ SELECTCASE SELECTCOM
 ;42,클리캡
 ;-------------------------------------------------
 	CASE 42
-		IF TEQUIP:11 == 0
+		IF TEQUIP:11 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:324 == 0
@@ -1760,11 +1775,11 @@ SELECTCASE SELECTCOM
 				ELSEIF CFLAG:324 < 2 || FLAG:7 == 2
 					PRINTFORMW  앞으로 칠백오십만년 기다리고 나서 한번 더 와 주세요.
 					PRINTFORMW 진짜 대답을 알려 드리겠습니다.
-					
+
 					CFLAG:324 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:11 == 1
+		ELSE
 			IF CFLAG:324 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -1775,7 +1790,7 @@ SELECTCASE SELECTCOM
 ;43,오나홀
 ;-------------------------------------------------
 	CASE 43
-		IF TEQUIP:12 == 0
+		IF TEQUIP:12 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:325 == 0
@@ -1835,7 +1850,7 @@ SELECTCASE SELECTCOM
 					CFLAG:325 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:12 == 1
+		ELSE
 			IF CFLAG:325 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 오나홀을 빼자 %CALLNAME%의 자지는 눈 깜짝할 사이에 수그러들었다.
@@ -1855,7 +1870,7 @@ SELECTCASE SELECTCOM
 ;44,바이브
 ;-------------------------------------------------
 	CASE 44
-	IF TEQUIP:13 == 0
+	IF TEQUIP:13 == 1
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:326 == 0
@@ -1902,7 +1917,7 @@ SELECTCASE SELECTCOM
 				CFLAG:326 = 2
 			ENDIF
 		ENDIF
-	ELSEIF TEQUIP:13 == 1
+	ELSE
 		IF CFLAG:326 == 1 || FLAG:7 == 2
 			CALL TRAIN_MESSAGE
 			PRINTFORML 바이브를 뽑아 내자 시원한 소리를 내 날아가 버려, 그대로 벽에 박혔다.
@@ -1915,7 +1930,7 @@ SELECTCASE SELECTCOM
 ;45,애널바이브
 ;-------------------------------------------------
 	CASE 45
-	IF TEQUIP:14 == 0
+	IF TEQUIP:14 == 1
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:327 == 0
@@ -1959,7 +1974,7 @@ SELECTCASE SELECTCOM
 				CFLAG:327 = 2
 			ENDIF
 		ENDIF
-	ELSEIF TEQUIP:14 == 1
+	ELSE
 		IF CFLAG:327 == 1 || FLAG:7 == 2
 			CALL TRAIN_MESSAGE
 			PRINTFORMW 「아힝」
@@ -1982,7 +1997,7 @@ SELECTCASE SELECTCOM
 ;46,애널비즈
 ;-------------------------------------------------
 	CASE 46
-	IF TEQUIP:15 == 0
+	IF TEQUIP:15 == 1
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:328 == 0
@@ -2019,7 +2034,7 @@ SELECTCASE SELECTCOM
 				CFLAG:328 = 2
 			ENDIF
 		ENDIF
-	ELSEIF TEQUIP:15 == 1
+	ELSE
 		IF CFLAG:328 == 1 || FLAG:7 == 2
 			CALL TRAIN_MESSAGE
 			PRINTFORMW 뽑아 내도 뽑아 내도 끝이 안보이는 것은 왜냐……
@@ -2030,7 +2045,7 @@ SELECTCASE SELECTCOM
 ;47,유두캡
 ;-------------------------------------------------
 	CASE 47
-		IF TEQUIP:16 == 0
+		IF TEQUIP:16 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:329 == 0
@@ -2070,7 +2085,7 @@ SELECTCASE SELECTCOM
 					CFLAG:329 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:16 == 1
+		ELSE
 			IF CFLAG:329 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 꽤 떼어낼 수 없어서 난처했다.
@@ -2144,7 +2159,7 @@ SELECTCASE SELECTCOM
 ;49,착유기
 ;-------------------------------------------------
 	CASE 49
-		IF TEQUIP:17 == 0
+		IF TEQUIP:17 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:331 == 0
@@ -2186,7 +2201,7 @@ SELECTCASE SELECTCOM
 					CFLAG:331 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:17 == 1
+		ELSE
 			IF CFLAG:331 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 떼어내자 분출한 액체가 안개가 되어, 방을 채웠다.
@@ -3149,7 +3164,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					;기교や봉사정신がある
+					;技巧や奉仕精神がある
 					IF (ABL:기교 > 3) || (ABL:봉사정신 > 3)
 						PRINTFORMW 「응츄♡　낼름♡　음？　자지 기분 좋아？」
 						PRINTFORMW %CALLNAME%는 눈을 들어 이쪽을 올려보면서, 자지를 입에 가득 물고 봉사하고 있다.
@@ -3957,7 +3972,7 @@ SELECTCASE SELECTCOM
 ;105,아이마스크
 ;-------------------------------------------------
 	CASE 105
-		IF TEQUIP:18 == 0
+		IF TEQUIP:18 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:359 == 0
@@ -3991,7 +4006,7 @@ SELECTCASE SELECTCOM
 					CFLAG:359 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:18 == 1
+		ELSE
 			IF CFLAG:359 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -4002,7 +4017,7 @@ SELECTCASE SELECTCOM
 ;106,밧줄
 ;-------------------------------------------------
 	CASE 106
-		IF TEQUIP:19 == 0
+		IF TEQUIP:19 == 1
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:360 == 0
@@ -4036,7 +4051,7 @@ SELECTCASE SELECTCOM
 					CFLAG:360 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:19 == 1
+		ELSE
 			IF CFLAG:360 == 1 || FLAG:7 == 2
 				;CALL TRAIN_MESSAGE
 				IF TALENT:3 || TALENT:6
@@ -4057,7 +4072,7 @@ SELECTCASE SELECTCOM
 ;107,볼재갈
 ;-------------------------------------------------
 	CASE 107
-		IF TEQUIP:20 == 0
+		IF TEQUIP:20
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:361 == 0
@@ -4095,11 +4110,11 @@ SELECTCASE SELECTCOM
 					CFLAG:361 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:20 == 1
+		ELSE
 			IF CFLAG:361 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 『息が出来なくて死ぬかと思った』
-				PRINTFORMW と손話で言われた。
+				PRINTFORMW と手話で言われた。
 			ENDIF
 		ENDIF
 
@@ -4544,7 +4559,7 @@ SELECTCASE SELECTCOM
 ;146,관장기＋플러그
 ;-------------------------------------------------
 	CASE 146
-		IF TEQUIP:21 == 0
+		IF TEQUIP:21
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:375 == 0
@@ -4575,7 +4590,7 @@ SELECTCASE SELECTCOM
 					CFLAG:375 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:21 == 1
+		ELSE
 			IF CFLAG:375 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -4621,7 +4636,7 @@ SELECTCASE SELECTCOM
 ;148,확장벌룬
 ;-------------------------------------------------
 	CASE 148
-		IF TEQUIP:22 == 0
+		IF TEQUIP:22
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:377 == 0
@@ -4652,7 +4667,7 @@ SELECTCASE SELECTCOM
 					CFLAG:377 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:22 == 1
+		ELSE
 			IF CFLAG:377 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -4663,7 +4678,7 @@ SELECTCASE SELECTCOM
 ;149,애널전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 149
-		IF TEQUIP:23 == 0
+		IF TEQUIP:23
 			;처음
 			IF CFLAG:378 == 0
 				CALL TRAIN_MESSAGE
@@ -4683,7 +4698,7 @@ SELECTCASE SELECTCOM
 				CALL TRAIN_MESSAGE
 				CFLAG:378 = 2
 			ENDIF
-		ELSEIF TEQUIP:23 == 1
+		ELSE
 			IF CFLAG:378 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 그렇게 해서 우리들은 1854년의 뉴저지에 도착했다……
@@ -4694,7 +4709,7 @@ SELECTCASE SELECTCOM
 ;150,유방전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 150
-		IF TEQUIP:24 == 0
+		IF TEQUIP:24
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:379 == 0
@@ -4705,14 +4720,14 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 
 				CFLAG:379 = 2
 			ENDIF
-		ELSEIF TEQUIP:24 == 1
+		ELSE
 			IF CFLAG:379 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;151,뱀장어목욕탕　복종, 예속만
+;151,뱀장어욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 151
 		CALL TRAIN_MESSAGE
@@ -4734,7 +4749,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;152,벌레목욕탕　복종, 예속만
+;152,벌레욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 152
 		CALL TRAIN_MESSAGE
@@ -4755,7 +4770,7 @@ SELECTCASE SELECTCOM
 ;160,촉수소환
 ;-------------------------------------------------
 	CASE 160
-		IF TEQUIP:25 == 0
+		IF TEQUIP:25
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:382 == 0
@@ -4818,7 +4833,7 @@ SELECTCASE SELECTCOM
 					CFLAG:382 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:25 == 1
+		ELSE
 			IF CFLAG:382 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 촉수！　하우스！
@@ -5128,7 +5143,7 @@ SELECTCASE SELECTCOM
 ;168,촉수구욕
 ;-------------------------------------------------
 	CASE 168
-		IF TEQUIP:36 == 0
+		IF TEQUIP:36
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:390 == 0
@@ -5159,7 +5174,7 @@ SELECTCASE SELECTCOM
 					CFLAG:390 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:36 == 1
+		ELSE
 			IF CFLAG:390 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -5276,7 +5291,7 @@ SELECTCASE SELECTCOM
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
 				;薬を飲ませると%CALLNAME%は身体中の穴という穴から体液を垂れ流して絶命した。
 				;薬を間違えただろうか？
-				;「この門を通る者、모든希望を捨てよ！」
+				;「この門を通る者、全ての希望を捨てよ！」
 				;しばらくするとよみがえった。
 				PRINTFORMW Σουφρﾎνω%CALLNAME% και ｮταν ｭναﾂ δραπｭτηﾂ μｭχρι θανｬτου στο υγρﾌ σﾎμα απﾌ κｬθε τρﾍπα.
 				PRINTFORMW Τι λｬθοﾂ φｬρμακο？
@@ -5333,7 +5348,7 @@ SELECTCASE SELECTCOM
 ;183,비디오카메라,
 ;-------------------------------------------------
 	CASE 183
-		IF TEQUIP:28 == 0
+		IF TEQUIP:28
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:395 == 0
@@ -5364,7 +5379,7 @@ SELECTCASE SELECTCOM
 					CFLAG:395 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:28 == 1
+		ELSE
 			IF CFLAG:395 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -5375,7 +5390,7 @@ SELECTCASE SELECTCOM
 ;184,야외플레이,
 ;-------------------------------------------------
 	CASE 184
-		IF TEQUIP:29 == 0
+		IF TEQUIP:29
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:396 == 0
@@ -5414,7 +5429,7 @@ SELECTCASE SELECTCOM
 					CFLAG:396 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:29 == 1
+		ELSE
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 돌아왔을 때의 안도감은 뭐라 말할 수 없었다……
@@ -5470,7 +5485,7 @@ SELECTCASE SELECTCOM
 ;186,수치플레이,
 ;-------------------------------------------------
 	CASE 186
-		IF TEQUIP:30 == 0
+		IF TEQUIP:30
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:398 == 0
@@ -5508,7 +5523,7 @@ SELECTCASE SELECTCOM
 					CFLAG:398 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:30 == 1
+		ELSE
 			IF CFLAG:398 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -5519,7 +5534,7 @@ SELECTCASE SELECTCOM
 ;187,목욕탕플레이,
 ;-------------------------------------------------
 	CASE 187
-		IF TEQUIP:31 == 0
+		IF TEQUIP:31
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:399 == 0
@@ -5554,7 +5569,7 @@ SELECTCASE SELECTCOM
 					CFLAG:399 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:31 == 1
+		ELSE
 			IF CFLAG:399 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -5565,7 +5580,7 @@ SELECTCASE SELECTCOM
 ;188,샤워,
 ;-------------------------------------------------
 	CASE 188
-		IF TEQUIP:32 == 0
+		IF TEQUIP:32
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:400 == 0
@@ -5596,7 +5611,7 @@ SELECTCASE SELECTCOM
 					CFLAG:400 = 2
 				ENDIF
 			ENDIF
-		ELSEIF TEQUIP:32 == 1
+		ELSE
 			IF CFLAG:400 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 
@@ -5604,10 +5619,10 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;189,신혼플레이,　연모, 친애만
+;189,새댁플레이,　연모, 친애만
 ;-------------------------------------------------
 	CASE 189
-		IF TEQUIP:33 == 0
+		IF TEQUIP:33
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:401 == 0
@@ -5623,7 +5638,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 텐션이 너무 오르는 것은 그대로이지만.
 				CFLAG:401 = 2
 			ENDIF
-		ELSEIF TEQUIP:33 == 1
+		ELSE
 			IF CFLAG:401 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				PRINTFORMW 에이프런을 벗으라고 말하자, %CALLNAME%는 옷자락을 꽉 쥐어 외로운 것 같은 표정을 띄웠다.
@@ -6281,11 +6296,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:416 == 0
-			PRINTFORMW 「모성回路接続　オールグリーン」
-			PRINTFORMW 「真の모성を개방する時が来たようです」
+			PRINTFORMW 「母性回路接続　オールグリーン」
+			PRINTFORMW 「真の母性を開放する時が来たようです」
 			PRINTFORMW 「母なる大地で眠りなさい」
 			PRINTFORMW まさか…本当に出るのか？
-			PRINTFORMW ギギギ…とおかしな音をたてて%CALLNAME%の硬質の厚い가슴板が回転し描かれた幾何学模様がぐるぐるとまわりはじめる
+			PRINTFORMW ギギギ…とおかしな音をたてて%CALLNAME%の硬質の厚い胸板が回転し描かれた幾何学模様がぐるぐるとまわりはじめる
 			PRINTFORMW それを見ていた%CALLNAME:MASTER%はゆっくりと意識が途切れるのを感じた
 			CFLAG:416 = 1
 		;2번째 이후
@@ -6548,7 +6563,7 @@ IF CFLAG:106
 	;콘돔
 	ELSEIF CFLAG:106 == 9
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
-		IF TFLAG:2 > 0 && SELECTCOM != 62 && SELECTCOM != 63 && SELECTCOM != 67 && SELECTCOM != 70 && SELECTCOM != 71
+		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72)
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
 				PRINTFORMW 
@@ -6612,7 +6627,7 @@ IF TFLAG:9 == 1
 ENDIF
 
 ;-------------------------------------------------
-;조수를범해서사정
+;조수를범한다로 사정
 ;-------------------------------------------------
 IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A
@@ -8073,19 +8088,19 @@ SELECTCASE TFLAG:13
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
 				RETURN 0
 			CALL EVENT_MESSAGE
-			;임신대상をTARGETに격납し、부親は奴隷はV、조수はWとする
+			;임신대상을 TARGET에 격납하고, 부친은 노예는 V, 조수는 W로 한다
 			;붕괴되어 버린 경우
 			IF TALENT:9 == 1
 				PRINTFORMW 「이제 무리, 무리다 이거.」
-			;부親が主人で모親が연모か친애持ち
+			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 				PRINTFORMW 
-			;부親が奴隷か조수で모親が음란か창부持ち
+			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
-				;부親(조수）との相性が125より大きい場合
+				;부친(조수）과의 상성이 125보다 큰 경우
 				IF CFLAG:102 == 2 && GET_RELATION(TARGET, W) > 125
 					PRINTFORMW 
-			 	;부親(奴隷）との相性が125より大きい場合
+			 	;부친(노예）과의 상성이 125보다 큰 경우
 				ELSEIF CFLAG:102 == 3 && GET_RELATION(TARGET, V) > 125
 					PRINTFORMW 
 				ELSE
@@ -8270,7 +8285,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「いやだ、いやだいやだいやだああああ！　絶対にいや、離れたくない！」
 					PRINTFORMW 「だって、あの暗闇から解き放ってくれた！　助けてくれたのに！」
 					PRINTFORMW 「やっと%CSTR:일인칭%のこと分かってくれる人を見つけたと思ったのに！」
-					PRINTFORMW 「ずっと조교してくれるって……いってたのに……」
+					PRINTFORMW 「ずっと調教してくれるって……いってたのに……」
 					PRINTFORMW 「なんでもするよう、%CSTR:이인칭%が望むことなら何でも……！」
 					PRINTFORMW 「だからお願い……お願いだよ……一緒にいようよ……」
 					PRINTFORMW 「いやだよ……あれになんか戻りたくないよぅ……」
@@ -8278,10 +8293,10 @@ SELECTCASE TFLAG:13
 					PRINTFORMW そうして、%CALLNAME%は物言わぬ土人形になった。
 					PRINTFORMW かつての彼女の面影はもうなくなってしまった。
 					PRINTFORMW ――いや、何かをなくしたのは自分のほうかもしれない。
-					PRINTFORMW 마법はもう解けてしまった。
+					PRINTFORMW 魔法はもう解けてしまった。
 					PRINTFORMW この土偶がどれほどの値で売れるだろうか。
-					PRINTFORMW 土偶を検分しながら、%CALLNAME:MASTER%は사고を集中しようとした。
-					PRINTFORMW どうしても、上손く行かなかった。
+					PRINTFORMW 土偶を検分しながら、%CALLNAME:MASTER%は思考を集中しようとした。
+					PRINTFORMW どうしても、上手く行かなかった。
 				;음란, 창부+반발각인Lv3 미만
 				ELSEIF (TALENT:4 || TALENT:7) && MARK:3 < 3
 					PRINTFORMW 
@@ -8289,8 +8304,8 @@ SELECTCASE TFLAG:13
 				ELSEIF (TALENT:5 || TALENT:8) && MARK:3 < 3
 					PRINTFORMW 知り合いの古美術商が中々いい値段で引き取ってくれた。
 					PRINTFORMW 数日後、国立博物館のパンフレットが届いた。
-					PRINTFORMW 「日本코시로の美」と題された展示が紹介されており、その中に%CALLNAME%の姿もあった。
-					PRINTFORMW 顔中を顔料によって彩られ、진바오리をまとって逆立ちする%CALLNAME%は発光していた。
+					PRINTFORMW 「日本古代の美」と題された展示が紹介されており、その中に%CALLNAME%の姿もあった。
+					PRINTFORMW 顔中を顔料によって彩られ、陣羽織をまとって逆立ちする%CALLNAME%は発光していた。
 					PRINTFORMW 屹立する怒張の下には湿った茂みが堂々とさらけ出され、触れようとする客たちが列を成している様子も写っていた。
 					PRINTFORMW 完全に封じたと思っていたが、別にそんなことはなかった。
 					PRINTFORMW だがもうどうしようもない。せめてこちらにとばっちりが飛んでこないよう祈ることしか出来ない。

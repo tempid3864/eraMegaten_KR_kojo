@@ -41,7 +41,7 @@ IF TFLAG:전투이벤트 == 2
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%CSTR:일인칭 + "は손ぬるくないぜ？",72,LEFT%┃
+		PRINTFORML ┃%CSTR:일인칭 + "は手ぬるくないぜ？",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
@@ -58,9 +58,9 @@ IF TFLAG:전투이벤트 == 3
 	ENDIF
 ENDIF
 
-;공격した
+;攻撃した
 IF TFLAG:전투이벤트 == 11
-	;공격して倒した
+	;攻撃して倒した
 	IF BASE:(ARG:1):ＨＰ <= 0
 		IF 함락(ARG) && RAND:2
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -90,7 +90,7 @@ IF TFLAG:전투이벤트 == 11
 			PRINTFORML ┃%"さっさとくたばっちまいな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;小데미지
+	;小ダメージ
 	ELSEIF 데미지비율(ARG:1, ARG:2) > 10
 		IF RAND:2
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -101,7 +101,7 @@ IF TFLAG:전투이벤트 == 11
 			PRINTFORML ┃%"退屈させないでくれよ？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;微데미지
+	;微ダメージ
 	ELSEIF 데미지비율(ARG:1, ARG:2) > 0
 		IF RAND:2
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -112,16 +112,16 @@ IF TFLAG:전투이벤트 == 11
 			PRINTFORML ┃%"頑丈なヤツだな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;무효화された
+	;무효化された
 	ELSEIF ARG:2 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"かっ、硬いぃ～～～",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;공격したけど흡수された
+	;攻撃したけど吸収された
 	ELSEIF ARG:2 < 0
 		IF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"공격が吸い込まれちまった！？",72,LEFT%┃
+			PRINTFORML ┃%"攻撃が吸い込まれちまった！？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -131,7 +131,7 @@ IF TFLAG:전투이벤트 == 11
 	ENDIF
 ENDIF
 
-;피탄
+;被弾
 IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 	;被弾（死亡）
 	IF BASE:ARG:ＨＰ <= 0
@@ -173,7 +173,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
-	;이악물기（擬似的に無理やり動かしてます）
+	;食いしばり（擬似的に無理やり動かしてます）
 	ELSEIF BASE:ARG:ＨＰ == 1
 		IF RAND:2 == 0
 			;「コネクト」
@@ -189,7 +189,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 	ELSEIF ARG:2 == 0
 		IF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"손札は割れてるんだよ、マヌケ",72,LEFT%┃
+			PRINTFORML ┃%"手札は割れてるんだよ、マヌケ",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -226,7 +226,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
-	;피탄（中데미지）
+	;被弾（中ダメージ）
 	ELSEIF 데미지비율(ARG, ARG:2) > 20
 		IF RAND:4 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -242,10 +242,10 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"손札を読み間違えたか…！",72,LEFT%┃
+			PRINTFORML ┃%"手札を読み間違えたか…！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;피탄（小데미지）
+	;被弾（小ダメージ）
 	ELSEIF 데미지비율(ARG, ARG:2) > 0
 		IF RAND:4 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -268,7 +268,7 @@ IF TFLAG:전투이벤트 == 12 || TFLAG:전투이벤트 == 14
 	ELSEIF ARG:2 < 0
 		IF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"공격がソウルジェムに吸い込まれちまった！？",72,LEFT%┃
+			PRINTFORML ┃%"攻撃がソウルジェムに吸い込まれちまった！？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -290,7 +290,7 @@ IF TFLAG:전투이벤트 == 15
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
-;반사
+;反射
 IF TFLAG:전투이벤트 == 16
 	IF RAND:2 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -298,7 +298,7 @@ IF TFLAG:전투이벤트 == 16
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"ちっとは머리冷やせっての、マヌケ。",72,LEFT%┃
+		PRINTFORML ┃%"ちっとは頭冷やせっての、マヌケ。",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
@@ -318,16 +318,16 @@ IF TFLAG:전투이벤트 == 17
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"손こずらせやがって！",72,LEFT%┃
+		PRINTFORML ┃%"手こずらせやがって！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
 
-;회피
+;回避
 IF TFLAG:전투이벤트 == 18
 	IF RAND:4 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"손ぬる過ぎるんだよ！",72,LEFT%┃
+		PRINTFORML ┃%"手ぬる過ぎるんだよ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -351,18 +351,18 @@ ENDIF
 ;사용한 스킬의 이름을 LOCALS에 대입
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 LOCALS = %RESULTS%
-;사용した스킬の相称번호をLOCALに代入
+;使用したスキルの相称番号をLOCALに代入
 CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 LOCAL = RESULT
-;사용した스킬が물리か마법かをLOCAL:1に代入
-;1:물리　2:마법
+;使用したスキルが物理か魔法かをLOCAL:1に代入
+;1:物理　2:魔法
 CALLFORM SKILL_DAMAGETYPE_{CFLAG:ARG:입력행동}
 LOCAL:1 = RESULT
 
-;以下공격구상
+;以下攻撃口上
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-;통상공격
+;통상攻撃
 IF CFLAG:ARG:입력행동 == 0
 	IF RAND:4 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -382,15 +382,15 @@ IF CFLAG:ARG:입력행동 == 0
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ;=====================================================================================
-;特別구상のある行動群
-;롯소・판타즈마
+;特別口上のある行動群
+;ロッソ・ファンタズマ
 ELSEIF CFLAG:ARG:입력행동 == 2995
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		SELECTCASE RAND:3
 			CASE 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　アイツのために、もう一度！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　アイツのために、もう一度！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASE 1
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -398,7 +398,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASEELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、好きなヤツの為に！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　今一度、好きなヤツの為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
 	;음란, 창부
@@ -406,7 +406,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 		SELECTCASE RAND:3
 		CASE 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　誰よりも気持ちよくなるために、もう一度！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　誰よりも気持ちよくなるために、もう一度！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASE 1
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -414,7 +414,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASEELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、アタシの욕망の為に！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　今一度、アタシの欲望の為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
 	;복종, 예속
@@ -422,7 +422,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 		SELECTCASE RAND:3
 		CASE 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　贖罪のために、もう一度！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　贖罪のために、もう一度！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASE 1
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -430,74 +430,74 @@ ELSEIF CFLAG:ARG:입력행동 == 2995
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		CASEELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"『롯소・판타즈마』！　今一度、罪を償う為に！",72,LEFT%┃
+			PRINTFORML ┃%"『ロッソ・ファンタズマ』！　今一度、罪を償う為に！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDSELECT
 	;그 이외
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"ちくしょう、またこの마법を使う事になるのかよ…",72,LEFT%┃
+		PRINTFORML ┃%"ちくしょう、またこの魔法を使う事になるのかよ…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;스쿠왈타토레
+;スクワルタトーレ
 ELSEIF CFLAG:ARG:입력행동 == 2996
 	SELECTCASE RAND:3
 	CASE 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"借りるぜ、사야카！　『스쿠왈타토레』！！！",72,LEFT%┃
+		PRINTFORML ┃%"借りるぜ、さやか！　『スクワルタトーレ』！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	CASE 1
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"힘を借してくれ、사야카！　『스쿠왈타토레』！！！",72,LEFT%┃
+		PRINTFORML ┃%"力を借してくれ、さやか！　『スクワルタトーレ』！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	CASEELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"스쿠왈타토레』！！！　…やっぱ、" + CSTR:일인칭 + "らしくねぇや。",72,LEFT%┃
+		PRINTFORML ┃%"スクワルタトーレ』！！！　…やっぱ、" + CSTR:일인칭 + "らしくねぇや。",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDSELECT
-;티로・피날레
+;ティロ・フィナーレ
 ELSEIF CFLAG:ARG:입력행동 == 2997
 	SELECTCASE RAND:3
 	CASE 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"マミさんの技を" + CSTR:일인칭 + "が使うなんてね…　『티로・피날레』！！！",72,LEFT%┃
+		PRINTFORML ┃%"マミさんの技を" + CSTR:일인칭 + "が使うなんてね…　『ティロ・フィナーレ』！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	CASE 1
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"てぃ、てぃ、てぃ、　///っ　…『티로・피날레』！！！",72,LEFT%┃
+		PRINTFORML ┃%"てぃ、てぃ、てぃ、　///っ　…『ティロ・フィナーレ』！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	CASEELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"借りるぜ、마미！　『티로・피날레』！！！",72,LEFT%┃
+		PRINTFORML ┃%"借りるぜ、マミ！　『ティロ・フィナーレ』！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDSELECT
-;まどマギポータブル版より이름を拝借
-;산바람
+;まどマギポータブル版より名前を拝借
+;ヤマオロシ
 ELSEIF CFLAG:ARG:입력행동 == 1
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"『突き』！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;데스바운드
+;デスバウンド
 ELSEIF CFLAG:ARG:입력행동 == 10
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"『질풍迅雷』！",72,LEFT%┃
+	PRINTFORML ┃%"『疾風迅雷』！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;카스미切り
+;かすみ切り
 ELSEIF CFLAG:ARG:입력행동 == 25
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"『鉄砕채찍』！",72,LEFT%┃
+	PRINTFORML ┃%"『鉄砕鞭』！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;백열찌르기
+;百烈突き
 ELSEIF CFLAG:ARG:입력행동 == 229
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"『異端審問』！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;천열찌르기
+;千烈突き
 ELSEIF CFLAG:ARG:입력행동 == 230
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"『断罪の磔柱』！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;어설트다이브
+;アサルトダイブ
 ELSEIF CFLAG:ARG:입력행동 == 328
 	PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"『魔女に与える鉄槌』！",72,LEFT%┃
@@ -514,11 +514,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	IF CFLAG:ARG:타겟 > 6
 		IF RAND:2
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"리카バリーなんて" + CSTR:일인칭 + "の仕事じゃないがね…",72,LEFT%┃
+			PRINTFORML ┃%"リカバリーなんて" + CSTR:일인칭 + "の仕事じゃないがね…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"회복마법。　" + CSTR:일인칭 + "もこんくらいは使えるのさ",72,LEFT%┃
+			PRINTFORML ┃%"回復魔法。　" + CSTR:일인칭 + "もこんくらいは使えるのさ",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;リカーム、サマリカーム
@@ -544,7 +544,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
-	;리캄도라
+	;リカームドラ
 	ELSEIF CFLAG:ARG:입력행동 == 419
 		IF 함락(ARG)
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -552,7 +552,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"これも…계약の代償ってやつか…",72,LEFT%┃
+			PRINTFORML ┃%"これも…契約の代償ってやつか…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	ELSE
@@ -569,7 +569,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 		ELSE
 			IF RAND:2
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"大丈남편か？しっかりしろよ",72,LEFT%┃
+				PRINTFORML ┃%"大丈夫か？しっかりしろよ",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -582,7 +582,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;カジャ系
 	IF RANGE(CFLAG:ARG:입력행동,501, 504)
-		;스쿠・카쟈
+		;スク・カジャ
 		IF CFLAG:ARG:입력행동 == 502
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"食うかい？",72,LEFT%┃
@@ -600,24 +600,24 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;デクンダ
 	ELSEIF CFLAG:ARG:입력행동 == 505
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"うっとうしい마법なんざ、こんなものよ！",72,LEFT%┃
+		PRINTFORML ┃%"うっとうしい魔法なんざ、こんなものよ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;デカジャ
 	ELSEIF CFLAG:ARG:입력행동 == 509
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"調子に乗るなよ、それ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;기합
+	;気合
 	ELSEIF CFLAG:ARG:입력행동 == 511
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"はあああっ…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;컨센트레이트
+	;コンセントレイト
 	ELSEIF CFLAG:ARG:입력행동 == 512
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"마력を集中させ、정신を統一…",72,LEFT%┃
+		PRINTFORML ┃%"魔力を集中させ、精神を統一…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;포효
+	;雄叫び
 	ELSEIF CFLAG:ARG:입력행동 == 514
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"うぉらああああああっ！",72,LEFT%┃
@@ -627,17 +627,17 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"はんっ、チャラチャラ踊ってんじゃねぇよウスノロ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;리벨리온 || 레볼루션
+	;リベリオン || レボリューション
 	ELSEIF CFLAG:ARG:입력행동 == 516 || CFLAG:ARG:입력행동 == 517
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"いっちょ派손にいこうじゃない！",72,LEFT%┃
+		PRINTFORML ┃%"いっちょ派手にいこうじゃない！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;포그브레스
+	;フォッグブレス
 	ELSEIF CFLAG:ARG:입력행동 == 520
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"（この霧は、きっと" + CSTR:일인칭 + "の心象風景だ…）",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;베어내기
+	;切り落とし
 	ELSEIF CFLAG:ARG:입력행동 == 534
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"見えたぜ、テメエの血がたっぷり詰まった心臓が…",72,LEFT%┃
@@ -655,7 +655,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	ENDIF
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99) || LOCAL == 0
-	;베놈재퍼
+	;ベノンザッパー
 	IF CFLAG:ARG:입력행동 == 8
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"毒濡れの槍だ、受けな！",72,LEFT%┃
@@ -753,7 +753,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999) || LOCAL == 6
 ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099) || LOCAL == 7
 		IF (LOCAL:1 ==1) && RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"충격波の槍だ！",72,LEFT%┃
+			PRINTFORML ┃%"衝撃波の槍だ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -783,11 +783,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199) || LOCAL == 8
 ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299) || LOCAL == 9
 		IF 함락(ARG)
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%CSTR:이인칭 + "のためだ。幻깨달음마법を今一度！",72,LEFT%┃
+				PRINTFORML ┃%CSTR:이인칭 + "のためだ。幻覚魔法を今一度！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"ちくしょう、また幻깨달음마법を使うことになるのか…",72,LEFT%┃
+				PRINTFORML ┃%"ちくしょう、また幻覚魔法を使うことになるのか…",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ;파마
@@ -807,7 +807,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399) || LOCAL == 10
 		ENDIF
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499) || LOCAL == 11
-		;무도系
+		;ムド系
 		IF RANGE(CFLAG:ARG:입력행동,1401, 1402) || RANGE(CFLAG:ARG:입력행동,1412, 1414)
 			IF RAND:2 == 0
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -825,7 +825,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499) || LOCAL == 11
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"呪われちまえ、마법소녀にな！",72,LEFT%┃
+				PRINTFORML ┃%"呪われちまえ、魔法少女にな！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -841,7 +841,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599) || LOCAL == 12
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"…自分で言うのもなんだが、これどういう마법なんだ？",72,LEFT%┃
+			PRINTFORML ┃%"…自分で言うのもなんだが、これどういう魔法なんだ？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -867,7 +867,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699) || LOCAL == 13
 ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799) || LOCAL == 14
 		IF (LOCAL:1 ==1) && RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"カ마이タチよ、槍に宿れ！",72,LEFT%┃
+			PRINTFORML ┃%"カマイタチよ、槍に宿れ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -882,11 +882,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799) || LOCAL == 14
 ELSEIF RANGE(CFLAG:ARG:입력행동,1801, 1899) || LOCAL == 15
 	IF (LOCAL:1 ==1) && RAND:2 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"槍よ、星の힘をまとえ！",72,LEFT%┃
+		PRINTFORML ┃%"槍よ、星の力をまとえ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"キ리카がこんなの使ってたな…",72,LEFT%┃
+		PRINTFORML ┃%"キリカがこんなの使ってたな…",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -900,9 +900,9 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999) || LOCAL == 16
 		PRINTFORML ┃%"熱線を、槍の形にまとめて…っと！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-		;『勇気』を『유귀』に変換するうろぶちワープロ
+		;『勇気』を『幽鬼』に変換するうろぶちワープロ
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"太陽よ！　愛に유귀を　与えてくれ！",72,LEFT%┃
+		PRINTFORML ┃%"太陽よ！　愛に幽鬼を　与えてくれ！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -916,10 +916,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099) || LOCAL == 17
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"独りぼっちは寂しいからな　道連れになりな",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;초메기도
+	;超メギド
 	ELSEIF CFLAG:ARG:입력행동 == 2022
 		PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"全힘！全開！　ぶっとびやがれぇーーーっ！！！",72,LEFT%┃
+		PRINTFORML ┃%"全力！全開！　ぶっとびやがれぇーーーっ！！！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		IF (LOCAL:1 ==1) && RAND:2 == 0
@@ -928,11 +928,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099) || LOCAL == 17
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"この마력、防げるもんなら防いでみな！",72,LEFT%┃
+			PRINTFORML ┃%"この魔力、防げるもんなら防いでみな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"こんな奥の손があるんだよ！",72,LEFT%┃
+			PRINTFORML ┃%"こんな奥の手があるんだよ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	ENDIF

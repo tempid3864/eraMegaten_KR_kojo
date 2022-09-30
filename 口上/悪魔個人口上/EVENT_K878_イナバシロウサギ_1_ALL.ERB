@@ -1,12 +1,12 @@
 ﻿;-------------------------------------------------
-;이나바흰토끼구상（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;イナバシロウサギ口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;関数コピペで製作しております。不具合等あるかもしれません。
 ;ピョンピョン言います。
 ;-------------------------------------------------
 
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;878とX2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;878와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 878, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -25,8 +25,8 @@
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
-;	001		2019/04/19		RKSI					新規作成：네코마타구상コンパチなんで似た部分多数。残骸もあるかも。
-;	002		2019/05/03		RKSI					암야검じゃなくて어둠속의기습だったので修正。
+;	001		2019/04/19		RKSI					新規作成：ネコマタ口上コンパチなんで似た部分多数。残骸もあるかも。
+;	002		2019/05/03		RKSI					暗夜剣じゃなくて闇討ちだったので修正。
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -35,7 +35,7 @@
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 口上の誤字・脱字の修正         |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
 ;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
@@ -60,9 +60,9 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 이나바흰토끼구상
+PRINTFORML イナバシロウサギ口上
 ;구상설명문
-PRINTFORML  ピョンピョン言う兎구상。女体化付き。
+PRINTFORML  ピョンピョン言う兎口上。女体化付き。
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（878을 캐릭터번호로 치환）
@@ -157,37 +157,37 @@ DRAWLINE
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 
 	KSTR:(K++) = 「むむっ！　%CSTR:12%ぴょん！　%CSTR:11%をこんな場所に呼び出すとは何事ぴょん！？」
-	KSTR:(K++) = 召喚されくるっと回ってポーズをとった%CALLNAME%は、なぜか소녀の姿だった。
+	KSTR:(K++) = 召喚されくるっと回ってポーズをとった%CALLNAME%は、なぜか少女の姿だった。
 	W:K = 1
 	KSTR:(K++) = まあ、飴玉の代金が浮いたと思えば問題ない。たぶん、きっと。
 	W:K = 1
-	KSTR:(K++) = 「？　あれ？　どうしたぴょん？　눈がマジぴょん？　わひゃあ！？」
-	KSTR:(K++) = %CALLNAME:MASTER%はポンと肩に손を置き、%CALLNAME%が눈を丸くしたところで押し倒す。
-	KSTR:(K++) = さあ、조교の始まりだ。
+	KSTR:(K++) = 「？　あれ？　どうしたぴょん？　目がマジぴょん？　わひゃあ！？」
+	KSTR:(K++) = %CALLNAME:MASTER%はポンと肩に手を置き、%CALLNAME%が目を丸くしたところで押し倒す。
+	KSTR:(K++) = さあ、調教の始まりだ。
 	CFLAG:201 = 1
-	GOTO 표시
+	GOTO 表示
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 	KSTR:(K++) = 「うー、いい加減にするぴょん！」
 	KSTR:(K++) = %CALLNAME:MASTER%はピョンピョン跳ねる%CALLNAME%の体を捕らえると、勢いをそのままにベッドにシュートした。
 	W:K = 1
-	KSTR:(K++) = 「な、なんて無駄の無い無駄に洗練された無駄な技ぴょん！　충격ほとんどなかったぴょん！」
+	KSTR:(K++) = 「な、なんて無駄の無い無駄に洗練された無駄な技ぴょん！　衝撃ほとんどなかったぴょん！」
 	CFLAG:201 = 2
-	GOTO 표시
+	GOTO 表示
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	KSTR:(K++) = 「ぴょーん！」
-	KSTR:(K++) = 조교部屋に入室すると、飛んでくる신발底が見えた。
+	KSTR:(K++) = 調教部屋に入室すると、飛んでくる靴底が見えた。
 	W:K = 1
-	KSTR:(K++) = %CALLNAME:MASTER%は중력に引かれて落下してくる"それ"の指向性だけを変えてやる。
+	KSTR:(K++) = %CALLNAME:MASTER%は重力に引かれて落下してくる"それ"の指向性だけを変えてやる。
 	W:K = 1
 	KSTR:(K++) = 「ぴょん！？」
 	KSTR:(K++) = 結果、%CALLNAME%はベッドにダンクされた。
-	KSTR:(K++) = 「ちょ、조교部屋にて%CSTR:12%は最強、ぴょん……がくっ！」
+	KSTR:(K++) = 「ちょ、調教部屋にて%CSTR:12%は最強、ぴょん……がくっ！」
 	W:K = 1
 	KSTR:(K++) = たたき起こしました。
 	CFLAG:201 = 3
-	GOTO 표시
+	GOTO 表示
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	KSTR:(K++) = 「ぴょん」
@@ -198,7 +198,7 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 	KSTR:(K++) = %CALLNAME:MASTER%は、ふふーんと鼻を鳴らす%CALLNAME%の首を固めてプロレス技をかけてやった。
 	KSTR:(K++) = 「ま、待つぴょーん、折れるぴょーん！？　ラーメンになっちゃうぴょーん！」
 	CFLAG:201 = 4
-	GOTO 표시
+	GOTO 表示
 ;함락
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
@@ -206,9 +206,9 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		IF CFLAG:미조교함락 == 1
 			;조교하지 않고 연모를 단 경우
 			KSTR:(K++) = 「あっ、%CSTR:12%ぴょん！」
-			KSTR:(K++) = 召喚された%CALLNAME%はなぜか소녀の姿であり、猛スピードでダッシュすると%CALLNAME:MASTER%の腹に激突してきた。
+			KSTR:(K++) = 召喚された%CALLNAME%はなぜか少女の姿であり、猛スピードでダッシュすると%CALLNAME:MASTER%の腹に激突してきた。
 			KSTR:(K++) = 「さあ、構うぴょん！　愛でるぴょん！　……どうしたぴょん？」
-			KSTR:(K++) = 問題ない、たださっき小腹が空いて입にしたサンドイッチが召喚されそうなだけである。
+			KSTR:(K++) = 問題ない、たださっき小腹が空いて口にしたサンドイッチが召喚されそうなだけである。
 			W:K = 1
 			KSTR:(K++) = 「うわぁ！？　な、なんか出たぴょーん！？？」
 			W:K = 1
@@ -216,16 +216,16 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			KSTR:(K++) = しばらくお待ち下さい......
 			KSTR:(K++) = 　　　　　　　　　　　　　　
 			W:K = 1
-			KSTR:(K++) = 「ひ、酷い눈にあったぴょん！　出会いがしらに%CSTR:11%にぶっかけとは、根性八十神ぴょん！」
+			KSTR:(K++) = 「ひ、酷い目にあったぴょん！　出会いがしらに%CSTR:11%にぶっかけとは、根性八十神ぴょん！」
 			KSTR:(K++) = いっしょに入浴して綺麗になった%CALLNAME%は、%CALLNAME:MASTER%と隣り合ってベッドに座りプリプリと怒っている。
 			KSTR:(K++) = 「まあでも、%CSTR:11%は心が広いから許してあげるぴょん」
 			KSTR:(K++) = そう言った%CALLNAME%は、%CALLNAME:MASTER%の膝の上にぴょんと乗っかってきた。
 			W:K = 1
-			KSTR:(K++) = 「代わりにいっぱい愛でるぴょん。まずはギューッとしてやさしく키스한다ぴょん！」
-			KSTR:(K++) =  クルリと回って%CALLNAME:MASTER%の首に손を回した%CALLNAME%の顔は、真っ赤になっていた。
+			KSTR:(K++) = 「代わりにいっぱい愛でるぴょん。まずはギューッとしてやさしくキスするぴょん！」
+			KSTR:(K++) =  クルリと回って%CALLNAME:MASTER%の首に手を回した%CALLNAME%の顔は、真っ赤になっていた。
 		ELSE
 			KSTR:(K++) = 「むむむ......ぴょん！」
-			KSTR:(K++) = 조교部屋の中で%CALLNAME%がなにやら考え込んでいる。
+			KSTR:(K++) = 調教部屋の中で%CALLNAME%がなにやら考え込んでいる。
 			KSTR:(K++) = 「%CSTR:12%、実は相談したい事があるぴょん」
 			W:K = 1
 			KSTR:(K++) = 「実は%CSTR:11%は%CSTR:12%の事を好きになってしまったらしいぴょん」
@@ -234,15 +234,15 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			KSTR:(K++) = %CALLNAME%は、そう言ってからチラリと%CALLNAME:MASTER%の顔を覗きこんでくる。
 			W:K = 1
 			KSTR:(K++) = 「やっぱりホントぴょん。%CSTR:11%は%CSTR:12%が大好きぴょん。もう離れられないぴょん」
-			KSTR:(K++) = 頬を真っ赤に染めた%CALLNAME%の머리を、%CALLNAME:MASTER%は優しく撫でてやった。
+			KSTR:(K++) = 頬を真っ赤に染めた%CALLNAME%の頭を、%CALLNAME:MASTER%は優しく撫でてやった。
 		ENDIF
 	;음란
 	ELSEIF TALENT:4
 		KSTR:(K++) = 「%CSTR:12%」
-		KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の太腿に濡れた가랑이を押し付けてきた。
+		KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の太腿に濡れた股間を押し付けてきた。
 		W:K = 1
-		KSTR:(K++) = 「兎はエッチだというのは誤解ぴょん。厳密には종류によるぴょん」
-		KSTR:(K++) = %CALLNAME%は言いながらも、腰を動かして쾌락を貪ろうとする。
+		KSTR:(K++) = 「兎はエッチだというのは誤解ぴょん。厳密には種類によるぴょん」
+		KSTR:(K++) = %CALLNAME%は言いながらも、腰を動かして快楽を貪ろうとする。
 		W:K = 1
 		KSTR:(K++) = 「でも、%CSTR:11%はえっちな兎にされてしまったぴょん」
 		W:K = 1
@@ -257,14 +257,14 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		KSTR:(K++) = 「でも……%CSTR:11%は、%CSTR:11%は、%CSTR:12%に痛いことされないとダメになってしまったぴょん」
 		KSTR:(K++) = 「%CSTR:12%、もっと、もっといじめて欲しいぴょん。忘れられないくらいに深く、強く、証が欲しいぴょん」
 		KSTR:(K++) = %CALLNAME:MASTER%は、傅いて慈悲を乞う%CALLNAME%を踏みつける。
-		KSTR:(K++) = 返ってきたのは、고통と歓喜が入り混じった嬌声だった。
+		KSTR:(K++) = 返ってきたのは、苦痛と歓喜が入り混じった嬌声だった。
 	ENDIF
 	;공통
 	IF KSTR:0 == ""
 		KSTR:(K++) = 
 	ENDIF
 	CFLAG:201 = 5
-	GOTO 표시
+	GOTO 表示
 ENDIF
 
 ;-------------------------------------------------
@@ -302,7 +302,7 @@ ELSE
 	CALL EVENTTRAIN_SECOND_K878
 ENDIF
 
-$표시
+$表示
 
 SIF KSTR:0 == ""
 	RETURN 0
@@ -331,7 +331,7 @@ VARSET W
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 	KSTR:(K++) = 「……ぴょん」
-	KSTR:(K++) = %CALLNAME%は冷たい눈で脱힘している。
+	KSTR:(K++) = %CALLNAME%は冷たい目で脱力している。
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
@@ -343,20 +343,20 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = %CALLNAME%は警戒の表情を浮かべてジリジリと間合いを取ろうとしている。
 		ELSE
-			KSTR:(K++) = %CALLNAME%は丸くなって머리を抱えてしまった。
+			KSTR:(K++) = %CALLNAME%は丸くなって頭を抱えてしまった。
 		ENDIF
 	CFLAG:202 = 1
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 		IF RAND:2 == 0
-			KSTR:(K++) = 「いい加減にするぴょん。계약盾にしても限度があるぴょん」
+			KSTR:(K++) = 「いい加減にするぴょん。契約盾にしても限度があるぴょん」
 		ELSE
 			KSTR:(K++) = 「%CSTR:12%根性八十神ぴょん」
 		ENDIF
 		IF RAND:2 == 0
 			KSTR:(K++) = %CALLNAME%はぶーぶーと文句を言っている。
 		ELSE
-			KSTR:(K++) = %CALLNAME%はジト눈で%CALLNAME:MASTER%を見つめている。
+			KSTR:(K++) = %CALLNAME%はジト目で%CALLNAME:MASTER%を見つめている。
 		ENDIF
 	CFLAG:202 = 2
 ;굴복각인Lv2
@@ -364,7 +364,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			KSTR:(K++) = 「懲りないぴょん。もう無駄と気付いたぴょん。でも好きにしていいとは言わないぴょん」
 		ELSE
-			KSTR:(K++) = 「兎は性欲が強いとか言われるけど、ぜってー인간のがヤベェぴょん」
+			KSTR:(K++) = 「兎は性欲が強いとか言われるけど、ぜってー人間のがヤベェぴょん」
 		ENDIF
 		IF RAND:2 == 0
 			KSTR:(K++) = %CALLNAME%はそう言いながらベッドの上でゴロゴロ転がっている。
@@ -396,14 +396,14 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		ELSE
 			KSTR:(K++) = 「%CSTR:12%！　%CSTR:11%を構うぴょーん！　寂しくてもしなないけど落ち込むぴょーん」
 			W:K = 1
-			KSTR:(K++) = 「あ……にゅにゅにゅ、真面눈な顔で抱きしめられると困るぴょん。照れるぴょん」
-			KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の팔の中で真っ赤になっている。
+			KSTR:(K++) = 「あ……にゅにゅにゅ、真面目な顔で抱きしめられると困るぴょん。照れるぴょん」
+			KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の腕の中で真っ赤になっている。
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:2 == 0
-			KSTR:(K++) = 「%CSTR:12%エッチするぴょーん！　……一人でスるのは物발りないぴょん%UNICODE(0x2661)%」
+			KSTR:(K++) = 「%CSTR:12%エッチするぴょーん！　……一人でスるのは物足りないぴょん%UNICODE(0x2661)%」
 		ELSE
 			KSTR:(K++) = 「ぴょんぴょんぴょん♪　見ーるぴょん、ドロドロぴょん%UNICODE(0x2661)%」
 		ENDIF
@@ -417,15 +417,15 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		IF RAND:2 == 0
 			KSTR:(K++) = 「今度もいっぱい、痛くしてくれるぴょん？」
-			KSTR:(K++) = 近寄ってきた%CALLNAME%は、무서움と期待に震える瞳で%CALLNAME:MASTER%を見上げてきた。
+			KSTR:(K++) = 近寄ってきた%CALLNAME%は、恐れと期待に震える瞳で%CALLNAME:MASTER%を見上げてきた。
 		ELSE
 			KSTR:(K++) = 「あ」
-			KSTR:(K++) = ベッドに座って%CALLNAME:MASTER%を出迎えた%CALLNAME%は、遠くからでも分かるほどに가랑이を湿らせていた。
+			KSTR:(K++) = ベッドに座って%CALLNAME:MASTER%を出迎えた%CALLNAME%は、遠くからでも分かるほどに股間を湿らせていた。
 			KSTR:(K++) = 「ごめんなさい、ぴょん。%CSTR:12%にされることを考えてたら、こうなってしまったぴょん」
 			W:K = 1
 			KSTR:(K++) = 指示も無く発情した奴隷には罰を与えねばなるまい。
 			KSTR:(K++) = 「あっ、ひぃん%UNICODE(0x2661)%」
-			KSTR:(K++) = %CALLNAME:MASTER%が유두と淫核をひねり上げると、ひと際高く嬌声が響いた。
+			KSTR:(K++) = %CALLNAME:MASTER%が乳首と淫核をひねり上げると、ひと際高く嬌声が響いた。
 		ENDIF
 	;그 외, 공통
 	IF KSTR:0 == ""
@@ -500,7 +500,7 @@ ELSEIF MARK:2 == 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	KSTR:(K++) = 「無茶苦茶ぴょーん。デタラメぴょーん。くたびれたぴょーん」」
-	KSTR:(K++) = 不平不満を입にしながらグデーっと伸びている。
+	KSTR:(K++) = 不平不満を口にしながらグデーっと伸びている。
 	KSTR:(K++) = 「もうちょっと、%CSTR:11%を大事にするぴょん」
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
@@ -508,7 +508,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		KSTR:(K++) = 「すぴすぴ……%CSTR:12%大好きぴょん」
-		KSTR:(K++) =  %CALLNAME%は満발した様子で%CALLNAME:MASTER%の팔の中で寝息をたてている。
+		KSTR:(K++) =  %CALLNAME%は満足した様子で%CALLNAME:MASTER%の腕の中で寝息をたてている。
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		KSTR:(K++) = 「もっとぴょん、もっとするぴょん、まだまだやれ……ぴょん」
@@ -527,16 +527,16 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		KSTR:(K++) = 「んー、せっかくだからお出かけでもするぴょん？　まだ체력余ってるピョン」
+		KSTR:(K++) = 「んー、せっかくだからお出かけでもするぴょん？　まだ体力余ってるピョン」
 		KSTR:(K++) = それから%CALLNAME%と%CALLNAME:MASTER%は、普通の恋人のようにデートプランを考えた。
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		KSTR:(K++) = 「ハァ%UNICODE(0x2661)%ハァ%UNICODE(0x2661)%ハァ%UNICODE(0x2661)%　발りないピョン。まだ、발りないピョン！」
-		KSTR:(K++) = %CALLNAME:MASTER%は、両발で自分を絡めとろうとしてくる%CALLNAME%を引き剥がして조교を終えた。
+		KSTR:(K++) = 「ハァ%UNICODE(0x2661)%ハァ%UNICODE(0x2661)%ハァ%UNICODE(0x2661)%　足りないピョン。まだ、足りないピョン！」
+		KSTR:(K++) = %CALLNAME:MASTER%は、両足で自分を絡めとろうとしてくる%CALLNAME%を引き剥がして調教を終えた。
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		KSTR:(K++) = 「%CSTR:11%は、%CSTR:11%はもっともっと痛いのが欲しいですぴょん」
-		KSTR:(K++) = そう言って更なる조교を強請る%CALLNAME%を、%CALLNAME:MASTER%は平손を入れて突き放した。
+		KSTR:(K++) = そう言って更なる調教を強請る%CALLNAME%を、%CALLNAME:MASTER%は平手を入れて突き放した。
 		KSTR:(K++) = 「あはッ♪　ごめんなさいですぴょん……%UNICODE(0x2661)%」
 	ENDIF
 	;공통
@@ -615,24 +615,24 @@ SELECTCASE SELECTCOM
 		IF TEQUIP:25 == 0
 			;처음
 			IF CFLAG:300 == 0
-				KSTR:(K++) = %CALLNAME%の白い모피を丹念に撫で、順々に秘所や가슴の先に触れて行く。
+				KSTR:(K++) = %CALLNAME%の白い毛皮を丹念に撫で、順々に秘所や胸の先に触れて行く。
 				KSTR:(K++) = 「ん、んん」
-				KSTR:(K++) = %CALLNAME%はくすぐったそうだが、まだ쾌感を抱くには至っていないようだ。
+				KSTR:(K++) = %CALLNAME%はくすぐったそうだが、まだ快感を抱くには至っていないようだ。
 				CFLAG:300 = 1
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 「優しく撫でられるのは好きぴょん。強めにされるのも好きぴょん。ぴょんぴょん」
-						KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の팔の中でされるがままになっている。
+						KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の腕の中でされるがままになっている。
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 「アハ♪　そこぴょん　ん、あっ%UNICODE(0x2661)%」
-						KSTR:(K++) =  %CALLNAME%は全身を丹念に애무されながら、もたらされる쾌락に酔っている。
+						KSTR:(K++) =  %CALLNAME%は全身を丹念に愛撫されながら、もたらされる快楽に酔っている。
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
-						KSTR:(K++) = 「あ、ん……もっと強くいじめても大丈남편ぴょん%UNICODE(0x2661)%」
-						KSTR:(K++) = %CALLNAME%は常に無い優しい애무に戸惑いながらも喜悦の表情を隠せないでいる。
+						KSTR:(K++) = 「あ、ん……もっと強くいじめても大丈夫ぴょん%UNICODE(0x2661)%」
+						KSTR:(K++) = %CALLNAME%は常に無い優しい愛撫に戸惑いながらも喜悦の表情を隠せないでいる。
 					ENDIF
 					;함락완료 공통
 					IF KSTR:0 == ""
@@ -643,7 +643,7 @@ SELECTCASE SELECTCOM
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:300 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 					KSTR:(K++) = 「んん♪　あ、今のは違うピョン！　わざとだピョン」
-					KSTR:(K++) = %CALLNAME%はくすぐったさとは別の감각に身をよじった。
+					KSTR:(K++) = %CALLNAME%はくすぐったさとは別の感覚に身をよじった。
 					CFLAG:300 = 3
 				ENDIF
 				;그 이외
@@ -665,7 +665,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:301 == 0
 		KSTR:(K++) = 「ぴょん！？　や、やめるぴょーん！　汚いぴょん！」
-		KSTR:(K++) = 저항の声を無視してペロリと舌を這わせると、%CALLNAME%の体が大きく跳ねた。
+		KSTR:(K++) = 抵抗の声を無視してペロリと舌を這わせると、%CALLNAME%の体が大きく跳ねた。
 		KSTR:(K++) = 「んひゃあ！？」
 		W:K = 1
 		KSTR:(K++) = どうやら弱点はここらしい。
@@ -681,7 +681,7 @@ SELECTCASE SELECTCOM
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「%UNICODE(0x2661)%　%UNICODE(0x2661)%　%UNICODE(0x2661)%」
 					KSTR:(K++) = 「吸ったら、あっ%UNICODE(0x2661)%　強すぎる、ぴょん%UNICODE(0x2661)%　んんっ%UNICODE(0x2661)%　でも、もっと、もっとぴょん%UNICODE(0x2661)%」
-					KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の머리を抑えて가랑이に押し付けながら、自らも腰を動かして쾌락をむさぼっている。
+					KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の頭を抑えて股間に押し付けながら、自らも腰を動かして快楽をむさぼっている。
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「――――――っぅ%UNICODE(0x2661)%」
@@ -702,7 +702,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:301 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =「うううう、%CSTR:12%はひでーやつぴょん」
-				KSTR:(K++) = 恨みがましい눈で見つめながら、%CALLNAME%は쾌락に抗うため腰をモゾモゾと動かしている。
+				KSTR:(K++) = 恨みがましい目で見つめながら、%CALLNAME%は快楽に抗うため腰をモゾモゾと動かしている。
 				CFLAG:301 = 2
 			ENDIF
 		ENDIF
@@ -722,11 +722,11 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「ん……優しく触ってほしいぴょん。大事なところだぴょん。んふふ♪」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「指じゃ物발りないぴょん！　もっと太くて熱いのがいいぴょん%UNICODE(0x2661)%」
+					KSTR:(K++) = 「指じゃ物足りないぴょん！　もっと太くて熱いのがいいぴょん%UNICODE(0x2661)%」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「あっ、ん……もっと強く触ってほしいですぴょん%UNICODE(0x2661)%」
-					KSTR:(K++) =  %CALLNAME%は熱を오비びた視線でこちらを見つめている。
+					KSTR:(K++) =  %CALLNAME%は熱を帯びた視線でこちらを見つめている。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -796,14 +796,14 @@ SELECTCASE SELECTCOM
 			IF CFLAG:305 == 0
 				KSTR:(K++) = 「ぴょん！？」
 				KSTR:(K++) = 肛門の周辺を指先で刺激すると、%CALLNAME%は文字通りに飛び上がった。
-				KSTR:(K++) = 「や、止めるぴょん！　アブノーマルぴょ……조교とかアブノーマルの極みだったぴょーん！？」
+				KSTR:(K++) = 「や、止めるぴょん！　アブノーマルぴょ……調教とかアブノーマルの極みだったぴょーん！？」
 				CFLAG:305 = 1
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 「んん……後ろだけで良いぴょん？」
-						KSTR:(K++) = %CALLNAME%は切ない表情を浮かべて가랑이を押し付けてきた。
+						KSTR:(K++) = %CALLNAME%は切ない表情を浮かべて股間を押し付けてきた。
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 「あ、ん、お尻の穴が気持ちいいぴょん%UNICODE(0x2661)%」
@@ -821,7 +821,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:305 < 2 || FLAG:7 == 2) && KSTR:0 == ""
-					KSTR:(K++) = 「うう、저항できない自分が情けないぴょん……」
+					KSTR:(K++) = 「うう、抵抗できない自分が情けないぴょん……」
 					CFLAG:305 = 3
 				ENDIF
 				;그 이외
@@ -842,8 +842,8 @@ SELECTCASE SELECTCOM
 		IF TEQUIP:25 == 0
 			;처음
 			IF CFLAG:306 == 0
-				KSTR:(K++) =「む、가슴を触るのかぴょん？　セクハラぴょん！」
-				KSTR:(K++) = 逃げようとする%CALLNAME%を抱え込み、毛に覆われた가슴部を優しく揉み解す。
+				KSTR:(K++) =「む、胸を触るのかぴょん？　セクハラぴょん！」
+				KSTR:(K++) = 逃げようとする%CALLNAME%を抱え込み、毛に覆われた胸部を優しく揉み解す。
 				KSTR:(K++) = 「やめるぴょーん、出るとこ出るぴょーん！」
 				
 				CFLAG:306 = 1
@@ -851,19 +851,19 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
-						KSTR:(K++) = %CALLNAME%を後ろから抱え込むように抱きしめ、가슴に손を這わせた。
+						KSTR:(K++) = %CALLNAME%を後ろから抱え込むように抱きしめ、胸に手を這わせた。
 						KSTR:(K++) = 「%CSTR:11%のおっぱい好きぴょん？　%CSTR:11%は%CSTR:12%に揉まれるのが好きぴょん」
 						KSTR:(K++) = 「むふー……あっ、もう、強くしちゃダメぴょん%UNICODE(0x2661)%」
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
-						KSTR:(K++) = 「あ、ん、気持ちいいけど、ちょっとだけ、ちょっとだけ物발りないぴょん」
-						KSTR:(K++) =  도발的にそう言ってくるのでギュッと強く揉みしだいてやると、%CALLNAME%はかん高い嬌声を上げた。
+						KSTR:(K++) = 「あ、ん、気持ちいいけど、ちょっとだけ、ちょっとだけ物足りないぴょん」
+						KSTR:(K++) =  挑発的にそう言ってくるのでギュッと強く揉みしだいてやると、%CALLNAME%はかん高い嬌声を上げた。
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 「あ……その、おっぱい揉まれると、%CSTR:11%は切ない、ですぴょん」
 						W:K = 1
 						KSTR:(K++) = 「もっと痛くしてほしいって、%CSTR:12%の物だって教えてほしいって、そう思っちゃいますぴょん」
-						KSTR:(K++) = %CALLNAME%は優しく가슴を揉まれる감각に戸惑っている様子だ。
+						KSTR:(K++) = %CALLNAME%は優しく胸を揉まれる感覚に戸惑っている様子だ。
 					ENDIF
 					;함락완료 공통
 					IF KSTR:0 == ""
@@ -874,8 +874,8 @@ SELECTCASE SELECTCOM
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:306 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 					KSTR:(K++) = 「むむむ。%CSTR:12%がおっぱい星人なのは仕方ないぴょん」
-					KSTR:(K++) = 「でも、%CSTR:11%の가슴を揉んで良い理由には……ぴょんっ！？」
-					KSTR:(K++) = ……%CALLNAME%が건방짐な事を言ってくるので、%CALLNAME:MASTER%は少し強めに揉みしだいてやった。
+					KSTR:(K++) = 「でも、%CSTR:11%の胸を揉んで良い理由には……ぴょんっ！？」
+					KSTR:(K++) = ……%CALLNAME%が生意気な事を言ってくるので、%CALLNAME:MASTER%は少し強めに揉みしだいてやった。
 					CFLAG:306 = 3
 				ENDIF
 				;그 이외
@@ -910,7 +910,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「ッぴょん！　くすぐったいぴょん、あ、そう、コリコリするのは好きぴょん%UNICODE(0x2661)%」
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
-						KSTR:(K++) = 「ッ！？　も、もっと強くしても大丈남편ぴょん。あっ、ひっ%UNICODE(0x2661)%」
+						KSTR:(K++) = 「ッ！？　も、もっと強くしても大丈夫ぴょん。あっ、ひっ%UNICODE(0x2661)%」
 					ENDIF
 					;함락완료 공통
 					IF KSTR:0 == ""
@@ -955,7 +955,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「あ、そうだぴょん、いい感じぴょん……もっとコネコネするぴょん%UNICODE(0x2661)%」
 					;복종, 예속	
 					ELSEIF (TALENT:5 || TALENT:8)
-						KSTR:(K++) = 「んっ、その、もっと強くても大丈남편ぴょん、むしろ強い方が……あっ%UNICODE(0x2661)%」
+						KSTR:(K++) = 「んっ、その、もっと強くても大丈夫ぴょん、むしろ強い方が……あっ%UNICODE(0x2661)%」
 					ENDIF
 					;함락완료 공통
 					IF KSTR:0 == ""
@@ -965,7 +965,7 @@ SELECTCASE SELECTCOM
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:308 < 2 || FLAG:7 == 2) && KSTR:0 == ""
-					KSTR:(K++) = 「うぐぐ、もう가슴を触られるのも慣れちゃったぴょん。悔しいぴょん」
+					KSTR:(K++) = 「うぐぐ、もう胸を触られるのも慣れちゃったぴょん。悔しいぴょん」
 					KSTR:(K++) = でも感じちゃう？
 					KSTR:(K++) = 「言わねーからぴょん！？」
 					CFLAG:308 = 3
@@ -1025,7 +1025,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:310 == 0
-			KSTR:(K++) =「가슴でするぴょん？　え？　自分で？　……マジかぴょん？」
+			KSTR:(K++) =「胸でするぴょん？　え？　自分で？　……マジかぴょん？」
 			CFLAG:310 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 3 || FLAG:7 == 2)
@@ -1043,7 +1043,7 @@ SELECTCASE SELECTCOM
 				;함락완료 공통
 				IF KSTR:0 == ""
 					KSTR:(K++) = 「んっ%UNICODE(0x2661)%　んっ%UNICODE(0x2661)%　見てぴょん、硬くなっちゃったぴょん%UNICODE(0x2661)%」
-					KSTR:(K++) = %CALLNAME%は真っ赤に充血して隆立した유두を、%CALLNAME:MASTER%に示してみせた。
+					KSTR:(K++) = %CALLNAME%は真っ赤に充血して隆立した乳首を、%CALLNAME:MASTER%に示してみせた。
 				ENDIF
 				CFLAG:310 = 4
 			ENDIF
@@ -1093,7 +1093,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:311 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 「う、あっ、み、見るなぴょん。んんっ」
-				KSTR:(K++) = %CALLNAME%はそう言いながらも자위を止める様子がない。
+				KSTR:(K++) = %CALLNAME%はそう言いながらも自慰を止める様子がない。
 				CFLAG:311 = 2
 			ENDIF
 		ENDIF
@@ -1280,7 +1280,7 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「みゅみゅみゅ、ビクッってしたぴょん。　可愛いぴょん♪」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「うりうりぴょん。たまにはご봉사もするぴょん。うりうり」
+					KSTR:(K++) = 「うりうりぴょん。たまにはご奉仕もするぴょん。うりうり」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「あ、どうかぴょん？　気持ちいいぴょん？　なら良かったぴょん%UNICODE(0x2661)%」
@@ -1654,16 +1654,16 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:3 || TALENT:6
 					KSTR:(K++) = 「ぴょん？」
 					W:K = 1
-					KSTR:(K++) = 「키스かぴょん？　そう言えばしてなかったぴょん」
+					KSTR:(K++) = 「キスかぴょん？　そう言えばしてなかったぴょん」
 					W:K = 1
 					KSTR:(K++) = 「じゃ、するぴょん。ちゅっ%UNICODE(0x2661)%」
 					KSTR:(K++) = %CALLNAME%はつま先立ちからピョンと飛び上がって、%CALLNAME:MASTER%の唇を奪った。
 					KSTR:(K++) = 「しちゃったぴょん、けっこう恥ずかしいぴょん。……あ」
 					W:K = 1
-					KSTR:(K++) = %CALLNAME:MASTER%は、赤面する%CALLNAME%を抱き上げると深く입付けた。
+					KSTR:(K++) = %CALLNAME:MASTER%は、赤面する%CALLNAME%を抱き上げると深く口付けた。
 					KSTR:(K++) = 「ん、ちゅぷ、ちゅ、ちゅっ……ぴょん%UNICODE(0x2661)%」
 					W:K = 1
-					KSTR:(K++) = 「ぷはぁ、不意打ちぴょん。でも素적だったぴょん。んふふー」
+					KSTR:(K++) = 「ぷはぁ、不意打ちぴょん。でも素敵だったぴょん。んふふー」
 			ELSE
 					KSTR:(K++) = 「ぴょん！？　は、初めてだったぴょーん！　ちくしょーぴょーん！」
 		ENDIF
@@ -1677,11 +1677,11 @@ SELECTCASE SELECTCOM
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「ん、ちゅ、ちゅっ、ちゅっ……ん%UNICODE(0x2661)%」
-					KSTR:(K++) = %CALLNAME%は、쾌락を貪るように舌を絡めてくる。
+					KSTR:(K++) = %CALLNAME%は、快楽を貪るように舌を絡めてくる。
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「あ、ん、ちゅ……%UNICODE(0x2661)%」
-					KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の입内を舌で애무して봉사している。
+					KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%の口内を舌で愛撫して奉仕している。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -1691,7 +1691,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;순종Lv3 이상
 			IF ABL:0 >= 3 && (CFLAG:312 < 2 || FLAG:7 == 2) && KSTR:0 == ""
-				KSTR:(K++) = 「ん、ちゅ……키스は嫌いじゃぴょん。嫌いでは」
+				KSTR:(K++) = 「ん、ちゅ……キスは嫌いじゃぴょん。嫌いでは」
 				CFLAG:312 = 3
 			ENDIF
 			;그 이외
@@ -1716,7 +1716,7 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「疲れたぴょん？　膝枕くらいはできるぴょん」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「？　どうしたぴょん？　大丈남편かぴょん？」
+					KSTR:(K++) = 「？　どうしたぴょん？　大丈夫かぴょん？」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「……指示があるまで待つぴょん」
@@ -1746,7 +1746,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:314 == 0
 			KSTR:(K++) = 「お話するぴょん？　んー？」
-			KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の膝の上に乗って上눈遣いをしている。
+			KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の膝の上に乗って上目遣いをしている。
 			CFLAG:314 = 1
 		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
@@ -1774,11 +1774,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:316 == 0
-			KSTR:(K++) = %CALLNAME%は팔の中でスピスピと鼻を鳴らしている。
+			KSTR:(K++) = %CALLNAME%は腕の中でスピスピと鼻を鳴らしている。
 			CFLAG:316 = 1
 		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
-			KSTR:(K++) = %CALLNAME%は、팔の中でグリグリと머리を押し付けてくる。
+			KSTR:(K++) = %CALLNAME%は、腕の中でグリグリと頭を押し付けてくる。
 			CFLAG:316 = 2
 		ENDIF
 ;-------------------------------------------------
@@ -1789,7 +1789,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:317 == 0
 				KSTR:(K++) = 「ぴょんぱらり、一回転ぴょん」
-				KSTR:(K++) = %CALLNAME%はピョンと跳ぶとくるっと回って、%CALLNAME:MASTER%の팔の中に収まった。
+				KSTR:(K++) = %CALLNAME%はピョンと跳ぶとくるっと回って、%CALLNAME:MASTER%の腕の中に収まった。
 			KSTR:(K++) =
 			CFLAG:317 = 1
 		;2번째 이후
@@ -1805,7 +1805,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:318 == 0
-			KSTR:(K++) =「お요리するぴょん？　……塩を揉みこむ요리は背筋が震えるぴょん」
+			KSTR:(K++) =「お料理するぴょん？　……塩を揉みこむ料理は背筋が震えるぴょん」
 			KSTR:(K++) = どうやら伝承でのトラウマを発症しているようだ。
 			CFLAG:318 = 1
 		;2번째 이후
@@ -1996,16 +1996,16 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:322 == 0
 			KSTR:(K++) =「むむむ、また珍妙な物を持ち出してきたぴょん！　きっとろくでもない……ひゃあ！」
-			KSTR:(K++) = 警戒をかいくぐり秘所に로터を押し当てると、%CALLNAME%は飛び跳ねた。
+			KSTR:(K++) = 警戒をかいくぐり秘所にローターを押し当てると、%CALLNAME%は飛び跳ねた。
 			CFLAG:322 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:322 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「うう、触るなら機械じゃなくて손で触ってほしいぴょん」
+					KSTR:(K++) = 「うう、触るなら機械じゃなくて手で触ってほしいぴょん」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「あうう、気持ちいいけど物발りないぴょん……」
+					KSTR:(K++) = 「あうう、気持ちいいけど物足りないぴょん……」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「はうう……」
@@ -3279,11 +3279,11 @@ SELECTCASE SELECTCOM
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 「い、いよいよ、ぴょん。ふ、不束者の%CSTR:11%ですが、よろしく頼むぴょん」
-						KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%を安心させるように頬に키스をした。
+						KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%を安心させるように頬にキスをした。
 						W:K = 1
-						KSTR:(K++) = 힘を抜き、身を任せてくれた%CALLNAME%に、ゆっくりと一物をめり込ませていく。
+						KSTR:(K++) = 力を抜き、身を任せてくれた%CALLNAME%に、ゆっくりと一物をめり込ませていく。
 						KSTR:(K++) = 「ッ……」
-						KSTR:(K++) = %CALLNAME%は破瓜の아픔に再び身体を緊張させながらも、愛おしそうに額を擦り付けてきた。
+						KSTR:(K++) = %CALLNAME%は破瓜の痛みに再び身体を緊張させながらも、愛おしそうに額を擦り付けてきた。
 					;음란, 창부
 					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
@@ -3368,7 +3368,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「い、いよいよ、ぴょん。ふ、不束者の%CSTR:11%ですが、よろしく頼むぴょん」
 						KSTR:(K++) = %CALLNAME:MASTER%は%CALLNAME%の体を軟らかく抱きしめる。
 						W:K = 1
-						KSTR:(K++) = そうして힘が抜けると、ゆっくりと自らの一物を挿入していく。
+						KSTR:(K++) = そうして力が抜けると、ゆっくりと自らの一物を挿入していく。
 						KSTR:(K++) = 「っ……う、%CSTR:11%は、女になったぴょん、これからもよろしくぴょん」
 						KSTR:(K++) = %CALLNAME%は破瓜の証を太腿に散らしながら、幸せそうに微笑んだ。
 					;음란, 창부
@@ -3418,11 +3418,11 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「顔見えないぴょん。でも、温かくて安心するぴょん。ん……」」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「%CSTR:11%としては大変満발な体位ぴょん。ズンズン突いてほしいぴょん」
+					KSTR:(K++) = 「%CSTR:11%としては大変満足な体位ぴょん。ズンズン突いてほしいぴょん」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「あ、う……はあぁ」
-					KSTR:(K++) = 男根を힘強く突き入れるたび、%CALLNAME%は쾌락のうめき声を漏らした。
+					KSTR:(K++) = 男根を力強く突き入れるたび、%CALLNAME%は快楽のうめき声を漏らした。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -3471,7 +3471,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:336 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 「ううっ、ぬるっとしてキュッと締まって、こ、これはまずいぴょん！？　あっ……」
-				KSTR:(K++) = %CALLNAME%は自分の分身を包み込む쾌感に抗おうと必死だ。
+				KSTR:(K++) = %CALLNAME%は自分の分身を包み込む快感に抗おうと必死だ。
 				CFLAG:336 = 3
 			ENDIF
 			;그 이외
@@ -3540,8 +3540,8 @@ SELECTCASE SELECTCOM
 						W:K = 1
 						KSTR:(K++) = そしてズブリと、自らの胎に肉棒を深々と咥え込んだ。
 						KSTR:(K++) = 「痛いぴょん%UNICODE(0x2661)%　気持ちいいぴょん%UNICODE(0x2661)%　あはっ%UNICODE(0x2661)%」
-						KSTR:(K++) = 赤く사키いた花びらを%CALLNAME:MASTER%が容赦なく突き上げ、散らせていく。
-						KSTR:(K++) = 残ったのは、赤と白が混ざり泡立つ淫猥な액체だった。
+						KSTR:(K++) = 赤く咲いた花びらを%CALLNAME:MASTER%が容赦なく突き上げ、散らせていく。
+						KSTR:(K++) = 残ったのは、赤と白が混ざり泡立つ淫猥な液体だった。
 					;복종, 예속
 					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) =
@@ -3943,7 +3943,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「深く、つながってるのが分かるぴょん。あっ、いま子宮を叩いたぴょん。んんっ……♪」
 						KSTR:(K++) = 抱き合いながら緩やかに内側を叩くと、%CALLNAME%はピクピクと小さく反応を返してくる。
 						KSTR:(K++) = 「%CSTR:12%、%CSTR:11%は幸せぴょん」
-						KSTR:(K++) = 互いの舌を絡め아이、唾液を交換しながら、二人はしばし余韻を楽しんだ。
+						KSTR:(K++) = 互いの舌を絡めあい、唾液を交換しながら、二人はしばし余韻を楽しんだ。
 					;음란, 창부
 					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
@@ -4254,15 +4254,15 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:344 == 0
-			KSTR:(K++) =「손で擦ればいいぴょん？　んー？　ぴょん」
+			KSTR:(K++) =「手で擦ればいいぴょん？　んー？　ぴょん」
 			KSTR:(K++) = %CALLNAME%は首をかしげながら、試し試し肉棒を擦り上げている。
-			KSTR:(K++) = 「%CSTR:11%にこの손を汚せと言うのか！　ってやつぴょん」
+			KSTR:(K++) = 「%CSTR:11%にこの手を汚せと言うのか！　ってやつぴょん」
 			CFLAG:344 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「んふー、けっこう楽しいぴょん。ご봉사するぴょん」
+					KSTR:(K++) = 「んふー、けっこう楽しいぴょん。ご奉仕するぴょん」
 					KSTR:(K++) = %CALLNAME%はピョンピョンとリズムに乗って擦り上げているが、案外と悪くない。
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -4284,7 +4284,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:344 || FLAG:7 == 2) && KSTR:0 == ""
-				KSTR:(K++) = 「힘加減が難しいぴょん。うっかり潰しそうだぴょん」
+				KSTR:(K++) = 「力加減が難しいぴょん。うっかり潰しそうだぴょん」
 				KSTR:(K++) = 想像させるでない。
 				CFLAG:344 = 2
 			ENDIF
@@ -4325,7 +4325,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:345 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 「ぺろぺろ……」
-				KSTR:(K++) = は小さな입で肉棒に봉사している。
+				KSTR:(K++) = は小さな口で肉棒に奉仕している。
 				KSTR:(K++) =「だんだんと人参に見えてきたぴょん……」
 				KSTR:(K++) = いったん止めさせました。
 				CFLAG:345 = 2
@@ -4338,19 +4338,19 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:346 == 0
-			KSTR:(K++) =「파이즈리、ぴょん？　……そうかぴょん、この가슴でやれというのかぴょん」
+			KSTR:(K++) =「パイズリ、ぴょん？　……そうかぴょん、この胸でやれというのかぴょん」
 			CFLAG:346 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「んふー♪　この가슴で気持ちよくなってくれると、%CSTR:11%も嬉しいぴょん」
+					KSTR:(K++) = 「んふー♪　この胸で気持ちよくなってくれると、%CSTR:11%も嬉しいぴょん」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「んんー%UNICODE(0x2661)%　유두擦りながらすると、%CSTR:11%も気持ちいぴょん。大発見ぴょん」
+					KSTR:(K++) = 「んんー%UNICODE(0x2661)%　乳首擦りながらすると、%CSTR:11%も気持ちいぴょん。大発見ぴょん」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「%CSTR:11%のおっぱいはどうですかぴょん？　ご満발いただけたら嬉しいぴょん%UNICODE(0x2661)%」
+					KSTR:(K++) = 「%CSTR:11%のおっぱいはどうですかぴょん？　ご満足いただけたら嬉しいぴょん%UNICODE(0x2661)%」
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -4404,7 +4404,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:347 || FLAG:7 == 2) && KSTR:0 == ""
-				KSTR:(K++) = 「は、入りそうで怖いぴょん。だ、大丈남편ぴょん？」」
+				KSTR:(K++) = 「は、入りそうで怖いぴょん。だ、大丈夫ぴょん？」」
 				CFLAG:347 = 2
 			ENDIF
 		ENDIF
@@ -4415,7 +4415,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:348 == 0
-			KSTR:(K++) =「べ、べとつくピョン！？　모피にソープはミスマッチぴょん！」
+			KSTR:(K++) =「べ、べとつくピョン！？　毛皮にソープはミスマッチぴょん！」
 			CFLAG:348 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:348 < 3 || FLAG:7 == 2)
@@ -4429,7 +4429,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「どうですかぴょん？　気持ちよくなれてるぴょん？」
-					KSTR:(K++) = %CALLNAME%は全身をすりつけ必死に봉사しているが、時折自分自身も慰めているようだ。
+					KSTR:(K++) = %CALLNAME%は全身をすりつけ必死に奉仕しているが、時折自分自身も慰めているようだ。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -4569,16 +4569,16 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:352 == 0
-			KSTR:(K++) =「파이즈리＋フェラだと、ぴょん？　この가슴でかぴょん？」
+			KSTR:(K++) =「パイズリ＋フェラだと、ぴょん？　この胸でかぴょん？」
 			CFLAG:352 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:352 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「ん……どうぴょん？　上손く出来てるぴょん？　んふっ♪」
+					KSTR:(K++) = 「ん……どうぴょん？　上手く出来てるぴょん？　んふっ♪」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「これって、おっぱいで気持ちよくなれて、お입で정액まで味わえるぴょん。大発見ぴょん」
+					KSTR:(K++) = 「これって、おっぱいで気持ちよくなれて、お口で精液まで味わえるぴょん。大発見ぴょん」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「こしこし……実は練習してきたぴょん。成果、出てるといいぴょん」
@@ -4764,18 +4764,18 @@ SELECTCASE SELECTCOM
 			KSTR:(K++) = 「な、舐められたぴょん！？　あふぁっ！？」
 			W:K = 1
 			KSTR:(K++) = 「い、いけないぴょん！　出ちゃうぴょん！」
-			KSTR:(K++) = %CALLNAME%は가랑이の一物を舐められるたびに腰を跳ねさせている。
+			KSTR:(K++) = %CALLNAME%は股間の一物を舐められるたびに腰を跳ねさせている。
 			CFLAG:302 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「あっ、な、舐めてるピョン。ひゃあ！？　ごめんぴょん、そこは민감ぴょん」
-					KSTR:(K++) = 舌を這わせるたび、唾液とは別の액체が滴った。
+					KSTR:(K++) = 「あっ、な、舐めてるピョン。ひゃあ！？　ごめんぴょん、そこは敏感ぴょん」
+					KSTR:(K++) = 舌を這わせるたび、唾液とは別の液体が滴った。
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「ひゃあう%UNICODE(0x2661)%」
-					KSTR:(K++) = 「そこは민감ぴょん。はふぅ、責められすぎるとすごいことになるぴょん♪」
+					KSTR:(K++) = 「そこは敏感ぴょん。はふぅ、責められすぎるとすごいことになるぴょん♪」
 					W:K = 1
 					KSTR:(K++) = %CALLNAME%は%CALLNAME:MASTER%の舌遣いに嬌声を上げ恍惚の表情を浮かべている。
 				;복종, 예속	
@@ -4783,7 +4783,7 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「ッ！？%UNICODE(0x2661)%　っう%UNICODE(0x2661)%」
 					W:K = 1
 					KSTR:(K++) = 「あ、ああっ、気持ちよくなりすぎちゃうぴょん！」
-					KSTR:(K++) = %CALLNAME%は主人に봉사される歓喜と쾌락に身を躍らせている。
+					KSTR:(K++) = %CALLNAME%は主人に奉仕される歓喜と快楽に身を躍らせている。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -4794,7 +4794,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:302 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 「もう諦めたぴょん。気持ちいいのは仕方ないぴょん。わひゃあ！？」
-				KSTR:(K++) = 自깨달음は出来たようだったが、弱点を突かれて我慢できるようになった訳でもないようだ。
+				KSTR:(K++) = 自覚は出来たようだったが、弱点を突かれて我慢できるようになった訳でもないようだ。
 				CFLAG:302 = 3
 			ENDIF
 			;그 이외
@@ -5279,7 +5279,7 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「ひゃあ！？　だ、ダメぴょん、癖になっちゃうぴょん！」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「はぁ♪　叩かれて気持ちよくなれたら素적だぴょん」
+					KSTR:(K++) = 「はぁ♪　叩かれて気持ちよくなれたら素敵だぴょん」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「あっ♪　あっ♪　あっ♪」
@@ -5315,14 +5315,14 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:355 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「ひゃっ！？　ち、유두取れちゃうぴょん、でも、癖になりそうぴょん♪」
+					KSTR:(K++) = 「ひゃっ！？　ち、乳首取れちゃうぴょん、でも、癖になりそうぴょん♪」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 「유두いじめられて気持ちよくなっちゃうぴょん、きっとそのうち、こするだけでイッちゃうぴょん♪」
+					KSTR:(K++) = 「乳首いじめられて気持ちよくなっちゃうぴょん、きっとそのうち、こするだけでイッちゃうぴょん♪」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「刻んでほしいぴょん、もっと아픔を、取れないくらいに深く、あっあっあっあっ～%UNICODE(0x2661)%」
-					KSTR:(K++) = 隆立した유두を勢いよく弾くと、%CALLNAME%は思わずと言った風に嬌声を上げた。
+					KSTR:(K++) = 「刻んでほしいぴょん、もっと痛みを、取れないくらいに深く、あっあっあっあっ～%UNICODE(0x2661)%」
+					KSTR:(K++) = 隆立した乳首を勢いよく弾くと、%CALLNAME%は思わずと言った風に嬌声を上げた。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -5360,8 +5360,8 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「ひぃぁん♪　いたいのも気持ちいいかもしれないぴょん♪」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「ぴっ♪　ひゃっ♪　あはっ%UNICODE(0x2661)%　素적だぴょん……」
-					KSTR:(K++) = 채찍の音の中でも、%CALLNAME%は恍惚の表情を浮かべている。
+					KSTR:(K++) = 「ぴっ♪　ひゃっ♪　あはっ%UNICODE(0x2661)%　素敵だぴょん……」
+					KSTR:(K++) = 鞭の音の中でも、%CALLNAME%は恍惚の表情を浮かべている。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -5400,7 +5400,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「ひ゛あ゛っ……%UNICODE(0x2661)%%UNICODE(0x2661)%」
-					KSTR:(K++) = 양초の蝋が垂れるたび、肌に熱が走るたび、%CALLNAME%は歓喜の声を上げた。
+					KSTR:(K++) = 蝋燭の蝋が垂れるたび、肌に熱が走るたび、%CALLNAME%は歓喜の声を上げた。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -5427,7 +5427,7 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:358 == 0
 			KSTR:(K++) = 「っ！？　！　！　！　！　？」
-			KSTR:(K++) = 바늘を突き刺されると、%CALLNAME%はもう声にもならない音で喉を震わせた。
+			KSTR:(K++) = 針を突き刺されると、%CALLNAME%はもう声にもならない音で喉を震わせた。
 			CFLAG:358 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:358 < 3 || FLAG:7 == 2)
@@ -5440,7 +5440,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「はあ゛ぅ%UNICODE(0x2661)%　嬉しいぴょん、これが%CSTR:12%の%CSTR:11%である証ぴょん」
-					KSTR:(K++) = 바늘が突き刺さり残った傷あとを、%CALLNAME%は愛おしそうに撫でた。
+					KSTR:(K++) = 針が突き刺さり残った傷あとを、%CALLNAME%は愛おしそうに撫でた。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -5578,7 +5578,7 @@ SELECTCASE SELECTCOM
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)	
 					KSTR:(K++) = 「解かれてしまったぴょん。残念ぴょん」
-					KSTR:(K++) = %CALLNAME%は体に残った밧줄の痕を指先で撫でて恍惚としている。
+					KSTR:(K++) = %CALLNAME%は体に残った縄の痕を指先で撫でて恍惚としている。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -5718,7 +5718,7 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 「%CALLNAME:MASTER%のクリちゃん、ペロペロしてあげるぴょん♪」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「%CALLNAME:MASTER%のおまんこにご봉사いたしますぴょん%UNICODE(0x2661)%」
+					KSTR:(K++) = 「%CALLNAME:MASTER%のおまんこにご奉仕いたしますぴょん%UNICODE(0x2661)%」
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -8453,7 +8453,7 @@ SELECTCASE SELECTCOM
 		IF TEQUIP:32
 			;처음
 			IF CFLAG:400 == 0
-				KSTR:(K++) = 「샤워は好きぴょん！」
+				KSTR:(K++) = 「シャワーは好きぴょん！」
 				CFLAG:400 = 1
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:400 < 3 || FLAG:7 == 2)
@@ -8520,7 +8520,7 @@ SELECTCASE SELECTCOM
 		IF TEQUIP:33
 			;처음
 			IF CFLAG:401 == 0
-				KSTR:(K++) = 「いわゆる一つの裸에이프런ぴょん？」
+				KSTR:(K++) = 「いわゆる一つの裸エプロンぴょん？」
 				CFLAG:401 = 1
 			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
@@ -9026,7 +9026,7 @@ SELECTCASE SELECTCOM
 ;			;초기페르소나능력변경
 			;ABL:페르소나1데이터／스킬1 =
 			
-			;ABL:페르소나1데이터／습득스킬 =
+			;ABL:페르소나1데이터／습득스킬1 =
 			;ABL:페르소나1데이터／습득LV1 =
  
 		ENDIF
@@ -9040,7 +9040,7 @@ SELECTCASE SELECTCOM
 ;			;능력변경
 			;ABL:스킬1 = 
 			
-			;ABL:습득스킬
+			;ABL:습득스킬1
 			;ABL:습득LV1
  
 		ENDIF
@@ -9065,7 +9065,7 @@ SELECTCASE SELECTCOM
 ;			;초기링크악마능력변경
 			;ABL:초기변신악마스킬1
 			
-			;ABL:초기변신악마습득스킬
+			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
 			;ABL:초기링크악마공격상성
@@ -9196,15 +9196,15 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 「はうっ♪　こ、これ、ドキドキして気持ちよくて、けっこう好きぴょん」
-					KSTR:(K++) = %CALLNAME%は、そう言ってしなやかな발で%CALLNAME:MASTER%の머리を抱きしめた。
+					KSTR:(K++) = %CALLNAME%は、そう言ってしなやかな足で%CALLNAME:MASTER%の頭を抱きしめた。
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「ふぅあっ%UNICODE(0x2661)%　ん、きもちいいぴょん、気持ちよくするぴょん♪」
-					KSTR:(K++) = %CALLNAME:MASTER%と%CALLNAME%は、互いの性器を貪るように쾌락を与え合った。
+					KSTR:(K++) = %CALLNAME:MASTER%と%CALLNAME%は、互いの性器を貪るように快楽を与え合った。
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 「……あっ%UNICODE(0x2661)%　これは刺激が強すぎるぴょん、はあぅ%UNICODE(0x2661)%」
-					KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%に与えられる쾌感に溺れないように봉사をおこなった。
+					KSTR:(K++) = %CALLNAME%は、%CALLNAME:MASTER%に与えられる快感に溺れないように奉仕をおこなった。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -9215,7 +9215,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:408 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 「んん、あんまり舐めると集中できないぴょん……あうっ♪」
-				KSTR:(K++) = %CALLNAME%は、秘所からもたらされる쾌感に注意しながら봉사している。
+				KSTR:(K++) = %CALLNAME%は、秘所からもたらされる快感に注意しながら奉仕している。
 				CFLAG:408 = 3
 			ENDIF
 			;그 이외
@@ -9491,8 +9491,8 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = %CALLNAME%はＧスポットを責められるたび、何度も何度も腰を跳ねさせた。
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「はあぅっ！？　こ、擦ったら、ご봉사できないぴょん、あっ♪」
-					KSTR:(K++) = %CALLNAME%は局所から与えられる쾌락に腰を跳ねさせまいと必死にこらえている。
+					KSTR:(K++) = 「はあぅっ！？　こ、擦ったら、ご奉仕できないぴょん、あっ♪」
+					KSTR:(K++) = %CALLNAME%は局所から与えられる快楽に腰を跳ねさせまいと必死にこらえている。
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -9524,7 +9524,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「あ♪　赤ちゃんの部屋叩かれてるぴょん。んふ、素적だぴょん」
+					KSTR:(K++) = 「あ♪　赤ちゃんの部屋叩かれてるぴょん。んふ、素敵だぴょん」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「ふあっ♪　しきゅう、叩かれてるぴょん、ひあっ%UNICODE(0x2661)%」
@@ -9563,13 +9563,13 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:415 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 「んっふー、どうぴょん？　上손く出来てるぴょん？」
+					KSTR:(K++) = 「んっふー、どうぴょん？　上手く出来てるぴょん？」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 「%CSTR:11%のおっぱいはどうぴょん？　%CSTR:12%の舌は気持ちいいぴょん♪」
 				;복종, 예속	
 				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 「ご봉사するぴょん！　あっ、舐めたらダメぴょん、あ、はうっ……」
+					KSTR:(K++) = 「ご奉仕するぴょん！　あっ、舐めたらダメぴょん、あ、はうっ……」
 				ENDIF
 				;함락완료 공통
 				IF KSTR:0 == ""
@@ -11411,7 +11411,7 @@ VARSET W
 ;-------------------------------------------------
 IF NOWEX:0 > 0 && CFLAG:242 == 0
 	KSTR:(K++) = 「はあぅ%UNICODE(0x2661)%」
-	KSTR:(K++) = %CALLNAME%は、クリトリスからもたらされる初めての절정に盛大に潮を吹いた。
+	KSTR:(K++) = %CALLNAME%は、クリトリスからもたらされる初めての絶頂に盛大に潮を吹いた。
 	CFLAG:242 = 1
 ENDIF
 
@@ -11435,7 +11435,7 @@ ENDIF
 ;처음 B절정
 ;-------------------------------------------------
 IF NOWEX:3 > 0 && CFLAG:245 == 0
-	KSTR:(K++) = 「ひぅっ！？　む、가슴でイかせられてしまったぴょん……」
+	KSTR:(K++) = 「ひぅっ！？　む、胸でイかせられてしまったぴょん……」
 	CFLAG:245 = 1
 ENDIF
 
@@ -11503,7 +11503,7 @@ ELSEIF TFLAG:29 > 0
 	;굴복각인Lv3		
 	IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
 		KSTR:(K++) = 「あっ……あうう～」
-		KSTR:(K++) = 절정に達した%CALLNAME%は、腰を跳ねさせて脱힘している。
+		KSTR:(K++) = 絶頂に達した%CALLNAME%は、腰を跳ねさせて脱力している。
 		CFLAG:246= 2	
 	ENDIF		
 	;그 이외		
@@ -11693,23 +11693,23 @@ IF TFLAG:3 > 0
 		;음란, 창부	
 		ELSEIF (TALENT:4 || TALENT:7)	
 			KSTR:(K++) = 「ようやくぴょん、これでおまんこでも楽しめるぴょん♪」
-			KSTR:(K++) =  %CALLNAME%は、破瓜の様子を見てまだ知らぬ쾌락を想像し身を震わせた。
+			KSTR:(K++) =  %CALLNAME%は、破瓜の様子を見てまだ知らぬ快楽を想像し身を震わせた。
 		;복종, 예속	
 		ELSEIF (TALENT:5 || TALENT:8)	
 			KSTR:(K++) =  「……」
-			KSTR:(K++) =  %CALLNAME%は、ポロポロと涙を流し、가랑이から流れる破瓜の血を指で掬い取り舐めとった。
+			KSTR:(K++) =  %CALLNAME%は、ポロポロと涙を流し、股間から流れる破瓜の血を指で掬い取り舐めとった。
 			KSTR:(K++) = 「ありがとぴょん。これで、ようやく%CSTR:12%の%CSTR:11%になれたぴょん」
 			KSTR:(K++) = %CALLNAME%喜悦の笑みを浮かべ、膣で%CALLNAME:MASTER%の男根を締め上げた。
 		ENDIF	
 		;굴복각인Lv3
 		IF MARK:2 == 3 && KSTR:0 == ""
 			KSTR:(K++) = 「ぴぃ！？」
-			KSTR:(K++) = %CALLNAME%は破瓜の아픔と屈辱を受け、%CALLNAME:MASTER%を突き飛ばした。
+			KSTR:(K++) = %CALLNAME%は破瓜の痛みと屈辱を受け、%CALLNAME:MASTER%を突き飛ばした。
 		ENDIF
 		;공통	
 		IF KSTR:0 == ""	
 			KSTR:(K++) =「ぴぃ！？」
-			KSTR:(K++) = %CALLNAME%は破瓜の아픔と屈辱を受け、%CALLNAME:MASTER%を突き飛ばした。
+			KSTR:(K++) = %CALLNAME%は破瓜の痛みと屈辱を受け、%CALLNAME:MASTER%を突き飛ばした。
 		ENDIF	
 	ENDIF
 ENDIF
@@ -11769,7 +11769,7 @@ IF P > PALAMLV:4 && CFLAG:250 == 0
 	CALL PALAM_MESSAGE_D
 	;로션을 사용한 경우
 	IF SELECTCOM == 180
-		KSTR:(K++) = 「ヌルヌルするぴょん！？　모피と相性悪いぴょん！」
+		KSTR:(K++) = 「ヌルヌルするぴょん！？　毛皮と相性悪いぴょん！」
 	;그 이외
 	ELSE
 		KSTR:(K++) = 「おまた、濡れてきたぴょん……んっ」
@@ -11786,7 +11786,7 @@ IF P > PALAMLV:3 && CFLAG:251 == 0
 	CALL PALAM_MESSAGE_D
 	;미약을 사용한 경우
 	IF SELECTCOM == 181
-		KSTR:(K++) = 「一옷盛られたぴょん！　ううう、根性八十神ぴょん！」
+		KSTR:(K++) = 「一服盛られたぴょん！　ううう、根性八十神ぴょん！」
 	;그 이외
 	ELSE
 		KSTR:(K++) = 「あうう、変な気分ぴょん、発情したみたいぴょん」
@@ -11942,7 +11942,7 @@ IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
 	;굴복과 복종에 의한 굴복
 	ELSEIF TFLAG:24 == 33
 		KSTR:(K++) = 「んー、仕方ないぴょん。絆されちゃったぴょん。好きにしてほしいぴょん」
-		KSTR:(K++) = %CALLNAME%にはもうほとんど저항する気は残っていない様子だ。
+		KSTR:(K++) = %CALLNAME%にはもうほとんど抵抗する気は残っていない様子だ。
 	ENDIF
 ENDIF
 
@@ -11972,7 +11972,7 @@ IF TFLAG:21 == 3
 	;그 이외
 	IF KSTR:0 == ""
 		KSTR:(K++) = 「ふしゃぁ！」
-		KSTR:(K++) = どうにも、完全に적とみなされたらしい。今は近付かない方がいいだろう。
+		KSTR:(K++) = どうにも、完全に敵とみなされたらしい。今は近付かない方がいいだろう。
 	ENDIF
 ENDIF
 
@@ -12536,7 +12536,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			IF CFLAG:269 < 1 || FLAG:7 == 2
 				KSTR:(K++) = 「抱き枕になりにきたぴょん！　さあカモン！　ぴょん」
-				KSTR:(K++) = %CALLNAME:MASTER%は、팔を大きく広げた%CALLNAME%を抱きしめてそのままベッドにダイブした。
+				KSTR:(K++) = %CALLNAME:MASTER%は、腕を大きく広げた%CALLNAME%を抱きしめてそのままベッドにダイブした。
 				KSTR:(K++) = 「むふふー、トリコになるとよいぴょーん
 				CFLAG:269 = 1
 			ENDIF
@@ -12583,7 +12583,7 @@ SELECTCASE TFLAG:13
 			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
 				KSTR:(K++) = 「……できちゃったぴょん♪」
-				KSTR:(K++) = %CALLNAME%は満발気に下腹部を撫でている。
+				KSTR:(K++) = %CALLNAME%は満足気に下腹部を撫でている。
 			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
 				;부친(조수）과의 상성이 125보다 큰 경우
@@ -12612,8 +12612,8 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)					
 				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 「い、痛かったぴょん！　一人産むだけでコレとか인간ヤバイぴょん！」
-					KSTR:(K++) = %CALLNAME%は、そう言って抱きかかえた我が子に모유を与え始めた。
+					KSTR:(K++) = 「い、痛かったぴょん！　一人産むだけでコレとか人間ヤバイぴょん！」
+					KSTR:(K++) = %CALLNAME%は、そう言って抱きかかえた我が子に母乳を与え始めた。
 					KSTR:(K++) = 「でもまあ、%CSTR:12%の子ならもう何人か産んでも良いぴょん」
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
@@ -12698,7 +12698,7 @@ SELECTCASE TFLAG:13
 				;연모, 친애	
 				IF (TALENT:3 || TALENT:6)	
 					KSTR:(K++) = 「親離れの時ぴょん。名残惜しいぴょん。でも%CSTR:11%はしっかり見送るぴょん」
-					KSTR:(K++) = 「……母の가슴から旅立つ我が子にーっ、敬礼！　ぴょん」
+					KSTR:(K++) = 「……母の胸から旅立つ我が子にーっ、敬礼！　ぴょん」
 					KSTR:(K++) = %CALLNAME%はなぜかやたらと様になる敬礼で我が子を見送った。
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)	
@@ -12944,15 +12944,15 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			IF CFLAG:283 < 1 || FLAG:7 == 2
 				KSTR:(K++) = 「ぴょん？」
-				KSTR:(K++) = %CALLNAME:MASTER%は、%CALLNAME%を抱き寄せるとそっと입付けをした。
+				KSTR:(K++) = %CALLNAME:MASTER%は、%CALLNAME%を抱き寄せるとそっと口付けをした。
 				KSTR:(K++) = 「わ、わ、わ、急にどうしたぴょん？　あ、でも嬉しいぴょん、ん♪」
 				W:K = 1
-				KSTR:(K++) = しばし키스を交し合ったあと、%CALLNAME:MASTER%は改めて用件を告げる。
+				KSTR:(K++) = しばしキスを交し合ったあと、%CALLNAME:MASTER%は改めて用件を告げる。
 				KSTR:(K++) = 「ケッコン、ぴょん？　あ、えっと、%CSTR:11%は、%CSTR:11%は……」
 				KSTR:(K++) = 数瞬の間をあけて、何かを決心するようにうなずくと、%CALLNAME%は%CALLNAME:MASTER%に抱きついた。
 				W:K = 1
 				KSTR:(K++) = 「%CSTR:11%も%CSTR:12%が大好きぴょん。だから、ずっと一緒に居たいぴょん」
-				KSTR:(K++) = 左손の薬指に반지がはまる。
+				KSTR:(K++) = 左手の薬指に指輪がはまる。
 				KSTR:(K++) = そう、これからはずっと一緒だ。たとえ死が二人を別っても。
 				CFLAG:283 = 1
 			ENDIF
@@ -12967,9 +12967,9 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 怪しく桃色に輝くそれは、%CALLNAME%を冒し蕩かし、変えていく。
 				W:K = 1
 				KSTR:(K++) = 「お待たせしたぴょん……%UNICODE(0x2661)%」
-				KSTR:(K++) = 子宮の上に각인が完成したとき、そこにはただ一人のための음마として完成した%CALLNAME%の姿があった。
+				KSTR:(K++) = 子宮の上に刻印が完成したとき、そこにはただ一人のための淫魔として完成した%CALLNAME%の姿があった。
 				KSTR:(K++) = もはや死すら二人を別てはすまい。
-				KSTR:(K++) = どちらが求めるともなく、永劫の쾌락の坩堝に堕ちていった。
+				KSTR:(K++) = どちらが求めるともなく、永劫の快楽の坩堝に堕ちていった。
 				CFLAG:284 = 1
 			ENDIF
 		;-------------------------------------------------
@@ -12978,8 +12978,8 @@ SELECTCASE TFLAG:13
 	CASE 42
 			CALL EVENT_MESSAGE
 			IF CFLAG:285 < 1 || FLAG:7 == 2
-				KSTR:(K++) = ジュウ、と肉を焦がす音とともに、%CALLNAME%の首に赤い개목걸이のような焼印が刻まれる。
-				KSTR:(K++) = それは特殊な계약によって魂を構築する情報子にすら傷を付け、永遠の従属を強いる呪いだ。
+				KSTR:(K++) = ジュウ、と肉を焦がす音とともに、%CALLNAME%の首に赤い首輪のような焼印が刻まれる。
+				KSTR:(K++) = それは特殊な契約によって魂を構築する情報子にすら傷を付け、永遠の従属を強いる呪いだ。
 				KSTR:(K++) = 「幸せ、ぴょん%UNICODE(0x2661)%」
 				W:K = 1
 				KSTR:(K++) = 「これで%CSTR:11%は%CSTR:12%の、%CSTR:12%だけの……」
@@ -14081,7 +14081,7 @@ IF TFLAG:전투이벤트 == 2
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 3
-;아군 파티에서의 피소환시의 대사
+;아군 파티에서의 피소환시의 대사	
 			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"兎、参上！　ぴょん",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -14105,7 +14105,7 @@ IF CFLAG:ARG:입력행동 == 0
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;타격
 ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
-	;餅つき・월령네밋사구상さんから。
+	;餅つき・月齢ネミッサ口上さんから。
 	IF CFLAG:ARG:입력행동 == 216
 		SELECTCASE FLAG:월령
 			CASE 8
@@ -14118,7 +14118,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 					PRINTFORML ┃%"月光・旋廻",72,LEFT%┃
 					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-					PRINTFORML ┃%"撃砕・신벌",72,LEFT%┃
+					PRINTFORML ┃%"撃砕・神罰",72,LEFT%┃
 					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 					PRINTFORML ┃%"活殺撃ー！　ぴょん！",72,LEFT%┃
@@ -14130,7 +14130,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 				ELSE
 					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 					PRINTFORML ┃%"叩きのめすぴょん！　さらにのめすぴょん！",72,LEFT%┃
-					PRINTFORML ┃%"コレが必殺のぉ！　満月版달밤의떡찧기ぴょーん！",72,LEFT%┃
+					PRINTFORML ┃%"コレが必殺のぉ！　満月版月夜の餅つきぴょーん！",72,LEFT%┃
 					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 				ENDIF
 			CASE 1 TO 7
@@ -14145,7 +14145,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
 					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 				ELSE
 					PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-					PRINTFORML ┃%"杵で殴っていいのは、殴られる깨달음悟がある적だけぴょん",72,LEFT%┃
+					PRINTFORML ┃%"杵で殴っていいのは、殴られる覚悟がある敵だけぴょん",72,LEFT%┃
 					PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 				ENDIF
 			CASEELSE
@@ -14183,17 +14183,17 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"발を引っ張るぴょん！",72,LEFT%┃
+		PRINTFORML ┃%"足を引っ張るぴょん！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;도발
 ELSEIF RANGE(CFLAG:ARG:입력행동,515)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"うっそぴょーん！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;기합、컨센트레이트
+	;気合、コンセントレイト
 	ELSEIF RANGE(CFLAG:ARG:입력행동,511, 512)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"餅つき準備ぴょん！　월령は大丈남편かぴょん？",72,LEFT%┃
+		PRINTFORML ┃%"餅つき準備ぴょん！　月齢は大丈夫かぴょん？",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;그 외
 	ELSE
@@ -14206,9 +14206,9 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"兎返しのジツ！　なんちゃってぴょん",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;어둠속의기습
+;闇討ち
 ELSEIF CFLAG:ARG:입력행동 == 40
-	;월령で変化
+	;月齢で変化
 	SELECTCASE FLAG:월령
 		CASE 8
 		;満月
@@ -14219,7 +14219,7 @@ ELSEIF CFLAG:ARG:입력행동 == 40
 		;통상
 			IF RAND:3 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"ふつーに斬るピョン。ふつーの위력ピョン",72,LEFT%┃
+				PRINTFORML ┃%"ふつーに斬るピョン。ふつーの威力ピョン",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -14246,7 +14246,7 @@ ELSEIF CFLAG:ARG:입력행동 == 40
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ぴょこぉん、ぴょこぉん、ぴょこぉん、ぴょこぉん",72,LEFT%┃
-				PRINTFORML ┃%"검の極意を見つけてしまったかもしれないピョン……",72,LEFT%┃
+				PRINTFORML ┃%"剣の極意を見つけてしまったかもしれないピョン……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 	ENDSELECT
@@ -14263,7 +14263,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
 ;링케이지
 ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 4999)
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"仲魔の힘を借りて、今必殺の合体技ぴょん！",72,LEFT%┃
+			PRINTFORML ┃%"仲魔の力を借りて、今必殺の合体技ぴょん！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 

@@ -1,7 +1,7 @@
 ﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K1202_ALL.ERB
-;	Facility	:당신四天王、水の운디네の구상
+;	Facility	:あなた四天王、水のウンディーネの口上
 ;	Start word	:いいですとも！！
 ;
 ;	Licence		:ライセンスフリー。
@@ -38,9 +38,9 @@ SIF !(TALENT:16 && TALENT:18)
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML 츤데레운디네구상
+PRINTFORML 츤데레 운디네 구상
 ;구상설명문
-PRINTFORML  　この専用구상はツイン테일・건방짐・츤데레・입癖はバカ、死ね、최저で構成されています
+PRINTFORML  　この専用口上はツインテール・生意気・ツンデレ・口癖はバカ、死ね、最低で構成されています
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
@@ -107,10 +107,10 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「계약했다고 뭐든지 생각 했던 대로 되는 것은 아니야」
 	PRINTFORMW 「그렇게 명령하면 %CSTR:일인칭%들은 따르지 않으면 안되지만、싫어하는 걸 하는건 안되니까」
 	PRINTFORMW %CALLNAME:TARGET%는 뺨을 부풀려 뿌뿌하고 화내고 있다
-;	これもう필요한いでしょ。인간の場合は-1で加入して조교종료後に전투참가できなくなるし、악마は本来この処理ないし
+;	これもう必要ないでしょ。人間の場合は-1で加入して調教終了後に戦闘参加できなくなるし、悪魔は本来この処理ないし
 ;	IF CFLAG:전투참가불가능 == 0
 ;		DRAWLINE
-;		PRINTFORMW ※%NAME:TARGET%は%NAME:MASTER%への신뢰を失い、전투に참가しなくなります※
+;		PRINTFORMW ※%NAME:TARGET%は%NAME:MASTER%への信頼を失い、戦闘に参加しなくなります※
 ;		SIF CFLAG:포지션 > 0
 ;			CALL REMOVE_POSITION,CFLAG:포지션
 ;		CFLAG:전투참가불가능 = 1

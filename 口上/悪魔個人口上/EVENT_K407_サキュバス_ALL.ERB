@@ -1,11 +1,11 @@
 ﻿;-------------------------------------------------
-;서큐버스구상（캐릭터の이름を入れる、下にコンセプトなど一言あれば入れる）
+;サキュバス口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;えっちなお姉さんとイチャエロしたいという願望からかいてみました。
 ;性格に関して自分のイメージなんで大多数の人と異なるかもしれませんがご了承ください。
-;気に入らねければ삭제してくださって構いません
+;気に入らねければ削除してくださって構いません
 ;	◆はじめに
 ;これは自分がいつも楽しませてもらっているお礼として作ってみました。
-;구상書くのはこれが初めてな上に文才もないんで出来が悪くても勘弁してください
+;口上書くのはこれが初めてな上に文才もないんで出来が悪くても勘弁してください
 ;◆ライセンスについて
 ;	+----+----+-------------------------------+
 ;	|番号|許可|ライセンス内容                 |
@@ -59,9 +59,9 @@
 SIF ARG == 1
 	RETURN 0
 ;구상명
-PRINTFORML %NAME%個人구상
+PRINTFORML %NAME%個人口上
 ;구상설명문
-PRINTFORML    %NAME%の기본的な個人구상です。
+PRINTFORML    %NAME%の基本的な個人口上です。
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -1175,6 +1175,7 @@ CASE 14
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
 			PRINTFORMW %CALLNAME:MASTER%가 무릎 위에 앉아 있는 %CALLNAME:TARGET%를 뒤에서 부터 배를 꼬옥 껴안자 %CALLNAME:MASTER%의 손에 %CALLNAME:TARGET%의 손이 올라왔다
 			PRINTFORMW 특별히 말을 주고 받는 것은 하지 않고 느긋하게 행복한 시간을 보냈다…
+			CFLAG:317 = 2
 			CFLAG:317 = 2
 		ENDIF
 
@@ -2417,9 +2418,8 @@ CASE 14
 				CFLAG:341 = 3
 			;그 이외
 			ELSEIF CFLAG:341 < 2 || FLAG:7 == 2
-                                PRINTFORMW ｢응、아、하아、아하%UNICODE(0x2661)%｣
+				PRINTFORMW ｢응、아、하아、아하%UNICODE(0x2661)%｣
 				PRINTFORMW %CALLNAME:TARGET%이 삼켜오는 질에서 폭발하지 않게 %CALLNAME:MASTER%는 기분을 감추려는 듯이 %CALLNAME:TARGET%의 가슴이나 클리토리스를 자극했다…
-				
 				CFLAG:341 = 2
 			ENDIF
 		ENDIF
@@ -4635,11 +4635,11 @@ CASE 14
 				CFLAG:393 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
-				PRINTFORMW 미약을 마신%CALLNAME:TARGET%는갖고 싶어하는 듯한 눈으로 이쪽을 보고 있다
+				PRINTFORMW 미약을 마신%CALLNAME:TARGET%는 갖고 싶어하는 듯한 눈으로 이쪽을 보고 있다
 				CFLAG:393 = 3
 			;그 이외
 			ELSEIF CFLAG:393 < 2 || FLAG:7 == 2
-				PRINTFORMW 미약を飲んだ%CALLNAME:TARGET%は物欲しそうな눈でこちらを見ている
+				PRINTFORMW 미약을 마신%CALLNAME:TARGET%는 갖고 싶어하는 듯한 눈으로 이쪽을 보고 있다
 				CFLAG:393 = 2
 			ENDIF
 		ENDIF
@@ -6180,7 +6180,7 @@ IF TFLAG:0 > 0
 			PRINTFORMW 
 			CFLAG:233 = 2
 		ENDIF
-	;그 이외의 입사정
+	;그 이외の口射精
 	ELSE
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 4 || FLAG:7 == 2)
@@ -6316,7 +6316,7 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
@@ -6399,7 +6399,7 @@ IF TFLAG:2 > 0
 ENDIF
 
 ;-------------------------------------------------
-;역강간으로 사정시켰다
+;역강간으로 사정당했다
 ;-------------------------------------------------
 IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A
