@@ -164,7 +164,7 @@ ENDIF
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K5082
-;助手
+;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
 ;	IF CFLAG:203 == 0
@@ -9061,15 +9061,15 @@ SELECTCASE SELECTCOM
 			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
-			;ABL:初期リンク悪魔공격상성
-			;ABL:初期リンク悪魔최저공격횟수
-			;ABL:初期リンク悪魔최대공격횟수
-			;ABL:初期リンク悪魔사거리
-			;ABL:初期リンク悪魔공격범위
-			;ABL:初期リンク悪魔추가효과
-			;ABL:初期リンク悪魔추가효과상성
-			;ABL:初期リンク悪魔추가효과명중률
-			;ABL:初期リンク悪魔추가효과최대명중률
+			;ABL:초기링크악마공격상성
+			;ABL:초기링크악마최저공격횟수
+			;ABL:초기링크악마최대공격횟수
+			;ABL:초기링크악마사거리
+			;ABL:초기링크악마공격범위
+			;ABL:초기링크악마추가효과
+			;ABL:초기링크악마추가효과상성
+			;ABL:초기링크악마추가효과명중률
+			;ABL:초기링크악마추가효과최대명중률
 		ENDIF
  
 ;-------------------------------------------------
@@ -11193,7 +11193,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;모유체질
+				;母乳体質
 				IF TALENT:149						
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
@@ -12161,7 +12161,7 @@ SELECTCASE TFLAG:13
 						LOCALS:0 = 
 					ENDIF	
 				ENDIF
-				;그 외
+				;その他
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -12185,7 +12185,7 @@ SELECTCASE TFLAG:13
 						LOCALS:0 = 
 					ENDIF	
 				ENDIF
-				;그 외
+				;その他
 				IF LOCALS:0 == ""	
 					PRINTFORML 
 				ENDIF	
@@ -13322,7 +13322,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 18
 			TRYCALLFORM SKILL_TYPE_{CFLAG:(FLAG:행동순1):입력행동},FLAG:행동순1
 			スキル相性 = RESULT
-			IF スキル相性 == GET_TYPE_NUM("비구")
+			IF スキル相性 == GET_TYPE_NUM("飛具")
 				LOCALS:10 = 生憎と、俺に飛び道具は効かねぇよ
 			ELSEIF RAND:2 == 0
 				LOCALS:10 = 遅せぇっ
@@ -13546,7 +13546,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
 	;물어뜯기계
 	IF RANGE(CFLAG:ARG:입력행동,321, 326)
 		LOCALS:10 = 
-	;그 외
+	;その他
 	ELSE
 		LOCALS:10 = 
 	ENDIF
@@ -13569,7 +13569,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;도발
 	ELSEIF CFLAG:ARG:입력행동 == 515
 		LOCALS:10 = 
-	;그 외
+	;その他
 	ELSE
 		LOCALS:10 = 
 	ENDIF
@@ -13627,7 +13627,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	LOCALS:10 = 
 ;-------------------------------------------------
-;그 외
+;その他
 ;-------------------------------------------------
 ELSE
 	LOCALS:10 = 

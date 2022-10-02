@@ -1,16 +1,15 @@
 ﻿;-------------------------------------------------
-;謎のヒロインX口上
-;現状は戦闘口上だけ
-;調教口上誰か作ってくれないかなーﾁﾗｯﾁﾗｯと浅い期待をしながら調教口上を作る準備だけはしておく
+;マンドリカルド戦闘口上
+;えっちゃん口上を参考にしてます
 ;-------------------------------------------------
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:EVENT_K5083_ASSI.ERB
+;	Module		:EVENT_K5087_ASSI.ERB
 ;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
-;	001		2021/05/17		しゃけ					新規作成　戦闘口上のみ
+;	001		2022/05/29		takaya					新規作成　戦闘口上のみ
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -27,12 +26,12 @@
 ;	+----+----+-------------------------------+
 ;	|   5| ○ | 既存口上の改変                |
 ;	+----+----+-------------------------------+
-;	|   6| ▲ | 改変した口上の自由な再配布    |
+;	|   6| ○ | 改変した口上の自由な再配布    |
 ;	+----+----+-------------------------------+
-;	|   7| X | 口上内容の転載                |
+;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 
-@BATTLE_EVENT_K5083, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_K5087, ARG, ARG:1, ARG:2
 ;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCALS:10 = 1행째
 ;			LOCALS:11 = 2행째
@@ -40,7 +39,7 @@
 ;			LOCALS:13 = 4행째
 ;			LOCALS:14 = 5행째
 ;로 늘려나간다
-SIF ARG < 0 && NO:ARG != 5083
+SIF ARG < 0 && NO:ARG != 5087
 	RETURN 0
 VARSET LOCALS
 VARSET KSTR
@@ -50,11 +49,11 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 1
 		SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = 崩しました！ 後詰めお願いしますね！
+				LOCALS:10 = はいはい、俺の後にも続きますよーっと
 			CASE 1
-				LOCALS:10 = アタック、チャーンス！
+				LOCALS:10 = 皆さん！今がチャンスっす！
 			CASE 2
-				LOCALS:10 = ボッコボコにしてやりますよ、ええ！
+				LOCALS:10 = 俺が先陣！感激っすね！！
 		ENDSELECT
 	;COOP참가
 	CASE 2
@@ -62,46 +61,30 @@ SELECTCASE TFLAG:전투이벤트
 		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			SELECTCASE RAND:3
 				CASE 0
-					LOCALS:10 = マスターさんの次は私です！
+					LOCALS:10 = 了解っす
 				CASE 1
-					LOCALS:10 = 追撃ーッ！
+					LOCALS:10 = さすがっすねー！
 				CASE 2
-					LOCALS:10 = 後ろから正々堂々不意打ち！
+					LOCALS:10 = はいはい、続いて攻撃しますよ、っと！
 			ENDSELECT
 		;그 이외
 		ELSE
-			SELECTCASE RAND:3
-				CASE 0
-					IF FLAG:행동순1 != -1
-						IF NO:(FLAG:행동순1) == 5086
-							LOCALS:10 = えっちゃん、後ろは任せてください！
-						ELSEIF NO:(FLAG:행동순1) == [[キャラ:빨강세이버]]
-							LOCALS:10 = ネロさんの後に続くのは癪ですが……！！
-						ELSEIF NO:(FLAG:행동순1) == [[キャラ:파랑세이버]]
-							LOCALS:10 = わたｺﾞﾎﾝ……セイバーの次はまたセイバー、です！！
-						ELSE
-							LOCALS:10 = %CALLNAME:(FLAG:행동순1)%さんに続きますよ！
-						ENDIF
-					ELSE
-						IF RAND:2
-							LOCALS:10 = リンチの時間です！
-						ELSE
-							LOCALS:10 = 横殴りですよ、横殴り！
-						ENDIF
-					ENDIF
-				CASE 1
-					LOCALS:10 = リンチの時間です！
-				CASE 2
-					LOCALS:10 = 横殴りですよ、横殴り！
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = ぼっこぼこにしてやるっす！	
+			CASE 1
+				LOCALS:10 = はいはい、続くっすよー
+			CASE 2
+				LOCALS:10 = やるじゃねえっすか！
 			ENDSELECT
 		ENDIF
 	;피소환시
 	CASE 3
 		SELECTCASE RAND:2
 			CASE 0
-				LOCALS:10 = よし、出番ですね！
+				LOCALS:10 = そんじゃまぁ、やりますかっと
 			CASE 1
-				LOCALS:10 =　業務的に処理します！ うぬの運命を呪うがいい！
+				LOCALS:10 =　マンドリカルド、よろしくーっす
 		ENDSELECT
 	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
@@ -111,28 +94,28 @@ SELECTCASE TFLAG:전투이벤트
 		IF BASE:(ARG:1):ＨＰ <= 0
 			SELECTCASE RAND:2
 			CASE 0
-				LOCALS:10 = よし、次です、次！
+				LOCALS:10 = 俺でも倒せたっすよ！
 			CASE 1
-				LOCALS:10 = 成敗！！
+				LOCALS:10 = 弱いくせに出てくるんじゃねぇ！
 			ENDSELECT
 		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
-				LOCALS:10 = むむっ、崩せなかったとは……！
+				LOCALS:10 = あれ？おかしいっすね！？
 			ELSE
 				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
 		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
-			LOCALS:10 = さぁ、大人しく滅べ！
+			LOCALS:10 = このままトドメっす！
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
-			LOCALS:10 = これぐらいは小手調べの範囲です、決して手を抜いたわけじゃないんですよ？
+			LOCALS:10 = けっこうイケたんじゃないっすかね
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
-			LOCALS:10 = ぬぉぁー！ か、硬い……！！
+			LOCALS:10 = くそっ、かってぇ！
 		;무효되었다
 		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
-			LOCALS:10 = む、無効化されるとは……これインチキなんじゃないですか！？
+			LOCALS:10 = 無効とかアリっすか！？
 		ENDIF
 	;피데미지
 	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
@@ -141,62 +124,61 @@ SELECTCASE TFLAG:전투이벤트
 		IF BASE:ARG:ＨＰ <= 0
 			SELECTCASE RAND:2
 				CASE 0
-					LOCALS:10 = セイバーを絶滅させるまで、倒れる訳には……
+					LOCALS:10 = ま、三流にしちゃよくやったってことで……
 				CASE 1
-					LOCALS:10 = セイバーを……倒す……ぐふっ
+					LOCALS:10 = 次は負け……ねぇ……
 			ENDSELECT
 		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			SELECTCASE RAND:2
 				CASE 0
-					LOCALS:10 = あいたっ！？
+					LOCALS:10 = いてっ！？
 				CASE 1
-					LOCALS:10 = アウチッ！？
+					LOCALS:10 = まずいっす！！
 			ENDSELECT
 		;무효
 		ELSEIF ARG:2 == 0
 			SELECTCASE RAND:2
 				CASE 0
-					LOCALS:10 = この程度、どうってことはありませんよーだ！
+					LOCALS:10 = 効かないんだよォ！！
 				CASE 1
-					LOCALS:10 = あ、私セイバーなのでその攻撃は通りません
+					LOCALS:10 = そこ、無駄っすよー
 			ENDSELECT
 		;흡수
 		ELSEIF ARG:2 < 0
 			SELECTCASE RAND:2
 				CASE 0
-					LOCALS:10 = 唸れ、コスモリアクター！
+					LOCALS:10 = ありがてえこってす
 				CASE 1
-					LOCALS:10 = いやぁ、相手の攻撃は強敵でしたね！
+					LOCALS:10 = 吸収……いいっすね、これ
 			ENDSELECT
 		ELSE
 			SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = あいたっ
+				LOCALS:10 = あいてっ！？
 			CASE 1
-				LOCALS:10 = うひゃっ
+				LOCALS:10 = 耐えろぉおおおお！！
 			CASE 2
-				LOCALS:10 = ぐぇっ
+				LOCALS:10 = あー！？
 			ENDSELECT
 		ENDIF
 	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が無効数(回避も含む)
 	CASE 13
 		;全弾命中した
 		IF ARG:2 == 0
-			LOCALS:10 = セイバーたるもの、全ヒットは余裕なんですよ！
+			LOCALS:10 = 俺の攻撃が全命中……夢っすかね？コレ
 		;普通
 		ELSEIF ARG:2 < ARG:1
-			LOCALS:10 = む、幾らか外しましたか
+			LOCALS:10 = くそっ、いくつか避けられた！！
 		;全弾回避された
 		ELSEIF ARG:2 == ARG:1
 			SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = あっ、あーっ！？
+				LOCALS:10 = す、すんません！外しました！
 			CASE 1
-				LOCALS:10 = い、いや、これは単に小手調べとしてわかりやすい軌道の攻撃を出しただけですし？？？？
-				LOCALS:11 = 別にぃ？ 全然悔しくありませんしぃ？？？？
+				LOCALS:10 = いやいやいや、ダメ過ぎだろ俺……！
 			CASE 2
-				LOCALS:10 = ちょーっ！？ 避けるなーっ！！
+				LOCALS:10 = えっ、全部ハズレとかマジっすか！？
 			ENDSELECT
 		ENDIF
 	;範囲攻撃で敵を撃破した
@@ -207,157 +189,149 @@ SELECTCASE TFLAG:전투이벤트
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
-				LOCALS:10 = 一掃完了！ いやーこういうのは気持ちいいですね！
+				LOCALS:10 = これで一掃っすね！！
 			CASE 1
-				LOCALS:10 = 余裕でした！
+				LOCALS:10 = 三流に全滅させられてんじゃねーよ！
 			CASE 2
-				LOCALS:10 = セイバー見てから殲滅余裕でした！
+				LOCALS:10 = 俺、活躍したっすよ！！
 			ENDSELECT
 		ELSE
-			LOCALS:10 = ま、まぁまぁ、これぐらいは生き延びてもらえないと歯ごたえがありませんからね、うん！
+			LOCALS:10 = うーん、倒しこそねたっすかね？
 		ENDIF
 	;반사당했다
 	CASE 15
-		LOCALS:10 = Oh……
+		LOCALS:10 = あいて！？反射とかアリっすか！？
 	;반사했다
 	CASE 16
-		LOCALS:10 = くぅらぇーい！ コゥスモォ、リィフレェクタゥアー！！
-		LOCALS:11 = ……すいません、今のは忘れてください……！
+		LOCALS:10 = そこは得意なところっすよ！！
 	;회피당했다
 	CASE 17
 		SELECTCASE RAND:3
 		CASE 0
-			LOCALS:10 = あー、避けられちゃいましたよ？！
+			LOCALS:10 = てめぇ！避けんじゃねぇ！
 		CASE 1
-			LOCALS:10 = こらーっ、避けるなー！！
+			LOCALS:10 = ぐっ！当たんねぇ！
 		CASE 2
-			LOCALS:10 = ぐぬぬぬっ……
+			LOCALS:10 = すんません！外したっす！！
 		ENDSELECT
 	;회피했다
 	CASE 18
 		SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = セイバー忍法、チェンジボディ＝ジツ！！
+				LOCALS:10 = 追いついてないっすよ！
 			CASE 1
-				LOCALS:10 = ふっ、私のアホ毛は敵の攻撃を事前に察知できるんですよ！
-				LOCALS:11 = ……いやまぁ、実際どうなのかはわかりませんが
+				LOCALS:10 = 俺でも避けられたっす！
 			CASE 2
-				LOCALS:10 = セイバーを滅ぼす者がこの程度の攻撃に当たるわけないじゃないですかー！
+				LOCALS:10 = どこ見てんだ！！
 		ENDSELECT
 	;반격스킬 발동했다
 	CASE 20
-			LOCALS:10 = セイバー忍法、アベンジャンス＝ソード！
+			LOCALS:10 = そこ、隙アリっす！！
 	CASE 22
 		SELECTCASE GET_STATE(CFLAG:ARG:상태이상)
 			CASE "HAPPY"
-				LOCALS:10 = こ、これが……幸せ……！？
+				LOCALS:10 = と、友達100人……
 			CASE "SHOCK"
-				LOCALS:10 = あばっばっばっ……！？
+				LOCALS:10 = びりびりして動けねぇっすよぉ……
 			CASE "FREEZE"
-				LOCALS:10 = ぶるぶる……さ、さむっ！！！？
+				LOCALS:10 = さ、さみぃ……
 			CASE "BIND", "PALYZE"
-				LOCALS:10 = あのー！？ すいませーん！？ ヘルプミー！？
+				LOCALS:10 = えっ……あれ、う、動けねぇ……
 			CASE "PANIC"
-				LOCALS:10 = %CSTR:ARG:일인칭%の貴重なカップ麺を……！！ ゆ”る”さ”ん”っ”！！
+				LOCALS:10 = てめぇが俺の敵だな！？
 			CASE "SLEEP"
-				LOCALS:10 = ( ?ω?)ｽﾔｧ…
+				LOCALS:10 = うーん……おやすみなさいっす……
 			CASE "CLOSE"
-				LOCALS:10 = あー！ 私の魔術がーっ！？
+				LOCALS:10 = ぐっ、やばいっす！魔力が……
 			CASE "POISON"
-				LOCALS:10 = おぇっぷ……びょ、病欠しまーす……
+				LOCALS:10 = あー、毒っすねコレ……じわじわ来てるっす
 			CASE "BOMB"
-				LOCALS:10 = はっ、私の頭の中に爆弾が……！？
+				LOCALS:10 = あー！？ちょっとこの爆弾洒落になんねー！？
 			CASE "CHARM"
-				KSTR:(K++) = えっ……ニートになっていいんですか……！？_PH_
+				KSTR:(K++) = うっ、なんか頭がくらくらするっす……
 			CASE "CURSE"
-				LOCALS:10 = ぐわーっ、呪われた－！！
-				LOCALS:11 = あの、すいません！？ ここはアヴァなんとかの効力で無効化できる場面だったのでは！？
+				LOCALS:10 = ぎゃー！呪われちまった！？
 			CASE "FLY"
-				LOCALS:10 = ﾌﾞｰﾝﾌﾞｰﾝﾌﾞｰﾝ
-				LOCALS:11 = ぎゃーっ、なんで蠅になっているんですかー！？
+				LOCALS:10 = なんすか、なんなんすかハエって！！
 			CASE "STONE"
-				LOCALS:10 = …………（無言のサムズアップ）
+				LOCALS:10 = …………(妙にダサいポーズで固まっている
 			CASE "FLAME"
-				LOCALS:10 = ガッデムホット！？
+				LOCALS:10 = あっつ！？燃える！燃えちまうっすよぉ！
 			CASE "SLIP"
-				LOCALS:10 = おぁーっ！？ い、いや、別に恥ずかしくありませんし！
-				LOCALS:11 = 下がブルマだから別に見えてても問題ありませんし！？
+				LOCALS:10 = うわー！？た、助けて欲しいっす……ぐべっ
 			CASE "BRAND"
-				LOCALS:10 = 聖痕……！ これで私もセイバー殺しとしての箔が───
-				LOCALS:11 = ───えっ、これそういう代物じゃないんですか？
+				LOCALS:10 = へ、変なモンが俺の体に……
 			;그 외 상태이상
 			;CASEELSE
 		ENDSELECT
 	;食いしばり等で耐えた
 	CASE 25
-		LOCALS:10 = うぐぉ……セイバーを滅ぼすまでは、倒れません……！
+		LOCALS:10 = いくら三流でもそうそう死んで、たまるかよォ！！
 	;배틀에서 승리했다
 	CASE 90
 		SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = ふぅ……また一人、私以外のセイバーが消えました
+				LOCALS:10 = 勝ちました、っと！はぁ……良かった
 			CASE 1
-				LOCALS:10 = セイバーに逢えばセイバーを斬る。
-				LOCALS:11 = 神に逢えば神を斬る……主にセイバーばっかり増やす神を！
+				LOCALS:10 = ま、今回はなんとかなったっすね
 		ENDSELECT
 	;레벨 업했다
 	CASE 91
 		SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = 私がセイバーの頂点であるためには、鍛練を怠りません
+				LOCALS:10 = レベルアップ、ありがてえこってす
 			CASE 1
-				LOCALS:10 = …………レベルアップしたら胸とか成長しませんかね…？
+				LOCALS:10 = 俺、レベルアップっす！
 		ENDSELECT
 	;도주에 성공했다
 	CASE 92
 		SELECTCASE RAND:3
 			CASE 0
-				LOCALS:10 = にぃげるんですよぉ！
+				LOCALS:10 = 賭けろ！ブリリアドーロ！
 			CASE 1
-				LOCALS:10 = セイバー忍法、ニンジャ＝ダッシュ！！
+				LOCALS:10 = 撤退すればまた戦えるっすよ！
 			CASE 2
-				LOCALS:10 = お前たちなど私の相手ではなーい！
-				LOCALS:11 = という訳で、撤退です！
+				LOCALS:10 = 逃げるが勝ち、っすね
 		ENDSELECT
 	;도주에 실패했다
 	CASE 93
-			LOCALS:10 = くっ、セイバー忍法を見破るとは、侮りがたし……！
+			LOCALS:10 = あー！？回り込まれたっす！！
 	;전투 개시시
 	CASE 94
 		IF FLAG:선제공격플래그
-			LOCALS:10 = セイバーの先制攻撃です！
+			LOCALS:10 = 先制、頂くぜ！！
 		ELSEIF 현HP비율(ARG) < 25
 			;빈사
-			LOCALS:10 = なんの……！ セイバーたるもの、これくらいの逆境は……！
+			LOCALS:10 = えっ、俺、やばくないっすか……
 		ELSE
-			LOCALS:10 = 速攻で終わらせますよ！
+			LOCALS:10 = 陰キャらしく、それなりに頑張りますよっと！
 		ENDIF
 	;백어택을 당했다
 	CASE 95
 		IF 현HP비율(ARG) < 25
 			;빈사
-			LOCALS:10 = なんの……！ セイバーたるもの、これくらいの逆境は……！
+			LOCALS:10 = あー！？今はまずいっす！マジで！！
 		ELSE
-			LOCALS:10 = あーっ！？ 背後を取るとは、卑怯な奴めー！
+			LOCALS:10 = くそっ、まずいっすね！回り込まれた
 		ENDIF
 	;적에게 선제공격을 당했다
 	CASE 96
 		IF 현HP비율(ARG) < 25
 			;빈사
-			LOCALS:10 = なんの……！ セイバーたるもの、これくらいの逆境は……！
+			LOCALS:10 = 生き残れるっすかね、俺……
 		ELSE
-			LOCALS:10 = 先手を取られた程度で負けるほど軟ではありません！	
+			LOCALS:10 = くそっ、敵の方がはえぇ！！	
 		ENDIF
 	CASE 100
 		IF 0
 		;スキル分岐
-		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[스킬:○○]]
+		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[スキル:○○]]
 		ELSE
 			SELECTCASE RAND:2
 				CASE 0
-					LOCALS:10 = いざ、合体攻撃です！
+					LOCALS:10 = つまりは合体技っすね！！
 				CASE 1
-					LOCALS:10 = 合わせていきますよ！
+					LOCALS:10 = はいはい、いくっすよー
 			ENDSELECT
 		ENDIF
 ENDSELECT
@@ -365,7 +339,7 @@ SIF !(LOCALS:10 == "")
 	CALL MESSAGE_B2(CALLNAME:ARG,0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 
 
-@BATTLE_MESSAGE_K5083,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_K5087,ARG,ARG:1 = 0
 #DIM 宝具セリフ
 ;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCALS:10 = 1행째
@@ -394,26 +368,25 @@ IF 1 == 0
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
-		LOCALS:10 = あー……セイバーもいなくて……エアコンが涼しいですね……
+		LOCALS:10 = なんかもやもやして変な気持ちっす……
 	ELSE
-		LOCALS:10 = ハッ、セイバー！！
+		LOCALS:10 = あっ！？俺、今何してました！？
 	ENDIF
 ;혼란시
 ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 	;금전뿌리기
 	IF CFLAG:ARG:입력행동 == 2315
-		LOCALS:10 = マスターさんの財布の中身をゴールにシューッ！
-		LOCALS:11 = 超、エキサイティング！
+		LOCALS:10 = 銭投げっすよ！銭投げ！！
 	;행동불능（멍하니 멈춰 있다）
 	ELSEIF CFLAG:ARG:입력행동 == 2314
 		SELECTCASE RAND:2
 			CASE 0
-				LOCALS:10 = あぁ、せっかくありあわせのお金で買ったカップ麺なのに……
+				LOCALS:10 = あぁー、このまま溶けたい……
 			CASE 1
-				LOCALS:10 = うぅ、カップ麺……
+				LOCALS:10 = やっぱデュランダルっすよ、デュランダル……
 		ENDSELECT
 	ELSE
-		LOCALS:10 = よくも%CSTR:ARG:일인칭%のカップ麺をっ！！
+		LOCALS:10 = てめぇ！よくもオレのデュランダルを！！
 	ENDIF
 ;-------------------------------------------------
 ;특정스킬
@@ -422,11 +395,11 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 ELSEIF CFLAG:ARG:입력행동 == 0
 	SELECTCASE RAND:3
 		CASE 0
-			LOCALS:10 = はっ！
+			LOCALS:10 = たたっ斬る！！
 		CASE 1
-			LOCALS:10 = やっ！
+			LOCALS:10 = せいや！っと！！
 		CASE 2
-			LOCALS:10 = せいっ！
+			LOCALS:10 = この野郎が！！
 	ENDSELECT
 ;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
 ;	LOCALS:10 = 
@@ -486,10 +459,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 ;-------------------------------------------------
 ;검격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
-	IF CFLAG:ARG:입력행동 == [[스킬:어둠속의기습]]
-		LOCALS:10 = いざっ、正々堂々不意打ち！
+	IF CFLAG:ARG:입력행동 == 6 || CFLAG:ARG:입력행동 == 67
+		LOCALS:10 = まとめて叩っ斬る！！
 	ELSE
-		LOCALS:10 = 斬り捨てます！
+		LOCALS:10 = てめぇら、覚悟しやがれ！！
 	ENDIF
 ;비구
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
@@ -502,7 +475,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
 ;	;물어뜯기계
 ;	IF RANGE(CFLAG:ARG:입력행동,321, 326)
 ;		LOCALS:10 = 
-;	;그 외
+;	;その他
 ;	ELSE
 ;		LOCALS:10 = 
 ;	ENDIF
@@ -529,7 +502,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;	LOCALS:10 = 
 	;ELSEIF CFLAG:ARG:입력행동 == [[스킬:컨센트레이트]]
 	;	LOCALS:10 = 
-	;그 외
+	;その他
 	;ELSE
 	;	LOCALS:10 = 
 	;ENDIF
@@ -556,10 +529,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 ;	LOCALS:10 = 
 ;파마
 ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
-	LOCALS:10 = 喰らえっ、聖剣の光ー！
+	LOCALS:10 = 
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
-	LOCALS:10 = セイバーですので、闇の力を扱うぐらい余裕なんですよ！
+	LOCALS:10 =
 ;;지변
 ;ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599)
 ;	LOCALS:10 = 
@@ -587,41 +560,25 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	;LOCALS:10 = 
 ;-------------------------------------------------
-;그 외
+;その他
 ;-------------------------------------------------
 ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"ノウブル・ファンタズム")
-	LOCALS:10 = コスモリアクター、オーバードライブ！
-	LOCALS:11 = ここからは本気と書いてマジでいきます！
-ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"無銘勝利剣")
-	IF SKILLGAGE_H_GET(ARG,PU_SKILLNUM_GET(ARG,"無銘勝利剣")) == 0
-		宝具セリフ = RAND:2
-		SELECTCASE 宝具セリフ
-			CASE 0
-				LOCALS:10 = 星光の剣よ！ 赤とか白とか黒とか消し去るべし！
-			CASE 1
-				LOCALS:10 = 　　　　　　　　　 ｾｲﾊﾞｰ
-				LOCALS:11 = 今、光と闇が交わり 最 強 に見える！
-		ENDSELECT
-	ELSEIF SKILLGAGE_H_GET(ARG,PU_SKILLNUM_GET(ARG,"無銘勝利剣")) == 6
-		SELECTCASE 宝具セリフ
-			CASE 0
-				LOCALS:10 = みんなにはナイショだよ！
-			CASE 1
-				LOCALS:10 = カタフラクティ・シフト！ 王道の力を知れ！
-		ENDSELECT
-	ELSEIF SKILLGAGE_H_GET(ARG,PU_SKILLNUM_GET(ARG,"無銘勝利剣")) == 11
-		LOCALS:10 = 　ｴｯｸｽ・ｶﾘﾊﾞｰ
-		LOCALS:11 = 『無銘勝利剣』─────ッ！！！！
-	ENDIF
-ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"支援砲撃")
-	LOCALS:10 = いざ、尋常に支援砲撃！
-ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"直感")
-	LOCALS:10 = むっ、見えた！
-ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"セイバーの星")
-	LOCALS:10 = あ、ちょうどカップ麺が出来たころ合いでした！
-	LOCALS:11 = ちょっと失礼して、いただきまーす！
-ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"銀河流星剣")
-	LOCALS:10 = いくぞ、第二宝具！ 『銀河流星剣』！
+	LOCALS:10 = こんな三流の俺でもサーヴァントの誇りはあります！
+	LOCALS:11 = 気合入れて行くっすよ！！
+ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"不帯剣の誓い")
+	LOCALS:10 = 我が手に剣無し。されど剣あり。
+	LOCALS:11 = 栄光の剣。壊れずの絶世。この一時だけでも！
+	LOCALS:12 = ｾﾙﾏﾝ･ﾃﾞ･ﾃﾞｭﾗﾝﾀﾞﾙ
+	LOCALS:13 = 『不帯剣の誓い』！
+ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"絶世の儚剣")
+	LOCALS:10 = 駆けろ、ブリリアドーロ！ 虹の彼方にて光を放て！ 
+	LOCALS:11 = 我が命に代えて、誓いを破り、絶世の剣を今ここに！
+	LOCALS:12 = ﾚｰｳﾞ･ﾃﾞ･ﾃﾞｭﾗﾝﾀﾞﾙ
+	LOCALS:13 = 『絶世の儚剣』！
+ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"九偉人の鎧")
+	LOCALS:10 = この鎧の守りは簡単には抜けねぇっすよ！！
+ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"ﾌﾞﾘﾘｱﾄﾞｰﾛの嘶き")
+	LOCALS:10 = ブリリアドーロの力、見るがいいっす！
 ENDIF
 ;-------------------------------------------------
 ;진・그 외
@@ -630,11 +587,11 @@ IF LOCALS:10 == ""
 	;반드시 무언가 말한다
 	SELECTCASE RAND:3
 		CASE 0
-			LOCALS:10 = はっ
+			LOCALS:10 = はぁっ！！
 		CASE 1
-			LOCALS:10 = すばやく！
+			LOCALS:10 = 吹き飛べぇ！！
 		CASE 2
-			LOCALS:10 = セイバー！
+			LOCALS:10 = せいっ！！
 	ENDSELECT
 ENDIF
 

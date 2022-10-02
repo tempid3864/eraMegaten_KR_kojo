@@ -27,10 +27,10 @@
 ;-------------------------------------------------
 ;	Edit	Date			Author	New
 ;	001		2020/06/10		名無し	新規作成（eratoho Jから移植）
-;	002
+;	002		2020/10/09		TLAS		バグ２箇所修正
 ;-------------------------------------------------
 ;使用フラグ一覧
-;CFLAG:800　질내사정횟수
+;CFLAG:800　中出し回数
 ;CFLAG:801　尻穴射精回数
 ;CFLAG:802　絶頂済み
 ;CFLAG:803　C感覚Lv5以上&&快C 9000以上
@@ -114,7 +114,7 @@ PRINTFORML %CALLNAME%（eratohoJ에서 이식）
 
 ;구상설명문
 PRINTFORML 　　eratohoJ등으로부터의 이식+일부 개조입니다。
-PRINTFORML 　　(AA표시 유무를 선택할 수 있습니다）
+PRINTFORML 　　(AA표시 여부를 선택할 수 있습니다）
 PRINTL 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
@@ -172,7 +172,7 @@ DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
 	;AA表示の有無を決定
-	PRINTFORML AA표시 유무를 선택하십시오
+	PRINTFORML AA표시 여부를 선택해 주세요
 	PRINTFORML 
 	CALL INPUT_YN("AA표시 있음", "AA표시 없음")
 	IF RESULT == 0
@@ -289,7 +289,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 이미 %CALLNAME%의 눈은 흐려져서、언제든지 조교를 시작할 수 있을 것 같다。
 		CSTR:100 = 응……%조사처리(CALLNAME,"가")% 엉망진창이 될 정도로
 		CSTR:101 = 괴롭혀주세요……
-		CFLAG:808 = 7120;全裸（절정）
+		CFLAG:808 = 7120;全裸（絶頂）
 		CALL PRINT_AA_K4851
 	;복종
 	ELSEIF TALENT:5
@@ -297,7 +297,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	ENDIF
 	CFLAG:201 = 5
 	RETURN 0
-ELSEIF CFLAG:201 < 6
+ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
 	;친애
 	IF TALENT:6
 		PRINTFORMW %조사처리(CALLNAME,"를")% 호출하자、기세 좋게 %조사처리(CALLNAME:MASTER,"를")% 끌어안았다。
@@ -347,9 +347,9 @@ ENDIF
 ;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
-IF ASSI < 0 
+IF ASSI < 0
 	CALL EVENTTRAIN_SECOND_K4851_1
-;助手
+;조수
 ELSEIF NO:ASSI == 4821
 ;처음
 	IF CFLAG:203 == 0
@@ -419,7 +419,7 @@ IF MARK:3 == 3 && (CFLAG:202 <= 4 || FLAG:7 == 2)
 	CFLAG:808 = 7009;顔（見下し）
 	CALL PRINT_AA_K4851
 	CFLAG:202 = 4
-;반발각인Lv0 or 1 or 2
+;反発刻印Lv0 or 1 or 2
 ELSEIF (MARK:3 == 2 && (CFLAG:202 <= 4 || FLAG:7 == 2)) || (MARK:3 == 1 && (CFLAG:202 < 4 || FLAG:7 == 2)) || (MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2))
 	CSTR:100 = 또 왔어？
 	CFLAG:808 = 7008;顔（ジト目）
@@ -501,7 +501,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 방에 들어가자、%조사처리(CALLNAME,"는")% 흰자의를 드러내며 자위를 반복하고 있었다。
 				PRINTFORMW 이미 시트는 젖지 않은 장소가 없을 정도다。
 				CSTR:100 = %CALLNAME:MASTER%…아…드디어 와줬네에♪
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 				CALL PRINT_AA_K4851
 				PRINTFORMW %조사처리(CALLNAME,"는")% 당신에게 뜨거운 시선을 보내면서 가랑이를 벌리고、충혈된 바기나를 보여주고 있다…
 			CASE 1
@@ -510,7 +510,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% 미지근한 물로 짠 천으로 사타구니를 부드럽게 닦아주고、%조사처리(CALLNAME,"를")% 일으켰다……
 			CASE 2
 				CSTR:100 = 앗……%CALLNAME:MASTER%……
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 				CALL PRINT_AA_K4851
 				PRINTFORMW %조사처리(CALLNAME:MASTER,"가")% 방에 들어오자、%조사처리(CALLNAME,"는")% 자위를 그만두고、
 				PRINTFORMW %CALLNAME:MASTER%의 곁으로 달려왔다。
@@ -554,18 +554,6 @@ RETURN 0
 ;조교 종료시의 대사
 ;--------------------------------------------------
 DRAWLINE
-;潤滑フラグリセット
-CFLAG:250 = 0
-;V射精回数リセット
-CFLAG:800 = 0
-;A射精回数リセット
-CFLAG:801 = 0
-;絶頂回数リセット
-CFLAG:802 = 0
-;浣腸フラグリセット
-CFLAG:807 = 0
-
-
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	CSTR:100 = 다시는 오지 않았으면 좋겠는데
@@ -594,7 +582,7 @@ ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;질내사정횟수 5回以上
+		;中出し回数 5回以上
 		IF CFLAG:800 >= 5
 			CSTR:100 = 하아…　하아… 뱃속…잔뜩…
 			CSTR:101 = 응… 행복…해…
@@ -626,7 +614,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		CSTR:100 = 하아……하아……보지를 꿰뚫어줬으면 좋겠어어……%CALLNAME:MASTER%……
-		CFLAG:808 = 7120;全裸（절정）
+		CFLAG:808 = 7120;全裸（絶頂）
 		CALL PRINT_AA_K4851
 		PRINTFORMW %조사처리(CALLNAME,"는")% 자신의 음핵을 주무르면서 당신의 이름을 부르고 있다。
 	;복종, 예속
@@ -638,7 +626,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;질내사정횟수 5回以上の場合
+		;中出し回数 5回以上の場合
 		IF CFLAG:800 >= 5
 			CSTR:100 = 하아…　뱃속…잔뜩…
 			CFLAG:808 = 7121;半裸（顔隠し）
@@ -679,6 +667,16 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	ENDIF
 	CFLAG:219 = 4
 ENDIF
+;潤滑フラグリセット
+CFLAG:250 = 0
+;V射精回数リセット
+CFLAG:800 = 0
+;A射精回数リセット
+CFLAG:801 = 0
+;절정回数リセット
+CFLAG:802 = 0
+;浣腸フラグリセット
+CFLAG:807 = 0
 RETURN 0
 
 ;--------------------------------------------------
@@ -831,6 +829,8 @@ SELECTCASE SELECTCOM
 ;1,커닐링구스
 ;-------------------------------------------------
 	CASE 1
+		CFLAG:808 = 7122;半裸（顔隠し＋絶頂）
+		CALL PRINT_AA_K4851
 		;처음
 		IF CFLAG:301 == 0
 			;연모, 친애
@@ -873,7 +873,7 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:4 || TALENT:7
 					IF RAND:2 == 0
 						CSTR:100 = 아앗…♪좀 더…좀 더 핥아줘♪
-						CFLAG:808 = 7120;全裸（절정）
+						CFLAG:808 = 7120;全裸（絶頂）
 						CALL PRINT_AA_K4851
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% %CALLNAME:PLAYER%의 머리를 짓누르며 더 큰 쾌감을 얻으려고 한다。
 						PRINTFORMW 「흐앗…미…미안해。너무 기분이 좋아서 그만…」
@@ -881,7 +881,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% %CALLNAME:PLAYER%의 머리를 누르고、한층 더 큰 쾌감을 얻으려고 한다。
 						CSTR:100 = 읏…좀 더…핥아줘…
-						CFLAG:808 = 7120;全裸（절정）
+						CFLAG:808 = 7120;全裸（絶頂）
 						CALL PRINT_AA_K4851
 					ENDIF
 				;복종, 예속
@@ -1538,12 +1538,12 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					IF RAND:2 == 0
-						PRINTFORMW 「으응♪가슴 기분 좋아♪아하아♪」
-						PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 격렬하게 %CALLNAME:TARGET%의 가슴을 주물렀다。
-						CSTR:100 = 가슴 괴롭히는거 죠아해에♪
+							PRINTFORMW 「으응♪가슴 기분 좋아♪아하아♪」
+							PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% 격렬하게 %CALLNAME:TARGET%의 가슴을 주물렀다。
+							CSTR:100 = 가슴 괴롭히는거 죠아해에♪
 					ELSE
-						PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME:TARGET%의 유방을 격렬하게 주물렀다。
-						CSTR:100 = 응…하아♪…좀 더 강하게 해줘어♪…
+							PRINTFORMW %조사처리(CALLNAME:PLAYER,"는")% %CALLNAME:TARGET%의 유방을 격렬하게 주물렀다。
+							CSTR:100 = 응…하아♪…좀 더 강하게 해줘어♪…
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -1818,7 +1818,7 @@ SELECTCASE SELECTCOM
 							ELSE
 								CSTR:100 = 응♪…핫♪…클리토리스도오♪…자안뜨윽♪기분 좋아앗♪
 							ENDIF
-							CFLAG:808 = 7120;全裸（절정）
+							CFLAG:808 = 7120;全裸（絶頂）
 							CALL PRINT_AA_K4851
 						CASE 1
 							;野次馬5人以上
@@ -2421,7 +2421,7 @@ CASE 15
 			CASE 2
 				PRINTFORMW 자신의 이야기를 텐시는 진지하게 듣고 있다
 				CSTR:100 = 저기 있잖아、더 들려줄래？
-				CFLAG:808 = 7041;顔（안경）
+				CFLAG:808 = 7041;顔（眼鏡）
 				CALL PRINT_AA_K4851
 				PRINTFORMW 흥미로워 보여서 다행이다。
 			CASE 3
@@ -2656,7 +2656,7 @@ CASE 15
 				PRINTFORMW 「당신은 겉보기와는 다르게 제법 튼튼한 몸이네～」
 				PRINTFORMW 텐시는 당신의 몸을 흥미롭게 만지고 있다
 				CSTR:100 = 이게 남자의 몸이구나～
-				CFLAG:808 = 7041;顔（안경）
+				CFLAG:808 = 7041;顔（眼鏡）
 				CALL PRINT_AA_K4851
 			ENDSELECT
 			CFLAG:316 = 2
@@ -2671,7 +2671,7 @@ CASE 15
 		IF CFLAG:317 == 0
 			CSTR:100 = 뭐 조금은 느긋한 시간도 가져야겠지
 			CSTR:101 = 차라도 우려올까？
-			CFLAG:808 = 7041;顔（안경）
+			CFLAG:808 = 7041;顔（眼鏡）
 			CALL PRINT_AA_K4851
 			CFLAG:317 = 1
 		;2번째 이후
@@ -3470,7 +3470,7 @@ CASE 15
 					ELSE
 						CSTR:100 = 후앗、히아앗！
 						CSTR:101 = 정말… 조금 더 살살 빼줘…
-						CFLAG:808 = 7120;全裸（절정）
+						CFLAG:808 = 7120;全裸（絶頂）
 						CALL PRINT_AA_K4851
 					ENDIF
 				;음란, 창부
@@ -3480,7 +3480,7 @@ CASE 15
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
-			;굴복각인Lv3
+			;屈服刻印LV3
 			ELSEIF MARK:2 == 3 && (CFLAG:327 < 3 || FLAG:7 == 2)
 				CSTR:100 = 하아… 후으…
 				CSTR:101 = 뭔가 버릇이 될 것 같아…
@@ -3546,7 +3546,7 @@ CASE 15
 				CFLAG:328 = 2
 			ENDIF
 		ENDIF
-	;탈착
+	;脱着
 	ELSE
 		IF CFLAG:328 == 1 || FLAG:7 == 2
 			CALL TRAIN_MESSAGE
@@ -8018,7 +8018,7 @@ CASE 15
 			CALL PRINT_AA_K4851
 			PRINTFORMW 항의하며 목소리를 높이는 %조사처리(CALLNAME:TARGET,"였")%지만、그 목소리는 가냘프다。
 			CSTR:100 = 하아――…하아――…싫어…몸이…쑤셔오고 있어…
-			CFLAG:808 = 7120;全裸（절정）
+			CFLAG:808 = 7120;全裸（絶頂）
 			CALL PRINT_AA_K4851
 			CFLAG:393 = 1
 		;2번째 이후
@@ -8043,13 +8043,13 @@ CASE 15
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 
 				ENDIF
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 				CALL PRINT_AA_K4851
 				CFLAG:393 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:393 < 3 || FLAG:7 == 2)
 				CSTR:100 = 앙……몸이 뜨거워……이상해져버려……
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 				CALL PRINT_AA_K4851
 				PRINTFORMW 온몸에 약이 돌고、온몸을 홍조시키면서 %조사처리(CALLNAME:TARGET,"는")% %조사처리(CALLNAME:PLAYER,"를")% 촉촉한 눈동자로 바라보고 있다
 				PRINTFORMW 그것은 마치 무의식적으로 자신의 사타구니를 쓰다듬듯이 손을 움직이는 것처럼 보인다
@@ -8057,7 +8057,7 @@ CASE 15
 			;그 이외
 			ELSEIF CFLAG:393 < 2 || FLAG:7 == 2
 				CSTR:100 = 앙……몸이 뜨거워……이상해져버려……
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 				CALL PRINT_AA_K4851
 				PRINTFORMW 온몸에 약이 돌고、온몸을 홍조시키면서 %조사처리(CALLNAME:TARGET,"는")% %조사처리(CALLNAME:PLAYER,"를")% 촉촉한 눈동자로 바라보고 있다
 				PRINTFORMW 그것은 마치 무의식적으로 자신의 사타구니를 쓰다듬듯이 손을 움직이는 것처럼 보인다
@@ -8140,7 +8140,7 @@ CASE 15
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ口上が出るように변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -9423,7 +9423,7 @@ IF NOWEX:3 > 0 && CFLAG:245 == 0
 		PRINTFORMW 처음 맞이하는 가슴의 절정에 %조사처리(CALLNAME:TARGET,"는")% 조금 당황하는 것 같다。
 		CSTR:100 = 응응！이제、가슴 너무 기분 좋아서…
 		CSTR:101 = 아、안돼에…！！
-		CFLAG:808 = 7120;全裸（절정）
+		CFLAG:808 = 7120;全裸（絶頂）
 		CALL PRINT_AA_K4851
 	ENDIF
 	CFLAG:245 = 1
@@ -9517,11 +9517,11 @@ IF TFLAG:29 > 1
 			ENDIF
 			SELECTCASE RAND:3
 				CASE 0
-					CFLAG:808 = 7124;顔（절정）
+					CFLAG:808 = 7124;顔（絶頂）
 				CASE 1
 					CFLAG:808 = 8522
 				CASE 2
-					CFLAG:808 = 7120;全裸（절정）
+					CFLAG:808 = 7120;全裸（絶頂）
 			ENDSELECT
 			CALL PRINT_AA_K4851
 		;음란, 창부
@@ -9566,11 +9566,11 @@ IF TFLAG:29 > 1
 		CSTR:100 = 가버린 곳 보여져버려…싫어어엇♪
 		SELECTCASE RAND:3
 			CASE 0
-				CFLAG:808 = 7124;顔（절정）
+				CFLAG:808 = 7124;顔（絶頂）
 			CASE 1
 				CFLAG:808 = 8522
 			CASE 2
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 		ENDSELECT
 		CALL PRINT_AA_K4851
 		CFLAG:246 = 3
@@ -9579,11 +9579,11 @@ IF TFLAG:29 > 1
 		CSTR:100 = 안돼에、가버려…이제 가버려엇！
 		SELECTCASE RAND:3
 			CASE 0
-				CFLAG:808 = 7124;顔（절정）
+				CFLAG:808 = 7124;顔（絶頂）
 			CASE 1
 				CFLAG:808 = 8522
 			CASE 2
-				CFLAG:808 = 7120;全裸（절정）
+				CFLAG:808 = 7120;全裸（絶頂）
 		ENDSELECT
 		CALL PRINT_AA_K4851
 		CFLAG:246 = 2
@@ -11091,7 +11091,7 @@ ENDIF
 ;ENDIF
 SELECTCASE TFLAG:13
 		;-------------------------------------------------
-		;아침 펠라치오
+		;아침펠라
 		;-------------------------------------------------
 	CASE 1
 			CALL EVENT_MESSAGE
@@ -11123,7 +11123,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;아침 파이즈리
+		;아침파이즈리
 		;-------------------------------------------------
 	CASE 2
 			CALL EVENT_MESSAGE
@@ -11150,7 +11150,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					;母乳体質かどうか
+					;모유체질인지 아닌지
 					IF TALENT:149
 						PRINTFORMW 
 					ELSE
@@ -11158,7 +11158,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					;母乳体質かどうか
+					;모유체질인지 아닌지
 					IF TALENT:149
 						PRINTFORMW 
 					ELSE
@@ -11170,7 +11170,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;아침 기승위
+		;아침기승위
 		;-------------------------------------------------
 	CASE 3
 			CALL EVENT_MESSAGE
@@ -11199,7 +11199,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;아침 기승위A
+		;아침기승위A
 		;-------------------------------------------------
 	CASE 24
 			CALL EVENT_MESSAGE
@@ -11225,7 +11225,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;아침 키스 연모, 친애 전제
+		;아침키스 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 25
 			CALL EVENT_MESSAGE
@@ -11256,7 +11256,7 @@ SELECTCASE TFLAG:13
 						PRINTFORMW  %조사처리(CALLNAME:MASTER,"가")% 눈을 뜨자、맛있을 것 같은 향기가 풍겨 왔다
 						CSTR:100 = 잘 지어졌습니다♪라니。편리하네。취반기라는 거…♪…
 					ENDIF
-					CFLAG:808 = 7041;顔（안경）
+					CFLAG:808 = 7041;顔（眼鏡）
 					CALL PRINT_AA_K4851
 					PRINTFORMW 아무래도 %조사처리(CALLNAME,"가")% 아침밥을 만들어주는것 같다
 				;음란, 창부
@@ -11280,7 +11280,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;일어나면 옆에서 자고 있다 연모, 친애전제
+		;일어나자 곁에서 자고 있다 연모, 친애 전제
 		;-------------------------------------------------
 	CASE 27
 			CALL EVENT_MESSAGE
@@ -11292,7 +11292,7 @@ SELECTCASE TFLAG:13
 				CFLAG:263 = 1
 
 		;-------------------------------------------------
-		;아침의 풋잡
+		;아침풋잡
 		;-------------------------------------------------
 	CASE 28
 			CALL EVENT_MESSAGE
@@ -11311,7 +11311,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 텐시의 발은 적당히 가볍고 부드럽고、그런데도 정말 미끈하다…
 					PRINTFORMW 맨다리의 끈적끈적한 감촉이、적당히 페니스에 달라붙어 부드러운 쾌감을 준다…！
 					CSTR:100 = 반응으로 봐선、꽤 마음에 든 것 같던데…？　후후、내 다리로 사로잡아 줄게！」
-					CFLAG:808 = 7041;顔（안경）
+					CFLAG:808 = 7041;顔（眼鏡）
 					CALL PRINT_AA_K4851
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -11324,7 +11324,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;아침의 갓 짜낸 우유
+		;;아침에 갓 짠 밀크
 		;-------------------------------------------------
 	CASE 29
 			CALL EVENT_MESSAGE
@@ -11344,7 +11344,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;오줌싸개버릇
+		;;잠자다 실례
 		;-------------------------------------------------
 	CASE 30
 			CALL EVENT_MESSAGE
@@ -11575,7 +11575,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（주인V 相手C）
+		;요바이（주인V 상대C）
 		;-------------------------------------------------
 	CASE 32
 			CALL EVENT_MESSAGE
@@ -11595,7 +11595,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;요바이（주인A 相手C）
+		;요바이（주인A 상대C）
 		;-------------------------------------------------
 	CASE 33
 			CALL EVENT_MESSAGE
@@ -11642,7 +11642,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;야간 자위
+		;밤 자위
 		;-------------------------------------------------
 	CASE 35
 			CALL EVENT_MESSAGE
@@ -11666,7 +11666,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;같이 잔다 연모, 친애
+		;같이잔다 연모, 친애
 		;-------------------------------------------------
 	CASE 36
 			CALL EVENT_MESSAGE
@@ -11710,7 +11710,7 @@ SELECTCASE TFLAG:13
 
 		;-------------------------------------------------
 		;
-		;임신시
+		
 		;-------------------------------------------------
 	CASE 11
 			SIF CFLAG:271 >= 1 && FLAG:7 != 2
@@ -11750,7 +11750,7 @@ SELECTCASE TFLAG:13
 			CFLAG:271 = 1
 
 		;-------------------------------------------------
-		;出産時
+		;출산시
 		;-------------------------------------------------
 	CASE 12
 			CALL EVENT_MESSAGE
@@ -11763,7 +11763,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 텐시는 배를 누르며、괴로운 듯한 얼굴을 하고 있다。
 					PRINTFORMW 잘 보면 눈물도 나오고 있으니、상당히 괴로운 모양이다。
 					CSTR:100 = 저기…　손、잡아줘…
-					CFLAG:808 = 7031;얼굴（웃음）
+					CFLAG:808 = 7031;顔（泣き）
 					CALL PRINT_AA_K4851
 					PRINTFORMW 그 말을 들은 당신은、텐시의 손을 꼭 쥐었다。
 					PRINTFORMW 「응아아！아파아！　아아앗！」
@@ -11771,7 +11771,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 그리고、잠시 있다가。
 					PRINTFORMW 드디어 아기가 나왔다。
 					CSTR:100 = 에헤헤、아기、태어났구나…
-					CFLAG:808 = 7012;얼굴（쑥스러움２）
+					CFLAG:808 = 7012;顔（照れ２）
 					CALL PRINT_AA_K4851
 					PRINTFORMW 출산으로 녹초가 된 텐시를、당신은 부드럽게 껴안았다。
 				;음란, 창부
@@ -11885,7 +11885,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;독립할 때
+		;자식 독립시
 		;-------------------------------------------------
 	CASE 14
 			CALL EVENT_MESSAGE
@@ -11918,7 +11918,7 @@ SELECTCASE TFLAG:13
 				CFLAG:274 = 1
 			ENDIF
 		;-------------------------------------------------
-		;정식 포장마차 때
+		;정식포장마차시
 		;-------------------------------------------------
 	CASE 15
 			CALL EVENT_MESSAGE
@@ -12163,7 +12163,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;콘서트
+		;콘서트시
 		;-------------------------------------------------
 	CASE 20
 			CALL EVENT_MESSAGE
@@ -12245,7 +12245,7 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;난교 라이브시
+		;난교라이브시
 		;-------------------------------------------------
 	CASE 21
 			CALL EVENT_MESSAGE
@@ -12260,11 +12260,11 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;공중 변소 플레이 시
+		;공중변소 플레이시
 		;-------------------------------------------------
 	CASE 22
 	CALL EVENT_MESSAGE
-	;처음
+;처음
 	IF CFLAG:281 == 0
 		PRINTFORML 
 		PRINTFORMW 「%조사처리(CSTR:일인칭,"를")% 성처리에 쓰겠다、니…」
@@ -12275,7 +12275,7 @@ SELECTCASE TFLAG:13
 		ENDIF
 		PRINTFORML 
 		CFLAG:281 = 1
-	;그 이외
+;그 이외
 	ELSEIF CFLAG:281 < 1 || FLAG:7 == 2
 		;淫ＮＴＲ
 		IF TALENT:ＮＴＲ == 2 || TALENT:ＮＴＲ == 5
@@ -12527,7 +12527,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 
 		;-------------------------------------------------
-		;;[아내][남편]取得時 친애전제
+		;;[아내][남편]취득시 친애 전제
 		;-------------------------------------------------
 	CASE 40
 			CALL EVENT_MESSAGE
@@ -12751,7 +12751,7 @@ SELECTCASE TFLAG:13
 			CFLAG:293 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・난교 파티
+		;;ＮＴＲ요바이・난교파티
 		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 51
@@ -12813,7 +12813,7 @@ SELECTCASE TFLAG:13
 			CFLAG:296 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・밤거리
+		;;ＮＴＲ요바이・밤의 거리
 		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
 		;-------------------------------------------------
 	CASE 54
@@ -12855,7 +12855,7 @@ SELECTCASE TFLAG:13
 			CFLAG:297 = 1
 		ENDIF
 		;-------------------------------------------------
-		;;ＮＴＲ요바이・ＮＴＲ첫 밀회
+		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
 		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)가 된 직후 하루 종료 후, 한번만 행한다
 		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
 		;-------------------------------------------------
@@ -12991,9 +12991,9 @@ SELECTCASE TFLAG:13
 			CFLAG:605 = 1
 		ENDIF
 		;-------------------------------------------------
-		;던전 내 성욕 처리：동료마와 섹스하기
+		;던전내 성욕처리：동료마와 섹스한다
 		;당하는 쪽
-		;MASTER에 실행자 번호가 들어있습니다
+		;MASTERに実行者の番号が入っています
 		;-------------------------------------------------
 	CASE 79
 		CALL EVENT_MESSAGE
@@ -13137,7 +13137,7 @@ RETURN 0
 ;--------------------------------------------------
 SELECTCASE TSTR:END종별
 	CASE "개별END"
-		;연모 단체 엔드
+		;연모 1체 엔딩
 		IF TALENT:아내 || TALENT:남편 && CFLAG:21 == 1
 			DRAWLINE
 			PRINTFORMW …………
@@ -13222,7 +13222,7 @@ ENDIF
 
 
 @BATTLE_EVENT_K4851_1, ARG, ARG:1, ARG:2
-;아군 파티에서의 데빌ＣＯ－ＯＰ발동시의 대사
+;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 SELECTCASE TFLAG:전투이벤트
 	CASE 1
 		IF RAND:2 == 0
@@ -13232,7 +13232,7 @@ SELECTCASE TFLAG:전투이벤트
 		ENDIF
 		CFLAG:808 = 7505;余裕（SD)
 		CALL PRINT_AA_K4851
-;아군 파티에서의 데빌ＣＯ－ＯＰ참여시의 대사
+;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
 	CASE 2
 		IF TALENT:3 || TALENT:6
 			IF RAND:2 == 0
@@ -13245,7 +13245,7 @@ SELECTCASE TFLAG:전투이벤트
 				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
-;자기편 파티에서의 피소환시의 대사
+;아군 파티에서의 피소환시의 대사
 	CASE 3
 		IF TALENT:3 || TALENT:6
 			IF RAND:2 == 0
@@ -13256,7 +13256,7 @@ SELECTCASE TFLAG:전투이벤트
 			CFLAG:808 = 7000;全身（SD)
 			CALL PRINT_AA_K4851
 		ENDIF	
-;공격　ARG가 공격을 하는 동료마、ARG:1가 적、ARG:2가 피해량
+;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		IF BASE:(ARG:1):ＨＰ <= 0;공격하여 쓰러뜨렸다
 			CSTR:100 = 응、끝인거네！
@@ -13328,7 +13328,7 @@ CASE 15
 ;반사했다
 CASE 16
 	CSTR:100 = 후흐～응、경솔했네
-	CFLAG:808 = 7041;顔（안경）
+	CFLAG:808 = 7041;顔（眼鏡）
 	CALL PRINT_AA_K4851
 ;공격 미스
 CASE 17

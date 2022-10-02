@@ -10453,7 +10453,7 @@ IF TFLAG:전투이벤트 == 2
 ENDIF
 ;공격して殺害した
 IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
-		IF RAND:2 && TALENT:3 || TALENT:6
+		IF RAND:2 && TALENT:ARG:3 || TALENT:ARG:6
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"해냈다앗！" + CSTR:이인칭 + "칭찬해줘 칭찬해줘ー♪",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -10470,7 +10470,7 @@ ELSEIF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 ENDIF
 ;被弾（死亡）
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
-		IF RAND:3 == 0 && TALENT:3 || TALENT:6
+		IF RAND:3 == 0 && TALENT:ARG:3 || TALENT:ARG:6
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CSTR:이인칭 + "… 어디…？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -10617,7 +10617,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;파이널누드
 	ELSEIF CFLAG:ARG:입력행동 == 1214 
-		IF TALENT:4 || TALENT:7
+		IF TALENT:ARG:4 || TALENT:ARG:7
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CSTR:ARG:일인칭 + "의 보지 예쁘지？ 우후후…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -10687,7 +10687,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
 
 ;피의허니문
 ELSEIF CFLAG:ARG:입력행동 == 1620
-	IF TALENT:170
+	IF TALENT:ARG:170
 		IF RAND:3 == 0
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%CSTR:ARG:일인칭 + "랑" + CSTR:ARG:이인칭 + "를 방해하는거야…",72,LEFT%┃

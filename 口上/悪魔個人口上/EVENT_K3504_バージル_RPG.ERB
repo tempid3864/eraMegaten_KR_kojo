@@ -1,0 +1,537 @@
+﻿;-------------------------------------------------
+;バージルRPG口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;公式セリフの翻訳を持ってきたり、自己翻訳してセリフに入れた。雰囲気出てれば良し！
+;
+;UMVC3
+;ttps://w.atwiki.jp/umvsc3/pages/116.html
+;
+;DMC3SE
+;ttps://w.atwiki.jp/dmc3/pages/57.html
+;
+;DMC4SE
+;ttps://www.nicovideo.jp/watch/sm27707088
+;
+;DMC5
+;ttps://alastornopedestal.fc2.net/blog-entry-61.html
+;
+;-------------------------------------------------
+
+;-------------------------------------------------
+;eraMegaten전용 구상 템플릿
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
+;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
+;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
+;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
+;-------------------------------------------------
+
+;-------------------------------------------------
+;범용 구상의 작성에 사용하는 경우는, X1→캐릭터번호가 아니라,
+;KX1→PUB회화타입번호　로 변경해서 사용해주세요
+;-------------------------------------------------
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:EVENT_KX1_ASSI.ERB
+;	Facility	:회화타입：助手時口上
+;
+;	Modification Data:
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		Jガン					新規作成
+;	002		2022/08/16		名無し					RPG口上作成
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;ライセンスについて
+;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
+;	+----+----+-------------------------------+
+;	|番号|許可|ライセンス内容                 |
+;	+----+----+-------------------------------+
+;	|   1| ○ | 処理上のバグ修正              |
+;	+----+----+-------------------------------+
+;	|   2| ○ | 口上の誤字・脱字の修正        |
+;	+----+----+-------------------------------+
+;	|   3| ○ | 口上まとめへの収録            |
+;	+----+----+-------------------------------+
+;	|   4| ○ | 口上の新規追加                |
+;	+----+----+-------------------------------+
+;	|   5| ○ | 既存口上の改変                |
+;	+----+----+-------------------------------+
+;	|   6| ○ | 改変した口上の自由な再配布    |
+;	+----+----+-------------------------------+
+;	|   7| ○ | 口上内容の転載                |
+;	+----+----+-------------------------------+
+
+@ENEMY_BATTLE_EVENT_K3504, ARG, ARG:1, ARG:2
+IF TFLAG:전투이벤트 == 1
+;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+IF TFLAG:전투이벤트 == 2
+;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ENDIF
+
+@BATTLE_EVENT_K3504, ARG, ARG:1, ARG:2
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
+SIF ARG < 0 && NO:ARG != 3504
+	RETURN 0
+VARSET LOCALS
+
+SELECTCASE TFLAG:전투이벤트
+	;COOP발동 ARG는 발동자
+	CASE 1
+		IF RAND:2 == 0
+			LOCALS:10 = 来い！
+		ELSE
+			LOCALS:10 = 力を貸せ！
+		ENDIF
+	;COOP참가
+	CASE 2
+		;주인이 COOP발동
+		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER		
+			LOCALS:10 = 死ぬ覚悟はできたか？
+		;그 이외
+		ELSE
+			LOCALS:10 = 死ぬ覚悟はできたか？
+		ENDIF
+	;피소환시
+	CASE 3
+			LOCALS:10 = 
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
+	CASE 11
+		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
+		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
+		;상대가 죽었다
+		IF BASE:(ARG:1):ＨＰ <= 0
+			LOCALS:10 =  
+		;약점을 찔렀다. 즉 COOP
+		ELSEIF LOCAL > 100 && LOCAL < 999
+			IF CFLAG:(ARG:1):방어플래그
+				LOCALS:10 = 
+			ELSE
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
+				RETURN 0
+			ENDIF
+		;대 데미지
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
+			LOCALS:10 = 
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
+			LOCALS:10 = 
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
+			LOCALS:10 = 
+		;무효되었다
+		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
+			LOCALS:10 = 
+		ENDIF
+	;피데미지
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
+	CASE 12
+		;죽었다
+		IF BASE:ARG:ＨＰ <= 0
+			LOCALS:10 = 
+		;대 데미지
+		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
+			LOCALS:10 = 
+		;무효
+		ELSEIF ARG:2 == 0
+			LOCALS:10 = 無駄だ
+		;흡수
+		ELSEIF ARG:2 < 0
+			LOCALS:10 = 
+		ENDIF
+	;반사당했다
+	CASE 15
+			LOCALS:10 = 
+	;반사했다
+	CASE 16
+			LOCALS:10 = 
+	;회피당했다
+	CASE 17
+			LOCALS:10 = 
+	;회피했다
+	CASE 18		
+			IF RAND:2 ==0
+				LOCALS:10 = 遅い！
+			ELSE
+				LOCALS:10 = ……くだらん
+			ENDIF
+	;반격스킬 발동했다
+	CASE 20
+			LOCALS:10 = 
+	;배틀에서 승리했다
+	CASE 90
+		;次元斬・絶使用かつ自分の行動時に勝利し、かつバージルが話す場合
+		IF CFLAG:ARG:입력행동 == 3600 && FLAG:행동순1 == ARG
+			IF RAND:2 == 0
+				LOCALS:10 = This is the power of Sparda...
+			ELSE
+				LOCALS:10 = I shall surpass Sparda！
+			ENDIF
+		ELSEIF RAND:2 == 0
+			LOCALS:10 = これで終わりだ
+		ELSE
+			LOCALS:10 = 安らかに眠るがいい…
+		ENDIF
+	;레벨 업했다
+	CASE 91
+			LOCALS:10 = I need more power...!
+			
+	;도주에 성공했다
+	CASE 92
+			LOCALS:10 = 
+	;도주에 실패했다
+	CASE 93
+			LOCALS:10 = 
+	;전투 개시시
+	CASE 94
+		IF FLAG:선제공격플래그
+			LOCALS:10 = 
+		ELSEIF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = ……失せろ
+		ELSE
+			IF RAND:2 == 0
+				LOCALS:10 =  ……失せろ
+			ELSE
+				LOCALS:10 = ……邪魔だ
+			ENDIF
+		ENDIF
+	;백어택을 당했다
+	CASE 95
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = 
+		ELSE
+			LOCALS:10 = 
+		ENDIF
+	;적에게 선제공격을 당했다
+	CASE 96
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = 
+		ELSE
+			LOCALS:10 = 
+		ENDIF
+ENDSELECT
+SIF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+
+
+@BATTLE_MESSAGE_K3504,ARG,ARG:1 = 0
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
+VARSET LOCALS
+;사용한 스킬의 이름을 LOCALS에 대입
+CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+LOCALS = %RESULTS%
+;FLAG:ARG:타겟
+
+;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
+;SIF TALENT:ARG:9
+;	RETURN 0
+
+CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
+;주석처리하기 쉽도록
+IF 1 == 0
+;-------------------------------------------------
+;상태이상시
+;-------------------------------------------------
+;매료시
+ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
+	;행동불능（헤롱헤롱 거리고 있다）
+	IF CFLAG:ARG:입력행동 == 2314
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;혼란시
+ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
+	;금전뿌리기
+	IF CFLAG:ARG:입력행동 == 2315
+		LOCALS:10 = 
+	;행동불능（멍하니 멈춰 있다）
+	ELSEIF CFLAG:ARG:입력행동 == 2314
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;특정스킬
+;-------------------------------------------------
+;이쪽은 통상공격
+ELSEIF CFLAG:ARG:입력행동 == 0
+
+	IF RAND:2 == 0
+		LOCALS:10 = 死ね！
+	ELSE
+		LOCALS:10 = クズが！
+	ENDIF
+	
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
+;	LOCALS:10 = 
+;섹시댄스
+ELSEIF CFLAG:ARG:입력행동 == 1212
+	LOCALS:10 = 
+;캔디보이스
+ELSEIF CFLAG:ARG:입력행동 == 1213
+	LOCALS:10 = 
+;파이널누드
+ELSEIF CFLAG:ARG:입력행동 == 1214
+	LOCALS:10 = 
+;-------------------------------------------------
+;총공격（특수탄환 포함）
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2200)
+	;GUN
+	IF CFLAG:ARG:입력행동 == 2101
+		LOCALS:10 = 
+	;그 외（특수탄환）
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;기본행동
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
+	;ＣＨＡＮＧＥ
+	IF CFLAG:ARG:입력행동 == 2301
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;아이템
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3500)
+	LOCALS:10 = 
+;-------------------------------------------------
+;링케이지
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
+	;메시아라이저
+	IF CFLAG:ARG:입력행동 == 4160
+		LOCALS:10 = 
+	;L히트라이저
+	ELSEIF CFLAG:ARG:입력행동 == 4200
+		LOCALS:10 = 
+	;사망유희
+	ELSEIF CFLAG:ARG:입력행동 == 4800
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;범용스킬
+;-------------------------------------------------
+;검격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
+	LOCALS:10 = 
+;비구
+ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
+	LOCALS:10 = 
+;타격
+ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
+	LOCALS:10 = 
+;전술
+ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
+	;물어뜯기계
+	IF RANGE(CFLAG:ARG:입력행동,321, 326)
+		LOCALS:10 = 
+	;그 외
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;회복
+ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
+	;전체회복
+	IF CFLAG:ARG:타겟 > 6
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;지원
+ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
+	;강화계
+	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 558
+		LOCALS:10 = 
+	;약체계
+	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
+		LOCALS:10 = 
+	;도발
+	ELSEIF CFLAG:ARG:입력행동 == 515
+		IF RAND:6 == 0
+			LOCALS:10 = 死ぬ覚悟はできたか？
+		ELSEIF RAND:5 == 0
+			LOCALS:10 = ……つまらんな
+		ELSEIF RAND:4 == 0
+			LOCALS:10 = ……来い！
+		ELSEIF RAND:3 == 0
+			LOCALS:10 = それがおまえの本気か？
+		ELSEIF RAND:2 == 0
+			LOCALS:10 = 勝ち目があるとでも？
+		ELSE
+			LOCALS:10 = 時間の無駄だな……
+		ENDIF
+	;그 외
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;방어
+ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
+	LOCALS:10 = 
+;화염
+ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
+	LOCALS:10 = 
+;빙결
+ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
+	LOCALS:10 = 
+;전격
+ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
+	LOCALS:10 = 
+;충격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
+	LOCALS:10 = 
+;신경
+ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199)
+	LOCALS:10 = 
+;정신
+ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
+	LOCALS:10 = 
+;파마
+ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
+	LOCALS:10 = 
+;주살
+ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
+	LOCALS:10 = 
+;지변
+ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599)
+	LOCALS:10 = 
+;수격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
+	LOCALS:10 = 
+;질풍
+ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
+	LOCALS:10 = 
+;중력
+ELSEIF RANGE(CFLAG:ARG:입력행동,1801, 1899)
+	LOCALS:10 = 
+;핵열
+ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
+	LOCALS:10 = 
+;만능
+ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
+	;자폭계
+	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;마법소녀계
+ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
+	LOCALS:10 = 
+	
+;専用技
+
+;コマンド側のデビルトリガー取得方法分からん
+;;デビルトリガー
+;ELSEIF CFLAG:ARG:입력행동 == 13600
+;
+;	IF RAND:2 ==0
+;		LOCALS:10 = 少し、本気を出すとしよう
+;	ELSE
+;		LOCALS:10 = 楽しめそうだな
+;	ENDIF
+
+;デビルトリガー(次元斬・絶)
+ELSEIF CFLAG:ARG:입력행동 == 3600
+	
+	IF RAND:3 == 0
+		LOCALS:10 = 散るがいい！
+	ELSEIF RAND:2 == 0
+		LOCALS:10 = 消し飛べ！
+	ELSE
+		LOCALS:10 = 跪け…！
+	ENDIF
+
+	;1%の確率でセリフ変更
+	IF RAND:100 == 0
+		LOCALS:10 = JACK POT！
+	ENDIF
+
+;幻影剣
+ELSEIF CFLAG:ARG:입력행동 == 3601
+	LOCALS:10 = 
+
+;烈風幻影剣
+ELSEIF CFLAG:ARG:입력행동 == 3602
+	IF RAND:2 == 0
+		LOCALS:10 = これで終わりだ！
+	ELSE
+		LOCALS:10 = 図に乗るな！
+	ENDIF
+
+;次元斬
+ELSEIF CFLAG:ARG:입력행동 == 3603
+	IF RAND:3 == 0
+		LOCALS:10 = 消し飛べ！
+	ELSEIF RAND:2 == 0
+		LOCALS:10 = 失せろ！
+	ELSE
+		LOCALS:10 = 動くな！
+	ENDIF
+
+;疾走居合
+ELSEIF CFLAG:ARG:입력행동 == 3604
+	IF RAND:4 == 0
+		LOCALS:10 = 死ね！
+	ELSEIF RAND:3 == 0
+		LOCALS:10 = 消し飛べ！
+	ELSEIF RAND:2 == 0
+		LOCALS:10 = クズが！
+	ELSE
+		LOCALS:10 = 斬る！
+	ENDIF
+
+;エアトリック
+ELSEIF CFLAG:ARG:입력행동 == 3605
+	LOCALS:10 =
+
+;閻魔刀連斬
+ELSEIF CFLAG:ARG:입력행동 == 3606
+
+	IF RAND:2 == 0
+		LOCALS:10 = クズが！
+	ELSE
+		LOCALS:10 = 断ち斬る！
+	ENDIF
+
+;-------------------------------------------------
+;그 외
+;-------------------------------------------------
+ELSE
+	LOCALS:10 = 
+ENDIF
+;-------------------------------------------------
+;진・그 외
+;-------------------------------------------------
+IF LOCALS:10 == ""
+	;반드시 무언가 말한다
+	LOCALS:10 = 
+ENDIF
+
+SIF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)

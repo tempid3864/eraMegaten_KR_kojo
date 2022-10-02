@@ -75,6 +75,9 @@
 ;													　色々書いてたらしい。
 ;	029		2018/09/15		NEO						3.06。
 ;													　バグ修正だけのつもりだったけど色々カット。
+;	030		2022/07/XX		超乳マニア				3.06.1。
+;													　乳サイズで対応が変わる部分を諸々魔乳サイズに対応。
+;													　見逃しあったらごめんなさい。
 
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
@@ -318,7 +321,7 @@
 ;　810：未調教恋慕フラグ。なんかする予定。
 ;　811：調教開始時。普段はゼロのまま。これが立つとコスプレ口上を喋らなくなる。
 ;　　　　陥落後、調教の最初に『何もしない』を選ぶことで、以降は850以降の着替え口上オンオフができるようになる。
-;　　　　また、『調教開始時（2回目以降、X1을 캐릭터번호로 치환한다）』のところにあるコメントアウトを消すとコスプレ口上を喋らなくなる。
+;　　　　また、『調教開始時（2回目以降、X1을 캐릭터번호로 변경한다）』のところにあるコメントアウトを消すとコスプレ口上を喋らなくなる。
 ;　812：妊娠/出産状況。……ビット演算勉強しよう……
 ;　　　　1：未陥落時初妊娠
 ;　　　　2：未陥落時初妊娠した、かつ黄色いキャンディ使用経験あり
@@ -342,7 +345,7 @@
 ;　822：ヤバい威力のスキルでヒャッハーしたフラグ。エンディング用。
 ;　　　　具体的には、超メギド、アトミックブフーラ、ダイナミックアギラオ、ウルトラフレイラ、三歩必殺をMP10000以上でぶっぱ。
 ;　823：パイズリ処女（？）フラグ。パイズリ系で立ち、「パイズリってなんじゃらほい」という口上を飛ばす。
-;　824：今回調教開始時（2回目以降）の乳サイズフラグ。	1が絶壁、2が貧乳、3が普乳、4が巨乳、5が爆乳。
+;　824：今回調教開始時（2回目以降）の乳サイズフラグ。	1が絶壁、2が貧乳、3が普乳、4が巨乳、5が爆乳。→6に魔乳を追加しました。
 ;　825：前回調教終了時の乳サイズフラグ。				サイズについては上と同じ。
 ;　826：[崩壊]口上が出たかフラグ。途中から崩壊した時用。
 ;　827：大嫌いモード（反発刻印Lv３口上）フラグ。
@@ -563,6 +566,8 @@ IF CFLAG:807 == 0
 				PRINTFORM 작은 유방……
 			ELSEIF TALENT:거유 || TALENT:폭유
 				PRINTFORM 풍만한 유방……
+			ELSEIF TALENT:마유
+				PRINTFORM 両手でも抱えきれない程の乳房……
 			ELSE
 				PRINTFORM 형태 좋은 유방……
 			ENDIF
@@ -1039,6 +1044,7 @@ ENDIF
 ;調教開始時（2回目以降）
 ;現在MAG量が少ないと……なんですけど、力づくでなんか美しくない。だれかﾎﾞｽｹﾃ
 ;・乳サイズ変動口上、搭載しました。2回目以降なので、調教終了時口上を呼び出さず強制終了させるようなのがない限りきちんと動くはず。
+;・上記、魔乳状態を追加させていただきました。
 ;・前回の射精に関する口上、仕込みました。多分動作はだいじょうぶ。
 ;-------------------------------------------------
 @EVENTTRAIN_SECOND_K4402_1
@@ -1063,6 +1069,9 @@ ELSEIF TALENT:111 == 1
 ;爆乳
 ELSEIF TALENT:112 == 1
 	CFLAG:824 = 5
+;魔乳
+ELSEIF TALENT:126 == 1
+	CFLAG:824 = 6
 ;普乳
 ELSE
 	CFLAG:824 = 3
@@ -1755,6 +1764,14 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「이러한 자세로 죄송합니다……유방의 사이즈에、속옷이 맞질 않아서……」
 				PRINTFORMW 「……몹시、좋아？　입니까……？　될 수 있으면 그대로의 자세로……？」
 				PRINTFORMW 「%CSTR:일인칭%에겐、 이해가 어려운 사항 같습니다……」
+			;魔乳
+			;おっぱいの重みに耐えられない系
+			ELSEIF TALENT:126 == 1
+				PRINTFORMW %CALLNAME%は、足を震えさせながら必死に巨大な胸を抑えている。
+				PRINTFORMW 胸を服の中に納めることが出来なかったらしく、その結果余計に振り回されているようだ……
+				PRINTFORMW 「申し訳ありません……この乳房のサイズでは、%CSTR:일인칭%はうまく動けず……」
+				PRINTFORMW 「このままでは、おそらく戦闘の妨げになるかと思われます……」
+				PRINTFORMW 「可能であれば、以前のサイズに戻していただきたいと、思っています……」
 			;普乳
 			;『ボリュームに欠ける』って書こうとしたけど、主観的っつか観念的っつか、そんな感じなのでやめておく
 			;データを客観的に見て、雑誌やらのモデルのそれにスタイルが近ければ『スタイルがいい』と判断する系
@@ -1783,6 +1800,11 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW %CALLNAME%는 가슴부분을 내려다보며、나직히 중얼거린다……
 			;巨乳
 			ELSEIF TALENT:111 == 1
+				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
+				PRINTFORMW 「전투시에는、아직 움직임에 방해가 될 것 같습니다……」
+				PRINTFORMW %CALLNAME%은 가볍게 한숨을 토하며、유방을 확인하고 있다……
+			;爆乳
+			ELSEIF TALENT:112 == 1
 				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
 				PRINTFORMW 「전투시에는、아직 움직임에 방해가 될 것 같습니다……」
 				PRINTFORMW %CALLNAME%은 가볍게 한숨을 토하며、유방을 확인하고 있다……
@@ -2009,6 +2031,18 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 					PRINTFORMW 「この身は全て、%CSTR:이인칭%のモノ……」
 					PRINTFORMW 「責任を、取っていただければ、幸いです」
 					PRINTFORMW …………はい。
+					;まちち化
+					TALENT:112 = 0
+					TALENT:126 = 1
+				;魔乳
+				ELSEIF TALENT:126 == 1
+					PRINTFORMW 元々巨大な胸だったが、もはや%CALLNAME%の体の一部とも思えない大きさになっている。
+					PRINTFORMW %CALLNAME%も明らかに重みに耐えかねているらしく、足元がおぼつかないようだ。
+					PRINTFORMW 乳肉に飲み込まれていたはずの先端の自己主張も著しく、服を引き裂かんばかりにテントを作っている。
+					PRINTFORMW 「…………。理解、していただけたかと思います」
+					PRINTFORMW 「%CSTR:일인칭%にも、異常な大きさであることは理解できます……」
+					PRINTFORMW 「せめて責任を、取っていただければ、幸いです」
+					PRINTFORMW …………はい。
 				;普乳
 				ELSE
 					PRINTFORMW 元々はうつくしいラインを描いていたが、……見間違えでなければ、大きくなっているようにも見える……
@@ -2131,6 +2165,13 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「常に、ブラジャーなしで、生活せざるをえません……」
 				PRINTFORMW 言い訳のように、%CALLNAME%は言う。
 				PRINTFORMW 乳首が立っているのは、服の上からでも明らかだ……
+			;魔乳
+			ELSEIF TALENT:126 == 1
+				PRINTFORMW 「……あまりに大きく、なりました……」
+				PRINTFORMW 「……こんなに、大きくては……着られる服もなく……」
+				PRINTFORMW 「せめて、この巨大な胸を楽しんでいただければ幸いです……」
+				PRINTFORMW 一見、困りきったような態度の%CALLNAME%。
+				PRINTFORMW だが頬は紅く染まり、乳首は何かを期待するようにヒクヒクとはねている……
 			;普乳
 			;『ボリュームに欠ける』って書こうとしたけど、主観的っつか観念的っつか、そんな感じなのでやめておく
 			;データを客観的に見て、雑誌やらのモデルのそれにスタイルが近ければ『スタイルがいい』と判断する系
@@ -2164,7 +2205,13 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
 				PRINTFORMW 「……大きい方が、性行為では、有利でしょうか……？」
 				PRINTFORMW 「……いえ、%CSTR:이인칭%のお好みが、この大きさであるなら、文句などございません……」
-				PRINTFORMW %CALLNAME%はかるく息を吐きながら、유방を確かめている……
+				PRINTFORMW %CALLNAME%はかるく息を吐きながら、乳房を確かめている……
+			;爆乳
+			ELSEIF TALENT:112 == 1
+				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
+				PRINTFORMW 「……大きい方が、性行為では、有利でしょうか……？」
+				PRINTFORMW 「……いえ、%CSTR:이인칭%のお好みが、この大きさであるなら、文句などございません……」
+				PRINTFORMW %CALLNAME%はかるく息を吐きながら、乳房を確かめている……
 			;普乳
 			ELSE
 				PRINTFORMW 「이 몸은、인간의 형상을 참고로 하여 제작되었기 때문에……」
@@ -2509,6 +2556,11 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「……大きく、なりました……」
 				PRINTFORMW 「この乳房の大きさは、下品で、無様だと……判断できます……」
 				PRINTFORMW 「このように身体を変えていただいて……感謝しています……」
+			;魔乳
+			ELSEIF TALENT:126 == 1
+				PRINTFORMW 「……大きく、なりました……」
+				PRINTFORMW 「動くことすら困難なこの乳房を見ると、%CSTR:일인칭%が支配されていると……実感できます……」
+				PRINTFORMW 「%CSTR:이인칭%のご趣味に合えば……幸いです……」
 			;普乳
 			;『ボリュームに欠ける』って書こうとしたけど、主観的っつか観念的っつか、そんな感じなのでやめておく
 			;データを客観的に見て、雑誌やらのモデルのそれにスタイルが近ければ『スタイルがいい』と判断する系
@@ -2540,6 +2592,12 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW %CALLNAME%는 가슴부분을 내려다보며、나직히 중얼거린다……
 			;巨乳
 			ELSEIF TALENT:111 == 1
+				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
+				PRINTFORMW 「……大きい方が、性行為では、有利でしょうか……？」
+				PRINTFORMW 「……いえ、%CSTR:이인칭%のお好みが、この大きさであるなら、文句などございません……」
+				PRINTFORMW %CALLNAME%はかるく息を吐きながら、乳房を確かめている……
+			;爆乳
+			ELSEIF TALENT:112 == 1
 				PRINTFORMW 「얼마 정도는 가벼워졌습니다만……」
 				PRINTFORMW 「……大きい方が、性行為では、有利でしょうか……？」
 				PRINTFORMW 「……いえ、%CSTR:이인칭%のお好みが、この大きさであるなら、文句などございません……」
@@ -3779,6 +3837,9 @@ ELSEIF TALENT:111 == 1
 ;爆乳
 ELSEIF TALENT:112 == 1
 	CFLAG:825 = 5
+;魔乳
+ELSEIF TALENT:126 == 1
+	CFLAG:825 = 6
 ;普乳
 ELSE
 	CFLAG:825 = 3
@@ -4066,7 +4127,7 @@ SELECTCASE SELECTCOM
 				ELSEIF RAND:2 == 0 && TALENT:동물귀
 					PRINTFORMW 「%CSTR:이인칭%、그 부위는…%CSTR:일인칭%의 청각기관입니다만…」
 					PRINTFORMW 「지금은、특히……자극에、약한 것 같습니다……」
-				ELSEIF RAND:2 == 0 && TALENT:거유 || TALENT:폭유
+				ELSEIF RAND:2 == 0 && TALENT:거유 || TALENT:폭유 || TALENT:126
 					PRINTFORMW 「마음에 드신다니 다행입니다…」
 					PRINTFORMW 「예…%CSTR:이인칭%에 마음에 들어、%CSTR:일인칭%도 기쁩니다……」
 				ELSE
@@ -4091,7 +4152,7 @@ SELECTCASE SELECTCOM
 				ELSEIF RAND:3 == 0 && TALENT:동물귀
 					PRINTFORMW 「짐승 형상의 부산물입니다…청각 기관이 이렇게 되는 것은…」
 					PRINTFORMW 「%CSTR:이인칭%、왜 그러십니까？　왜、%CSTR:일인칭%의 청각 기관을 쓰다듬고……」
-				ELSEIF RAND:2 == 0 && TALENT:거유 || TALENT:폭유
+				ELSEIF RAND:2 == 0 && TALENT:거유 || TALENT:폭유 || TALENT:126
 					PRINTFORMW 「유방은……정말…전투 행위에 방해가 되고 있습니다…」
 					PRINTFORMW 「네…%CSTR:이인칭%가 기뻐하실 거면、이의는 아무것도……」
 				ELSE
@@ -6411,7 +6472,7 @@ CASE 14
 						PRINTFORMW 침대 위에 앉은 %CALLNAME%는、어딘가 부끄러운 듯 하다……
 					ELSEIF RAND:4 == 0 && TALENT:오줌싸개버릇
 						PRINTFORMW 침대 위에 앉은 %CALLNAME%는、무엇 때문인지 머뭇거리고 있다……
-					ELSEIF RAND:3 == 0 && (TALENT:폭유 || TALENT:거유)
+					ELSEIF RAND:3 == 0 && (TALENT:폭유 || TALENT:거유 || TALENT:126)
 						PRINTFORMW 침대 위에 앉은 %CALLNAME%는、가볍게 어깨를 풀어 주고 있다……
 					ELSEIF RAND:2 == 0 && TALENT:임신
 						PRINTFORMW 침대 위에 앉은 %CALLNAME%는、가볍게 아랫배를 쓰다듬고 있다……
@@ -6936,6 +6997,9 @@ CASE 14
 							ELSEIF TALENT:거유 || TALENT:폭유
 								PRINTFORMW 「……지방은 뺄 수 있는 것입니까？」
 								PRINTFORMW %CALLNAME%은 푸둥푸둥한 자신의 가슴을 흔들고 있다……
+							ELSEIF TALENT:126
+								PRINTFORMW 「……せめて少しは軽くなるのでしょうか？」
+								PRINTFORMW %CALLNAME%は自分の胸を持ち上げようとしてあきらめたようだ……
 							ELSE
 								PRINTFORMW 「……어중간 한 것이 좋은것일까요？」
 								PRINTFORMW %CALLNAME%는 말랑말랑한 자신의 가슴을 만지고 있다……
@@ -13185,6 +13249,13 @@ CASE 14
 					PRINTFORMW 「……예、이해하였습니다。그럼、실례하겠습니다……」
 					PRINTFORMW 「읏……뜨겁、군요……%CSTR:이인칭%의、페니스……」
 					PRINTFORMW %CALLNAME%는 풍만한 유방으로 페니스를 감싸、봉사를 시작했다……
+				;魔性
+				ELSEIF TALENT:126 == 1
+					PRINTFORMW 「유방으로 하는 봉사、군요……」
+					PRINTFORMW 「사이에 넣어、비비면 되는 것입니까？」
+					PRINTFORMW 「……예、이해하였습니다。그럼、실례하겠습니다……」
+					PRINTFORMW 「읏……뜨겁、군요……%CSTR:이인칭%의、페니스……」
+					PRINTFORMW %CALLNAME%はその重さに手こずりながらも巨大な乳房で肉棒を包み、奉仕を開始した……
 				;뉴트럴
 				ELSE
 					PRINTFORMW 「유방으로 하는 봉사、군요……」
@@ -13205,11 +13276,18 @@ CASE 14
 				ELSEIF TALENT:111 == 1 || TALENT:112 == 1
 					PRINTFORMW 「유방으로 하는 봉사、군요……」
 					PRINTFORMW 「이번엔、어떻게 합니까？」
-					PRINTFORMW 「이번엔、어떻게 합니까？」
 					PRINTFORMW 「……예、이해했습니다。감싼 다음、비비는 거군요……」
 					PRINTFORMW 「그럼、실례하겠습니다……」
 					PRINTFORMW 「읏……뜨겁、군요……%CSTR:이인칭%의、페니스……」
 					PRINTFORMW %CALLNAME%는 풍만한 유방으로 페니스를 감싸、봉사를 시작했다……
+				;魔性
+				ELSEIF TALENT:126 == 1
+					PRINTFORMW 「유방으로 하는 봉사、군요……」
+					PRINTFORMW 「이번엔、어떻게 합니까？」
+					PRINTFORMW 「……예、이해했습니다。감싼 다음、비비는 거군요……」
+					PRINTFORMW 「그럼、실례하겠습니다……」
+					PRINTFORMW 「읏……뜨겁、군요……%CSTR:이인칭%의、페니스……」
+					PRINTFORMW %CALLNAME%はその重さに手こずりながらも巨大な乳房で肉棒を包み、奉仕を開始した……
 				;뉴트럴
 				ELSE
 					PRINTFORMW 「유방으로 하는 봉사、군요……」
@@ -13260,8 +13338,8 @@ CASE 14
 						PRINTFORMW %CALLNAME%は貧しい胸部の肉を必死で集めて谷間を作ろうとしている……
 						PRINTFORMW 努力と結果は殆ど伴っていない。
 						PRINTFORMW 奉仕にかこつけて自慰でもしているのか、と詰ると、濡れた瞳が%CALLNAME:MASTER%を見た……
-					;巨強or爆発
-					ELSEIF TALENT:111 == 1 || TALENT:112 == 1
+					;巨強or爆発or魔性
+					ELSEIF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 						PRINTFORMW 「……質問があるのですが……」
 						PRINTFORMW 「…%CSTR:이인칭%は、乳房が好きなのでしょうか？」
 						PRINTFORMW 「この奉仕は、フェラチオやセックスよりも刺激が少なくなると思われるのですが…」
@@ -13281,8 +13359,8 @@ CASE 14
 						PRINTFORMW %CALLNAME%は貧しい胸部の肉を必死で集めて谷間を作ろうとしている……
 						PRINTFORMW 努力と結果は殆ど伴っていない。
 						PRINTFORMW 奉仕にかこつけて自慰でもしているのか、と詰ると、濡れた瞳が%CALLNAME:MASTER%を見た……
-					;巨強or爆発
-					ELSEIF TALENT:111 == 1 || TALENT:112 == 1
+					;巨強or爆発or魔性
+					ELSEIF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 						PRINTFORMW %CALLNAME%をベッドに寝かせ、わきを閉めさせる。
 						PRINTFORMW そうすると、肉が盛り上がり、深い谷間ができた。
 						PRINTFORMW 「%CSTR:일인칭%は、動かなくともよろしいのでしょうか……？」
@@ -13306,8 +13384,8 @@ CASE 14
 					PRINTFORMW 「이 봉사는、%CSTR:일인칭%에게 있어 곤란이 따릅니다만……」
 					PRINTFORMW 「……노력 해 보이겠습니다……」
 					PRINTFORMW %CALLNAME%는 얇디 얇은 흉근을 끌어모아、필사적으로 골짜기를 만드려 하고 있다……
-				;巨強or爆発
-				ELSEIF TALENT:111 == 1 || TALENT:112 == 1
+				;巨強or爆発or魔性
+				ELSEIF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 					PRINTFORMW 「유방으로 하는 봉사、입니까…」
 					PRINTFORMW 「그럼、실례하겠습니다……」
 					PRINTFORMW 「통상적으로、원기왕성하시군요……」
@@ -13328,8 +13406,8 @@ CASE 14
 					PRINTFORMW 「이 봉사는、%CSTR:일인칭%에게 있어 곤란이 따릅니다만……」
 					PRINTFORMW 「……노력 해 보이겠습니다……」
 					PRINTFORMW %CALLNAME%는 얇디 얇은 흉근을 끌어모아、필사적으로 골짜기를 만드려 하고 있다……
-				;巨強or爆発
-				ELSEIF TALENT:111 == 1 || TALENT:112 == 1
+				;巨強or爆発or魔性
+				ELSEIF TALENT:111 == 1 || TALENT:112 == 1 || TALENT:126 == 1
 					PRINTFORMW 「유방으로 하는 봉사、입니까…」
 					PRINTFORMW 「그럼、실례하겠습니다……」
 					PRINTFORMW 「통상적으로、원기왕성하시군요……」
@@ -18356,6 +18434,9 @@ CASE 14
 					;爆発
 					ELSEIF TALENT:112 == 1
 						PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+					;魔性
+					ELSEIF TALENT:126 == 1
+						PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 					;뉴트럴
 					ELSE
 						PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -18404,6 +18485,9 @@ CASE 14
 						;爆発
 						ELSEIF TALENT:112 == 1
 							PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+						;魔性
+						ELSEIF TALENT:126 == 1
+							PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 						;뉴트럴
 						ELSE
 							PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -18428,6 +18512,12 @@ CASE 14
 							PRINTFORMW 「……알겠습니다、유방으로 봉사하는 거군요……」
 							PRINTFORMW 「유방으로 봉사를 할 때는、%CSTR:이인칭%의 페니스의 끝부분만이 나와…조금…이상한 기분이…됩니다…」
 							PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+						;魔性
+						;あなたのサイズが大きくてあなたの息子のサイズも大きいとか小人体型とか色々いるから難しい…
+						ELSEIF TALENT:126 == 1
+							PRINTFORMW 「……分かりました、乳房での奉仕ですね……」
+							PRINTFORMW 「乳房での奉仕をする際は、%CSTR:이인칭%のペニスが乳房の圧を押しのけてきて…少し…変な気分に…なります…」
+							PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 						;뉴트럴
 						ELSE
 							PRINTFORMW 「……알겠습니다、가슴으로 봉사하는 거군요……」
@@ -18448,6 +18538,9 @@ CASE 14
 						;爆発
 						ELSEIF TALENT:112 == 1
 							PRINTFORMW %CALLNAME%は体勢を変えると、暴力的なまでの乳で、腰を震わせながらの奉仕を開始した……
+						;魔性
+						ELSEIF TALENT:126 == 1
+							PRINTFORMW %CALLNAME%は体勢を変えると、あまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 						;뉴트럴
 						ELSE
 							PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -18467,6 +18560,9 @@ CASE 14
 						;爆発
 						ELSEIF TALENT:112 == 1
 							PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+						;魔性
+						ELSEIF TALENT:126 == 1
+							PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 						;뉴트럴
 						ELSE
 							PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -18512,6 +18608,9 @@ CASE 14
 					;爆発
 					ELSEIF TALENT:112 == 1
 						PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+					;魔性
+					ELSEIF TALENT:126 == 1
+						PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 					;뉴트럴
 					ELSE
 						PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -18537,6 +18636,9 @@ CASE 14
 					;爆発
 					ELSEIF TALENT:112 == 1
 						PRINTFORMW %CALLNAME%는 폭력적이기까지 한 가슴으로、허리를 떨며 봉사를 시작했다……
+					;魔性
+					ELSEIF TALENT:126 == 1
+						PRINTFORMW %CALLNAME%はあまりに巨大な乳房を必死に動かし、腰を震わせながらの奉仕を開始した……
 					;뉴트럴
 					ELSE
 						PRINTFORMW %CALLNAME%는 체위를 바꿔、가슴 사이에 페니스를 넣었다……
@@ -23965,6 +24067,8 @@ SELECTCASE TFLAG:13
 							PRINTFORM 엉덩이를 범하면 발기하는 페니스가 있는 것
 						ELSEIF TALENT:거유 || TALENT:폭유
 							PRINTFORM 눈을 즐겁게 하는 큰 가슴
+						ELSEIF TALENT:126
+							PRINTFORM 凡そあり得ない程の巨大な乳房
 						ELSEIF TALENT:유아체형 || TALENT:소인체형
 							PRINTFORM 꽉 조여주는 그곳
 						ELSE
@@ -24967,7 +25071,7 @@ SELECTCASE TFLAG:13
 							PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%を見つめながら、指示を待っている……
 						ENDIF
 					;縄で縛ってたりしたら服開けないかなーと腕使う描写はカット……まあ縛ってたらそもそもオープンできない気がしたのでこんな形。
-					ELSEIF TALENT:거유 || TALENT:폭유
+					ELSEIF TALENT:거유 || TALENT:폭유 || TALENT:126
 						;下着が、ネグリジェ・ニップルピアス、絆創膏、長襦袢でなく、つけてる
 						IF TEQUIP:속옷（상） != 506 && TEQUIP:속옷（상） <= 520 && TEQUIP:속옷（상） >= 501 && RAND:3 == 0
 							PRINTFORMW 「んっ……んっ……！」
@@ -25026,6 +25130,11 @@ SELECTCASE TFLAG:13
 ;							PRINTFORMW 「衣擦れの音で勃起していてくださいこの豚マスターめがと言っているのです」
 						PRINTFORMW 乳房をしまうよう命令すると、%CALLNAME%は下着に胸を押し込みはじめた。
 						PRINTFORMW 次に買い出しに行くときは、下着を見つくろってこねばならないだろうか……
+					;超乳おっぱいにもがく姿って興奮しますよね
+					ELSEIF TALENT:126
+						PRINTFORMW 乳房をしまうよう命令すると、%CALLNAME%は下着に胸を押し込みはじめた。
+						PRINTFORMW ……が、一向に下着へと乳房が収まる様子はない。
+						PRINTFORMW 仕方なく%CALLNAME:MASTER%は%CALLNAME%を手伝ってやることにした……
 					ELSE
 						PRINTFORMW 乳房をしまうよう命令すると、%CALLNAME%は素直に従った。
 						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%を見つめながら、指示を待っている……
@@ -26739,6 +26848,9 @@ SIF (SELECTCOM == 82 || SELECTCOM == 87 || SELECTCOM == 88 || SELECTCOM == 125 |
 			;爆発
 			ELSEIF TALENT:112 == 1
 				PRINTFORM 주체 할 수 없을듯한 유방
+			;魔性
+			ELSEIF TALENT:126 == 1
+				PRINTFORM こちらが本体かとも思うほどの巨大な乳房
 			;뉴트럴
 			ELSE
 				PRINTFORM 균형 잡힌 유방
@@ -26783,6 +26895,9 @@ SIF (SELECTCOM == 82 || SELECTCOM == 87 || SELECTCOM == 88 || SELECTCOM == 125 |
 				;これがオチって中々ない今時
 				ELSEIF TALENT:112 == 1
 					PRINTFORM 충분이 육감이 느껴지는 유방
+				;魔性
+				ELSEIF TALENT:126 == 1
+					PRINTFORMW 行動を阻害するほどの質量をもつ乳房
 				;極まったニュートラルこそ“最悪”なのだ……
 				ELSE
 					PRINTFORM 균형잡힌 아름다운 유방
@@ -26834,6 +26949,9 @@ SIF (SELECTCOM == 82 || SELECTCOM == 87 || SELECTCOM == 88 || SELECTCOM == 125 |
 				;爆発
 				ELSEIF TALENT:112 == 1
 					PRINTFORM 주체할 수 없을듯한 유방
+				;魔性
+				ELSEIF TALENT:126 == 1
+					PRINTFORM 身体の一部とも思えない巨大な乳房
 				;뉴트럴
 				ELSE
 					PRINTFORM 균형잡힌 아름다운 유방

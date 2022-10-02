@@ -186,7 +186,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		ELSE
 			PRINTFORMW 「…」
 			PRINTFORMW 언제나처럼 %CALLNAME%를 조교한다고 소환하자、드물게 스스로 서있는 %CALLNAME%가 나타났다。
-			PRINTFORMW 갑자기 부끄러운 것처럼 풍만한 가슴을 감추려 하고 있다。　…肝心な部分を隠しきれていないが。
+			PRINTFORMW 갑자기 부끄러운 것처럼 풍만한 가슴을 감추려 하고 있다。　…정작 중요한 곳은 감추지 못했지만。
 			PRINTFORMW 「잘도…사람의 몸을 실컷 농락했겠다…」
 			PRINTFORMW 「덕분에…%이인칭이% 계속 머리에서 떠나지 않아…」
 			PRINTFORMW 「…악마에게 이런 일을 겪게 한 책임을 져」
@@ -282,7 +282,7 @@ ELSEIF CFLAG:801 == 0 && (TALENT:6 || TALENT:7 || TALENT:8)
 		PRINTFORMW 「그렇지만…%CSTR:12%을(를)…만날 수 있어서…」
 		PRINTFORMW 「…%CSTR:12%과(와) 함께라면…또…뭔가 할 수 있을 것 같은 느낌이…」
 		PRINTFORMW 「그러니까…계속 잘 부탁해…%CSTR:12%…」
-		PRINTFORMW 그렇게 머리를 이쪽에 기대는 모습은、수 천년、아니 수 만년을 살아온 대악마라고는 생각되지 않는、연상의 소녀 같은 분위기。
+		PRINTFORMW 그렇게 머리를 이쪽에 기대는 모습은、수 천년、아니 수 만년을 살아온 대악마라고는 생각되지 않는、또래의 소녀 같은 분위기。
 		PRINTFORMW 사랑스럽고 게으른 마왕님을 이쪽으로 향하게 하고、%마스터는% 살며시 입을 맞췄다…
 	ENDIF
 	CFLAG:801 = 1
@@ -9435,13 +9435,13 @@ RETURN 1
 @ENEMY_BATTLE_EVENT_K223, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
@@ -9461,7 +9461,44 @@ IF TFLAG:전투이벤트 == 1
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-	IF RAND:2 == 0
+	;あなたが発動
+	IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
+		IF RAND:3 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"めんどくさい……けど、" + CSTR:이인칭 + "には……続かないとねぇ……",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:2 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"休んじゃ……ダメ？…………はぁい、続きまぁす",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSE
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"契約、だから……働かないとねぇ…………めんどくさいけど……",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ENDIF
+	;イシュキック(あかり)が発動
+	;ペル2でセットで出てきたので
+	ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4518
+		IF RAND:3 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%CSTR:11 + "もぉ……？　……転生戦士サマは悪魔使いが荒いなぁ……",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:3 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"なんで" + CSTR:11 + "まで…………しょうがないなぁ……",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSE
+		;原作ネタ
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"そろそろ……漢字読めるように……なった？",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ENDIF
+	;그 이외
+	ELSEIF RAND:3 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"……えぇ？　……" + CSTR:11 + "も続かないとダメぇ……？",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
 			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"…" + CSTR:11 + "도 해…？귀찮아…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -9577,9 +9614,14 @@ ENDIF
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;	PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;	PRINTFORML ┃%"",72,LEFT%┃
 ;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+;スキル名が機能していなかったので修正。
+CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+;사용한 스킬의 이름을 LOCALS에 대입
+LOCALS = %RESULTS%
 
 ;ATTACK
 IF CFLAG:ARG:입력행동 == 0
@@ -9605,41 +9647,112 @@ ELSEIF CFLAG:ARG:입력행동 == 4160
 	PRINTFORML ┃%CSTR:일인칭 + "의 사랑의 형태…받아내…",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-;얼음의난무、마하・부흐다인
-ELSEIF CFLAG:ARG:입력행동 == 815 || CFLAG:ARG:입력행동 == 806
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%LOCALS + "…얼어붙으면 좋아…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;빙결
+;素質持ちのため加筆。
+ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
+;氷の乱舞、マハ・ブフダインだけじゃなくても問題なさそうなので条件式を変更
+	;IF CFLAG:ARG:입력행동 == 815 || CFLAG:ARG:입력행동 == 806
+	IF RAND:6 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%LOCALS + "…얼어붙어라…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:5 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"凍てつけ……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:4 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"あっつい……涼しく、しよう",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"凍って……砕けて……？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:10 > 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"凍ってくれると……後処理が楽にすむ……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		;ネタセリフなので発言確立を少なめに設定。
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"絶対零度の…………なんだっけ……？　まぁいいか……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 
-;회오리
-ELSEIF CFLAG:ARG:입력행동 == 1008
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%LOCALS + "…날아가버리면 좋아…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;충격
+;素質持ちのため加筆。
+ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
+	;竜巻だけじゃなくても問題なさそうなので条件式を変更
+	;IF CFLAG:ARG:입력행동 == 1008
+	IF RAND:5 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%LOCALS + "…날아가버려라…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:4 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"どっか……飛んでけぇ……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"どーん……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:10 > 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"……じゃぁ……サヨナラ……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		;ネタセリフなので発言確立を少なめに設定。
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"破ぁー…………　いや、ため息じゃ……ないから",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 
-;헬즈아이
-ELSEIF CFLAG:ARG:입력행동 == 1405
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"죽어…" + LOCALS + "…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;주살
+;素質持ちのため加筆。
+ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
+	;ヘルズアイだけじゃなくても問題なさそうなので条件式を変更
+	;ELSEIF CFLAG:ARG:입력행동 == 1405
+	IF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"죽어…" + LOCALS + "…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"…………まだ、生きてたの……？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 
-;영면의유혹
-ELSEIF CFLAG:ARG:입력행동 == 1225
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"…같이 자자…이 세상이 끝날 때까지…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-;파이널누드
-ELSEIF CFLAG:ARG:입력행동 == 1214
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"자…잘 봐…천하의…마왕의…알몸이야…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-;영면의유혹
-ELSEIF CFLAG:ARG:입력행동 == 1227
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"후후후…포로로 만들어줄게…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;정신
+;素質持ちのため加筆。
+ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
+	;永眠の誘い
+	IF CFLAG:ARG:입력행동 == 1225
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"…같이 자자…이 세상이 끝날 때까지…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;파이널누드
+	ELSEIF CFLAG:ARG:입력행동 == 1214
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"자…보라고…천하의…마왕의…알몸이야…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;誘惑の霧
+	ELSEIF CFLAG:ARG:입력행동 == 1227
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"후후후…포로로 만들어줄게…",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"一応……悪魔だから……これくらいはね……？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"蝕め……！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"内側から……犯してあげる……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 
 ;회복
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
@@ -9654,9 +9767,19 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 
 ;そのほか
 ELSE
-	PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"【" + LOCALS + "】…",72,LEFT%┃
-	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	IF RAND:3 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"こういうことも……できる……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%LOCALS + "……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"どう……？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 ENDIF
 
 ;ELSEIF ARG:1 > 0
@@ -9669,57 +9792,57 @@ ENDIF
 ;	SELECTCASE ARG:1
 ;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"영맹")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교활")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"잔학")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"현명")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"타천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"우애")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;상태변화로는 교만 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"교만")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;특수로는 냉정 보유자의 충성도가 상승
 ;		CASE GETNUM(TALENT,"냉정")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"우둔")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;허심 보유자는 최저 ２만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"허심")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;	ENDSELECT

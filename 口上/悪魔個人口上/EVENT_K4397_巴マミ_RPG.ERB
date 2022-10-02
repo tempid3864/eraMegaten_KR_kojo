@@ -1,417 +1,826 @@
-﻿@BATTLE_MESSAGE_K4397, ARG,ARG:1 = 0
-LOCAL:1 = 1
-LOCAL = CFLAG:ARG:입력행동
-LOCALS = "EMPTY"
+﻿;-------------------------------------------------
+;	Modification Data:
+;	Edit	Date			Author				Reason
+;	001		2021/3/23		hitonari			新規作成
+;-------------------------------------------------
 
-;崩壊してる場合は口上表示しない
-;몇몇 이탈리아어 기술명은 마마마 포터블에서 찾을 수 있었음. 링크는 아래
-;https://namu.wiki/w/%EB%A7%88%EB%B2%95%EC%86%8C%EB%85%80%20%EB%A7%88%EB%8F%84%EC%B9%B4%E2%98%86%EB%A7%88%EA%B8%B0%EC%B9%B4%20%ED%8F%AC%ED%84%B0%EB%B8%94/%EC%8A%A4%ED%82%AC%20%EC%A0%95%EB%B3%B4#s-2.2
-;나머지는 괜히 한글로 바뀐 것도 있고 해서 번역을 못 함. 어디 나오는 기술명인지 정보도 없고...
-SIF TALENT:ARG:9
-	RETURN 0
-
-CALLFORM SKILL_EFECT_{LOCAL}
-IF RESULT == 1
-	CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
-	SELECTCASE RESULT
-		;검격
-		CASE 0
-			IF RAND:2
-				LOCALS = 리본이여、베어갈라라！
-			ELSE
-				LOCALS = 총 뿐이라고 생각했어？유감이네。
-			ENDIF
-		;비구
-		CASE 1
-			IF RAND:2
-				LOCALS = 토카、티로、다시 토카！
-					;마마마 포터블에 토카라는 기술이 있음
-			ELSE
-				LOCALS = 마탄의 무도、춤추는 마법소녀！
-			ENDIF
-		;타격
-		CASE 2
-			IF RAND:2
-				LOCALS = 좀 떨어져줄래？
-			ELSE
-				LOCALS = 총 뿐이라고 생각했어？유감이네。
-			ENDIF
-		;전술
-		CASE 3
-			IF RAND:2
-				LOCALS = 리본이여、물어뜯어라！
-			ELSE
-				LOCALS = 총 뿐이라고 생각했어？유감이네。
-			ENDIF
-		;화염
-		CASE 4
-			IF RAND:2
-				LOCALS = 『라・팔로톨라・체・브루시아』！ 
-					;La pallottola che brucia, 불태우는 탄환
-			ELSE
-				LOCALS =  새까맣게 타버렸네！
-			ENDIF
-		;빙결
-		CASE 5
-			IF RAND:2
-				LOCALS = 『우나・팔로톨라・기아치아타』！ 
-					;Una pallottola ghiacciatta, 빙설의 탄환
-			ELSE
-				LOCALS = 『이터널 포ー…』　…아무것도 아냐。
-					;이터널 포스 블리자드
-			ENDIF
-		;전격
-		CASE 6
-			IF RAND:2
-				LOCALS = 『라・팔로톨라・디무・투오노』！ 
-					;La pallottola (?) tuono, 천둥의 탄환
-			ELSE
-				LOCALS = 마비되어주세요？
-			ENDIF
-		;충격
-		CASE 7
-			IF RAND:2
-				LOCALS = 『온다・디무・코르포』！
-					;어디서 나오는 건지는 모르겠음.
-			ELSE
-				LOCALS = 충격파로 직접 쏴맞추는 거야！
-					;충격波を直接打ち込む
-			ENDIF
-		;신경
-		CASE 8	
-			IF RAND:2
-				LOCALS = 『フレティア・디무・ベレノ』！
-					;이것도 역시 모름.
-			ELSE
-				LOCALS = 독으로 약화되는 거야！
-			ENDIF
-		;정신
-		CASE 9
-			IF RAND:2
-				LOCALS = 어때？무서워？나 말이야。
-			ELSE
-				LOCALS = 사쿠라 씨 정도까진 아니어도、쓸만하다고？
-			ENDIF
-		;파마
-		;ここらへんからネタが切れる
-		CASE 10
-			IF RAND:2
-				LOCALS = 『파사의 힘으로…』　…아무것도 아냐。
-					;원래는 『파사の힘で相手はし…』였음. 그런데 相手はし는 上손はし를 잘못 쓴 게 아닌가 싶음. 사실 문제는 저 'はし'다음에 뭐가 이어지는지를 모른다는 거임.
-			ELSE
-				LOCALS = 빛으로 돌아가세요！
-			ENDIF
-		;주살
-		CASE 11
-			LOCALS = 『버닝・다크・플레…』　…아무것도 아냐。
-		;지변
-		;うっせぇ
-		CASE 12
-			IF RAND:2
-				LOCALS = 地속성ってあんまりネタがな…　…何でもないわ。
-			ELSE
-				LOCALS = 地속성って文字通り地味…　…何も言ってないわ。
-			ENDIF
-					;언어유희는 너무 어려웠음. 죄송할 따름...
-		;수격
-		CASE 13
-			IF RAND:2
-				LOCALS = 『ラッセロ・라비ドー』！
-			ELSE
-				LOCALS = 물이라도 뒤집어쓰고 반성하세요！
-			ENDIF
-		;질풍
-		CASE 14
-			IF RAND:2
-				LOCALS = 『ラ・パロッタ・디무・ウン・タービン』！
-			ELSE
-				LOCALS = 바람이여！적을 찢어발겨라！
-			ENDIF
-		;중력
-		;デブさんをマミって言ったやつは天誅
-		CASE 15
-			IF RAND:2
-				LOCALS = 케이크만 먹고 있는 건 아냐！　…관계없지만。
-			ELSE
-				LOCALS = 가슴이 크고 뚱뚱해보인다는 거네。　…관계없지만。
-			ENDIF
-		;핵열
-		;「勇気」を「유귀」に変換するうろぶちワープロ
-		CASE 16
-			IF RAND:2
-				LOCALS = 『우나・팔로톨라・솔라레』！
-					;Una pallottola solare, 태양의 탄환
-			ELSE
-				LOCALS = 태양이여！ 사랑에 용기를 더해줘！
-			ENDIF
-		;만능
-		CASE 17
-			LOCALS = 모든 마력을 이 일격에…！
-		;사이코
-		;CASE 18
-		CASEELSE
-			LOCALS = 저、당신、マルカジリ！
-				;마루카지리가 뭔지 몰라서 번역을 못 함.
-	ENDSELECT
-;회복
-ELSEIF RESULT == 2 && RAND:3 == 0
-	IF CFLAG:ARG:타겟 > 6
-		IF RAND:2
-			LOCALS = 여러분！　지금、회복합니다！
-		ELSE
-			LOCALS = 모두 건강하게 되어라%UNICODE(0x2661)%
-		ENDIF
-	ELSE
-		IF FLAG:(CFLAG:ARG:타겟) == 0 && 함락(ARG)
-			IF RAND:2
-				LOCALS = 주인님、상처를 치유합니다！
-			ELSE
-				LOCALS = 당신은 여기서 죽어선 안 돼！
-			ENDIF
-		ELSE
-			IF RAND:2
-				LOCALS = 아픔아 아픔아、날아가라！
-			ELSE
-				LOCALS = 치친프이프이、대승 브이%UNICODE(0x2661)%
-			ENDIF
-		ENDIF
-	ENDIF
-;상태변화
-;ELSEIF RESULT == 3
-;特殊
-;ELSEIF RESULT == 4
-;状態回復
-;ELSEIF RESULT == 5
-ELSE
-;	IF RAND:3 == 0
-;		LOCALS = 《アバーッ！》
-;	ELSEIF RAND:2
-;		LOCALS = 《イヤーッ！》
-;	ELSE
-;		LOCALS = 《グワーッ！》
-;	ENDIF
-ENDIF
-
-;롯소・판타즈마
-IF LOCAL == 2995
-	SELECTCASE RAND:3
-	CASE 0
-		LOCALS = 『롯소・판타즈마』！！！　…언제 들어도 좋은 이름이네.
-	CASE 1
-		LOCALS = 빌릴게、사쿠라！　『롯소・판타즈마』！！！
-	CASEELSE
-		LOCALS = 이 마법을 내가 사용…인과네。
-	ENDSELECT
-;티로・피날레
-ELSEIF LOCAL == 2997
-
-	SELECTCASE RAND:7
-	CASE 0
-		LOCALS = 『티로・피날레』！！！
-	CASE 1
-		LOCALS = 티로・피나아아아아아ーーー알레！！！
-	CASE 2
-		LOCALS = 멈춰！　『티로・피날레』！！！
-	CASE 3
-		LOCALS = 제거한다！　『티로・피날레』！！！
-	CASE 4
-		LOCALS = 빈틈투성이네！　『티로・피날레』！！！
-	CASE 5
-		LOCALS = 『필로・피날레』！！！　　　　　…어라？
-	CASEELSE
-		LOCALS = 티이이로・피나알ーーー레！！！
-	ENDSELECT
-
-;이하 마마마 포터블에서 가져온 기술명들
-;108_찰나장대비쏘기
-;ELSEIF 108
-ELSEIF LOCAL == 108
-	LOCALS = 『무한의 마탄』！
-;112_연속사격
-ELSEIF LOCAL == 10
-	LOCALS = 『티로・보레』！
-;113_산탄사격
-ELSEIF LOCAL == 25
-	LOCALS = 『티로・도피에타』！
-;125_멸살수전
-ELSEIF LOCAL == 229
-	LOCALS = 『봄바르다멘토』！
-;bombardaménto
-;223_뇌정축
-ELSEIF LOCAL == 230
-	LOCALS = 좀 떨어져줄래？『황금의 미각(黄金の美다리)』！
-;508_스쿤・다
-ELSEIF LOCAL == 328
-	LOCALS = 미봉책이지만、이걸로 몸을 지킬 정도의 도움은 되겠지。
-;601_테트라쟈
-ELSEIF LOCAL == 502
-	LOCALS = 이걸로 이제 괜찮아！
-;1101_시바브
-ELSEIF LOCAL == 515
-	LOCALS = 『레가레』！
-;1122_파라라・웨이브
-ELSEIF LOCAL == 516
-	LOCALS = 『레가레・바스타리아』！
-ENDIF
-
-SIF LOCALS != "EMPTY"
-	CALL MESSAGE_B(LOCAL:1, LOCALS, LOCALS:1, LOCALS:2, LOCALS:3, LOCALS:4)
-
+;-------------------------------------------------
+;巴マミ戦闘口上をver.3.3に移植。
+;また、旧口上に敬意を払いつつ加筆・改変しました。
+;旧口上の作者氏、並びに移植に協力してくれた諸氏にこの場を借りて感謝を。
+;-------------------------------------------------
+;ピュエラ・マギ・ホーリー・クインテットネタは使いたかったが断念。
+;ティロフィナーレ＋黒き翼＋スクワルタトーレ＋ロッソファンタズマ＋フィニトラフレティアでリンケージとか？（妄想です。期待はするな）
+;-------------------------------------------------
 @BATTLE_EVENT_K4397, ARG, ARG:1, ARG:2
-SIF ARG < 0 && NO:ARG != 4518
+;-------------------------------------------------
+SIF ARG < 0 && NO:ARG != 4397
 	RETURN 0
-LOCAL:1 = 1
-LOCALS = EMPTY
+VARSET LOCALS
+VARSET KSTR
+
+;KSTR:0 = 
+;KSTR:1 = 
 SELECTCASE TFLAG:전투이벤트
 	;COOP발동 ARG는 발동자
 	CASE 1
-		IF RAND:3 == 0
-			LOCALS = 가랏！
-		ELSEIF !RAND:2
-			LOCALS = 이걸로 마지막이야！
-		ELSE
-			LOCALS = 단번에 결정내버리는 거야！
-		ENDIF
+		LOCALS:10 = まずは一撃！
+	;COOP참가
 	CASE 2
+		;주인이 COOP발동
+		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
+			LOCALS:10 = 続くわ！　ティロ・デュエット！
+		;그 이외
+		ELSE
+			LOCALS:10 = ティロ・ボレー！　一気に畳みかけましょう！
+		ENDIF
+	;피소환시
+	CASE 3
+			LOCALS:10 = 魔法少女巴マミ。お呼びに与り光栄だわ
 	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
 		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
-			IF 함락(ARG) && RAND:2
-				LOCALS = 너무 보기 흉한 꼴은 보일 수 없네。
+			IF RAND:5 == 0
+				LOCALS:10 = 一気に決めさせてもらうわよ！
+			ELSEIF RAND:4 == 0
+				LOCALS:10 = これで最後よ！
+			ELSEIF RAND:3 == 0
+				LOCALS:10 = 健闘ね
+			ELSEIF RAND:2 == 0
+				LOCALS:10 = 私の勝ちよ！
 			ELSE
-				IF RAND:2
-					LOCALS = 일 하나는 해결됐네。
-				ELSE
-					LOCALS = 지는 건가요。
-				ENDIF
+				LOCALS:10 = 決まったわ！
 			ENDIF
 		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
-				LOCALS = 그렇게 간단히는 가지 않는 건가。
+				LOCALS:10 = まずは急所に一発、と！
 			ELSE
 				;이쪽은 COOP발동으로 돌리기 위해서 CUT
 				RETURN 0
 			ENDIF
 		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
-			IF RAND:2
-				LOCALS = 앞으로 조금밖에 안 남았네。
+			IF RAND:5 == 0
+				LOCALS:10 = まだ倒れないの！？
+			ELSEIF RAND:4 == 0
+				LOCALS:10 = 倒れてない、でも！
+			ELSEIF RAND:3 == 0
+				LOCALS:10 = もう一撃…！
+			ELSEIF RAND:2 == 0
+				LOCALS:10 = 何物も私のマスケットは許しはしないわ！
 			ELSE
-				LOCALS = 또 한 발…！
+				LOCALS:10 = 油断大敵！　まだ生きてるわ！
 			ENDIF
-		ELSEIF 데미지비율(ARG:1, ARG:2) > 20
-			IF RAND:2
-				LOCALS = 견제는 순조롭네。
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
+			IF RAND:2 == 0
+				LOCALS:10 = 手応えありね！
 			ELSE
-				LOCALS = 다음 머스켓을 보충！
+				LOCALS:10 = 牽制は順調ね！
 			ENDIF
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
-			IF RAND:2
-				LOCALS = 꽤 끈질기네！
+			IF RAND:2 == 0
+				LOCALS:10 = そう簡単にはいかないか……
 			ELSE
-				LOCALS = 급소가 아닌 건가。
+				LOCALS:10 = けっこうしぶといわね……
 			ENDIF
-		;무효화された
-		ELSEIF ARG:2 == 0
-			IF RAND:2
-				LOCALS = 거짓말、효과가 없어…！？
-			ELSE
-				LOCALS = 그런！？
-			ENDIF
-		;흡수された
-		ELSEIF ARG:2 < 0
-			IF RAND:2
-				LOCALS = 이런 일이 일어나다니！
-			ELSE
-				LOCALS = 공격을 먹었다고！？
-			ENDIF
+		;무효되었다
+		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
+			LOCALS:10 = 嘘、効いていない…！？
 		ENDIF
 	;피데미지
 	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
+		;味方に攻撃された
+		;IF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
-				LOCALS = 내 몸、이제 움직이지 않네…죄송해요、주인…ㄴ…
+				LOCALS:10 = ……내 몸、이제 움직이지 않네……죄송해요、주인……님……
 			ELSE
 				IF RAND:2
-					LOCALS = 또、죽어버리는 거네…
+					LOCALS:10 = 또、죽어버리는 거네……
 				ELSE
-					LOCALS = 에…？
+					LOCALS:10 = 에……？
 				ENDIF
 			ENDIF
-		;대 데미지
-		;死亡フラーグ
+;빈사
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
-			IF 함락(ARG) && RAND:2
-				LOCALS = 나、혼자가 아닌 걸…！
+			LOCALS:10 = 
+		;대 데미지
+		ELSEIF 데미지비율(ARG, ARG:2) > 50
+			IF RAND:3
+				LOCALS:10 = 나、혼자가 아닌 걸……！
+			ELSEIF RAND:2
+				LOCALS:10 = 이제 아무것도 두렵지 않아……！
 			ELSE
-				IF RAND:2
-					LOCALS = 이제 아무것도 두렵지 않아…！
-				ELSE
-					LOCALS = 몸이 가벼워…！
-				ENDIF
+				LOCALS:10 = 몸이 가벼워……！
 			ENDIF
 		ELSEIF 데미지비율(ARG, ARG:2) > 20
 			IF RAND:2
-				LOCALS = 좀 방심해버렸어。
+				LOCALS:10 = 조금 방심해버렸으려나…？
 			ELSE
-				LOCALS = 꽤 하잖아！
+				LOCALS:10 = 꽤 하잖아！
 			ENDIF
 		ELSEIF 데미지비율(ARG, ARG:2) > 0
 			IF RAND:2
-				LOCALS = 다치지는 않은 건가。
+				LOCALS:10 = 無傷って訳にはいかないわね
 			ELSE
-				LOCALS = 얕아！
+				LOCALS:10 = まだ浅いわね
 			ENDIF
 		;무효
 		ELSEIF ARG:2 == 0
 			IF RAND:2
-				LOCALS = 방어！
+				LOCALS:10 = 방어！
 			ELSE
-				LOCALS = 네、유감입니다！
+				LOCALS:10 = 네、유감입니다！
 			ENDIF
 		;흡수
 		ELSEIF ARG:2 < 0
 			IF RAND:2
-				LOCALS = 공격이 소울젬에 흡수됐다！？
+				LOCALS:10 = 공격이 소울젬에 흡수됐다！？
 			ELSE
-				LOCALS = 앗！　기、기분좋아ー%UNICODE(0x2661)%
+				LOCALS:10 = 아아앗……！　기、기분좋아……%UNICODE(0x2661)%
 			ENDIF
 		ENDIF
+
+	;範囲攻撃
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が無効数(回避も含む)
+	CASE 13
+		;全弾命中した
+		IF ARG:2 == 0
+			LOCALS:10 = 全弾命中！　流石私ね！
+		;普通
+		ELSEIF ARG:2 < ARG:1
+			LOCALS:10 = 期待値内には収まってるわね
+		;全弾回避された
+		ELSEIF ARG:2 == ARG:1
+			LOCALS:10 = 私の射撃を全部躱したというの…！？
+		ENDIF
+	;範囲攻撃で敵を撃破した
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が撃破数
+	CASE 14
+		;全員撃破
+		IF ARG:2 == ARG:1
+			LOCALS:10 = こんなところね！
+		ELSE
+			LOCALS:10 = ガッチャ！
+		ENDIF
+	;반사당했다
 	CASE 15
-		;被반사
-		PRINTFORMW ARG:2 = {ARG:2}
 		IF RAND:2
-			LOCALS = 거짓말이지…！？
+			LOCALS:10 = 거짓말이지…！？
 		ELSE
-			LOCALS = 자기 공격이 이렇게나 아픈 건…！
+			LOCALS:10 = 자신의 공격이 이렇게나 아프다니…！
 		ENDIF
+	;반사했다
 	CASE 16
-		;반사
 		IF RAND:2
-			LOCALS = 답례품이야！
+			LOCALS:10 = お返しよ！
 		ELSE
-			LOCALS = 튕겨나라！
+			LOCALS:10 = 自分の攻撃のお味は如何かしら？
 		ENDIF
+	;회피당했다
 	CASE 17
-		;적회피
-		IF RAND:2
-			LOCALS = 반응、빠르잖아！？
-		ELSE
-			LOCALS = 움직임、빠르잖아！？
-		ENDIF
+		LOCALS:10 = あれを躱したの！？
+	;회피했다
 	CASE 18
-		;自分회피
-		IF RAND:2
-			LOCALS = 이제、구경거리가 아니라고？
+		LOCALS:10 = 残念ね！
+	;敵味方全体攻撃(詳細処理無し)
+	;CASE 19
+	;		LOCALS:10 = 
+	;反撃を発動した
+	CASE 20
+		SELECTCASE TFLAG:발동연동스킬
+			;ダッジカウンター
+			CASE 2484
+				LOCALS:10 = その隙を見逃すほど甘くはないわ！
+			;그 외
+			CASEELSE
+				LOCALS:10 = 伊達に魔法少女やってないんだから！
+		ENDSELECT
+	;トリガースキルを発動した
+	CASE 21
+		SELECTCASE TFLAG:발동연동스킬
+		;○○
+		;CASE 
+		;	LOCALS:10 = 
+		;그 외
+		CASEELSE
+			LOCALS:10 = 
+		ENDSELECT
+	;バッドステータスを受けた
+	CASE 22
+		SELECTCASE GET_STATE(CFLAG:ARG:상태이상)
+			CASE "HAPPY"
+				LOCALS:10 = 
+			CASE "SHOCK","FREEZE","BIND","PALYZE"
+				LOCALS:10 = 
+			CASE "PANIC"
+				LOCALS:10 = 
+			CASE "SLEEP"
+				LOCALS:10 = 
+			;CASE "CLOSE"
+			CASE "POISON"
+				LOCALS:10 = 
+			;CASE "BOMB"
+			CASE "CHARM"
+				LOCALS:10 = 
+			;CASE "CURSE"
+			;CASE "FLY"
+			;CASE "STONE"
+			CASE "FLAME"
+				LOCALS:10 = 
+			CASE "SLIP"
+				LOCALS:10 = 
+			;CASE "BRAND"
+			;그 외 상태이상
+			;CASEELSE
+		ENDSELECT
+	;食いしばり等で耐えた
+	CASE 23
+		;食いしばり
+		IF BASE:ARG:ＨＰ == 1
+			LOCALS:10 = もう何も怖くない…！
+		;그 외
 		ELSE
-			LOCALS = 하앗！
+			LOCALS:10 = もうだめなの…？
+		ENDIF
+	;회복してもらった
+	CASE 24
+		;ARG:2　回復量
+		LOCAL = ARG:2 * 100 / BASE:ARG:ＨＰ
+		;LOCAL　回復量割合
+		IF 0
+		;キャラ分岐
+		;ELSEIF NO:(ARG:1) == XXXX
+		;50%以上 & HPほぼ満タン
+		ELSEIF LOCAL > 50 && 현HP비율(ARG) > 90
+		;50%以上
+		ELSEIF LOCAL > 50
+		;그 외
+		ELSE
+		ENDIF
+	;状態異常を直してもらった
+	CASE 25
+		;ARG:2　直ったバステ
+		IF 0
+		;キャラ分岐
+		;ELSEIF NO:(ARG:1) == XXXX
+		ELSE
+			SELECTCASE GET_STATE(ARG:2)
+				CASE "SLEEP"
+					LOCALS:10 = 
+				;그 외 상태이상
+				CASEELSE
+					LOCALS:10 = 
+			ENDSELECT
+		ENDIF
+	;戦闘中イって行動不能にならず耐えた(ムフフ展開時のみ)
+	CASE 47
+		;歯を食いしばって快楽に耐えた
+		LOCALS:10 = んん……っ！（ダメよ、耐えるのよマミ！）
+	;行動中イって行動不能になった(ムフフ展開時のみ 50%の確率でHAPPYに)
+	CASE 48
+		;GET_STATE(CFLAG:ARG:상태이상) == "HAPPY"
+		
+		;절정の余韻に浸っている
+		LOCALS:10 = だ、だめ……こ、こんなんじゃ戦えない……
+	;ターン終了時状態異常が自然回復した
+	CASE 50
+		SELECTCASE GET_STATE(CFLAG:ARG:상태이상)
+			CASE "SLEEP"
+				LOCALS:10 = 
+			;그 외 상태이상
+			CASEELSE
+				LOCALS:10 = 
+		ENDSELECT
+	;ターン終了時今の状態による口上
+	CASE 51
+		IF 0
+		;ELSEIF FLAG:무후후전개 && (BATTLE_H_EVENT_PRO(ARG) > 30 || CFLAG:ARG:던전내발정용욕정치 > 5000) && !RAND:2
+		;	;BATTLE_H_EVENT_PRO(ARG)　行動中にイく確率
+		;	SETCOLOR COLOR("pink")
+		;	IF     BATTLE_H_EVENT_PRO(ARG) > 80
+		;	ELSEIF BATTLE_H_EVENT_PRO(ARG) > 50
+		;	ELSEIF BATTLE_H_EVENT_PRO(ARG) > 30
+		;	ELSEIF CFLAG:ARG:던전내발정용욕정치 > 10000
+		;	ELSEIF CFLAG:ARG:던전내발정용욕정치 > 5000
+		;상태이상시
+		ELSEIF GET_STATE(CFLAG:ARG:상태이상) == "SLEEP"
+			LOCALS:10 = 
+		;그 외 상태이상
+		;ELSEIF CFLAG:ARG:상태이상 > 0
+		;HP50%以下
+		ELSEIF 현HP비율(ARG) < 50
+			LOCALS:10 = 
+		;HP20%以下
+		ELSEIF 현HP비율(ARG) < 20
+			LOCALS:10 = 
+		ENDIF
+	;ターン終了時ORGYがHEATになった(機械の乙女専用)
+	;CASE 52
+	;		LOCALS:10 = 
+	;ターン終了時エクスリンケージ装備時のイベント口上(ムフフ展開時のみ)
+	CASE 53
+		;発情によってHAPPYになった
+		IF CFLAG:ARG:던전내발정 == 1 && GET_STATE(CFLAG:ARG:상태이상) == "HAPPY"
+			LOCALS:10 = こ、こんなことって…？
+		;頭の中がピンクに染まった
+		ELSEIF CFLAG:ARG:던전내발정 == 1
+			LOCALS:10 = わ、私としたことが…
+		;落ち着いた
+		ELSEIF CFLAG:ARG:던전내발정 == 0
+			LOCALS:10 = ふぅ…
+		ENDIF
+	;ターン終了時エクスリンケージ装備時のイベント口上2(ムフフ展開時のみ)
+	CASE 54
+		;中に注がれた精液が垂れてきた…
+		LOCALS:10 = んん…っ
+	;배틀에서 승리했다
+	CASE 90
+		LOCALS:10 = 皆、お疲れ様♪
+	;레벨 업했다
+	CASE 91
+		LOCALS:10 = やったわ！　次もこの調子で行きましょう！
+	;도주에 성공했다
+	CASE 92
+		LOCALS:10 = 
+	;도주에 실패했다
+	CASE 93
+		LOCALS:10 = 
+	;전투 개시시
+	CASE 94
+		IF FLAG:선제공격플래그
+			LOCALS:10 = 敵を見つけたわ！　先に仕掛けましょう！
+		ELSEIF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = くっ、このままじゃ…
+		ELSE
+			LOCALS:10 = では始めましょうか
+		ENDIF
+	;백어택을 당했다
+	CASE 95
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = くっ、このままじゃ…
+		ELSE
+			LOCALS:10 = 態勢を立て直しましょう
+		ENDIF
+	;적에게 선제공격을 당했다
+	CASE 96
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = くっ、このままじゃ…
+		ELSE
+			LOCALS:10 = なかなか手強い敵ね
 		ENDIF
 ENDSELECT
-SIF LOCALS != "EMPTY"
-	CALL MESSAGE_B(LOCAL:1, LOCALS, LOCALS:1, LOCALS:2, LOCALS:3, LOCALS:4)
+
+;링케이지に参加した
+IF TFLAG:전투이벤트 == 100
+	IF 0
+	;スキル分岐
+	;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[スキル:○○]]
+	
+	;キャラ分岐
+	;ELSEIF NO:(FLAG:행동순1) == XXXX
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+ENDIF
+
+IF !(LOCALS:10 == "") && !(KSTR:0 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL 구상변수표시
+ELSEIF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+ENDIF
+RESETCOLOR
+
+;-------------------------------------------------
+@BATTLE_MESSAGE_K4397,ARG,ARG:1 = 0
+;-------------------------------------------------
+VARSET LOCALS
+VARSET KSTR
+;사용한 스킬의 이름을 LOCALS에 대입
+CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+LOCALS:10 = %RESULTS%
+;FLAG:ARG:타겟
+
+;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
+;SIF TALENT:ARG:9
+;	RETURN 0
+
+CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
+;주석처리하기 쉽도록
+IF 1 == 0
+;-------------------------------------------------
+;상태이상시
+;-------------------------------------------------
+;매료시
+;ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
+	;행동불능（헤롱헤롱 거리고 있다）
+;	IF CFLAG:ARG:입력행동 == 2314
+;		LOCALS:10 = 
+;	ELSE
+;		LOCALS:10 = 
+;	ENDIF
+;혼란시
+;ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
+	;금전뿌리기
+;	IF CFLAG:ARG:입력행동 == 2315
+;		LOCALS:10 = 
+	;행동불능（멍하니 멈춰 있다）
+;	ELSEIF CFLAG:ARG:입력행동 == 2314
+;		LOCALS:10 = 
+;	ELSE
+;		LOCALS:10 = 
+;	ENDIF
+;幸福時の行動不能
+;ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("HAPPY") && CFLAG:ARG:입력행동 == 2314
+	;自分の体をまさぐっている(発情中+ムフフ展開時のみ)
+;	IF 위험일(ARG) == 2 && FLAG:무후후전개
+;		LOCALS:10 = 
+;	ELSE
+;		LOCALS:10 = 
+;	ENDIF
+;-------------------------------------------------
+;특정스킬
+;-------------------------------------------------
+;이쪽은 통상공격
+ELSEIF CFLAG:ARG:입력행동 == 0
+	LOCALS:10 = 撃つわよ！　ティーロ！
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
+;	LOCALS:10 = 
+;섹시댄스
+ELSEIF CFLAG:ARG:입력행동 == 1212
+	LOCALS:10 = 見惚れてもいいのよ？
+;캔디보이스
+ELSEIF CFLAG:ARG:입력행동 == 1213
+	LOCALS:10 = 甘～く、囁いてあげる…
+;파이널누드
+ELSEIF CFLAG:ARG:입력행동 == 1214
+	LOCALS:10 = 皆のためにひと肌脱いであげてもいいわ
+;108_刹那五月雨撃
+ELSEIF CFLAG:ARG:입력행동 == 108
+	LOCALS:10 = 行くわよ、『무한의 마탄』！
+;112_連続撃ち
+ELSEIF CFLAG:ARG:입력행동 == 10
+	LOCALS:10 = 『티로・보레』！
+;113_散弾撃ち
+ELSEIF CFLAG:ARG:입력행동 == 25
+	LOCALS:10 = 『ティロ・ドッピエッタ』！
+;125_滅殺袖箭
+ELSEIF CFLAG:ARG:입력행동 == 229
+	LOCALS:10 = フルパワーで行くわよ、『무한의 마탄』！！
+;1011_東衝破
+ELSEIF CFLAG:ARG:입력행동 == 1011
+	LOCALS:10 = 派手に行くわよ！！『봄바르다멘토』！
+;1012_西撃破
+ELSEIF CFLAG:ARG:입력행동 == 1012
+	LOCALS:10 = もうド派手に行っちゃうわよ！！『ボンバルタメント・デュオ』！！
+;204_回し蹴り
+ELSEIF CFLAG:ARG:입력행동 == 204
+	LOCALS:10 = 乙女の美脚、あなたに止められて？
+;223_雷霆蹴
+ELSEIF CFLAG:ARG:입력행동 == 230
+	LOCALS:10 = 좀 떨어져줄래？
+;207_雷震王母の蹴り
+ELSEIF CFLAG:ARG:입력행동 == 207
+	LOCALS:10 = これが『황금의 미각』よ！
+;226_曳光倶梨伽羅蹴
+ELSEIF CFLAG:ARG:입력행동 == 226
+	LOCALS:10 = これが本当の『황금의 미각』よ！
+;508_スク・ンダ
+ELSEIF CFLAG:ARG:입력행동 == 328
+	LOCALS:10 = 미봉책이지만、이걸로 몸을 지킬 정도의 도움은 되겠지
+;601_テトラジャ
+ELSEIF CFLAG:ARG:입력행동 == 502
+	LOCALS:10 = 이걸로 이제 괜찮아！
+;1101_シバブー
+ELSEIF CFLAG:ARG:입력행동 == 515
+	LOCALS:10 = 私はリボンが得意なの！『레가레』！
+;1122_パララ・ウェブ
+ELSEIF CFLAG:ARG:입력행동 == 516
+	LOCALS:10 = このリボンの数、躱せるかしら？『레가레・바스타리아』！
+;1905_ニュークリアミサイル
+ELSEIF CFLAG:ARG:입력행동 == 1905
+	LOCALS:10 = こんなものが造れるなんて我ながら驚きだけど、やれば出来るものね…！
+;魔法のシャボン
+;「魔法少女系」に入るのは入力行動が2989～2999までなので
+	ELSEIF CFLAG:ARG:입력행동 == 3587
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = それは柔らかく、そして濡れて……いえ、何でもないわ
+			CASE 1
+				LOCALS:10 = なぎさ、あなたの技を使うわね！　『ボッレ・ディ・サポーネ』！！
+			CASEELSE
+				LOCALS:10 = 見た目はファンシーだけど侮ってはダメよ？
+		ENDSELECT
+;-------------------------------------------------
+;기본행동
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
+	;ＣＨＡＮＧＥ
+	IF CFLAG:ARG:입력행동 == 2301
+		LOCALS:10 = 休憩させてもらうわね
+	ELSE
+		LOCALS:10 = ちょっと疲れちゃったかな
+	ENDIF
+;-------------------------------------------------
+;아이템
+;-------------------------------------------------
+;ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3500)
+;	LOCALS:10 = 
+;-------------------------------------------------
+;링케이지
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
+	;메시아라이저
+	IF CFLAG:ARG:입력행동 == 4160
+		LOCALS:10 = 絆の力ね♪
+	;L히트라이저
+	ELSEIF CFLAG:ARG:입력행동 == 4200
+		LOCALS:10 = 力がみなぎってきたわ！
+	;사망유희
+	ELSEIF CFLAG:ARG:입력행동 == 4800
+		LOCALS:10 = 行くわよ！　いいわね！
+	ELSE
+		LOCALS:10 = 皆、一斉に行くわよ！
+	ENDIF
+;-------------------------------------------------
+;범용스킬
+;-------------------------------------------------
+;검격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
+	IF RAND:2
+		LOCALS:10 = 리본이여、베어갈라라！
+	ELSE
+		LOCALS:10 = 총 뿐이라고 생각했어？　유감이네
+	ENDIF
+;비구
+ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
+	IF RAND:2
+		LOCALS:10 = 토카、티로、다시 토카！
+			;마마마 포터블에 토카라는 기술이 있음
+	ELSE
+		LOCALS:10 = 마탄의 무도、춤추는 마법소녀！
+	ENDIF
+;타격
+ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
+	IF RAND:2
+		LOCALS:10 = 좀 떨어져줄래？
+	ELSE
+		LOCALS:10 = 총 뿐이라고 생각했어？　유감이네
+	ENDIF
+;전술
+ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
+	;물어뜯기계
+	IF RANGE(CFLAG:ARG:입력행동,321, 326)
+		LOCALS:10 = 私、あなた、マルカジリ、ってね！
+	;그 외
+	ELSE
+		IF RAND:2
+			LOCALS:10 = 리본이여、물어뜯어라！
+		ELSE
+			LOCALS:10 = 총 뿐이라고 생각했어？　유감이네
+		ENDIF
+	ENDIF
+;회복
+ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
+	;전체회복
+	IF CFLAG:ARG:타겟 > 6
+		IF RAND:2
+			LOCALS:10 = 여러분！　지금、회복합니다！
+		ELSE
+			LOCALS:10 = 모두 건강하게 되어라%UNICODE(0x2661)%
+		ENDIF
+	ELSE
+		IF FLAG:(CFLAG:ARG:타겟) == 0 && 함락(ARG)
+			IF RAND:2
+				LOCALS:10 = 주인님、상처를 치유합니다！
+			ELSE
+				LOCALS:10 = 당신은 여기서 죽어선 안 돼！
+			ENDIF
+		ELSE
+			IF RAND:2
+				LOCALS:10 = 아픔아 아픔아、날아가라！
+			ELSE
+				LOCALS:10 = 치친프이프이、대승 브이%UNICODE(0x2661)%
+			ENDIF
+		ENDIF
+	ENDIF
+;지원
+ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
+	;강화계
+	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 558
+		LOCALS:10 = 気休めかも知れないけれど
+	;약체계
+	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
+		LOCALS:10 = これなら！
+	;도발
+	ELSEIF CFLAG:ARG:입력행동 == 515
+		LOCALS:10 = 鬼さんこちら、手の鳴る方へ♪
+	;그 외
+	ELSE
+		LOCALS:10 = ヘイ悪魔さん！　カモンカモン！
+	ENDIF
+;방어
+ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
+	LOCALS:10 = 守りに入るのは性に合わないのだけど
+;화염
+ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
+	IF RAND:2
+		LOCALS:10 = 『라・팔로톨라・체・브루시아』！ 
+			;La pallottola che brucia, 불태우는 탄환
+	ELSE
+		LOCALS:10 = 새까맣게 타버렸네！
+	ENDIF
+;빙결
+ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
+	IF RAND:2
+		LOCALS:10 = 『우나・팔로톨라・기아치아타』！ 
+			;Una pallottola ghiacciatta, 빙설의 탄환
+	ELSE
+		LOCALS:10 = 얼어붙어라！
+	ENDIF
+;전격
+ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
+	IF RAND:2
+		LOCALS:10 = 『라・팔로톨라・디무・투오노』！ 
+			;La pallottola (?) tuono, 천둥의 탄환
+	ELSE
+		LOCALS:10 = 마비되어주세요？
+	ENDIF
+;충격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
+	IF RAND:2
+		LOCALS:10 = 『온다・디무・코르포』！
+			;어디서 나오는 건지는 모르겠음.
+	ELSE
+		LOCALS:10 = 충격파로 직접 쏴맞추는 거야！
+			;衝撃波を直接打ち込む！
+	ENDIF
+;신경
+ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199)
+	IF RAND:2
+		LOCALS:10 = 『フレティア・ディ・ベレノ』！
+			;이것도 역시 모름.
+	ELSE
+		LOCALS:10 = 綺麗な花には棘があるのよ。毒の棘がね
+	ENDIF
+;정신
+ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
+	IF RAND:2
+		LOCALS:10 = 어때？　무서워？　나 말이야。
+	ELSE
+		LOCALS:10 = 쿄코 정도까진 아니어도、쓸만하다고？
+	ENDIF
+;파마
+ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
+	IF RAND:2
+		LOCALS:10 = 闇より出でて闇へと還れ！
+	ELSE
+		LOCALS:10 = 빛으로 돌아가세요！
+	ENDIF
+;주살
+ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
+	LOCALS:10 = 闇属性ってあんまり好きではないのだけれど
+;지변
+ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599)
+	IF RAND:2
+		LOCALS:10 = 大地の力、思い知りなさい！
+	ELSE
+		LOCALS:10 = 地属性って地味……なのかしら？
+	ENDIF
+;수격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
+	IF RAND:2
+		LOCALS:10 = 『ラッセロ・ラビドー』！
+	ELSE
+		LOCALS:10 = 물이라도 뒤집어쓰고 반성하세요！
+	ENDIF
+;질풍
+ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
+	IF RAND:2
+		LOCALS:10 = 『ラ・パロッタ・ディ・ウン・タービン』！
+	ELSE
+		LOCALS:10 = 바람이여！적을 찢어발겨라！
+	ENDIF
+;중력
+ELSEIF RANGE(CFLAG:ARG:입력행동,1801, 1899)
+	IF RAND:2
+		LOCALS:10 = ところで、重力と地変って何が違うのかしら？
+	ELSE
+		LOCALS:10 = よく「重い女」って言われてる気がするのよね…
+	ENDIF
+;핵열
+ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
+	IF RAND:2
+		LOCALS:10 = 『우나・팔로톨라・솔라레』！
+			;Una pallottola solare, 태양의 탄환
+	ELSE
+		LOCALS:10 = 태양이여！ 사랑에 용기를 더해줘！
+	ENDIF
+;만능
+ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
+	;자폭계
+	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
+		LOCALS:10 = 私の魔法を全て解放する……！！
+	ELSE
+		LOCALS:10 = この一撃に賭ける……！
+	ENDIF
+
+;마법소녀계
+ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
+;롯소・판타즈마
+	IF CFLAG:ARG:입력행동 == 2995
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = 『롯소・판타즈마』！！！　……언제 들어도 좋은 이름이네.
+			CASE 1
+				LOCALS:10 = 빌릴게、쿄코！　『롯소・판타즈마』！！
+			CASEELSE
+				LOCALS:10 = 이 마법을 내가 사용……인과네
+		ENDSELECT
+;スクワルタトーレ
+	ELSEIF CFLAG:ARG:입력행동 == 2996
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = 斬り裂き魔の刃のお味はどう？
+			CASE 1
+				LOCALS:10 = 借りるわね、美樹さん！　『スクワルタトーレ』！！
+			CASEELSE
+				LOCALS:10 = ほんとは剣は苦手なんだけど
+		ENDSELECT
+;侵食する黒き翼
+	ELSEIF CFLAG:ARG:입력행동 == 2998
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = あああああああッ！！　も、もう抑えられない……！
+			CASE 1
+				LOCALS:10 = これが……本当の暁美さんの力なの……ッ！？
+			CASEELSE
+				LOCALS:10 = この魔法を私が使う……因果ね……ッ！
+		ENDSELECT
+;フィニトラ・フレティア
+	ELSEIF CFLAG:ARG:입력행동 == 2999
+		SELECTCASE RAND:3
+			CASE 0
+				LOCALS:10 = この魔法、きっと私と相性がいいはず！
+			CASE 1
+				LOCALS:10 = この一撃が世界を変える……かも？
+			CASEELSE
+				LOCALS:10 = 鹿目さん、使わせてもらうわよ！　『フィニトラ・フレティア』！！
+		ENDSELECT
+
+;ティロ・フィナーレ
+	ELSEIF CFLAG:ARG:입력행동 == 2997
+		SELECTCASE RAND:7
+			CASE 0
+				LOCALS:10 = 『티로・피날레』！！！
+			CASE 1
+				LOCALS:10 = 티로・피나아아아아아ーーー알레！！！
+			CASE 2
+				LOCALS:10 = 멈춰！　『티로・피날레』！！！
+			CASE 3
+				LOCALS:10 = 제거한다！　『티로・피날레』！！！
+			CASE 4
+				LOCALS:10 = 빈틈투성이네！　『티로・피날레』！！！
+			CASE 5
+				LOCALS:10 = 『필로・피날레』！！！　　　　　…어라？
+			CASEELSE
+				LOCALS:10 = 티이이로・피나알ーーー레！！！
+		ENDSELECT
+ENDIF
+;-------------------------------------------------
+;그 외
+;-------------------------------------------------
+ELSE
+;	LOCALS:10 = 
+ENDIF
+;-------------------------------------------------
+;진・그 외
+;-------------------------------------------------
+IF LOCALS:10 == ""
+	;반드시 무언가 말한다
+	LOCALS:10 = 
+ENDIF
+
+IF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,(KSTR:0 == ""), LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	SIF !(KSTR:0 == "")
+		CALL 구상변수표시
+ENDIF
+RETURN
+
+;IF !(LOCALS:10 == "") && !(KSTR:0 == "")
+;	CALL MESSAGE_B2(CALLNAME:ARG,0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+;	CALL 구상변수표시
+;ELSEIF !(LOCALS:10 == "")
+;	CALL MESSAGE_B2(CALLNAME:ARG,1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+;ENDIF

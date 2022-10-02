@@ -1,6 +1,6 @@
 ﻿;/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:EVENT_K501_女_ピクシー_ALL.ERB
+;	Module		:EVENT_K501_1_女_ピクシー_ALL.ERB
 ;	Facility	:회화타입：ピクシーの調教時口上
 ;
 ;	Licence		:ライセンスフリー。
@@ -49,7 +49,7 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-@셀렉트구상설명_K501,ARG = 0
+@셀렉트구상설명_K501_1,ARG = 0
 SIF ARG == 1
 	RETURN 0
 ;구상명
@@ -61,7 +61,7 @@ PRINTFORML 범용 소녀구상을 베이스로 여러가지 추가한것들
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_K501
+@EVENTTRAIN_K501_1
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF TCVAR:0 == 1
@@ -95,12 +95,12 @@ PRINTFORML 범용 소녀구상을 베이스로 여러가지 추가한것들
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_K501
+;	CALL EVENTTRAIN_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_K501
+;		CALL EVENTTRAIN_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -444,7 +444,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_K501
+	CALL EVENTTRAIN_SECOND_K501_1
 ;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
@@ -470,13 +470,13 @@ IF ASSI < 0
 ;	ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_K501
+	CALL EVENTTRAIN_SECOND_K501_1
 ENDIF
 
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_K501
+@EVENTTRAIN_SECOND_K501_1
 	CALL EVENTTRAIN_MESSAGE_CLOTHES
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
@@ -735,7 +735,7 @@ RETURN 0
 ;EVENTEND 관련（X1을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_K501
+@EVENTEND_K501_1
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF TCVAR:0 == 1
@@ -746,12 +746,12 @@ RETURN 0
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTEND_PY1_K501
+;	CALL EVENTEND_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	SIF NO:ASSI == Y1
-;	CALL EVENTEND_PY1_K501
+;	CALL EVENTEND_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -939,7 +939,7 @@ RETURN 0
 ;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_K501
+@KOJO_MESSAGE_COM_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
@@ -961,12 +961,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_K501
+;	CALL KOJO_MESSAGE_COM_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_K501
+;		CALL KOJO_MESSAGE_COM_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -11254,7 +11254,7 @@ ENDSELECT
 ;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_K501
+@KOJO_MESSAGE_PALAMCNG_A_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -11267,12 +11267,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K501
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K501
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12083,7 +12083,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_K501
+@KOJO_MESSAGE_PALAMCNG_E_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -12096,12 +12096,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K501
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K501
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12132,7 +12132,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_K501
+@KOJO_MESSAGE_PALAMCNG_B_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -12145,12 +12145,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K501
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K501
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12431,7 +12431,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_K501
+@KOJO_MESSAGE_PALAMCNG_C_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -12444,12 +12444,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K501
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K501
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12556,7 +12556,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_K501
+@KOJO_MESSAGE_PALAMCNG_D_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -12569,12 +12569,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K501
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K501
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12686,7 +12686,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_K501
+@KOJO_MESSAGE_MARKCNG_K501_1
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -12699,12 +12699,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_K501
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_K501
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_K501_1
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -12848,12 +12848,12 @@ ENDIF
 ;-------------------------------------------------
 ;이벤트구상 모음（X1、X2을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_K501
+@KOJO_MESSAGE_EVENT_K501_1
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_K501
+;	CALL KOJO_MESSAGE_EVENT_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;-------------------------------------------------
@@ -15636,7 +15636,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;조건설정
 ;-------------------------------------------------
-@EVENTTURNEND_K501
+@EVENTTURNEND_K501_1
 ;#LATER
 ;SIF TARGET < 0
 ;	RETURN 0
@@ -15669,12 +15669,12 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_K501
+@KOJO_MESSAGE_ENDING_K501_1
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_ENDING_PY1_K501
+;	CALL KOJO_MESSAGE_ENDING_PY1_K501_1
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -15730,7 +15730,7 @@ ENDSELECT
 ;=============================================================
 ;전투메시지
 ;=============================================================
-@ENEMY_BATTLE_EVENT_K501, ARG, ARG:1, ARG:2
+@ENEMY_BATTLE_EVENT_K501_1, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -15743,7 +15743,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORML ┃%"",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
-@BATTLE_EVENT_K501, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_K501_1, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 	IF RAND:2 == 0
@@ -15770,7 +15770,7 @@ IF TFLAG:전투이벤트 == 2
 ENDIF
 
 
-@BATTLE_MESSAGE_K501,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_K501_1,ARG,ARG:1 = 0
 IF CFLAG:ARG:입력행동 == 2022 && NO:ARG == 407
 ;초메기도 사용시
 	;CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG

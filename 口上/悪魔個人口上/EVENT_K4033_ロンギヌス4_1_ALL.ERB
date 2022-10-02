@@ -87,7 +87,14 @@ IF CFLAG:220 == 0
 		TALENT:TARGET:0 = 1
 		ABL:TARGET:4 = 0
 		EXP:TARGET:0 = 0
+TALENT:무관심 = 0
+TALENT:감정결핍 = 0
+TALENT:악취둔감 = 0
+TALENT:중독되기쉬움 = 0
+TALENT:절벽 = 0
 TALENT:남자 = 0
+TALENT:광기 = 0
+
 TALENT:반항적 = 1
 TALENT:꿋꿋함 = 1
 TALENT:저항 = 1
@@ -578,7 +585,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -3673,7 +3680,7 @@ SELECTCASE TFLAG:13
 ;　　32:요바이 V/C
 ;　　33:요바이 A/C
 ;　　34:요바이 C/C
-;　　35:밤자위
+;　　35:밤 자위
 ;　　36:같이잔다
 ;　　37:起きたら隣で寝てる
 ;　　38:朝の足コキ

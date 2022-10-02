@@ -63,9 +63,9 @@ PRINTL
 ;--------------------------------------------------
 IF CFLAG:220 == 0
 	;AA表示の有無を決定
-	PRINTFORML AA 표시 여부를 선택해주세요(후에 커맨드「아무것도안한다」로도 변경 가능합니다。)
+	PRINTFORML AA표시 여부를 선택해 주세요(나중에 커맨드 「아무것도안한다」로도 변경 가능합니다。)
 	CFLAG:808 = 7000
-	CALL INPUT_YN("AA 표시 있음", "AA 표시 없음")
+	CALL INPUT_YN("AA표시 있음", "AA표시 없음")
 	IF RESULT == 0
 		PRINTFORMW AA를 표시합니다。
 		CFLAG:809 = 0
@@ -188,7 +188,7 @@ ENDIF
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K4809_1
-;助手
+;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
 ;	IF CFLAG:203 == 0
@@ -315,7 +315,7 @@ CFLAG:801 = 0
 ;絶頂回数リセット
 CFLAG:802 = 0
 
-;체력 500미만
+;体力500未満
 IF BASE:0 < 500
 	PRINTFORMW 「하아…하아…너무 지나쳤어！이제、움직일 수 없잖아」
 	PRINTFORMW 「…그래도、기뻐」
@@ -391,11 +391,11 @@ SELECTCASE SELECTCOM
 			CASE 0
 				PRINTFORMW %조사처리(CALLNAME,"는")% %CALLNAME:MASTER%에게 몸을 기대었다。
 				CSTR:100 = 이거 안돼에%UNICODE(0x2665)%%UNICODE(0x2665)%…서 있을 수 없어%UNICODE(0x2665)%%UNICODE(0x2665)%…
-				CFLAG:808 = 0;애무
+				CFLAG:808 = 0;愛撫
 			CASE 1
 				PRINTFORMW 손가락으로 자극할 때마다 %조사처리(CALLNAME,"는")% 점점 젖어 갔다。
 				CSTR:100 = 으응！…히아아！
-				CFLAG:808 = 7103;애무
+				CFLAG:808 = 7103;愛撫
 				CALL PRINT_AA_K4809
 			CASE 2
 				PRINTFORMW %조사처리(CALLNAME,"는")% 몸을 만지는 것만으로 몸을 떨었다
@@ -410,7 +410,7 @@ SELECTCASE SELECTCOM
 			CASE 4
 				PRINTFORMW %CALLNAME%의 목과 쇄골에 키스를 하자、몸을 떨었다
 				CSTR:100 = 응…그곳은…하으…
-				CFLAG:808 = 7103;애무
+				CFLAG:808 = 7103;愛撫
 				CALL PRINT_AA_K4809
 		ENDSELECT
 	ELSE
@@ -425,7 +425,7 @@ SELECTCASE SELECTCOM
 			CSTR:101 = 읏、좀 더 상냥하게…
 		ENDIF
 		IF RAND:2 == 0
-			CFLAG:808 = 7103;애무
+			CFLAG:808 = 7103;愛撫
 			CALL PRINT_AA_K4809
 		ELSE
 			CFLAG:808 = 61
@@ -558,7 +558,7 @@ SELECTCASE SELECTCOM
 						CASE 0
 							PRINTFORMW 그녀의 가슴을 마구 주무르자 귀여운 신음 소리를 냈다。
 							CALL REACTION_K4809_1
-							CFLAG:808 = 0;애무
+							CFLAG:808 = 0;愛撫
 							CALL PRINT_AA_K4809
 						CASE 1
 							CALL BODYTOUCH_K4809_1
@@ -711,16 +711,16 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;AA表示の有無を決定
 		IF CFLAG:809 == 0
-			PRINTFORML AA 표시 여부를 변경하시겠습니까？(현재：표시 있음）
+			PRINTFORML AA표시 여부를 변경하시겠습니까？(현재：표시있음）
 		ELSE
-			PRINTFORML AA 표시 여부를 변경하시겠습니까？(현재：표시 없음）
+			PRINTFORML AA표시 여부를 변경하시겠습니까？(현재：표시없음）
 		ENDIF
-		PRINTFORML  [1] “AA 표시 없음”
-		PRINTFORML  [2] “AA 표시 있음”
+		PRINTFORML  [1] “AA표시 없음”
+		PRINTFORML  [2] “AA표시 있음”
 		$INPUT_LOOP_K4809_1_PRINT_AA
 		INPUT
 		IF RESULT == 2
-			PRINTFORMW AA를 표시합니다。
+			PRINTFORMW AA를 표시하게 되었습니다。
 			CFLAG:809 = 0
 		ELSEIF RESULT == 1
 			PRINTFORMW AA를 표시하지 않습니다。
@@ -729,7 +729,7 @@ SELECTCASE SELECTCOM
 			GOTO INPUT_LOOP_K4809_1_PRINT_AA
 		ENDIF
 		PRINTL 
-		;스킬「スピア・ザ・グングニルの仕様の切り替え
+		;スキル「スピア・ザ・グングニルの仕様の切り替え
 		PRINTFORML 스킬「스피어・더・궁니르」의 사양을 선택하십시오。
 		PRINTL 
 		PRINTFORML  [0] “디폴트（높은 명중・높은 크리티컬 공격）”
@@ -1533,7 +1533,7 @@ SELECTCASE SELECTCOM
 ;조교자봉사계 커맨드
 ;===================================================================================================================================================
 ;-------------------------------------------------
-;90手淫する、91パイズリする、９２正常位させる、９３後背位させる、94騎乗位する、95アナル正常位させる、96アナル後背位させる、97アナル騎乗位する、98,모유마시기　함락완료만、９９愛撫させる、210,귀두공격
+;90手淫する、91パイズリする、９２正常位させる、９３後背位させる、94騎乗位する、95アナル正常位させる、96アナル後背位させる、97アナル騎乗位する、98,母乳飲ませる　陥落済みのみ、９９愛撫させる、210,亀頭攻め
 ;-------------------------------------------------
 	CASE 90 ,91, 92, 93, 94, 95, 96, 97, 98, 99, 210
 		CALL TRAIN_MESSAGE
@@ -1814,7 +1814,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ口上が出るように변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 			ENDIF
@@ -1882,7 +1882,7 @@ SELECTCASE SELECTCOM
 ;500번대,파생커맨드
 ;=================================================
 ;-------------------------------------------------
-;500,３Ｐ、503,Gスポット刺激504,乱れ牡丹505,騎乗乳房自慰508,６９パイズリ509,搾乳510,ダブル素股511,二本フェラ512,アナル騎乗乳房自慰513,입과바기나를범한다(３Ｐ派生)514,입과애널을범한다(３Ｐ派生)515,애널흐트러진모란
+;500,３Ｐ、503,Gスポット刺激504,乱れ牡丹505,騎乗乳房自慰508,６９パイズリ509,搾乳510,ダブル素股511,二本フェラ512,アナル騎乗乳房自慰513,口とヴァギナを犯す(３Ｐ派生)514,口とアナルを犯す(３Ｐ派生)515,アナル乱れ牡丹
 ;-------------------------------------------------
 	CASE 500, 502, 503, 504, 505, 508, 509, 510, 511, 512, 613, 514, 515
 		CALL TRAIN_MESSAGE
@@ -3045,7 +3045,7 @@ SETCOLOR COLOR("ピンク")
 SETFONT "Times New Roman"
 PRINTFORM  %UNICODE(0x2665)% 
 RESETCOLOR
-SETFONT "ＭＳ ゴシック"
+SETFONT
 
 @BODYTOUCH_K4809_1;汎用のボディータッチ台詞
 SELECTCASE RAND:2
@@ -3184,7 +3184,7 @@ CALL PRINT_AA_K4809
 ;=================================================================================
 ;●戦闘イベント系口上
 ;詳しくはKOJO_RPG.ERB参照。
-;『TFLAG:戦闘イベントに以下の値を代入して、@EVENT_BATTLE_Kを呼び出す
+;『TFLAG:전투이벤트に以下の値を代入して、@EVENT_BATTLE_Kを呼び出す
 ;範囲系は封印。吸収反射回避も単体でしかでない』
 ;……とのこと。
 ;=================================================================================
@@ -3407,7 +3407,7 @@ IF CFLAG:ARG:입력행동 == 0
 	ENDSELECT
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;-------------------------------------------------
-;○スキル使用(회복、支援以外）
+;○スキル使用(回復、支援以外）
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 399) || RANGE(CFLAG:ARG:입력행동,601, 2999)
 	IF CFLAG:ARG:입력행동 == 2845
@@ -3472,7 +3472,7 @@ ENDIF
 CHKFONT "ＭＳ Ｐゴシック"
 	SIF RESULT
 		SETFONT "ＭＳ Ｐゴシック"
-	;AA表示あり
+	;AA표시 있음
 	IF CFLAG:809 == 0
 		;AAと本文の間に一行スペースを入れる
 		PRINTL 　
@@ -4155,7 +4155,7 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL ／／／/＼ ＿＿ ィ"　　 /　　　　　　　 :: 　　　　.:r;.　,　 　 ﾏ=-=≦＼＼＼＼
 				PRINTL . ／／／／／／ / 　 　 ,′::fｯ:.　　 　 　 　 　 　 ヾ' 　: 　　 ﾏ＼＼＼＼＼＼
 				PRINTL ／／／／／／ / 　 　 ｨ{ 　｀¨　　　　 　 　 　 　 　 u　}　　　 ∨ /＼＼＼＼/
-			CASE 0;애무
+			CASE 0;愛撫
 				PRINTL 　　　　 　 　 　 　 　 　 ＞――――＜
 				PRINTL 　　　　　　　　　　　／　　　　　　　 　 　 丶 __
 				PRINTL 　　 　 　 　 　 　 /　　　　　　　　　　　　＿_　　＼
@@ -4602,7 +4602,7 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　 　 　 ||　　　　,.. 　 イ//≧=|;';';'||;';';';';||';';';';';!≧==≦// ＞　..　　　 |　　　　 　 　 　 　 |　　　　　}
 				PRINTL 　　　　　　　　　　 　 　 || -=≦＼////////ノ';';';'||;';';';';||';';';';';|＼)///////////＞　||　　　　　　　　 　 ||　　　　 /
 				PRINTL 　　　 　 　 　 　 ｡o≦l　|| 　 　 　 ￣￣￣／';';';';';'l{;';';';';}l;';';';';';∨　￣￣￣￣￣　 　|||　≧=-　　　　　　||　　　／
-			CASE 810;펠라치오
+			CASE 810;フェラチオ
 				PRINTL 　　　　　　　 　 　 ／ 　 　 　 　 　 　 　 ＿＿　　　　　　　　　　　　　　＼
 				PRINTL .　　　 　 　 　 　 /　　　　　　 　 ＿__／＿_ 　丶　　　　　　　　　　　　　 　 、
 				PRINTL 　　　　　　　＿_/＿＿　　-=三三／// : : ヽ　　 ＼三三≧x、　　　　 　 　 ゛
@@ -4861,7 +4861,7 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　 ヽ{　ヽ >､! f´::::::ヽ　　 　 　 /:::::::ヾ¨´
 				PRINTL 　　　　　　 ´￣´￣｀{=＝= }｀¨⌒´￣{ =＝=}
 				PRINTL 　　　　　　　　　　 　 ｀¨¨¨´　　　　　 ｀¨¨¨´
-			CASE 7504;회피
+			CASE 7504;回避
 				PRINTL 　　　　　　＿＿_//＼　　　　　　　 　 　 　 　 ＿＿
 				PRINTL 　　 　 　 |///////＼＼　　　,.　-―　　¨￣　　　　 ＼
 				PRINTL 　　 　 　 |/////////＼＼／　　　　　　　　　　　　　　丶
@@ -5170,13 +5170,11 @@ CHKFONT "ＭＳ Ｐゴシック"
 		ENDSELECT
 		;AAと本文の間に一行スペースを入れる
 		PRINTW 
-	;AA表示なし
+	;AA표시 없음
 	ELSE
 		PRINTFORMW 「%CSTR:100%　%CSTR:101%」
 	ENDIF
 	CSTR:100 = 　
 	CSTR:101 = 　
-;KR판 임의수정, "ＭＳ ゴシック" > "DotumChe"
-	;SETFONT "ＭＳ ゴシック"
-	SETFONT "DotumChe"
+	SETFONT
 

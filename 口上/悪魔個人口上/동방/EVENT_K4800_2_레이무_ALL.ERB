@@ -87,7 +87,7 @@
 ;--------------------------------------------------
 ;구상셀렉트 기능：구상설명
 ;--------------------------------------------------
-@셀렉트구상설명_K4800_1,ARG = 0
+@셀렉트구상설명_K4800_2,ARG = 0
 SIF ARG == 1
 	RETURN 0
 ;구상명
@@ -99,7 +99,7 @@ PRINTFORML 차후 본 구상 생길 때는 숫자를 늘려주세요
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_K4800_1
+@EVENTTRAIN_K4800_2
 ;--------------------------------------------------
 ;엑스트라 모드 구문 CFLAG:220을 사용
 ;예를 선택했을 때에 첫 훈련 때 말 설정용의 소질을 변경할 수 있습니다
@@ -127,12 +127,12 @@ PRINTFORML 차후 본 구상 생길 때는 숫자를 늘려주세요
 ;특정 캐릭터가 조수, 주인 때 특수 캐릭터 인사 말을 호출(Y1을 특정 캐릭터, X1을 노예로 번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_K4800_1
+;	CALL EVENTTRAIN_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_K4800_1
+;		CALL EVENTTRAIN_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -231,30 +231,30 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTL [0] 가르친다
 		PRINTL [1] 가르치지 않는다
 		;이름을 가르칠까 가르치지 않는가의 루프
-		$INPUT_LOOP_1
+		$INPUT_LOOP_A
 		INPUT
 		IF RESULT == 0
 				PRINTL 이름을 입력해 주세요.
 				PRINTL  
 			;이름을 입력하는 루프
-			$INPUT_LOOP_2
+			$INPUT_LOOP_B
 			INPUTS
 			STRLENS RESULTS
 			IF RESULT > 14
 				PRINTFORML 「음―, 조금 길어. 조금만 더 짧게 안 돼?」
-				GOTO INPUT_LOOP_2
+				GOTO INPUT_LOOP_B
 			ELSEIF RESULTS == ""
-				GOTO INPUT_LOOP_1
+				GOTO INPUT_LOOP_A
 			ELSE
 				IF RESULTS == "레이무"
 					PRINTFORML 「내 이름 말고, 당신 이름」
-					GOTO INPUT_LOOP_2
+					GOTO INPUT_LOOP_B
 				ELSEIF RESULTS == "하쿠레이레이무"
 					PRINTFORML 「내 이름 말고, 당신 이름」
-					GOTO INPUT_LOOP_2
+					GOTO INPUT_LOOP_B
 				ELSEIF RESULTS == "하쿠레이 레이무"
 					PRINTFORML 「내 이름 말고, 당신 이름」
-					GOTO INPUT_LOOP_2
+					GOTO INPUT_LOOP_B
 				ELSEIF RESULTS == "마리사"
 					PRINTFORML 「…어딘가의 흑백 같은 이름이야」
 				ELSEIF RESULTS == "린노스케"
@@ -267,7 +267,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 				PRINTL [0] 예
 				PRINTL [1] 아니오
 				;입력한 이름을 확정하는 루프
-				$INPUT_LOOP_3
+				$INPUT_LOOP_C
 				INPUT
 				IF RESULT == 0
 					CSTR:이인칭 = %RESULTS%
@@ -275,9 +275,9 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 					PRINTFORMW 당신은 진짜 이름(%CSTR:이인칭%)을 가르쳤다.
 				ELSEIF RESULT == 1
 					PRINTL 이름을 입력해 주세요.
-					GOTO INPUT_LOOP_2
+					GOTO INPUT_LOOP_B
 				ELSE
-					GOTO INPUT_LOOP_3
+					GOTO INPUT_LOOP_C
 				ENDIF
 			ENDIF
 					PRINTFORMW 「%CSTR:이인칭%… 당신의 이름은 %CSTR:이인칭%…」
@@ -292,7 +292,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 「…그럼, 적어도 어떻게 부르면 좋을지 말해줘」
 			PRINTFORMW 「역시, 이럴 때는 주인님, 이라든지?」
 		ELSE
-			GOTO INPUT_LOOP_1
+			GOTO INPUT_LOOP_A
 		ENDIF
 	;-------------------------------------------------
 		;통칭을 매듭짓는 이벤트
@@ -459,7 +459,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_K4800_1
+	CALL EVENTTRAIN_SECOND_K4800_2
 ;마리사 조수시
 ELSEIF NO:ASSI == 4801
     DRAWLINE
@@ -612,12 +612,12 @@ ELSEIF NO:ASSI == 4821
     ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_K4800_1
+	CALL EVENTTRAIN_SECOND_K4800_2
 ENDIF
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_K4800_1
+@EVENTTRAIN_SECOND_K4800_2
 ;반발각인Lv3
 IF MARK:3 == 3
 	PRINTFORMW 
@@ -797,17 +797,17 @@ ENDIF
 ;EVENTEND 관련（X1을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_K4800_1
+@EVENTEND_K4800_2
 ;--------------------------------------------------
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTEND_PY1_K4800_1
+;	CALL EVENTEND_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	SIF NO:ASSI == Y1
-;	CALL EVENTEND_PY1_K4800_1
+;	CALL EVENTEND_PY1_K4800_2
 ;	
 ;ENDIF
 ;--------------------------------------------------
@@ -1279,7 +1279,7 @@ CFLAG:4910 = 0
 ;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_K4800_1
+@KOJO_MESSAGE_COM_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	
@@ -1292,12 +1292,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_K4800_1
+;	CALL KOJO_MESSAGE_COM_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_K4800_1
+;		CALL KOJO_MESSAGE_COM_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -5523,7 +5523,7 @@ CASE 15
 		;연모かつ호칭決定이벤트を見ているとき,初손で選ぶ
 		IF (TALENT:연모 || TALENT:친애) == 1 && PREVCOM == -1
 			PRINTFORMW ―레이무로부터의 통칭을 변경합니다―
-			CALL K4800_1_CALLNAME_RESELECT
+			CALL K4800_2_CALLNAME_RESELECT
 		CALL TRAIN_MESSAGE
 		;처음
 		ELSEIF CFLAG:313 == 0
@@ -13121,9 +13121,9 @@ CASE 15
 ;=================================================
 ;ENDSELECT
 
-;CALL KOJO_MESSAGE2_COM_K4800_1
+;CALL KOJO_MESSAGE2_COM_K4800_2
 
-;@KOJO_MESSAGE2_COM_K4800_1
+;@KOJO_MESSAGE2_COM_K4800_2
 ;SELECTCASE SELECTCOM
 ;-------------------------------------------------
 ;160,촉수소환
@@ -16872,7 +16872,7 @@ ENDSELECT
 ;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_K4800_1
+@KOJO_MESSAGE_PALAMCNG_A_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -16885,12 +16885,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4800_1
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4800_1
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -19820,7 +19820,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_K4800_1
+@KOJO_MESSAGE_PALAMCNG_E_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -19833,12 +19833,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4800_1
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4800_1
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -19874,7 +19874,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_K4800_1
+@KOJO_MESSAGE_PALAMCNG_B_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -19887,12 +19887,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4800_1
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4800_1
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -21407,7 +21407,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_K4800_1
+@KOJO_MESSAGE_PALAMCNG_C_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -21420,12 +21420,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4800_1
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4800_1
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -21520,7 +21520,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_K4800_1
+@KOJO_MESSAGE_PALAMCNG_D_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -21533,12 +21533,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4800_1
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4800_1
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -21622,7 +21622,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_K4800_1
+@KOJO_MESSAGE_MARKCNG_K4800_2
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	 
@@ -21635,12 +21635,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4800_1
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4800_2
 ;	
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4800_1
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4800_2
 ;		
 ;	ENDIF
 ;ENDIF
@@ -21750,13 +21750,13 @@ ENDIF
 ;-------------------------------------------------
 ;이벤트구상 모음（X1을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_K4800_1
+@KOJO_MESSAGE_EVENT_K4800_2
 
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_K4800_1
+;	CALL KOJO_MESSAGE_EVENT_PY1_K4800_2
 ;	
 ;ENDIF
 SELECTCASE TFLAG:13
@@ -24094,7 +24094,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;투기장 패배시 구상 모음（X1을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
-@KOJO_MESSAGE_LOSE_COLOSSEUM_K4800_1
+@KOJO_MESSAGE_LOSE_COLOSSEUM_K4800_2
 SELECTCASE TFLAG:투기장패배
 		;-------------------------------------------------
 		;오니＆덩굴
@@ -24124,7 +24124,7 @@ ENDSELECT
 ;엔딩구상의 유무를 판별하는 함수
 ;기술한 엔딩의 종류에 따라 주석처리를 해제
 ;-------------------------------------------------
-@ENDING_CHECK_K4800_1
+@ENDING_CHECK_K4800_2
 SELECTCASE TSTR:END종별
 	;CASE "개별END"
 	;	SIF TALENT:아내 || TALENT:남편
@@ -24149,7 +24149,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_K4800_1
+@KOJO_MESSAGE_ENDING_K4800_2
 ;--------------------------------------------------
 SELECTCASE TSTR:END종별
 	CASE "개별END"
@@ -24173,7 +24173,7 @@ SELECTCASE TSTR:END종별
 			PRINTFORMW 레이무는 쓴웃음 지으면서 당신의 머리카락을 어루만지고는 오늘 밤도 행해지는 격렬한 행위를 상상하고는 가볍게 흥분해 버렸다.
 			PRINTFORMW 「좀 더 힘내서, 기분이 좋은 일 하자…♪」
 			PRINTFORMW 
-			PRINTFORMW         ―― Ending No. 4800_1 (레이무 엔딩)
+			PRINTFORMW         ―― Ending No. 4800_2 (레이무 엔딩)
 		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;DRAWLINE
@@ -24205,7 +24205,7 @@ ENDSELECT
 
 
 
-@ENEMY_BATTLE_EVENT_K4800_1, ARG, ARG:1, ARG:2
+@ENEMY_BATTLE_EVENT_K4800_2, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -24219,7 +24219,7 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-@BATTLE_EVENT_K4800_1, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_K4800_2, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -24240,7 +24240,7 @@ IF TFLAG:전투이벤트 == 3
 ENDIF
 
 
-@BATTLE_MESSAGE_K4800_1,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_K4800_2,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
@@ -24320,7 +24320,7 @@ ENDIF
 ;-------------------------------------------------
 ;@조교中の호칭を決める이벤트(연모かつ初손「아무것도안한다」を選択時)
 ;-------------------------------------------------
-@K4800_1_CALLNAME_RESELECT
+@K4800_2_CALLNAME_RESELECT
     DRAWLINE
     PRINTFORMW ―조교 중의 호칭을 결정하세요―
     PRINTL [0] 주인님이 좋다
@@ -24416,7 +24416,7 @@ ENDIF
                 PRINTFORMW 「아, 그렇지만 조교인데 %조사처리(CSTR:이인칭,"라")%고 불러도 괜찮은거야?」
                 PRINTFORMW 「역시, 주인님이라든지 하는 게 괜찮지 않을까」
                 PRINTFORMW 「…… 그렇지 않으면, 오빠라든지, 아니면 오라버니라든지, 랄까…」
-                CALL K4800_1_CALLNAME_RESELECT
+                CALL K4800_2_CALLNAME_RESELECT
             ELSEIF RESULT == 1
                 GOTO INPUT_LOOP_7
             ELSE
@@ -24441,5 +24441,5 @@ ENDIF
     ENDIF
 
 
-@KOJO_EXIST_K4800_1
+@KOJO_EXIST_K4800_2
 RETURN 1

@@ -104,7 +104,7 @@ IF CFLAG:201 == 0 && CFLAG:이벤트가입 == 0
 		CSTR:이인칭 = 嬢ちゃん
 	ENDIF
 
-	;衣装：왕관、드레스、팬티、양말、펌프스
+	;衣装：王冠、ドレス、パンティ、靴下、パンプス
 	CFLAG:모자 = 28
 	CFLAG:전신복 = 304
 	CFLAG:속옷（하）= 602
@@ -143,7 +143,7 @@ IF CFLAG:201 == 0
 		PRINTFORMW 『まぁ、何にせよや』
 	ENDIF
 	PRINTFORML 
-	PRINTFORML 『마왕　バエル』
+	PRINTFORML 『魔王　バエル』
 	PRINTFORML 『今後ともよろしく、や』
 	PRINTFORMW 少女はペコリとお辞儀をした
 	CFLAG:201 = 1
@@ -190,7 +190,7 @@ ENDIF
 ;간이 조수구상 발동시에 첫조교시 구상을 스킵（Y1을 조수의 캐릭터번호로 한다）
 ;여러 명이 있을 경우는, SIF NO:ASSI == Y1 || NO:ASSI == Z1으로 추가해 나간다
 ;--------------------------------------------------
-;助手が葛城史人
+;조수が葛城史人
 IF CFLAG:201 == 1 && ASSI == 4761
 	PRINTFORMW 『まぁ……%CSTR:일인칭%は負けたんやからな』
 	PRINTFORML 『好きにしぃ』
@@ -317,9 +317,9 @@ IF MARK:반발각인 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	CFLAG:217 = 1
 ;굴복각인Lv3
 ELSEIF MARK:굴복각인 == 3
-	;체력 500미만
+	;体力500未満
 	IF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
-		;음란, 창부、발정중
+		;음란, 창부、発情中
 		IF TALENT:음란 || TALENT:창부 || TALENT:발정가능
 			PRINTFORMW 『盛りの付いた猫は途中でストップせんと死ぬまで止まらんで』
 			PRINTFORMW 少女は先程までの調教を思い出して微笑んでいる
@@ -3844,7 +3844,7 @@ CASE 14
 	CASE 156
 		CALL TRAIN_MESSAGE
 ;-------------------------------------------------
-;157,요정바이브　체격による制限あり
+;157,妖精バイブ　体格による制限あり
 ;-------------------------------------------------
 	CASE 157
 		CALL TRAIN_MESSAGE
@@ -4442,7 +4442,7 @@ CASE 14
 				ENDIF
 			ENDIF
 		ELSE
-		;TEQUIP:29 >= 1でどこの場所選んでも同じ口上が出るように변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
+		;TEQUIP:29로 어느 장소를 선택해도 같은 구상이 나오도록  변경･장소마다 바꾸고 싶으면 == 로 하고 숫자를 만지기
 			IF CFLAG:396 == 1 || FLAG:7 == 2
 				CALL TRAIN_MESSAGE
 				;처음
@@ -5195,7 +5195,7 @@ CASE 14
 ;-------------------------------------------------
 ;505,기승유방자위
 ;-------------------------------------------------
-;ヴァギナ派生
+;바기나파생
 	CASE 505
 	IF TFLAG:40 == 1
 		CALL TRAIN_MESSAGE
@@ -5234,7 +5234,7 @@ CASE 14
 				CFLAG:412 = 2
 			ENDIF
 		ENDIF
-;アナル派生
+;애널파생
 	ELSEIF TFLAG:40 == 2
 		CALL TRAIN_MESSAGE
 		;처음
@@ -5268,7 +5268,7 @@ CASE 14
 		ENDIF
 	ENDIF
 ;-------------------------------------------------
-;506,挿入Ｇスポ責め
+;506,삽입Ｇ스팟자극
 ;-------------------------------------------------
 	CASE 506
 		CALL TRAIN_MESSAGE
@@ -6539,7 +6539,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:음란 || TALENT:창부
-					;母乳体質かどうか
+					;모유체질인지 아닌지
 					IF TALENT:모유체질
 						PRINTFORML 『おーおー』
 						PRINTFORML 『朝から母乳撒き散らせながらパイズリでチンコおっ立たせてどうする気や？』
@@ -6554,7 +6554,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:복종 || TALENT:예속
-					;母乳体質かどうか
+					;모유체질인지 아닌지
 					IF TALENT:모유체질
 						PRINTFORML 『朝から母乳撒き散らせながらパイズリご奉仕とお前さんも熱心やな』
 					ELSE
@@ -7070,7 +7070,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:연모 || TALENT:음란 || TALENT:복종 || TALENT:친애 || TALENT:창부 || TALENT:예속) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:연모 || TALENT:친애
-					;露出癖と素質:恥じらいの有無で分岐
+					;露出癖と素質:부끄럼쟁이の有無で分岐
 					IF ABL:B:8 >= 5 && !TALENT:35
 						PRINTFORMW 『あの二人はうまくやっとるやろか』
 						PRINTFORML 
@@ -7081,7 +7081,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:음란 || TALENT:창부
-					;露出癖と素質:恥じらいの有無で分岐
+					;露出癖と素質:부끄럼쟁이の有無で分岐
 					IF ABL:B:8 >= 5 && !TALENT:35
 						PRINTFORMW 『自分から夜這いに行くと、あの子も成長したのぉ……』
 						PRINTFORML 
@@ -7093,7 +7093,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				;복종, 예속
 				ELSEIF TALENT:복종 || TALENT:예속
-					;露出癖と素質:恥じらいの有無で分岐
+					;露出癖と素質:부끄럼쟁이の有無で分岐
 					IF ABL:B:8 >= 5 && !TALENT:35
 						PRINTFORMW 『自分からご奉仕に向かうとは成長したのぉ……』
 						PRINTFORML 
@@ -7166,7 +7166,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 『よぉやったの……』
 				PRINTFORML 『と、言っても判らんか』
 				PRINTFORMW 少女は呆けた表情のまま口から涎を垂らしている
-			;恋慕か親愛持ち
+			;연모か親愛持ち
 			ELSEIF TALENT:연모 || TALENT:친애
 				;父親が主人公の場合
 				IF CFLAG:임신시부친판정 == 1
@@ -7185,7 +7185,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 『まぁ……アレやったら妊娠するわなぁ』
 					PRINTFORMW 『次は頑張りや』
 				ENDIF
-			;淫乱か娼婦持ち
+			;음란か娼婦持ち
 			ELSEIF TALENT:음란 || TALENT:창부
 				;父親が主人公の場合
 				IF CFLAG:임신시부친판정 == 1
@@ -7359,10 +7359,10 @@ SELECTCASE TFLAG:13
 			ENDIF
 
 		;-------------------------------------------------
-		;定食屋台で実際に働いたとき
+		;정식포장마차에서 실제로 일했을 때
 		;-------------------------------------------------
 	CASE 97
-			;クレーム処理を丸く収めた
+			;클레임 처리를 원만하게 수습했다
 			IF TFLAG:86 == 10
 				IF RAND:3 == 0 && ABL:요리기능 <= 1
 					PRINTFORML 「魔王たる%CSTR:일인칭%なら、この位は余裕や」
@@ -7630,7 +7630,7 @@ SELECTCASE TFLAG:13
 				CFLAG:285 = 1
 			ENDIF
 		;-------------------------------------------------
-		;;[[맹우]取得時 예속 전제
+		;;[[盟友]取得時 隷属前提
 		;-------------------------------------------------
 	CASE 92
 			CALL EVENT_MESSAGE
@@ -7723,7 +7723,7 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그 외
+				;その他
 				ELSE
 					;진행도 분기
 					;초회
@@ -7788,7 +7788,7 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그 외
+				;その他
 				ELSE
 					;진행도 분기
 					;초회
@@ -7866,7 +7866,7 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
 						PRINTFORMW 
 					ENDIF
-				;그 외
+				;その他
 				ELSE
 					;진행도 분기
 					;초회
@@ -8170,7 +8170,7 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 ENDSELECT
 ;-------------------------------------------------
-;투기장패배時口上集（4998をキャラ番号に置換する） 基本的に見るとゲームオーバーなのでフラグは使わない事に
+;투기장 패배시 구상 모음（4998을 캐릭터번호로 치환한다） 기본적으로 보면 게임오버기 때문에 플래그를 사용하지 않도록
 ;-------------------------------------------------
 @KOJO_MESSAGE_LOSE_COLOSSEUM_K270
 SELECTCASE TFLAG:투기장패배
@@ -8227,7 +8227,7 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;@KOJO_MESSAGE_ENDING 관련
+;@KOJO_MESSAGE_ENDING関係
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;엔딩구상의 유무를 판별하는 함수
@@ -8313,7 +8313,7 @@ RETURN 0
 ;RETURN 1
 
 ;＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-;戦闘メッセージ
+;전투메시지
 ;＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 @ENEMY_BATTLE_EVENT_K270, ARG, ARG:1, ARG:2
 
@@ -8362,7 +8362,7 @@ IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 		PRINTFORML ┃%"後は任せたで、" + CSTR:이인칭,72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-		PRINTFORML ┏>＠%NAME:ARG +"（소녀）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>＠%NAME:ARG +"（少女）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"………",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8391,10 +8391,10 @@ ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 20
 	ENDIF
 ENDIF
 
-;반사
+;反射
 IF TFLAG:전투이벤트 == 16
 	IF RAND:3 == 0
-		PRINTFORML ┏>＠%NAME:ARG +"（소녀）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>＠%NAME:ARG +"（少女）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"………？",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8419,7 +8419,7 @@ ENDIF
 ;레벨 업했다
 IF TFLAG:전투이벤트 == 91
 	IF RAND:3 == 0 && (TALENT:빈유 || TALENT:절벽)
-		PRINTFORML ┏>＠%NAME:ARG +"（소녀）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>＠%NAME:ARG +"（少女）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"………？",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8435,7 +8435,7 @@ IF TFLAG:전투이벤트 == 91
 		PRINTFORML ┃%"蘇ってくるで、" + CSTR:일인칭 + "の力…",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-		PRINTFORML ┏>＠%NAME:ARG +"（소녀）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>＠%NAME:ARG +"（少女）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"………！",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		PRINTFORML 
@@ -8451,7 +8451,7 @@ ENDIF
 ;--------------------------------------------------
 @BATTLE_MESSAGE_K270,ARG,ARG:1 = 0
 
-;剣撃スキル
+;검격スキル
 IF (CFLAG:ARG:입력행동 >= 1 && CFLAG:ARG:입력행동 <= 29) || (CFLAG:ARG:입력행동 >= 37 && CFLAG:ARG:입력행동 <= 76)
 		IF RAND:4 == 0
 			PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8546,7 +8546,7 @@ ELSEIF CFLAG:ARG:입력행동 >= 321 && CFLAG:ARG:입력행동 <= 326
 		PRINTFORML ┃%"" + CSTR:일인칭 + "もちょうど空腹やったんや",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;메가톤프레스
+;メガトンプレス
 ELSEIF CFLAG:ARG:입력행동 == 205
 	IF RAND:2 == 0
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8563,7 +8563,7 @@ ELSEIF CFLAG:ARG:입력행동 == 205
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ;ブレス系
-;포그브레스、용해브레스、파이어브레스、아이스브레스、독가스브레스
+;フォッグブレス、溶解ブレス、ファイアブレス、アイスブレス、毒ガスブレス
 ELSEIF CFLAG:ARG:입력행동 == 520 || CFLAG:ARG:입력행동 == 538 || CFLAG:ARG:입력행동 == 708 || CFLAG:ARG:입력행동 == 809 || CFLAG:ARG:입력행동 == 1112
 	IF RAND:2 == 0
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8579,7 +8579,7 @@ ELSEIF CFLAG:ARG:입력행동 == 520 || CFLAG:ARG:입력행동 == 538 || CFLAG:A
 		PRINTFORML ┃%"少女は蛙を上から叩いた",72,LEFT%┃
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;파리화의저주
+;蝿化の呪い
 ELSEIF CFLAG:ARG:입력행동 == 2511
 	IF RAND:2 == 0
 		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8597,7 +8597,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2511
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;파워브레스
+;パワーブレス
 ELSEIF CFLAG:ARG:입력행동 == 524
 	PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"皆……！" + CSTR:일인칭 + "の下へ集うんや！",72,LEFT%┃
@@ -8607,7 +8607,7 @@ ENDIF
 ;テンプレ
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
-;		PRINTFORML ┏>＠%NAME:ARG +"（소녀）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓;
+;		PRINTFORML ┏>＠%NAME:ARG +"（少女）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓;
 ;		PRINTFORML ┃%"　",72,LEFT%┃
 ;		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		PRINTFORML ┏>＠%NAME:ARG +"（蛙）",27,LEFT%　━━━━━━━━━━━━━━━━━━━━┓
@@ -8664,10 +8664,10 @@ ENDIF
 SETCOLOR 0x55BEFF
 LOCALS = {ARG:1}
 LOCALS:1 = {FLAG:경과턴수}
-;戦闘開始・味方のレベルが敵のレベルより１０以上高い
-;戦闘開始・味方のレベルが敵のレベルより１０以上低い
-;戦闘開始・同レベル帯
-;戦闘開始・先制攻撃
+;전투개시・아군의 레벨이 적의 레벨보다 １０이상 높다
+;전투개시・아군의 레벨이 적의 레벨보다 １０이상 낮다
+;전투개시・동레벨대
+;전투개시・선제공격
 IF ARG <= 3
 	IF RAND:3 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8685,7 +8685,7 @@ IF ARG <= 3
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;戦闘開始・バックアタック
+;전투개시・백어택
 ELSEIF ARG == 4
 	IF RAND:2 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8703,9 +8703,9 @@ ELSEIF ARG == 4
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;戦闘開始・バックアタック（百太郎発動）
-;戦闘開始・不意打ち
-;戦闘開始・不意打ち（百太郎発動）
+;전투개시・백어택（하쿠타로우）
+;전투개시・기습
+;전투개시・기습（하쿠타로우）
 ELSEIF ARG >= 5 && ARG <= 7
 	IF RAND:3 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8723,9 +8723,9 @@ ELSEIF ARG >= 5 && ARG <= 7
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;戦闘終了・味方のレベルが敵のレベルより１０以上高い
-;戦闘終了・味方のレベルが敵のレベルより１０以上低い
-;戦闘終了・同レベル帯
+;전투종료・아군의 레벨이 적의 레벨보다 １０이상 높다
+;전투종료・아군의 레벨이 적의 레벨보다 １０이상 낮다
+;전투종료・동레벨대
 ELSEIF ARG >= 8 && ARG <= 10
 	IF RAND:4 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8757,7 +8757,7 @@ ELSEIF ARG >= 8 && ARG <= 10
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;戦闘終了・全滅
+;전투종료・전멸
 ELSEIF ARG == 11
 	IF RAND:2 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8775,13 +8775,13 @@ ELSEIF ARG == 11
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・死亡している味方が複数いる・逃走不能
-;전투중・死亡している味方が複数いる・逃走可能
-;전투중・死亡している味方が一人いる（あなた）
-;전투중・死亡している味方が一人いる（あなた以外）
-;전투중・戦闘開始時よりも味方の数が少ない
+;전투중・사망한 아군이 복수 있다・도주불가
+;전투중・사망한 아군이 복수 있다・도주가능
+;전투중・사망한 아군이 1명 있다（아나타）
+;전투중・사망한 아군이 1명 있다（아나타 이외）
+;전투중・전투 개시시보다 아군의 수가 적다
 ELSEIF (ARG >= 12 && ARG <= 15) || ARG == 32
-	;전투중・葛城史人が死亡
+	;戦闘中・葛城史人が死亡
 	IF ARG == 15 && NO:(ARG:8) ==  [[キャラ:아야토]]
 		;バエル城で蛙を踏み潰した
 		IF CFLAG:ASSI:이벤트가입 == 1
@@ -8825,12 +8825,12 @@ ELSEIF (ARG >= 12 && ARG <= 15) || ARG == 32
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・ＨＰを25%切った味方が複数いる・逃走不能
-;전투중・ＨＰを25%切った味方が複数いる・逃走可能
-;전투중・ＨＰを25%切った味方が一人いる（あなた）
-;전투중・ＨＰを25%切った味方が一人いる（あなた以外）
+;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주불가
+;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주가능
+;전투중・ＨＰ를 25% 밑도는 아군이 1명 있다（아나타）
+;전투중・ＨＰ를 25% 밑도는 아군이 1명 있다（아나타 이외）
 ELSEIF ARG >= 16 && ARG <= 19
-	;전투중・葛城史人が瀕死
+	;戦闘中・葛城史人が瀕死
 	IF ARG == 19 && NO:(ARG:8) ==  [[キャラ:아야토]]
 		;バエル城で蛙を踏み潰した
 		IF CFLAG:ASSI:이벤트가입 == 1
@@ -8878,14 +8878,14 @@ ELSEIF ARG >= 16 && ARG <= 19
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・状態異常の味方が複数いる
-;전투중・POISON状態の味方がいる
-;전투중・PALYZE状態の味方がいる
-;전투중・STONE状態の味方がいる
-;전투중・HAPPY状態の味方がいる
-;전투중・PANIC状態の味方がいる
-;전투중・SLEEP状態の味方がいる
-;전투중・CHARM状態の味方がいる
+;전투중・상태이상인 아군이 복수 있다
+;戦闘中・POISON状態の味方がいる
+;戦闘中・PALYZE状態の味方がいる
+;戦闘中・STONE状態の味方がいる
+;戦闘中・HAPPY状態の味方がいる
+;戦闘中・PANIC状態の味方がいる
+;戦闘中・SLEEP状態の味方がいる
+;戦闘中・CHARM状態の味方がいる
 ELSEIF ARG >= 20 && ARG <= 27
 	;함락완료
 	IF RAND:3 == 0 && (TALENT:ASSI:연모 || TALENT:ASSI:복종 || TALENT:ASSI:친애 || TALENT:ASSI:예속)
@@ -8913,7 +8913,7 @@ ELSEIF ARG >= 20 && ARG <= 27
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・葛城史人のＨＰが50%切った
+;戦闘中・葛城史人のＨＰが50%切った
 ELSEIF ARG == 28 && NO:(ARG:8) ==  [[キャラ:아야토]]
 ;ELSEIF ARG >= 28 && NO:(ARG:8) [[キャラ:아야토]]
 	;バエル城で蛙を踏み潰した
@@ -8935,7 +8935,7 @@ ELSEIF ARG == 28 && NO:(ARG:8) ==  [[キャラ:아야토]]
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・危険な状態の味方はいない・逃走不能
+;전투중・위험한 상태의 아군은 없다・행동불능
 ELSEIF ARG == 29
 	IF RAND:3 == 0
 		CALL NAVI_IMAGE_HYOUJI_3
@@ -8957,7 +8957,7 @@ ELSEIF ARG == 29
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・危険な状態の味方はいない・戦闘開始時よりも敵の数が少ない
+;전투중・위험한 상태의 아군은 없다・전투 개시시보다 적의 수가 적다
 ELSEIF ARG == 30
 	IF RAND:3 == 0
 		CALL NAVI_IMAGE_HYOUJI_4
@@ -8977,11 +8977,11 @@ ELSEIF ARG == 30
 		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;전투중・危険な状態の味方はいない・戦闘開始時から敵の数が変わらない
+;전투중・위험한 상태의 아군은 없다・전투 개시시부터 적의 수가 변하지 않는다
 ELSEIF ARG == 31
 	PRINTL
 	IF FLAG:경과턴수 == 10
-		;恋慕系陥落済み
+		;연모系陥落済み
 		IF RAND:2 == 0 && (TALENT:ASSI:연모 || TALENT:ASSI:친애)
 			IF RAND:3 == 0
 				IF TIME < 4
@@ -9022,7 +9022,7 @@ ELSEIF ARG == 31
 									CALL WRITE_IMG, [[キャラ:바엘]], (CFLAG:ASSI:SHOP얼굴이미지) * 100 + 1, 6
 				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-		;淫乱系陥落済み
+		;음란系陥落済み
 		ELSEIF RAND:2 == 0 && (TALENT:ASSI:음란 || TALENT:ASSI:창부)
 			IF RAND:3 == 0
 				CALL NAVI_IMAGE_HYOUJI_3
@@ -9052,7 +9052,7 @@ ELSEIF ARG == 31
 								CALL WRITE_IMG, [[キャラ:바엘]], (CFLAG:ASSI:SHOP얼굴이미지) * 100 + 1, 6
 				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-		;服従系陥落済み
+		;복종系陥落済み
 		ELSEIF RAND:2 == 0 && (TALENT:ASSI:복종 || TALENT:ASSI:예속)
 			IF RAND:3 == 0
 				CALL NAVI_IMAGE_HYOUJI_3
@@ -9130,7 +9130,7 @@ ELSEIF ARG == 31
 		ENDIF
 	ENDIF
 	IF FLAG:경과턴수 == 20
-		;恋慕系陥落済み
+		;연모系陥落済み
 		IF RAND:2 == 0 && (TALENT:ASSI:연모 || TALENT:ASSI:친애)
 			IF RAND:2 == 0
 				CALL NAVI_IMAGE_HYOUJI_3
@@ -9151,7 +9151,7 @@ ELSEIF ARG == 31
 									CALL WRITE_IMG, [[キャラ:바엘]], (CFLAG:ASSI:SHOP얼굴이미지) * 100 + 1, 6
 				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-		;淫乱系陥落済み
+		;음란系陥落済み
 		ELSEIF RAND:2 == 0 && (TALENT:ASSI:음란 || TALENT:ASSI:창부)
 			IF RAND:2 == 0
 				CALL NAVI_IMAGE_HYOUJI_3
@@ -9172,7 +9172,7 @@ ELSEIF ARG == 31
 									CALL WRITE_IMG, [[キャラ:바엘]], (CFLAG:ASSI:SHOP얼굴이미지) * 100 + 1, 6
 				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
-		;服従系陥落済み
+		;복종系陥落済み
 		ELSEIF RAND:2 == 0 && (TALENT:ASSI:복종 || TALENT:ASSI:예속)
 			IF RAND:2 == 0
 				CALL NAVI_IMAGE_HYOUJI_3

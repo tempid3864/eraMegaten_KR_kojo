@@ -137,15 +137,15 @@ IF CFLAG:220 == 0
 	
 	
 	;AA表示の有無を決定
-	PRINTFORML AA表示の有無を選んでください（「何もしない」コマンドで後から変更可能です。）
-	PRINTFORML  [1] “AA表示なし”
-	PRINTFORML  [2] “AA表示あり”
+	PRINTFORML AA표시 여부를 선택해 주세요（「아무것도안한다」 커맨드로 나중에 변경 가능합니다。）
+	PRINTFORML  [1] “AA표시 없음”
+	PRINTFORML  [2] “AA표시 있음”
 	CFLAG:808 = 7001
 	CALL PRINT_AA_K621
 	$INPUT_LOOP_K621_PRINT_AA
 	INPUT
 	IF RESULT == 2
-		PRINTFORMW AAを表示するようになりました
+		PRINTFORMW AA를 표시하게 되었습니다
 		CFLAG:809 = 0
 	ELSEIF RESULT == 1
 		PRINTFORMW AAを表示しません
@@ -776,19 +776,19 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;AA表示の有無を決定
 		IF CFLAG:809 == 0
-			PRINTFORML AA表示の有無を切り替えますか？(現在：表示有り）
+			PRINTFORML AA표시 여부를 변경하시겠습니까？(현재：표시있음）
 		ELSE
-			PRINTFORML AA表示の有無を切り替えますか？(現在：表示無し）
+			PRINTFORML AA표시 여부를 변경하시겠습니까？(현재：표시없음）
 		ENDIF
-		PRINTFORML  [1] “AA表示なし”
-		PRINTFORML  [2] “AA表示あり”
+		PRINTFORML  [1] “AA표시 없음”
+		PRINTFORML  [2] “AA표시 있음”
 		$INPUT_LOOP_K886_PRINT_AA
 		INPUT
 		IF RESULT == 2
-			PRINTFORMW AAを表示するようになりました。
+			PRINTFORMW AA를 표시하게 되었습니다。
 			CFLAG:809 = 0
 		ELSEIF RESULT == 1
-			PRINTFORMW AAを表示しません。
+			PRINTFORMW AA를 표시하지 않습니다。
 			CFLAG:809 = 1
 		ELSE
 			GOTO INPUT_LOOP_K886_PRINT_AA
@@ -2663,7 +2663,7 @@ SETCOLOR COLOR("ピンク")
 SETFONT "Times New Roman"
 PRINTFORM  %UNICODE(0x2665)% 
 RESETCOLOR
-SETFONT "ＭＳ ゴシック"
+SETFONT
 
 
 ;スキンシップ
@@ -3049,7 +3049,7 @@ ENDIF
 CHKFONT "ＭＳ Ｐゴシック"
 	SIF RESULT
 		SETFONT "ＭＳ Ｐゴシック"
-	;AA表示あり
+	;AA표시 있음
 	IF CFLAG:809 == 0
 		;AAと本文の間に一行スペースを入れる
 		PRINTL 　
@@ -3268,9 +3268,9 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　  　　　　　　　　　　　　　　 　 　  　　　 /:::::/::::|::::::::::::::::::/|￣
 		ENDSELECT
 		PRINTW 
-	;AA表示なし
+	;AA표시 없음
 	ELSE
 	ENDIF
-	SETFONT "ＭＳ ゴシック"
+	SETFONT
 
 

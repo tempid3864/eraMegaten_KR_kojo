@@ -25,11 +25,12 @@
 
 ;-------------------------------------------------
 ;	Edit	Date			Author	New
-;	001		2019 03 27		名無し	新規作成
+;	001		2019/03/27		名無し	新規作成
+;	002		2021/07/20		Musue	処理上のバグ修正
 
 ;-------------------------------------------------
 ;使用フラグ一覧
-;CFLAG:808　表示するＡＡを選択する
+;CFLAG:ARG:808　表示するＡＡを選択する
 ;0～6000番台		調教コマンド描写用 CASE NO.XXX + 差分YのXXXYで分類
 ;7000～7099番台		表情描写
 ;7100～7199番台		半裸、裸描写
@@ -38,15 +39,18 @@
 ;8000～8999番台		調教時の状態描写用
 
 ;AA表示用関数
-@PRINT_AA_K4104
+@PRINT_AA_K4104, ARG = -1
+SIF ARG == -1
+	ARG = TARGET
+
 CHKFONT "ＭＳ Ｐゴシック"
 	SIF RESULT
 		SETFONT "ＭＳ Ｐゴシック"
-	;AA表示あり
-	IF CFLAG:809 == 0
+	;AA표시 있음
+	IF CFLAG:ARG:809 == 0
 		;AAと本文の間に一行スペースを入れる
 		PRINTL 　
-		SELECTCASE CFLAG:808
+		SELECTCASE CFLAG:ARG:808
 			CASE 0
 				PRINTL .　　　 　 .／////////ヽ/// .´斗＜!_＿__j´⌒ ＜　、
 				PRINTL 　　　　 /////////////.／／ 　 ／　　　　｀　 ､　＼＼._
@@ -54,8 +58,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　/.//////////../ 　／ X´　　/ 　 　 　 Y　 　 ＼　ハ.////.＼
 				PRINTL 　 　 i///////////..' 　/　/　 /　.'　　　　　　i　　Y 　 Y　 ..//////}
 				PRINTL 　 　 l///////////ｌ　 l　/　 .'　 .i　. !　　ｌ　　ｌi　} }　 　}i.　i///////}
-				PRINTL 　 　 ∨/////////.|　 i l{ 　 {　　{　ｌ.|　iｌ | }　ﾘ!} Ｎ　　从　.///////}
-				PRINTL .　　　 }/////////..|i　il从 .从.ィ升 ﾄ!　l| | jｨ升ﾄ} !　.人　!.!///////}
+				PRINT 　 　 ∨/////////.|　 i l{ 　 {　　{　ｌ.|　iｌ | }　ﾘ!} Ｎ　　从　.///////}
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT .　　　 }/////////..|i　il从 .从.ィ升 ﾄ!　l| | jｨ升ﾄ} !　.人　!.!///////}
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL .　 　　l /////////.|{　ｌ! 人 j人 」L从 _j jムイムﾉイ　　 }.|///////}
 				PRINTL .　 　　l //////// .从八 　 i|　ji匕ﾇ　 　 　 i匕jﾒ　!i　　人.///////}
 				PRINTL .　 　 ｜.///////./ /. 　＼从 """　　　　　　""" 从 イ 从///////
@@ -88,8 +94,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　///// |/////////　　　　　　　　　 　 ＼　　　　　 　 　 ｀ヽ
 				PRINTL 　　///// |/////// '　　　　　　　 　 　 　 　 ＼　　　　　　＼　 ､
 				PRINTL 　　//////V//////{　　 　　 {　　　　　　　　　　`丶､　　　　　 ､ ',
-				PRINTL 　　///////V/////　　　　　 ､ 　 __＿,　-='⌒）　　　　　　　 ＿', ',...へ―　 ､
-				PRINTL 　　////////ｉ////　　　 　 　 }／／＿￣` ＜...　　　 　 　 （////////＼__/ﾊ
+				PRINT 　　///////V/////　　　　　 ､ 　 __＿,　-='⌒）　　　　　　　 ＿', ',...へ―　 ､
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　////////ｉ////　　　 　 　 }／／＿￣` ＜...　　　 　 　 （////////＼__/ﾊ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　////////|///　　　　　 　 /―　　Y⌒¨¨´r,.:.　　　　　　人77777 ＼/,＼/,ｉ
 				PRINTL 　　////////|//　　　　　　／ ―へ　　､　　 ｀¨´ 　　　　}　　　￣￣ヽ/ ＼ //
 				PRINTL 　　//////// /　　　　　／　　―　､ ＼_)┐　　　　　　 ノ　(77777,＼ }///∨
@@ -115,8 +123,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　／　　　　 　 　 　 　 /　　 ｀¨¨´　　 ,r' ⌒ ＜
 				PRINTL 　　　 / 　 　 　　　　`ｉ　　　|　　　　　 　 ／　　　　　　＼
 				PRINTL 　　　/　　　　　　　 　 l 　　.|　　 　 　 ／ 　 　 　 　 　 　 ＼
-				PRINTL 　　 /　　　　　　　　　│　　|　 　 　 ./ 　 　 　 　 　 　 　　　＼
-				PRINTL .　 / 　 　 　 　 　 　 　!　　　．　　　/ 　　　　　　　　　　　　　　＼
+				PRINT 　　 /　　　　　　　　　│　　|　 　 　 ./ 　 　 　 　 　 　 　　　＼
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT .　 / 　 　 　 　 　 　 　!　　　．　　　/ 　　　　　　　　　　　　　　＼
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　/　 　 │ 　　　　　　!　　　.’　 　/ 　 　　　　　　γ　 　 　 　 　 ＼
 				PRINTL ./　 　　│　　　　　　│　　　.V　/ 　 　 　 　 　　　},　　　　　　　　　＼
 				PRINTL |. 　 　 　|　　　　　　　| 　 　 　∨　　　　　　　　 　 l ヽ 　 　 　 　 　　　　､
@@ -142,8 +152,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 30
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　 .ﾄ=|　|　 :{､{＞　_　＜{ / 　 　ノニニ/ニ乂＿＿
 				PRINTL 　　　　　　　　　 　 　 　 　 　 　 　 　 ___　　　 ／￣　｀｀.....ヽ　　,　-　´ ￣￣ ｀ヽニィ====≦ニﾆミ､
-				PRINTL 　　　　　　　　　　　　　　　　　　　　/ --ヽ___/__ .ノ　　　　　　　　　　　　 　 　 　 ',ニニニニニニニ
-				PRINTL 　　　　　 　 　 　 　 　 ＿＿　　 　 ,　ﾆ／/ィ///}　　　　　　　 　 　 　 　 ､ 　 　 　iニニニﾆiニニニ
+				PRINT 　　　　　　　　　　　　　　　　　　　　/ --ヽ___/__ .ノ　　　　　　　　　　　　 　 　 　 ',ニニニニニニニ
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　 　 　 　 　 　 ＿＿　　 　 ,　ﾆ／/ィ///}　　　　　　　 　 　 　 　 ､ 　 　 　iニニニﾆiニニニ
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　 　 　 　 ＞ ´　　 　 ヽ 　 i　{///////ィ　　　　　　　　 .:r,:.　　 　 ',　　　　|ニニﾆﾆjニニニ
 				PRINTL 　　　　　　　＞　　　　　　　　　',　 | ／ ￣ ＼/ｲ　 .ィ　 　 　 　 ｀ ´　　　.ｨ}　 　 　 !ニニﾆ/ニニニ
 				PRINTL 　　　　＞　　　　　　　　　　　　 ',　.!{　　　　　ヾj　　　　　　 ゝ 　　　　　/ﾆi　 　 　 |ﾆﾆ／ニニﾆニ
@@ -164,8 +176,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　 　 　 　 　 {_,..ィ／　　　　　　　　　｀ヽ、　｀ヽ、__,.. イ
 				PRINTL 　 　 　 　 . ,.　'´ 〃　,.'　　 /　　ﾊ　 　 ヽ　ヾ 、　　　 ＼.
 				PRINTL 　　　　　..く　　//　 /　　 /　　 　 '.　　　ﾍ　 ﾍ＼　 　 　 ヽ、
-				PRINTL 　 　 　 　 . ｀Y ,'　 /　 　 ,　　　 　 i　　　　'..　 '　l.ヽ　　　　 ∨
-				PRINTL 　　　　 　 　 i l.　,'!,. - ､.i!　 　 ,..　l!¨¨ヽ　 i. 　 ! i　 ﾍ_,.　＜´.
+				PRINT 　 　 　 　 . ｀Y ,'　 /　 　 ,　　　 　 i　　　　'..　 '　l.ヽ　　　　 ∨
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　 　 　 i l.　,'!,. - ､.i!　 　 ,..　l!¨¨ヽ　 i. 　 ! i　 ﾍ_,.　＜´.
+				PRINTFORML 　　　　　　 %CSTR:ARG:101%
 				PRINTL 　 　 　 　 　 l. i　, i.　　　!l＿＿＿_!l＿__　 i! 　 i ,　　 !.
 				PRINTL .　　　　　　　l_｣‐i十 ¨￣　　 　 　 .xf示≦７.,.　　　　 !.
 				PRINTL 　　　　　　　 　 　 l ィ芍心　　　 .〃乂zソっi! 　 i　　,!
@@ -185,22 +199,24 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　）　 --..＼　u　　　　　　　　　　　 　 ｡　 　 　 V / /////////≧ ､
 			CASE 50
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　 ｰ七"-z
-				PRINTL 　　　　　　　　　 　 　 　 　 　 　 　 　 /(乂 ） ｛					
+				PRINTL 　　　　　　　　　 　 　 　 　 　 　 　 　 /(乂 ） ｛
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　{　　ツ　|
-				PRINTL 　　　　　　　　 　 　 　 　 　 ／　　　　＼　　 /　　　　　　　　　　　__＼			
-				PRINTL 　　　　　　　　　　　　　　　,.　　 ´　　　　Y⌒　　　　　　　　　　　　 　 　 　 ｀　　.,
-				PRINTL 　 　 　 　 　 　 　 　 .　　´　　　　　　　　　　 　 　 ｀　、　/´　　 　 　 　 　 　 　 　 ｀　 .　　　　　　　　　　　　　　　　ｨ 　　「|
-				PRINTL 　　　　　　　　　　　 __ 　 　　　__　　　　　　　　　　　 　 .'　　　　　 　 　 　 　 　 　 　 　 　 、　 　 　 　 　 　 　　／　/ ,.へl |「|
-				PRINTL 　　　 　 　 　／　／/'ﾉ　　 ／//)　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 ＼　　　　 　 　 ∠／// //ヽi.」l」
-				PRINTL 　　　 　 　. 　イ/.///　　 /////　　　　 　 　 　 　 　 　 :　　　　　　　　　　　　　　　　　　　 　 ＼　　　 　 　 　 / し'/
-				PRINTL 　　　　　/ ///' ///　　 /////　　　　　　　　　　　　 　 :　　　　　　　　　　　　 　 　 　 　 　 　 　 ヽ　　　　　　　ヽ-'
-				PRINTL 　 　　__/ ///:///ﾊ 　 /////　　　　 　 　 　 　 　 　 　 }!　　　　　　　　　　　　　　　　　　　　　　 　 .　 /　　　　　　／ﾌ
-				PRINTL 　　 ﾉ/,　.{// {////:　 :////　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 ∨ /　　　　 < <
-				PRINTL 　　{//{　.{// }///八_////{　　　　　　　　　　　　　　 　 ｉ:　　　　　　　　　　　　　　　　　　　　　　　　　∨　　　　　 ヽ〉
-				PRINTL 　　{/八　//ノ/////////八　　　　　　　　　　　　　　　八　　 　 　 　 　 L∠、　　　　　　　　　　　　　　,　　　　/7
-				PRINTL .　　V//ノ///八////i{///.ハ　　　　　　　　　　　　　. : : : : .　　　　　　 (乂<ﾒ　　　　　　　　　　　　　　 ′　　//、_,.ｨ
-				PRINTL 　　∧///i{/////////////.∧ 　 　 　 　 ／⌒,.., ___. : : :_: : :.　 　 　 　 -ｊ─　　　　　 　 　 　 　 　 　 　 ,　　 /へﾊ／
-				PRINTL .　 ′∨/八/////////////.人___＿___／////　 ヽ: ィ´ー‐‐　､　　　　　 二)　　　　　　　　　　　 　 　 　 ′
+				PRINTL 　　　　　　　　 　 　 　 　 　 ／　　　　＼　　 /　　　　　　　　　　　__＼
+				PRINT 　　　　　　　　　　　　　　　,.　　 ´　　　　Y⌒　　　　　　　　　　　　 　 　 　 ｀　　.,
+				PRINTFORML 　　　　　　　　　　　%CSTR:ARG:100%
+				PRINT 　 　 　 　 　 　 　 　 .　　´　　　　　　　　　　 　 　 ｀　、　/´　　 　 　 　 　 　 　 　 ｀　 .
+				PRINTFORML 　　　　　　　　　　　%CSTR:ARG:101%
+				PRINTL 　　　　　　　　　　　 __ 　 　　　__　　　　　　　　　　　 　 .'　　　　　 　 　 　 　 　 　 　 　 　 、
+				PRINTL 　　　 　 　 　／　／/'ﾉ　　 ／//)　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 ＼
+				PRINTL 　　　 　 　. 　イ/.///　　 /////　　　　 　 　 　 　 　 　 :　　　　　　　　　　　　　　　　　　　 　 ＼
+				PRINTL 　　　　　/ ///' ///　　 /////　　　　　　　　　　　　 　 :　　　　　　　　　　　　 　 　 　 　 　 　 　 ヽ
+				PRINTL 　 　　__/ ///:///ﾊ 　 /////　　　　 　 　 　 　 　 　 　 }!　　　　　　　　　　　　　　　　　　　　　　 　 .
+				PRINTL 　　 ﾉ/,　.{// {////:　 :////　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 ∨
+				PRINTL 　　{//{　.{// }///八_////{　　　　　　　　　　　　　　 　 ｉ:　　　　　　　　　　　　　　　　　　　　　　　　　∨
+				PRINTL 　　{/八　//ノ/////////八　　　　　　　　　　　　　　　八　　 　 　 　 　 L∠、　　　　　　　　　　　　　　,
+				PRINTL .　　V//ノ///八////i{///.ハ　　　　　　　　　　　　　. : : : : .　　　　　　 (乂<ﾒ　　　　　　　　　　　　　　 ′
+				PRINTL 　　∧///i{/////////////.∧ 　 　 　 　 ／⌒,.., ___. : : :_: : :.　 　 　 　 -ｊ─　　　　　 　 　 　 　 　 　 　 ,
+				PRINTL .　 ′∨/八/////////////.人___＿___／////　 ヽ: ィ´ー‐‐　､　　　　　二)　　　　　　　　　　　 　 　 　 ′
 				PRINTL 　 :　　 Y/////////////////////////// /　 :. : 込////://人⌒ ､　　　ゆ　　　　　　　　　　　 　 　 　 :
 				PRINTL 　 i　　　////////////////////////＞ ´　　　　　　ヽ￣:V///＼/,＼- ､　　　　　　　　　　　　　　　　.
 				PRINTL 　 :　 　 {/////////////////////／　 　 　 　 ﾉ　:i! 　 　 ∧/////ヽ/ ＼,＼
@@ -214,8 +230,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 60
 				PRINTL 　　　　　　　　　　　　 ＞―=＝=―-'' : : : : : ｌj:¨: {
 				PRINTL 　　　　　　　　　　　 ｧ'　　　　　　　　 : : ､＿ : : : : ｀ ''‐―　 ―‐ く
-				PRINTL 　　　　　　　　　 　 ,　　　　　　　　　　　　　 　 　 ―　　　　　u　　∨
-				PRINTL 　　　　　　 　 　 　 |.　　　　　 　 　 　 ,　　　　　　　　　　　 　 　 　 ∨
+				PRINT 　　　　　　　　　 　 ,　　　　　　　　　　　　　 　 　 ―　　　　　u　　∨
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　 　 　 　 |.　　　　　 　 　 　 ,　　　　　　　　　　　 　 　 　 ∨
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　 　 　 ＿|＿　 　 　 斗ｚｘ_ノ　　　　u　　　　　　 ー　 ,.ヵ　∨
 				PRINTL 　　　　　　,イ-=ﾆニニニニニﾆア´　:::r,::)　　　: : : 　: :　　　　ゝ::::ノ　､
 				PRINTL 　 　 _　-=ﾆﾆﾆニニニニニニイ　 ＿,ィﾆﾆ〕　　 : :　　: : 　 _Yニニニニニ=-､､,,
@@ -242,8 +260,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL ニニニニニニ}
 				PRINTL ニニニニニﾆ/　 ＿　　　　　　　　　　　　　 　 {／￣￣ ｀ヽ
 				PRINTL ニニニニニﾆ{／　　 　｀ ー- _　-- } 　　　 _／　　　　　　　',
-				PRINTL ニニニニニﾆ乂　　　　　¨ ‐-　__　　　＞ ´　　　　　　u 　　 ,
-				PRINTL ニニニニニニﾆ〉′　　　　　　　　　　　　　　 　 |　　 　 　 　.!
+				PRINT ニニニニニﾆ乂　　　　　¨ ‐-　__　　　＞ ´　　　　　　u 　　 ,
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT ニニニニニニﾆ〉′　　　　　　　　　　　　　　 　 |　　 　 　 　.!
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL ニニニニニﾆr,.　　　　　 　 　 　 　 　 　 　 　 　 |　　 　 　 　 ，
 				PRINTL ニ二ニニ.／:',　　　　　　　　 　 　 r-く:.:ｰ.､,ｨf=--＜_.　　　　 V
 				PRINTL ニニﾆﾆ,イ:.:.:ノ　　　c　　　 　 　 　.{///＼´　`＜////＼ 　 　 V
@@ -263,8 +283,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 90
 				PRINTL 　　　　　　　　　　　　　　　 ∨　 /　i　　i.　　 　 　 i　　　i.　　　 !. ヾ 　 ヾ'.
 				PRINTL 　　　　　　　　　　　　　　　　Y､/i!　i!　 .l!　　　　　 l.　　　i.　　　 iﾍ ヾ!=、 '.
-				PRINTL 　　　　　　　　　　　　　　　　 !i. i!　.i　　l!　　　　　 .!　　　.!',　　　!　', i. r Y '.
-				PRINTL 　　　 　 　 　 　 　 　 　 　 　 i! l.　 l　　l!　 　 ',.　　l　　　 l´!-イミ、 !'　!.i }､i
+				PRINT 　　　　　　　　　　　　　　　　 !i. i!　.i　　l!　　　　　 .!　　　.!',　　　!　', i. r Y '.
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　 　 　 　 　 　 　 　 　 　 i! l.　 l　　l!　 　 ',.　　l　　　 l´!-イミ、 !'　!.i }､i
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　　 　 !.iﾍ　!　　!',　　　'.,　 i!　 　 ,!　仞歹′　 ｀/　l
 				PRINTL 　　　　　　　　　　　　　　　　　ヾ　ヾ　　', ヽ　　 ヽ iﾍ._／　　¨´ / i /　 ! 　 ',
 				PRINTL 　　　　　　　　　　　　　　　　 　 i',　　　　',　 ヽ-‐ ´　　　 　 / i / i /　.,'、　 ﾍ、
@@ -304,7 +326,9 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　|-　　　　 |　 |　 /　　 /　/ : ＼　＼　　 ＼			
 				PRINTL 　　　　　　　　　　 └-＿　　　￣|./　　 /　/,. 公､:＼　＼　　 ＼-､
 				PRINTL 　　　　　　　　　　　　　/ /　　　,.-/　　 /　／,.(⌒)､＼＼　＼　　 ＼＼　　 　 　 　 　 ／
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
 				PRINTL 　　　　　　 　　　　　　　/　　　/ /　　 /／／: :`ーﾞ :＼＼＼　＼　　 ヽ.＼　　　　　／
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　　　　{ 〈　　//／: : :,:-(:o)- ､: ＼: : ＼　＼＿ﾉ　}　　　／
 				PRINTL 　　　　　　　　　　　　　　　　　ヽ　ーく {: : : :/: : : : : : : ヽ: : ヽ: : :} 　　 /　/ 　 /
 				PRINTL 　　　　　　　　　　　 ＼　 　 　 　 ＼　 八: : :{: :/´⌒ヽ: : }: : : }: :/　 ／／　　/
@@ -323,8 +347,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 100
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　|　　 -‐―‐- ､
 				PRINTL 　　　　　　　　　　　　 　 　 　 }　　　　 　 　 　 　ﾚ'′　　　　　　丶
-				PRINTL 　　　　　　　　　　　　　　 　 ノ　　　　 /　　　 ／　　　u　　　　　　 ＼
-				PRINTL 　　　　　 　 . 　-―――＜　　　　　 厶-‐　´ 　 　 　 　 　 　 　 　 　 ＼
+				PRINT 　　　　　　　　　　　　　　 　 ノ　　　　 /　　　 ／　　　u　　　　　　 ＼
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　 　 . 　-―――＜　　　　　 厶-‐　´ 　 　 　 　 　 　 　 　 　 ＼
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　/　　　　　 　　 　 ￣｀　 ´　　　　　　　　　　　　　　　　　　　　＼
 				PRINTL .　　　 　 /
 				PRINTL 　　　　 /　　　　　　　　　　　 　 　 　 　 　 　 　 、　 　 /　　 __
@@ -344,8 +370,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　 　 　 　 　 　 l　 　　∨ 　.≠ﾒ､　l l ＼
 				PRINTL 　　　　　　　　　　　　　　　　　　 　 l　　 　 ∨ 芋ﾒx､　l l　　／
 				PRINTL 　　　　　　　　　　　　　　　　　　　　l　 　 　 ∨ﾞ７ﾞ'竓ﾐxﾘ ／　／
-				PRINTL 　　　　　　　　　　　　 　 　 　 　 　 ,' :::::::::::::::∨:::::　ヾミx、／
-				PRINTL 　　　　　　　　　　　　　　　　　　　/ 　 :::::::::::::::::::::::::　 ヾﾐ!＿二
+				PRINT 　　　　　　　　　　　　 　 　 　 　 　 ,' :::::::::::::::∨:::::　ヾミx、／
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　　　　/ 　 :::::::::::::::::::::::::　 ヾﾐ!＿二
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　 　 　 　 　 /　　　　　　::::::::::::::　 　 /
 				PRINTL 　　　　　　　　　　　　　　　　　 /　　　　　　　　 　 :::::::　/
 				PRINTL 　　　　　　　　　　　 　 　 　 ／ 　 　 　 　 　 　 　 　 　 /
@@ -368,8 +396,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　.:′　　　　 ∨∧　 Y　　　　　,
 				PRINTL 　　　 　 　 　 　 / 　 .:/.: 　 　 l:　 |　 !:.　　　 　 ′
 				PRINTL .　　　　 　 　 　 {:　　:i|　!|_j|l 　|_　|　 |!　　:.　　　|
-				PRINTL .　　　　 　 　 　 |　i|_」ﾚ=ミ从イr }′　　　:i|　　　}
-				PRINTL .　　　　 　 　 　 |_从 i{.ｨ炒ぅ ./-ｲ　　　 　 {!　 　 {
+				PRINT .　　　　 　 　 　 |　i|_」ﾚ=ミ从イr }′　　　:i|　　　}
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT .　　　　 　 　 　 |_从 i{.ｨ炒ぅ ./-ｲ　　　 　 {!　 　 {
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　 ｀! ／／/　 {: 　{、　 　､　　　:､
 				PRINTL 　　　　　　　　　　　 〈　　 　 ＿_　! .､＼.　 　 ＼、　＼
 				PRINTL 　　　　　 　 　 　 　 人r,　-―― '　　　.　 　　　　　　∧
@@ -471,8 +501,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 ,. '´　　　　　　　　　　 ｀ヽ、ヽ、＼
 				PRINTL 　　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 ,.'　　/　　　　　　　　　　　　 ヽ　 ,..-ﾍ
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　 　 　 /　　 ,　　　　　　　　　　　 　 　 ∨　　.ﾊ
-				PRINTL 　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 i l　 ! l　　　i　　　,　! 　 　 i.　　　 i. 　 　 i
-				PRINTL 　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 !.!　i. l　,　 ,'　　 .,' .,i.　　　 ! 　 　 .}　　　 l
+				PRINT 　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 i l　 ! l　　　i　　　,　! 　 　 i.　　　 i. 　 　 i
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 !.!　i. l　,　 ,'　　 .,' .,i.　　　 ! 　 　 .}　　　 l
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ヾ斗匕　 /　、 / / !　　　 !　　　 ,!　 i.　 !
 				PRINTL 　　　　　　　　　　　　　　 　 　 　 　 　 　 　 rf=‐　ヽ!.　ヽ/イ　｀ ｰ- i ,ｨ　 /　 /　/　　.!　,'
 				PRINTL .　 ,.　-‐‐- 、　　　　　　　　　 　 　 　 　 　 {､!　　,..ｲ气丐　　　ｭ､__ j' ｀¨ iイ/ｨイ 　 i　'. i､
@@ -507,8 +539,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　 　 ／　　　　　 　 ／ :: : :::／/　´
 				PRINTL 　 　 　 　 　 　 　 　 　 /　　 , .／ 　 .／: : : : :／,ｨ´ 　 ..ヽ.
 				PRINTL 　　　　　　　 　 　 　 　 l　 ! l　　　i　ヽ : : : ／／
-				PRINTL 　　　　 　 　 　 　 　 　 !　i. l　,　 ,'　　 .>.／／　　　　 　 　i
-				PRINTL 　　 　 　 　 　 　 　 　　ヾ斗.l_ 　 /　 /:::::::´/　　　　 　　　 |
+				PRINT 　　　　 　 　 　 　 　 　 !　i. l　,　 ,'　　 .>.／／　　　　 　 　i
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　 　 　 　 　 　 　 　　ヾ斗.l_ 　 /　 /:::::::´/　　　　 　　　 |
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　 　 　 !.　ヽ/　./L: : ::./　 　 　 　 　 　|
 				PRINTL 　　　　　　　　　　　　　　 ノ ㍉、./ . ./.｀.､/　　　　　　　 　 |
 				PRINTL 　　　　　　　　　　　　 　 {　　.:.:.ﾞ/　.ﾉ　　　.../　　　 　 　 　 |
@@ -543,8 +577,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　 　 .｡＜¨ヾ.＼＼ 　｀　｡.
 				PRINTL .　　　　　　 　 　 　 ／　 　 ヽ　ヽ.＼＼　 　 ＼
 				PRINTL 　　　　　　　　　　.:′　　　　 ∨∧　 Y　　　　　,
-				PRINTL 　　　 　 　 　 　 / 　 .:/.: 　 　 l:　 |　 !:.　　　 　 ′
-				PRINTL .　　　　 　 　 　 {:　　:i|　!|_j|l 　|_　|　 |!　　:.　　　|
+				PRINT 　　　 　 　 　 　 / 　 .:/.: 　 　 l:　 |　 !:.　　　 　 ′
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT .　　　　 　 　 　 {:　　:i|　!|_j|l 　|_　|　 |!　　:.　　　|
+				PRINTFORML 　　　　　　 %CSTR:ARG:101%
 				PRINTL .　　　　 　 　 　 |　i|_」ﾚ=ミ从イr }′　　　:i|　　　}
 				PRINTL .　　　　 　 　 　 |_从 i{.ｨ炒ぅ ./-ｲ　　　 　 {!　 　 {
 				PRINTL 　　　　　　　　　　　 ｀! ／／/　 {: 　{、　 　､　　　:､
@@ -575,12 +611,41 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　 ｉ∧　　　　　　　　　　　　　　　／　　　　　 　 　 　 ヽ　　　　　　　　　　　　　　　 ∧
 				PRINTL 　　　　　　 |/∧　　 　 　 　 　 　 　 　 ／　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 　 ／/∧
 				PRINTL 　　　　　　 |///＞ ､　　　　　　　　 イ　　　　　　　　　　　　　　　ﾍ　　　　　　　　　　 ｨ//////∧
+			CASE 620
+				PRINTL 　　　　　　　　　　　　　　　　，　r:;V:{　ヾ_ ノ　　　u　 /ｲ}:/　 .、　　　　　　　　|
+				PRINTL 　　　　　　　　　　　　　　　　 ／´ 　 ｀` 　 　 　 　 　 -‐f;ﾂ、　 ＼　　 　 　 　 |l
+				PRINT 　　　　　 　 　 　 　 　 　 ／ /　　　´　　　　　　　　 　 　 　 ﾞ:、 　|　　　　　＞'"
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　|　　　　　　　　　　 　 / 　/　　　　　　　　　　　　　　　　 　 }　　|　　＞'":::::::::::
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
+				PRINTL `iﾄ　　　　 　 | 　 　 　 〈 　ﾉ 　　　　／　　 　 　 :、　　　　 　 l　　′´:::::::::::::::::::::
+				PRINTL 　l|| 　`'＜　 |l　　 　 　 ∨　　　　　 　 　 　 　 　 丶　　　　　|／:::::::::::::::::::::::::::::::
+				PRINTL 　　　　　　｀　 、　　　.／ι　　　　　　　　　　　　　　 u　　／　　｀丶::::::::::::::::::::::
+				PRINTL 　 　 　 　 　 　 ＼ .／　　　　　　　　 　 　 　 　 　 　 　 ／　　　 　 　 ＼::::::::::::::
+				PRINTL 　 　 　 　 　 　 　 ヽ　 　 ι　 　 -＝ｰ　　　 　 　 　 ／　　 　 　 　 　 　 ＼:::::::
+				PRINTL 　 　 　 　 　 　 　 　ﾞ:.　　 ＿_　　　　__　　　　　　 ／　　　　　　　　　　　 　 ＼
+				PRINTL 　　　　　U　　　　 　 i .／　 　 ｀Yf´ 　 ｀丶. _　／　　u
+				PRINTL 　　　　　　　　　　　　{　　　　　 :i|l:　　　　　 ,: ′
+				PRINTL 　　　 　 　 　 　 　 　 i　　　　　 :||: 　 　 　 /
+				PRINTL 　　　　　　 　 　 　 　 ﾞ:. 　 　 ／:i|:　　　　/
+				PRINTL 　　　　　　　　　　　　　ﾞ:. 　 ﾉ / ||:＼ 　 /
+				PRINTL 　　　　　　　　　　　　　　ﾄ､/ /　′ヽ .:ｲ
+				PRINTL 　　　　　　　　　　　　　　}　) i　 　 U´ "
+				PRINTL 　　　　　　　　　 　 　 　 　 し
+				PRINTL 　　　 　 　 　 　 　 　 　 　 ,,.　＿_
+				PRINTL 　　　　　　　　　　　　　　 /::::::::::l |:::ヽ　　 　 　 　 　 |
+				PRINTL ＞　　l| 　 　 　 　 　 |　／::::::::::::}（:::::(ﾊ　 　 　 　 　 ||　ι　 　 　 　 ,.: ′
+				PRINTL ||l　　 ≧　　　＿ ,i　イ:::::::U:::::::::lj:::::::八　　　　　　　　　　　　 　 |／
+				PRINTL ||　　　|l　　　　　 |l　 |:::::::l:::::::::::::::::::::::::::|＼|　　　　　　 　 　 　 イ|
+				PRINTL | 　 　 |l　　　　　 ||ｌ　|:::::::|::::::::::|ｌ::::::::::::::| 　|≧=-　　　-=≦　　 ||l
 			CASE 630
 				PRINTL 　　 　 　 　 　 　 　 　 　 ,.ｨ¨　＝=‐r-ｧ- ..,_　 　 　 　 　 　 　 ＞　，　　　　　　　　　　　　　　　　　　　　　　　　ｉ
 				PRINTL 　　　　　 　 　 　 　 .,.f-‐　¨￣　¨" ＜- .,_｀　 ､　　 　 　 　 　 　 .}≧=-　　_　　　　　　＿＿　-‐ァ　　　　　　.;
 				PRINTL 　　　　　　　　 　,. '´　　　　　　　　　　 ｀ヽ、ヽ、＼.　　　 　 　 　 .;　　　　　　￣¨¨¨￣　　　　　/
-				PRINTL .　　　　　　 　 ,.'　　/　　　　　　　　　　　　 ヽ　 ,..-ﾍ 　 　 ',:::　　./　　　　　　　　　　　　　　　 ,'　　　　　　　/
-				PRINTL 　　　　　　　 /　　 ,　　　　　　　　　　　 　 　 ∨　　.ﾊ　　　　　　　　　　　　　　　　　 　 　 　 .,'　　　　　　　/ ｀＜
+				PRINT .　　　　　　 　 ,.'　　/　　　　　　　　　　　　 ヽ　 ,..-ﾍ 　 　 ',:::　　./　　　　　　　　　　　　　　　 ,'　　　　　　　/
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　 /　　 ,　　　　　　　　　　　 　 　 ∨　　.ﾊ　　　　　　　　　　　　　　　　　 　 　 　 .,'　　　　　　　/ ｀＜
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL .　　　　　 　 i l　 ! l　　　i　　　,　! 　 　 i.　　　 i. 　 　 i　　　　　　　　 　 　 　 　 　 　 　 　 　 ,'　　　　　　 ./　　　｀＜
 				PRINTL 　　　　 　 　 !.!　i. l　,　 ,'　　 .,' .,i.　　　 ! 　 　 .}　　　 l
 				PRINTL 　 　 　 　 　 ヾ斗匕　  /　、 / / !　　　 !　　　 ,!　 i.　 !　　　　　　　　 　 　 　 　 　 　 　 _　/_　　　　　　/
@@ -609,8 +674,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　　　 　 　 　 |　　 　 　 l 　 　 |　　｀ 　 -　 _　　 ｲ
 				PRINTL .　　　　 　 　 　 |　　 　 　 l 　 　 |　　　　　 　 　イ　|
 				PRINTL .　　　　　　　 　 ! ＞ ＜　 |.　 　｜＞ 。._ 　＜　 !　l|
-				PRINTL .　　　　　　　 ,　´　 　 　｀ |.　　　|　　　 {　＿|＿_!　l|
-				PRINTL 　　　　　　　　　　 　 　 　 |　|　　　　 　 `-‐ ´ 　 Ｖ .',ヽ
+				PRINT .　　　　　　　 ,　´　 　 　｀ |.　　　|　　　 {　＿|＿_!　l|
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　 　 　 　 |　|　　　　 　 `-‐ ´ 　 Ｖ .',ヽ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　 　 　 !　　　　　　 , ', .l 　 |　　　　　　　　　 ヽﾘ　',
 				PRINTL 　 　 　 　 　 l　　　　　　 l　',ﾘ! 　!　 　 　 　 ' , 　 　 ＼　l
 				PRINTL 　 　 　 　 　 |　　　　　　 |　　|　 |　 :_::　　　 　 　 　 　 ヾ
@@ -676,8 +743,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL ニニニニﾆﾆ／＞-―ヾシ＜/≧x、 　　＼
 				PRINTL ニニニニﾆ/ 　 　 ／ 　 ﾊ　　｀ﾞ'＜/＼.　　ヽ
 				PRINTL ニニニニ/　　　/ 　　　　 :、丶　　 ＼ﾊ.　　∧
-				PRINTL ニニﾆﾆ/　/　 /　　　　　　ﾄ　　　　　　Ⅵ　　 l
-				PRINTL ニニニ/ ./　 /l　　　　　　 | ',　∨　　　 Ⅵ 　 |/　　 　 　 /
+				PRINT ニニﾆﾆ/　/　 /　　　　　　ﾄ　　　　　　Ⅵ　　 l
+				PRINTFORML 　　　　　　　　　　　　　　%CSTR:ARG:100%
+				PRINT ニニニ/ ./　 /l　　　　　　 | ',　∨　　　 Ⅵ 　 |/　　 　 　 /
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL ニニﾆｲ　|　_/_LＬx'　/　､ l 　',　ﾄ　 　 　 ⅵ　/ｧx　　　//
 				PRINTL ニﾆﾆ从　l:　l 　', 　 /　 /卞､ul .| l　　　　 Ｙ :|/＞' ´￣　ヽ.
 				PRINTL ニニﾆハ. lヽlｆ¨Iiｧx　;　// __　｀iT''|　　　　 l| :|　　　　　　,.　'　¨¨ `ヽ
@@ -696,8 +765,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　　　 　 　 　 _,..　‐_¨. =‐　¨¨¨´＜ - ﾆ二 ｰ- ..,_　 ｀ヽ
 				PRINTL .　　 　 　 　 　 {_,..ィ／　　　　　　　　　｀ヽ、　｀ヽ、__,.. イ////////////////////////
 				PRINTL 　 　 　 　 . ,.　'´ 〃　,.'　　 /　　ﾊ　 　 ヽ　ヾ 、　　　 ＼.////////////////////////
-				PRINTL 　　　　　..く　　//　 /　　 /　　 　 '.　　　ﾍ　 ﾍ＼　 　 　 ヽ、 ////////////////////
-				PRINTL 　 　 　 　 . ｀Y ,'　 /　 　 ,　　　 　 i　　　　'..　 '.. l.ヽ　　　　 ∨.///////////////////
+				PRINT 　　　　　..く　　//　 /　　 /　　 　 '.　　　ﾍ　 ﾍ＼　 　 　 ヽ、 ////////////////////
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　 　 　 　 . ｀Y ,'　 /　 　 ,　　　 　 i　　　　'..　 '.. l.ヽ　　　　 ∨.///////////////////
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　 　 　 i. l.　,'!,. - ､.i!　 　 ,..　l!¨¨ヽ　 i. 　 ! i　 ﾍ_,.　＜´.////////////////////
 				PRINTL 　 　 　 　 　 l. i　, i.　　　!l＿＿＿_!l＿__　 i! 　 i ,　　 !./////////////////////////
 				PRINTL .　　　　　　　l_｣‐i十 ¨￣　　 　 　 .xf示≦７.,.　　　　..!./////////////////////////
@@ -726,12 +797,39 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　　　　 　 　 　 /　　　　　　 ／　　　／ゝゝゝゝ'　 .∪ ﾟ　 '，　　　　　　　ゝイ//彡*''ﾟ´///
 				PRINTL 　　　　　　　　　　{　　　　　 ''　 _　 r≦　　　　　　　　u　　 　’，　　　　　　　　｀¨´} Ｖ/////
 				PRINTL 　　　　　　　　　 入　　＿ , r≦　　　　 　 　 　 　 　 　 　 　 　 ’，　　　　　　　　　}　V/////
+			CASE 691
+				PRINTL 　　　　　　　　　　　　　 　 　 　 　 　 　 　　　 ／二 } ‐_´イ八_.　　 　 　 ∨´　￣ ｀ヽﾆニニﾆﾆ＼
+				PRINTL 　　　　　　　　　　　　　　／／　　　￣ ＼ ∨　, - ｫ　　　r 二 ＞o｡.　　 ′ 　　　　　V>､ﾆニニﾆ＼
+				PRINTL 　　　　　　　　　　　 　／／　 ／　　 　 　 V　 　rｧ'　　 　 {-　　　　 }ヽ/　/　　　　　　vﾆ＼ﾆニニﾆ＼
+				PRINTL 　　　　　　　　　 ﾟ　　　　　 ／　　　　　　　 '，　ﾉ´　　　　 ゝ'≧s｡ /　}Y '　　　　 　 　 lﾆﾆ} ＼ﾆニニﾆ＼
+				PRINT 　　　　　　　　　　　　　　　　　 　 　 　 　 　 V/　　　　　　..._..　　 ^V}Y `{　　　　 　 　 }ニ/ 　 ＼ﾆニニﾆ＼
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　 ﾟ　　 .'　　 u　　　　, ィﾆ)　/　　 　 　 　:.ゞ':　　 / } L._{　 　 　 　 　 iﾆ/　　　　＼ 斗--ニ＼
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
+				PRINTL 　　　　　　　 　 　 　 ,　　　　　　　 ／ﾆニｱ fｯ.:.: 　 　 ､　　 　 　 /　{_ﾆﾆv　　　 　 　 ,=====ﾆニニニニニニﾆV
+				PRINTL 　　　　　　　　　　　 ′　　　　 　 ' ＜ ￣__　ヽ´　　　　　　¨ 　 　 　 ゝ-- .　　　　　　ﾆニニニニニニニニニニ}
+				PRINTL 　　　　　　　　　　　　　　　　 ／ﾆニニニﾆ)　l　　 　 　 ij 　 ／　　　 　 　 :　　　　　 '=ﾆニニニニニニニニニ/
+				PRINTL 　　　　　　　　　　　　　 　 ∠ﾆニ=- ¨¨¨´ 　 }　　　　　　　 '　　　　　　　　i 　 　 　 ,ﾆﾆ/￣￣ 二ﾆﾆ=----彡
+				PRINTL 　 　 　 　 　 ./　　　　　 '　　 /　　　　　　　　　 __ -=-　　/ 　 --　　 　 　 l　 　 　 ′/
+				PRINTL 　 　／ _ ,.r<^ヾ¨ヽ ／　　　　　　　　　 　 　 　 ⌒　 ¨¨　,　 / ／ __ ＼　　 }　　 　 ﾆ/　　　ﾟ
+				PRINTL . 　〃 /ヽ_)､)-^ し′　　　　,　 　 　 　 　 　 ,　 　 　 　 /　 ゝ'ｰ'ゝr- _　＞'¨ ミ､　 {/　　　　 ﾟ
+				PRINTL 　　　 {　　　　 / '　　　　 　 ′　u　　　　　　＼､ﾉし'／,　　　　　＼¨ゝ-　　　　　　 }　｡
+				PRINTL 　　　 i `ｰ ⌒ {/　　　　　　　　　　　　　　　/　｀⌒´　/　　　　　　　＞-
+				PRINTL 　　　 |　 　 　 }　　 　 　 　 {　　 　 　 　 　　′　　　　′　　　　　　　　　＼ 　 　 　 i
+				PRINTL .　　　乂　　　'　　　　　　　　　　　 　 　 　 {　ハ 　 /　　　　　　　 　 　 　 /ヽ __　ノ　　//
+				PRINTL 　　　　　 -彡　　　　　　　　　　 　 　 　 　 ∨ﾆﾆヽ{　　　　 　 ｕ　　　　　/ﾆ≧s｡　　／'
+				PRINTL 　　 　 　 　 　 　 　 　 　 　 ∧|i　　 　 　 　 {ﾆニニ'，　　　　　　　　　　/ﾆニニニ≧s｡
+				PRINTL .　　　　 　 　 　 　 　 ｡o≦ﾆﾆi|l　　　　　　　Vﾆニﾆ∧　　　 　 　 i| 　 'ﾆニニニニニニﾆ≧s｡
+				PRINTL .　　　　　　 　 ｡o≦ﾆニニニﾆ|ﾆ ､ 　 　 |i 　 Vﾆニﾆ∧ 　　li　　 li|i ﾆニニニニニニニニニニﾆ≧s｡
+				PRINTL 　　　　｡o≦ﾆニニニニニニニニﾆ≧=-卅 ＜Vﾆニニ}＞-廾＜ﾆ|iﾆニニニニニニニニニニニニニﾆ≧s｡
 			CASE 710
 				PRINTL 　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 ,.ｨ¨　＝=‐r-ｧ- ..,_
 				PRINTL 　　　　　　　　　　　 　 　 　 　 　 　 　 　 　 ,.f-‐　¨￣　¨" ＜- .,_｀　 ､
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　.／　　　 　 　 　 　 ｀ヽ、ヽ、＼
-				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　,.ｨ　　　　　 　 　 　 　 　 ヾ 　 ,..-ﾍ
-				PRINTL .　　　　　　　　　　　　　 　 　 　 　 　 　 ﾉ ,　　　　　　　　　　　 　　 .ﾍ∨
+				PRINT 　　　　　　　　　　　　　　　　　　　　　　　,.ｨ　　　　　 　 　 　 　 　 ヾ 　 ,..-ﾍ
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT .　　　　　　　　　　　　　 　 　 　 　 　 　 ﾉ ,　　　　　　　　　　　 　　 .ﾍ∨
+				PRINTFORML 　　　　　　　 %CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　 　 　 　 　 　 　 　 ! l　　　!　　　,　i 　 　 !.　　 i. '.
 				PRINTL 　　　　　　　　　　　 　 　 　 　 　 　 　 .八 {　ハV人/Vハ　 |　|　 　ﾘ
 				PRINTL 　　　　　　　　　　　　　　　　　　 　 　 {　 八´　　　 　 ｨ≦ミ'} |　 　 《
@@ -763,8 +861,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　 ／　　´¨＞　´￣￣￣￣｀ - ､＜¨｀　　　　　＼
 				PRINTL 　　 　 　 　 　 　 〈＿＿,／　　　　　 　 　 　 　 　 ＼＼ー- ､＿＿〉
 				PRINTL 　　　　 　 　 　 　 ／ ／　　　　　　　　　　　 　 　 　 ＼＼ ＼　＼＼
-				PRINTL 　　　　　　　　　 < ／　　　/　　　　 　 ヽ　　 　 　 　 　 ＼ ヽ.＼　＼　.
-				PRINTL 　　　　 　 __ ´￣｀ ヽ　　　'　　　　 　 　 　 　 　 　 　 　 　 ，　， ＼ ﾉ ‘，
+				PRINT 　　　　　　　　　 < ／　　　/　　　　 　 ヽ　　 　 　 　 　 ＼ ヽ.＼　＼　.
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　 　 __ ´￣｀ ヽ　　　'　　　　 　 　 　 　 　 　 　 　 　 ，　， ＼ ﾉ ‘，
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　 /　 　 （_ ,: 　 ＼　!　　　　　　　　i　　　 　 !　 　 　 !　 |　　　　　!
 				PRINTL 　　 　　{　 　 o　　 　 　 ',|_　　　 　 　 　 |＿＿＿_!　 　 　 |　 |　　　　　!
 				PRINTL 　　　　 ､　　　 　 .:.:.::::::::} ｀　　　 　 　 ´|!　 　 　 |!｀ 　 　 |　 }　 　 　 　 ､
@@ -787,8 +887,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　 　 　 -　　 　￣丨:|　　 　 ヽ　　　　　　￣ﾞ　 　　　､
 				PRINTL 　　　　　　 　 　 　 　 　 　 　 　 　 ,　　´　　　　　　　　　|:::|　　　　 |　　　　　　　 　 　 　 　 丶
 				PRINTL 　　　　　　　　　　　　 　 　 　 .,　　　　　 　 　 　 　 　 　 |:::|　　　　 |　　　　　　　　　　　　　　　＼
-				PRINTL 　　　　　　　　　　　　　　　 ／　　　　 　 　 　 　 　 　 　 |:::|　　　　 ﾄ､　　　　　　　　　 ＼
-				PRINTL 　　　　　　 　 　 　 　 　 .／　　　　　　　 　 　 　 　 　 　 |:::|　　　　 | ∧　　　　　　　　　　＼
+				PRINT 　　　　　　　　　　　　　　　 ／　　　　 　 　 　 　 　 　 　 |:::|　　　　 ﾄ､　　　　　　　　　 ＼
+				PRINTFORML 　　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　 　 　 　 　 　 .／　　　　　　　 　 　 　 　 　 　 |:::|　　　　 | ∧　　　　　　　　　　＼
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　/　　 　 /　　　　 　 　 　 　 　 　 |:::|　　　　 l　∧ヽ　　　　　　　　　　＼
 				PRINTL 　　　　　　 　 　 　 　 ,　 　 　 /　　　　　　　　　　　　 　 |:::|　　　　 l　 ∧　＼　　 　 　 　 　 　 ＼
 				PRINTL 　　　　　　　　　　　　l　　　　,′ 　 　 　 　 　 　 　 　 　 |:::|　　　　 l 　 ∧　　＼
@@ -821,8 +923,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　／　　　　　　　　　.,＞　' ´　　　　　　　　　｀　ﾞﾞ'　,
 				PRINTL 　　　　＼　　　　　　　／　　　　　　　　　　　　　　　　　　｀ヽ、
 				PRINTL 　　　　　 ヽ、__＿＿//　　　　　　　　　　　　　　＼　　　　 ＼＼
-				PRINTL 　　　　　　 ／　　　,ｲ　　　　　　　　　 }　　　　　　 ヽ、　　　　∨ヽ
-				PRINTL 　　　　 .／　　　／/　　　　 ;　　　　　 |　　　　　　　} ヽ　　　　.∨ ∨
+				PRINT 　　　　　　 ／　　　,ｲ　　　　　　　　　 }　　　　　　 ヽ、　　　　∨ヽ
+				PRINTFORML 　　　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　 .／　　　／/　　　　 ;　　　　　 |　　　　　　　} ヽ　　　　.∨ ∨
+				PRINTFORML 　　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　/_＿＿_/ /　　　　　{　　　　　　i、　　　　　　i　 .}　　　　}　 .∨
 				PRINTL 　　　 /　　/　　/　　　　　 .|　　　　　　|ヽ　_＿_　　_|　　 ￣￣,-i-=、i
 				PRINTL 　　 ./　　 .{　　{　　　　　　 i　　　　　 ,ｨ ´＼　,ィ｀ヽ　　　　　　　 }:／
@@ -855,8 +959,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　 　 　 　 　 　 ,　 　 　 /　　　　　　　　　　　　 　 |:::|　　　　 l　 ∧　＼　　 　 　 　 　 　 ＼
 				PRINTL 　　　　　　　　　　 l　　　　,′ 　 　 　 　 　 　 　 　 　 |:::|　　　　 l 　 ∧　　＼
 				PRINTL 　　　　　　　　　　 | 　 　 i{　　　　　 　 i　　　　　　　　|:::|　　　　 |　　:∧　　　＼
-				PRINTL 　　　　　　　　　　 { 　 　 i|　　＼　　　 {　　　　　　 　 ﾄ､}　 　 　 | 　　:∧　　　　＼
-				PRINTL 　　　　 　 　 　 　 .}/{　　 {　　　 ＼　　{　　　　　　 　 |　`ｰ‐+一'i　 　 :∧　　　　　＼
+				PRINT 　　　　　　　　　　 { 　 　 i|　　＼　　　 {　　　　　　 　 ﾄ､}　 　 　 | 　　:∧　　　　＼
+				PRINTFORML 　　　　　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　 　 　 　 　 .}/{　　 {　　　 ＼　　{　　　　　　 　 |　`ｰ‐+一'i　 　 :∧　　　　　＼
+				PRINTFORML 　　　　　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　 　 　 　 　 　 }／{人 　!　 { !`ｰ-= _　　　　} 　 |　　　 | 　 l 　 　 :∧　　　　　　＼
 				PRINTL 　　　　　　　 　 　 　 　 　 } ヽ{人从-―-ﾚ' ~"'‐-廴__,! 　 　 | 　 | V : 　 ∧　　　　　　　＼
 				PRINTL 　　　　　 　 　 　 　 　 　 / ',:::::: ,ィ芹芋=ｪヽ从/　／ {　　　 } 　 }　V:　　:∧　　　　　　　　＼
@@ -878,13 +984,50 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL :.:.:.:.:.:.:.:',:::i　　 　 l.|　 　 　 .;j　　　　　　.l ! 　 　 　ヽ 　 　 　 ／　 　 　 　 ／
 				PRINTL :.:.:.:.:.:.:.:.:ｌ::ｌ　　　 :i:l　　　　　　　 　 　 　 }{　 　 　 　 ＼　 .／　 　 　 　 ／
 				PRINTL : : :.:.:.:.:.:.ｌ::l　　　 :ｌ:!　　　o　　　 　 　 　 .j　　　　 　 　 i>　　　　 　 　 /
+			CASE 830
+				PRINTL 　　　　　　　　　 　 　 　 　 　 　 　 i 　 !　　　　　　　　　　　　　　 　 　 　 　 /　　　　　 i
+				PRINTL 　　　　　　 　 　 　 　 　 　 　 　 　 | 　 |　　　　　　 　 　 　 　 　 　 　 　 　 ｲ　　　　　　!
+				PRINT 　　　　　　　　　　　　　　　　　　　 i　　i　　　　　　　　　　　　　　　　　 　 /! 　 　 　 　 i
+				PRINTFORML 　　　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　　　　,' 　 ,'　　　　　　　　　　　　　　　　　　 ,' ! 　 　 　 　 i
+				PRINTFORML 　　　　　　　　　%CSTR:ARG:101%
+				PRINTL 　　　　　　　　　　　　　　　 　 　 / 　 /　　　　　　　　　　　　　　　　 　 '.| .|　'´¨¨　 　 !
+				PRINTL 　　　　　　　　　　　　　 　 　 　 /.　 /　　　　　　　　　　 　 　 　 　 　 　 ', |.　　　　 　 |
+				PRINTL 　　　　　　　　 　 　 　 　 　 　 /　, '　　　　　　　　　　　　　 　 　 　 　 　 ’!　　　　　　|
+				PRINTL 　　　　　　　　　　　　 　 　 　 i　/　　　　　　　　　　　　　　　　　　 　 　 　 '　　　　　　i　　 　 　 　 　 　 　 ＞　´￣ ｀
+				PRINTL 　　　　　　　　　　　　　　　　 ,' ′　　 　 　 　 i　　　　　　　　　　　　　　　　 ',. 　 　 　 ',　　　　 　 　 　 ／
+				PRINTL .＼　　　 　 　 　 　 　 　 　 ／　 　 　 　 　 　 ﾄ　　　　　　　　　　　　　　　　 ∨　 　 　 ∨　 　 　 　 ／
+				PRINTL 　　＼　　　　　　　　　　　/　 　 　 　 　 　 　 '′　　　　　　　　　　 　 　 　 　 ',　　　　　| 　 　 　 ／
+				PRINTL .　　　 ＼　　 　 　 　 　 /　　　　　u　　　　　　　　　　　　　　　　　　　　　　　 ∨　　 　 |.　 　 ／		
+				PRINTL 　　 　 　 ＼　　　　 　 /　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ＼　　　|　 ／
+				PRINTL 　　 　 　 　 ヽ.　　 　 /　　　　　　　　　　　　　　　　　　u　　　　　　　　　　　　　　 ＼　 | /
+				PRINTL 　　　　　　　　ヽ　ｨ/´　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 ＼'
+				PRINTL 　　　　　　 　 ／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ＼
+				PRINTL 　　　　　　／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 ＼
+				PRINTL .　　　　／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　,　　　　　　　　　　　　 　 ＼
+				PRINTL .　　 ／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 /　　　　　　　　　　　　　　 　 ＼　　　 　 　 　 /
+				PRINTL 　 ／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　_ノ´　　　　　　 　 　 　 　 　 　 　 　 ヽ　 　 　 　 /
+				PRINTL ／　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 ／　　　　　　　　　　　　　　　　　　　　　　ヽ　　　 /
+				PRINTL 　　　　　　　　　　　　　　　　　　　　 　 　 　 　 ,、　　 　 　 /　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ＼　/
+				PRINTL 　　　　　　　　　　　　 　 u 　 　 　 　 ヽ_ ,　　 ,'oﾄ､　　　V　　　　　　　ij　　　　　　　　　　　　　　　 　 　 　 ＼
+				PRINTL 　　　　　　　　　　　　　 　 　 　 　 　 　 ﾉ( _.／..ﾞYﾟ..ヽ、_ ﾍ　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 ＼
+				PRINTL 　　　　　　　　　　　 　 　 　 　 　 ,. _,.ﾆィY::::::::::ｉ!::::::::｀Y　､　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 ＼
+				PRINTL 　　　　　　　　　　　　　 　 　 ,,' '´´　 ／rV:::::::: ﾄ}::::::::V‐-=`___､　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ヽ
+				PRINTL .　　　　　　　　　　　　　　　　　　　∠ ＜　ゞ :;;;_''_::;;イ从.　 　 /｀　　､
+				PRINTL 　　　　　　　　　　　　　　 　 　 ／　 _　 `´ 　 　 　 　 　 　 ¨ 　 ′　_　　 `　､
+				PRINTL 　 　 　 　 　 　 　 　 　 　 __／-‐ ´　 　 　 　 　 ＿＿＿　　　 　 　 　 `　 ､ 　 ヽ､
+				PRINTL 　　　　　　 　 　 　 _／-｀´ 　 　 　 　 　 ´ 　 　 　 　 　 　 　 `　　　　　　 　 ヽ ､　ヽ
+				PRINTL 　　　　　 　 　 　 ／　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 ｀　 ヽ
+				PRINTL .　　　　　　　 ／　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 ＼
 			CASE 840
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 _,..　‐_¨. ｀ヽ.,.-- ､r―=＝＝＝=- ...,,_
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 {_,..ィ ,.　'´　 ｀ ¨¨¨.ｰｰ-.ﾆ二 ｰ- ..,_　 ｀ヽ
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ,.　'´ ..イ 　 　 　 /　　　 ｀ヽ、　｀ヽ、__,.. イ
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 く　　/./　/　 /　.'　 　 　 　 　ヾ、　　　 ＼
-				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ｀Y　l　/　 .'　 .i　　　 　 　 　 } ＼　 　 　 ヽ、
-				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 i l{ 　 {　　{　 .! 　 　 　 　 　 ヽ　　　　 ∨
+				PRINT 　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ｀Y　l　/　 .'　 .i　　　 　 　 　 } ＼　 　 　 ヽ、
+				PRINTFORML 　　　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 i l{ 　 {　　{　 .! 　 　 　 　 　 ヽ　　　　 ∨
+				PRINTFORML 　　　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 　 　 　 il从 .从.ィ升 ｌ.|　iｌ　 　 　 .!　ﾁ. ._,.,..:＜´
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 ｲ笊ﾐｘ.ムL.ﾄ!　l|i　 ,　 .ﾉ イ .|
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 　 　 　 .ｌ .:ﾋｿ 　 　 ./ ,､　　.}
@@ -919,8 +1062,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　 ,イ ,ｲ >ｲ 　:i　　 :, ' ,　 ヽ
 				PRINTL 　　　　 /　 ＝/　:/　 {　　　V V　:ﾑ
 				PRINTL 　　　　,:　　 ' ′ :{　 ＞━ … ―:, ﾊ
-				PRINTL 　　　　{　　 { {　iｨ:',.ｨ::,　　　 f:::::Y } }
-				PRINTL 　　　　|　　 | |　{./:::::::}　　　 ゞ='　Vゝ
+				PRINT 　　　　{　　 { {　iｨ:',.ｨ::,　　　 f:::::Y } }
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　|　　 | |　{./:::::::}　　　 ゞ='　Vゝ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　:,　 f⌒',　ヽ`‐　　　　　　　./{
 				PRINTL 　　　　 V .{　　 ”‘`　　　　＾　　イ　;
 				PRINTL 　　　　　 < `”~　＞‐　　― ＜､, 　:{
@@ -946,8 +1091,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　　　 　 ／　 ／　 /　　　　　 ヽ
 				PRINTL 　　 　 　 /-./´￣｀囗´￣￣ ヽ― ､、　　　 　 　 　 ',
 				PRINTL .　　　　 , ―廴＿ノ　乂＿＿ノ― ､　ヽ
-				PRINTL 　　　　　　　　　　　　　　　　　　　　＼ ヽ 　 　 　 　 i
-				PRINTL .　　 　 |.　　　|　　　　　　 　 　 　 |　　 ',　',　　 　 　 |
+				PRINT 　　　　　　　　　　　　　　　　　　　　＼ ヽ 　 　 　 　 i
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT .　　 　 |.　　　|　　　　　　 　 　 　 |　　 ',　',　　 　 　 |
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL .　　 　 |.　　　|　　　|　　　　|　　　|　　　',　',　　　 　 |
 				PRINTL .　　 　 |.　　　|　　　|　　　　|　　　| 　 　 l　｣_.　　　　|
 				PRINTL 　　　　ﾊ　 　 |　　　|　　　　|　　　|　　　 |'"'^}　　 　 |
@@ -968,8 +1115,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　　　　　／　　　　　∧::::::.　 　 .
 				PRINTL 　　　　　　　　　　 　 　 　 　 　 　 /　 /　 ／ /　∧:::::| 　　　.,
 				PRINTL 　　　　　　　　　　　　　　　　　　　{_i__{__ /　！ /i　',::::|　　 　 ′
-				PRINTL 　　 　 　 　 　 　 　 　 　 　 _ 　 ___,ｘ=ﾐ　 ｀^ヽ|_｛ |　  .:::|　　　　　,
-				PRINTL 　　　　　　　　　　　　 　 rf^i V{　　　/i/i/　　ミ､,.-ミ:::|　　i 　 　′
+				PRINT 　　 　 　 　 　 　 　 　 　 　 _ 　 ___,ｘ=ﾐ　 ｀^ヽ|_｛ |　  .:::|　　　　　,
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　 　 rf^i V{　　　/i/i/　　ミ､,.-ミ:::|　　i 　 　′
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　ｎ|　:|　',-､ __,　　 　 　 '’ ⌒ }::! 　 |
 				PRINTL 　　　　　　　　　　　　　{ i ｉ ; 　 ',. ∨　 　 　　　　　 ,::/　　　　i
 				PRINTL 　　　　　　　　　　　　 〈:.　 　 　 　 ｝　　　　　.r‐‐,　:i　　　| 　i
@@ -997,8 +1146,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　ｲ　, '　　 i　|ﾊ .V､
 				PRINTL 　　　　　　　　　　　　　/ ./　‘　　　ﾊ .!　',　V＼
 				PRINTL 　　　　　　　　　　　　 ﾊ ,'　 li　　 ./　 {　i |　.}　ﾊ
-				PRINTL 　　　　　　　　　　　　 ゝｲ―`―ｨ≠=zi　xi　 l,　 ﾊ
-				PRINTL 　　　　　　　　　　　　　},沁Y　　{:;i:l Y ~iｲ,L」 |　　}
+				PRINT 　　　　　　　　　　　　 ゝｲ―`―ｨ≠=zi　xi　 l,　 ﾊ
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　},沁Y　　{:;i:l Y ~iｲ,L」 |　　}
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　 ,' ゞｲ　　 .ゞ'〆 　V　}　i ::　i
 				PRINTL 　　　　　　　　　 　 　 {// _　　 // O 　 , '〆ｨ　i .ﾘ
 				PRINTL 　　　　　　　　　　　　 ' ,　i_}　　　 　　 ﾑｲ }ﾊ.} .| ｿ
@@ -1032,8 +1183,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　 i. l.　,'!,. - ､.i!　 　 ,..　l!¨¨ヽ　 i. 　 ! i　 ﾍ_,.　＜´
 				PRINTL 　　　　　　　　　　 　 　 l. i　, i.　　　!l＿＿＿_!l＿__　 i! 　 i ,　　 !
 				PRINTL 　　　　　　　　　　 　 　 l_｣‐i十 ¨￣　　 　 ｨニ芹苅 7¨,r‐､'　　 .!
-				PRINTL 　　　　　　　　　　　　　　　 l｀!　　 ,　　 　 i′う::i:::ﾘ.,' / ｎ. i　　 ,!
-				PRINTL 　　 　 　 　 　 　 　 　 　 　 }､!｀¨´　　　　　　 ゞ- '/ｨ　.ﾉ　,!　　.!
+				PRINT 　　　　　　　　　　　　　　　 l｀!　　 ,　　 　 i′う::i:::ﾘ.,' / ｎ. i　　 ,!
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　 　 　 　 　 　 　 　 　 　 }､!｀¨´　　　　　　 ゞ- '/ｨ　.ﾉ　,!　　.!
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　 　 　 　 　 　 　 ,'八xwx 　 　 　 　 xwx　　ゝ' /　 !　|
 				PRINTL 　　 　 　 　 　 　 　 　 ＿_/ 　 ヽ、　 ｀¨¨´　　　　,.ｲ!ゝイ　　i.　|
 				PRINTL 　　　　 　 　 　 　 /´　　　 ｀ ｰ '¨¨Y､　　　　 ,..イ　 i 　 .!　　l.　l
@@ -1062,8 +1215,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　 　 　 　 　 　 　 　 　 　 _＿＿∠.イ //　 ′　　　　　　　　 ‘，
 				PRINTL 　　　　　　　　　　　　　　 　 　 　 }_＿／:′ i :′　_|__|_!| :| 　　i　 　 :.　{＼
 				PRINTL 　　　　　　　　　　　　　　　　 　 　 　 　 ’　 :|_|{从__｣__j_ﾘ｀ト 　 |__j_　:|:! |＼{
-				PRINTL 　　　　　　　　　　　　　 　 　 　 　 　 　 }　 frヾ:｢　ｬ≠=≧ﾄー-ﾑ,ﾘ_｀!|i| |　 ト､
-				PRINTL 　　　　　　　　　　　　 　 　 　 　 　 　 　 　 {!小{　　込ｿ ｀　　　r扞ｧｲ}ﾉﾘ　 レ′
+				PRINT 　　　　　　　　　　　　　 　 　 　 　 　 　 }　 frヾ:｢　ｬ≠=≧ﾄー-ﾑ,ﾘ_｀!|i| |　 ト､
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　 　 　 　 　 　 　 　 　 {!小{　　込ｿ ｀　　　r扞ｧｲ}ﾉﾘ　 レ′
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　}　　丶.ヽ　''　￣　　 　 ﾋｿ /!
 				PRINTL 　　　　　　　　　　　　　　　　　 　 　 　 }　　 　 ¨＼ 　 　 、　' 　 '' ′
 				PRINTL 　　　　　　　　　　　　　　　　　 　 　 　 　 　 　　 _} ＼　　 　 ´　 ｲ　{
@@ -1093,8 +1248,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 7006
 				PRINTL 　　　　　　　　　　　／　 ／　　 ／　　　　　 　 　 　 ﾄ､　　　　　　　 ＼ 　 ＼
 				PRINTL 　　　　　　　　　 ／　 ／　　 ／／　　　　　,! 　.| 　 ,' .!|　　',　　　　　　ヽｰ- }
-				PRINTL 　　　 　 　 　 　 ',　　〈.　　／／　 　 　 　 / ! 　|　 ,.　 !ﾄ､　 ',　　　　　　 ',　/
-				PRINTL 　　 　 　 　 　 　 ',　　 ',／./　　　　　 ,　 ,'　|　　　 |　 .||. ',　 !､ 　 　 　 　 V
+				PRINT 　　　 　 　 　 　 ',　　〈.　　／／　 　 　 　 / ! 　|　 ,.　 !ﾄ､　 ',　　　　　　 ',　/
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　 　 　 　 　 　 ',　　 ',／./　　　　　 ,　 ,'　|　　　 |　 .||. ',　 !､ 　 　 　 　 V
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　ゝ.__　ノ/　 　 　 　./　 |　 !　 i　 | 　 ||__',.　| ',　!　', ',　　 ,
 				PRINTL 　　　　　 　 　 　 /　　/ /　　　 .,　 /! i　|-‐| 　|!　|　　||　 !　|ｰ}　!.　l |　　 }
 				PRINTL 　　　 　 　 　 　 / 　 / / / ,. 　/　/ | :!　|　 |＿j!__|　　|j　 |__}　|__j.　! |　　 !
@@ -1127,8 +1284,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　 　 　 　 　 　 　 　 ′ :{/　　　　　　　 　 :.
 				PRINTL 　　 　 　 　 　 　 　 　 　 　 |　　{ i| :|! |l　 }l!.｜ l　|!
 				PRINTL 　　　　　　　　　　　　　　　 |　　|_jＬﾊ.jﾙ_/iL_|L||!｣j
-				PRINTL 　　　　　　　　　　　　　　　 |　　:}/{. ャ_ﾃ､　 rﾃｼく
-				PRINTL 　　　　　　　　　　　　　　　 } 　 八ﾑ　 　　　,　/）ｿ
+				PRINT 　　　　　　　　　　　　　　　 |　　:}/{. ャ_ﾃ､　 rﾃｼく
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　 } 　 八ﾑ　 　　　,　/）ｿ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　 　 ＿＿_ 　 　 　 　 　 　 ′:/:::/_.＞｡.._ﾆ イ|´
 				PRINTL 　／⌒　　 ｀ヽ.　　　 　 　 ﾉ.::/ .:///〃⌒ヾ.'ヽ!
 				PRINTL ／⌒＼ 　 　 .｡≧=ー―=彡′.:{///{////∧//＼
@@ -1151,7 +1310,7 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　 　 　 ｀ー- ｚ´｀ ー…-＜///}|/////∧
 				PRINTL 　　　　　　　　　　　　　　　　 　 　｀ト｡.＿ 　 　 ｀⌒7ー´⌒｀^}
 				PRINTL 　　　　　　　　　 　 　 　 　 　 　 　 }　　　√¨'ト｡.＿〃⌒ｚｭノ
-			CASE 7011
+			CASE 7011, 7015
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　＞ …ー こ7ー…＜ .　　 　'　,
 				PRINTL 　　　　　　　　　　　　　　　 　 　 　 ／ ／ ´￣　　￣　'　 ,.　　＼ 　　' ,
 				PRINTL 　　　　　　　　　 　 　 　 　 　 　 ／, ＜ 　 　 　 　 　 　 　 >　　　＼　　' ,
@@ -1159,12 +1318,18 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　 　 　 　 　 　 /　/　　　　　　　　　　　　　　　　 >'´ !
 				PRINTL 　　　　　　　　　　　　　　　　7　 ﾊ　　　　 　 |　　　 i　　　　　　　 }　!
 				PRINTL 　　　　　　　　　　　　　　 　7　 ﾊ　 |　!.　　　|!　i.　| !　 i　 　 i　 　!. i ',
-				PRINTL 　　　　　　　　　　　　　 　 7　i,.!-|‐.i､ i ',　　 !i,.！‐-|　､!　　 .!　 　!ｲ　',　　i
-				PRINTL 　　　　　　　　　　　　　　　|＿{ ! 廴!　|　',　　i|__| 　i !.　 }　　 } i　 |　　　!　.!
+				PRINT 　　　　　　　　　　　　　 　 7　i,.!-|‐.i､ i ',　　 !i,.！‐-|　､!　　 .!　 　!ｲ　',　　i
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　|＿{ ! 廴!　|　',　　i|__| 　i !.　 }　　 } i　 |　　　!　.!
+				PRINTFORML 　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　 　 　 | ｀,ｨｆ斧ミ　 ',＿} ｨｆ斧笊ﾐ､ｊ＿,ｲ　!.　!　　i .!　|
 				PRINTL 　　　　　　　　　　　　　 　 　 |　{{ .{:i;;!}　　　　　 {::i;;!::! }}- !　　,′,' 　 .!　　!
 				PRINTL 　　　　　　　　　　　　　 　 　 | i.|　弋ｿ　　　　　 ゝ-ﾟ_,　　 i　!/　,'} } 　 i
-				PRINTL 　　　　　　　　　　　　　　　　ﾉ i.|　 ｀　′　　　　 　 　 　 ,' ,'!i.／//　　.!　 ,′
+				IF CFLAG:ARG:808 == 7011
+					PRINTL 　　　　　　　　　　　　　　　　ﾉ i.|　 ｀　′　　　　 　 　 　 ,' ,'!i.／//　　.!　 ,′
+				ELSE
+					PRINTL 　　　　　　　　　　　　　　　　ﾉ i.|//｀/′　　　　 　////,' ,'!i.／//　　.!　 ,′
+				ENDIF
 				PRINTL 　　　　　　　　　　　　　 ‐=ﾆ-´}ﾄ　　　　　　　　　　　　, ' ´ ﾘ≦´　 　 　 /
 				PRINTL 　　　　　　　　 　 　 　 　 　 　 ﾘ込　　　ー　　-‐　　　 ム!:::::::.... 　 ,' 　/
 				PRINTL 　　　　　　　　　　　　　　　　　　　, ＞　　　　　　　 イ　　{:::::::::...　,' 　 {
@@ -1183,8 +1348,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　 　 ィ´　アヾ'=彡-､/　ヽ
 				PRINTL 　　　　　　　　　　　　　　　　　/　 ,ィ　　;　ｌ　＼<＿　丶
 				PRINTL 　　　　　　　　　　　　　 　 　 ｲ　/ヽ !　 ｌ　　',　 ヾーゝ ﾊ
-				PRINTL 　　　　　　　　　　　　　　　 （ハｲ7Ｙﾊ　ﾉ´ヽ ',　　',　　　 ',　　　　　}
-				PRINTL 　　　　　　　　　　　　　　　　　{ｊ､ゞﾟ)ノz=x､　 ト､　ﾊ　　　＼　　 ノｊ
+				PRINT 　　　　　　　　　　　　　　　 （ハｲ7Ｙﾊ　ﾉ´ヽ ',　　',　　　 ',　　　　　}
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　　{ｊ､ゞﾟ)ノz=x､　 ト､　ﾊ　　　＼　　 ノｊ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　　　　 　 　 !　ｨ:　　 {:ｔﾊ ﾘ |ィ ､トー-　　　ヾ´_ノ
 				PRINTL 　　　　　　　　　　　　　　　　　 ｌ ｒ　 　　ゞ''　　ｲ ｿミヽ　｀ー　　＞－'＿__
 				PRINTL 　　　　　　　　　　　　　　　　 　 ヽ　-ﾟ　 　 ,-‐ｧ'ヽ(≧ｭ､＿＿　　　　　ヽ二ニ｀ヽ
@@ -1215,8 +1382,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　 　 　 　 　 /　 　 　 　 　 　 　 　 ‘， ，　　 ヽ
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　　　ﾊ　 　 ﾉ　　　　}　}
 				PRINTL 　　　　　　　 　 　 　 　 　 　 　 　 ト、 　} /,ﾉ.ｲ／)ﾉﾊ　 　 }　}
-				PRINTL 　　　　　　　　　　 　 　 　 　 　 　 }ｉい_jﾉ~　,斗=㍉　}　　} }　}　　　　ⅰ
-				PRINTL 　　　　　　　　　　　　　　 　 　 　 八式　　　　Vツ　ﾉ　 ,ﾉ'^Yﾞ　　 ｉ　 ｉ|
+				PRINT 　　　　　　　　　　 　 　 　 　 　 　 }ｉい_jﾉ~　,斗=㍉　}　　} }　}　　　　ⅰ
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　 　 　 　 八式　　　　Vツ　ﾉ　 ,ﾉ'^Yﾞ　　 ｉ　 ｉ|
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　 　 　 　 　 　 　 ｀ﾂ　　　　~＾／　／　ｧ }　 　 |　 ﾘ
 				PRINTL 　　　　　　　　　　　　　　　　 　 　 　 ｢ _　-‐┐ー=彡 　 _,ノ　　　|　 ′ 　 ,i|
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　＼ 厂}　　 　 　 ｲ,ﾊｲ 　　|　{　　　ﾉﾘ|
@@ -1246,8 +1415,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　　　　　　　 　 　 　 　 　 　 ,..　i,. -―＝ミ､/_7‐- ､¨ - 、
 				PRINTL 　　　　　　　　　　　 　 　 _,..　-―＝ニ　ー‐--　　 -‐/.／　,.　'´　,. '´/ ﾍヽ　　ヽ ヾ.ヽ
 				PRINTL 　　　　　 　 　 　 　 　 〃　　 　 　 　 　 _ 二ニ=-　　.{/__／　 , イ　 /　 ! ﾍヾ、 .ノ　ﾍ ﾍ
-				PRINTL 　　　　 　 　 　 　 　 / 　 　 　 　 ,.　' ´　　 　 　 　 　 ヽ/! ヽィ Y 　 i. 　 !　 '.　 '. ', 　 ﾊ　'.
-				PRINTL 　　　　　　　　　　　 i {　 　 　 ／　　　　　　　 _,.,. -‐　iィﾐ､./i!　!　 _i! 　 !.　└‐ ! .!.　　 '. i
+				PRINT 　　　　 　 　 　 　 　 / 　 　 　 　 ,.　' ´　　 　 　 　 　 ヽ/! ヽィ Y 　 i. 　 !　 '.　 '. ', 　 ﾊ　'.
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　 i {　 　 　 ／　　　　　　　 _,.,. -‐　iィﾐ､./i!　!　 _i! 　 !.　└‐ ! .!.　　 '. i
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　 　 　 　 　 　 　 　 ! ',　　　/　　　　 ,..　‐ ¨ ／　 　 r! 仞　 　 '.　 !i.ヽ i!　　　i. i. !.　 　 Y
 				PRINTL 　　　　　　　　　　　人 ゝ ..,/ 　 ,.　' ´　 　 ／　 　 　 Y　　　　　,ィﾆミ、 i!　　　iヾi!　　 　 '.
 				PRINTL 　　　　　　　　　　　　 ｀　┐,. '´　　 　 　 /　　　　　 八　 '　　 　 仞苅》 ゝ .,_　Y.｀　　 　 ﾍ　　　　　　　　　 ,. --　、
@@ -1271,6 +1442,29 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　 iニニﾆﾆ!ニニニニニﾆlニニニニニニニニニニニニニニニニニニﾆi ､!
 				PRINTL 　　　　 lニニﾆﾆ!ニニニニニﾆﾍニニニニニニニニニニニニニニニニニﾆﾆ!　ヽ
 				PRINTL 　　　　∧ニニﾆiニニニニニニﾆヾニニニニニニニニニニニニニニニニニ/　く
+			CASE 7016
+				PRINTL 　　　　　　　 　 　 　 　 　 　 　 　 ,.　-‐t==γ´￣¨　　 　 、
+				PRINTL 　　　　　　　　　　　　　　　　,.　 ´　　／ / 7　　　　　 　 　 ＼
+				PRINTL 　　　　　　　　　　　 　 　 ／　　 　 , 　 /　,　　　 　 　 　 　 　 ヽ
+				PRINTL 　　　　　 　 　 　 　 　 ／ 　 　 　 /　 /　 i　　　　 .　　　 　 　 　 '.
+				PRINTL 　　　　　　　　　　　 ,　　　　　　 /!　 ;　　 !　 　 　 !　　　　　　　　i
+				PRINTL 　　　 　 　 　 　 　 /　　　　　　 ' ∟　　　｣　 　 　 i　　 　 　 　 　 !
+				PRINTL 　 　 　 　 　 　 　 ,　　　 　 　 / 　 　 ７{　 /　　　 ;　　 　 　 　 │;
+				PRINTL 　　　　　　　　　　i　　　　　　┗‐-　r‘ {. /　　　 /　　 ／／　 /j/
+				PRINTL 　　　　　　　　 　 i　　　　　　　　　　i　 {/　　 ／' / ／／　イ/{_,
+				PRINTL 　　　　　　　　　　'.　　　　　　　　　 /フィ≦f´ /ｨ ´　´＿__　　廴
+				PRINTL 　　　　　　　　　　　　　　　　　　　 , / ,ヽ　 ,／ :::::::::::´￣￣｀　　 }
+				PRINTL 　　　　　　　　　　 ‘，　 　 　 　 　 !‘　 く.j/　　:::::::::::: 　 　 　 　 /
+				PRINTL 　 　 　 　 　 　 　 　 '.　　　　　　　 ＼　､_}　　　　　　　　　　 　 ;
+				PRINTL 　　　　　　　　　　　　}　　　　　　　　、 ヽｨ ､＿_ , 　 　 ｬ ￣~ｱ/
+				PRINTL 　　　　　　　　　　　　}　　　　　　　 　 `ーr一　´　 　 　 `　　/
+				PRINTL 　　　　　　　　　　 　 ;　　　　　　　　　　　ヽ　 ＿≧　　＿_　'
+				PRINTL 　　 　 　 　 　 　 　 /　　　　　　　　　　　　i/ﾆニﾆ≧く
+				PRINTL 　　　　　　　　　　,　　　　　　　　　　 　 ｲ /ﾆﾆﾆﾆﾆﾆﾆ＼
+				PRINTL 　　　　 ､＿_ 　 彡　　　　　　 　 　 　 / j/'ﾆﾆﾆﾆﾆﾆﾆﾆニヽ
+				PRINTL 　　　　　　　　｀ヽ　＿_,　　　　　　　 /ﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆ＼
+				PRINTL 　　　　　　　　　　 ≦　　 ＿＿_　 イﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆ
+				PRINTL 　　　　　　　　　　　／ﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆﾆニi
 			;KR판 추가
 			CASE 7099
 				PRINTL 　　　　　　　　　　　　　　　　　　　,,､≦¨匸}¨≧ミ､
@@ -1315,8 +1509,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　　　　 　／＞''´ ハ　｀''＜ ＼
 				PRINTL 　　　　　　 　 　 　 　 　 　 　 / / 　 　 ｌ　 '， !　ヽ 　V
 				PRINTL 　　　　　　　　　　　　　 　 　 ,∨　　|　 | 　 |　|　　ﾊノV
-				PRINTL 　　　　　　　 　 　 　 　 　 　 ｌ | |　斗''"|　 `ト､､　 | } } }!
-				PRINTL 　　　　　　　　　　　　　　　　|八ゝヽヽ ｣. 　 |_/ /ノ//　}!
+				PRINT 　　　　　　　 　 　 　 　 　 　 ｌ | |　斗''"|　 `ト､､　 | } } }!
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　|八ゝヽヽ ｣. 　 |_/ /ノ//　}!
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　 　 　 　 　 　 　 　 　 l　ヘ.≪芯 ￣ 芯≫イ〉　√
 				PRINTL 　　　 　 　 　 　 　 　 　 　 　 l ゞ_ﾍ:/:/　'　:/:/:/‐'　　,'
 				PRINTL 　　　　　　　　　　　　 　 　 　 }　　 )h､ -　 ' .イ . |　　{
@@ -1340,8 +1536,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　 　 　 　 　 　 乂＿ ./ニニ辷　 /:i:i:ﾍ　ソニニ}h､ ＿ノ
 				PRINTL 　　　　＿＿　　 　 　 　 _,ｲニニVﾑノ/:i:i:i:i:i:ﾍソﾆVニニﾆ〕
 				PRINTL .　　 ,ｲ./ z､ ヽ.　　　 　 ｣ニニニ/ニゝ､」:i:i:i:｢ノﾆﾆ',ニﾆﾆ〈　　　　　　　　 ＿
-				PRINTL 　　〈 {_しニﾆ=-　、　　 >､　￣八ニニニ|｣|｣ニニﾆ}!´ ＿__〉. 　 　 _,､丶`　　　`'く
-				PRINTL 　　 ゝ√ヽ　`'＜ニニﾆ=- ―< {ﾆ≧ニニニニニイ∧　　,　''¨¨¨´　　　,ﾊ　r ､.　 |〉
+				PRINT 　　〈 {_しニﾆ=-　、　　 >､　￣八ニニニ|｣|｣ニニﾆ}!´ ＿__〉. 　 　 _,､丶`　　　`'く
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　 ゝ√ヽ　`'＜ニニﾆ=- ―< {ﾆ≧ニニニニニイ∧　　,　''¨¨¨´　　　,ﾊ　r ､.　 |〉
+				PRINTFORML 　　　　　%CSTR:ARG:101%
 				PRINTL 　　　( {///廴厂厂`＜ニニニニﾆ=- 二二二二ﾆ/　 ヽ/　　　　　　,ィ(zzしzz{ ｣」
 				PRINTL 　 　 ( {/////////廴　`＜ニニニニニニニニニニニニニ＞''´廴廴厂廴ノﾆﾑ
 				PRINTL 　　　( {////////////廴　`＜ニﾆ＞''´｀''＜ニﾆ＞''´几_厂廴ノ///////////} )
@@ -1374,8 +1572,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL ニニﾆﾆ二二二二＞''´＿＿＿_ 　∨:i:i:i:i:iヽ　　　　　　　　　　_
 				PRINTL 二二二ニニﾆア　 /　　 　 ./汽:/ヽ}｀''＜:i:i:i:i:ヽ＿＿＿＿＿_ハ_
 				PRINTL ニニニニﾆア　　 /　　　　 .}}i心 ',:/:　 　 ヽﾆ=-''"´￣ヽ. : : :/´＿＼_
-				PRINTL 二二ﾆﾆア　　　,ｲ.　 ヽ.＿__}}!ツ ﾉ:/:　　　　ヽ　　　　　 (:'ｬ:/ノ{　,,､-‐ﾐ
-				PRINTL ニﾆﾆｱ 　￣￣ﾌ￣￣￣￣ |¨｀　∠> 　`　 　 ヽ 　 　 　 `'}: :/:iV-―‐〈
+				PRINT 二二ﾆﾆア　　　,ｲ.　 ヽ.＿__}}!ツ ﾉ:/:　　　　ヽ　　　　　 (:'ｬ:/ノ{　,,､-‐ﾐ
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT ニﾆﾆｱ 　￣￣ﾌ￣￣￣￣ |¨｀　∠> 　`　 　 ヽ 　 　 　 `'}: :/:iV-―‐〈
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL ＞＜ }　　　　　　　 　 　 ＿| 　 :/:/:　　 }　 　 !!;｀ヽ 　 u. ∨:i:iﾉ`'''ｧ ,ｲ
 				PRINTL .廴__ノ.　　 　 　 ＼ ￣￣￣| ,,ノ:/:/. 　 ﾉヽ　 !!;＿　　 　 ./:i:i:}-=彳
 				PRINTL /　　'，ヽ　 　 ＿＿'，＿＿_| }}､ヽ:/:/. (::ノ　 !!;　　 　 ,/,ｲi:i:ｉ:ｉ}
@@ -1398,8 +1598,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　／　 　 ヽ　ヽ.＼＼　 　 ＼
 				PRINTL 　　 　 .:′　　　　 ∨∧　 Y　　　　　,
 				PRINTL .　 　 / 　 .:/.: 　 　 l:　 |　 !:.　　　 　 ′
-				PRINTL 　　　{:　　:i|　!|_j|l 　|_　|　 |!　　:.　　　|
-				PRINTL 　　　|　i|_」ﾚ=ミ从イr }′　　　:i|　　　}
+				PRINT 　　　{:　　:i|　!|_j|l 　|_　|　 |!　　:.　　　|
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　|　i|_」ﾚ=ミ从イr }′　　　:i|　　　}
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　|_从 i{ （:｝　} /-ｲ　　　 　 {!　 　 {
 				PRINTL .　　　 　 ｀}　´ ,,/' 　 {: 　{、　 　､　　　:､
 				PRINTL .　　　 　 〈　　 　 ＿_ ＼､＼.　 　 ＼、　＼
@@ -1429,8 +1631,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　 　 　 　 r―t_,ｨ＞ ､…- 。
 				PRINTL 　　　　　　　　　 　 /ｲ　 ⌒ヽ ＼＼ 　 ｀ヽ、
 				PRINTL 　　　　　　　　 　 , ′　　　　}　 :}　 ヽ　　　ﾟo
-				PRINTL 　　 　 　 　 　 　 {　 　 　 　 .L乂 ＼ .}　　 　 :.
-				PRINTL 　　　　　 　 　 　 ;　 .i　./ ./　　　,　 } |　　　　:}
+				PRINT 　　 　 　 　 　 　 {　 　 　 　 .L乂 ＼ .}　　 　 :.
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　 　 　 　 ;　 .i　./ ./　　　,　 } |　　　　:}
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　 　 乂_{ /{ /{人l　/　,: /　　　　,ﾟ
 				PRINTL 　　　　　　　　　　　 }　　f::::::r､ ,′/ヽ　　 　.,
 				PRINTL 　　　　　　 　 　 　 ;ﾟ　 　 ｀ﾟﾟ　/　/　ﾉ　　　/
@@ -1450,8 +1654,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　 .く　　／ .　/　 　.　＼ ノ 　ハ
 				PRINTL . 　 　 　 　 　 　 i.'/.X´ ./　.'　　　　　i　　Y　 ﾊ
 				PRINTL .　　　　 　 　 　 l　/　 .'　 .i　. ! 　ｌ　　ｌi　} }　 } }
-				PRINTL 　 　 　 　 　 　 .ｌ ! 人 j人 」L从 j jムイム Y.　}
-				PRINTL 　 　 　 　 　 　 | ィ - '￣　　　 　 '―-- .V:　j...|
+				PRINT 　 　 　 　 　 　 .ｌ ! 人 j人 」L从 j jムイム Y.　}
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　 　 　 　 　 　 | ィ - '￣　　　 　 '―-- .V:　j...|
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　 　 　 　 　 　 !　! rﾃtォ､　　　　,.二,,,__ 刈 .|. {
 				PRINTL .　　　　　　　 　i:从 弋こj 　,　 　 弋こソ'.ｲ|　!..{
 				PRINTL 　　　　 　 　 　 }ィ;{ ..vwx　 　 　 ..vwxv ｲ:|.i...l ﾍ
@@ -1478,8 +1684,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 7120
 				PRINTL 　　　　　　　　　　　　 　 ／　　　　 　 　 　 　 　 　 　 |:::|　　　　 ﾄ､　　　　　　　　　 ＼
 				PRINTL 　　　　　　　　　 　 　 ／　　　　　　　 　 　 　 　 　 　 |:::|　　　　 | ∧　　　　　　　　　　＼
-				PRINTL 　　　　　　　　　　　 /　　 　 /　　　　 　 　 　 　 　 　 |:::|　　　　 l　∧ヽ　　　　　　　　　　＼
-				PRINTL 　　　 　 　 　 　 　 ,　 　 　 /　　　　　　　　　　　　 　 |:::|　　　　 l　 ∧　＼　　 　 　 　 　 　 ＼
+				PRINT 　　　　　　　　　　　 /　　 　 /　　　　 　 　 　 　 　 　 |:::|　　　　 l　∧ヽ　　　　　　　　　　＼
+				PRINTFORML 　　　　　　　%CSTR:ARG:100%
+				PRINT 　　　 　 　 　 　 　 ,　 　 　 /　　　　　　　　　　　　 　 |:::|　　　　 l　 ∧　＼　　 　 　 　 　 　 ＼
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　 l　　　　,′ 　 　 　 　 　 　 　 　 　 |:::|　　　　 l 　 ∧　　＼
 				PRINTL 　　　　　　　　　　 | 　 　 i{　　　　　 　 i　　　　　　　　|:::|　　　　 |　　:∧　　　＼
 				PRINTL 　　　　　　　　　　 { 　 　 i|　　＼　　　 {　　　　　　 　 ﾄ､}　 　 　 | 　　:∧　　　　＼
@@ -1509,8 +1717,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 7121
 				PRINTL 　　　　　　　 　 　　 Zﾆ=＝＝ﾆ三三:=x、
 				PRINTL 　　　　 　 　 　 　 　 　 x≠¨¨¨ﾐx　=三:心
-				PRINTL 　　　　　　 　 　　　　〃　 z=ﾐx. ヾ，　 .ﾏ_ﾊ
-				PRINTL 　　　　　　　　　　　 ,,′ /　　 l!　 }}　　 }.刈
+				PRINT 　　　　　　 　 　　　　〃　 z=ﾐx. ヾ，　 .ﾏ_ﾊ
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　 ,,′ /　　 l!　 }}　　 }.刈
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINT 　　　　　 　 　 　 　 {{　 .l　
 				PRINTFORM %UNICODE(0x2665)%
 				PRINTL 　′ .ﾘ　　.ﾘ//
@@ -1524,8 +1734,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 			CASE 7122
 				PRINTL 
 				PRINTL 　 `ー‐'" ／　　　　　 ',：
-				PRINTL 　　　　／ ／　 　 　 　 '､：，，				
-				PRINTL 　　　　 ／　　　　　　　　￣￣ヽ：
+				PRINT 　　　　／ ／　 　 　 　 '､：，，
+				PRINTFORML 　　　　　　　　　　　　　　　　　　　 %CSTR:ARG:100%
+				PRINT 　　　　 ／　　　　　　　　￣￣ヽ：
+				PRINTFORML 　　　　　　　　　　　　　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　／ ／　　　　　　　　　　　 '､：
 				PRINTL 　　　 ／　　　　　 　 　 　 　 ,〈＼＼：
 				PRINTL 　　／ ／　　　　 　 　 　 　 / .〉;::＼＼：
@@ -1548,8 +1760,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL .　　　　　　　　　　　/／／／　　　　　　　　　ヽ//
 				PRINTL .　　　 　 　 _＿＿∠.イ //　 ′　　　　　　　　 ‘，
 				PRINTL .　　 　 　 .}_＿／:′i:′　_|__|_!| :| 　　i　 　 :.　{＼
-				PRINTL 　　　　　　 　 　 ’　 :|_|{从__｣__j_ﾘ｀ト 　 |__j_　:|:! |＼{
-				PRINTL 　　　 　 　 　 　 }　 frヾ:｢　ｬ≠=≧ﾄー-ﾑ,ﾘ_｀!|i| |　 ト､
+				PRINT 　　　　　　 　 　 ’　 :|_|{从__｣__j_ﾘ｀ト 　 |__j_　:|:! |＼{
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　 　 　 　 　 }　 frヾ:｢　ｬ≠=≧ﾄー-ﾑ,ﾘ_｀!|i| |　 ト､
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　.　　{!小{　　込ｿ ｀　　　r扞ｧｲ}ﾉﾘ　 レ′
 				PRINTL .　　　　 　 　 　 }　　丶.ヽ　''　￣　　 　 ﾋｿ /!.!
 				PRINTL 　　　　　　　 　 }　　 　 ¨＼ 　 　 、　' 　 '' ′
@@ -1581,8 +1795,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　　　　　　　,!＼　　　　 ,＞ ' ´　,..　'´　＿_／　　 ｀　 、　　　　　　　　　　　　　 　 　 ＿_
 				PRINTL 　　　　　　　　　　　 ／　　｀ ｰ-　´--r=彡'¨´￣　　　 　 ¨　　 、　ヽ　　　　　　　　　　　　rf´￣ﾆミ､　｀　､
 				PRINTL 　　　　　 　 　 　 ∠　.,_　　　_,.. -‐ ﾆ¨′　｀ヽ、　 ｀　 、　　　　｀　､ ヽ　　　　　　　 　 　 ′　r=ﾆミﾍ　　　ヽ
-				PRINTL 　　　　　　　　　　　　　 ,.フ ,. イ７　　　　 　 　 ﾍ　 　 　 ヽ、 　 　 　 ヽﾍ　　　　　 　 　 　 　 　 　 　 ﾑ 　 　 ∨
-				PRINTL 　　　　　　　　　　 　 ／,.イ　/イ /　 　 !　　　 　 ヽ.　 　 　 ヽ　　　 　 、.ﾍ　　　　　　　　　　　 　 　 　 '.　　　 '.
+				PRINT 　　　　　　　　　　　　　 ,.フ ,. イ７　　　　 　 　 ﾍ　 　 　 ヽ、 　 　 　 ヽﾍ　　　　　 　 　 　 　 　 　 　 ﾑ 　 　 ∨
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　 　 ／,.イ　/イ /　 　 !　　　 　 ヽ.　 　 　 ヽ　　　 　 、.ﾍ　　　　　　　　　　　 　 　 　 '.　　　 '.
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　　　　　　　　　　/ ｨ　/ ,ｲ,　 /　　i /　i　 i!　　　ﾍ　、　 　 ﾍ.　　 　 ヾ　∨　 　 　 　 　 　 　 　 　 　 i.　　　 l.　 　 ／
 				PRINTL 　　　　 　 　 　 　 //´ヽi / /　,'　　,.ｨ　 / イ '.. 　 　 ',、ﾍ.　 　 ﾍ　　　　 Yﾍ∨　　　　　　　　　　　　 　 !　 i 　 !　 ／/
 				PRINTL 　　　　　　　　　 〈/　＿/ /＿,.. ＜-‐　´　/　.!　　 .! .iﾍ　ヽ　　　 、 　 i.　!　ヾ、　　　　　　　　　　　　 ,'　　 　 i／　/
@@ -1636,8 +1852,10 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　 　 /　 .::::{　 ;::.　 　 ,:}　　　.:{
 				PRINTL 　　　　　　 :i　　 i!　　　 :|　　　:i:
 				PRINTL 　　　 l{　　::|　　 }:.　　 ::::}　　 .:}{
-				PRINTL 　　　 i!　　::}:.　　{::.　　 :::|: ::! .:{ l::
-				PRINTL 　　　 i　　 .:',　　 !V　　 ::i!::::, ;:l }:,
+				PRINT 　　　 i!　　::}:.　　{::.　　 :::|: ::! .:{ l::
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　 i　　 .:',　　 !V　　 ::i!::::, ;:l }:,
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
 				PRINTL 　　 　　　　 :.　　　ヾ::.　:::',　　 { ,:
 				PRINTL 　　 }　 ;　　　':,　 :ﾑ　<　 :{.V　ﾑ V
 				PRINTL 　　. V　,　　　ﾑ.∧ヾ　＼ ゝ:V{ ﾑ V
@@ -1693,13 +1911,70 @@ CHKFONT "ＭＳ Ｐゴシック"
 				PRINTL 　　　　　　　| |　　　　　　　 　 　 　 　 /／:::厶ｲ::::::::::::::::::::::::::::::::::::::::::::::: : ', |
 				PRINTL 　　　　　　　○　　　　 　 　 　 　 　 ／:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::ノ i
 				PRINTL 　　　　　　　　 　 　 　 　 　 　 　 ／::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::／ 人}
+			CASE 7504
+				PRINTL 　　　　　　　　　　　　　　　 ＿＿　　 ＿＿　ゝ､＿＿＿
+				PRINTL 　　　　　　　　　　　　ゝ≦__i　 ｲ　ｲ――　｀　> 　 　 ／
+				PRINTL 　　　　　　　　　　　　　　　 } 　イ　　i　　≧　 }　 i￣
+				PRINTL 　　　　　　　　　　　　　　　 |／　 ﾊ { i | ﾊ　　.|　 |
+				PRINT 　　　　　　　　　　　　　　　　´ﾚ.{/　Y V　 Ｖ　}　 |＼　　　　 ＿
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　　　　　　　　　　　　　　　　 }　| ‐‐　　 -‐ Y　　}　　≧==-'ｨ
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
+				PRINTL 　　　　　　　　　　　　＼　　　}〆､　 ｒ ｺ　　ﾘ≧=､', 　＞＜'~
+				PRINTL 　　　　　　　　　　　　　 ｀ー-=}//≧=--=≦///ハ　　｀ヽ、≧=-
+				PRINTL 　　　　　　　　　　　　　　／＿ V//ﾊ　 ／/////ム }｀ヽ、 ∨
+				PRINTL 　　　　　　　　　　　　　 /´　 { ( V//〆ﾊ//////　 }　　　}　!
+				PRINTL 　　　　　　　　　　　　　　　　　　 }/////////ソ　＿
+				PRINTL 　　　　　　　　　　　　　　　　　　 ヒ≧ニニニH-=≦}
+				PRINTL 　　　　　　　　　　　　　　　　　　V/////////＼-=≦――--
+				PRINTL 　　　　　　　　　　　　　　　　　V/////////////ヽ、///// (
+				PRINTL 　　　　　　　　　　　　　-=≦/////////////////////////{
+				PRINTL 　　　　　　　　　　　　}//////////////////////////////i
+				PRINTL 　　　　　　　　　　　　＼////／￣i~~}≧=-////////////／
+				PRINTL 　　　　　　　　　　　　　　ゞ／　 　 |　 }　ム//≧=--=≦'~~
+			CASE 7505
+				PRINTL 　　　　　　　　　　 　 ／ ＼／　　　　　　　　 　 　 　 　 　 　 　 ｀ヽ、 　　〉
+				PRINTL 　　　　　　　 　 　 ／ 　 ／　　　　　　　　　　　　　　　　　　　　　 　＼／‘，
+				PRINTL 　　　　 　 　 　 ／ 　 ／./　　　　　　　　　　 {　　　.{　　　 　 |　}　　 ｜　　ﾟ，
+				PRINT 　　　　　　　　〈　 .／{　/　　　　　 　 |　　 　 {　　　.{　　　 　 |　}　　　{　　　:，
+				PRINTFORML 　　　　　　%CSTR:ARG:100%
+				PRINT 　 　 　 　 　 　 ＼{／{./　　i　 　 {　　|　　　　|　　　.{　　　 　 |　}　　　| 　 　 }
+				PRINTFORML 　　　　　　%CSTR:ARG:101%
+				PRINTL 　　　　　　　 　 ,'゛{　 {′　 {　 　 {　　|　　　　ﾄ､　　 }＼　　　 {　}　 {　　　 　 }
+				PRINTL 　　　　 　 　 　 ｉ　{　 {　 　 {　 　 {　　| ､｜　 {｜ 　 |￣}￣|￣}｀ト､_{_ .|　{　　}
+				PRINTL 　　　　 　 　 　 |　{　 {　　　{　 　 {___,｣-{｜　 {｜ 　 |　 }　 |　 }｜ {｜｜｜　 }
+				PRINTL 　　　　 　 　 　 |　{　 {　　ｉ :{ 　 ／{　.i}｜|　　{｜　__|／}＿|＿}〈__｣┤｜｜　｜
+				PRINTL 　　　　 　 　 　 |　{　｜　 { .{ ／　 {､_ｊ} L｣―┘￣　　ｊ灯'{//j}㍉‐〈 ＼}　} 　 i}
+				PRINTL 　　　　　　　 　 |　{　｜　｜乂 ＿_|斗=ミヽ　　　 　 　 _{_乂_ｿ_ﾉ{　‘， ∨}　　i}
+				PRINTL 　　　　　　　　　|　{　｜　｜f'¨∨fﾞ〈//)_У　　　　　　　　　　　__〉.　‘，乂_　 i}
+				PRINTL 　　　　　　　 　｜｜.八　 乂　 ｊ{ 乂／/_入　 ::::}　　 　　　r'"　　‘， ‘，｜i　i}
+				PRINTL 　　　　　　　　　|　l}　　ヽi{　{　.{ ＼_／ /　 }　ｰ'′　　　　└―ﾍ　‘， .} ｜|　i}
+				PRINTL 　　　　　　　　　　 l}　　　l{　{　.{＼ｊ{　 /　 /　　　　　　　　　　　 }　　ﾟ｡ }　}/　ｊ}
+				PRINTL 　　　 　 　 　 　 }　l}　 　 l{　{　乂､＼/　 /　　 _,...::::＞' 　　　／　　　　　/　 {.{
+				PRINTL 　　　　　　 　 　 }　ｌ}　 　 }＼` 　 ｀¨´　 〈　　　 ー― ﾞ　　 ／　 　 　 　 /　　:{.{
+				PRINTL 　　　　　　　　　 }　ｌ}　 　 }　 ＼　　　　　 ＼　　　　　　 ／　　　　 　 ／{　　 :{ }
+				PRINTL 　　　　　　　　　｜ ｌ}　　　}　　 {＼　　　　　 ｀ヽ.　　 　/　　　　＼_／　 {.　　｜}
+				PRINTL 　　　　　　　　　｜┴―- 乂＿ﾄ､_{＼　　 　 　 :}｀¨¨ 〈　　　 　 　 ＼　｜　　 }｜
+				PRINTL 　　　　　　　　／i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i)ｰ｀¨'＼_,　　　 }｀ﾞ¨癶〉、 　 　 　 　 ＼{　 　 }､{
+				PRINTL 　　　　　　 ／i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i｀T　　 /￣　 　 }　 i{　i{ i＼　　　　　　　＼＿{､_{
+				PRINTL 　　　 　 ／i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i})ｰ /　　　　 ,′.八_ｊ{_ｉ　 ＼　　　　　　　＼}-┴―‐:..、
+				PRINTL 　 　 　 l{:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i}） /　　　　 /　./｀7 {l〈}i　　 ＼　　　　　　　＼i:i:i:ｉ:ｉ:ｉ:ｉ:ｉ＼
+				PRINTL 　 　 　 l{:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:i:ｉ:ｉ}!/　 　 　 /　./{　{i:ｉ{ｌ:ｉ}l、　　　＼　　　　　　　＼i:i:i:ｉ:ｉ:ｉ:ｉ:ｉ＼
 
 			CASE 9999
 		ENDSELECT
 		;AAと本文の間に一行スペースを入れる
 		PRINTW 
-	;AA表示なし
+	;AA표시 없음
 	ELSE
+		IF TFLAG:전투이벤트 >= 1
+			PRINTFORML ┏＠%NAME:ARG,10,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃% CSTR:ARG:100 + CSTR:ARG:101 ,72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSE
+			PRINTFORMW 「%CSTR:ARG:100%%CSTR:ARG:101%」
+		ENDIF
 	ENDIF
-	;SETFONT "ＭＳ ゴシック"
+	CSTR:ARG:100 = 
+	CSTR:ARG:101 = 
 	SETFONT
