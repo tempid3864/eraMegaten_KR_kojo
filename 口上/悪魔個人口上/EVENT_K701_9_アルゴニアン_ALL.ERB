@@ -499,10 +499,10 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 						WSTR:(K++) = 雌に点いた火は鎮まる気配を見せず、誘うような蕩けた顔と躰を晒して雄を無意識に挑発している…
 				ENDSELECT
 				;経験も回数分増やす
-				CALL ADDS_EXP("性交経験", 1, TARGET)
-				CALL ADDS_EXP("絶頂経験", 1, TARGET)
-				CALL ADDS_EXP("膣射経験", 1, TARGET)
-				CALL ADDS_EXP("精液経験", 1, TARGET)
+				CALL ADDS_EXP("성교경험", 1, TARGET)
+				CALL ADDS_EXP("절정경험", 1, TARGET)
+				CALL ADDS_EXP("질사경험", 1, TARGET)
+				CALL ADDS_EXP("정액경험", 1, TARGET)
 				;조수を抱くで減った依存度、好感度をここである程度取り戻す(でも値はテキトー)
 				BASE:TARGET:충성도 += 50
 				TCVAR:TARGET:획득충성도 += 50
@@ -10127,8 +10127,8 @@ IF CFLAG:106
 								WSTR:(K++) = 「ハプニングですから_PH_PH_……無効試合_PH_……ですよね♪」
 								KSTR:(K++) = ……勝負は実質%CALLNAME:TARGET%の勝ちだが、とりあえず試合は引き分けとした
 								WSTR:(K++) = 次は破れないよう少し気を付けよう……と、%CALLNAME:MASTER%は反省した
-								CALL ADDS_EXP("膣射経験", 2, TARGET)
-								CALL ADDS_EXP("精液経験", 2, TARGET)
+								CALL ADDS_EXP("질사경험", 2, TARGET)
+								CALL ADDS_EXP("정액경험", 2, TARGET)
 								STAIN:6 |= 4
 							CASE IS < 5
 								;4/10で勝ち
@@ -13195,10 +13195,10 @@ SELECTCASE TFLAG:13
 					KCOLOR:K = GETDEFCOLOR()
 					
 					;経験を増やしておく
-					CALL ADDS_EXP("性交経験", 1, TARGET)
-					CALL ADDS_EXP("絶頂経験", 1, TARGET)
-					CALL ADDS_EXP("膣射経験", 1, TARGET)
-					CALL ADDS_EXP("精液経験", 1, TARGET)
+					CALL ADDS_EXP("성교경험", 1, TARGET)
+					CALL ADDS_EXP("절정경험", 1, TARGET)
+					CALL ADDS_EXP("질사경험", 1, TARGET)
+					CALL ADDS_EXP("정액경험", 1, TARGET)
 					;次回調教時用に이벤트플래그を設定
 					CFLAG:802 = 2
 				ENDIF
@@ -13234,10 +13234,10 @@ SELECTCASE TFLAG:13
 					ENDIF
 					
 					;経験を増やしておく
-					CALL ADDS_EXP("性交経験", 1, TARGET)
-					CALL ADDS_EXP("絶頂経験", 1, TARGET)
-					CALL ADDS_EXP("膣射経験", 1, TARGET)
-					CALL ADDS_EXP("精液経験", 1, TARGET)
+					CALL ADDS_EXP("성교경험", 1, TARGET)
+					CALL ADDS_EXP("절정경험", 1, TARGET)
+					CALL ADDS_EXP("질사경험", 1, TARGET)
+					CALL ADDS_EXP("정액경험", 1, TARGET)
 					;次回調教時用に이벤트플래그を設定
 					CFLAG:802 = 2
 				ELSEIF ABL:가창기능 > 3
@@ -14780,7 +14780,7 @@ IF CFLAG:803 > CFLAG:804
 		KSTR:(K++) = これ以上追い詰めようとしても、あまり意味はないだろう…
 		WSTR:(K++) = 　
 		;절정経験を増やす
-		CALL ADDS_EXP("絶頂経験", 1, TARGET)
+		CALL ADDS_EXP("절정경험", 1, TARGET)
 		;欲情と潤滑をプラス
 		PALAM:욕정 += 1000
 		PALAM:윤활 += 500
