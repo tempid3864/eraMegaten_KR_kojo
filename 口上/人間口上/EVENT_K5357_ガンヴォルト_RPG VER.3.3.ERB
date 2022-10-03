@@ -14,19 +14,21 @@
 ;범용 구상의 작성에 사용하는 경우는, 5357→캐릭터번호가 아니라,
 ;K5357→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#Translated by "패러독스 인터랙티브 갤러리"
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K5357_ASSI.ERB
-;	Facility	:会話タイプ：助手時口上
+;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
 ;	001		2021/03/30		木綿豆腐				新規作成　ただし戦闘口上のみ
 ;	002		2021/04/06		木綿豆腐				個別イベント3用にちょっとだけ追加
 ;	003		2021/04/27		木綿豆腐				個別イベント4用にちょっとだけ追加
-;	004		2021/06/19		木綿豆腐				얼굴이미지を作ったので出すようにしたよ
+;	004		2021/06/19		木綿豆腐				顔グラを作ったので出すようにしたよ
 ;	005		2021/06/21		木綿豆腐				避雷針後のメッセージが消えるようになったのでWAIT入れるようにした/調教メッセージが出力される可能性があったので対処
 ;	006		2021/08/24		木綿豆腐				個別イベント5用にちょっと追加/その他ちょっと弄ったり
+;	007		2021/10/04		木綿豆腐				SPスキル使用時の台詞をちょっと変えてみたり歌が流れだしたら曲名が出るようにしたり
+;	008		2022/06/07		木綿豆腐				ちょっとしたバグを直したり
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -35,35 +37,35 @@
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 구상の誤字・脱字の修正        |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
-;	|   3| ○ | 구상まとめへの収録            |
+;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
-;	|   4| ○ | 구상の新規추가                |
+;	|   4| ○ | 口上の新規追加                |
 ;	+----+----+-------------------------------+
-;	|   5| ○ | 既存구상の改変                |
+;	|   5| ○ | 既存口上の改変                |
 ;	+----+----+-------------------------------+
 ;	|   6| ○ | 改変した口上の自由な再配布    |
 ;	+----+----+-------------------------------+
-;	|   7| ○ | 구상内容の転載                |
+;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 ;-------------------------------------------------
-;【사용CFLAG】
-;　CFLAG:800　シアンの歌판정 for Reincarnation
-;　CFLAG:801　シアンの歌판정 for Indigo Destiny
-;　CFLAG:802　避雷바늘판정
-;　CFLAG:803　個別이벤트用판정
+;【使用CFLAG】
+;　CFLAG:800　シアンの歌判定 for Reincarnation
+;　CFLAG:801　シアンの歌判定 for Indigo Destiny
+;　CFLAG:802　避雷針判定
+;　CFLAG:803　個別イベント用判定
 ;--------------------------------------------------
 @BATTLE_EVENT_K5357, ARG, ARG:1, ARG:2
-;■台詞の行数を増やしたいときは
-;PRINTL 아이うえお
+;■대사의 행 수를 늘리고 싶을 때는
+;PRINTL あいうえお
 ;PRINTL かきくけこ
 ;LOCALS:10 = さしすせそ
 ;LOCALS:11 = たちつてと
 ;KSTR:0 = なにぬねの
 ;KSTR:1 = はひふへほ
 ;　　↓
-;아이うえお
+;あいうえお
 ;かきくけこ
 ;┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;┃さしすせそ　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　┃
@@ -71,7 +73,7 @@
 ;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;なにぬねの
 ;はひふへほ
-;と増やしていく
+;로 늘려나간다
 SIF ARG < 0 && NO:ARG != 5357
 	RETURN 0
 VARSET LOCALS
@@ -151,11 +153,11 @@ SELECTCASE TFLAG:전투이벤트
 	;피소환시
 	CASE 3
 		;LOCALS:10 = 
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2がダメージ量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;아군に공격した
+		;味方に攻撃した
 		;IF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
@@ -274,7 +276,7 @@ SELECTCASE TFLAG:전투이벤트
 			ENDIF
 		ENDIF
 	;피데미지
-	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2がダメージ量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -283,7 +285,7 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS:10 = 그앗……！
 			ENDIF
-		;아군に공격された
+		;味方に攻撃された
 		ELSEIF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 			LOCALS:10 = 상대를 제대로 확인해주세요, 이쪽은 아군입니다
 		;대 데미지
@@ -363,8 +365,8 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 피할 수 없나……
 			ENDSELECT
 		ENDIF
-	;範囲공격
-	;ARGが공격をする仲魔、ARG:1が공격された적数、ARG:2が無効数(회피も含む)
+	;範囲攻撃
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が無効数(回避も含む)
 	CASE 13
 		;全弾命中した
 		IF ARG:2 == 0
@@ -412,7 +414,7 @@ SELECTCASE TFLAG:전투이벤트
 			CASE 2
 				LOCALS:10 = 움직임이 좋은 놈도 있는 것 같아
 			ENDSELECT
-		;全弾회피された
+		;全弾回避された
 		ELSEIF ARG:2 == ARG:1
 			IF RAND:2 == 0
 				SETCOLOR 0x1d9eff
@@ -431,8 +433,8 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 좀 더 제대로 노리지 않으면……
 			ENDSELECT
 		ENDIF
-	;範囲공격で적を撃破した
-	;ARGが공격をする仲魔、ARG:1が공격された적数、ARG:2が撃破数
+	;範囲攻撃で敵を撃破した
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が撃破数
 	CASE 14
 		;全員撃破
 		IF ARG:2 == ARG:1
@@ -584,9 +586,33 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 우왓！？
 			CASE "BRAND"
 				LOCALS:10 = 회복 저해라니, 귀찮게……
-			;그 외の상태이상
+			;그 외 상태이상
 			;CASEELSE
 		ENDSELECT
+	;ターン終了時今の状態による口上
+	CASE 51
+		SETCOLOR 0x33ffcc
+		;残りHP関連
+		IF LOCALS:10 == "" && KSTR:0 == ""
+			IF 0
+			ELSEIF 현HP비율(ARG) == 0
+			;HP20%以下
+			ELSEIF 현HP비율(ARG) < 20
+				SETCOLOR 0x1d9eff
+				IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1 || SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+					LOCALS:10 = わたしの歌じゃ、もうあなたの翼《チカラ》になれないの……？
+				ELSE
+					LOCALS:10 = ＧＶ、大丈夫！？　しっかりして！
+				ENDIF
+				LOCAL = 6500
+				CALL MESSAGE_P_LN("シアン", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
+				SETCOLOR 0x33ffcc
+				LOCALS:10 = 心配かけてごめん……%CSTR:ARG:일인칭%ならまだ、やれるから……！
+			;HP50%以下
+			ELSEIF 현HP비율(ARG) < 50
+				LOCALS:10 = 落ち着け……この程度の窮地、何度も切り抜けて来たはずだ……
+			ENDIF
+		ENDIF
 	;배틀에서 승리했다
 	CASE 90
 		IF CFLAG:ARG:803 == 1
@@ -649,17 +675,41 @@ SELECTCASE TFLAG:전투이벤트
 		ENDSELECT
 	;도주에 성공했다
 	CASE 92
-		LOCAL = RAND:3
-		SELECTCASE LOCAL
-		CASE 0
-			LOCALS:10 = 지금은 물러나죠
-		CASE 1
-			LOCALS:10 = 무리해서 쓰러뜨릴 수도 없다, 는 건가
-		CASE 2
-			LOCALS:10 = 알겠습니다. 철수합시다
-		ENDSELECT
+		IF RAND:2 == 0
+			SETCOLOR 0x1d9eff
+			LOCALS:10 = あっちからなら逃げられそうだよ、ＧＶ！
+			LOCAL = 6500
+			CALL MESSAGE_P_LN("シアン", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
+			SETCOLOR 0x33ffcc
+			LOCAL = RAND:3
+			SELECTCASE LOCAL
+			CASE 0
+				LOCALS:10 = こちらＧＶ。撤退用のルートを確認しました
+			CASE 1
+				LOCALS:10 = 皆さん、こっちへ。安全なルートが見つかりました！
+			CASE 2
+				LOCALS:10 = ありがとう、シアン。助かったよ
+			ENDSELECT
+		ELSE
+			LOCAL = RAND:3
+			SELECTCASE LOCAL
+			CASE 0
+				LOCALS:10 = 지금은 물러나죠
+			CASE 1
+				LOCALS:10 = 무리해서 쓰러뜨릴 수도 없다, 는 건가
+			CASE 2
+				LOCALS:10 = 알겠습니다. 철수합시다
+			ENDSELECT
+		ENDIF
 	;도주에 실패했다
 	CASE 93
+		IF RAND:2 == 0
+			SETCOLOR 0x1d9eff
+			LOCALS:10 = もう、何なの！？　本当にしつこいんだからー！
+			LOCAL = 6500
+			CALL MESSAGE_P_LN("시안", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
+			SETCOLOR 0x33ffcc
+		ENDIF
 		LOCAL = RAND:3
 		SELECTCASE LOCAL
 		CASE 0
@@ -849,11 +899,11 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 상황은 불리하지만…… 결정적인 건 아냐
 			ENDSELECT
 		ENDIF
-	;링케이지に참가した
+	;링케이지に参加した
 	CASE 100
 		IF 0
-		;스킬分岐
-		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[스킬:○○]]
+		;スキル分岐
+		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[スキル:○○]]
 		;キャラ分岐
 		;ELSEIF NO:(FLAG:행동순1) == [[キャラ:○○]]
 		ELSE
@@ -879,15 +929,17 @@ ELSE
 ENDIF
 
 @BATTLE_MESSAGE_K5357, ARG, ARG:1 = 0
-;■台詞の行数を増やしたいときは
-;PRINTL 아이うえお
+#DIM DIVA_F
+#DIM DIVA_H
+;■대사의 행 수를 늘리고 싶을 때는
+;PRINTL あいうえお
 ;PRINTL かきくけこ
 ;LOCALS:10 = さしすせそ
 ;LOCALS:11 = たちつてと
 ;KSTR:0 = なにぬねの
 ;KSTR:1 = はひふへほ
 ;　　↓
-;아이うえお
+;あいうえお
 ;かきくけこ
 ;┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;┃さしすせそ　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　┃
@@ -895,7 +947,7 @@ ENDIF
 ;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;なにぬねの
 ;はひふへほ
-;と増やしていく
+;로 늘려나간다
 VARSET LOCALS
 CALL 구상변수초기화
 
@@ -904,6 +956,8 @@ CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 LOCALS = %RESULTS%
 LOCALS:1 = 포지션{(CFLAG:ARG:타겟)}
 ;FLAG:ARG:타겟
+DIVA_F = SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]])
+DIVA_H = SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]])
 
 ;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
 ;SIF TALENT:ARG:9
@@ -1011,7 +1065,12 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 ;と言いつつ専用스킬しか搭載しないのだが
 ;-------------------------------------------------
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:SONG OF DIVA]]
+	ALIGNMENT RIGHT
 	IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+		RESETCOLOR
+		;字を斜めにするアレはできなかった
+		PRINTL ♪ - 輪廻 新章 -　　　　　
+		ALIGNMENT LEFT
 		SETCOLOR 0x1d9eff
 		IF RAND:2 == 0
 			LOCALS:10 = 너는…… 내가 지키겠어！
@@ -1026,6 +1085,9 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:SONG OF DIVA]]
 			PRINTL 　
 		ENDIF
 	ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+		RESETCOLOR
+		PRINTL ♪ - 藍の運命 -　　　　　
+		ALIGNMENT LEFT
 		SETCOLOR 0x1d9eff
 		LOCALS:10 = 나의 노래가, 너의 날개《힘》가 될 거야――
 		CFLAG:ARG:801 = 0
@@ -1079,21 +1141,35 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:피뢰침]]
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기1]]
 	CALL SING_CIAN_K5357, ARG
 	LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 	SETCOLOR 0x144ff4
 	PRINTL 　　　　천체처럼 요동치는 우레
 	PRINTL 　
 	PRINTL 　
 	PRINTL 　
 	PRINTL 　
-	PRINTL 　　　　　　 이에 이르는 모든 것을 떨쳐 내리라
+	PRINTW 　　　　　　 이에 이르는 모든 것을 떨쳐 내리라
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = ＬＩＧＨＴＮＩＮＧ ＳＰＨＥＲＥ！
-	LOCALS:11 = （라이트닝 스피어）
+	IF EQUIP:ARG:악세서리 == 5349
+		IF CFLAG:ARG:기합플래그 > 0
+			LOCALS:10 = 撃ち砕け！　ライトニングスフィア！
+		ELSE
+			LOCALS:10 = ライトニングスフィア！
+		ENDIF
+	ELSEIF DIVA_F == 1 || DIVA_H == 1
+		LOCALS:10 = ライトニングスフィア！
+	ELSE
+		LOCALS:10 = ライトニングスフィア！
+		LOCAL = CFLAG:ARG:얼굴이미지 * 100
+		SIF LOCAL == 0
+			LOCAL = 6400
+		CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:GV]], LOCAL, LOCALS:10)
+		VARSET LOCALS
+	ENDIF
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기2]]
 	CALL SING_CIAN_K5357, ARG
 	LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 	SETCOLOR 0x144ff4
 	PRINTL 　　　　번쩍이는 것은 우레를 휘감은 성검
 	PRINTL 　
@@ -1102,50 +1178,86 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기2]]
 	PRINTL 　
 	PRINTL 　　　　　　　　　　　　　 푸른 우레의 포학이여 적을 꿰뚫어라
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = ＳＰＡＲＫ ＣＡＬＩＢＵＲ！
-	LOCALS:11 = （스파크 칼리버）
+	IF EQUIP:ARG:악세서리 == 5349
+		IF CFLAG:ARG:집중플래그 > 0
+			LOCALS:10 = 切り裂け！　スパークカリバー！
+		ELSE
+			LOCALS:10 = スパークカリバー！
+		ENDIF
+	ELSEIF DIVA_F == 1 || DIVA_H == 1
+		LOCALS:10 = スパークカリバー！
+	ELSE
+		LOCALS:10 = スパークカリバー！
+		LOCAL = CFLAG:ARG:얼굴이미지 * 100
+		SIF LOCAL == 0
+			LOCAL = 6400
+		CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:GV]], LOCAL, LOCALS:10)
+		VARSET LOCALS
+	ENDIF
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기3]]
 	CALL SING_CIAN_K5357, ARG
 	LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 	SETCOLOR 0x144ff4
 	PRINTL 　　　　번쩍이는 뇌광은 반역의 길잡이
 	PRINTL 　
 	PRINTL 　　　　　　　　　　　　　　 울려 퍼지는 우레는 혈조의 증표
 	PRINTL 　
 	PRINTL 　
-	PRINTL 　　　　　　　 꿰뚫는 뇌격이야말로 만물의 이치
+	PRINTW 　　　　　　　 꿰뚫는 뇌격이야말로 만물의 이치
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = ＶＯＬＴＩＣ ＣＨＡＩＮ！
-	LOCALS:11 = （볼틱 체인）
+	IF EQUIP:ARG:악세서리 == 5349
+		IF CFLAG:ARG:기합플래그 > 0
+			LOCALS:10 = 絡め取れ！　ヴォルティックチェーン！
+		ELSE
+			LOCALS:10 = ヴォルティックチェーン！
+		ENDIF
+	ELSEIF DIVA_F == 1 || DIVA_H == 1
+		LOCALS:10 = ヴォルティックチェーン！
+	ELSE
+		LOCALS:10 = ヴォルティックチェーン！
+		LOCAL = CFLAG:ARG:얼굴이미지 * 100
+		SIF LOCAL == 0
+			LOCAL = 6400
+		CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:GV]], LOCAL, LOCALS:10)
+		VARSET LOCALS
+	ENDIF
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기4]]
 	CALL SING_CIAN_K5357, ARG
 	LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 	SETCOLOR 0x144ff4
 	PRINTL 　　　　내세운 위신이 집결하는 칼끝
 	PRINTL 　
 	PRINTL 　　　　　　　　　　　　　　 밤하늘을 개척하는 뇌인의 극점
 	PRINTL 　
 	PRINTL 　
-	PRINTL 　　　　　　　성검을 넘어, 가져오는 영광
+	PRINTW 　　　　　　　성검을 넘어, 가져오는 영광
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = ＧＬＯＲＩＯＵＳ ＳＴＲＩＺＥＲ！
-	LOCALS:11 = （글로리어스 스트라이저）
+	LOCALS:10 = グロリアスストライザー！
+	LOCAL = CFLAG:ARG:얼굴이미지 * 100
+	SIF LOCAL == 0
+		LOCAL = 6400
+	CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:GV]], LOCAL, LOCALS:10)
+	VARSET LOCALS
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기5]]
 	CALL SING_CIAN_K5357, ARG
 	LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+	CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 	SETCOLOR 0x144ff4
 	PRINTL 　　　　울려 퍼지는 것은 요정의 노랫소리
 	PRINTL 　
 	PRINTL 　　　　　　　　　　　　　 드날리는 것은 용의 포효
 	PRINTL 　
 	PRINTL 　
-	PRINTL 　　　　　　　　 총신총구, 뇌신이 되어라
+	PRINTW 　　　　　　　　 총신총구, 뇌신이 되어라
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = ＵＮＬＩＭＩＴＥＤ ＶＯＬＴ！
-	LOCALS:11 = （언리미티드 볼트）
+	LOCALS:10 = アンリミテッドヴォルト！
+	LOCAL = CFLAG:ARG:얼굴이미지 * 100
+	SIF LOCAL == 0
+		LOCAL = 6400
+	CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:GV]], LOCAL, LOCALS:10)
+	VARSET LOCALS
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:대방전]]
 	CALL SING_CIAN_K5357, ARG
 	LOCAL = RAND:3
@@ -1189,7 +1301,7 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:팔색뇌공]]
 	CASE 1
 		LOCALS:10 = 팔색뇌공！
 	CASE 2
-		IF CFLAG:기합플래그 && EQUIP:ARG:악세서리 == 5349
+		IF CFLAG:ARG:기합플래그 && EQUIP:ARG:악세서리 == 5349
 			LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
 			LOCALS:11 = 모든 것을 꿰뚫는, 지고의 벽력이 되어라！！
 		ELSE
@@ -1198,7 +1310,7 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:팔색뇌공]]
 	ENDSELECT
 ;-------------------------------------------------
 ;그 외
-;アキュラくんの실패は繰り返さない
+;アキュラくんの失敗は繰り返さない
 ;-------------------------------------------------
 ELSE
 	CALL SING_CIAN_K5357, ARG

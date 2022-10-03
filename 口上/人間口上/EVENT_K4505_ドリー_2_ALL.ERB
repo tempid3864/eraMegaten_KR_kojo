@@ -1,0 +1,5318 @@
+﻿;-------------------------------------------------
+;ドリー口上２
+;
+
+;
+;ドリー口上２のキャラクター
+;ドリーはお友達の「フロスト君」といつも一緒です
+;
+;「フロスト君」は他人に見えなかったり、他人が「フロスト君」に見えたり、自分が「フロスト君」になったりしますが……
+;
+;専用CFLAG
+;800：実況進行度フラグ　　戦闘開始時に0クリアする
+;
+;-------------------------------------------------
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:EVENT_K4505_2_ASSI.ERB
+;	Facility	:ドリー口上：組織のエージェント時口上
+;
+;	Modification Data:
+;	Edit	Date			Author					Reason
+;	001		2022/05/07		ななし					新規作成
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;ライセンスについて
+;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
+;	+----+----+-------------------------------+
+;	|番号|許可|ライセンス内容                 |
+;	+----+----+-------------------------------+
+;	|   1| ○ | 処理上のバグ修正              |
+;	+----+----+-------------------------------+
+;	|   2| ○ | 口上の誤字・脱字の修正        |
+;	+----+----+-------------------------------+
+;	|   3| ○ | 口上まとめへの収録            |
+;	+----+----+-------------------------------+
+;	|   4| ○ | 口上の新規追加                |
+;	+----+----+-------------------------------+
+;	|   5| ○ | 既存口上の改変                |
+;	+----+----+-------------------------------+
+;	|   6| ○ | 改変した口上の自由な再配布    |
+;	+----+----+-------------------------------+
+;	|   7| ○ | 口上内容の転載                |
+;	+----+----+-------------------------------+
+
+;--------------------------------------------------
+;구상셀렉트 기능：구상설명
+;--------------------------------------------------
+@셀렉트구상설명_K4505_2,ARG = 0
+SIF CFLAG:이벤트가입 != 5
+	RETURN -1
+SIF ARG == 1
+	RETURN 0
+;구상명
+PRINTFORML ドリー口上
+;구상설명문
+PRINTFORML 　組織のエージェントになったドリーです 
+
+;--------------------------------------------------
+;엑스트라모드 구문　CFLAG:220을 사용
+;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
+;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
+;--------------------------------------------------
+;IF CFLAG:220 == 0
+;	PRINTL 処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
+;	$INPUT_LOOP
+;	INPUT
+;	IF RESULT == 0
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
+;		TALENT:TARGET:0 = 1
+;		ABL:TARGET:4 = 0
+;		EXP:TARGET:0 = 0
+;	ELSEIF RESULT == 1
+;		PRINTFORMW ―通常モードで調教を開始します―
+;	ELSE
+;		GOTO INPUT_LOOP
+;	ENDIF
+;	CFLAG:220 = 1
+;ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL EVENTTRAIN_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL EVENTTRAIN_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;--------------------------------------------------
+;간이 조수구상 발동시에 첫조교시 구상을 스킵（Y1을 조수의 캐릭터번호로 한다）
+;여러 명이 있을 경우는, SIF NO:ASSI == Y1 || NO:ASSI == Z1으로 추가해 나간다
+;--------------------------------------------------
+;IF CFLAG:201 == 0 && ASSI > 0
+;	SIF NO:ASSI == Y1
+;		CFLAG:201 =1
+;ENDIF
+;--------------------------------------------------
+;EVENTTRAIN 관련（4402_3을 캐릭터번호로 치환）
+;조교 개시시의 대화 CFLAG 201～219를 사용
+;--------------------------------------------------
+@EVENTTRAIN_K4505_2
+;-------------------------------------------------
+;조교 개시시（1회만） CFLAG201
+;-------------------------------------------------
+DRAWLINE
+;첫조교시
+IF CFLAG:201 == 0
+	PRINTFORMW 資料によれば、奴隷の名は小牧翠
+	PRINTFORML 　
+	PRINTFORMW COMPを使用している所を見つけた組織の人間によって拉致
+	PRINTFORMW しばらく監禁されていたが、組織の幹部の命で性奴隷としてエージェント達の慰安用に使われていた
+	PRINTFORML そのうち利用者が減ってきた為『処分』されようとしていたが
+	PRINTFORMW 組織のエージェントとして再教育を受ける事となり、魔術師として生まれ変わる
+	PRINTFORML 
+	PRINTFORMW と、あるが…
+	PRINTFORML  
+	PRINTFORMW 「フロスト君、新しい上司が部屋に来るって言うけど、何しに来るんだろうね」
+	PRINTFORML  
+	PRINTFORMW 「えっ、『ナニ』に決まってるって？」
+	PRINTFORMW 「フロスト君、ギャグが冴えてるよ♪」
+	PRINTFORMW %CALLNAME%の部屋のドアを開けると、ロングヘアにメガネの少女が虚空に向かって話しかけていた
+	PRINTFORML  
+	PRINTFORML 「あ、来たんだ」
+	PRINTFORM 「じゃあ、フロスト君も混じって
+	;조수がいる場合
+	IF ASSI > 0 
+		PRINTFORMW 四人で始めよ♪」
+		PRINTFORMW 「誰がどの穴を使うかはジャンケンで決めてね」
+	ELSE
+		PRINTFORML 三人ではじめよ♪」
+		PRINTFORMW 「で、フロスト君は今日はどの穴を使う？」
+	ENDIF
+	PRINTFORML 　
+	PRINTFORML 慰安婦として使われている間に精神が崩壊して
+	PRINTFORMW 見えない友人を創造して会話をしている、という話は本当の様だ…
+	CFLAG:201 = 1
+	RETURN 0
+;굴복각인Lv3
+ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && 함락() == 0
+;	PRINTFORMW 
+	CFLAG:201 = 4
+	RETURN 0
+;함락
+ELSEIF CFLAG:201 < 5 && (TALENT:연모 || TALENT:음란 || TALENT:예속)
+;	PRINTFORMW 
+	CFLAG:201 = 5
+	RETURN 0
+ENDIF
+
+;-------------------------------------------------
+;간이 조수구상（Y1을 조수의 캐릭터번호로 치환, X1을 캐릭터번호로 변경한다) CFLAG203
+;말할 캐릭터를 늘릴 경우, 구문을 복사＆붙여넣기 해, CFLAG의 수를 204, 205로 늘린다
+;-------------------------------------------------
+;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
+IF ASSI < 0 
+	CALL EVENTTRAIN_SECOND_K4505_2
+;조수
+;ELSEIF NO:ASSI == Y1
+	;처음
+;	IF CFLAG:203 == 0
+		;함락완료＋함락시 첫 구상이 발생완료
+;		IF 함락() && CFLAG:201 >= 5
+;			PRINTFORMW 
+		;그 이외
+;		ELSE
+;			PRINTFORMW 
+;		ENDIF
+;		CFLAG:203 = 1
+	;2번째 이후
+;	ELSEIF CFLAG:203 < 2 || FLAG:7 ==2
+		;함락완료
+;		IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
+;			PRINTFORMW 
+		;그 이외
+;		ELSE
+;			PRINTFORMW 
+;		ENDIF
+;		CFLAG:203 = 2
+;	ENDIF
+;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
+ELSE
+	CALL EVENTTRAIN_SECOND_K4505_2
+ENDIF
+
+;-------------------------------------------------
+;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
+;-------------------------------------------------
+@EVENTTRAIN_SECOND_K4505_2
+;반발각인Lv3
+IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　なめんなよ』
+		RESETCOLOR
+		PRINTFORML 「駄目だよ、フロスト君。いきなり喧嘩なんて売ったら」
+		PRINTFORMW %CALLNAME%は一人芝居をしている…
+	ELSEIF RAND:2 == 0
+		PRINTFORML 「うん…」
+		PRINTFORML 「この人は上司だから殺しちゃダメなんだよ、フロスト君」
+		PRINTFORMW %CALLNAME%は何もない空間に説教をしている…
+	ELSE
+		PRINTFORML 　
+		PRINTFORML ぶんっ
+		PRINTFORML 　
+		PRINTFORMW いきなり時計が飛んできた
+		PRINTFORML 　
+		PRINTFORML 「駄目だよ、フロスト君」
+		PRINTFORML 「いきなりブフなんて撃ったりしたら」
+		PRINTFORMW %CALLNAME%は何もない空間に説教をしている…
+	ENDIF
+;굴복각인Lv3
+ELSEIF MARK:2 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
+	IF RAND:4 == 0
+		PRINTFORMW 「%CSTR:이인칭%、来たんだ」
+		PRINTFORML 「フロスト君とシてたんだけど、一緒に混じる？」
+		IF EXIST_ITEM(4)
+			;バイブを持っている場合、自分で挿れてる
+			CFLAG:LOCAL:속옷（하） = 0
+			PRINTFORMW %CALLNAME%は穴にバイブを入れながら四つん這いなっている
+			PRINTFORML 　
+			PRINTFORMW 「ほら、後ろの穴が空いてるヨ%ハート()%」
+			TEQUIP:13 = 1
+		ELSE
+			;バイブを持っていない場合、指で我慢
+			PRINTFORMW %CALLNAME%は大きく足を開くと愛液まみれで準備万端の両穴を曝した
+		ENDIF
+	ELSEIF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　ニンゲンがきたぜ』
+		PRINTFORML 『パーティータイムだ』
+		RESETCOLOR
+		PRINTFORML 　
+		PRINTFORMW 「そうだね、%CSTR:이인칭%が来たし始めよっか♪」
+	ELSEIF RAND:2 == 0
+		PRINTFORML 「あぁっ%ハート()%」
+		PRINTFORML 「フロスト君のオチンチン、冷たくて気持ちイイ♪」
+		PRINTFORMW %CALLNAME%はアイスキャンディーを両穴に入れてオナニーの最中だった
+		PRINTFORML ………
+		PRINTFORML ……
+		PRINTFORML …
+		PRINTFORMW 「ふぅ…フロスト君、まだ出来るんだ♪」
+		PRINTFORML 「なら、おちんちん奇麗にしてあげるね♪」」
+		PRINTFORMW %CALLNAME%は両手に持ったアイスキャンディーを艶めかしく舐めている…
+	ELSE
+		PRINTFORML 「送信……っと♪」
+		PRINTFORMW 「あっ、丁度リプ返が終わったところだよ」
+		PRINTFORML 　
+		PRINTFORML 「みんな普段は『このメンヘラ』『フロスト君ってなんすかｗｗｗ』」とか言うけど」
+		PRINTFORMW 「フロスト君とヤってる動画だと『女神降臨！』『もっとうｐ』」とか言うんだよね」
+		PRINTFORMW 「みんなでアップ用のハメ撮り動画、撮っちゃう？」
+	ENDIF
+ELSE
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　よくきたな』
+		RESETCOLOR
+	ELSEIF RAND:2 == 0
+		PRINTFORML 「いらっしゃい」
+		PRINTFORML 「好きに使っていいから…」
+		PRINTFORMW %CALLNAME%はこちらに目もくれず漫画を読んでいる…
+	ELSE
+		PRINTFORML 「お客さんが来たから今日はここまでだよ、フロスト君」
+		PRINTFORMW %CALLNAME%は自慰の途中だったようだ
+	ENDIF
+ENDIF
+CFLAG:202 = 4
+RETURN 0
+
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL EVENTEND_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	SIF NO:ASSI == Y1
+;	CALL EVENTEND_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;--------------------------------------------------
+;조교 종료시의 대사
+;--------------------------------------------------
+DRAWLINE
+;반발각인Lv3
+IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
+	IF RAND:2 == 0
+		PRINTFORML 「最悪だったね、フロスト君」
+		PRINTFORMW 「後で二人だけでシようね%ハート()%」
+	ELSE
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　ツギにあったら氷漬けだぜ』
+		PRINTFORML 『カクゴしとくんだな』
+		RESETCOLOR
+		PRINTFORMW 無表情の%CALLNAME%に脅された
+	ENDIF
+	CFLAG:217 = 1
+;体力500未満
+ELSEIF BASE:0 < 500
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『もうオネンネかい、%CALLNAME%』
+		RESETCOLOR
+		PRINTFORML 「うん、もうダウン…」
+		PRINTFORMW ベッドに突っ伏したまま%CALLNAME%は寝息を立てている
+	ELSEIF RAND:2 == 0
+		PRINTFORML 「つかれて動けない…」
+		PRINTFORMW 「フロスト君、お風呂連れてって～」
+		PRINTFORML 　
+		PRINTFORML 「……そっか」
+		PRINTFORMW 「フロスト君、お風呂なんか入ったら溶けちゃうもんね…ゴメンゴメン」
+	ELSE
+		PRINTFORML 「フロスト君の体、冷たくて気持ちいい…」
+		PRINTFORMW %CALLNAME%は枕を抱きながら疲れて寝てしまった
+	ENDIF
+	CFLAG:218 = 1
+ELSE
+	IF RAND:3 == 0
+		PRINTFORMW 「フロスト君も楽しかった？」
+		PRINTFORMW 「そう、なら良かった%ハート()%」
+	ELSEIF RAND:2 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　楽しかったぜ』
+		PRINTFORMW 『また来いよな』
+		RESETCOLOR
+		PRINTFORML 　
+		PRINTFORML 「もぅ…%CSTR:이인칭%と一緒だから」
+		PRINTFORMW 「フロスト君もハッスルしちゃったじゃない」
+		PRINTFORMW 「%CSTR:일인칭%？　楽しかったよ♪」
+	ELSE
+		PRINTFORML 「フロスト君も喜んでるし」
+		PRINTFORMW 「また次もみんなで楽しもうね%ハート()%」
+	ENDIF
+	CFLAG:219 = 3
+ENDIF
+RETURN 0
+
+;--------------------------------------------------
+;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
+;커맨드 실행시에 출력됩니다
+;--------------------------------------------------
+@KOJO_MESSAGE_COM_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL TRAIN_MESSAGE
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_COM_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_COM_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;커맨드 실행시의 대사 CFLAG 300～500
+;-------------------------------------------------
+;=================================================
+;애무계 커맨드
+;=================================================
+;-------------------------------------------------
+;0,애무
+;-------------------------------------------------
+SELECTCASE SELECTCOM
+	CASE 0
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒーホー。　股間が雪解けホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「フロスト君と二人がかりなんて…♪」
+		ELSE
+			PRINTFORMW 「フロスト君…触り方が…エッチ♪」
+		ENDIF
+		CFLAG:300 = 2
+
+;-------------------------------------------------
+;1,커닐링구스
+;-------------------------------------------------
+	CASE 1
+		CALL TRAIN_MESSAGE
+		IF RAND:4 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　股間が雪解けホー』
+			RESETCOLOR
+		ELSEIF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　オレはカキ氷じゃないホー』
+			RESETCOLOR
+		ELSEIF RAND:2 
+			PRINTFORMW 「そんな二人がかりで舐められたら…♪」
+		ELSE
+			PRINTFORML 「好き%ハート()%」
+			PRINTFORMW 「フロスト君の舐め方、好き%ハート()%」
+		ENDIF
+		CFLAG:301 = 2
+
+;-------------------------------------------------
+;2,펠라한다
+;-------------------------------------------------
+	CASE 2
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　オイラのアイスキャンディー、おいしいだろ？』
+			RESETCOLOR
+			PRINTFORMW 「うん、喜んで舐めてくれてるよ♪」
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「フロスト君…そこ、そこがイイの…♪」
+		ELSE
+			PRINTFORMW 「そんな二人がかりで舐められたら…♪」
+		ENDIF
+		CFLAG:302 = 2
+
+;-------------------------------------------------
+;3,손가락삽입
+;-------------------------------------------------
+	CASE 3
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「フロスト君の指、いつもと違って長くて太いけど…」
+			PRINTFORMW 「気持ちイイよ♪」
+		ELSE
+			PRINTFORMW 「次はフロスト君のオチンチン、ちょうだい%ハート()%」
+		ENDIF
+		CFLAG:303 = 2
+
+;-------------------------------------------------
+;4,애널핥기
+;-------------------------------------------------
+	CASE 4
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『そこ舐めても氷はでないホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「フロスト君の舌、いつもと違ってあったかい…%ハート()%」
+		ELSE
+			PRINTFORMW 「舐めなくったって、準備はいつでもできてるよ、フロスト君♪」
+		ENDIF
+		CFLAG:304 = 2
+
+;-------------------------------------------------
+;5,애널애무
+;-------------------------------------------------
+	CASE 5
+		CALL TRAIN_MESSAGE
+		IF RAND:4 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『そこをマッサージしても氷はでないホー』
+			RESETCOLOR
+		ELSEIF RAND:3 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「フロスト君の指、いつもと違って長くて太くて、あったかい…%ハート()%」
+		ELSE
+			PRINTFORML 「んもぉ～%ハート()%」
+			PRINTFORMW 「前戯なんかしなくてもいいのに♪」
+		ENDIF
+		CFLAG:305 = 2
+
+;-------------------------------------------------
+;6,가슴주무르기
+;-------------------------------------------------
+	CASE 6
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『そんなに揉まれると、溶けちまうホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「フロスト君の指、いつもと違ってあったかい…%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:306 = 2
+
+;-------------------------------------------------
+;7,유두자극
+;-------------------------------------------------
+	CASE 7
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『優しく扱わないと溶けちまうホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「フロスト君の指、いつもと違ってあったかい…%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:307 = 2
+
+;-------------------------------------------------
+;8,가슴애무
+;-------------------------------------------------
+	CASE 8
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0 && BUST() > 3
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『そんなに揉まれると、溶けちまうホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「フロスト君の指、いつもと違ってあったかい…%ハート()%」
+		ELSE
+			PRINTFORMW 「フロスト君の触り方、エッチだから%CSTR:일인칭%も興奮してきちゃった%ハート()%」
+		ENDIF
+		CFLAG:308 = 2
+
+;-------------------------------------------------
+;9,조개젖히기
+;-------------------------------------------------
+	CASE 9
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『中はアツアツだホー。　試してみるか？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「あっ♪」
+			PRINTFORMW 「冷たい息吹きかけられたら声出ちゃう%ハート()%」
+		ELSE
+			PRINTFORMW 「ほら、早くシようよ、フロスト君♪」
+		ENDIF
+		CFLAG:309 = 2
+
+;-------------------------------------------------
+;10,가슴자위
+;-------------------------------------------------
+	CASE 10
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー』
+			IF BUST() > 3
+				PRINTFORMW 『相変わらずでかいオッパイ』
+			ELSE
+				PRINTFORMW 『小さいけど感度は良好』
+			ENDIF
+			PRINTFORMW 『やっぱり%CALLNAME%はエッチだホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「見ててね、フロスト君」
+			PRINTFORMW 「%CSTR:일인칭%のチクニー%ハート()%」
+		ELSE
+			PRINTFORML 「オッパイ欲しくなったら言ってね」
+			PRINTFORMW 「すぐにオナニー中止するから♪」
+		ENDIF
+		CFLAG:310 = 2
+
+;-------------------------------------------------
+;11,자위
+;-------------------------------------------------
+	CASE 11
+		CALL TRAIN_MESSAGE
+		IF RAND:4 == 0 && TEQUIP:비디오카메라 == 1
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒーホー』
+			PRINTFORML 『これから%CALLNAME%のオナニーショーだホー♪』
+			PRINTFORMW 『お前ら瞬き一つせずによーく見とくホー』
+			RESETCOLOR
+		ELSEIF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー』
+			PRINTFORMW 『%CALLNAME%のカラダ、熱くてとてちゃいそうだホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「見てて興奮したら押し倒してもいいよ♪」
+		ELSE
+			PRINTFORML 「見ててね、フロスト君」
+			PRINTFORMW 「%CSTR:일인칭%のオナニー%ハート()%」
+		ENDIF
+		CFLAG:311 = 2
+
+;-------------------------------------------------
+;12,날개애무
+;-------------------------------------------------
+	CASE 12
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:435 == 0 && FLAG:7 == 2
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『%CALLNAME%も羽が生えて、オレ達の仲間入りホー？』
+			RESETCOLOR
+			CFLAG:435 = 1
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+		ENDIF
+		CFLAG:435 = 2
+
+;-------------------------------------------------
+;13,꼬리애무
+;-------------------------------------------------
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:436 == 0 && FLAG:7 == 2
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『%CALLNAME%も尻尾が生えて、オレ達の仲間入りホー？』
+			RESETCOLOR
+			CFLAG:436 = 1
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML
+			ELSE
+				PRINTFORML 
+			ENDIF
+		ENDIF
+		CFLAG:436 = 2
+
+;-------------------------------------------------
+;14,클리애무
+;-------------------------------------------------
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー！』
+			PRINTFORMW 『体が熱くなってきたホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORMW 
+		ENDIF
+		CFLAG:442 = 2
+
+;-------------------------------------------------
+;15,엉덩이애무
+;-------------------------------------------------
+	CASE 15
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORMW 
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:445 = 2
+
+
+;=================================================
+;커뮤니케이션계 커맨드
+;=================================================
+;-------------------------------------------------
+;20,키스한다
+;-------------------------------------------------
+	CASE 20
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒホー、氷漬けにしてやるホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「……」
+			PRINTFORMW 「唇、貼り付かなかったね♪」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:312 = 2
+
+;-------------------------------------------------
+;21,아무것도안한다
+;-------------------------------------------------
+	CASE 21
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『たいくつだホー』
+			PRINTFORML 『プリクラとるホ？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「フロストく～ん、アイスとって～」
+		ELSE
+			PRINTFORMW 「休憩とか認めないゾ♪」
+			PRINTFORMW 「最低でも抜かずの三回はシないと、ね♪」
+		ENDIF
+		CFLAG:313 = 2
+
+
+;-------------------------------------------------
+;22,회화　연모, 친애만
+;-------------------------------------------------
+	CASE 22
+		CALL TRAIN_MESSAGE
+		CFLAG:314 = 2
+
+;-------------------------------------------------
+;23,프레젠트　연모, 친애만
+;-------------------------------------------------
+	CASE 23
+		CALL TRAIN_MESSAGE
+		CFLAG:315 = 2
+
+;-------------------------------------------------
+;24,스킨쉽　연모, 친애만
+;-------------------------------------------------
+	CASE 24
+		CALL TRAIN_MESSAGE
+		CFLAG:316 = 2
+
+;-------------------------------------------------
+;25,느긋하게있는다　연모, 친애만
+;-------------------------------------------------
+	CASE 25
+		CALL TRAIN_MESSAGE
+		CFLAG:317 = 2
+
+;-------------------------------------------------
+;26,가사　연모, 친애만
+;-------------------------------------------------
+	CASE 26
+		CALL TRAIN_MESSAGE
+		CFLAG:318 = 2
+
+;-------------------------------------------------
+;27,노래연습　연모, 친애만
+;-------------------------------------------------
+	CASE 27
+		CALL TRAIN_MESSAGE
+		CFLAG:319 = 2
+
+;-------------------------------------------------
+;28,매도
+;-------------------------------------------------
+	CASE 28
+		CALL TRAIN_MESSAGE
+		;함락완료
+		IF 함락() && (CFLAG:320 < 4 || FLAG:7 == 2)
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒーホー、なめんなよ』
+			RESETCOLOR
+			CFLAG:320 = 4
+		;굴복각인Lv3
+		ELSEIF MARK:2 == 3 && (CFLAG:320 < 3 || FLAG:7 == 2)
+			PRINTFORML 
+			CFLAG:320 = 3
+		;그 이외
+		ELSEIF CFLAG:320 < 2 || FLAG:7 == 2
+			PRINTFORML 
+			CFLAG:320 = 2
+		ENDIF
+
+;-------------------------------------------------
+;29,비디오감상　함락완료만
+;-------------------------------------------------
+	CASE 29
+		CALL TRAIN_MESSAGE
+
+		CFLAG:321 = 2
+
+
+;=================================================
+;도구사용 커맨드
+;=================================================
+;40,로터
+;-------------------------------------------------
+	CASE 40
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORMW 
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 
+		ELSE
+			PRINTFORMW 
+		ENDIF
+		CFLAG:322 = 2
+
+;-------------------------------------------------
+;41,전기마사지기
+;-------------------------------------------------
+	CASE 41
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORMW 
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 
+		ELSE
+			PRINTFORMW 
+		ENDIF
+		CFLAG:323 = 2
+
+;-------------------------------------------------
+;42,클리캡
+;-------------------------------------------------
+	CASE 42
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:11 == 1
+			;IF RAND:2 == 0
+				PRINTFORMW 
+			;ELSE
+			;ENDIF
+		ELSE
+;			IF RAND:2 == 0
+				PRINTFORMW 
+;			ELSE
+;			ENDIF
+		ENDIF
+		CFLAG:324 = 1
+
+;-------------------------------------------------
+;43,오나홀
+;-------------------------------------------------
+	CASE 43
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:12 == 1
+			IF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ELSE
+;			IF RAND:2 == 0
+				PRINTFORMW 
+;			ELSE
+;			ENDIF
+		ENDIF
+		CFLAG:325 = 1
+
+;-------------------------------------------------
+;44,바이브
+;-------------------------------------------------
+	CASE 44
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:13 == 1
+			IF RAND:3 == 0
+				PRINTFORMW 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「これ」
+				PRINTFORML 「いつものより小さいね、フロスト君」
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ENDIF
+		CFLAG:326 = 1
+
+;-------------------------------------------------
+;45,애널바이브
+;-------------------------------------------------
+	CASE 45
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:14 == 1
+			IF RAND:3 == 0
+				PRINTFORMW 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「これ」
+				PRINTFORML 「いつものより小さいね、フロスト君」
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ENDIF
+		CFLAG:327 = 1
+
+;-------------------------------------------------
+;46,애널비즈
+;-------------------------------------------------
+	CASE 46
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:15 == 1
+			IF RAND:4 == 0
+				PRINTFORMW 
+			ELSEIF RAND:3 == 0
+				PRINTFORMW 
+			ELSEIF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ELSE
+			IF CFLAG:328 == 1 || FLAG:7 == 2
+				IF RAND:2 == 0
+					PRINTFORMW 
+				ELSE
+					PRINTFORMW 
+				ENDIF
+			ENDIF
+		ENDIF
+		CFLAG:328 = 1
+
+;-------------------------------------------------
+;47,유두캡
+;-------------------------------------------------
+	CASE 47
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:16 == 1
+			IF RAND:2 == 0
+				PRINTFORMW 
+			ELSEIF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+				CFLAG:329 = 2
+			ENDIF
+		ELSE
+;			IF RAND:2 == 0
+				PRINTFORMW 
+;			ENDIF
+		ENDIF
+		CFLAG:329 = 1
+
+;-------------------------------------------------
+;48,유두로터
+;-------------------------------------------------
+	CASE 48
+		CALL TRAIN_MESSAGE
+		IF RAND:2 == 0
+			PRINTFORMW 
+		ELSE
+			PRINTFORMW 
+		ENDIF
+		CFLAG:330 = 2
+
+;-------------------------------------------------
+;49,착유기
+;-------------------------------------------------
+	CASE 49
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:17 == 1
+			IF RAND:3 == 0
+				PRINTFORMW 
+			ELSEIF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORMW 
+			ELSE
+				PRINTFORMW 
+			ENDIF
+		ENDIF
+		CFLAG:331 = 1
+
+
+;=================================================
+;섹스계 커맨드
+;=================================================
+;-------------------------------------------------
+;60,정상위
+;-------------------------------------------------
+	CASE 60
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　アクマを犯して楽しいホ？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「うん、やっぱり本物のオチンチンはいいね、フロスト君♪」
+		ELSE
+			PRINTFORML 「そう、ソコ♪」
+			PRINTFORMW 「フロスト君のオチンチン、あったかい♪」
+		ENDIF
+		CFLAG:332 = 1
+
+;-------------------------------------------------
+;61,후배위
+;-------------------------------------------------
+	CASE 61
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORML 『%CALLNAME%も気持ち良さそうな顔して喘いでいるホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「もぉ～」
+			PRINTFORMW 「恥ずかしいから繋がっている所を実況しないでよぉ～%ハート()%」
+		ELSE
+			PRINTFORML 「そう、ソコ♪」
+			PRINTFORMW 「フロスト君のオチンチン、奥まで届いてるよ♪」
+		ENDIF
+		CFLAG:333 = 1
+
+;-------------------------------------------------
+;62,정상위애널
+;-------------------------------------------------
+	CASE 62
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　アクマを犯して楽しいホ？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「うん、やっぱりお尻でスるのはいいね、フロスト君♪」
+		ELSE
+			PRINTFORML 「そう、ソコ♪」
+			PRINTFORMW 「フロスト君のアイスキャンディーで、お尻の中があったかい♪」
+		ENDIF
+		CFLAG:334 = 1
+
+;-------------------------------------------------
+;63,후배위애널
+;-------------------------------------------------
+	CASE 63
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORML 『尻穴なのに%CALLNAME%も気持ち良さそうな顔して喘いでいるホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「もぉ～」
+			PRINTFORMW 「恥ずかしいから繋がっている所を実況しないでよぉ～%ハート()%」
+		ELSE
+			PRINTFORML 「そう、ソコ♪」
+			PRINTFORMW 「フロスト君のオチンチン、奥まで届いてるよ♪」
+		ENDIF
+		CFLAG:335 = 2
+
+;-------------------------------------------------
+;64,역강간
+;-------------------------------------------------
+	CASE 64
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:336 = 1
+
+;-------------------------------------------------
+;65,젖성교
+;-------------------------------------------------
+	CASE 65
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:337 = 1
+
+;-------------------------------------------------
+;66,기승위
+;-------------------------------------------------
+	CASE 66
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒーホー♪』
+			PRINTFORMW 『動けば動くほどキモチ良いホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「フロスト君は動かなくていいから」
+			PRINTFORMW 「沢山セーエキ出してね♪」
+		ELSE
+			PRINTFORML 「うん」
+			PRINTFORMW 「じゃあもっと激しく動いちゃうね%ハート()%」
+			PRINTFORML 「先に一人でイっちゃ駄目だゾ♪」
+			PRINTFORMW %CALLNAME%は見えない何かと話しながら腰を振っている
+		ENDIF
+		CFLAG:338 = 1
+
+;-------------------------------------------------
+;67,기승위애널
+;-------------------------------------------------
+	CASE 67
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORMW 『ヒーホー♪』
+			PRINTFORMW 『動けば動くほどキモチ良いホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「フロスト君は動かなくていいからね♪」
+		ELSE
+			PRINTFORML 「うん」
+			PRINTFORMW 「じゃあ、もっと激しく動いちゃうね%ハート()%」
+			PRINTFORML 「先に一人でイっちゃ駄目だゾ♪」
+			PRINTFORMW %CALLNAME%は見えない何かと話しながら腰を振っている
+		ENDIF
+		CFLAG:339 = 1
+
+;-------------------------------------------------
+;68,대면좌위
+;-------------------------------------------------
+	CASE 68
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:340 = 1
+
+;-------------------------------------------------
+;69,배면좌위
+;-------------------------------------------------
+	CASE 69
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:341 = 1
+
+;-------------------------------------------------
+;70,대면좌위애널
+;-------------------------------------------------
+	CASE 70
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:340 = 1
+
+;-------------------------------------------------
+;71,배면좌위애널
+;-------------------------------------------------
+	CASE 71
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:343 = 1
+
+;-------------------------------------------------
+;72,속옷비켜삽입
+;-------------------------------------------------
+	CASE 72
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:420 = 1
+
+;-------------------------------------------------
+;73,속옷비켜삽입애널
+;-------------------------------------------------
+	CASE 73
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:421 = 1
+
+
+;=================================================
+;봉사계 커맨드
+;=================================================
+;-------------------------------------------------
+;80,수음
+;-------------------------------------------------
+	CASE 80
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー！』
+			PRINTFORMW 『チンコ熱くてオイラの手が溶けちまうホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORMW 「フロスト君のオチンチン、すごく熱くなってる♪」
+			PRINTFORMW 「このままだと溶けちゃうから、セーエキだしてスッキリしようか%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:344 = 1
+
+;-------------------------------------------------
+;81,펠라치오
+;-------------------------------------------------
+	CASE 81
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー！』
+			PRINTFORMW 『オイラのアイスキャンディーおいしいだホ？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「フロスト君のアイスキャンディーおいしい%ハート()%」
+			PRINTFORMW 「これなら何本でも食べられるよ♪」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:345 = 1
+
+;-------------------------------------------------
+;82,파이즈리
+;-------------------------------------------------
+	CASE 82
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホ？』
+			PRINTFORMW 『オイラにいれないのか？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「ほらほ～ら♪」
+			PRINTFORMW 「フロスト君のアイスキャンディー、%CSTR:일인칭%のオッパイで溶かしちゃうゾ%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:346 = 1
+
+;-------------------------------------------------
+;83,스마타
+;-------------------------------------------------
+	CASE 83
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホ？』
+			PRINTFORMW 『オイラにいれないのか？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「ほらほ～ら♪」
+			PRINTFORMW 「フロスト君のアイスキャンディー、下の口で舐めちゃうゾ%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:347 = 1
+
+;-------------------------------------------------
+;84,거품춤
+;-------------------------------------------------
+	CASE 84
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:348 = 1
+
+;-------------------------------------------------
+;85,풋잡
+;-------------------------------------------------
+	CASE 85
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:349 = 1
+
+;-------------------------------------------------
+;86,다리핥기강제
+;-------------------------------------------------
+	CASE 86
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:350 = 1
+
+;-------------------------------------------------
+;87,세로파이즈리
+;-------------------------------------------------
+	CASE 87
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:351 = 1
+
+;-------------------------------------------------
+;88,파이즈리펠라
+;-------------------------------------------------
+	CASE 88
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:352 = 1
+
+;-------------------------------------------------
+;89,모유마시기　함락완료만
+;-------------------------------------------------
+	CASE 89
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホ？』
+			PRINTFORMW 『オイラのアイスミルク欲しいホ？』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「ほらほら～」
+			PRINTFORMW 「これ飲んでアイスキャンディー作ってねゾ%ハート()%」
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:353 = 1
+
+
+;=================================================
+;조교자봉사계 커맨드
+;=================================================
+;-------------------------------------------------
+;수음한다
+;-------------------------------------------------
+	CASE 90
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:423 = 1
+
+;-------------------------------------------------
+;파이즈리한다
+;-------------------------------------------------
+	CASE 91
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:424 = 2
+
+;-------------------------------------------------
+;정상위시킨다
+;-------------------------------------------------
+	CASE 92
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:425 == 0 && CFLAG:426 == 0 && CFLAG:427 == 0
+			PRINTFORML 
+			CFLAG:425 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:425 = 2
+		ENDIF
+
+;-------------------------------------------------
+;후배위시킨다
+;-------------------------------------------------
+	CASE 93
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:425 == 0 && CFLAG:426 == 0 && CFLAG:427 == 0
+			PRINTFORML 
+			CFLAG:426 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:426 = 2
+		ENDIF
+
+;-------------------------------------------------
+;기승위한다
+;-------------------------------------------------
+	CASE 94
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:425 == 0 && CFLAG:426 == 0 && CFLAG:427 == 0
+			PRINTFORML 
+			CFLAG:427 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:427 = 2
+		ENDIF
+
+;-------------------------------------------------
+;애널정상위시킨다
+;-------------------------------------------------
+	CASE 95
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:428 == 0 &&  CFLAG:429 ==  0 && CFLAG:430 == 0
+			PRINTFORML 
+			CFLAG:428 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:428 = 2
+		ENDIF
+
+;-------------------------------------------------
+;애널후배위시킨다
+;-------------------------------------------------
+	CASE 96
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:428 == 0 &&  CFLAG:429 ==  0 && CFLAG:430 == 0
+			PRINTFORML 
+			CFLAG:429 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:429 = 2
+		ENDIF
+
+;-------------------------------------------------
+;애널기승위한다
+;-------------------------------------------------
+	CASE 97
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:428 == 0 &&  CFLAG:429 ==  0 && CFLAG:430 == 0
+			PRINTFORML 
+			CFLAG:430 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:430 = 2
+		ENDIF
+
+
+;=================================================
+;SM계 커맨드
+;=================================================
+;-------------------------------------------------
+;100,스팽킹
+;-------------------------------------------------
+	CASE 100
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:354 = 1
+
+;-------------------------------------------------
+;101,젖스팽킹
+;-------------------------------------------------
+	CASE 101
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:355 = 1
+
+;-------------------------------------------------
+;102,채찍
+;-------------------------------------------------
+	CASE 102
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:356 = 1
+
+;-------------------------------------------------
+;103,양초
+;-------------------------------------------------
+	CASE 103
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML ヤメルホー。　とけるホー
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:355 = 1
+
+;-------------------------------------------------
+;104,바늘
+;-------------------------------------------------
+	CASE 104
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:358 = 1
+
+;-------------------------------------------------
+;105,아이마스크
+;-------------------------------------------------
+	CASE 105
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:18 == 1
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:359 = 1
+		ELSE
+;			IF FLAG:7 == 2
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:359 = 2
+		ENDIF
+
+;-------------------------------------------------
+;106,밧줄
+;-------------------------------------------------
+	CASE 106
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:19 == 1
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:360 = 1
+		ELSE
+;			IF FLAG:7 == 2
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:360 = 2
+		ENDIF
+
+;-------------------------------------------------
+;107,볼재갈
+;-------------------------------------------------
+	CASE 107
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:20 == 1
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:361 = 1
+		ELSE
+;			IF FLAG:7 == 2
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:362 = 2
+		ENDIF
+
+
+;=================================================
+;조수에 의한 커맨드, 및 레즈플레이
+;=================================================
+;-------------------------------------------------
+;120,커닐링구스강제
+;-------------------------------------------------
+	CASE 120
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:362 = 1
+
+;-------------------------------------------------
+;121,조개맞대기
+;-------------------------------------------------
+	CASE 121
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:363 = 1
+
+;-------------------------------------------------
+;122,조수를범하게한다
+;-------------------------------------------------
+	CASE 122
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:364 = 1
+
+;-------------------------------------------------
+;123,풋잡한다
+;-------------------------------------------------
+	CASE 123
+		CALL TRAIN_MESSAGE
+		IF CFLAG:365 == 0
+			PRINTFORML 
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:365 = 1
+		ENDIF
+
+;-------------------------------------------------
+;124,더블펠라
+;-------------------------------------------------
+	CASE 124
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:366 = 1
+
+;-------------------------------------------------
+;125,더블파이즈리
+;-------------------------------------------------
+	CASE 125
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:367 = 1
+
+;-------------------------------------------------
+;126,가슴맞대기
+;-------------------------------------------------
+	CASE 126
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:368 = 1
+
+;-------------------------------------------------
+;127,자위과시
+;-------------------------------------------------
+	CASE 127
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:432 = 1
+
+;-------------------------------------------------
+;128,조개젖히기과시
+;-------------------------------------------------
+	CASE 127
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:465 = 1
+
+;-------------------------------------------------
+;129,자위구음과시
+;-------------------------------------------------
+	CASE 127
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:466 = 1
+
+
+;=================================================
+;하드한조교 커맨드
+;=================================================
+;-------------------------------------------------
+;140,이라마치오
+;-------------------------------------------------
+	CASE 140
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:369 = 1
+
+;-------------------------------------------------
+;141,피스트퍽　복종, 예속만
+;-------------------------------------------------
+	CASE 141
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:370 = 1
+
+;-------------------------------------------------
+;142,애널피스트　복종, 예속만
+;-------------------------------------------------
+	CASE 142
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:371 = 1
+
+;-------------------------------------------------
+;143,양구멍피스트　복종, 예속만
+;-------------------------------------------------
+	CASE 143
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:372 = 4
+
+;-------------------------------------------------
+;144,방뇨
+;-------------------------------------------------
+	CASE 144
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:373 = 1
+
+;-------------------------------------------------
+;145,애널봉사강제
+;-------------------------------------------------
+	CASE 145
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:374 = 1
+
+;-------------------------------------------------
+;146,관장기＋플러그
+;-------------------------------------------------
+	CASE 146
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:21
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:375 = 1
+		ELSE
+			IF CFLAG:375 == 1 || FLAG:7 == 2
+				PRINTFORML 
+			ENDIF
+		ENDIF
+
+;-------------------------------------------------
+;147,공기관장
+;-------------------------------------------------
+	CASE 147
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:376 = 1
+
+;-------------------------------------------------
+;148,확장벌룬
+;-------------------------------------------------
+	CASE 148
+		CALL TRAIN_MESSAGE
+;		IF TEQUIP:22
+;			IF RAND:3 == 0
+;				PRINTFORML 
+;			ELSEIF RAND:2 == 0
+				PRINTFORML 
+;			ELSE
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:377 = 1
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+
+;-------------------------------------------------
+;149,애널전극　복종, 예속만
+;-------------------------------------------------
+	CASE 149
+		CALL TRAIN_MESSAGE
+;		IF TEQUIP:23
+;			IF RAND:3 == 0
+;				PRINTFORML 
+;			ELSEIF RAND:2 == 0
+;				PRINTFORML 
+;			ELSE
+				PRINTFORML 
+;			ENDIF
+			CFLAG:378 = 1
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+
+;-------------------------------------------------
+;150,유방전극　복종, 예속만
+;-------------------------------------------------
+	CASE 150
+		CALL TRAIN_MESSAGE
+;		IF TEQUIP:24
+;			IF RAND:3 == 0
+;				PRINTFORML 
+;			ELSEIF RAND:2 == 0
+				PRINTFORML 
+;			ELSE
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:379 = 1
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+
+;-------------------------------------------------
+;151,뱀장어욕탕　복종, 예속만
+;-------------------------------------------------
+	CASE 151
+		CALL TRAIN_MESSAGE
+		;굴복각인Lv3
+		IF MARK:2 == 3 && (CFLAG:380 < 3 || FLAG:7 == 2)
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:380 = 4
+		ELSEIF CFLAG:380 < 2 || FLAG:7 == 2
+			PRINTFORML 
+			CFLAG:380 = 2
+		ENDIF
+
+;-------------------------------------------------
+;152,벌레욕탕　복종, 예속만
+;-------------------------------------------------
+	CASE 152
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML 
+;		ELSEIF RAND:2 == 0
+;			PRINTFORML 
+;		ELSE
+			PRINTFORML 
+;		ENDIF
+		CFLAG:381 = 1
+
+;-------------------------------------------------
+;154,요정오나홀　소인체형계만
+;-------------------------------------------------
+	CASE 154
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML 
+;		ELSEIF RAND:2 == 0
+;			PRINTFORML 
+;		ELSE
+			PRINTFORML 
+;		ENDIF
+		CFLAG:422 = 1
+
+
+;=================================================
+;촉수계 커맨드
+;=================================================
+;-------------------------------------------------
+;160,촉수소환
+;-------------------------------------------------
+	CASE 160
+		IF TEQUIP:25
+			CALL TRAIN_MESSAGE
+			;처음
+			IF CFLAG:382 == 0
+				PRINTFORML 
+				CFLAG:382 = 1
+			;2번째 이후
+			ELSE
+				IF RAND:3 == 0
+					PRINTFORML 
+				ELSEIF RAND:2 == 0
+					PRINTFORML 
+				ELSE
+					PRINTFORML 
+				ENDIF
+				CFLAG:382 = 2
+			ENDIF
+		ELSE
+			CALL TRAIN_MESSAGE
+			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;161,촉수삽입
+;-------------------------------------------------
+	CASE 161
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:383 == 0
+			PRINTFORML 
+			CFLAG:383 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:383 = 2
+		ENDIF
+
+;-------------------------------------------------
+;162,애널촉수
+;-------------------------------------------------
+	CASE 162
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:384 == 0
+			PRINTFORML 
+			CFLAG:384 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:384 = 2
+		ENDIF
+
+;-------------------------------------------------
+;163,촉수클리자극
+;-------------------------------------------------
+	CASE 163
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:385 == 0
+			PRINTFORML 
+			CFLAG:385 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:385 = 2
+		ENDIF
+
+;-------------------------------------------------
+;164,촉수유두자극
+;-------------------------------------------------
+	CASE 164
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:386 == 0
+			PRINTFORML 
+			CFLAG:386 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:386 = 2
+		ENDIF
+
+;-------------------------------------------------
+;165,촉수착유
+;-------------------------------------------------
+	CASE 165
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:387 == 0
+			PRINTFORML 
+			CFLAG:387 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:387 = 2
+		ENDIF
+
+;-------------------------------------------------
+;166,촉수긴박
+;-------------------------------------------------
+	CASE 166
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:388 == 0
+			PRINTFORML 
+			CFLAG:388 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:388 = 2
+		ENDIF
+
+;-------------------------------------------------
+;167,촉수관장
+;-------------------------------------------------
+	CASE 167
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:389 == 0
+			PRINTFORML 
+			CFLAG:389 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:389 = 2
+		ENDIF
+
+;-------------------------------------------------
+;168,촉수구욕
+;-------------------------------------------------
+	CASE 168
+		IF TEQUIP:36
+			CALL TRAIN_MESSAGE
+			;처음
+			IF CFLAG:390 == 0
+				PRINTFORML 
+				CFLAG:390 = 1
+			;2번째 이후
+			ELSE
+				IF RAND:2 == 0
+					PRINTFORML 
+				ELSE
+					PRINTFORML 
+				ENDIF
+				CFLAG:390 = 2
+			ENDIF
+		ELSE
+			CALL TRAIN_MESSAGE
+			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;169,촉수페니스자극
+;-------------------------------------------------
+	CASE 169
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:391 == 0
+;			PRINTFORML 
+			CFLAG:391 = 1
+		;2번째 이후
+		ELSE
+;			IF RAND:2 == 0
+;				PRINTFORML 
+;			ELSE
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:391 = 4
+		ENDIF
+
+
+;=================================================
+;특수커맨드
+;=================================================
+;-------------------------------------------------
+;180,로션,
+;-------------------------------------------------
+	CASE 180
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML 
+;		ELSEIF RAND:2 == 0
+;			PRINTFORML 
+;		ELSE
+			PRINTFORML 
+;		ENDIF
+		CFLAG:392 = 1
+
+;-------------------------------------------------
+;181,미약,
+;-------------------------------------------------
+	CASE 181
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:393 = 1
+
+;-------------------------------------------------
+;182,이뇨제,
+;-------------------------------------------------
+	CASE 182
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:394 = 2
+
+;-------------------------------------------------
+;183,비디오카메라,
+;-------------------------------------------------
+	CASE 183
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:28
+			IF RAND:3 == 0
+				SETCOLOR 0XB9EAFF
+				PRINTFORML 『ヒーホー。　ハイシンの時間だホ』
+				RESETCOLOR
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「うん、今日も頑張ろうね、フロスト君♪」
+			ELSE
+				PRINTFORML 「今からフロスト君とのエッチ、配信するね～♪」
+			ENDIF
+			CFLAG:395 = 2
+		ELSE
+			IF CFLAG:395 == 1 || FLAG:7 == 2
+				IF RAND:3 == 0
+					SETCOLOR 0XB9EAFF
+					PRINTFORMW 『ヒーホー。　今日はココマデだホ』
+					PRINTFORMW 『これ以降を見たいなら課金するホ♪』
+					RESETCOLOR
+				ELSEIF RAND:2 == 0
+					PRINTFORML 「フロスト君、おつかれ～」
+				ELSE
+					PRINTFORML 「次もヤるから見てね～♪」
+					PRINTFORMW %CALLNAME%はビデオカメラに手を振っている
+				ENDIF
+			ENDIF
+		ENDIF
+
+;-------------------------------------------------
+;184,야외플레이,
+;-------------------------------------------------
+	CASE 184
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:29
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+					PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:396 = 1
+		ELSE
+			CALL TRAIN_MESSAGE
+;			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;185,조수를범한다,
+;-------------------------------------------------
+	CASE 185
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:397 = 2
+
+;-------------------------------------------------
+;186,수치플레이,
+;-------------------------------------------------
+	CASE 186
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:30
+			IF RAND:3 == 0
+				PRINTFORML 
+	;		ELSEIF RAND:2 == 0
+	;			PRINTFORML 
+	;		ELSE
+	;			PRINTFORML 
+			ENDIF
+			CFLAG:398 = 1
+		ELSE
+;			PRINTFORML 
+			CFLAG:398 = 2
+		ENDIF
+	
+;-------------------------------------------------
+;187,목욕탕플레이,
+;-------------------------------------------------
+	CASE 187
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:31
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:399 = 1
+		ELSE
+			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;188,샤워,
+;-------------------------------------------------
+	CASE 188
+		IF TEQUIP:32
+			CALL TRAIN_MESSAGE
+			;처음
+			IF CFLAG:400 == 0
+				PRINTFORML 
+				CFLAG:400 = 1
+			;2번째 이후
+			ELSE
+	;		IF RAND:3 == 0
+				PRINTFORML 　
+	;		ELSEIF RAND:2 == 0
+	;			PRINTFORML 
+	;		ELSE
+	;			PRINTFORML 
+			ENDIF
+			CFLAG:400 = 1
+		ELSE
+			CALL TRAIN_MESSAGE
+;			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;189,새댁플레이,　연모, 친애만
+;-------------------------------------------------
+	CASE 189
+		CALL TRAIN_MESSAGE
+		IF TEQUIP:33
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+;				PRINTFORML 
+			ENDIF
+			CFLAG:401 = 1
+		ELSE
+;			PRINTFORML 
+		ENDIF
+
+;-------------------------------------------------
+;190,사진촬영,
+;-------------------------------------------------
+	CASE 190
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:402 == 0
+			PRINTFORML 
+			CFLAG:402 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+	;		ELSE
+	;			PRINTFORML 
+			ENDIF
+			CFLAG:402 = 2
+		ENDIF
+
+;-------------------------------------------------
+;191,강정신약,
+;-------------------------------------------------
+	CASE 191
+		CALL TRAIN_MESSAGE
+	;		IF RAND:3 == 0
+	;			PRINTFORML  
+	;		ELSEIF RAND:2 == 0
+				PRINTFORML 　
+	;		ELSE
+	;			PRINTFORML 
+	;		ENDIF
+			CFLAG:403 = 1
+
+;-------------------------------------------------
+;192,콘돔정음（노예）
+;-------------------------------------------------
+	CASE 192
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:404 == 0
+			PRINTFORML 
+			CFLAG:404 = 1
+		;2번째 이후
+		ELSE
+;			IF RAND:3 == 0
+;				PRINTFORML  
+;			ELSEIF RAND:2 == 0
+;				PRINTFORML 　
+;			ELSE
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:404 = 2
+		ENDIF
+
+;-------------------------------------------------
+;193,콘돔정음（조수）
+;-------------------------------------------------
+	CASE 193
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:405 == 0
+			PRINTFORML 
+			CFLAG:405 = 1
+		;2번째 이후
+		ELSE
+;			IF RAND:3 == 0
+;				PRINTFORML  
+;			ELSEIF RAND:2 == 0
+;				PRINTFORML 　
+;			ELSE
+;				PRINTFORML 
+;			ENDIF
+			CFLAG:405 = 2
+		ENDIF
+
+;-------------------------------------------------
+;194,정액키스
+;-------------------------------------------------
+	CASE 194
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:406 == 0
+			PRINTFORML 
+			CFLAG:406 = 1
+		;2번째 이후
+		ELSE
+	;		IF RAND:3 == 0
+	;			PRINTFORML  
+	;		ELSEIF RAND:2 == 0
+				PRINTFORML 　
+	;		ELSE
+	;			PRINTFORML 
+	;		ENDIF
+			CFLAG:406 = 2
+		ENDIF
+
+;-------------------------------------------------
+;195,유선개발
+;-------------------------------------------------
+	CASE 195
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:431 == 0
+			PRINTFORML  
+			CFLAG:431 = 1
+		;2번째 이후
+		ELSE
+	;		IF RAND:3 == 0
+	;			PRINTFORML  
+	;		ELSEIF RAND:2 == 0
+				PRINTFORML 　
+	;		ELSE
+	;			PRINTFORML 
+	;		ENDIF
+			CFLAG:431 = 2
+		ENDIF
+
+;-------------------------------------------------
+;200,사람을부른다
+;-------------------------------------------------
+	CASE 200
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:433 == 0
+;			PRINTFORML 
+			CFLAG:433 = 1
+		;2번째 이후
+		ELSE
+			IF RAND:3 == 0
+				PRINTFORML  
+			ELSEIF RAND:2 == 0
+				PRINTFORML  
+;			ELSE
+;				PRINTFORML 
+			ENDIF
+			CFLAG:433 = 2
+		ENDIF
+
+;-------------------------------------------------
+;201,윤간
+;-------------------------------------------------
+	CASE 201
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+;		ELSE
+;			PRINTFORML 
+		ENDIF
+		CFLAG:434 = 1
+
+
+;=================================================
+;500번대,파생커맨드
+;=================================================
+;-------------------------------------------------
+;500,３Ｐ
+;-------------------------------------------------
+	CASE 500
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:407 = 1
+
+;-------------------------------------------------
+;501,식스나인
+;-------------------------------------------------
+	CASE 501
+		CALL TRAIN_MESSAGE
+			IF RAND:3 == 0
+				PRINTFORMW 
+	;		ELSEIF RAND:2 == 0
+	;			PRINTFORML 　
+	;		ELSE
+	;			PRINTFORML 
+			ENDIF
+			CFLAG:408 = 2
+
+;-------------------------------------------------
+;502,이와시미즈
+;-------------------------------------------------
+	CASE 502
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:409 = 1
+
+;-------------------------------------------------
+;503,G스팟자극
+;-------------------------------------------------
+	CASE 503
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:410 = 2
+
+;-------------------------------------------------
+;504,흐트러진모란
+;-------------------------------------------------
+	CASE 504
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:411 = 2
+
+;-------------------------------------------------
+;515,애널흐트러진모란
+;-------------------------------------------------
+	CASE 515
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:441 = 2
+
+;-------------------------------------------------
+;513,입과바기나를범한다
+;-------------------------------------------------
+	CASE 513
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:439 = 1
+
+;-------------------------------------------------
+;514,입과애널을범한다
+;-------------------------------------------------
+	CASE 514
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:440 = 1
+
+;-------------------------------------------------
+;505,기승유방자위
+;-------------------------------------------------
+	CASE 505
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:412 = 1
+
+;-------------------------------------------------
+;512,애널기승유방자위
+;-------------------------------------------------
+	CASE 512
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:419 = 1
+
+;-------------------------------------------------
+;506,삽입Ｇ스팟자극
+;-------------------------------------------------
+	CASE 506
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:413 = 1
+
+;-------------------------------------------------
+;507,삽입자궁구자극
+;-------------------------------------------------
+	CASE 507
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:414 = 1
+
+;-------------------------------------------------
+;508,６９파이즈리
+;-------------------------------------------------
+	CASE 508
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+		ENDIF
+		CFLAG:415 = 1
+
+;-------------------------------------------------
+;509,착유
+;-------------------------------------------------
+	CASE 509
+		CALL TRAIN_MESSAGE
+		;처음
+		IF CFLAG:416 == 0
+			PRINTFORML 
+			CFLAG:416 = 1
+		;2번째 이후
+		ELSE
+	;		IF RAND:3 == 0
+	;			PRINTFORML  
+	;		ELSEIF RAND:2 == 0
+				PRINTFORML 　
+	;		ELSE
+	;			PRINTFORML 
+	;		ENDIF
+			CFLAG:419 = 6
+		ENDIF
+
+;-------------------------------------------------
+;510,더블스마타
+;-------------------------------------------------
+	CASE 510
+		CALL TRAIN_MESSAGE
+;		IF RAND:3 == 0
+;			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+;		ENDIF
+		CFLAG:417 = 1
+
+;-------------------------------------------------
+;511,두개펠라
+;-------------------------------------------------
+	CASE 511
+		CALL TRAIN_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML  
+;		ELSEIF RAND:2 == 0
+			PRINTFORML 　
+;		ELSE
+;			PRINTFORML 
+		ENDIF
+		CFLAG:418 = 1
+
+;-------------------------------------------------
+;516,前立腺刺激
+;-------------------------------------------------
+	CASE 516
+		CALL TRAIN_MESSAGE
+
+	CASEELSE
+		CALL TRAIN_MESSAGE
+ENDSELECT
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG 관련（X1을 캐릭터번호로 치환）
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
+;-------------------------------------------------
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
+;조교자의 사정을 트리거로 한 구상
+;-------------------------------------------------
+@KOJO_MESSAGE_PALAMCNG_A_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL PALAM_MESSAGE_A
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;조교자의 사정시의 텍스트
+;-------------------------------------------------
+;-------------------------------------------------
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
+;-------------------------------------------------
+IF CFLAG:106
+	CALL PALAM_MESSAGE_A
+	;머리카락
+	IF CFLAG:106 == 1
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:221 = 1
+	;얼굴
+	ELSEIF CFLAG:106 == 2
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:222 = 1
+	;가슴
+	ELSEIF CFLAG:106 == 3
+		PRINTFORMW 
+		CFLAG:223 = 1
+	;배
+	ELSEIF CFLAG:106 == 4
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:224 = 1
+	;겨드랑이
+	ELSEIF CFLAG:106 == 5
+		PRINTFORMW 
+		CFLAG:225 = 1
+	;허벅지
+	ELSEIF CFLAG:106 == 6
+		PRINTFORMW 
+		CFLAG:226 = 1
+	;가랑이
+	ELSEIF CFLAG:106 == 7
+		PRINTFORML 
+		CFLAG:227 = 1
+	;엉덩이
+	ELSEIF CFLAG:106 == 8
+		PRINTFORML 
+		CFLAG:228 = 1
+	;콘돔
+	ELSEIF CFLAG:106 == 9
+		;섹스로 사정하고, 애널섹스 이외를 실행 시
+		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72)
+			PRINTFORML 
+			CFLAG:229 = 1
+		ELSE
+			PRINTFORML 
+			CFLAG:230 = 1
+		ENDIF
+	ENDIF
+	RETURN 0
+ENDIF
+
+;-------------------------------------------------
+;손, 입 이외로 사정
+;対応コマンドはキス、素股、足コキ、アナル強制奉仕、ダブル素股
+;-------------------------------------------------
+IF TFLAG:9 == 1
+	CALL PALAM_MESSAGE_A
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:231 = 1
+ENDIF
+
+;-------------------------------------------------
+;조수를범한다로 사정
+;-------------------------------------------------
+IF TFLAG:7 > 0
+	PRINTFORML 
+	CFLAG:232 = 1
+ENDIF
+
+;-------------------------------------------------
+;입으로 사정
+;-------------------------------------------------
+IF TFLAG:0 > 0
+	CALL PALAM_MESSAGE_A
+	;이라마치오로 사정
+	IF SELECTCOM == 140
+		IF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
+			PRINTFORMW 
+			CFLAG:233 = 3
+		;그 이외
+		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
+			PRINTFORMW 
+			CFLAG:233 = 2
+		ENDIF
+	;그 이외의 입사정
+	ELSE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:233 = 2
+	ENDIF
+ENDIF
+
+;-------------------------------------------------
+;손으로 사정
+;-------------------------------------------------
+IF TFLAG:1 > 0
+	CALL PALAM_MESSAGE_A
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:234 = 1
+ENDIF
+
+;-------------------------------------------------
+;가슴으로 사정
+;-------------------------------------------------
+IF TFLAG:34 > 0
+	CALL PALAM_MESSAGE_A
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:235 = 1
+ENDIF
+
+;-------------------------------------------------
+;섹스로 사정
+;-------------------------------------------------
+IF TFLAG:2 > 0
+	CALL PALAM_MESSAGE_A
+	;애널섹스계
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:237 = 1
+;	;안쪽 자극 섹스계
+	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:238 = 1
+	ENDIF
+ENDIF
+
+;-------------------------------------------------
+;역강간으로 사정시켰다
+;-------------------------------------------------
+IF SELECTCOM == 64 && TFLAG:10 > 0
+	CALL PALAM_MESSAGE_A
+	PRINTFORML 
+	CFLAG:239 = 1
+ENDIF
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
+;촉수의 사정을 트리거로 한 구상
+;-------------------------------------------------
+@KOJO_MESSAGE_PALAMCNG_E_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL PALAM_MESSAGE_E
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;촉수의 사정시의 텍스트ｆ
+;-------------------------------------------------
+;-------------------------------------------------
+;촉수가 사정
+;-------------------------------------------------
+IF TFLAG:15 >0
+	CALL PALAM_MESSAGE_E
+	PRINTFORML 
+	CFLAG:240 = 1
+ENDIF
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
+;노예의 절정을 트리거로 한 구상
+;-------------------------------------------------
+@KOJO_MESSAGE_PALAMCNG_B_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL PALAM_MESSAGE_B
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;노예의 절정시의 텍스트
+;-------------------------------------------------
+;처음の絶頂？　とっくに経験済みよ
+;-------------------------------------------------
+;처음 C절정
+;-------------------------------------------------
+IF NOWEX:0 > 0 && CFLAG:241 == 0
+;	PRINTFORML 
+	CFLAG:241 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 V절정
+;-------------------------------------------------
+IF NOWEX:1 > 0 && CFLAG:242 == 0
+;	PRINTFORML 
+	CFLAG:242 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 A절정
+;-------------------------------------------------
+IF NOWEX:2 > 0 && CFLAG:243 == 0
+;	PRINTFORML 
+	CFLAG:243 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 B절정
+;-------------------------------------------------
+IF NOWEX:3 > 0 && CFLAG:244 == 0
+;	PRINTFORML 
+	CFLAG:244 = 1
+ENDIF
+
+;-------------------------------------------------
+;절정
+;-------------------------------------------------
+;강절정
+IF TFLAG:29 > 1
+	CALL PALAM_MESSAGE_B
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー。　カラダの中からスイがあふれてきて』
+			PRINTFORML 『ドロドロにとけてしまうホー♪』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「すごいっ♪　すごいよっ%ハート()%　フロスト君♪」
+			PRINTFORML 「世界がイチゴで、ブルーハワイで、レモンで、メロンで…」
+			PRINTFORMW 「レインボーだよ%ハート()%」
+		ELSE
+			PRINTFORML 「すごいよっ♪　フロスト君のテクニック♪」
+			PRINTFORML 「%CSTR:일인칭%、%CSTR:일인칭%♪」
+		ENDIF
+	CFLAG:245 = 2
+;절정
+ELSEIF TFLAG:29 > 0
+	CALL PALAM_MESSAGE_B
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒホー。　カラダがとけちまうホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「フロスト君、%CSTR:일인칭%、イッちゃうよ♪」
+		ELSE
+			PRINTFORML 「フロスト君が上手だから」
+			PRINTFORML 「%CSTR:일인칭%、イッちゃうよ♪」
+		ENDIF
+	CFLAG:245 = 1
+ENDIF
+
+;-------------------------------------------------
+;사정
+;-------------------------------------------------
+;사정하고 있다
+IF TFLAG:10 > 0
+	IF EXP:사정경험 == 0
+		PRINTFORMW 「フロスト君、%CSTR:일인칭%のオチンチンからのミルクでるようになったよ」
+		PRINTFORMW 「これで氷ミルクが沢山作れるね♪」
+		CFLAG:246 = 1
+	ELSE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　カルピス味はマイナーだホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　サワークリーム氷、できたホー』
+			RESETCOLOR
+		ELSE
+			PRINTFORML 「%CSTR:일인칭%のアイスバーから、ミルクこぼれちゃう♪」
+		ENDIF
+		CFLAG:246 = 2
+	ENDIF
+ENDIF
+
+;-------------------------------------------------
+;분유
+;-------------------------------------------------
+;분유하고 있다
+IF TFLAG:11 > 0
+		IF RAND:2 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー。　練乳ミルク氷、できたホー』
+			RESETCOLOR
+		ELSE
+			PRINTFORML 「フロスト君、ミルク味だよ♪」
+		ENDIF
+
+	CFLAG:247 = 1
+ENDIF
+
+;-------------------------------------------------
+;방뇨
+;-------------------------------------------------
+;방뇨하고 있다
+IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
+	IF RAND:2 == 0
+		PRINTFORML 「ほら、フロスト君。レモン味だよ♪」
+	ELSE
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー。　レモン氷、できたホー』
+		RESETCOLOR
+	ENDIF
+	CFLAG:248 = 1
+ENDIF
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
+;조교 후의 변화를 트리거로 한 구상
+;-------------------------------------------------
+@KOJO_MESSAGE_PALAMCNG_C_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL PALAM_MESSAGE_C
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;조교 후의 텍스트
+;-------------------------------------------------
+;-------------------------------------------------
+;처녀상실(처녀만)
+;またまた御冗談を
+;-------------------------------------------------
+IF TFLAG:3 > 0
+	CALL PALAM_MESSAGE_C
+	PRINTFORML 
+ENDIF
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
+;파라미터 변화를 트리거로 한 구상
+;-------------------------------------------------
+@KOJO_MESSAGE_PALAMCNG_D_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL PALAM_MESSAGE_D
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;파라미터 변화시의 텍스트
+;-------------------------------------------------
+;-------------------------------------------------
+;처음 윤활이 LV3을 넘었다
+;-------------------------------------------------
+P = PALAM:4 + UP:4
+IF P > PALAMLV:4 && CFLAG:245 == 0
+	CALL PALAM_MESSAGE_D
+	SETCOLOR 0XB9EAFF
+	PRINTFORML 『ヒホー。　%CALLNAME%の股間が雪解けホー』
+	RESETCOLOR
+	PRINTFORMW 「んもぉー%ハート()%　フロスト君、そんな事言わないで%ハート()%」
+	PRINTFORMW こんな状況でも%CALLNAME%は一人漫才をしている…
+	CFLAG:245 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 욕정이 LV2를 넘었다
+;-------------------------------------------------
+P = PALAM:6 + UP:6
+IF P > PALAMLV:3 && CFLAG:246 == 0
+	CALL PALAM_MESSAGE_D
+	CFLAG:246 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 굴복이 LV3을 넘었다
+;-------------------------------------------------
+P = PALAM:7 + UP:7
+IF P > PALAMLV:3 && CFLAG:247 == 0
+	CALL PALAM_MESSAGE_D
+	PRINTFORML
+	CFLAG:247 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 복종이 LV3을 넘었다
+;-------------------------------------------------
+P = PALAM:5 + UP:5
+IF P > PALAMLV:3 && CFLAG:248 == 0
+	CALL PALAM_MESSAGE_D
+	PRINTFORMW 
+	CFLAG:248 = 1
+ENDIF
+
+;-------------------------------------------------
+;처음 공포가 LV3을 넘었다
+;-------------------------------------------------
+P = PALAM:11 + UP:11
+IF P > PALAMLV:3 && CFLAG:249 == 0
+	CALL PALAM_MESSAGE_D
+	PRINTFORML 
+	CFLAG:249 = 1
+ENDIF
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_MARKCNG 관련（X1을 캐릭터번호로 치환）
+;각인 변동을 트리거로 한 구상
+;각인 변동 후에 구상을 발동합니다
+;-------------------------------------------------
+@KOJO_MESSAGE_MARKCNG_K4505_2
+;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
+;SIF ASSI > 0 && ASSIPLAY
+;	RETURN 0 
+;볼재갈 착용시에는 지문을 표시하고 구상을 스킵한다
+IF TEQUIP:20 &&  SELECTCOM != 107
+	CALL MARK_MESSAGE
+	RETURN 0
+ENDIF
+;--------------------------------------------------
+;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;IF ASSI > 0 && ASSIPLAY
+;	IF NO:ASSI == Y1
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4505_2
+;		RETURN 0
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+;고통각인Lv3
+;-------------------------------------------------
+IF TFLAG:22 == 3
+	CALL MARK_MESSAGE_A
+	PRINTFORML 
+ENDIF
+
+;-------------------------------------------------
+;쾌락각인Lv3
+;-------------------------------------------------
+IF TFLAG:23 == 3
+	CALL MARK_MESSAGE_P
+	PRINTFORML 
+ENDIF
+
+;-------------------------------------------------
+;굴복각인Lv3
+;-------------------------------------------------
+IF TFLAG:24 == 13 || TFLAG:24 == 23 || TFLAG:24 == 33
+	CALL MARK_MESSAGE_S
+	PRINTFORML 
+ENDIF
+
+;-------------------------------------------------
+;반발각인Lv3
+;-------------------------------------------------
+IF TFLAG:21 == 3
+	CALL MARK_MESSAGE_R
+	PRINTFORMW 「%CSTR:이인칭%なんて大キライっ！」
+ENDIF
+
+;-------------------------------------------------
+;이벤트구상 모음（X1、X2을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
+;-------------------------------------------------
+@KOJO_MESSAGE_EVENT_K4505_2
+;--------------------------------------------------
+;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_EVENT_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;-------------------------------------------------
+;아침펠라
+;-------------------------------------------------
+SELECTCASE TFLAG:13
+	CASE 1
+	CALL EVENT_MESSAGE
+	PRINTFORML 　
+	CFLAG:261 = 1
+
+
+;-------------------------------------------------
+;아침파이즈리
+;-------------------------------------------------
+CASE 2
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:262 < 1 || FLAG:7 == 2)
+		;모유체질인지 아닌지
+		IF TALENT:149
+			PRINTFORML 　
+		ELSE
+			PRINTFORML 　
+		ENDIF
+		CFLAG:262 = 1
+	ENDIF
+
+;-------------------------------------------------
+;아침기승위
+;-------------------------------------------------
+CASE 3
+	CALL EVENT_MESSAGE
+	PRINTFORML 　
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;아침기승위A
+;-------------------------------------------------
+CASE 24
+	CALL EVENT_MESSAGE
+	PRINTFORML 　
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;아침키스
+;-------------------------------------------------
+CASE 25
+	CALL EVENT_MESSAGE
+	PRINTFORML 
+	CFLAG:263 = 2
+
+;-------------------------------------------------
+;아침식사
+;-------------------------------------------------
+CASE 26
+	CALL EVENT_MESSAGE
+	;노래 부르면서인지 아닌지
+	IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
+		PRINTFORML 　
+	ELSE
+		PRINTFORML 　
+	ENDIF
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;일어나자 곁에서 자고 있다
+;-------------------------------------------------
+CASE 27
+	CALL EVENT_MESSAGE
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;아침풋잡
+;-------------------------------------------------
+CASE 28
+	CALL EVENT_MESSAGE
+	PRINTFORML 　
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;;아침에 갓 짠 밀크
+;-------------------------------------------------
+CASE 29
+	CALL EVENT_MESSAGE
+	IF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;;잠자다 실례
+;-------------------------------------------------
+CASE 30
+	CALL EVENT_MESSAGE
+	IF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:263 = 1
+
+;-------------------------------------------------
+;조교 후 레즈플레이
+;-------------------------------------------------
+CASE 4
+	CALL EVENT_MESSAGE
+		PRINTFORML 　
+		CFLAG:264 = 1
+
+;-------------------------------------------------
+;조교 후 섹스
+;-------------------------------------------------
+CASE 5
+	CALL EVENT_MESSAGE
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:265 = 1
+
+;-------------------------------------------------
+;강정신약의 반동
+;-------------------------------------------------
+CASE 6
+	CALL EVENT_MESSAGE
+	PRINTFORML 「きたっ♪　キタッ%ハート()%」
+	CFLAG:266 = 1
+
+;-------------------------------------------------
+;조교 후 착유
+;-------------------------------------------------
+CASE 7
+	CALL EVENT_MESSAGE
+	IF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:267 = 1
+
+;-------------------------------------------------
+;조교 후 자위
+;-------------------------------------------------
+CASE 8
+	CALL EVENT_MESSAGE
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:268 = 1
+
+;-------------------------------------------------
+;요바이（주인C 상대V）
+;-------------------------------------------------
+CASE 9
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:269 = 2
+
+;-------------------------------------------------
+;요바이（주인C 상대A）
+;-------------------------------------------------
+CASE 31
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:269 = 2
+
+;-------------------------------------------------
+;요바이（주인V 상대C）
+;-------------------------------------------------
+CASE 32
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:269 = 2
+
+;-------------------------------------------------
+;요바이（주인A 상대C）
+;-------------------------------------------------
+CASE 33
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:269 = 2
+
+;-------------------------------------------------
+;요바이（양쪽C（스마타）・양쪽C（조개맞대기））
+;-------------------------------------------------
+CASE 34
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORMW 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORMW 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORMW 
+		ENDIF
+		CFLAG:269 = 1
+	ENDIF
+
+;-------------------------------------------------
+;밤 자위
+;-------------------------------------------------
+CASE 35
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:269 < 1 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORMW 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORMW 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORMW 
+		ENDIF
+		CFLAG:269 = 1
+	ENDIF
+
+;-------------------------------------------------
+;같이잔다
+;-------------------------------------------------
+CASE 36
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:269 = 2
+
+;-------------------------------------------------
+;황색사탕 사용시
+;-------------------------------------------------
+CASE 10
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:270 < 2 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORMW 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORMW 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORMW 
+		ENDIF
+		CFLAG:270 = 2
+	ELSEIF CFLAG:270 < 1 || FLAG:7 == 2
+		PRINTFORMW 
+		CFLAG:270 = 1
+	ENDIF
+
+;-------------------------------------------------
+;임신 발각시
+;-------------------------------------------------
+CASE 11
+	SIF CFLAG:271 >= 1 && FLAG:7 != 2
+		RETURN 0
+	CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『ガキができたホー』
+			RESETCOLOR
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「赤ちゃんが出来たよ」
+			PRINTFORML 「%CSTR:일인칭%とフロスト君、どっちに似るかな♪」
+		ELSE
+			PRINTFORML 
+		ENDIF
+	CFLAG:271 = 1
+
+;-------------------------------------------------
+;출산시
+;-------------------------------------------------
+CASE 12
+	CALL EVENT_MESSAGE
+	;初産
+	IF CFLAG:272 == 0
+		IF RAND:2 == 0
+			SETCOLOR 0XB9EAFF
+			PRINTFORML 『ヒーホー』
+			PRINTFORMW 『穴がすこしゆるくなったけど気にするなホー』
+			RESETCOLOR
+		ELSE
+			PRINTFORML 「%CSTR:일인칭%もついにママになったよ、フロスト君♪」
+		ENDIF
+	ELSE
+		IF RAND:2 == 0
+			PRINTFORMW 『ヒーホー』
+			PRINTFORMW 『かき氷いっちょう、おまたせだホー』
+			RESETCOLOR
+		ELSE
+			PRINTFORML 「また二人の赤ちゃんつくろうね、フロスト君%ハート()%」
+		ENDIF
+	ENDIF
+	CFLAG:272 = 1
+
+;-------------------------------------------------
+;육아실
+;-------------------------------------------------
+CASE 13
+	CALL EVENT_MESSAGE
+;출산전
+	IF TALENT:153
+		;함락완료
+		IF 함락() && (CFLAG:273 < 2 || FLAG:7 == 2)
+			;연모, 친애
+			IF 함락() == 1
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF 함락() == 2
+				PRINTFORMW 
+			;복종, 예속
+			ELSEIF 함락() == 3
+				PRINTFORMW 
+			ENDIF
+			CFLAG:273 = 2
+		ELSEIF CFLAG:273 < 1 || FLAG:7 == 2
+			PRINTFORMW 
+			CFLAG:273 = 1
+		ENDIF
+;출산후
+	ELSE
+		;함락완료
+		IF 함락() && (CFLAG:273 < 4 || FLAG:7 == 2)
+			;연모, 친애
+			IF 함락() == 1
+				PRINTFORMW 
+			;음란, 창부
+			ELSEIF 함락() == 2
+				PRINTFORMW 
+			;복종, 예속
+			ELSEIF 함락() == 3
+				PRINTFORMW 
+			ENDIF
+			CFLAG:273 = 4
+		ELSEIF CFLAG:273 < 3 || FLAG:7 == 2
+			PRINTFORMW 
+			CFLAG:273 = 3
+		ENDIF
+	ENDIF
+
+;-------------------------------------------------
+;자식 독립시
+;-------------------------------------------------
+CASE 14
+	CALL EVENT_MESSAGE
+	;굴복각인Lv3
+	IF MARK:2 == 3 && (CFLAG:274 < 3 || FLAG:7 == 2)
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:274 = 4
+	ELSEIF CFLAG:274 < 2 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:274 = 2
+	ENDIF
+
+
+;-------------------------------------------------
+;정식포장마차시
+;-------------------------------------------------
+CASE 15
+	CALL EVENT_MESSAGE
+	IF CFLAG:275 == 0
+		PRINTFORML 「ついにメイドデビューだよ、フロスト君♪」
+	ELSE
+		IF RAND:3 == 0
+			PRINTFORML 「お子様ランチ用のオモチャ、沢山持ってきたよ♪」
+			PRINTFORMW %CALLNAME%は両手いっぱい『大人のオモチャ』を持っている
+		ELSEIF RAND:2 == 0
+			PRINTFORML 「再就職だよ、フロスト君♪」
+		ELSE
+			PRINTFORML 「大丈夫、フロスト君には冷凍庫の中にいてもらうから」
+		ENDIF
+	ENDIF
+	CFLAG:275 = 1
+
+;-------------------------------------------------
+;정식포장마차에서 실제로 일했을 때
+;-------------------------------------------------
+	CASE 97
+		CALL EVENT_MESSAGE
+		;실패. 급료반감
+		IF TFLAG:86 == 1
+		ELSEIF TFLAG:86 == 0
+			IF RAND:3 == 0
+				SETCOLOR 0XB9EAFF
+				PRINTFORML 『ヒーホー』
+				PRINTFORMW 『"特製氷レモン"のどこが悪いホー？』
+				RESETCOLOR
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「う～ん」
+				PRINTFORML 「お客さんに渡したバイブ、ちょっと大きかったかなぁ」
+			ELSE
+				PRINTFORML 「う～ん」
+				PRINTFORML 「使用済みのローターじゃ駄目だったかなぁ」
+			ENDIF
+		ELSEIF TFLAG:86 == 0
+			IF RAND:3 == 0
+				SETCOLOR 0XB9EAFF
+				PRINTFORML 『ヒーホー』
+				PRINTFORMW 『雪花氷できたホー』
+				RESETCOLOR
+			ELSEIF RAND:2 == 0
+				PRINTFORML 「そのオモチャ選ぶの？」
+				PRINTFORMW 「お客さん通だねぇ～♪」
+				PRINTFORMW 「初めてならちゃんとローション使うんだゾ♪」
+			ELSE
+				PRINTFORML 
+			ENDIF
+		ENDIF
+
+;-------------------------------------------------
+;창관에서 아르바이트시
+;-------------------------------------------------
+CASE 16
+	CALL EVENT_MESSAGE
+;처음
+	IF CFLAG:276 == 0
+		PRINTFORMW 
+		CFLAG:276 = 1
+;그 이외
+	ELSEIF CFLAG:276 < 1 || FLAG:7 == 2
+		SETCOLOR 0XB9EAFF
+		PRINTFORML 『ヒーホー』
+		PRINTFORMW 『またきたぜ』
+		RESETCOLOR
+		CFLAG:276 = 1
+	ENDIF
+
+;-------------------------------------------------
+;창관에서 아르바이트・실행시
+;-------------------------------------------------
+CASE 63
+	CALL EVENT_MESSAGE
+	IF RAND:4 == 0 && CFLAG:278 > 0
+		PRINTFORMW 『おおおおお！』
+		PRINTFORML 『エロ動画の"股淫乱ドリー"じゃん！』
+		PRINTFORMW %CALLNAME%の姿を見た客は興奮している
+	ELSEIF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORMW 『ヒーホー』
+		PRINTFORML 『もうダウンか？　なさけないホー』
+		PRINTFORMW %CALLNAME%の客のペニスをつんつんと突いている
+		RESETCOLOR
+	ELSEIF RAND:2 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORMW 『ヒーホー』
+		PRINTFORML 『アツアツのチンコでとけちまうホー♪』
+		PRINTFORML  %CALLNAME%の客の上で激しく腰を振っている
+		RESETCOLOR
+	ELSE
+		PRINTFORML 「フロスト君のアイスキャンディ、おいしい♪」
+		PRINTFORMW  %CALLNAME%の客のペニスに舌を這わせている
+	ENDIF
+	CFLAG:606 = 2
+
+;-------------------------------------------------
+;렌탈시
+;-------------------------------------------------
+CASE 17
+	CALL EVENT_MESSAGE
+;처음
+	IF CFLAG:277 == 0
+		PRINTFORML 
+		CFLAG:277 = 1
+;그 이외
+	ELSEIF CFLAG:277 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:277 = 1
+	ENDIF
+
+;-------------------------------------------------
+;매각시
+;-------------------------------------------------
+CASE 18
+	CALL EVENT_MESSAGE
+;함락완료
+	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
+		;연모, 친애+반발각인Lv3 미만
+		IF (함락() == 1) && MARK:3 < 3
+			PRINTFORML 
+		;음란, 창부+반발각인Lv3 미만
+		ELSEIF (함락() == 2) && MARK:3 < 3
+			PRINTFORML 
+		;복종, 예속+반발각인Lv3 미만
+		ELSEIF (함락() == 3) && MARK:3 < 3
+			PRINTFORML 
+		ENDIF
+;반발각인Lv3
+	ELSEIF MARK:3 == 3
+		PRINTFORML 
+;그 이외
+	ELSE
+		PRINTFORML 
+	ENDIF
+
+;-------------------------------------------------
+;비디오 매각시
+;-------------------------------------------------
+CASE 19
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:278 < 2 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:278 = 2
+	ELSEIF CFLAG:278 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:278 = 1
+	ENDIF
+
+;-------------------------------------------------
+;콘서트시
+;-------------------------------------------------
+CASE 20
+	CALL EVENT_MESSAGE
+;처음
+	IF CFLAG:279 == 0
+		PRINTFORML 
+		CFLAG:279 = 1
+;그 이외
+	ELSEIF CFLAG:279 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:279 = 1
+	ENDIF
+
+;-------------------------------------------------
+;난교라이브시
+;-------------------------------------------------
+CASE 21
+	CALL EVENT_MESSAGE
+;처음
+	IF CFLAG:280 == 0
+		PRINTFORML 
+		CFLAG:280 = 1
+;그 이외
+	ELSEIF CFLAG:280 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:280 = 1
+	ENDIF
+
+;-------------------------------------------------
+;공중변소 플레이시
+;-------------------------------------------------
+CASE 22
+	CALL EVENT_MESSAGE
+	IF RAND:3 == 0
+		PRINTFORML 
+	ELSEIF RAND:2 == 0
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	CFLAG:281 = 2
+
+;-------------------------------------------------
+;비디오 보유시
+;-------------------------------------------------
+CASE 23
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:282 < 2 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:282 = 2
+	ELSEIF CFLAG:282 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:282 = 1
+	ENDIF
+
+;-------------------------------------------------
+;기억소거약 사용시
+;-------------------------------------------------
+CASE 30
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:283 < 2 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:283 = 2
+	ELSEIF CFLAG:283 < 1 || FLAG:7 == 2
+		PRINTFORML 
+		CFLAG:283 = 1
+	ENDIF
+
+;-------------------------------------------------
+;;[아내][남편]취득시
+;-------------------------------------------------
+CASE 40
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:283 < 1 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:283 = 1
+	ENDIF
+
+;-------------------------------------------------
+;;[음마]취득시
+;-------------------------------------------------
+CASE 41
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:284 < 1 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:284 = 1
+	ENDIF
+
+;-------------------------------------------------
+;;[노리개]취득시
+;-------------------------------------------------
+CASE 42
+	CALL EVENT_MESSAGE
+;함락완료
+	IF 함락() && (CFLAG:285 < 1 || FLAG:7 == 2)
+		;연모, 친애
+		IF 함락() == 1
+			PRINTFORML 
+		;음란, 창부
+		ELSEIF 함락() == 2
+			PRINTFORML 
+		;복종, 예속
+		ELSEIF 함락() == 3
+			PRINTFORML 
+		ENDIF
+		CFLAG:285 = 1
+	ENDIF
+
+		;-------------------------------------------------
+		;;[애ＮＴＲ]이벤트시
+		;-------------------------------------------------
+	CASE 45
+		CALL EVENT_MESSAGE
+		;함락완료
+		IF (CFLAG:288 < 1 || FLAG:7 == 2)
+			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
+				IF 함락() == 1
+					;진행도 분기
+					;초회
+					IF CFLAG:애ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
+						IF RAND:2 == 0
+							PRINTFORML 
+						ELSE
+							PRINTFORML 
+						ENDIF
+					ENDIF
+				;음란, 창부
+				ELSEIF 함락() == 2
+					;진행도 분기
+					;초회
+					IF CFLAG:애ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;복종, 예속
+				ELSEIF 함락() == 3
+					;진행도 분기
+					;초회
+					IF CFLAG:애ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;그 외
+				ELSE
+					;진행도 분기
+					;초회
+					IF CFLAG:애ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				ENDIF
+			ELSE
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
+				IF CFLAG:애ＮＴＲ진행도 == 0
+					PRINTFORML 
+				;2번째（리치）
+				ELSEIF CFLAG:애ＮＴＲ진행도 == 1
+					PRINTFORML 
+				;3번째（함락）
+				ELSEIF CFLAG:애ＮＴＲ진행도 == 2
+					PRINTFORML 
+				ENDIF
+			ENDIF
+			CFLAG:288 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;[음ＮＴＲ]이벤트시
+		;-------------------------------------------------
+	CASE 46
+		CALL EVENT_MESSAGE
+		;함락완료
+		IF (CFLAG:289 < 1 || FLAG:7 == 2)
+			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
+				IF 함락() == 1
+					;진행도 분기
+					;초회
+					IF CFLAG:음ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;음란, 창부
+				ELSEIF 함락() == 2
+					;진행도 분기
+					;초회
+					IF CFLAG:음ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;복종, 예속
+				ELSEIF 함락() == 3
+					;진행도 분기
+					;초회
+					IF CFLAG:음ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;그 외
+				ELSE
+					;진행도 분기
+					;초회
+					IF CFLAG:음ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:음ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				ENDIF
+			ELSE
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
+				IF CFLAG:음ＮＴＲ진행도 == 0
+					PRINTFORML 
+				;2번째（리치）
+				ELSEIF CFLAG:음ＮＴＲ진행도 == 1
+					PRINTFORML 
+				;3번째（함락）
+				ELSEIF CFLAG:음ＮＴＲ진행도 == 2
+					PRINTFORML 
+				ENDIF
+			ENDIF
+			CFLAG:289 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;[예ＮＴＲ]이벤트시
+		;-------------------------------------------------
+	CASE 47
+		CALL EVENT_MESSAGE
+		;함락완료
+		IF (CFLAG:290 < 1 || FLAG:7 == 2)
+			IF CFLAG:함락캐릭터 == CFLAG:MASTER:캐릭터고유번호
+				;주인이 함락되어 있다 or 누구에게도 함락되지 않은 상태에서 ＮＴＲ
+				;연모, 친애
+				IF 함락() == 1
+					;진행도 분기
+					;초회
+					IF CFLAG:예ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;음란, 창부
+				ELSEIF 함락() == 2
+					;진행도 분기
+					;초회
+					IF CFLAG:예ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;복종, 예속
+				ELSEIF 함락() == 3
+					;진행도 분기
+					;초회
+					IF CFLAG:예ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				;그 외
+				ELSE
+					;진행도 분기
+					;초회
+					IF CFLAG:예ＮＴＲ진행도 == 0
+						PRINTFORML 
+					;2번째（리치）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 1
+						PRINTFORML 
+					;3번째（함락）
+					ELSEIF CFLAG:예ＮＴＲ진행도 == 2
+						PRINTFORML 
+					ENDIF
+				ENDIF
+			ELSE
+				;주인 이외의 누군가에게 함락된 상태에서 또 다른 캐릭터에게 ＮＴＲ
+				;진행도 분기
+				;초회
+				IF CFLAG:예ＮＴＲ진행도 == 0
+					PRINTFORML 
+				;2번째（리치）
+				ELSEIF CFLAG:예ＮＴＲ진행도 == 1
+					PRINTFORML 
+				;3번째（함락）
+				ELSEIF CFLAG:예ＮＴＲ진행도 == 2
+					PRINTFORML 
+				ENDIF
+			ENDIF
+			CFLAG:290 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;애(愛)계 재함락시
+		;;주인에게 연모계 함락되었거나, 한번 애(愛)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
+		;-------------------------------------------------
+	CASE 48
+		CALL EVENT_MESSAGE
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
+		
+		IF (CFLAG:291 < 1 || FLAG:7 == 2)
+			;주인에게 다시 함락된다
+			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
+				PRINTFORML 
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:291 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;음(淫)계 재함락시
+		;;주인에게 음란계 함락되었거나, 한번 음(淫)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
+		;-------------------------------------------------
+	CASE 49
+		CALL EVENT_MESSAGE
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
+					
+		IF (CFLAG:292 < 1 || FLAG:7 == 2)
+			;주인에게 다시 함락된다
+			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
+				PRINTFORML 
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:292 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;예(隷)계 재함락시
+		;;주인에게 복종계 함락되었거나, 한번 예(隷)계 ＮＴＲ상태가 된 캐릭터가 다시 함락당할 때
+		;-------------------------------------------------
+	CASE 50
+		CALL EVENT_MESSAGE
+		;재함락 전에 함락되어있던 캐릭터 → CFLAG:함락캐릭터 로 취득가능, 이름은 %NTRNAME(CFLAG:함락캐릭터)%
+		;재함락 대상 캐릭터 → FAVORITE_1_ID(TARGET)　로 취득가능, 이름은 %NTRNAME(FAVORITE_1_ID(TARGET))%
+		;다소 번잡해지므로 LOCAL, 혹은 #DIM 등을 사용해 알아보기 쉽게 하는 것을 권장합니다
+					
+		IF (CFLAG:293 < 1 || FLAG:7 == 2)
+			;주인에게 다시 함락된다
+			IF FAVORITE_1_ID(TARGET) == CFLAG:MASTER:캐릭터고유번호
+				PRINTFORML 
+			;그 외 캐릭터・ＮＰＣ에게 다시 ＮＴＲ된다
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:293 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・난교파티
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
+		;-------------------------------------------------
+	CASE 51
+		CALL EVENT_MESSAGE
+		;굴복각인Lv3
+		IF MARK:2 == 3 && (CFLAG:294 < 3 || FLAG:7 == 2)
+			IF RAND:3 == 0
+				PRINTFORML 
+			ELSEIF RAND:2 == 0
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:294 = 4
+		ELSEIF CFLAG:294 < 2 || FLAG:7 == 2
+			PRINTFORML 
+			CFLAG:294 = 2
+		ENDIF
+
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・공원
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
+		;-------------------------------------------------
+	CASE 52
+		CALL EVENT_MESSAGE
+		IF (CFLAG:295 < 1 || FLAG:7 == 2)
+			IF TALENT:연모 || TALENT:친애
+				;이전에 연모 루트였던 경우
+				PRINTFORML 
+			ELSEIF TALENT:음란 || TALENT:창부
+				;이전에 음란 루트였던 경우
+				PRINTFORML 
+			ELSEIF TALENT:복종 || TALENT:예속
+				;이전에 복종 루트였던 경우
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+			ENDIF
+			CFLAG:295 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・변기
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
+		;-------------------------------------------------
+	CASE 53
+		CALL EVENT_MESSAGE
+		IF (CFLAG:296 < 1 || FLAG:7 == 2)
+			IF TALENT:연모 || TALENT:친애
+				;이전에 연모 루트였던 경우
+				PRINTFORML 
+			ELSEIF TALENT:음란 || TALENT:창부
+				;이전에 음란 루트였던 경우
+				PRINTFORML 
+			ELSEIF TALENT:복종 || TALENT:예속
+				;이전에 복종 루트였던 경우
+				PRINTFORML 
+			ELSE
+				IF TALENT:섹스광 && RAND:2 == 0
+					PRINTFORML 
+				ELSE
+					PRINTFORML 
+				ENDIF
+			ENDIF
+			CFLAG:296 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・밤의 거리
+		;;음ＮＴＲ상태（TALENT:ＮＴＲ == 2 나 TALENT:ＮＴＲ == 5）일 때만
+		;-------------------------------------------------
+	CASE 54
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:296 = 2
+
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・ＮＴＲ전 밀회
+		;;ＮＴＲ상태가 되기 전에 밀회할 때
+		;-------------------------------------------------
+	CASE 55
+		CALL EVENT_MESSAGE
+		IF (CFLAG:297 < 1 || FLAG:7 == 2)
+			IF CFLAG:함락캐릭터 != 0
+				;주인 이외에 함락되어 있는 경우
+				PRINTFORML 
+			ELSEIF TALENT:연모 || TALENT:친애
+				;연모 루트
+				PRINTFORML 
+			ELSEIF TALENT:음란 || TALENT:창부
+				;음란 루트
+				PRINTFORML 
+			ELSEIF TALENT:복종 || TALENT:예속
+				;복종 루트
+				PRINTFORML 
+			ELSE
+				PRINTFORMW
+			ENDIF
+			CFLAG:297 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・ＮＴＲ후 첫 밀회
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)가 된 직후 하루 종료 후, 한번만 행한다
+		;다른 캐릭터에 함락될 때마다 일어난다. 같은 캐릭터에 다시 함락되는 경우는 일어나지 않는다
+		;-------------------------------------------------
+	CASE 56
+		CALL EVENT_MESSAGE
+		IF (CFLAG:298 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+					PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+					PRINTFORML 
+			ENDIF
+			CFLAG:298 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・데이트
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;-------------------------------------------------
+	CASE 57
+		CALL EVENT_MESSAGE
+		IF (CFLAG:299 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+				PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+				PRINTFORML 
+			ENDIF
+			CFLAG:299 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・본방
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;여성이라면 삽입당하는 쪽, 남성이라면 삽입하는 쪽으로 고정
+		;-------------------------------------------------
+	CASE 58
+		CALL EVENT_MESSAGE
+		IF (CFLAG:601 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+				PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+				PRINTFORML 
+			ENDIF
+			CFLAG:601 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・자위서로과시
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ상태인 경우, 노출증 3이나 자위중독 1 중 하나를 충족시키는 것이 조건이 됩니다.
+		;-------------------------------------------------
+	CASE 59
+		CALL EVENT_MESSAGE
+		IF (CFLAG:602 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+				PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+				PRINTFORML 
+			ENDIF
+			CFLAG:602 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・애널
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;CFLAG:애널횟수가 1 이상이면 삽입당하고, CFLAG:삽입횟수가 1 이상면 삽입하고 있습니다.
+		;양 플래그 모두 서있는 경우, 지문에서는 삽입당하는 쪽이 우선됩니다.
+		;-------------------------------------------------
+	CASE 60
+		CALL EVENT_MESSAGE
+		IF (CFLAG:603 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+				PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+				PRINTFORML 
+			ENDIF
+			CFLAG:603 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・야외플레이
+		;;애ＮＴＲ이나 예ＮＴＲ상태(TALENT:ＮＴＲ == 1, 3, 4, 6)에서 하루 종료시에 발생.
+		;애ＮＴＲ의 경우, 노출증이 4 이상이 아니라면 발생하지 않습니다
+		;-------------------------------------------------
+	CASE 61
+		CALL EVENT_MESSAGE
+		IF (CFLAG:604 < 1 || FLAG:7 == 2)
+			IF TALENT:ＮＴＲ == 1 || TALENT:ＮＴＲ == 4
+				;애ＮＴＲ
+				PRINTFORML 
+			ELSEIF TALENT:ＮＴＲ == 3 || TALENT:ＮＴＲ == 6
+				;예ＮＴＲ
+				PRINTFORML 
+			ENDIF
+			CFLAG:604 = 1
+		ENDIF
+		;-------------------------------------------------
+		;;ＮＴＲ요바이・야외조교
+		;;예ＮＴＲ상태(TALENT:ＮＴＲ == 3, 6)에서 CFLAG:현ＮＴＲ진행도가 6이상인 경우 하루 종료시에 발생.
+		;-------------------------------------------------
+	CASE 62
+		CALL EVENT_MESSAGE
+		IF RAND:3 == 0
+			PRINTFORML 
+		ELSEIF RAND:2 == 0
+			PRINTFORML 
+		ELSE
+			PRINTFORML 
+		ENDIF
+		CFLAG:605 = 2
+	CASEELSE
+		CALL EVENT_MESSAGE
+ENDSELECT
+
+
+;-------------------------------------------------
+;@KOJO_MESSAGE_ENDING 관련(X1, X2를 캐릭터 번호로 치환한다)
+;-------------------------------------------------
+;-------------------------------------------------
+;조건설정
+;-------------------------------------------------
+@EVENTTURNEND_K4505_2
+;#LATER
+;SIF TARGET < 0
+;	RETURN 0
+;SIF NO:TARGET != X1
+;	RETURN 0
+;특수 하렘엔딩용 조건 판정 구문 샘플
+;XX 안에 조건으로 하는 캐릭터의 캐릭터번호를 넣으면, 원하는 조합의 하렘엔딩을 설정할 수 있다
+;하렘엔딩의 조건을 충족했을 때, 이곳의 특수 하렘엔딩의 조건도 충족한 경우, 하렘엔딩에서 파생한다
+;A = 0
+;B = 0
+;REPEAT CHARANUM
+;	IF NO:COUNT == XX || NO:COUNT == XX || NO:COUNT == XX || NO:COUNT == XX || NO:COUNT == XX
+;		SIF TALENT:COUNT:6 || TALENT:COUNT:7 || TALENT:COUNT:8
+;			A += 1
+;		SIF TALENT:COUNT:3 || TALENT:COUNT:4 || TALENT:COUNT:5 || TALENT:COUNT:6 || TALENT:COUNT:7 || TALENT:COUNT:8
+;			B += 1
+;	ENDIF
+;REND
+;SIF A && A+B >= XXX
+;	CFLAG:21 = 2
+;1체 엔딩용 분기 플래그, 1체 엔딩이 있는 상위 함락소질만 주석처리를 해제한다
+;SIF TALENT:6
+;	CFLAG:21 = 1
+;SIF TALENT:7
+;	CFLAG:21 = 1
+;SIF TALENT:8
+;	CFLAG:21 = 1
+;-------------------------------------------------
+;엔딩 본문
+;-------------------------------------------------
+@KOJO_MESSAGE_ENDING_K4505_2
+;--------------------------------------------------
+;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
+;--------------------------------------------------
+;IF NO:MASTER == Y1
+;	CALL KOJO_MESSAGE_ENDING_PY1_K4505_2
+;	RETURN 0
+;ENDIF
+;--------------------------------------------------
+;연모 1체 엔딩
+;IF TALENT:6 && CFLAG:21 == 1
+	;DRAWLINE
+	;PRINTFORMW …………
+	;PRINTFORMW ………
+	;PRINTFORMW ……
+	;PRINTFORMW 
+
+	;PRINTFORMW 
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2A (○○エンド)
+;음란 1체 엔딩
+;ELSEIF TALENT:7 && CFLAG:21 == 1
+	;DRAWLINE
+	;PRINTFORMW …………
+	;PRINTFORMW ………
+	;PRINTFORMW ……
+	;PRINTFORMW 
+
+	;PRINTFORMW 
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2B (○○エンド)
+;복종 1체 엔딩
+;ELSEIF TALENT:8 && CFLAG:21 == 1
+	;DRAWLINE
+	;PRINTFORMW …………
+	;PRINTFORMW ………
+	;PRINTFORMW ……
+	;PRINTFORMW 
+
+	;PRINTFORMW 
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2C (○○エンド)
+;ENDIF
+
+;특수 하렘엔딩
+;IF CFLAG:21 == 2
+	;DRAWLINE
+	;PRINTFORMW …………
+	;PRINTFORMW ………
+	;PRINTFORMW ……
+	;PRINTFORMW 
+
+	;PRINTFORMW 
+	;PRINTFORMW 　　　　　　　　―― Ending No.2X2 (○○エンド)
+;ENDIF
+
+;CALL GAME_CONTINUE
+;RETURN 0
+
+;=============================================================
+;전투메시지
+;=============================================================
+;--------------------------------------------------
+;リアクション
+;--------------------------------------------------
+@ENEMY_BATTLE_EVENT_K4505_2, ARG, ARG:1, ARG:2
+
+;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
+IF TFLAG:전투이벤트 == 1
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー！",72,LEFT%┃
+		PRINTFORML ┃%"おまえらも手伝うホー！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"チャンスだよ、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"みんなで乱れよ"+ ハート(),72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+
+;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
+IF TFLAG:전투이벤트 == 2
+
+SETCOLOR 0XB9EAFF
+	IF RAND:4 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー！",72,LEFT%┃
+		PRINTFORML ┃%"さつりくタイムのじかんだホー！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"" + CSTR:일인칭 + "達もやろう、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"邪魔者は片づけようか、フロスト君",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"乱パだって、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+
+;被弾（死亡）
+IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
+	IF RAND:2 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"しんじまったか……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ごめんね…フロスト君……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+;残り２０％以下
+ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 20
+	IF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"フロスト君、" + CSTR:일인칭 + "もう駄目かも…",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"" + CALLNAME + "立つホー",72,LEFT%┃
+		PRINTFORML ┃%"倒れたらまた酷い目にあうホー",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+
+;回避
+IF TFLAG:전투이벤트 == 18
+	IF RAND:2 == 0
+		PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"当たらないよ♪",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+
+;배틀에서 승리했다
+IF TFLAG:전투이벤트 == 90
+	IF RAND:4 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"やったね、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ナイス連携、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"" + CSTR:일인칭 + "達、最強じゃない？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+
+;레벨 업했다
+IF TFLAG:전투이벤트 == 91
+	IF RAND:1024 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"また強くなったよ、フロスト君",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML 　
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"初めからこの強さがあれば……",72,LEFT%┃
+		PRINTFORML ┃%"え？　" +  CSTR:일인칭+ "何言ってるんだろう？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー！",72,LEFT%┃
+		PRINTFORML ┃%"" + CALLNAME + "もつよくなったホー！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"フロスト君、" + CSTR:일인칭 + "強くなったみたい",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"これは…レベルアップ…？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+ENDIF
+RESETCOLOR
+
+;--------------------------------------------------
+;スキル使用時
+;--------------------------------------------------
+@BATTLE_MESSAGE_K4505_2,ARG,ARG:1 = 0
+
+;ブフーラ、マハ・ブフ、マハ・ブフダイン
+IF CFLAG:ARG:입력행동 == 802 || CFLAG:ARG:입력행동 == 804 || CFLAG:ARG:입력행동 == 806
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー。なめんなよ",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"氷漬けにしちゃおうね、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"フロスト君、力を貸して♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+;ブフバリオン
+ELSEIF CFLAG:ARG:입력행동 == 839
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ゴートゥーヘルだホー",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"凍り付いて死んじゃえばいいよね、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"フロスト君、邪魔者は始末しちゃお%ハート()%",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+;빙결ガードキル
+ELSEIF CFLAG:ARG:입력행동 == 831
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー。死へのカウントダウンだホー",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"これで魔法が効くようになったよ、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"フロスト君、次で終わらせよう♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+;トリスアギオン
+ELSEIF CFLAG:ARG:입력행동 == 718
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒホー。" + CALLNAME + "の火炎はすごいホー",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"焼け死んじゃってね♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"" + CSTR:일인칭 + "だって、フロスト君に助けてもらってばかりじゃないから！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+;サバトマ
+ELSEIF CFLAG:ARG:입력행동 == 529
+
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"来て、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+;ハッピーステップ
+ELSEIF CFLAG:ARG:입력행동 == 1202
+	IF RAND:1024 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"そう、嫌な事なんて忘れて……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"嫌な事なんて忘れて楽しくいこう♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"踊ろ、フロスト君♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+;섹시댄스
+ELSEIF CFLAG:ARG:입력행동 == 1212
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ヒーホー。ストリップショーだホー♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お触りＯＫ、だゾ%ハート%",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"" + CALLNAME + "の生ライブ、楽しんでってね♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+;ヘルズアイ
+ELSEIF CFLAG:ARG:입력행동 == 1405
+	IF RAND:3 == 0
+		SETCOLOR 0XB9EAFF
+		PRINTFORML ┏┓＠フロスト君？　┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ゴートゥーヘルだホー",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		RESETCOLOR
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"目で殺しちゃう、ゾ♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"昇天しちゃって♪",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+ENDIF
+RESETCOLOR
+
+
+;＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+;ヘッドセットメッセージ
+;＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+;=========================================
+;戦闘口上の雛形。[キャラナンバー]と[キャラ名]を置換して使用。　一応ライセンスフリー。
+;京都じゃない方の双葉はんから拝借した純那ちゃん（kame先生作）から更に拝借して雛形を作ったものから
+;摩多羅神ヘッドセット口上を作る過程で欲しい物を入れて……悪魔はヘッドセットを持てなかった（白目）ため原形に戻したもの。
+;じゅんなちゃんのエーギルをもらうよ。ん？　そうすればいっぱいヘッドセット口上作れるからね。 Schrott
+;=========================================
+@BATTLE_NAVI_K4505_2, ARG, ARG:1, ARG:2, ARG:3, ARG:4, ARG:5, ARG:6, ARG:7, ARG:8
+SETCOLOR 0XB9EAFF
+LOCALS = {ARG:1}
+LOCALS:1 = {FLAG:경과턴수}
+
+;プレイ内容
+;１：ディルドースクワット
+;２：掃除機バキュームフェラ
+;３：なわとび
+;４：産卵プレイ
+;５
+;６
+;７
+;８
+;９：アナルペットボトルスクワット
+
+
+
+	SIF FLAG:경과턴수 == 1
+		CFLAG:800 = 0
+	IF FLAG:경과턴수 >= 6
+		IF RAND:4 == 0
+			;実況開始！
+			IF CFLAG:800 == 0
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒーホー♪",72,LEFT%┃
+				PRINTFORML ┃%"" + CALLNAME + "のオナニータイムの開始だホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 1
+
+			;ディルドースクワット
+			ELSEIF CFLAG:800 == 1 && HAVE_VAGINA() && RAND:4 == 0
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホー♪",72,LEFT%┃
+				PRINTFORML ┃%"自分の腕くらい太いディルドーを持ってきてどうするんだホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 11
+			ELSEIF CFLAG:800 == 11
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホ？",72,LEFT%┃
+				PRINTFORML ┃%"ディルドーを床に置いて……その上でスクワットするホ？",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 21
+			ELSEIF CFLAG:800 == 21
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ああぁっ♪" + ハート(),72,LEFT%┃
+				PRINTFORML ┃%"スクワットオナニー♪　いいっ♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 31
+			ELSEIF CFLAG:800 == 31
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"" + CALLNAME + "すごいホー",72,LEFT%┃
+				PRINTFORML ┃%"床の上が汗でビッショビショだホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 41
+			ELSEIF CFLAG:800 == 41
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"あはっ♪　もう限界…かも" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 51
+			ELSEIF CFLAG:800 == 51
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"イクッ、イクッ♪　イクッ～～" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 99
+
+			;産卵プレイ
+			ELSEIF CFLAG:800 == 1 && HAVE_VAGINA() && RAND:3 == 0
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホー♪",72,LEFT%┃
+				PRINTFORML ┃%"台所でなにやってたんだホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 14
+			ELSEIF CFLAG:800 == 14
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"氷ぜんざいを作ってたホ……床に置いてどうするホ？",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 24
+			ELSEIF CFLAG:800 == 24
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ああぁっ♪" + ハート(),72,LEFT%┃
+				PRINTFORML ┃%"みてっ♪　" + CSTR:일인칭 + "の仕上げっ♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 34
+			ELSEIF CFLAG:800 == 34
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"見てっ、フロスト君♪　氷白玉ぜんざいだよっ" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 44
+			ELSEIF CFLAG:800 == 44
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"" + CALLNAME + "すごいホー",72,LEFT%┃
+				PRINTFORML ┃%"卵みたいに股からポコポコ白玉が出てくるホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 54
+			ELSEIF CFLAG:800 == 54
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"いいっ♪　白玉プレイ♪　イイッ♪",72,LEFT%┃
+				PRINTFORML ┃%"イクッ、　産卵プレイでイクッ♪　イクッ～～",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 99
+
+			;掃除機バキュームフェラ
+			ELSEIF CFLAG:800 == 1 && HAVE_PENIS() && RAND:4 == 0
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホー♪",72,LEFT%┃
+				PRINTFORML ┃%"掃除機なんて出してどうするんだホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 12
+			ELSEIF CFLAG:800 == 12
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホ？",72,LEFT%┃
+				PRINTFORML ┃%"掃除機のホースにチンチン入れて、電源を入れるホ？",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 22
+			ELSEIF CFLAG:800 == 22
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ああぁっ♪" + ハート(),72,LEFT%┃
+				PRINTFORML ┃%"バキュームフェラ♪　いいっ♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 32
+			ELSEIF CFLAG:800 == 32
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"" + CALLNAME + "すごいホー",72,LEFT%┃
+				PRINTFORML ┃%"掃除機のパワーに負けてないホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 42
+			ELSEIF CFLAG:800 == 42
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"そんなに激しく吸われたらっ♪　" + CSTR:일인칭 + "♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 52
+			ELSEIF CFLAG:800 == 52
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"イクッ、でちゃうっ♪　全部のんでぇ～～" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 99
+
+			;なわとび
+			ELSEIF CFLAG:800 == 1 && RAND:3 == 0
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホー♪",72,LEFT%┃
+				PRINTFORML ┃%"重りのついたにプルクリップに縄……",72,LEFT%┃
+				PRINTFORML ┃%"マゾプレイかホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 13
+			ELSEIF CFLAG:800 == 13
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホ？",72,LEFT%┃
+				PRINTFORML ┃%"縄を手に持って……縄跳びホ？",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 23
+			ELSEIF CFLAG:800 == 23
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ああぁっ♪　いたいっ" + ハート(),72,LEFT%┃
+				PRINTFORML ┃%"飛ぶたびにっ　乳首がっ　千切れそうにっ♪",72,LEFT%┃
+				PRINTFORML ┃%"いたいのがっ　気持ちいいっ♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 33
+			ELSEIF CFLAG:800 == 33
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"" + CALLNAME + "すごいホー",72,LEFT%┃
+				PRINTFORML ┃%"床の上がビッショビショになるまで続けてるホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 43
+			ELSEIF CFLAG:800 == 43
+				SETCOLOR 0XFF82D2
+				IF HAVE_PENIS()
+					PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"飛ぶ度にオチンチンがビタンビタンしてっ♪",72,LEFT%┃
+					PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+					CFLAG:800 = 63
+				ELSE
+					PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"ダメッ、刺激がたりない！",72,LEFT%┃
+					PRINTFORML ┃%"クリトリスにもクリップつけて……",72,LEFT%┃
+					PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+					CFLAG:800 = 53
+				ENDIF
+			ELSEIF CFLAG:800 == 53
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"イイッ♪　刺激強くてイイッ♪",72,LEFT%┃
+				PRINTFORML ┃%"縄で♪　クリップで♪　乳首も♪　クリトリスも♪　千切れるほど引っ張られて♪",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 53
+			ELSEIF CFLAG:800 == 63
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"イクッ、イクッ♪　激痛でイクッ～～" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 99
+
+			;後でセリフ追加するためにテンプレートを残す
+			;ELSEIF CFLAG:800 == 1 && RAND:3 == 0
+
+			;アナルペットボトルスクワット
+			ELSEIF CFLAG:800 == 1
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホー♪",72,LEFT%┃
+				PRINTFORML ┃%"空のペットボトルに水なんて入れてどうするんだホー",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 19
+			ELSEIF CFLAG:800 == 19
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ヒホ？",72,LEFT%┃
+				PRINTFORML ┃%"ペットボトルを床に置いて……その上でスクワットするホ？",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 29
+			ELSEIF CFLAG:800 == 29
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"お゛お゛お゛ぉっ！" + ハート(),72,LEFT%┃
+				PRINTFORML ┃%"お゛じりのなかっ、おぐまでっ、はい゛っでる！",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 39
+			ELSEIF CFLAG:800 == 39
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"" + CALLNAME + "すごいホー",72,LEFT%┃
+				PRINTFORML ┃%"ペットボトルが全部はいったホー！",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 49
+			ELSEIF CFLAG:800 == 49
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"も、もう゛…",72,LEFT%┃
+				PRINTFORML ┃%"おしり……げんかい…" + ハート(),72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 59
+			ELSEIF CFLAG:800 == 59
+				SETCOLOR 0XFF82D2
+				PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"お゛お゛お゛おおっおっ！",72,LEFT%┃
+				PRINTFORML ┃%"おぢりとま゛らないぃぃぃ！",72,LEFT%┃
+				PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				CFLAG:800 = 99
+
+
+			;終了
+			ELSEIF CFLAG:800 == 99
+				IF RAND:2 == 0
+					PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"い…じょう…で……" + CALLNAME + "…の…オナニー中継は……",72,LEFT%┃
+					PRINTFORML ┃%"しゅう…りょう…だホー……",72,LEFT%┃
+					PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ELSE
+				SETCOLOR 0XFF82D2
+					PRINTFORML ┏>>MESSAGE 　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+					PRINTFORML ┃%"" + CSTR:일인칭 + "も、もうダメだから…",72,LEFT%┃
+					PRINTFORML ┃%"" + CSTR:이인칭 + "は…頑張って……",72,LEFT%┃
+					PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+				ENDIF
+				CFLAG:800 = 100
+			ENDIF
+		ENDIF
+	ENDIF
+
+RESETCOLOR

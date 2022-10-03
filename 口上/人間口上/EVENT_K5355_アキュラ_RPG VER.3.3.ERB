@@ -1,9 +1,9 @@
 ﻿;-------------------------------------------------
-;白き鋼鉄のXからアキュラ구상　例によって전투だけ
+;白き鋼鉄のXからアキュラ口上　例によって戦闘だけ
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;eraMegaten전용 구상 템플릿
-;5355とX2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;5355와 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
 ;단, 캐릭터번호가 한자리인 캐릭터의 경우, 5355, Y1은 1, X2는 01과 같이 바꿔주세요
 ;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
 ;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
@@ -14,21 +14,25 @@
 ;범용 구상의 작성에 사용하는 경우는, 5355→캐릭터번호가 아니라,
 ;K5355→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:EVENT_K5355_ASSI.ERB
 ;	Facility	:회화타입：助手時口上
 ;
 ;	Modification Data:
 ;	Edit	Date			Author					Reason
-;	001		2021/03/21		木綿豆腐				신규작성　다만 전투구상만
-;	002		2021/03/30		木綿豆腐				진짜 약간 갱신
-;	003		2021/04/06		木綿豆腐				개별이벤트 3 용으로 약간만 추가
-;	004		2021/04/27		木綿豆腐				개별이벤트 4 용으로 약간만 추가
-;	005		2021/06/19		木綿豆腐				얼굴그래픽 만들었으니 나오도록 했다
-;	006		2021/06/21		木綿豆腐				다크니스 트리거 후 메세지가 사라지게 되어서 WAIT 들어가게 함 / 조교 메세지가 출력될 가능성이 있었으므로 대처
-;	007		2021/08/24		木綿豆腐				개별이벤트 5 용으로 조금만 추가/그외 약간 건드렸음
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/##Translated by "패러독스 인터랙티브 갤러리"
+;	001		2021/03/21		木綿豆腐				新規作成　ただし戦闘口上のみ
+;	002		2021/03/30		木綿豆腐				ほんのちょっと更新
+;	003		2021/04/06		木綿豆腐				個別イベント3用にちょっとだけ追加
+;	004		2021/04/27		木綿豆腐				個別イベント4用にちょっとだけ追加
+;	005		2021/06/19		木綿豆腐				顔グラを作ったので出すようにしたよ
+;	006		2021/06/21		木綿豆腐				ダークネストリガー後のメッセージが消えるようになったのでWAIT入れるようにした/調教メッセージが出力される可能性があったので対処
+;	007		2021/08/24		木綿豆腐				個別イベント5用にちょっと追加/その他ちょっと弄ったり
+;	008		2021/10/04		木綿豆腐				SPスキル使用時の台詞をちょっと変えてみたり歌が流れだしたら曲名が出るようにしたり
+;	009		2022/05/13		木綿豆腐				イクス2ルートに対応
+;	010		2022/06/07		木綿豆腐				ちょっとしたバグを直したり新規EXウェポン分を追加したり
+;	011		2022/07/25		木綿豆腐				個別イベント用にちょっとだけ追加
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
 ;	+----+----+-------------------------------+
@@ -36,38 +40,61 @@
 ;	+----+----+-------------------------------+
 ;	|   1| ○ | 処理上のバグ修正              |
 ;	+----+----+-------------------------------+
-;	|   2| ○ | 구상の誤字・脱字の修正        |
+;	|   2| ○ | 口上の誤字・脱字の修正        |
 ;	+----+----+-------------------------------+
-;	|   3| ○ | 구상まとめへの収録            |
+;	|   3| ○ | 口上まとめへの収録            |
 ;	+----+----+-------------------------------+
-;	|   4| ○ | 구상の新規추가                |
+;	|   4| ○ | 口上の新規追加                |
 ;	+----+----+-------------------------------+
-;	|   5| ○ | 既存구상の改変                |
+;	|   5| ○ | 既存口上の改変                |
 ;	+----+----+-------------------------------+
 ;	|   6| ○ | 改変した口上の自由な再配布    |
 ;	+----+----+-------------------------------+
-;	|   7| ○ | 구상内容の転載                |
+;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 ;-------------------------------------------------
-;【사용CFLAG】
-;　CFLAG:800　ROROの歌판정 for awakening
-;　CFLAG:801　ROROの歌판정 for darkness
-;　CFLAG:802　ROROの歌판정 for diva
-;　CFLAG:803　個別이벤트用판정
-;　CFLAG:804　個別이벤트制御用（日付取得　구상では使わない）
-;　CFLAG:805　個別이벤트制御用（時刻取得　구상では使わない）
-;　CFLAG:806　個別이벤트制御用（続き見ないよフラグ）
+;【使用CFLAG】
+;　CFLAG:800　ROROの歌判定 for awakening
+;　CFLAG:801　ROROの歌判定 for darkness
+;　CFLAG:802　ROROの歌判定 for diva
+;　CFLAG:803　個別イベント用判定
+;　　0:普段
+;　　1:vsバタフライエフェクト
+;　　2:vsアシモフ
+;　　3:vsデマーゼル
+;　　4:vs蒼龍銀虎
+;　　5:vsイプシロン3
+;　CFLAG:804　個別イベント制御用（X:日付取得　口上では使わない）/（X2:전투이벤트用）
+;　CFLAG:805　個別イベント制御用（X:時刻取得　口上では使わない）/（X2:전투이벤트用）
+;　CFLAG:806　個別イベント制御用（X:続き見ないよフラグ）/（X2:コハクの特技を見たフラグ）
+;　CFLAG:807　個別イベント　碧色の雷霆クリア判定
+;　CFLAG:808　個別イベント　祈歌クリア判定
+;　CFLAG:809　ブリッツダッシュ判定（ONだとブリッツダッシュ、OFFだとディヴァイド）
+;　CFLAG:810　一度でも習得した事のあるＥＸウェポンの記録（ビット）
+;　　0:スパークステラー
+;　　1:アンカーネクサス
+;　　2:オービタルエッジ
+;　　3:ルミナリーマイン
+;　　4:キスオブディーヴァ
+;　　5:ドラフトスパイラル
+;　　6:クロスランサー
+;　　7:スピンチョッパー
+;　　8:メギドバースト
+;　　9:タイムフリーザー
+;　　10:ガトリングスコール
+;　　11:ラピッドリッパー
+;　　12:オプティックラウンド
 ;--------------------------------------------------
 @BATTLE_EVENT_K5355, ARG, ARG:1, ARG:2
-;■台詞の行数を増やしたいときは
-;PRINTL 아이うえお
+;■대사의 행 수를 늘리고 싶을 때는
+;PRINTL あいうえお
 ;PRINTL かきくけこ
 ;LOCALS:10 = さしすせそ
 ;LOCALS:11 = たちつてと
 ;KSTR:0 = なにぬねの
 ;KSTR:1 = はひふへほ
 ;　　↓
-;아이うえお
+;あいうえお
 ;かきくけこ
 ;┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;┃さしすせそ　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　┃
@@ -75,7 +102,7 @@
 ;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;なにぬねの
 ;はひふへほ
-;と増やしていく
+;로 늘려나간다
 SIF ARG < 0 && NO:ARG != 5355
 	RETURN 0
 VARSET LOCALS
@@ -90,6 +117,8 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS:10 = 네놈의 약점 따위는 이미 해석이 끝났다
 		ELSEIF CFLAG:ARG:803 == 3
 			LOCALS:10 = 이번에야말로, 네놈을 토멸하겠다！
+		ELSEIF CFLAG:ARG:803 == 5
+			LOCALS:10 = イプシロン！　これで決着をつける！
 		ELSE
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
@@ -105,6 +134,8 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 2
 		IF CFLAG:ARG:803 == 3
 			LOCALS:10 = 마지막 전언이다……！
+		ELSEIF CFLAG:ARG:803 == 5
+			LOCALS:10 = これで終わりだ、イプシロン！
 		;주인이 COOP발동
 		ELSEIF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			LOCAL = RAND:3
@@ -142,11 +173,11 @@ SELECTCASE TFLAG:전투이벤트
 	;피소환시
 	CASE 3
 		;LOCALS:10 = 
-	;공격　ARGが공격をする仲魔、ARG:1が적、ARG:2がダメージ量
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
-		;아군に공격した
+		;味方に攻撃した
 		;IF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
@@ -169,9 +200,11 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 아아…… 놈은 분명, 바로 근처에서 보고 있을 거다
 			ELSEIF CFLAG:ARG:803 == 3
 				LOCALS:10 = 토멸…… 완료
+			ELSEIF CFLAG:ARG:803 == 5
+				LOCALS:10 = これで……眠れ、イプシロンッ
 			ELSE
 				IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
-				ELSEIF RAND:2 == 0
+				ELSEIF (CSTR:ARG:100 == "X2" && CFLAG:ARG:고유게이지H2 > 0 && CFLAG:ARG:고유게이지D1 > 0) || RAND:2 == 0
 					IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 						SETCOLOR 0xffffff
 						LOCAL = 6600
@@ -184,7 +217,24 @@ SELECTCASE TFLAG:전투이벤트
 					IF CFLAG:ARG:입력행동 == [[스킬:X-ROSS DISASTER]]
 						LOCALS:10 = 끝났다앗！　최강 콤비네이션！
 					ELSE
-						LOCALS:10 = 적을 격파！　역시 아큐라 군！
+						IF CSTR:ARG:100 == "X2"
+							SELECTCASE CFLAG:ARG:고유게이지H2
+							CASE 0
+								LOCALS:10 = やったぜ！　向かうところ敵ナシだ！
+							CASE 1
+								LOCALS:10 = ＱＵＩＣＫ ＢＲＥＡＫ！　やったね！
+							CASE 2
+								LOCALS:10 = お見事っ！　目にも止まらぬ武器さばき！
+							CASE 3
+								LOCALS:10 = ソッコー撃破！　ガンガンいっちゃえ！
+							CASE 4
+								LOCALS:10 = このスピード！　まさに電光石火だね！
+							CASE 5
+								LOCALS:10 = キミの勢いは、留まるところを知らないね！
+							ENDSELECT
+						ELSE
+							LOCALS:10 = 적을 격파！　역시 아큐라 군！
+						ENDIF
 					ENDIF
 					CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
 					SETCOLOR 0x33ffcc
@@ -323,7 +373,7 @@ SELECTCASE TFLAG:전투이벤트
 			ENDIF
 		ENDIF
 	;피데미지
-	;ARGが공격を受ける仲魔、ARG:1が적、ARG:2がダメージ量
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
@@ -332,13 +382,22 @@ SELECTCASE TFLAG:전투이벤트
 			ELSE
 				LOCALS:10 = 우옷……！
 			ENDIF
-		;아군に공격された
+		;味方に攻撃された
 		ELSEIF CFLAG:ARG:PT플래그 == CFLAG:(ARG:1):PT플래그
 			LOCALS:10 = ……어딜 노리고 있나
 		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 			ELSEIF RAND:2 == 0
+				LOCAL = RAND:3
+				SELECTCASE LOCAL
+				CASE 0
+					LOCALS:10 = 데미지, 위험 영역！　조심해, 아큐라 군！ 
+				CASE 1
+					LOCALS:10 = わわっ！　体力マズいよ！　気を付けて！
+				CASE 2
+					LOCALS:10 = 大丈夫？　無茶はダメだよ？
+				ENDSELECT
 				IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 					SETCOLOR 0xffffff
 					LOCAL = 6600
@@ -348,7 +407,6 @@ SELECTCASE TFLAG:전투이벤트
 				ELSE
 					LOCAL = 6400
 				ENDIF
-				LOCALS:10 = 데미지, 위험 영역！　조심해, 아큐라 군！ 
 				CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
 				SETCOLOR 0x33ffcc
 			ENDIF
@@ -373,7 +431,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = 이런 곳에서…… %CSTR:ARG:일인칭%는 멈추지 않아……
 				ENDSELECT
 			ENDIF
-		;無効
+		;무효
 		ELSEIF ARG:2 == 0
 			IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 			ELSEIF RAND:2 == 0
@@ -436,8 +494,8 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 꽤 하는군……
 			ENDSELECT
 		ENDIF
-	;範囲공격
-	;ARGが공격をする仲魔、ARG:1が공격された적数、ARG:2が無効数(회피も含む)
+	;範囲攻撃
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が無効数(回避も含む)
 	CASE 13
 		;全弾命中した
 		IF ARG:2 == 0
@@ -522,8 +580,8 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 다음에 만회하겠어
 			ENDSELECT
 		ENDIF
-	;範囲공격で적を撃破した
-	;ARGが공격をする仲魔、ARG:1が공격された적数、ARG:2が撃破数
+	;範囲攻撃で敵を撃破した
+	;ARGが攻撃をする仲魔、ARG:1が攻撃された敵数、ARG:2が撃破数
 	CASE 14
 		;全員撃破
 		IF ARG:2 == ARG:1
@@ -667,18 +725,18 @@ SELECTCASE TFLAG:전투이벤트
 		CASE 2
 			LOCALS:10 = 아쉽게 됐군
 		ENDSELECT
-	;トリガー스킬を発動した
-	;たぶんダークネストリガー中の追撃をしたら표시されるであろうからアクセルに限定する
+	;トリガースキルを発動した
+	;たぶんダークネストリガー中の追撃をしたら表示されるであろうからアクセルに限定する
 	CASE 21
 		SELECTCASE TFLAG:발동연동스킬
-		;アクセル　滅多に見ないし一종류でいいかな……
+		;アクセル　滅多に見ないし一種類でいいかな……
 		CASE 2485
 			LOCALS:10 = 허점투성이로군
 		;그 외
 		;CASEELSE
 		;	LOCALS:10 = 
 		ENDSELECT
-	;バッド스테이터스を受けた
+	;バッドステータスを受けた
 	CASE 22
 		SELECTCASE GET_STATE(CFLAG:ARG:상태이상)
 			CASE "HAPPY"
@@ -711,6 +769,37 @@ SELECTCASE TFLAG:전투이벤트
 			;그 외の상태이상
 			;CASEELSE
 		ENDSELECT
+	;ターン終了時今の状態による口上
+	CASE 51
+		SETCOLOR 0x33ffcc
+		;残りHP関連
+		IF LOCALS:10 == "" && KSTR:0 == ""
+			IF 0
+			ELSEIF 현HP비율(ARG) == 0
+			;HP20%以下
+			ELSEIF 현HP비율(ARG) < 20
+				IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+					LOCALS:10 = モード・ダークネス……裏目に出たか
+				ELSE
+					IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+						SETCOLOR 0xffffff
+						LOCAL = 6600
+					ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+						SETCOLOR 0xff961e
+						LOCAL = 6500
+					ELSE
+						LOCAL = 6400
+					ENDIF
+					LOCALS:10 = ア、アキュラくん！　もうこれ以上は――
+					CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+					SETCOLOR 0x33ffcc
+					LOCALS:10 = %CSTR:ARG:일인칭%ならまだやれる。サポートを頼む、ロロ
+				ENDIF
+			;HP50%以下
+			ELSEIF 현HP비율(ARG) < 50
+				LOCALS:10 = 生憎だが、苦境には慣れている……
+			ENDIF
+		ENDIF
 	;배틀에서 승리했다
 	CASE 90
 		IF CFLAG:ARG:803 == 1
@@ -719,9 +808,10 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS:10 = ……정신을 똑바로 차려. 놈은 아직 끝나지 않았어
 		ELSEIF CFLAG:ARG:803 == 3
 			LOCALS:10 = 지옥에는―― 네놈 혼자 가라
+		ELSEIF CFLAG:ARG:803 == 5
+			LOCALS:10 = ヌル、大丈夫か！？　すぐに向かう！
 		ELSE
-			IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
-			ELSEIF RAND:2 == 0
+			IF RAND:2 == 0
 				IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 					SETCOLOR 0xffffff
 					LOCAL = 6600
@@ -747,8 +837,7 @@ SELECTCASE TFLAG:전투이벤트
 		ENDIF
 	;레벨 업했다
 	CASE 91
-		IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
-		ELSEIF RAND:2 == 0
+		IF RAND:2 == 0
 			IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 				SETCOLOR 0xffffff
 				LOCAL = 6600
@@ -773,6 +862,20 @@ SELECTCASE TFLAG:전투이벤트
 		ENDSELECT
 	;도주에 성공했다
 	CASE 92
+		IF RAND:2 == 0
+			IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+				SETCOLOR 0xffffff
+				LOCAL = 6600
+			ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+				SETCOLOR 0xff961e
+				LOCAL = 6500
+			ELSE
+				LOCAL = 6400
+			ENDIF
+			LOCALS:10 = よーし、撤退だ！　こっちのルートが安全だよ！
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			SETCOLOR 0x33ffcc
+		ENDIF
 		LOCAL = RAND:3
 		SELECTCASE LOCAL
 		CASE 0
@@ -784,6 +887,20 @@ SELECTCASE TFLAG:전투이벤트
 		ENDSELECT
 	;도주에 실패했다
 	CASE 93
+		IF RAND:2 == 0
+			IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+				SETCOLOR 0xffffff
+				LOCAL = 6600
+			ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+				SETCOLOR 0xff961e
+				LOCAL = 6500
+			ELSE
+				LOCAL = 6400
+			ENDIF
+			LOCALS:10 = あっちゃー……追いつかれちゃったよ
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			SETCOLOR 0x33ffcc
+		ENDIF
 		LOCAL = RAND:3
 		SELECTCASE LOCAL
 		CASE 0
@@ -965,11 +1082,11 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 선수를 쳐봤자……！
 			ENDSELECT
 		ENDIF
-	;링케이지に참가した
+	;링케이지に参加した
 	CASE 100
 		IF 0
-		;스킬分岐
-		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[스킬:○○]]
+		;スキル分岐
+		;ELSEIF CFLAG:(FLAG:행동순1):입력행동 == [[スキル:○○]]
 		;キャラ分岐
 		;ELSEIF NO:(FLAG:행동순1) == [[キャラ:○○]]
 		ELSE
@@ -995,15 +1112,15 @@ ELSE
 ENDIF
 
 @BATTLE_MESSAGE_K5355, ARG, ARG:1 = 0
-;■台詞の行数を増やしたいときは
-;PRINTL 아이うえお
+;■대사의 행 수를 늘리고 싶을 때는
+;PRINTL あいうえお
 ;PRINTL かきくけこ
 ;LOCALS:10 = さしすせそ
 ;LOCALS:11 = たちつてと
 ;KSTR:0 = なにぬねの
 ;KSTR:1 = はひふへほ
 ;　　↓
-;아이うえお
+;あいうえお
 ;かきくけこ
 ;┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;┃さしすせそ　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　┃
@@ -1011,7 +1128,7 @@ ENDIF
 ;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;なにぬねの
 ;はひふへほ
-;と増やしていく
+;로 늘려나간다
 VARSET LOCALS
 CALL 구상변수초기화
 
@@ -1058,14 +1175,25 @@ ELSEIF CFLAG:ARG:입력행동 == 0
 	CALL SING_RORO_K5355, ARG
 	SETCOLOR 0x33ffcc
 	LOCAL = RAND:3
-	SELECTCASE LOCAL
-	CASE 0
-		LOCALS:10 = 익숙하진 않다만…… 우는 소리는 할 수 없나
-	CASE 1
-		LOCALS:10 = 총이 아니더라도, 이 정도는！
-	CASE 2
-		LOCALS:10 = 빗맞추지 않아！
-	ENDSELECT
+	IF CSTR:ARG:100 == "X2"
+		SELECTCASE LOCAL
+		CASE 0
+			LOCALS:10 = ブレイクシフトの、パワーならば！
+		CASE 1
+			LOCALS:10 = 接近戦用の設計が活きたな
+		CASE 2
+			LOCALS:10 = 退かないならば、手段は選ばん
+		ENDSELECT
+	ELSE
+		SELECTCASE LOCAL
+		CASE 0
+			LOCALS:10 = 익숙하진 않다만…… 우는 소리는 할 수 없나
+		CASE 1
+			LOCALS:10 = 총이 아니더라도, 이 정도는！
+		CASE 2
+			LOCALS:10 = 빗맞추지 않아！
+		ENDSELECT
+	ENDIF
 ;-------------------------------------------------
 ;총공격（특수탄환 포함）
 ;-------------------------------------------------
@@ -1128,101 +1256,367 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 	ENDIF
 ;-------------------------------------------------
 ;범용스킬
-;と言いつつ専用스킬しか搭載しないのだが
+;と言いつつ専用スキルしか搭載しないのだが
 ;-------------------------------------------------
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:블리츠대쉬]]
 	CALL SING_RORO_K5355, ARG
 	SETCOLOR 0x33ffcc
 	LOCAL = RAND:3
-	IF CFLAG:ARG:803 == 1
-		SELECTCASE LOCAL
-		CASE 0
-			LOCALS:10 = 조급해하지 마라…… 냉정해져……！
-		CASE 1
-			LOCALS:10 = 잡았다！
-		CASE 2
-			LOCALS:10 = 한시라도 빨리, 재워주도록 하마
-		ENDSELECT
-	ELSEIF CFLAG:ARG:803 == 2 || CFLAG:ARG:803 == 3
-		SELECTCASE LOCAL
-		CASE 0
-			LOCALS:10 = 사라져라, 데머즐……！
-		CASE 1
-			LOCALS:10 = 네놈의 낯짝은 이제 질렸다
-		CASE 2
-			LOCALS:10 = 네놈만은, 내가……！
-		ENDSELECT
+	IF CSTR:ARG:100 == "X2"
+		IF CFLAG:ARG:809 == 1
+			IF CFLAG:ARG:803 == 5
+				SELECTCASE LOCAL
+				CASE 0
+					LOCALS:10 = 逃がすと、思うなッ
+				CASE 1
+					LOCALS:10 = スピードで撹乱するまでだ……！
+				CASE 2
+					LOCALS:10 = 逃がさん……！
+				ENDSELECT
+			ELSE
+				SELECTCASE LOCAL
+				CASE 0
+					LOCALS:10 = ブリッツシフト、移行！
+				CASE 1
+					LOCALS:10 = 捉えた……！
+				CASE 2
+					LOCALS:10 = 逃がさん……！
+				ENDSELECT
+			ENDIF
+		ELSE
+			IF BLITZ_TARGET_JUDG(ARG) == 1
+				IF CFLAG:ARG:803 == 5
+					SELECTCASE LOCAL
+					CASE 0
+						LOCALS:10 = その盾だろうと、防げはしないッ
+					CASE 1
+						LOCALS:10 = そこを退けッ、イプシロン！
+					CASE 2
+						LOCALS:10 = その機動力では避けられまい……！
+					ENDSELECT
+				ELSE
+					SELECTCASE LOCAL
+					CASE 0
+						LOCALS:10 = フッ――！
+					CASE 1
+						LOCALS:10 = 捉えた……！
+					CASE 2
+						LOCALS:10 = 逃がさん……！
+					ENDSELECT
+				ENDIF
+			ELSE
+				IF CFLAG:ARG:803 == 5
+					SELECTCASE LOCAL
+					CASE 0
+						LOCALS:10 = その盾だろうと、防げはしないッ
+					CASE 1
+						LOCALS:10 = そこを退けッ、イプシロン！
+					CASE 2
+						LOCALS:10 = ブレイクホイールの破壊力は伊達ではない……！
+					ENDSELECT
+				ELSE
+					SELECTCASE LOCAL
+					CASE 0
+						LOCALS:10 = ふっ！　せいッ！　はぁッ！
+					CASE 1
+						LOCALS:10 = ブレイクホイールの破壊力は伊達ではない……！
+					CASE 2
+						LOCALS:10 = 強行突破する！
+					ENDSELECT
+				ENDIF
+			ENDIF
+		ENDIF
 	ELSE
-		SELECTCASE LOCAL
-		CASE 0
-			LOCALS:10 = 흣――！
-		CASE 1
-			LOCALS:10 = 잡았다！
-		CASE 2
-			LOCALS:10 = 핫！　맞아라！
-		ENDSELECT
+		IF CFLAG:ARG:803 == 1
+			SELECTCASE LOCAL
+			CASE 0
+				LOCALS:10 = 조급해하지 마라…… 냉정해져……！
+			CASE 1
+				LOCALS:10 = 잡았다！
+			CASE 2
+				LOCALS:10 = 한시라도 빨리, 재워주도록 하마
+			ENDSELECT
+		ELSEIF CFLAG:ARG:803 == 2 || CFLAG:ARG:803 == 3
+			SELECTCASE LOCAL
+			CASE 0
+				LOCALS:10 = 사라져라, 데머즐……！
+			CASE 1
+				LOCALS:10 = 네놈의 낯짝은 이제 질렸다
+			CASE 2
+				LOCALS:10 = 네놈만은, 내가……！
+			ENDSELECT
+		ELSE
+			SELECTCASE LOCAL
+			CASE 0
+				LOCALS:10 = 흣――！
+			CASE 1
+				LOCALS:10 = 잡았다！
+			CASE 2
+				LOCALS:10 = 핫！　맞아라！
+			ENDSELECT
+		ENDIF
 	ENDIF
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:연기회복]]
+	LOCALS:10 = ヒーリング！
+	LOCAL = 7300
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:SONG OF DIVA]]
 	IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
-		SETCOLOR 0xffffff
-		IF RAND:2 == 0
-			LOCALS:10 = 지지 마, 아큐라 군！
+		ALIGNMENT RIGHT
+		RESETCOLOR
+		;横向き三角がいい感じで使えなさそうなのでGV風表記
+		IF CSTR:ARG:100 == "X2"
+			PRINTL ♪ - 鎮花祭(エグゾシス) -　　　　　
+			ALIGNMENT LEFT
+			SETCOLOR 0xffffff
+			IF RAND:2 == 0
+				LOCALS:10 = まだ、終わりじゃない！
+			ELSE
+				LOCALS:10 = ぼくの歌がキミを守る！　オンステージだ！
+			ENDIF
+			CFLAG:ARG:800 = 0
+			LOCAL = 6600
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			IF CFLAG:ARG:803 != 4
+				PRINTL 　　正しき罪　讃えた罰
+				PRINTL 　　　そは――退り祓ひ却れ
+				PRINTL 　
+			ENDIF
 		ELSE
-			LOCALS:10 = 가라！　반격 시작이야！
-		ENDIF
-		CFLAG:ARG:800 = 0
-		LOCAL = 6600
-		CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
-		IF CFLAG:ARG:803 != 4
-			PRINTL 　　불과　기와　죽음과　몸과　본연의 주는　오셨나니
-			PRINTL 　　　자아　우러러보아라　짊어진 무거운 짐을――
-			PRINTL 　
+			PRINTL ♪ - 大祓(イグナイター) -　　　　　
+			ALIGNMENT LEFT
+			SETCOLOR 0xffffff
+			IF RAND:2 == 0
+				LOCALS:10 = 지지 마, 아큐라 군！
+			ELSE
+				LOCALS:10 = 가라！　반격 시작이야！
+			ENDIF
+			CFLAG:ARG:800 = 0
+			LOCAL = 6600
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			IF CFLAG:ARG:803 != 4
+				PRINTL 　　불과　기와　죽음과　몸과　본연의 주는　오셨나니
+				PRINTL 　　　자아　우러러보아라　짊어진 무거운 짐을――
+				PRINTL 　
+			ENDIF
 		ENDIF
 	ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
-		SETCOLOR 0xff961e
-		LOCALS:10 = 변신 완료！　팍팍 노래부를게！
-		CFLAG:ARG:802 = 0
-		LOCAL = 6500
-		CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
-		IF CFLAG:ARG:803 != 4
-		PRINTL 　　소원을　이룰　말의 힘《파워 에너지》　내가 너에게 줄테니까
-		PRINTL 　　　한 조각《하나》 뿐이라도　그래도　과거《어제》를 바꾸어
-		PRINTL 　　　　잃어버린 미래의　빛을 붙잡는　약속《프로토콜》！
-			PRINTL 　
+		ALIGNMENT RIGHT
+		RESETCOLOR
+		IF CSTR:ARG:100 == "X2"
+			PRINTL ♪ - 命題：＞(コマンドプロンプト) -　　　　　
+			ALIGNMENT LEFT
+			SETCOLOR 0xff961e
+			LOCALS:10 = モードチェンジ完了！　いくよ！　オーバードライヴ！
+			CFLAG:ARG:802 = 0
+			LOCAL = 6500
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			IF CFLAG:ARG:803 != 4
+				PRINTL 　　無くしたものなら　すぐ側にあった
+				PRINTL 　　　それに気づかず泣いてた　過ぎた自分にさよなら
+				PRINTL 　
+			ENDIF
+		ELSE
+			PRINTL ♪ - 白銀の約束(プロトコル) -　　　　　
+			ALIGNMENT LEFT
+			SETCOLOR 0xff961e
+			LOCALS:10 = 변신 완료！　팍팍 노래부를게！
+			CFLAG:ARG:802 = 0
+			LOCAL = 6500
+			CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+			IF CFLAG:ARG:803 != 4
+				PRINTL 　　소원을　이룰　말의 힘《파워 에너지》　내가 너에게 줄테니까
+				PRINTL 　　　한 조각《하나》 뿐이라도　그래도　과거《어제》를 바꾸어
+				PRINTL 　　　　잃어버린 미래의　빛을 붙잡는　약속《프로토콜》！
+				PRINTL 　
+			ENDIF
 		ENDIF
 	ENDIF
 	VARSET LOCALS
 	RESETCOLOR
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:X-ROSS DISASTER]]
-	SETCOLOR 0x33ffcc
-	LOCALS:10 = 간다, 로로！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-	SETCOLOR 0xffffff
-	LOCAL = 6600
-	LOCALS:10 = ＯＫ, 아큐라 군！
-	CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
-	ALIGNMENT RIGHT
-	RESETCOLOR
-	PRINTFORML 　　　　Dual blades perform their　　　　　　　　　　　　
-	PRINTFORML 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
-	PRINTFORML
-	PRINTFORML 　　Fervorous dance, ready to　　　　　　　　　　　　　　
-	SETCOLOR 0xe8307c
-	PRINTFORML 　　　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　
-	RESETCOLOR
-	PRINTFORML
-	PRINTFORML 　　　　Strike with conviction　　　　　　　　　　　　　 
-	PRINTFORMW 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
-	ALIGNMENT LEFT
-	SETCOLOR 0x33ffcc
-	LOCALS:10 = Ｘ－ＲＯＳＳ（크로스）……！
-	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-	SETCOLOR 0xffffff
-	LOCALS:10 = ＤＩＳＡＳＴＥＲ（디재스터）！
-	LOCAL = 6600
-	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
-	VARSET LOCALS
-	RESETCOLOR
+	IF CFLAG:ARG:803 == 4
+		CALL SING_MYTYL
+	ELSEIF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+		SETCOLOR 0xffffff
+		IF CSTR:ARG:100 == "X2"
+			IF CFLAG:ARG:800 == 0
+				PRINTL 　　雷鳴り響き渡り　聳ゆる世の末の歌時
+				PRINTL 　　　高く歌わん　聴きて憩え滅びに
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 1
+				PRINTL 　　夜明けの星供過ぎ去り　不安と恐れ今消えじ
+				PRINTL 　　　踊り出でよ　全て捨てて悔い破る
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 2
+				PRINTL 　　絶える事無き　天と地の様に　並べ合わせ
+				PRINTL 　　　尽きる事無き　恵みの雨とて　心尽くす永遠に
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 3
+				PRINTL 　　いざや！
+				PRINTL 　　　なか　きよ　のと　おの　ねふ　りの　みな　めさ
+				PRINTL 　　　　めな　みの　りふ　ねの　おとのよき　かな　再度
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 4
+				PRINTL 　　さあさ！
+				PRINTL 　　　なか　きよ　のと　おの　ねふ　りの　みな　めさ
+				PRINTL 　　　　めな　みの　りふ　ねの　おとのよき　かな　廻る
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 5
+				PRINTL 　　死すべきモノを贖い
+				PRINTL 　　　賛美と誉れ　今　来たりたもう
+				CFLAG:ARG:800 = 0
+			ENDIF
+		ELSE
+			IF CFLAG:ARG:800 == 0
+				PRINTL 　　空と大地が触れる狭間には　夜の手招き　騒ぐ胎内
+				PRINTL 　　　稜か見たような樹々の木漏れ日も　届かないのは“誰”の仕業か
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 1
+				PRINTL 　　困頓　後悔　猛省　再生　去り際　鳳
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 2
+				PRINTL 　　持チ加加呑ミテム　此ク加加呑ミテバ　持出デナム　此ク持チ出デ往ナバ
+				PRINTL 　　　天津神　国津神　八百万ノ神等　共ニ聞食セ
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 3
+				PRINTL 　　渾沌　更改　猛勢　最盛　乃至は　降誕
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 4
+				PRINTL 　　此れ　其れ　即ち　我成れ　誰為る　針路を　照らすは
+				PRINTL 　　　灯火篝て　無音の共鳴と――
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 5
+				PRINTL 　　孤独　ふたつ　出逢い　重なる時が満ちて
+				PRINTL 　　　軌跡　ひとつ　描く　喜び謳え
+				CFLAG:ARG:800 += 1
+			ELSEIF CFLAG:ARG:800 == 6
+				PRINTL 　　火と　気と　死と　身と　素の主は　来ませり
+				PRINTL 　　　いざ　仰ぎ見て　負える重荷を――
+				CFLAG:ARG:800 = 0
+			ENDIF
+		ENDIF
+		PRINTL 　
+	ELSEIF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1 && SKILLGAGE_F_GET(ARG, [[스킬:블리츠대쉬]]) > 1000
+		ALIGNMENT RIGHT
+		RESETCOLOR
+		PRINTL ♪ - 白銀の約束(プロトコル) -　　　　　
+		ALIGNMENT LEFT
+		SETCOLOR 0xff961e
+		PRINTL 　　願い　叶う　言葉力《パワーエナジー》　ぼくがキミにあげるから
+		PRINTL 　　　一欠《ひとつ》だけ　でも　過去《きのう》を変えて
+		PRINTL 　　　　無くした未来　光を掴む　約束《プロトコル》！
+		PRINTL 　
+	ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+		SETCOLOR 0xff961e
+		IF CSTR:ARG:100 == "X2"
+			IF CFLAG:ARG:802 == 0
+				PRINTL 　　ここで止まったら　何の意味もない
+				PRINTL 　　　終わらない旅の途中
+				PRINTL 　　　　手探りでも掴んだら　最後まで行けるはずさ――
+				CFLAG:ARG:802 += 1
+			ELSEIF CFLAG:ARG:802 == 1
+				PRINTL 　　冷たく察した瞳　滲む街
+				PRINTL 　　　新たなキッカケ　どこで見つければいい？
+				CFLAG:ARG:802 += 1
+			ELSEIF CFLAG:ARG:802 == 2
+				PRINTL 　　探しに行こうよ　自分らしい生き方さえ
+				PRINTL 　　　失ったままの空　見上げてるだけじゃダメ
+				PRINTL 　　　　分かってる　そんなこと
+				CFLAG:ARG:802 += 1
+			ELSEIF CFLAG:ARG:802 == 3
+				PRINTL 　　無くしたものなら　すぐ側にあった
+				PRINTL 　　　それに気づかず泣いてた　過ぎた自分にさよなら
+				CFLAG:ARG:802 = 0
+			ENDIF
+		ELSE
+			IF CFLAG:ARG:802 == 0
+				PRINTL 　　あの日　無くした記憶《カギ》　何処にあるの？
+				PRINTL 　　　同じ　目をした仲間《ヒト》　出会うため
+				CFLAG:ARG:802 += 1
+			ELSEIF CFLAG:ARG:802 == 1
+				PRINTL 　　鮮やかな　合成《ケミカル》は　見せかけの　そら言
+				PRINTL 　　　後悔　限界　超えたその先に　気が付いて
+				CFLAG:ARG:802 += 1
+			ELSEIF CFLAG:ARG:802 == 2
+				PRINTL 　　願い　叶う　言葉力《パワーエナジー》　ぼくがキミにあげるから
+				PRINTL 　　　一欠《ひとつ》だけ　でも　過去《きのう》を変えて
+				PRINTL 　　　　無くした未来　光を掴む　約束《プロトコル》！
+				CFLAG:ARG:802 = 0
+			ENDIF
+		ENDIF
+		PRINTL 　
+	ENDIF
+	IF CSTR:ARG:100 == "X2"
+		SETCOLOR 0x33ffcc
+		LOCALS:10 = ロロ、リミッターカット
+		CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+		SETCOLOR 0x9933cd
+		LOCAL = 6700
+		LOCALS:10 = モード・ダークネス……！
+		CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		ALIGNMENT RIGHT
+		RESETCOLOR
+		PRINTFORML 　　　　Vortex that breaks everything apart　　　　　　　
+		PRINTFORML 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
+		PRINTFORML
+		PRINTFORML 　　Light and darkness rush around　　　　　　　　　　　 
+		SETCOLOR 0xe8307c
+		PRINTFORML 　　　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　
+		RESETCOLOR
+		PRINTFORML
+		PRINTFORML 　　　　Like a waterfall, without stopping　　　　　　　 
+		PRINTFORMW 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
+		ALIGNMENT LEFT
+		SETCOLOR 0x33ffcc
+		LOCAL = CFLAG:ARG:얼굴이미지 * 100
+		SIF LOCAL == 100
+			LOCAL = 7200
+		LOCALS:10 = クロス……！
+		CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		SETCOLOR 0x9933cd
+		LOCALS:10 = シュトロームッ！
+		LOCAL = 6700
+		CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		VARSET LOCALS
+		RESETCOLOR
+	ELSE
+		SETCOLOR 0x33ffcc
+		LOCALS:10 = 간다, 로로！
+		CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
+		SETCOLOR 0xffffff
+		LOCAL = 6600
+		LOCALS:10 = ＯＫ, 아큐라 군！
+		CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		ALIGNMENT RIGHT
+		RESETCOLOR
+		PRINTFORML 　　　　Dual blades perform their　　　　　　　　　　　　
+		PRINTFORML 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
+		PRINTFORML
+		PRINTFORML 　　Fervorous dance, ready to　　　　　　　　　　　　　　
+		SETCOLOR 0xe8307c
+		PRINTFORML 　　　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　
+		RESETCOLOR
+		PRINTFORML
+		PRINTFORML 　　　　Strike with conviction　　　　　　　　　　　　　 
+		PRINTFORMW 　　　 ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣　　　　　　　
+		ALIGNMENT LEFT
+		SETCOLOR 0x33ffcc
+		LOCAL = CFLAG:ARG:얼굴이미지 * 100
+		SIF LOCAL == 0
+			LOCAL = 7000
+		SIF LOCAL == 6800
+			LOCAL = 7100
+		LOCALS:10 = クロス……！
+		CALL MESSAGE_P_LN(CALLNAME:ARG, 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		SETCOLOR 0xffffff
+		LOCALS:10 = ディザスター！
+		LOCAL = 6600
+		CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+		VARSET LOCALS
+		RESETCOLOR
+	ENDIF
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:스파크스텔라]]
 	CALL SING_RORO_K5355, ARG
 	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
@@ -1350,12 +1744,16 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:크로스랜서]]
 	VARSET LOCALS
 	SETCOLOR 0x33ffcc
 ELSEIF CFLAG:ARG:입력행동 == [[스킬:DARKNESS TRIGGER]]
+	ALIGNMENT RIGHT
+	RESETCOLOR
+	PRINTL ♪ - 記憶(メモリ)解放MIAOU -　　　　　
+	ALIGNMENT LEFT
 	SETCOLOR 0x9933cd
 	LOCAL = 6700
 	LOCALS:10 = 다크니스 트리거！　모드・다크니스……！
 	LOCALS:11 = 으아아아아아아아아아앗！！！
 	CFLAG:ARG:801 = 0
-	CALL MESSAGE_P_LN("ＲｏＲｏ", 1, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
 	IF CFLAG:ARG:803 != 4
 		PRINTL 　　몸을 갉아먹고　기반마저 부숴버려　집착을 버린다면
 		PRINTL 　　　기억《메모리》해방　능가하는 대음량《풀 볼륨》
@@ -1363,13 +1761,121 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:DARKNESS TRIGGER]]
 	ENDIF
 	VARSET LOCALS
 	RESETCOLOR
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기1]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = スピンチョッパー……！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = スピンチョッパー！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기2]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = メギドバーストッ！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = メギドバースト！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기3]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = タイムフリーザーッ！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = タイムフリーザー！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기4]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = ガトリングスコールッ！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = ガトリングスコール！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기5]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = ラピッドリッパー……！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = ラピッドリッパー！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
+ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기6]]
+	CALL SING_RORO_K5355, ARG
+	IF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
+		LOCALS:10 = オプティックラウンド……！
+		LOCAL = 6700
+	ELSE
+		IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6600
+		ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
+			LOCAL = 6500
+		ELSE
+			LOCAL = 6400
+		ENDIF
+		LOCALS:10 = オプティックラウンド！
+	ENDIF
+	CALL MESSAGE_P_LN("ＲｏＲｏ", 0, [[キャラ:아큐라(X)]], LOCAL, LOCALS:10, LOCALS:11)
+	VARSET LOCALS
+	SETCOLOR 0x33ffcc
 ;-------------------------------------------------
 ;그 외
-;ここに入ることは万に一つもない　はず←장비스킬の存在を忘れてましたー！！！
+;ここに入ることは万に一つもない　はず←装備スキルの存在を忘れてましたー！！！
 ;-------------------------------------------------
 ELSE
 ;	かつての己のミスを戒めとして残す
-;	LOCALS:10 = ここに入るのは想定外の엘라ーだ
+;	LOCALS:10 = ここに入るのは想定外のエラーだ
 ;	CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 ;	LOCALS:10 = 報告してくれると嬉しいなー？
 ;	CALL MESSAGE_B2("ＲｏＲｏ", 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
@@ -1416,41 +1922,74 @@ IF CFLAG:ARG:803 == 4
 	ELSE
 		SETCOLOR 0x33ffcc
 	ENDIF
-;모드・어웨이크닝　♪오오하라이《이그나이터ー》
-;오오하라이의 어디에 이그나이트한 요소가 있는건지　그게모르겟어
+;モード・アウェイクニング　♪大祓《イグナイター》
 ELSEIF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 	SETCOLOR 0xffffff
-	IF CFLAG:ARG:800 == 0
-		PRINTL 　　하늘과 대지가 맞닿는 틈새에는　밤이 손짓해 부르는　소란스런 태내
-		PRINTL 　　　언젠가 본 것만 같은 나무들 사이로 비치는 햇빛도　닿지 않는 것은 “누구”의 소행인가
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 1
-		PRINTL 　　곤돈　후회　맹성　재생　떠나는 때　봉황
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 2
-		;뭔가 구글했더니 나온 놈　을 가타카나로 변환（빨라서 무슨말인지 잘 모르겠고 가사 카드에도 없고 곤란） ;; 패독갤 주석: 오오하라에코토바 참조- [http://www2.kokugakuin.ac.jp/kaihatsu/oharai/t_02.html]
-		PRINTL 　　삼키시리　그리 삼키신다면　가져가시리　그리 가져가신다면
-		PRINTL 　　　아마츠카미　쿠니츠카미　팔백만의 신들이시여　모두 들어주소서
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 3
-		PRINTL 　　혼돈　갱신　맹세　왕성　또는　탄생
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 4
-		PRINTL 　　이렇게　저렇게　즉　내가 되고　누가 하나　나아갈 길　비추는 건
-		PRINTL 　　　등불 화톳불　무음의 공명으로――
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 5
-		PRINTL 　　고독　둘　만남　겹쳐지는 때가 차오르고
-		PRINTL 　　　궤적　하나　그리는 기쁨　노래해
-		CFLAG:ARG:800 += 1
-	ELSEIF CFLAG:ARG:800 == 6
-		PRINTL 　　불과　기와　죽음과　몸과　본연의 주는　오셨나니
-		PRINTL 　　　자아　우러러보아라　짊어진 무거운 짐을――
-		CFLAG:ARG:800 = 0
+	;♪鎮花祭《エグゾシス》
+	;なかきよの とおのねふりの みなめさめ なみのりふねの おとのよきかな　逆さから読んでも同じ回文の和歌なので回文歌というらしいよ
+	IF CSTR:ARG:100 == "X2"
+		IF CFLAG:ARG:800 == 0
+			PRINTL 　　雷鳴り響き渡り　聳ゆる世の末の歌時
+			PRINTL 　　　高く歌わん　聴きて憩え滅びに
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 1
+			PRINTL 　　夜明けの星供過ぎ去り　不安と恐れ今消えじ
+			PRINTL 　　　踊り出でよ　全て捨てて悔い破る
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 2
+			PRINTL 　　絶える事無き　天と地の様に　並べ合わせ
+			PRINTL 　　　尽きる事無き　恵みの雨とて　心尽くす永遠に
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 3
+			PRINTL 　　いざや！
+			PRINTL 　　　なか　きよ　のと　おの　ねふ　りの　みな　めさ
+			PRINTL 　　　　めな　みの　りふ　ねの　おとのよき　かな　再度
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 4
+			PRINTL 　　さあさ！
+			PRINTL 　　　なか　きよ　のと　おの　ねふ　りの　みな　めさ
+			PRINTL 　　　　めな　みの　りふ　ねの　おとのよき　かな　廻る
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 5
+			PRINTL 　　死すべきモノを贖い
+			PRINTL 　　　賛美と誉れ　今　来たりたもう
+			CFLAG:ARG:800 = 0
+		ENDIF
+	;♪大祓《イグナイター》
+	;大祓のどこにイグナイトな要素があるのか　ｺﾚｶﾞﾜｶﾗﾅｲ
+	ELSE
+		IF CFLAG:ARG:800 == 0
+			PRINTL 　　하늘과 대지가 맞닿는 틈새에는　밤이 손짓해 부르는　소란스런 태내
+			PRINTL 　　　언젠가 본 것만 같은 나무들 사이로 비치는 햇빛도　닿지 않는 것은 “누구”의 소행인가
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 1
+			PRINTL 　　곤돈　후회　맹성　재생　떠나는 때　봉황
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 2
+			;뭔가 구글했더니 나온 놈　을 가타카나로 변환（빨라서 무슨말인지 잘 모르겠고 가사 카드에도 없고 곤란） ;; 패독갤 주석: 오오하라에코토바 참조- [http://www2.kokugakuin.ac.jp/kaihatsu/oharai/t_02.html]
+			PRINTL 　　삼키시리　그리 삼키신다면　가져가시리　그리 가져가신다면
+			PRINTL 　　　아마츠카미　쿠니츠카미　팔백만의 신들이시여　모두 들어주소서
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 3
+			PRINTL 　　혼돈　갱신　맹세　왕성　또는　탄생
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 4
+			PRINTL 　　이렇게　저렇게　즉　내가 되고　누가 하나　나아갈 길　비추는 건
+			PRINTL 　　　등불 화톳불　무음의 공명으로――
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 5
+			PRINTL 　　고독　둘　만남　겹쳐지는 때가 차오르고
+			PRINTL 　　　궤적　하나　그리는 기쁨　노래해
+			CFLAG:ARG:800 += 1
+		ELSEIF CFLAG:ARG:800 == 6
+			PRINTL 　　불과　기와　죽음과　몸과　본연의 주는　오셨나니
+			PRINTL 　　　자아　우러러보아라　짊어진 무거운 짐을――
+			CFLAG:ARG:800 = 0
+		ENDIF
 	ENDIF
 	PRINTL 　
-;모드・다크니스　♪기억《메모리》해방MIAOU
-;MIAOU는「엠아이에이오유」라고 부릅니다
+;モード・ダークネス　♪記憶《メモリ》解放MIAOU
+;MIAOUは「えむあいえーおーゆー」と呼びます
 ELSEIF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 	SETCOLOR 0x9933cd
 	IF CFLAG:ARG:801 == 0
@@ -1471,26 +2010,50 @@ ELSEIF SKILLGAGE_H_GET(ARG, [[스킬:DARKNESS TRIGGER]]) == 1
 		CFLAG:ARG:801 = 0
 	ENDIF
 	PRINTL 　
-;모드・디바　♪백은의 약속《프로토콜》
-;８종 중에서 랜덤으로 선곡하는 건 인상에 남기 힘들 듯 하고 피곤하니 그만뒀음
+;モード・ディーヴァ　♪白銀の約束《プロトコル》
+;８種からランダムで選曲するのは印象に残りにくそうだし疲れるから止めた
 ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 	SETCOLOR 0xff961e
-	IF CFLAG:ARG:802 == 0
-		PRINTL 　　그 날　잃어버린 기억《열쇠》　어디에 있는 걸까？
-		PRINTL 　　　똑같은　눈을 한 동료《사람》　만나기 위해
-		CFLAG:ARG:802 += 1
-	ELSEIF CFLAG:ARG:802 == 1
-		PRINTL 　　선명한　합성《chemical》은　겉치레뿐인　빈말
-		PRINTL 　　　후회　한계　넘어선 그곳에서　알아차려
-		CFLAG:ARG:802 += 1
-	ELSEIF CFLAG:ARG:802 == 2
-		PRINTL 　　소원을　이룰　말의 힘《power energy》　내가 너에게 전해줄테니
-		PRINTL 　　　한 조각《하나》 뿐이지만　그래도　과거《어제》를 바꾸어
-		PRINTL 　　　　잃어버린 미래의　빛을 붙잡는　약속《protocol》！
-		CFLAG:ARG:802 = 0
+	;♪命題：＞《コマンドプロンプト》
+	IF CSTR:ARG:100 == "X2"
+		IF CFLAG:ARG:802 == 0
+			PRINTL 　　ここで止まったら　何の意味もない
+			PRINTL 　　　終わらない旅の途中
+			PRINTL 　　　　手探りでも掴んだら　最後まで行けるはずさ――
+			CFLAG:ARG:802 += 1
+		ELSEIF CFLAG:ARG:802 == 1
+			PRINTL 　　冷たく察した瞳　滲む街
+			PRINTL 　　　新たなキッカケ　どこで見つければいい？
+			CFLAG:ARG:802 += 1
+		ELSEIF CFLAG:ARG:802 == 2
+			PRINTL 　　探しに行こうよ　自分らしい生き方さえ
+			PRINTL 　　　失ったままの空　見上げてるだけじゃダメ
+			PRINTL 　　　　分かってる　そんなこと
+			CFLAG:ARG:802 += 1
+		ELSEIF CFLAG:ARG:802 == 3
+			PRINTL 　　無くしたものなら　すぐ側にあった
+			PRINTL 　　　それに気づかず泣いてた　過ぎた自分にさよなら
+			CFLAG:ARG:802 = 0
+		ENDIF
+	;♪白銀の約束《プロトコル》
+	ELSE
+		IF CFLAG:ARG:802 == 0
+			PRINTL 　　그 날　잃어버린 기억《열쇠》　어디에 있는 걸까？
+			PRINTL 　　　똑같은　눈을 한 동료《사람》　만나기 위해
+			CFLAG:ARG:802 += 1
+		ELSEIF CFLAG:ARG:802 == 1
+			PRINTL 　　선명한　합성《chemical》은　겉치레뿐인　빈말
+			PRINTL 　　　후회　한계　넘어선 그곳에서　알아차려
+			CFLAG:ARG:802 += 1
+		ELSEIF CFLAG:ARG:802 == 2
+			PRINTL 　　소원을　이룰　말의 힘《power energy》　내가 너에게 전해줄테니
+			PRINTL 　　　한 조각《하나》 뿐이지만　그래도　과거《어제》를 바꾸어
+			PRINTL 　　　　잃어버린 미래의　빛을 붙잡는　약속《protocol》！
+			CFLAG:ARG:802 = 0
+		ENDIF
 	ENDIF
 	PRINTL 　
 ELSE
 ENDIF
-;どうせこの後RORO名義で메시지出すので色はそのまま
+;どうせこの後RORO名義でメッセージ出すので色はそのまま
 

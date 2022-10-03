@@ -1,7 +1,9 @@
 ﻿;-------------------------------------------------
 ;マルフーシャ戦闘口上
 ;基本的にはローテンション気味
-;恋慕がつくと周囲が見えるようになる
+;本質的には普通の女の子
+;未恋慕時は周囲の人間をそこまで意識していない
+;연모がつくと周囲が見えるようになる
 ;-------------------------------------------------
 
 ;-------------------------------------------------
@@ -27,6 +29,8 @@
 ;	Edit	Date			Author					Reason
 ;	001		2021/09/08		レン					戦闘部分完成
 ;	002		2021/09/27		レン					消費アイテム口上の分岐細分化及び一部加筆修正
+;	003		2021/11/21		レン					パイルショット及びスパイクの口上を追加
+;	004		2021/11/24		レン					一部文章の加筆修正
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -79,12 +83,12 @@ SELECTCASE TFLAG:전투이벤트
 	;연모, 친애
 		IF TALENT:3 || TALENT:6
 			IF RAND:2 == 0
-				LOCALS:10 = 私の帰る場所、壊すつもりなら容赦はしない！
+				LOCALS:10 = 私の帰る場所、壊すつもりなら容赦しない！
 			ELSE
 				LOCALS:10 = 制圧射撃で動きを止めるから、その間に仕留めて！
 			ENDIF
 		ELSE
-	;연모、親愛以外
+	;연모, 친애以外
 			IF RAND:2 == 0
 				LOCALS:10 = 隙が出来た…一気に仕留める！
 			ELSE
@@ -100,10 +104,10 @@ SELECTCASE TFLAG:전투이벤트
 				IF RAND:2 == 0
 					LOCALS:10 = %CSTR:일인칭%も、%CSTR:이인칭%の役に立ちたいから！
 				ELSE
-					LOCALS:10 = %CSTR:이인칭%が作ったチャンス、無駄にはしない！
+					LOCALS:10 = %CSTR:이인칭%が作ったチャンス、絶対逃さない！
 				ENDIF
 			ELSE
-		;연모、親愛以外
+		;연모, 친애以外
 				IF RAND:2 == 0
 					LOCALS:10 = %CSTR:일인칭%も、%NAME:MASTER%さんに合わせて援護射撃を！
 				ELSE
@@ -146,7 +150,7 @@ SELECTCASE TFLAG:전투이벤트
 					ENDIF
 				ENDIF
 			ELSE
-		;연모、親愛以外
+		;연모, 친애以外
 				IF RAND:3 == 0
 					LOCALS:10 = 明日のために、今は手を汚すしか…
 				ELSEIF RAND:2 == 0
@@ -192,7 +196,7 @@ SELECTCASE TFLAG:전투이벤트
 					LOCALS:10 = スネジ、ンカ…ごめん…なさ…
 				ENDIF
 			ELSE
-			;연모、親愛以外
+			;연모, 친애以外
 				IF FINDCHARA_B([[キャラ:당신]]) == 2 || FINDCHARA_B([[キャラ:당신]]) == 12
 					IF RAND:2 == 0
 						LOCALS:10 = 次は…もっと…違う…
@@ -274,7 +278,7 @@ SELECTCASE TFLAG:전투이벤트
 				ENDIF
 			ENDIF
 		ELSE
-	;연모、親愛以外
+	;연모, 친애以外
 			IF FINDCHARA_B([[キャラ:당신]]) == 2 || FINDCHARA_B([[キャラ:당신]]) == 12
 				IF RAND:3 == 0
 					LOCALS:10 = 戦闘終了、先に進みましょう
@@ -337,7 +341,7 @@ SELECTCASE TFLAG:전투이벤트
 					ENDIF
 				ENDIF
 			ELSE
-		;연모、親愛以外
+		;연모, 친애以外
 				IF RAND:2 == 0
 					LOCALS:10 = 死にたくないので頑張りますよ
 				ELSE
@@ -415,9 +419,9 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
 ;이쪽은 통상공격
 ELSEIF CFLAG:ARG:입력행동 == 0
 	IF RAND:2 == 0
-		LOCALS:10 = 力だと勝てないから、相手の動きをよく見て…
+		LOCALS:10 = 力だと勝てない…相手の動きの隙を突くしか…
 	ELSE
-		LOCALS:10 = 正面からだと分が悪いから、意識外の一撃を狙う
+		LOCALS:10 = 正面からだと分が悪くても、意識外の一撃なら
 	ENDIF
 ;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
 ;	LOCALS:10 = 
@@ -510,10 +514,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 ;-------------------------------------------------
 ;아이템
 ;-------------------------------------------------
-;回復アイテム
+;회복アイテム
 ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3007) || RANGE(CFLAG:ARG:입력행동,3017, 3037)
 	LOCALS:10 = %LOCALS%を使うから、動かないで
-;도반옥、반혼향、崖っぷち粉末
+;道返玉、反魂香、崖っぷち粉末
 ELSEIF RANGE(CFLAG:ARG:입력행동,3008, 3009) || CFLAG:ARG:입력행동 == 3016
 	LOCALS:10 = もう、目の前で死んでいくのは見たくないから…
 ;攻撃アイテム（範囲）
@@ -533,7 +537,11 @@ ELSEIF CFLAG:ARG:입력행동 == 3101 || RANGE(CFLAG:ARG:입력행동,3103, 3104
 ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 	;메시아라이저
 	IF CFLAG:ARG:입력행동 == 4160
-		LOCALS:10 = 私はもうひとりじゃない！　信じられる皆が居るから！
+		IF RAND:2 == 0
+			LOCALS:10 = 私は…私達は一人じゃない！　信じ合える仲間が居る！
+		ELSE
+			LOCALS:10 = 私が今日まで生きてこれたのは、一人の力じゃない…皆が居たから！
+		ENDIF
 	;L히트라이저
 	ELSEIF CFLAG:ARG:입력행동 == 4200
 		LOCALS:10 = 私の未来、誰にも奪わせない…もう、何にも縛られない！
@@ -676,7 +684,7 @@ ELSE
 					LOCALS:10 = 所持金で性能が変わるって…どういう仕組みなんだろう…
 				ENDIF
 			ELSE
-				LOCALS:10 = こんな所じゃ、稼いでも使い道なんて無いから…全弾バラ撒く！
+				LOCALS:10 = こんな所じゃ、稼いでも使い道なんて無いから…全弾掃射！
 			ENDIF
 		;リペアショット
 		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルA")) == 5
@@ -689,6 +697,9 @@ ELSE
 		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルA")) == 6
 			LOCALS:10 = 電熱砲、チャージ完了
 			LOCALS:11 = 3…2…1…発射！
+		;パイルショット
+		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルA")) == 7
+			LOCALS:10 = 銃じゃ止めきれない…この距離ならパイルショットで！
 		ENDIF
 	;カードスキルB
 	ELSEIF CFLAG:ARG:입력행동 == PU_SKILLNUM_GET(ARG,"カードスキルB")
@@ -717,12 +728,15 @@ ELSE
 				LOCALS:10 = こちらマルフーシャ！
 				LOCALS:11 = 火力支援を要請します！
 			ENDIF
-	;対地タレット
+		;対地タレット
 		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルB")) == 6
-			LOCALS:10 = 相手の数が多いなら、こちらも数で対抗するだけ
+			LOCALS:10 = 相手が数で攻めてくるのなら、私も数で対抗する
 		;対空タレット
 		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルB")) == 7
 			LOCALS:10 = 対空タレットを設置、飛んでる敵は任せるから
+		;スパイク
+		ELSEIF SKILLGAGE_F_GET(ARG,PU_SKILLNUM_GET(ARG,"カードスキルB")) == 8
+			LOCALS:10 = どんな速い相手でも、足を止めれば後は撃ち抜くだけ
 		ENDIF
 	ELSE
 		LOCALS:10 = 

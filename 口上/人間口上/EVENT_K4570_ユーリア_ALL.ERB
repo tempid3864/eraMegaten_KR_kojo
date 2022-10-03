@@ -8958,7 +8958,74 @@ ELSEIF CFLAG:ARG:입력행동 == 0 || CFLAG:ARG:입력행동 == 2101
 		PRINTFORML ┃%"크리티컬을 노리고 갈게요！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
-;噛みつき系
+
+;専用技1 ドラゴンバイト／赤き鱗のﾄﾞﾗｸﾚｱ
+ELSEIF CFLAG:ARG:입력행동 == 3904
+;本性顕現時
+IF SKILLGAGE_H_GET(ARG,(PU_SKILLNUM_GET(ARG, "ドラゴンバイト"))) > 99
+	IF RAND:5 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"我が本質は竜",72,LEFT%┃
+		PRINTFORML ┃%"我が肌は赤き鱗",72,LEFT%┃
+		PRINTFORML ┃%"始祖ア・ドライグ・ゴッホの名において、全てを平らげて差し上げましょう",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞ユーリアは赤き巨竜と化し敵陣へと突っ込んだ！
+	ELSEIF RAND:4 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"テンション上がって――来ましたわァァァ！！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞ユーリアは赤き巨竜と化し敵陣へと突っ込んだ！
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"わたくし、伊達に150年も生きてございませんの",72,LEFT%┃
+		PRINTFORML ┃%"――か弱き塵芥の分際で、なァにイキり散らかしてくれてんですのォォォ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞ユーリアは赤き巨竜と化し敵陣へと突っ込んだ！
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"我が本質は竜、我が肌は赤き鱗",72,LEFT%┃
+		PRINTFORML ┃%"我が父ドラクルの名において、その真の姿をさらしましょう",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞ユーリアは赤き巨竜と化し敵陣へと突っ込んだ！
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"我が本質は竜、我が肌は赤き鱗",72,LEFT%┃
+		PRINTFORML ┃%"テンション上がって――来ましたわァァァ！！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞ユーリアは赤き巨竜と化し敵陣へと突っ込んだ！
+	ENDIF
+;그 이외
+ELSE
+	IF RAND:5 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"わたくしの“口”にお入りなさいな！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞竜の顎と化した腕が敵へと襲い掛かる！
+	ELSEIF RAND:4 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"マルカジリにして差し上げますわ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞竜の顎と化した腕が敵へと襲い掛かる！
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"左から右までまとめてガブッと行きますわよ",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞竜の顎と化した腕が敵へと襲い掛かる！
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ワタクシ・アナタ・マルカジリ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞竜の顎と化した腕が敵へと襲い掛かる！
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"まったく、今は“かしこくかわいいユーリアさん”で通ってますのに",72,LEFT%┃
+		PRINTFORML ┃%"こんなことをしてては台無しですわ",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORMW ＞竜の顎と化した腕が敵へと襲い掛かる！
+	ENDIF
+ENDIF
+	
+	;噛みつき系
 ELSEIF RANGE(CFLAG:ARG:입력행동,321, 326)
 	IF RAND:6 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

@@ -1,5 +1,5 @@
 ﻿;-------------------------------------------------
-;○○口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
+;あかり口上（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
 ;
 ;
 ;-------------------------------------------------
@@ -112,6 +112,12 @@ SIF MARK:굴복각인 < 3 && CSTR:이인칭 == ""
 	CSTR:이인칭 = おまえ
 SIF MARK:굴복각인 == 3 && CSTR:이인칭 == ""
 	CSTR:이인칭 = ご主人様
+;一人称の修正文も追加
+SIF MARK:굴복각인 < 1 && CSTR:이인칭 == ""
+	CSTR:일인칭 = 我
+SIF MARK:굴복각인 > 0 && CSTR:이인칭 == ""
+	;一人称を「あかり」に(元口上であかりだったので)
+	CSTR:일인칭 = あかり
 ;--------------------------------------------------
 ;간이 조수구상 발동시에 첫조교시 구상을 스킵（Y1을 조수의 캐릭터번호로 한다）
 ;여러 명이 있을 경우는, SIF NO:ASSI == Y1 || NO:ASSI == Z1으로 추가해 나간다
@@ -126,7 +132,10 @@ SIF MARK:굴복각인 == 3 && CSTR:이인칭 == ""
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	KSTR:(K++) = 「おまえはー！　我をこんな所に閉じ込めてどうするつもりだ！」
+	;調教初回に二人称を「おまえ」、一人称を「我」に。
+	CSTR:이인칭 = おまえ
+	CSTR:일인칭 = 我
+	KSTR:(K++) = 「%CSTR:이인칭%はー！　%CSTR:일인칭%をこんな所に閉じ込めてどうするつもりだ！」
 	KSTR:(K++) = 少女は%CALLNAME:MASTER%を見ると、怒りを露にして、怒鳴り声をあげる
 	W:K = 1
 	KSTR:(K++) = 「え？　調教？　なにそれ？」
@@ -135,11 +144,11 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	KSTR:(K++) = コロコロ変わる少女の表情を見てるうちに%CALLNAME:MASTER%は自然と笑みが浮かべていた
 	W:K = 1
 	KSTR:(K++) = 「あっ！　ニヤニヤしてる。なんだかわからないけど、変なことしたら許さないんだから！」
-	KSTR:(K++) = そう言って、身を守るように後ずさりするが、構わずに、ゆっくると近づいてく
+	KSTR:(K++) = そう言って、身を守るように後ずさりするが、構わずに、ゆっくりと近づいてく
 	W:K = 1
 	KSTR:(K++) = 「やだ……やめてよ。悪いことなんてしないほうがいいよ」
 	W:K = 1
-	KSTR:(K++) = 「絶対、レオ様が助けに来て、おまえなんかやっつけてくれるんだから！」
+	KSTR:(K++) = 「絶対、レオ様が助けに来て、%CSTR:이인칭%なんかやっつけてくれるんだから！」
 	W:K = 1
 	KSTR:(K++) = 「そのとき私に変なことしてないほうが…きゃっ」
 	W:K = 1
@@ -150,29 +159,36 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	GOTO 表示
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
-	PRINTFORMW 「星あかり…それがあかりの名前…」
+	;一人称を「あかり」に(元口上であかりだったので)
+	CSTR:일인칭 = あかり
+	PRINTFORMW 「星あかり…それが%CSTR:일인칭%の名前…」
 	;名前を戻す
-	NAME:TARGET = 호시 아카리
-	CALLNAME:TARGET = 아카리
+	NAME:TARGET = 星 あかり
+	CALLNAME:TARGET = あかり
 	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-	IF RAND:3 == 0
+	;ランダムだと変な口上が出るのでランダムから条件指定に。
+	;条件はリグル口上様から拝借しました(一部改変)。
+	IF CFLAG:2 >= 0 && EXP:50 >= 1
+	;음란傾向コース：依存度がプラス寄り＋異常経験1以上
 		PRINTFORMW 「すぐには助けは来ないみたいだし…あんまり喧嘩しててもしょうがないし…」
-		PRINTFORML 「だからっておまえを認めたわけじゃないから、その点勘違いしないように！」
+		PRINTFORML 「だからって%CSTR:이인칭%を認めたわけじゃないから、その点勘違いしないように！」
 		PRINTFORMW そういって、%CALLNAME:TARGET%は%CALLNAME:MASTER%を睨むが、その視線には以前ほどの力はない
 		PRINTFORMW それどころか、わずかではあるが何かを期待しているような気配を感じる
 		PRINTFORMW 果たして%CALLNAME:TARGET%は自分が何を期待しているか気づいているのだろうか？
 		KSTR:(K++) = 
-	ELSEIF RAND:2 == 0
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 1
+	;복종傾向コース：依存度がマイナス寄り＋異常経験1以上
 		PRINTFORMW そう告げると%CALLNAME:TARGET%はじっと%CALLNAME:MASTER%を見つめる…
 		PRINTFORMW そして、満足そうな様子を見て取ると言葉を続ける
-		PRINTFORMW 「おまえもおまえで頑張ってるみたいだし、名前くらいは教えてあげるってこと」
+		PRINTFORMW 「%CSTR:이인칭%も%CSTR:이인칭%で頑張ってるみたいだし、名前くらいは教えてあげるってこと」
 		PRINTFORML 「少しは感謝したらどう？」
 		PRINTFORMW そう言うとまた、%CALLNAME:TARGET%はじっと%CALLNAME:MASTER%を見つめた…
 		PRINTFORMW まだ反抗を諦めるほどではないが、%CALLNAME:MASTER%を怒らせるのは怖いのだろう…
 		KSTR:(K++) = 
 	ELSE
-		PRINTFORMW 「あかりの名前も知らない奴とこーゆーことしてるってのが気持ち悪いだけだから」
-		PRINTFORMW 「だから、名前を教えたってだけ、あかりがおまえに従う気になったとか妙な勘違いはしないこと！」
+	;연모傾向コース：それ以外…もとい、異常経験0
+		PRINTFORMW 「%CSTR:일인칭%の名前も知らない奴とこーゆーことしてるってのが気持ち悪いだけだから」
+		PRINTFORMW 「だから、名前を教えたってだけ、%CSTR:일인칭%が%CSTR:이인칭%に従う気になったとか妙な勘違いはしないこと！」
 		PRINTFORMW 「転生戦士イシュキックは悪になんか負けたりしないんだから！」
 		PRINTFORMW 本当に屈する気がないんなら、調教をやめるように抗議し続けるべきだろう
 		PRINTFORMW すでに調教をやめさせられないこと前提で、話をしてる時点で、自分がもう負け始めてると気づいていないようだ
@@ -184,7 +200,10 @@ ELSEIF CFLAG:201 < 2 && MARK:2 == 1
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-	IF RAND:3 == 0
+	;ランダムだと変な口上が出るのでランダムから条件指定に。
+	;条件はリグル口上様から拝借しました。
+	IF CFLAG:2 >= 0 && EXP:50 >= 2
+	;음란傾向コース：依存度がプラス寄り＋異常経験2以上
 		PRINTFORML 「あ…来たんだ…来なければいいのに…」
 		PRINTFORMW %CALLNAME:TARGET%はそんなふうに言うが、嬉しそうな表情を隠しきれていない
 		PRINTFORMW 「どうしたの？　どうせ、またいやらしいことするんでしょ？」
@@ -192,7 +211,8 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 		PRINTFORMW %CALLNAME:TARGET%はベッドの上からそんなことを非難がましく言う
 		PRINTFORMW もちろん待ちきれないというだけだろう…これなら堕ちるのもそう遠くないだろう…
 		KSTR:(K++) = 
-	ELSEIF RAND:2 == 0
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+	;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
 		PRINTFORML 「あ…ちょっと待って…」
 		PRINTFORML %CALLNAME:TARGET%は%CALLNAME:MASTER%が入ってくると小さく声をあげ、慌てて調教を受ける用意を始めた
 		PRINTFORMW そして、ちらちらと怯えきった目で、%CALLNAME:MASTER%の様子を確認してくる…
@@ -200,10 +220,11 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 		PRINTFORMW %CALLNAME:MASTER%はその様子に嗜虐心を煽られ、今回の調教内容を考え始めた…
 		KSTR:(K++) = 
 	ELSE
+	;연모傾向コース：それ以外…もとい、異常経験2未満
 		PRINTFORMW 「ねぇ、こーいうことって愛し合ってる人同士でやることなんでしょ？」
 		PRINTFORMW 「学校で習ったよ」
 		PRINTFORMW 「好きな人ができたら、みんなその人とこういうことをしたくなるって」
-		PRINTFORML 「じゃあ、あかりとこういうことを従ってるのって…もしかして…」
+		PRINTFORML 「じゃあ、%CSTR:일인칭%とこういうことを従ってるのって…もしかして…」
 		PRINTFORMW %CALLNAME:TARGET%はそこまで言うと、口を噤み、頬を赤らめ、%CALLNAME:MASTER%をじっと見つめだした
 		PRINTFORMW %CALLNAME:MASTER%は苦笑すると、%CALLNAME:TARGET%を押し倒した…そこにはもう抵抗はない…
 		KSTR:(K++) = 
@@ -212,27 +233,38 @@ ELSEIF CFLAG:201 < 3 && MARK:2 == 2
 	CFLAG:201 = 3
 	GOTO 表示
 ;굴복각인Lv3
+;ランダムだと変な口上が出るのでランダムから条件指定に。
+;条件はリグル口上様から拝借しました。
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
+	;屈服刻印1と2は飛ばされる可能性が割とあるので一応ここでも名前と一人称修正を仕込む。
+	;一人称を「あかり」に(元口上であかりだったので)
+	CSTR:일인칭 = あかり
+	NAME:TARGET = 星 あかり
+	CALLNAME:TARGET = あかり
+	;二人称をご主人様に
 	CSTR:이인칭 = ご主人様
-	PRINTFORML 「えっと…ご主人様…」
-	IF RAND:3 == 0
+	PRINTFORML 「えっと…%CSTR:이인칭%…」
+	IF CFLAG:2 >= 0 && EXP:50 >= 2
+	;음란傾向コース：依存度がプラス寄り＋異常経験2以上
 		PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が甘えた声で出迎えてきた
-		PRINTFORMW 「もう、あかりはご主人様に気持よくしてもらわないとダメな子になっちゃったみたいなの…」
-		PRINTFORMW 「ちゃんとご主人様のいうことを聞いていい奴隷になるから…」
-		PRINTFORM 「だから、これからもあかりにいっぱいいっぱい気持ちいいこと教えて…ご主人様%UNICODE(0x2661)%」
+		PRINTFORMW 「もう、%CSTR:일인칭%は%CSTR:이인칭%に気持よくしてもらわないとダメな子になっちゃったみたいなの…」
+		PRINTFORMW 「ちゃんと%CSTR:이인칭%のいうことを聞いていい奴隷になるから…」
+		PRINTFORM 「だから、これからも%CSTR:일인칭%にいっぱいいっぱい気持ちいいこと教えて……%UNICODE(0x2661)%」
 		PRINTFORMW %CALLNAME:TARGET%はそれだけいうと、%CALLNAME:MASTER%に抱きつき、体をすりつけてきた…
 		KSTR:(K++) = 
-	ELSEIF RAND:2 == 0
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+	;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
 		PRINTFORMW 部屋に入ると%CALLNAME:TARGET%がどこか虚ろな声で出迎えてきた
-		PRINTFORMW 「あかりはご主人様の奴隷です…」
+		PRINTFORMW 「%CSTR:일인칭%は%CSTR:이인칭%の奴隷です…」
 		PRINTFORMW 「もう二度と逆らったりしません…」
 		PRINTFORMW 「だから…大切にしてください…お願いします…」
 		KSTR:(K++) = 
 	ELSE
+	;연모傾向コース：それ以外…もとい、異常経験2未満
 		PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が照れくさそうな声で出迎えてきた
 		PRINTFORMW 「こんな風に呼ばれると男の人って嬉しいんだよね？」
 		PRINTFORMW 「実際、奴隷とご主人様なわけだけど」
-		PRINTFORML 「まぁとにかく、これからあかりが奴隷になってあげるから、よろしくね、ご主人様！」
+		PRINTFORML 「まぁとにかく、これから%CSTR:일인칭%が奴隷になってあげるから、よろしくね、%CSTR:이인칭%！」
 		PRINTFORMW なんだか、変な勘違いがあるような気がしないでもないが…
 		PRINTFORMW とにかく、調教が進んでいるのは確かなのであまり気にしないでおこう…
 		KSTR:(K++) = 
@@ -241,23 +273,29 @@ ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT
 	CFLAG:201 = 4
 	GOTO 表示
 ;売却可能
+;ランダムだと変な口上が出るのでランダムから条件指定に。
+;条件はリグル口上様から拝借しました。
 ELSEIF CFLAG:201 < 5 && CFLAG:매각가능 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORMW 「ねぇ…あかりのことをどうするつもりなの…？」
-	PRINTFORMW 「奴隷商人だっていってたけど…やっぱりあかりも売るつもりなの…？」
-	IF RAND:3 == 0
+	PRINTFORMW 「ねぇ…%CSTR:일인칭%のことをどうするつもりなの…？」
+	PRINTFORMW 「奴隷商人だっていってたけど…やっぱり%CSTR:일인칭%も売るつもりなの…？」
+	IF CFLAG:2 >= 0 && EXP:50 >= 2
+	;음란傾向コース：依存度がプラス寄り＋異常経験2以上
+		PRINTFORMW 「売られた先でも、こういうことしてもらえるのかな…」
+		PRINTFORMW 「それとも…もっとひどいことされちゃうのかな…」
+		KSTR:(K++) = 
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+	;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
+		PRINTFORMW 「もしかしたら…売られた先のほうがここよりもいい…」
+		PRINTFORMW 「なんてことがあったりしないかな…」
+		KSTR:(K++) = 
+	ELSE
+	;연모傾向コース：それ以外…もとい、異常経験2未満
 		PRINTFORMW 「……気に入った奴隷だと、売るのが惜しくなっちゃうとか」
 		PRINTFORMW 「そういうのがあったりするの？」
 		PRINTFORMW 「ううん、なんでもない…」
 		KSTR:(K++) = 
-	ELSEIF RAND:2 == 0
-		PRINTFORMW 「売られた先でも、こういうことしてもらえるのかな…」
-		PRINTFORMW 「それとも…もっとひどいことされちゃうのかな…」
-		KSTR:(K++) = 
-	ELSE
-		PRINTFORMW 「もしかしたら…売られた先のほうがここよりもいい…」
-		PRINTFORMW 「なんてことがあったりしないかな…」
-		KSTR:(K++) = 
 	ENDIF
+	CFLAG:201 = 5
 ;함락
 ELSEIF CFLAG:201 < 6 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
@@ -267,15 +305,15 @@ ELSEIF CFLAG:201 < 6 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 部屋に入ると、%CALLNAME:TARGET%の様子がなにやらおかしかった
 			PRINTFORML 「あ、その…あの…えとえと…その…」
 			PRINTFORMW 顔を真っ赤にして、何か言いたいらしいが、どうもうまく言えないようだ
-			PRINTFORMW 「え、えと、だ、だいすきです。ご主人様」
+			PRINTFORMW 「え、えと、だ、だいすきです。%CSTR:이인칭%」
 			PRINTFORML 「はぁ、やっとちゃんと言えた…ふふ」
 			PRINTFORMW %CALLNAME:TARGET%はほっと、息をつくと、満面の笑みを浮かべた
 			PRINTFORMW 「まだ、ちゃんと言ったことがなかったから…」
 			PRINTFORMW 「一緒に戦っていると、なんだかすごく頼もしくて、さりげなく気を使ってくれるのが凄い嬉しくて…」
-			PRINTFORMW 「なんだか、いつのまにか、ご主人様がヒーローみたいにみえて…」
-			PRINTFORMW 「それであかりがヒロインで、それで二人は結ばれて…」
+			PRINTFORMW 「なんだか、いつのまにか、%CSTR:이인칭%がヒーローみたいにみえて…」
+			PRINTFORMW 「それで%CSTR:일인칭%がヒロインで、それで二人は結ばれて…」
 			PRINTFORMW 「いままで、恋愛ものとか馬鹿馬鹿しいと思ってたけど…こうなってみると夢みたいに素敵…」
-			PRINTFORMW 「ねぇ、ご主人様…、ご主人様の気持ちもあかりに聞かせて…」
+			PRINTFORMW 「ねぇ、%CSTR:이인칭%…、%CSTR:이인칭%の気持ちも%CSTR:일인칭%に聞かせて…」
 			PRINTFORMW %CALLNAME:TARGET%はそういうと、%CALLNAME:MASTER%を目を真正面からじっと覗き込む…
 			PRINTFORMW そして、思わず、好きだと答えてしまっていた…
 			PRINTFORMW 「ふふ、嬉しい…本当に嬉しい…」
@@ -284,18 +322,18 @@ ELSEIF CFLAG:201 < 6 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW いつものように部屋に入ると%CALLNAME:TARGET%の様子がなにやらおかしかった
 			PRINTFORML 「あ、その…あの…えとえと…その…」
 			PRINTFORMW 顔を真っ赤にして、何か言いたいらしいが、どうもうまく言えないようだ
-			PRINTFORMW さっさと押し倒してしまおうと思っていたが、その必死な様子に尻込みしまった
-			PRINTFORMW 「え、えと、だ、だいすきです。ご主人様」
+			PRINTFORMW さっさと押し倒してしまおうと思っていたが、その必死な様子に尻込みしてしまった
+			PRINTFORMW 「え、えと、だ、だいすきです。%CSTR:이인칭%」
 			PRINTFORML 「はぁ、やっとちゃんと言えた…ふふ」
 			PRINTFORMW %CALLNAME:TARGET%はほっと、息をつくと、満面の笑みを浮かべた
 			PRINTFORMW 「まだ、ちゃんと言ったことがなかったから…」
-			PRINTFORMW 「はじめはご主人様のことひどいことする、大嫌いな奴だと思ってたけど…」
-			PRINTFORMW 「そのひどいこともあかりが好きだからやってたんだよね？」
-			PRINTFORMW 「今までそんなにあかりを好きになってくれたひとなんていなかったから、それが凄い嬉しくて…」
-			PRINTFORMW 「なんだか、いつのまにか、ご主人様がヒーローみたいにみえて…」
-			PRINTFORMW 「それであかりがヒロインで、それで二人は結ばれて…」
+			PRINTFORMW 「はじめは%CSTR:이인칭%のことひどいことする、大嫌いな奴だと思ってたけど…」
+			PRINTFORMW 「そのひどいことも%CSTR:일인칭%が好きだからやってたんだよね？」
+			PRINTFORMW 「今までそんなに%CSTR:일인칭%を好きになってくれたひとなんていなかったから、それが凄い嬉しくて…」
+			PRINTFORMW 「なんだか、いつのまにか、%CSTR:이인칭%がヒーローみたいにみえて…」
+			PRINTFORMW 「それで%CSTR:일인칭%がヒロインで、それで二人は結ばれて…」
 			PRINTFORMW 「いままで、恋愛ものとか馬鹿馬鹿しいと思ってたけど…こうなってみると夢みたいに素敵…」
-			PRINTFORMW 「ねぇ、ご主人様…、ご主人様の気持ちもあかりに聞かせて…」
+			PRINTFORMW 「ねぇ、%CSTR:이인칭%…、%CSTR:이인칭%の気持ちも%CSTR:일인칭%に聞かせて…」
 			PRINTFORMW %CALLNAME:TARGET%はそういうと、%CALLNAME:MASTER%を目を真正面からじっと覗き込む…
 			PRINTFORMW そして、思わず、好きだと答えてしまっていた…
 			PRINTFORMW 「ふふ、嬉しい…本当に嬉しい…」
@@ -309,22 +347,22 @@ ELSEIF CFLAG:201 < 6 && (TALENT:3 || TALENT:4 || TALENT:5)
 		PRINTFORMW 「ううん、そんなふうに考えてたことだけじゃない」
 		PRINTFORMW 「幼稚なヒーローに憧れてたのも、漫画家になりたいとかいってたのも…」
 		PRINTFORMW 「みんなみんなばかみたいでどうでもいい…」
-		PRINTFORMW 「ご主人様…あかりにはあなたがいればそれで十分…」
-		PRINTFORMW 「精一杯…頑張るから…どうかあかりを可愛がって…」
+		PRINTFORMW 「%CSTR:이인칭%…%CSTR:일인칭%にはあなたがいればそれで十分…」
+		PRINTFORMW 「精一杯…頑張るから…どうか%CSTR:일인칭%を可愛がって…」
 		KSTR:(K++) = 
 	;복종
 	ELSEIF TALENT:5
 		PRINTFORMW 「やっとわかったんです」
-		PRINTFORMW 「どうしてご主人様があかりをいじめるのか」
-		PRINTFORMW 「あかりがどうしようもなく、間違っていたからですよね」
+		PRINTFORMW 「どうして%CSTR:이인칭%が%CSTR:일인칭%をいじめるのか」
+		PRINTFORMW 「%CSTR:일인칭%がどうしようもなく、間違っていたからですよね」
 		PRINTFORMW 「邪悪な人間達に騙されて、ずっと間違ってることを正しいと信じ続けて…」
 		PRINTFORMW 「本当に最悪でした…」
-		PRINTFORMW 「けど、もう大丈夫…、真の勇者たるご主人様がちゃんと教育してくれたから…」
-		PRINTFORMW 「あかりは馬鹿だから、また騙されて道を間違うことがあるかもしれませんが…」
-		PRINTFORMW 「これからもあかりを正しい方向に導いてください、ご主人様…%UNICODE(0x2661)%」
+		PRINTFORMW 「けど、もう大丈夫…、真の勇者たる%CSTR:이인칭%がちゃんと教育してくれたから…」
+		PRINTFORMW 「%CSTR:일인칭%は馬鹿だから、また騙されて道を間違うことがあるかもしれませんが…」
+		PRINTFORMW 「これからも%CSTR:일인칭%を正しい方向に導いてください、%CSTR:이인칭%…%UNICODE(0x2661)%」
 		KSTR:(K++) = 
 	ENDIF
-	CFLAG:201 = 5
+	CFLAG:201 = 6
 	GOTO 表示
 ENDIF
 
@@ -397,11 +435,11 @@ IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 	;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 	IF RAND:3 == 0
-		PRINTFORMW 「お、おまえなんか全然怖くないんだから！」
+		PRINTFORMW 「お、%CSTR:이인칭%なんか全然怖くないんだから！」
 		PRINTFORML 「なにされたって私は負けないんだから！」
 		PRINTFORMW 少女は叫ぶが、虚勢だというのが悲しいくらいわかりやすい
 		PRINTFORMW 「ち、近づくな！　これ以上近づいたら死んでやるんだから！」
-		PRINTFORMW 「おまえに好き放題されるくらいなら死んだほうがマシだ…！」
+		PRINTFORMW 「%CSTR:이인칭%に好き放題されるくらいなら死んだほうがマシだ…！」
 		PRINTFORMW 「ほんとのほんとのなんだから！　近づいてこないで…」
 		PRINTFORMW %CALLNAME:MASTER%が一歩近づくごとに少女の声から力が失われていくのがわかる
 		PRINTFORMW そして、またあっさりと少女は組み伏せられてしまった…
@@ -420,7 +458,7 @@ ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	IF RAND:4 == 0
 		PRINTFORMW 「いい加減、諦めたら？」
-		PRINTFORMW 「こんなことしたからってあかりを好きになんかできるわけがないんだから」
+		PRINTFORMW 「こんなことしたからって%CSTR:일인칭%を好きになんかできるわけがないんだから」
 		PRINTFORMW 「ね、やっても時間を無駄にするだけだし、もっとこう有意義に時間を使おうよ」
 	ELSEIF RAND:3 == 0
 		PRINTFORMW 「今日はどうするの…？」
@@ -439,37 +477,47 @@ ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
 	ENDIF
 	CFLAG:202 = 2
 ;굴복각인Lv2
+;ランダムだと変な口上が出るのでランダムから条件指定に。
+;条件はリグル口上様から拝借しました。
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	IF RAND:4 == 0
-		PRINTFORML 「調教ね…うん、わかった…」
-		PRINTFORMW %CALLNAME:TARGET%はおとなしく、ベッドに横たわり、%CALLNAME:MASTER%を待つ
-		PRINTFORMW 「……あんまりひどくしないでね」
-	ELSEIF RAND:3 == 0
+	IF CFLAG:2 >= 0 && EXP:50 >= 2
+		;음란傾向コース：依存度がプラス寄り＋異常経験2以上
 		PRINTFORML 「えっと…、今日もすごいことするんだよ…ね？」
 		PRINTFORMW そう訪ねてくる%CALLNAME:TARGET%の目には情欲と期待がありありと見て取れる…
-	ELSEIF RAND:2 == 0
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+		;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
 		PRINTFORML 「そろそろ来る頃かなって…」
 		PRINTFORMW どうやら準備万端なようだ
 		PRINTFORML 「うん、早速初めて大丈夫…です…」
 		PRINTFORMW 慎重に言葉を選んでいるせいか、微妙に口調が辿々しい
 		PRINTFORMW こうなると、思うままに言葉を発していた頃がかえって懐かしい
+	ELSEIF RAND:2 == 0
+		;연모傾向コース：それ以外…もとい、異常経験2未満
+		PRINTFORML 「調教ね…うん、わかった…」
+		PRINTFORMW %CALLNAME:TARGET%はおとなしく、ベッドに横たわり、%CALLNAME:MASTER%を待つ
+		PRINTFORMW 「……あんまりひどくしないでね」
 	ELSE
-		PRINTFORML 「えっと、その優しくしてくれたら…あかりも…」
+		PRINTFORML 「えっと、その優しくしてくれたら…%CSTR:일인칭%も…」
 		PRINTFORMW そう言って、%CALLNAME:TARGET%は頬を赤らめ、顔を伏せた…
 		PRINTFORMW 何か様子がおかしい気がする…
 	ENDIF
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
+;ランダムだと変な口上が出るのでランダムから条件指定に。
+;条件はリグル口上様から拝借しました。
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
-		IF RAND:3 == 0
-			PRINTFORMW 「ご主人様…あかり、頑張りますね…」
+		IF CFLAG:2 >= 0 && EXP:50 >= 2
+		;음란傾向コース：依存度がプラス寄り＋異常経験2以上
+			PRINTFORMW 「%CSTR:이인칭%…%CSTR:일인칭%、頑張りますね…」
 			PRINTFORMW 「だから、いっぱいいっぱい気持よくしてください」
-		ELSEIF RAND:2 == 0
-			PRINTFORMW 「ご主人様…あかり、頑張りますね…」
-			PRINTFORMW 「だから、あかりを可愛がってください」
+		ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+		;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
+			PRINTFORMW 「%CSTR:이인칭%…%CSTR:일인칭%、頑張りますね…」
+			PRINTFORMW 「だから、%CSTR:일인칭%を可愛がってください」
 		ELSE
-			PRINTFORMW 「ご主人様、頑張っちゃうよ」
-			PRINTFORMW 「だから、もっとあかりのこと好きになってね」
+		;연모傾向コース：それ以外…もとい、異常経験2未満
+			PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%頑張っちゃうよ」
+			PRINTFORMW 「だから、もっと%CSTR:일인칭%のこと好きになってね」
 		ENDIF
 	CFLAG:202 = 4
 ;함락완료
@@ -477,50 +525,76 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-		IF RAND:2 == 0
+		IF RAND:3 == 0
 			PRINTFORML 「ん…やっと来てくれた！」
 			PRINTFORMW 部屋に入るなり、いきなり抱きつかれる
 			PRINTFORMW 「待ち遠しかったんだから！」
-			PRINTFORMW そういってじゃれついてくるのは正直うっとおしいが悪くはないきもする…
+			PRINTFORMW そういってじゃれついてくるのは正直うっとおしいが悪くはない気もする…
+		ELSEIF RAND:2 == 0
+			;屈服刻印3の時に発生している内容と一緒かつ２回以上言われると違和感のある内容なのでオミット。
+			;代わりに内容を追加。
+			;PRINTFORML 「えっと…ご主人様…」
+			;PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が照れくさそうな声で出迎えてきた
+			;PRINTFORMW 「こんな風に呼ばれると男の人って嬉しいんだよね？」
+			;PRINTFORMW 「実際、奴隷と%CSTR:이인칭%なわけだけど」
+			;PRINTFORML 「まぁとにかく、これから%CSTR:일인칭%が奴隷になってあげるから、よろしくね、%CSTR:이인칭%！」
+			;PRINTFORMW なんだか、変な勘違いがあるような気がしないでもないが…
+			;PRINTFORMW とにかく、調教が進んでいるのは確かなのであまり気にしないでおこう…
+			PRINTFORML 「あっ…%CSTR:이인칭%！」
+			PRINTFORMW 部屋に入ると、%CALLNAME:TARGET%がテレビからこちらを向いて笑顔を咲かせた
+			PRINTFORM どうやら
+			IF RAND:3 == 0
+				PRINTFORM レンタルしてきた映画
+			ELSEIF RAND:2 == 0
+				PRINTFORM 録画していた特撮番組
+			ELSE
+				PRINTFORM 再放送しているアニメ番組
+			ENDIF
+			PRINTFORMW を見ていたようだ。
+			PRINTFORML 「調教するんだよね、すぐに準備するから待ってて！」
+			PRINTFORMW そう言うと彼女は手際よくテレビを消してリモコンやらを片づけていった。
 		ELSE
-			PRINTFORML 「えっと…ご主人様…」
-			PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が照れくさそうな声で出迎えてきた
-			PRINTFORMW 「こんな風に呼ばれると男の人って嬉しいんだよね？」
-			PRINTFORMW 「実際、奴隷とご主人様なわけだけど」
-			PRINTFORML 「まぁとにかく、これからあかりが奴隷になってあげるから、よろしくね、ご主人様！」
-			PRINTFORMW なんだか、変な勘違いがあるような気がしないでもないが…
-			PRINTFORMW とにかく、調教が進んでいるのは確かなのであまり気にしないでおこう…
+			PRINTFORML 「そう！　我こそは転生戦士イシュキック！」
+			PRINTFORMW %CALLNAME:TARGET%は何やらこちらに背を向けて腕を組んで立っていた。
+			PRINTFORML 仮面までつけて完全に自分の世界に入っているようでこちらに気づく様子はない。
+			PRINTFORMW それどころかどんどんとセリフもポージングもヒートアップしていく。
+			PRINTFORML 「人々の生活を脅かす悪の手先めぇー！　正義のてっついを……」
+			PRINTFORMW ようやく振り返った%CALLNAME:TARGET%と仮面越しに目が合った。
+			PRINTFORML 「てっついを……えっと、あの……」
+			PRINTFORML 先ほどまでの勢いはどこへやら、どんどん声が小さくなっていってしまった。
+			PRINTFORMW まあ、悪の手先らしくちょめちょめしてやるとしよう。
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-		IF RAND:3 == 0
-		ELSEIF RAND:2 == 0
+		;IF RAND:2 == 0
 			PRINTFORMW 「今日はどんなすごいことをしてくれるんですか」
 			PRINTFORML 「今から楽しみでしょうがないです」
 			PRINTFORMW %CALLNAME:TARGET%は、淫蕩な笑みを浮かべている…
-		ELSE
-			PRINTFORML 「えっと…ご主人様…」
-			PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が甘えた声で出迎えてきた
-			PRINTFORMW 「もう、あかりはご主人様に気持よくしてもらわないとダメな子になっちゃったみたいなの…」
-			PRINTFORMW 「ちゃんとご主人様のいうことを聞いていい奴隷になるから…」
-			PRINTFORM 「だから、これからもあかりにいっぱいいっぱい気持ちいいこと教えて…ご主人様%UNICODE(0x2661)%」
-			PRINTFORMW %CALLNAME:TARGET%はそれだけいうと、%CALLNAME:MASTER%に抱きつき、体をすりつけてきた…
-		ENDIF
+		;ELSE
+			;屈服刻印3の時に発生している内容と一緒かつ２回以上言われると違和感のある内容なのでオミット。
+			;PRINTFORML 「えっと…%CSTR:이인칭%…」
+			;PRINTFORMW 部屋に入ると%CALLNAME:TARGET%が甘えた声で出迎えてきた
+			;PRINTFORMW 「もう、%CSTR:일인칭%は%CSTR:이인칭%に気持よくしてもらわないとダメな子になっちゃったみたいなの…」
+			;PRINTFORMW 「ちゃんと%CSTR:이인칭%のいうことを聞いていい奴隷になるから…」
+			;PRINTFORM 「だから、これからも%CSTR:일인칭%にいっぱいいっぱい気持ちいいこと教えて…%CSTR:이인칭%%UNICODE(0x2661)%」
+			;PRINTFORMW %CALLNAME:TARGET%はそれだけいうと、%CALLNAME:MASTER%に抱きつき、体をすりつけてきた…
+		;ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-		IF RAND:2 == 0
+		;IF RAND:2 == 0
 			PRINTFORMW 「あんまりいじめないでください…」
-			PRINTFORML 「あ、いや、ご主人様がしたいようにして構わないですが…でも…」
+			PRINTFORML 「あ、いや、%CSTR:이인칭%がしたいようにして構わないですが…でも…」
 			PRINTFORMW %CALLNAME:TARGET%はびくびくしながら、%CALLNAME:MASTER%の顔色を伺っている…
-		ELSE
-			PRINTFORML 「えっと…ご主人様…」
-			PRINTFORMW 部屋に入ると%CALLNAME:TARGET%がどこか虚ろな声で出迎えてきた
-			PRINTFORMW 「あかりはご主人様の奴隷です…」
-			PRINTFORMW 「もう二度と逆らったりしません…」
-			PRINTFORMW 「だから…大切にしてください…お願いします…」
-		ENDIF
+		;ELSE
+			;屈服刻印3の時に発生している内容と一緒かつ２回以上言われると違和感のある内容なのでオミット。
+			;PRINTFORML 「えっと…%CSTR:이인칭%…」
+			;PRINTFORMW 部屋に入ると%CALLNAME:TARGET%がどこか虚ろな声で出迎えてきた
+			;PRINTFORMW 「%CSTR:일인칭%は%CSTR:이인칭%の奴隷です…」
+			;PRINTFORMW 「もう二度と逆らったりしません…」
+			;PRINTFORMW 「だから…大切にしてください…お願いします…」
+		;ENDIF
 	ENDIF
 	CFLAG:202 = 5
 ENDIF
@@ -568,37 +642,37 @@ DRAWLINE
 IF CFLAG:800 == 0 && (CFLAG:매각가능 || 함락())
 	IF TALENT:연모
 		PRINTFORMW 「あ、そうだ。お願いがあるんだけど…」
-		PRINTFORMW 「あかりもご主人様と一緒に戦いたいの」
+		PRINTFORMW 「%CSTR:일인칭%も%CSTR:이인칭%と一緒に戦いたいの」
 		PRINTFORMW 「せっかくペルソナの力があるんだから、これからは守る正義のヒーローじゃなくて」
-		PRINTFORMW 「ご主人様を助ける、戦士としてこの力を活かしていきたい」
+		PRINTFORMW 「%CSTR:이인칭%を助ける、戦士としてこの力を活かしていきたい」
 		PRINTFORMW 「なんといっても今はヒロインも守られるだけじゃなくて、一緒に戦う時代だし…」
 		PRINTFORMW 「ね、いいでしょ？」
 		PRINTFORMW %CALLNAME:TARGET%の目は本気だ
 		PRINTFORMW 確かにペルソナの力は便利だ。今度から探索に連れていってもいいかもしれない
 
 	ELSEIF TALENT:음란
-		PRINTFORMW 「そうだ。あかりも今度から探索に連れて行ってよ」
-		PRINTFORMW 「だって、ご主人様が万が一にも殺されちゃったりでもしたら」
-		PRINTFORMW 「あかりも、もう生きていける気がしないし」
+		PRINTFORMW 「そうだ。%CSTR:일인칭%も今度から探索に連れて行ってよ」
+		PRINTFORMW 「だって、%CSTR:이인칭%が万が一にも殺されちゃったりでもしたら」
+		PRINTFORMW 「%CSTR:일인칭%も、もう生きていける気がしないし」
 		PRINTFORMW 「せっかく、ペルソナっていう力もあるし」
-		PRINTFORMW 「もうあかりを自由にしたからって、裏切ったりしないってわかるでしょ？」
+		PRINTFORMW 「もう%CSTR:일인칭%を自由にしたからって、裏切ったりしないってわかるでしょ？」
 		PRINTFORMW 「ね？　だからおねがい」	
 		PRINTFORMW 確かにペルソナの力は便利だ。今度から探索に連れていってもいいかもしれない
 	ELSEIF TALENT:복종
-		PRINTFORMW 「ご主人様、お願いがあります」
-		PRINTFORMW 「ご主人様は毎日世界のために悪魔と戦ってるんですよね」
-		PRINTFORMW 「あかりにペルソナという力があるのも、ご主人様の剣となれという宿命に違いありません」
-		PRINTFORMW 「だから、あかりにも、世界を救うべく戦うのを助けさせてください」
+		PRINTFORMW 「%CSTR:이인칭%、お願いがあります」
+		PRINTFORMW 「%CSTR:이인칭%は毎日世界のために悪魔と戦ってるんですよね」
+		PRINTFORMW 「%CSTR:일인칭%にペルソナという力があるのも、%CSTR:이인칭%の剣となれという宿命に違いありません」
+		PRINTFORMW 「だから、%CSTR:일인칭%にも、世界を救うべく戦うのを助けさせてください」
 		PRINTFORMW 「どうか、お願いします」
 		PRINTFORMW %CALLNAME:TARGET%の目は恐ろしいくらいに本気だ…
 		PRINTFORMW 確かにペルソナの力は便利だ。そして、その上この様子なら戦い振りも期待できそうだ…
 	ELSE
 		PRINTFORMW 「そうだ…ねぇ、悪魔を倒して回ってるんだよね？」
-		PRINTFORMW 「それだったら、あかりも一緒に連れて行ってくれない？」
+		PRINTFORMW 「それだったら、%CSTR:일인칭%も一緒に連れて行ってくれない？」
 		PRINTFORMW 「……別に助けたいとか、そういんじゃないけど」
 		PRINTFORMW 「こんなことされるくらいなら、別のことでこきつかわれたいよ」
 		PRINTFORMW 「それに外に出れるんだったらもうなんでもいい…」
-		PRINTFORMW 「ね、あかりがんばるから…それくらいいいでしょ？」
+		PRINTFORMW 「ね、%CSTR:일인칭%がんばるから…それくらいいいでしょ？」
 	ENDIF
 	CFLAG:800 = 1
 	RETURN 0
@@ -622,13 +696,13 @@ IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 		ENDIF
 	ENDIF
 	CFLAG:217 = 1
-;굴복각인Lv1 이하
-ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	IF RAND:8 == 0
+;굴복각인Lv0
+;屈服刻印が1以上だと名前等は教えてもらっている想定なのでレベル0オンリーに。
+ELSEIF MARK:2 == 0 && (CFLAG:219 < 1 || FLAG:7 == 2)
 			PRINTFORML 「うぐ…こんなの…やだよ…気持ち悪い…」
 			PRINTFORMW 解放された少女は目に涙を溜め、呆然とそう呟く
 			PRINTFORMW %CALLNAME:MASTER%はそんな少女の様子を見て、大切なことを忘れていたのを思い出した
-			PRINTFORML 「え、名前？　やだっ！　おまえなんかに教えてやるもんか！」
+			PRINTFORML 「え、名前？　やだっ！　%CSTR:이인칭%なんかに教えてやるもんか！」
 			PRINTFORMW 少女は%CALLNAME:MASTER%を憎々しげに睨みつける
 			PRINTFORMW まだ、自分の立場がわからない奴隷に、勉強させてやる必要があるのだろうか？
 			PRINTFORMW 「何をするつもり？　何をしたって無駄なんだから！」
@@ -636,105 +710,125 @@ ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
 			PRINTFORMW 「何されたって怖くなんかないんだから…！」
 			PRINTFORMW ならば、次も好き放題にするとだけ告げて、%CALLNAME:MASTER%は部屋をあとにした…
 			PRINTFORMW その言葉を聞いた少女は青ざめ、震えていたように見えた…
-	ELSEIF RAND:7 == 0
-				PRINTFORMW 「なんだったんだろう…」
-				PRINTFORMW 「なんだか、熱くて、何も考えられなくなって…」
-				PRINTFORML 「気持ちいい…のとは違うよね…」
-				PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、先程の調教を思い出し、恐る恐る呟いた…
+;굴복각인Lv1 이하
+ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
+	IF RAND:7 == 0
+			PRINTFORMW 「なんだったんだろう…」
+			PRINTFORMW 「なんだか、熱くて、何も考えられなくなって…」
+			PRINTFORML 「気持ちいい…のとは違うよね…」
+			PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、先程の調教を思い出し、恐る恐る呟いた…
 	ELSEIF RAND:6 == 0
-				PRINTFORMW 「なんで…なんでこんなことになったの…」
-				PRINTFORMW 「うぅ…えぐ…ぐす…」
-				PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、堪らず泣き出してしまった…
+			PRINTFORMW 「なんで…なんでこんなことになったの…」
+			PRINTFORMW 「うぅ…えぐ…ぐす…」
+			PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、堪らず泣き出してしまった…
 	ELSEIF RAND:5 == 0
-				PRINTFORMW 「すぐに助けが来るんだから…」
-				PRINTFORMW 「それまでちょっと従ったふりをするだけ…」
-				PRINTFORML 「そうあくまでふりなんだから…」
-				PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、自分に言い聞かせるように呟いた…
+			PRINTFORMW 「すぐに助けが来るんだから…」
+			PRINTFORMW 「それまでちょっと従ったふりをするだけ…」
+			PRINTFORML 「そうあくまでふりなんだから…」
+			PRINTFORMW 少女は%CALLNAME:MASTER%が出ていくと、自分に言い聞かせるように呟いた…
 	ELSEIF RAND:4 == 0
-				PRINTFORMW 「誰でもいいからはやく助けに来て…」
-				PRINTFORMW 「じゃないと、このままじゃ…」
+			PRINTFORMW 「誰でもいいからはやく助けに来て…」
+			PRINTFORMW 「じゃないと、このままじゃ…」
 	ELSEIF RAND:3 == 0
-					PRINTFORMW 「気持よくなんかない…はず」
-					PRINTFORMW 「だって、こんなので気持ちよくなるのっておかしいもの…」
-					PRINTFORMW なにやら%CALLNAME:TARGET%は必死に自分に言い聞かせるかのように呟いてる…
+			PRINTFORMW 「気持よくなんかない…はず」
+			PRINTFORMW 「だって、こんなので気持ちよくなるのっておかしいもの…」
+			PRINTFORMW なにやら%CALLNAME:TARGET%は必死に自分に言い聞かせるかのように呟いてる…
 	ELSEIF RAND:2 == 0
-					PRINTFORMW 「はぁ…やっと終わった…」
-					PRINTFORMW 「怒らせるようなことは…してないはずだよね…」
-					PRINTFORMW 「うん、きっと大丈夫…大丈夫なはず…」
+			PRINTFORMW 「はぁ…やっと終わった…」
+			PRINTFORMW 「怒らせるようなことは…してないはずだよね…」
+			PRINTFORMW 「うん、きっと大丈夫…大丈夫なはず…」
 	ELSE
-					PRINTFORMW 「子供にこんなことするなんて、変態だよね」
-					PRINTFORMW 「……まぁ、悪の犯罪者がそんなこと気にするとも思えないけど」
-					PRINTFORMW 「こんなことして、いつか報いを受けるんだからね！」
+			PRINTFORMW 「子供にこんなことするなんて、変態だよね」
+			PRINTFORMW 「……まぁ、悪の犯罪者がそんなこと気にするとも思えないけど」
+			PRINTFORMW 「こんなことして、いつか報いを受けるんだからね！」
 	ENDIF
 	CFLAG:219 = 1
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
-	IF RAND:7 == 0
-				PRINTFORMW 「はぁ…よかった…」
-				PRINTFORMW 「……よかった？　よかったって何が」
-				PRINTFORML 「もしかして、こんなことされて喜んじゃってるの…？」
-				PRINTFORMW %CALLNAME:TARGET%はそこまで考えると、何も考えないで済むように眠ってしまうことにした…
-	ELSEIF RAND:6 == 0
-				PRINTFORMW 「なんで、なんで誰も助けに来てくれないの…」
-				PRINTFORML 「もう怖いのも痛いのも嫌だよぉ…」
-				PRINTFORMW %CALLNAME:TARGET%はぐずぐずと泣いているうちにいつしか眠り込んでしまっていた…
-	ELSEIF RAND:5 == 0
-				PRINTFORMW 「どうして、こんなことするんだろう…」
-				PRINTFORMW 「こういうのは好きな人とやるはずなのに…」
-				PRINTFORML 「ん、あれ…それなら…うーん…」
-				PRINTFORMW %CALLNAME:TARGET%は何か思いつくと、悩み始め、そうしているうちに眠ってしまっていた…
-	ELSEIF RAND:4 == 0
-				PRINTFORMW 「……すっかり慣れちゃった、かな」
-				PRINTFORML 「助けもこないみたいだし、もう仕方ないよね、ふふ」
-				PRINTFORMW 部屋を出ようとすると、そんなふうに寂しく呟くのが聞こえた…
-	ELSEIF RAND:3 == 0
+		IF RAND:2 == 0
+			;ランダムだと変な口上が出るのでランダムから条件指定に。
+			;条件はリグル口上様から拝借しました。
+			IF CFLAG:2 >= 0 && EXP:50 >= 2
+			;음란傾向コース：依存度がプラス寄り＋異常経験2以上
+				IF RAND:2 == 0
+					PRINTFORMW 「はぁ…よかった…」
+					PRINTFORMW 「……よかった？　よかったって何が」
+					PRINTFORML 「もしかして、こんなことされて喜んじゃってるの…？」
+					PRINTFORMW %CALLNAME:TARGET%はそこまで考えると、何も考えないで済むように眠ってしまうことにした…
+				ELSE
 					PRINTFORMW 「どんどんすごくなってる気がする…」
 					PRINTFORMW 「これ以上すごくなったら…どうなっちゃうんだろう…」
-	ELSEIF RAND:2 == 0
+				ENDIF
+			ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+			;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
+				IF RAND:2 == 0
+					PRINTFORMW 「なんで、なんで誰も助けに来てくれないの…」
+					PRINTFORML 「もう怖いのも痛いのも嫌だよぉ…」
+					PRINTFORMW %CALLNAME:TARGET%はぐずぐずと泣いているうちにいつしか眠り込んでしまっていた…
+				ELSE
 					PRINTFORMW 「なんだか、どんどんすごくなってる…」
 					PRINTFORMW 「このままじゃ…うぅ…」
-	ELSE
+				ENDIF
+			ELSE
+			;연모傾向コース：それ以外…もとい、異常経験2未満
+				IF RAND:2 == 0
+					PRINTFORMW 「どうして、こんなことするんだろう…」
+					PRINTFORMW 「こういうのは好きな人とやるはずなのに…」
+					PRINTFORML 「ん、あれ…それなら…うーん…」
+					PRINTFORMW %CALLNAME:TARGET%は何か思いつくと、悩み始め、そうしているうちに眠ってしまっていた…
+				ELSE
 					PRINTFORMW 「ねぇ、どうだった？気持よかった？」
 					PRINTFORMW 「ん…せっかく、頑張ってるんだから気になるだけ…」
 					PRINTFORMW 「別に気持ちよくなってもらいたいとかそういうことじゃないよ」
-	ENDIF
+				ENDIF
+			ENDIF
+		ELSE
+					PRINTFORMW 「……すっかり慣れちゃった、かな」
+					PRINTFORML 「助けもこないみたいだし、もう仕方ないよね、ふふ」
+					PRINTFORMW 部屋を出ようとすると、そんなふうに寂しく呟くのが聞こえた…
+		ENDIF
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	IF RAND:3 == 0
-				PRINTFORMW 「うん…やっぱり気持ちよかった…」
-				PRINTFORMW 「こんなに気持ちいいんだもん…仕方ないよね…」
-				PRINTFORML 「もう、諦めて楽になってもいいよね…」
-				PRINTFORMW 部屋にのこされた%CALLNAME:TARGET%は、うっとりした様子で、先程の行為を思い返している…
-	ELSEIF RAND:2 == 0
-				PRINTFORMW 「もうやだ…いつまでこんなことが続くの？」
-				PRINTFORMW 「もしかして、ずっと？」
-				PRINTFORML 「そんな耐えられないよ、えぐっ…ぐすっ…」
-				PRINTFORMW 部屋にのこされた%CALLNAME:TARGET%は、ベッドに突っ伏し、大きな声で泣き出してしまった…
+	;ランダムだと変な口上が出るのでランダムから条件指定に。
+	;条件はリグル口上様から拝借しました。
+	IF CFLAG:2 >= 0 && EXP:50 >= 2
+	;음란傾向コース：依存度がプラス寄り＋異常経験2以上
+		PRINTFORMW 「うん…やっぱり気持ちよかった…」
+		PRINTFORMW 「こんなに気持ちいいんだもん…仕方ないよね…」
+		PRINTFORML 「もう、諦めて楽になってもいいよね…」
+		PRINTFORMW 部屋にのこされた%CALLNAME:TARGET%は、うっとりした様子で、先程の行為を思い返している…
+	ELSEIF -CFLAG:2 >= 0 && EXP:50 >= 2
+	;복종傾向コース：依存度がマイナス寄り＋異常経験2以上
+		PRINTFORMW 「もうやだ…いつまでこんなことが続くの？」
+		PRINTFORMW 「もしかして、ずっと？」
+		PRINTFORML 「そんな耐えられないよ、えぐっ…ぐすっ…」
+		PRINTFORMW 部屋にのこされた%CALLNAME:TARGET%は、ベッドに突っ伏し、大きな声で泣き出してしまった…
 	ELSE
-				PRINTFORMW 「……気持よさそうな顔をしてたな」
-				PRINTFORML 「やっぱり、これってあかりのことを好きでいてくれるってことだよね、うふ」
-				PRINTFORMW 	部屋にのこされた%CALLNAME:TARGET%は、一人で物思いに耽っている
+	;연모傾向コース：それ以外…もとい、異常経験2未満
+		PRINTFORMW 「……気持よさそうな顔をしてたな」
+		PRINTFORML 「やっぱり、これって%CSTR:일인칭%のことを好きでいてくれるってことだよね、うふ」
+		PRINTFORMW 	部屋にのこされた%CALLNAME:TARGET%は、一人で物思いに耽っている
 	ENDIF
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-					PRINTFORMW 「……ばいばい」
-					PRINTFORML 「また、すぐ会いに来てくれるよね？」
-					PRINTFORMW %CALLNAME:TARGET%の縋るような目が妙に胸にひっかかる…
+		PRINTFORMW 「……ばいばい」
+		PRINTFORML 「また、すぐ会いに来てくれるよね？」
+		PRINTFORMW %CALLNAME:TARGET%の縋るような目が妙に胸にひっかかる…
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「はぁ…ご主人様…すごい…」
-					PRINTFORMW 「どうしてこんなに気持よくできちゃうの」
-					PRINTFORMW 「こんなにすごいことがあるなんて…はぁ…」
+		PRINTFORMW 「はぁ…%CSTR:이인칭%…すごい…」
+		PRINTFORMW 「どうしてこんなに気持よくできちゃうの」
+		PRINTFORMW 「こんなにすごいことがあるなんて…はぁ…」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「満足してもらえましたか…？」
-					PRINTFORML 「…そう、それはよかったです」
-					PRINTFORML そう言って笑う%CALLNAME:TARGET%の笑顔はどこか虚ろではあったが、
-					PRINTFORMW 以前のような恐れの色はいつのまにやら姿を消していた…
+		PRINTFORMW 「満足してもらえましたか…？」
+		PRINTFORML 「…そう、それはよかったです」
+		PRINTFORML そう言って笑う%CALLNAME:TARGET%の笑顔はどこか虚ろではあったが、
+		PRINTFORMW 以前のような恐れの色はいつのまにやら姿を消していた…
 	ENDIF
 	;공통
 	IF KSTR:0 == ""
@@ -745,20 +839,20 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-					PRINTFORML 「ん……」
-					PRINTFORMW 立ち去ろうとすると、しっかりと手を掴まれていた
-					PRINTFORMW もちろん、振り払ってしまえばそれまでだろうが
-					PRINTFORMW そうする気にもなれず、ついつい%CALLNAME:TARGET%の傍で時間を潰してしまった…
+		PRINTFORML 「ん……」
+		PRINTFORMW 立ち去ろうとすると、しっかりと手を掴まれていた
+		PRINTFORMW もちろん、振り払ってしまえばそれまでだろうが
+		PRINTFORMW そうする気にもなれず、ついつい%CALLNAME:TARGET%の傍で時間を潰してしまった…
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「もう行っちゃうの？」
-					PRINTFORMW %CALLNAME:TARGET%は思いっきり残念そうな顔をする
-					PRINTFORMW 「待ってるから…なるべくはやく来てね…」
+		PRINTFORML 「もう行っちゃうの？」
+		PRINTFORMW %CALLNAME:TARGET%は思いっきり残念そうな顔をする
+		PRINTFORMW 「待ってるから…なるべくはやく来てね…」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「……ん、なんだろうこの気持ち」
-					PRINTFORMW 「痛いのも怖いのも嫌なはずなのに…」
-					PRINTFORMW 「なんだか…ご主人様がしてくれることだって考えたら…」
+		PRINTFORMW 「……ん、なんだろうこの気持ち」
+		PRINTFORMW 「痛いのも怖いのも嫌なはずなのに…」
+		PRINTFORMW 「なんだか…%CSTR:이인칭%がしてくれることだって考えたら…」
 	ENDIF
 	;공통
 	IF KSTR:0 == ""
@@ -847,6 +941,47 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
+						IF ABL:Ｃ감각 + ABL:Ｂ감각 > 4
+							IF PLAY_KISS(PLAYER, TARGET) && RAND:2
+								IF RAND:2
+									KSTR:(K++) = キスをしながら、未発達な体を丹念に愛撫した……
+									W:K = 1
+									KSTR:(K++) = 「ん…もっとキスして…すごくいいから…んんっ」
+								ELSE
+									KSTR:(K++) = %CALLNAME:MASTER%の唇を求める%CALLNAME:TARGET%にキスしてやりながら、優しく全身を愛撫した……
+									W:K = 1
+									KSTR:(K++) = 「ん…ちゅ…はぁ…あぁ…ふわふわするよぉ…」
+								ENDIF
+							ELSEIF RAND:3
+								KSTR:(K++) = %CALLNAME:MASTER%は笑みを浮かべると、%CALLNAME:TARGET%の敏感なところを優しく、丁寧に撫ぜてやった……
+								W:K = 1
+								KSTR:(K++) = 「あ…はぁ、そこもっと…気持ちいいよぉ…ふぁぁ」
+							ELSEIF RAND:2
+								KSTR:(K++) = 期待に満ちた眼差しで%CALLNAME:MASTER%を見つめる%CALLNAME:TARGET%の体に手を伸ばした……
+								W:K = 1
+								KSTR:(K++) = 「んん…優しくて…あぁ、ご主人様ぁ…%UNICODE(0x2661)%」
+							ELSE
+								KSTR:(K++) = %CALLNAME:MASTER%にしっかりと抱きついてくる%CALLNAME:TARGET%の未発達な体を丹念に愛撫した……
+								W:K = 1
+								KSTR:(K++) = 「ぁ…ん…もっと、もっと…いっぱいあかりを可愛がって…んん、ぁ…ふぁ…」
+								W:K = 1
+								KSTR:(K++) = %CALLNAME:TARGET%はふれられるたびに、嬌声をあげ、さらに%CALLNAME:MASTER%にまわした腕の力を強めてくる……
+							ENDIF
+						ELSE
+							KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%の愛撫に大人しく身を委ねている…
+							W:K = 1
+							IF RAND:3
+								KSTR:(K++) = 「あっ、んっ…いまちょっとぴりって…」
+								W:K = 1
+								KSTR:(K++) = 「なんだか…少し…怖い…」
+							ELSEIF RAND:2
+								KSTR:(K++) = 「あ…そんなところ…んっ…」
+							ELSE
+								KSTR:(K++) = 「んくっ…いっ…あ…続けて…」
+								W:K = 1
+								KSTR:(K++) = 「なんだか、だんだんよくなってきたきがするから…」
+							ENDIF
+						ENDIF
 						KSTR:(K++) = 
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
@@ -874,25 +1009,25 @@ SELECTCASE SELECTCOM
 								W:K = 1
 								KSTR:(K++) = 「ん…ちゅ…はぁ…あぁ…ふわふわするよぉ…」
 							ENDIF
-						ELSEIF !RAND:3
+						ELSEIF RAND:3
 							KSTR:(K++) = %CALLNAME:MASTER%は笑みを浮かべると、%CALLNAME:TARGET%の敏感なところを優しく、丁寧に撫ぜてやった……
 							W:K = 1
 							KSTR:(K++) = 「あ…はぁ、そこもっと…気持ちいいよぉ…ふぁぁ」
 						ELSEIF RAND:2
 							KSTR:(K++) = 期待に満ちた眼差しで%CALLNAME:MASTER%を見つめる%CALLNAME:TARGET%の体に手を伸ばした……
 							W:K = 1
-							KSTR:(K++) = 「んん…優しくて…あぁ、ご主人様ぁ…%UNICODE(0x2661)%」
+							KSTR:(K++) = 「んん…優しくて…あぁ、%CSTR:이인칭%ぁ…%UNICODE(0x2661)%」
 						ELSE
 							KSTR:(K++) = %CALLNAME:MASTER%にしっかりと抱きついてくる%CALLNAME:TARGET%の未発達な体を丹念に愛撫した……
 							W:K = 1
-							KSTR:(K++) = 「ぁ…ん…もっと、もっと…いっぱいあかりを可愛がって…んん、ぁ…ふぁ…」
+							KSTR:(K++) = 「ぁ…ん…もっと、もっと…いっぱい%CSTR:일인칭%を可愛がって…んん、ぁ…ふぁ…」
 							W:K = 1
 							KSTR:(K++) = %CALLNAME:TARGET%はふれられるたびに、嬌声をあげ、さらに%CALLNAME:MASTER%にまわした腕の力を強めてくる……
 						ENDIF
 					ELSE
 						KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%の愛撫に大人しく身を委ねている…
 						W:K = 1
-						IF !RAND:3
+						IF RAND:3
 							KSTR:(K++) = 「あっ、んっ…いまちょっとぴりって…」
 							W:K = 1
 							KSTR:(K++) = 「なんだか…少し…怖い…」
@@ -912,7 +1047,7 @@ SELECTCASE SELECTCOM
 					IF ABL:Ｃ감각 + ABL:Ｂ감각 > 4
 						;キスをする場合
 						KSTR:K = %CALLNAME:MASTER%は
-						IF PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "키스한다"))
+						IF PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
 							KSTR:K =+ "キスをしながら"
 						ENDIF
 						KSTR:K += CALLNAME:TARGET + "の"
@@ -939,7 +1074,7 @@ SELECTCASE SELECTCOM
 					ELSE
 						KSTR:(K++) = %CALLNAME:MASTER%を睨みつける%CALLNAME:TARGET%を組み伏せると、無理やり愛撫した……
 						W:K = 1
-						IF !RAND:3
+						IF RAND:3
 							KSTR:(K++) = 「また、変なとこ触って！　変態！　死んじゃえ！」
 						ELSEIF RAND:2
 							KSTR:(K++) = 「くすぐったいし、気持ち悪いからやめてよっ！」
@@ -970,6 +1105,27 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｃ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「あっ、あっ、そこはぁ…%UNICODE(0x2661)%」
+							W:K = 1
+							KSTR:(K++) = 「気持良すぎておかしくなっちゃうよぉ%UNICODE(0x2661)%」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「やっ…そんな音立てちゃ…んんっ…だめだよぉ…」
+						ELSE
+							KSTR:(K++) = 「そんなっ…がくがくしちゃう…あはっ…」
+							W:K = 1
+							KSTR:(K++) = 「や、ほんとに…ふぁぁ…」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「やっ…もう%CSTR:이인칭%…やっぱりこれ恥ずかしいよ」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「ん…あ…ふぅ、そんなになめられたらなんか変な気分に…」
+						ELSE
+							KSTR:(K++) = 「あぅ…こんなところ汚いのに……でも、ちょっと嬉しいかな…ふふ」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -987,7 +1143,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:301 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｃ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「あっ、あっ、そこはぁ…%UNICODE(0x2661)%」
 						W:K = 1
 						KSTR:(K++) = 「気持良すぎておかしくなっちゃうよぉ%UNICODE(0x2661)%」
@@ -999,8 +1155,8 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「や、ほんとに…ふぁぁ…」
 					ENDIF
 				ELSE
-					IF !RAND:3
-						KSTR:(K++) = 「やっ…もうご主人様…やっぱりこれ恥ずかしいよ」
+					IF RAND:3
+						KSTR:(K++) = 「やっ…もう%CSTR:이인칭%…やっぱりこれ恥ずかしいよ」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「ん…あ…ふぅ、そんなになめられたらなんか変な気分に…」
 					ELSE
@@ -1012,7 +1168,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:301 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｃ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「あ…ふぁ、やだ…声がでちゃう…あっ…ん…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「こんなの…こんなの変態なのに…気持ち悪いのに…どうして…んんっ、あっ…ん…」
@@ -1020,7 +1176,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「やっ、だめぇ…こんなのおかしいよぉ…ひぁ…」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「お願いだからやめてっ、こんなの恥ずかしくいよっ」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「いやぁ、気持ち悪いよぉ…」
@@ -1050,6 +1206,33 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ａ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「こんなのやっぱりおかしいよぉ…」
+							W:K = 1
+							KSTR:(K++) = 「でも、こんなにいいなら…おかしくても…ふぁぁ%UNICODE(0x2661)%」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「んっ…ねぇっ、なんでこんなところ舐めれるの？」
+							W:K = 1
+							KSTR:(K++) = 「ん、嫌じゃないよ。ちょっとは嫌だけど…」
+							W:K = 1
+							KSTR:(K++) = 「でも、なんだか舐めてくれるのが少し嬉しくて…あふっ」
+						ELSE
+							KSTR:(K++) = 「ねぇ…お尻の穴なんて汚いのに…舐めるの嫌じゃないの？」
+							W:K = 1
+							KSTR:(K++) = 「ううん、嫌じゃないならいいんだけど…」
+						ENDIF
+					ELSE
+						IF RAND:2
+							KSTR:(K++) = 「ねぇっ、こんなところ舐めなくていいよぉ…」
+							W:K = 1
+							KSTR:(K++) = 「そんなことされても嬉しくも気持よくもないからぁ」
+						ELSE
+							KSTR:(K++) = 「んくっ…ねぇ、こんなのやめてよぉ」
+							W:K = 1
+							KSTR:(K++) = 「もっと他のことならしてもいいから…お願い」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -1067,7 +1250,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:304 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ａ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「こんなのやっぱりおかしいよぉ…」
 						W:K = 1
 						KSTR:(K++) = 「でも、こんなにいいなら…おかしくても…ふぁぁ%UNICODE(0x2661)%」
@@ -1098,14 +1281,14 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:304 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ａ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「こんなことしたって気持よくなんか…気持よくなんか…んぁっ…」
 						W:K = 1
 						KSTR:(K++) = 「やだ…もうやめてよぉ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「やだっ！　やめてよぉ！」
 						W:K = 1
-						KSTR:(K++) = 「あかり、これ以上おかしくされるのはいやだよぉ！」
+						KSTR:(K++) = 「%CSTR:일인칭%、これ以上おかしくされるのはいやだよぉ！」
 					ELSE
 						KSTR:(K++) = 「はぁ、んっ…違う。違うよ。今のは違うんだからっ…！」
 					ENDIF
@@ -1133,7 +1316,7 @@ SELECTCASE SELECTCOM
 			IF CFLAG:305 == 0
 				KSTR:(K++) = 「なにしようとしてるの？」
 				W:K = 1
-				KSTR:(K++) = あかりは%CALLNAME:MASTER%が尻に手を伸ばすのでキョトンとしている
+				KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%が尻に手を伸ばすのでキョトンとしている
 				W:K = 1
 				KSTR:(K++) = 「え、お尻…？　どーいうこ…いたっ…！」
 				W:K = 1
@@ -1143,6 +1326,37 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
+						IF ABL:Ａ감각 > 2
+							IF RAND:4
+								KSTR:(K++) = 「なんでっ…、なんで、お尻ってこんなに気持ちいいのっ！？」
+								W:K = 1
+								KSTR:(K++) = 「こんなの…全然知らなかったよ…ああっ！」
+							ELSEIF RAND:3
+								KSTR:(K++) = 「あぁ…いいよぉ…%UNICODE(0x2661)%」
+								W:K = 1
+								KSTR:(K++) = 「ねぇ、もっともっとお願い…%UNICODE(0x2661)%」
+							ELSEIF RAND:2
+								KSTR:(K++) = 「あっ…ふぁ…ねぇ、なんで…そんなにうれしそうな顔するの？」
+								W:K = 1
+								KSTR:(K++) = 「%CSTR:일인칭%がお尻いじられて、気持ちよくなってるのがそんなに嬉しいの？　あっ…んっ…」
+							ELSE
+								KSTR:(K++) = 「あっ…んんっ…ふぁっ…」
+								W:K = 1
+								KSTR:(K++) = 「やめないでぇ。もっと激しくしてぇ…」
+							ENDIF
+						ELSE
+							IF RAND:3
+								KSTR:(K++) = 「やっ…そんなもぞもぞさせないで…」
+								W:K = 1
+								KSTR:(K++) = 「なんか、変な気持ちになっちゃう…」
+							ELSEIF RAND:2
+								KSTR:(K++) = 「んぐっ…お願い…もっと優しく…」
+							ELSE
+								KSTR:(K++) = 「あっ…んんっ、いまちょっとよかったかも…」
+								W:K = 1
+								KSTR:(K++) = 「うん…もうちょっとなら続けてもいいよ…」
+							ENDIF
+						ENDIF
 						KSTR:(K++) = 
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
@@ -1160,25 +1374,25 @@ SELECTCASE SELECTCOM
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:305 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 					IF ABL:Ａ감각 > 2
-						IF !RAND:4
+						IF RAND:4
 							KSTR:(K++) = 「なんでっ…、なんで、お尻ってこんなに気持ちいいのっ！？」
 							W:K = 1
 							KSTR:(K++) = 「こんなの…全然知らなかったよ…ああっ！」
-						ELSEIF !RAND:3
+						ELSEIF RAND:3
 							KSTR:(K++) = 「あぁ…いいよぉ…%UNICODE(0x2661)%」
 							W:K = 1
 							KSTR:(K++) = 「ねぇ、もっともっとお願い…%UNICODE(0x2661)%」
 						ELSEIF RAND:2
 							KSTR:(K++) = 「あっ…ふぁ…ねぇ、なんで…そんなにうれしそうな顔するの？」
 							W:K = 1
-							KSTR:(K++) = 「あかりがお尻いじられて、気持ちよくなってるのがそんなに嬉しいの？　あっ…んっ…」
+							KSTR:(K++) = 「%CSTR:일인칭%がお尻いじられて、気持ちよくなってるのがそんなに嬉しいの？　あっ…んっ…」
 						ELSE
 							KSTR:(K++) = 「あっ…んんっ…ふぁっ…」
 							W:K = 1
 							KSTR:(K++) = 「やめないでぇ。もっと激しくしてぇ…」
 						ENDIF
 					ELSE
-						IF !RAND:3
+						IF RAND:3
 							KSTR:(K++) = 「やっ…そんなもぞもぞさせないで…」
 							W:K = 1
 							KSTR:(K++) = 「なんか、変な気持ちになっちゃう…」
@@ -1205,7 +1419,7 @@ SELECTCASE SELECTCOM
 							KSTR:(K++) = 「だから…そんな激しくしちゃ…ひぁっ…あっ…」
 						ENDIF
 					ELSE
-						IF !RAND:3
+						IF RAND:3
 							KSTR:(K++) = 「またおしりを…へんたいっ、へんたいっ…！」
 							W:K = 1
 							KSTR:(K++) = 「へんたいをうつさないでよっ！」
@@ -1246,6 +1460,33 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 3 || FLAG:7 == 2)
 					;연모, 친애
 					IF (TALENT:3 || TALENT:6)
+						IF ABL:Ｂ감각 > 2
+							IF RAND:3
+								IF TRAINNAME:SELECTCOM == "유두자극"
+									KSTR:(K++) = 「だめ…乳首いじめちゃっ…ああっ…！」
+								ELSEIF TRAINNAME:SELECTCOM == "가슴주무르기"
+									KSTR:(K++) = 「こんなに小さいのに…揉んでて楽しい？」
+									W:K = 1
+									KSTR:(K++) = 「なんていうか、その物足りなくない？」
+									W:K = 1
+									KSTR:(K++) = 「あっ…ふぁ、そんな強く揉んじゃっ…や…ぁ…」
+								ELSE
+									KSTR:(K++) = 「ぁ…ん…そんな風にされたら、なんだか変な気分になっちゃ…あぁっ…」
+									W:K = 1
+									KSTR:(K++) = %CALLNAME:TARGET%は喘ぎながら、熱っぽい目で胸をまさぐる%CALLNAME:MASTER%を見つめている…
+								ENDIF
+							ELSEIF RAND:2
+								KSTR:(K++) = 「胸すごく感じるよぉ…ん…はぁ…」
+							ELSE
+								KSTR:(K++) = 「あっ…んんっ、はぁ…」
+								W:K = 1
+								KSTR:(K++) = 「もっと激しくてもいいからつづけて…」
+							ENDIF
+						ELSE
+							KSTR:(K++) = 「んっ…もう、こんな小さな胸なのに…」
+							W:K = 1
+							KSTR:(K++) = 「あ…やめないで…%CSTR:이인칭%にこのまましてほしい……」
+						ENDIF
 						KSTR:(K++) = 
 					;음란, 창부	
 					ELSEIF (TALENT:4 || TALENT:7)
@@ -1263,7 +1504,7 @@ SELECTCASE SELECTCOM
 				;굴복각인Lv3
 				IF MARK:2 == 3 && (CFLAG:306 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 					IF ABL:Ｂ감각 > 2
-						IF !RAND:3
+						IF RAND:3
 							IF TRAINNAME:SELECTCOM == "유두자극"
 								KSTR:(K++) = 「だめ…乳首いじめちゃっ…ああっ…！」
 							ELSEIF TRAINNAME:SELECTCOM == "가슴주무르기"
@@ -1275,7 +1516,7 @@ SELECTCASE SELECTCOM
 							ELSE
 								KSTR:(K++) = 「ぁ…ん…そんな風にされたら、なんだか変な気分になっちゃ…あぁっ…」
 								W:K = 1
-								KSTR:(K++) = あかりは喘ぎながら、熱っぽい目で胸をまさぐる%CALLNAME:MASTER%を見つめている…
+								KSTR:(K++) = %CALLNAME:TARGET%は喘ぎながら、熱っぽい目で胸をまさぐる%CALLNAME:MASTER%を見つめている…
 							ENDIF
 						ELSEIF RAND:2
 							KSTR:(K++) = 「胸すごく感じるよぉ…ん…はぁ…」
@@ -1287,14 +1528,14 @@ SELECTCASE SELECTCOM
 					ELSE
 						KSTR:(K++) = 「んっ…もう、こんな小さな胸なのに…」
 						W:K = 1
-						KSTR:(K++) = 「あ…やめないで…ご主人様にこのまましてほしい……」
+						KSTR:(K++) = 「あ…やめないで…%CSTR:이인칭%にこのまましてほしい……」
 					ENDIF
 					CFLAG:306 = 3
 				ENDIF
 				;그 이외
 				IF (CFLAG:306 || FLAG:7 == 2) && KSTR:0 == ""
 					IF ABL:Ｂ감각 > 2
-						IF !RAND:3
+						IF RAND:3
 							IF TRAINNAME:SELECTCOM == "유두자극"
 								KSTR:(K++) = 「あっ…だめっ…！　なんかぴりときてっ…んぁっ！」
 							ELSEIF TRAINNAME:SELECTCOM == "가슴주무르기"
@@ -1310,7 +1551,7 @@ SELECTCASE SELECTCOM
 							KSTR:(K++) = 「こんなので気持よくなんか…あっ…んくっ…」
 						ENDIF
 					ELSE
-						IF !RAND:3
+						IF RAND:3
 							IF TRAINNAME:SELECTCOM == "유두자극"
 								KSTR:(K++) = 「いたっ…乳首なんかつまんで何かんがえてるの！？」
 							ELSEIF TRAINNAME:SELECTCOM == "가슴주무르기"
@@ -1321,7 +1562,7 @@ SELECTCASE SELECTCOM
 						ELSEIF RAND:2
 							KSTR:(K++) = 「やだっ…！　触らないでよ…！」
 							W:K = 1
-							KSTR:(K++) = 「あかりの胸はおまえなんかに触らせるためにあるんじゃないっ！」
+							KSTR:(K++) = 「%CSTR:일인칭%の胸は%CSTR:이인칭%なんかに触らせるためにあるんじゃないっ！」
 						ELSE
 							KSTR:(K++) = 「もしかして…小さいほうがいいとか…？」
 							W:K = 1
@@ -1373,12 +1614,32 @@ SELECTCASE SELECTCOM
 				KSTR:(K++) = 「……やるから、今日はもうひどいことしないでね」
 				W:K = 1
 			ENDIF
-			KSTR:(K++) = あかりは覚悟を決めると、おずおずと自分を慰めはじめた…
+			KSTR:(K++) = %CALLNAME:TARGET%は覚悟を決めると、おずおずと自分を慰めはじめた…
 			CFLAG:310 = 1
 		ELSE
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF RAND:3
+						KSTR:(K++) = 「もう…また%CSTR:일인칭%が一人してるところがみたいの？」
+						W:K = 1
+						KSTR:(K++) = 「……ほんと、恥ずかしいのに仕方ないなぁ」
+						W:K = 1
+						KSTR:(K++) = %CALLNAME:TARGET%は嬉しそうに微笑むと、自分を慰め始めた…
+					ELSEIF RAND:2
+						KSTR:(K++) = 「ん…するのはいいけど…えっとその…」
+						W:K = 1
+						KSTR:(K++) = 「あんまり見ないでね…」
+						W:K = 1
+						KSTR:(K++) = 「いや、見るのはわかってるけど…それでも…」
+						KSTR:(K++) = %CALLNAME:TARGET%はそういって恥ずかしそうに微笑むと、自分を慰め始めた…
+					ELSE
+						KSTR:(K++) = %CALLNAME:TARGET%は指示を受けると素直に自慰を始めた…
+						W:K = 1
+						KSTR:(K++) = 「ん…くぅ…ん…はぁ…」
+						W:K = 1
+						KSTR:(K++) = %CALLNAME:TARGET%は喘ぎながら、%CALLNAME:TARGET%に熱っぽい目視線を投げかけている…
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -1395,8 +1656,8 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:310 < 2 || FLAG:7 == 2) && KSTR:0 == ""
-				IF !RAND:3
-					KSTR:(K++) = 「もう…またあかりが一人してるところがみたいの？」
+				IF RAND:3
+					KSTR:(K++) = 「もう…また%CSTR:일인칭%が一人してるところがみたいの？」
 					W:K = 1
 					KSTR:(K++) = 「……ほんと、恥ずかしいのに仕方ないなぁ」
 					W:K = 1
@@ -1421,7 +1682,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:310 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:욕망 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ふん、お前にやられるぐらいなら、自分でしたほうがましだもん」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%はそう言って舌を出すと自慰を始めた…
@@ -1442,7 +1703,7 @@ SELECTCASE SELECTCOM
 						W:K = 1
 						KSTR:(K++) = 「死んじゃえばいいのに…」
 					ELSE
-						KSTR:(K++) = 「…あかりは正義の味方なのに」
+						KSTR:(K++) = 「…%CSTR:일인칭%は正義の味方なのに」
 						W:K = 1
 						KSTR:(K++) = 「よりによってこんな……もう嫌……」
 					ENDIF
@@ -1520,17 +1781,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
-					KSTR:(K++) = 
-				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)
-					KSTR:(K++) = 
-				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)
-					KSTR:(K++) = 
-				ENDIF
-				;함락완료 공통
-				IF KSTR:0 == ""
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = %CALLNAME:TARGET%の口腔を隅々まで舐め回すと、%CALLNAME:TARGET%も積極的に舌を絡めてきた……
 						W:K = 1
 						KSTR:(K++) = 「ん…ちゅ…んん、ぷはぁ…」
@@ -1552,6 +1803,16 @@ SELECTCASE SELECTCOM
 						W:K = 1
 						KSTR:(K++) = 「はぁ…すごい。キスでこんなに気持よくなれるんだ…」
 					ENDIF
+					KSTR:(K++) = 
+				;음란, 창부	
+				ELSEIF (TALENT:4 || TALENT:7)
+					KSTR:(K++) = 
+				;복종, 예속	
+				ELSEIF (TALENT:5 || TALENT:8)
+					KSTR:(K++) = 
+				ENDIF
+				;함락완료 공통
+				IF KSTR:0 == ""
 				ENDIF
 				CFLAG:312 = 4
 			ENDIF
@@ -1562,9 +1823,9 @@ SELECTCASE SELECTCOM
 				IF RAND:2
 					KSTR:(K++) = 「んっ…んぁ、ん…はぁ…もう…終わり？」
 					W:K = 1
-					KSTR:(K++) = あかりの目はとろんとしている…
+					KSTR:(K++) = %CALLNAME:TARGET%の目はとろんとしている…
 				ELSE
-					KSTR:(K++) = 「あふ…、こんなに必死にべろべろとあかりの口の中をなめまわして…美味しいの？」
+					KSTR:(K++) = 「あふ…、こんなに必死にべろべろと%CSTR:일인칭%の口の中をなめまわして…美味しいの？」
 				ENDIF
 				CFLAG:312 = 3
 			ENDIF
@@ -1575,7 +1836,7 @@ SELECTCASE SELECTCOM
 				IF RAND:3
 					KSTR:(K++) = 「ん…ぐぐっ…んっ…ぷはぁ」
 					W:K = 1
-					KSTR:(K++) = 「そんなにあかりとキスできて嬉しいの？　変態っ、ロリコンっ！」
+					KSTR:(K++) = 「そんなに%CSTR:일인칭%とキスできて嬉しいの？　変態っ、ロリコンっ！」
 				ELSEIF RAND:2
 					KSTR:(K++) = 「あぅ…キスされるだけでも嫌なのに、なんで唾なんか飲ませられるの…」
 				ELSE
@@ -1744,15 +2005,15 @@ SELECTCASE SELECTCOM
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && KSTR:0 == ""
-					KSTR:(K++) = 「ん、これ、いいね…ご主人様がみえて安心できるよ」
+					KSTR:(K++) = 「ん、これ、いいね…%CSTR:이인칭%がみえて安心できるよ」
 					W:K = 1
-					KSTR:(K++) = 「うん、このままあかりを一杯かわいがって…」
+					KSTR:(K++) = 「うん、このまま%CSTR:일인칭%を一杯かわいがって…」
 				ENDIF
 				;그 이외
 				IF KSTR:0 == ""
 					KSTR:(K++) = 「好きなようにしたら」
 					W:K = 1
-					KSTR:(K++) = 「どうせあかりじゃ、あんたをどうにもできないんだから」
+					KSTR:(K++) = 「どうせ%CSTR:일인칭%じゃ、あんたをどうにもできないんだから」
 					W:K = 1
 					KSTR:(K++) = %CALLNAME:TARGET%は投げやりな様子で%CALLNAME:MASTER%を受け入れた…
 				ENDIF
@@ -1762,6 +2023,38 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「もっと、もっとっいっぱい突いてぇ」
+							W:K = 1
+							KSTR:(K++) = 「すごく、気持ちいいからぁ！」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「んんっ…はぁ…すごく気持よくて…」
+							W:K = 1
+							KSTR:(K++) = 「それになんだか幸せ…ふぁっ…」
+						ELSE
+							KSTR:(K++) = 「%CSTR:일인칭%も頑張るね…」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:이인칭%に気持ちよくなってほしいから…」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は、突き込みにあわせて、
+							KSTR:(K++) = 腰をくねらせ、必死に気持よくさせようとしている…
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「ん…くぅ…はぁ…なんだか胸があったかいよぉ…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「はぁ、なんかこういうふうにされるのって安心できる」
+							W:K = 1
+							KSTR:(K++) = 「やっぱり、%CSTR:이인칭%の顔が見れるからかな…？」
+							W:K = 1
+							KSTR:(K++) = そう言って、%CALLNAME:TARGET%は微笑んだ…
+						ELSE
+							KSTR:(K++) = 「そ、その、あんまり激しくしないで……」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%を大人しく受け入れてはいるものの、その表情は少し硬い…
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -1779,7 +2072,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:332 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「もっと、もっとっいっぱい突いてぇ」
 						W:K = 1
 						KSTR:(K++) = 「すごく、気持ちいいからぁ！」
@@ -1788,20 +2081,20 @@ SELECTCASE SELECTCOM
 						W:K = 1
 						KSTR:(K++) = 「それになんだか幸せ…ふぁっ…」
 					ELSE
-						KSTR:(K++) = 「あかりも頑張るね…」
+						KSTR:(K++) = 「%CSTR:일인칭%も頑張るね…」
 						W:K = 1
-						KSTR:(K++) = 「ご主人様に気持ちよくなってほしいから…」
+						KSTR:(K++) = 「%CSTR:이인칭%に気持ちよくなってほしいから…」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%は、突き込みにあわせて、
 						KSTR:(K++) = 腰をくねらせ、必死に気持よくさせようとしている…
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ん…くぅ…はぁ…なんだか胸があったかいよぉ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「はぁ、なんかこういうふうにされるのって安心できる」
 						W:K = 1
-						KSTR:(K++) = 「やっぱり、ご主人様の顔が見れるからかな…？」
+						KSTR:(K++) = 「やっぱり、%CSTR:이인칭%の顔が見れるからかな…？」
 						W:K = 1
 						KSTR:(K++) = そう言って、%CALLNAME:TARGET%は微笑んだ…
 					ELSE
@@ -1815,7 +2108,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:332 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「やぁ、おかしいよぉ。なんでこんなやつにこんなことされてるのに…ひぁっ…ん…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「あ、だめぇ…そんな優しくされたら…あぁっ…」
@@ -1825,7 +2118,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = %CALLNAME:TARGET%は快感のあまり、自分が甘えた声をだしていることにも気づいていないようだ…
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ぐ…うっ…」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%と目があわないように顔を背けている…
@@ -1909,6 +2202,27 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「ん…くぅ、奥に当たって…はぁっ…いいよぉ…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「やぁ、だめぇ…%UNICODE(0x2661)%」
+							W:K = 1
+							KSTR:(K++) = 「こんなに激しすぎてぇ…%UNICODE(0x2661)%」
+						ELSE
+							KSTR:(K++) = 「……もっと、もっとおもいっきり激しくしてぇ」
+							W:K = 1
+							KSTR:(K++) = 「すっごく感じちゃうからぁ！」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「ん…なんかこれ、変態チックだよね…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「また、これ…？　まぁ%CSTR:이인칭%がしたいんならいいんだけど…」
+						ELSE
+							KSTR:(K++) = 「あう…嫌じゃないけど…、やっぱり、これ恥ずかしいよ」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -1926,7 +2240,7 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ん…くぅ、奥に当たって…はぁっ…いいよぉ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「やぁ、だめぇ…%UNICODE(0x2661)%」
@@ -1938,10 +2252,10 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「すっごく感じちゃうからぁ！」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ん…なんかこれ、変態チックだよね…」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「また、これ…？　まぁご主人様がしたいんならいいんだけど…」
+						KSTR:(K++) = 「また、これ…？　まぁ%CSTR:이인칭%がしたいんならいいんだけど…」
 					ELSE
 						KSTR:(K++) = 「あう…嫌じゃないけど…、やっぱり、これ恥ずかしいよ」
 					ENDIF
@@ -1951,8 +2265,8 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:333 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
-						KSTR:(K++) = 「ふぁ…あかり、犬じゃない…のに…くぅっ、んっ…」
+					IF RAND:3
+						KSTR:(K++) = 「ふぁ…%CSTR:일인칭%、犬じゃない…のに…くぅっ、んっ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「やっ…奥に当たって…んんっ…！」
 					ELSE
@@ -1961,7 +2275,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = %CALLNAME:TARGET%はシーツを掴み、必死に喘ぎ声を押し殺そうとしている…
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「やっぱり、やだっ！　こんなのっ…あぅっ、うぐっ…」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:MASTER%は暴れる%CALLNAME:TARGET%を無理やり抑えつけ、犯し続けた…
@@ -2083,7 +2397,7 @@ SELECTCASE SELECTCOM
 					W:K = 1
 					KSTR:(K++) = 「……その初めてくらいは優しくしてほしいなぁって」
 					W:K = 1
-					KSTR:(K++) = 「うん、でもご主人様がそうして欲しいっていうなら頑張る」
+					KSTR:(K++) = 「うん、でも%CSTR:이인칭%がそうして欲しいっていうなら頑張る」
 					W:K = 1
 					KSTR:(K++) = %CALLNAME:TARGET%はそう言って覚悟を決めると、自ら%CALLNAME:MASTER%の上に腰を降ろした…
 				ENDIF
@@ -2117,9 +2431,9 @@ SELECTCASE SELECTCOM
 				ENDIF
 				;굴복각인Lv3
 				IF MARK:2 == 3 && KSTR:0 == ""
-					KSTR:(K++) = 「うん、わかった。これであかりが動けばいいんだよね？」
+					KSTR:(K++) = 「うん、わかった。これで%CSTR:일인칭%が動けばいいんだよね？」
 					W:K = 1
-					KSTR:(K++) = 「ふふ、それじゃあ、任せといて、あかり頑張ってご主人様を気持よくするよ」
+					KSTR:(K++) = 「ふふ、それじゃあ、任せといて、%CSTR:일인칭%頑張って%CSTR:이인칭%を気持よくするよ」
 					W:K = 1
 					KSTR:(K++) = %CALLNAME:TARGET%は笑みを浮かべ、腰を振り始めた…
 				ENDIF
@@ -2137,6 +2451,33 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「んふ、こうして%CSTR:이인칭%を見下ろすのってなんだか気持ちいい」
+							W:K = 1
+							KSTR:(K++) = 「このまま、%CSTR:일인칭%が気持よくしてあげるね…%UNICODE(0x2661)%」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「あっ、ふぁっ、やっぱりすごくいいよぉ…」
+							W:K = 1
+							KSTR:(K++) = 「ねぇっ、%CSTR:이인칭%も、一緒に気持ちよくなってぇ！」
+						ELSE
+							KSTR:(K++) = 「や…あぁ…そんなつきあげちゃだめだよぉ」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:일인칭%が%CSTR:이인칭%を犯してあげたいのにぃ、ふぁ、ぁぁ」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「んんっ、あっ…%CSTR:이인칭%のが大きく…」
+							W:K = 1
+							KSTR:(K++) = 「感じてくれてるんだぁ…%UNICODE(0x2661)%」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「くぅ…ん…はぁ、はいったぁ…」
+							W:K = 1
+							KSTR:(K++) = 「それじゃあ、いっぱい動くから、覚悟してねっ」
+						ELSE
+							KSTR:(K++) = 「ん…頑張るから、気持ちよくなってくれると嬉しいな…」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2154,22 +2495,22 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:338 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
-						KSTR:(K++) = 「んふ、こうしてご主人様を見下ろすのってなんだか気持ちいい」
+					IF RAND:3
+						KSTR:(K++) = 「んふ、こうして%CSTR:이인칭%を見下ろすのってなんだか気持ちいい」
 						W:K = 1
-						KSTR:(K++) = 「このまま、あかりが気持よくしてあげるね…%UNICODE(0x2661)%」
+						KSTR:(K++) = 「このまま、%CSTR:일인칭%が気持よくしてあげるね…%UNICODE(0x2661)%」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「あっ、ふぁっ、やっぱりすごくいいよぉ…」
 						W:K = 1
-						KSTR:(K++) = 「ねぇっ、ご主人様も、一緒に気持ちよくなってぇ！」
+						KSTR:(K++) = 「ねぇっ、%CSTR:이인칭%も、一緒に気持ちよくなってぇ！」
 					ELSE
 						KSTR:(K++) = 「や…あぁ…そんなつきあげちゃだめだよぉ」
 						W:K = 1
-						KSTR:(K++) = 「あかりがご主人様を犯してあげたいのにぃ、ふぁ、ぁぁ」
+						KSTR:(K++) = 「%CSTR:일인칭%が%CSTR:이인칭%を犯してあげたいのにぃ、ふぁ、ぁぁ」
 					ENDIF
 				ELSE
-					IF !RAND:3
-						KSTR:(K++) = 「んんっ、あっ…ご主人様のが大きく…」
+					IF RAND:3
+						KSTR:(K++) = 「んんっ、あっ…%CSTR:이인칭%のが大きく…」
 						W:K = 1
 						KSTR:(K++) = 「感じてくれてるんだぁ…%UNICODE(0x2661)%」
 					ELSEIF RAND:2
@@ -2185,21 +2526,21 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:338 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「やっ、またおおきくっ…！」
 						W:K = 1
 						KSTR:(K++) = 「なんでこんな、んくっ、あぁっ…！」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「ひぁっ…そんなっ、つきあげちゃだめっ」
 						W:K = 1
-						KSTR:(K++) = 「あかりまで…はぁ…んんっ…！」
+						KSTR:(K++) = 「%CSTR:일인칭%まで…はぁ…んんっ…！」
 					ELSE
 						KSTR:(K++) = 「んっ…はぁ…楽しんでなんかっ…」
 						W:K = 1
 						KSTR:(K++) = 「ただ、早く終わらせたいから頑張ってるだけで、ふぁっ…」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ぐ……ニヤニヤ笑って…」
 						W:K = 1
 						KSTR:(K++) = 「こんなことさせてっ、そんなに楽しいっていうのっ…！」
@@ -2274,7 +2615,7 @@ SELECTCASE SELECTCOM
 				IF KSTR:0 == ""
 					KSTR:(K++) = 「え、抱き合ってするって、やだよ！」
 						W:K = 1
-					KSTR:(K++) = 「あかりはあんたなんかと抱き合いたくなんかないんだから」
+					KSTR:(K++) = 「%CSTR:일인칭%はあんたなんかと抱き合いたくなんかないんだから」
 						W:K = 1
 					KSTR:(K++) = 「あ、ちょっとやめっ！」
 					KSTR:(K++) = %CALLNAME:MASTER%は嫌がる%CALLNAME:TARGET%を無理やり抱き寄せ、座らせた…
@@ -2285,6 +2626,36 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
+							KSTR:(K++) = 「んんっ…ちゅ…ふぁ、すごい。とろけちゃう…」
+							W:K = 1
+							KSTR:(K++) = 「ね、もっとキスしよ…%CSTR:일인칭%、もっともっととろけたいよぉ…んちゅ…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「ねぇっ、ぎゅっとしてっ…痛いくらいにお願いっ…！」
+							W:K = 1
+							KSTR:(K++) = 「もっともっと、%CSTR:이인칭%を感じたいのっ！」
+						ELSE
+							KSTR:(K++) = 「ん、%CSTR:일인칭%も頑張って動くから…って、んんっ…ああっ」
+							W:K = 1
+							KSTR:(K++) = 「や、そんな、激しくしちゃっ…ふぁっ…%CSTR:일인칭%動けなっちゃうよぉ…」
+						ENDIF
+					ELSE
+						IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
+							KSTR:(K++) = 「んっ…ちゅ、ちゅぷ…は…ん…」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:MASTER%が少し、俯いて頭を下げると
+							KSTR:(K++) = %CALLNAME:TARGET%は背を伸ばし、激しく唇に吸いついてきた…
+						ELSEIF RAND:2
+							KSTR:(K++) = 「んっ…お願い、しっかり抱きしめて…あったかくて気持いいから…」
+						ELSE
+							KSTR:(K++) = 「んんっ…あっ…んっ…」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%にしっかりと抱きつき、胸に顔をうずめている…
+							W:K = 1
+							KSTR:(K++) = 苦しそうに吐き出される吐息がこそばゆい…
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2302,21 +2673,21 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "키스한다"))
+					IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
 						KSTR:(K++) = 「んんっ…ちゅ…ふぁ、すごい。とろけちゃう…」
 						W:K = 1
-						KSTR:(K++) = 「ね、もっとキスしよ…あかり、もっともっととろけたいよぉ…んちゅ…」
+						KSTR:(K++) = 「ね、もっとキスしよ…%CSTR:일인칭%、もっともっととろけたいよぉ…んちゅ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「ねぇっ、ぎゅっとしてっ…痛いくらいにお願いっ…！」
 						W:K = 1
-						KSTR:(K++) = 「もっともっと、ご主人様を感じたいのっ！」
+						KSTR:(K++) = 「もっともっと、%CSTR:이인칭%を感じたいのっ！」
 					ELSE
-						KSTR:(K++) = 「ん、あかりも頑張って動くから…って、んんっ…ああっ」
+						KSTR:(K++) = 「ん、%CSTR:일인칭%も頑張って動くから…って、んんっ…ああっ」
 						W:K = 1
-						KSTR:(K++) = 「や、そんな、激しくしちゃっ…ふぁっ…あかり動けなっちゃうよぉ…」
+						KSTR:(K++) = 「や、そんな、激しくしちゃっ…ふぁっ…%CSTR:일인칭%動けなっちゃうよぉ…」
 					ENDIF
 				ELSE
-					IF !RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "키스한다"))
+					IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
 						KSTR:(K++) = 「んっ…ちゅ、ちゅぷ…は…ん…」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:MASTER%が少し、俯いて頭を下げると
@@ -2336,14 +2707,14 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:340 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "키스한다"))
+					IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
 						KSTR:(K++) = 「ふぁっ、やっ…んんっ…ちゅっ…」
 						W:K = 1
 						KSTR:(K++) = 「ぷはっ…だめ、口の中までおかさ…んんっ…ちゅ…あっ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「んっ、あっ、こ、こっちを見るなっ…！」
 						W:K = 1
-						KSTR:(K++) = 「あかり、気持よくなってなんかぁっ…！」
+						KSTR:(K++) = 「%CSTR:일인칭%、気持よくなってなんかぁっ…！」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%はそういって、%CALLNAME:MASTER%から顔を反らせている…
 					ELSE
@@ -2352,7 +2723,7 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = %CALLNAME:TARGET%は力が、喘ぎながら%CALLNAME:MASTER%にしがみついてきた…
 					ENDIF
 				ELSE
-					IF !RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "키스한다"))
+					IF RAND:3 && PLAY_KISS(PLAYER, TARGET) && GET_COMFLAG(GETNUM(TRAINNAME, "キスする"))
 						KSTR:(K++) = 「あっ…ちょっと、やだっ、やめてっ…ん…ちゅ…」
 						W:K = 1
 						KSTR:(K++) = 「んんッ…はぁっ、こんなことして、キスまでして…！」
@@ -2414,13 +2785,13 @@ SELECTCASE SELECTCOM
 				IF MARK:2 == 3 && KSTR:0 == ""
 					KSTR:(K++) = 「えっと、ここに座るのね。わかった」
 						W:K = 1
-					KSTR:(K++) = 「で、これでどうするの？　ご主人様も見えないし、動きにくいし、なんだかいまいち…」
+					KSTR:(K++) = 「で、これでどうするの？　%CSTR:이인칭%も見えないし、動きにくいし、なんだかいまいち…」
 					KSTR:(K++) = %CALLNAME:TARGET%がそう不満そうに呟いたので、胸に手を伸ばして、少々乱暴にまさぐってやる
 						W:K = 1
 					KSTR:(K++) = 「きゃっ、あふ…ん…」
 					KSTR:(K++) = 気持よさそうに声を出すので、続けて腰の方も動かしてやる…
 						W:K = 1
-					KSTR:(K++) = 「あっ…んんっ、ふぁ…、こんな…やっぱりご主人様、えっちだよぉ…%UNICODE(0x2661)%」
+					KSTR:(K++) = 「あっ…んんっ、ふぁ…、こんな…やっぱり%CSTR:이인칭%、えっちだよぉ…%UNICODE(0x2661)%」
 				ENDIF
 				;그 이외
 				IF KSTR:0 == ""
@@ -2437,6 +2808,38 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「んぅ……あっ……もっといっぱい…激しくっ…」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:이인칭%ぁ、このまま%CSTR:일인칭%をいっぱい気持よくしてぇっ…！」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「やん、またそんなところ…%CSTR:이인칭%えっちすぎるよぉ…%UNICODE(0x2661)%」
+							KSTR:(K++) = 「そんなにされたら、%CSTR:일인칭%…また…ふぁぁ…%UNICODE(0x2661)%」
+						ELSE
+							KSTR:(K++) = 「ん…あったかい…それにどきどきしてるのがわかる…」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:일인칭%もこれすきだから…このまま気持よくして…んふっ」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は背中をぴったりと押し付け、微笑みかけてきた
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「う…くぅ…くるし…けど…」
+							W:K = 1
+							KSTR:(K++) = 「大丈夫だから、%CSTR:이인칭%の思うとおりに…んくっ…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「……これってだっこだよね？」
+							W:K = 1
+							KSTR:(K++) = 「なんか、子供になっちゃったみたい、こんなえっちなことしてるのに…ちょっと変な気分…」
+						ELSE
+							KSTR:(K++) = 「……ん……はぁ、すごいなぁ」
+							W:K = 1
+							KSTR:(K++) = 「あ、いや、大きいのがしっかりとはいるんだなぁって」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%はそう言って、結合部をしげしげと眺めている
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2454,25 +2857,25 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:341 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「んぅ……あっ……もっといっぱい…激しくっ…」
 						W:K = 1
-						KSTR:(K++) = 「ご主人さまぁ、このままあかりをいっぱい気持よくしてぇっ…！」
+						KSTR:(K++) = 「%CSTR:이인칭%ぁ、このまま%CSTR:일인칭%をいっぱい気持よくしてぇっ…！」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「やん、またそんなところ…ご主人様えっちすぎるよぉ…%UNICODE(0x2661)%」
-						KSTR:(K++) = 「そんなにされたら、あかり…また…ふぁぁ…%UNICODE(0x2661)%」
+						KSTR:(K++) = 「やん、またそんなところ…%CSTR:이인칭%えっちすぎるよぉ…%UNICODE(0x2661)%」
+						KSTR:(K++) = 「そんなにされたら、%CSTR:일인칭%…また…ふぁぁ…%UNICODE(0x2661)%」
 					ELSE
 						KSTR:(K++) = 「ん…あったかい…それにどきどきしてるのがわかる…」
 						W:K = 1
-						KSTR:(K++) = 「あかりもこれすきだから…このまま気持よくして…んふっ」
+						KSTR:(K++) = 「%CSTR:일인칭%もこれすきだから…このまま気持よくして…んふっ」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%は背中をぴったりと押し付け、微笑みかけてきた
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「う…くぅ…くるし…けど…」
 						W:K = 1
-						KSTR:(K++) = 「大丈夫だから、ご主人様の思うとおりに…んくっ…」
+						KSTR:(K++) = 「大丈夫だから、%CSTR:이인칭%の思うとおりに…んくっ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「……これってだっこだよね？」
 						W:K = 1
@@ -2490,7 +2893,7 @@ SELECTCASE SELECTCOM
 			;그 이외
 			IF (CFLAG:341 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「んんっ、そんな色んなところさわられたらっ、あっ…！」
 						W:K = 1
 						KSTR:(K++) = 愛撫するたびに%CALLNAME:TARGET%のヴァギナはペニスを強く絞めつけてくる…
@@ -2506,8 +2909,8 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「ふぁっ、いじらないでっ、だめっ、だめだよぉ！　ひぁぁ！」
 					ENDIF
 				ELSE
-					IF !RAND:3
-						KSTR:(K++) = 「あぅっ…こんなふうにあかりをいじくりまわして面白いの！？」
+					IF RAND:3
+						KSTR:(K++) = 「あぅっ…こんなふうに%CSTR:일인칭%をいじくりまわして面白いの！？」
 						W:K = 1
 						KSTR:(K++) = 「あんたみたいなへんたい、死んじゃえばいいのにっ！」
 					ELSEIF RAND:2
@@ -2537,9 +2940,9 @@ ENDSELECT
 			IF MARK:2 == 3 && KSTR:0 == ""
 				KSTR:(K++) = 「うん…覚悟はできてたよ」
 				W:K = 1
-				KSTR:(K++) = 「でも、やっぱり怖いよ…ご主人様…」
+				KSTR:(K++) = 「でも、やっぱり怖いよ…%CSTR:이인칭%…」
 				W:K = 1
-				KSTR:(K++) = 「ね、あかりも頑張るけど、優しくしてね…」
+				KSTR:(K++) = 「ね、%CSTR:일인칭%も頑張るけど、優しくしてね…」
 				W:K = 1
 				KSTR:(K++) = そう言うと、%CALLNAME:TARGET%は身を強ばらせながらも、%CALLNAME:MASTER%に体を委ねてきた…
 			ENDIF
@@ -2549,7 +2952,7 @@ ENDSELECT
 				W:K = 1
 				KSTR:(K++) = %CALLNAME:TARGET%は%CALLNAME:MASTER%のただならぬ様子に怯えている
 				W:K = 1
-				KSTR:(K++) = 「あ、あかりはまだ子供だよ。ね、無理だよ…」
+				KSTR:(K++) = 「あ、%CSTR:일인칭%はまだ子供だよ。ね、無理だよ…」
 				W:K = 1
 				KSTR:(K++) = 「お願い、もう生意気言わないし、なんでもいうこと聞くから、やめて！」
 				W:K = 1
@@ -2562,6 +2965,30 @@ ENDSELECT
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && FLAG:7 == 2
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:Ｖ감각 > 2
+						IF RAND:3
+							KSTR:(K++) = 「んっ…あっ…もっとぉ…もっと欲しいよぉ」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「あっ…んっ…すごいっ…%CSTR:이인칭%のすごいよぉっ」
+						ELSE
+							KSTR:(K++) = 「%CSTR:이인칭%ぁ。いっぱいしてぇ」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:일인칭%もがんばるからぁ」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「あ…う…%CSTR:이인칭%、お願い優しくして…」
+							W:K = 1
+							KSTR:(K++) = 「そうしたら、%CSTR:일인칭%もよくなれそうな気がするから…んっ…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「ん…く…ふぅ…」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は目を瞑り、息を殺して、じっと耐えている……
+						ELSE
+							KSTR:(K++) = 「ん…ぐぅ…くるし…あんまり激しくしないで…」
+							KSTR:(K++) = 「%CSTR:일인칭%もがんばるから…」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2578,37 +3005,37 @@ ENDSELECT
 			;굴복각인Lv3
 			IF MARK:2 == 3 && FLAG:7 == 2 && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「んっ…あっ…もっとぉ…もっと欲しいよぉ」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「あっ…んっ…すごいっ…ご主人様のすごいよぉっ」
+						KSTR:(K++) = 「あっ…んっ…すごいっ…%CSTR:이인칭%のすごいよぉっ」
 					ELSE
-						KSTR:(K++) = 「ご主人様ぁ。いっぱいしてぇ」
+						KSTR:(K++) = 「%CSTR:이인칭%ぁ。いっぱいしてぇ」
 						W:K = 1
-						KSTR:(K++) = 「あかりもがんばるからぁ」
+						KSTR:(K++) = 「%CSTR:일인칭%もがんばるからぁ」
 					ENDIF
 				ELSE
-					IF !RAND:3
-						KSTR:(K++) = 「あ…う…ご主人様、お願い優しくして…」
+					IF RAND:3
+						KSTR:(K++) = 「あ…う…%CSTR:이인칭%、お願い優しくして…」
 						W:K = 1
-						KSTR:(K++) = 「そうしたら、あかりもよくなれそうな気がするから…んっ…」
+						KSTR:(K++) = 「そうしたら、%CSTR:일인칭%もよくなれそうな気がするから…んっ…」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「ん…く…ふぅ…」
 						W:K = 1
-						KSTR:(K++) = あかりは目を瞑り、息を殺して、じっと耐えている……
+						KSTR:(K++) = %CALLNAME:TARGET%は目を瞑り、息を殺して、じっと耐えている……
 					ELSE
 						KSTR:(K++) = 「ん…ぐぅ…くるし…あんまり激しくしないで…」
-						KSTR:(K++) = 「あかりもがんばるから…」
+						KSTR:(K++) = 「%CSTR:일인칭%もがんばるから…」
 					ENDIF
 				ENDIF
 			ENDIF
 			;그 이외
 			IF FLAG:7 == 2 && KSTR:0 == ""
 				IF ABL:Ｖ감각 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「あっ…ひぁっ、なんでっ、こんなの嫌なのに…嫌なはずなのにっ…はぁっ…」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「だめ…だめだよ…あかりはまだ子供なんだから…」
+						KSTR:(K++) = 「だめ…だめだよ…%CSTR:일인칭%はまだ子供なんだから…」
 						W:K = 1
 						KSTR:(K++) = 「こんな、こんなの…ふぁ…ぁん…」
 					ELSE
@@ -2617,16 +3044,16 @@ ENDSELECT
 						KSTR:(K++) = 「なんだか、ふぁっとして…あぁっ…」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「う…ぐ…苦しいよぉ…もうやめてよぉ。お願い…」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「あかりはこんなことしたくないのに…」
+						KSTR:(K++) = 「%CSTR:일인칭%はこんなことしたくないのに…」
 						W:K = 1
 						KSTR:(K++) = 「ぜったい、ぜったい、許さないんだから」
 					ELSE
 						KSTR:(K++) = 「お願い、もうやめてよぉ……」
 						W:K = 1
-						KSTR:(K++) = 「あかり、こんなの嫌だよぉ……」
+						KSTR:(K++) = 「%CSTR:일인칭%、こんなの嫌だよぉ……」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2688,7 +3115,7 @@ SELECTCASE SELECTCOM
 				W:K = 1
 				KSTR:(K++) = 「ふーん、そうなんだ。それじゃあ、こすってあげたらもっといいってことだよね」
 				W:K = 1
-				KSTR:(K++) = 「ふふ、あかり、頑張るね！」
+				KSTR:(K++) = 「ふふ、%CSTR:일인칭%、頑張るね！」
 			ELSE
 				KSTR:(K++) = 「こんなの…さわるのなんて嫌だよ……っていっても聞いてくれないんだよね…はぁ…」
 				W:K = 1
@@ -2705,6 +3132,39 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:봉사정신 > 2
+						IF RAND:3
+							KSTR:(K++) = 「ねぇ…%CSTR:이인칭%も%CSTR:일인칭%にさわってもらうほうが気持ちいいの？」
+							W:K = 1
+							KSTR:(K++) = 「そうだったら、嬉しいな…」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「ふふ、もう%CSTR:이인칭%のがちがちだよ」
+							W:K = 1
+							KSTR:(K++) = 「これって、期待してくれてるってことだよね？」
+							W:K = 1
+							KSTR:(K++) = 「んふ、%CSTR:일인칭%、がんばっちゃうよ」
+						ELSE
+							KSTR:(K++) = 「ここをこうするのがいいんだよね？」
+							W:K = 1
+							KSTR:(K++) = 「ぴくぴく跳ねるからすぐわかるよ」
+							W:K = 1
+							KSTR:(K++) = 「ほんと、この子可愛いね…」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「ふふ、さわってあげるとぴくぴく動いておもしろい」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:이인칭%もさわられると、感じちゃうんだね」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「かちかちではちきれちゃいそうで、苦しそう…」
+							W:K = 1
+							KSTR:(K++) = 「がんばってすっきりさせるね……」
+						ELSE
+							KSTR:(K++) = 「ん…、うまくできてるのかな？」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:일인칭%、上手になりたいから、だめだったら遠慮無く言ってね」
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2722,16 +3182,16 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:344 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:봉사정신 > 2
-					IF !RAND:3
-						KSTR:(K++) = 「ねぇ…ご主人様もあかりにさわってもらうほうが気持ちいいの？」
+					IF RAND:3
+						KSTR:(K++) = 「ねぇ…%CSTR:이인칭%も%CSTR:일인칭%にさわってもらうほうが気持ちいいの？」
 						W:K = 1
 						KSTR:(K++) = 「そうだったら、嬉しいな…」
 					ELSEIF RAND:2
-						KSTR:(K++) = 「ふふ、もうご主人様のがちがちだよ」
+						KSTR:(K++) = 「ふふ、もう%CSTR:이인칭%のがちがちだよ」
 						W:K = 1
 						KSTR:(K++) = 「これって、期待してくれてるってことだよね？」
 						W:K = 1
-						KSTR:(K++) = 「んふ、あかり、がんばっちゃうよ」
+						KSTR:(K++) = 「んふ、%CSTR:일인칭%、がんばっちゃうよ」
 					ELSE
 						KSTR:(K++) = 「ここをこうするのがいいんだよね？」
 						W:K = 1
@@ -2740,10 +3200,10 @@ SELECTCASE SELECTCOM
 						KSTR:(K++) = 「ほんと、この子可愛いね…」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ふふ、さわってあげるとぴくぴく動いておもしろい」
 						W:K = 1
-						KSTR:(K++) = 「ご主人様もさわられると、感じちゃうんだね」
+						KSTR:(K++) = 「%CSTR:이인칭%もさわられると、感じちゃうんだね」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「かちかちではちきれちゃいそうで、苦しそう…」
 						W:K = 1
@@ -2751,17 +3211,17 @@ SELECTCASE SELECTCOM
 					ELSE
 						KSTR:(K++) = 「ん…、うまくできてるのかな？」
 						W:K = 1
-						KSTR:(K++) = 「あかり、上手になりたいから、だめだったら遠慮無く言ってね」
+						KSTR:(K++) = 「%CSTR:일인칭%、上手になりたいから、だめだったら遠慮無く言ってね」
 					ENDIF
 				ENDIF
 				CFLAG:344 = 3
 			ENDIF
 			;그 이외
 			IF (CFLAG:344 || FLAG:7 == 2) && KSTR:0 == ""
-				IF !RAND:3
-					KSTR:(K++) = 「こんなのあかりがやらなくても…自分で出来るのに…」
+				IF RAND:3
+					KSTR:(K++) = 「こんなの%CSTR:일인칭%がやらなくても…自分で出来るのに…」
 					W:K = 1
-					KSTR:(K++) = 「なんでわざわざあかりにやらせるかなぁ…」
+					KSTR:(K++) = 「なんでわざわざ%CSTR:일인칭%にやらせるかなぁ…」
 				ELSEIF RAND:2
 					KSTR:(K++) = 「また、ぴくって……もう、大人しくしててよ……気持ち悪い……」
 				ELSE
@@ -2819,6 +3279,39 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF ABL:봉사정신 > 2
+						IF RAND:3
+							KSTR:(K++) = 「ちゅ…ん、ふ、んんっ…ふぅ…」
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:TARGET%は熱心にペニスを舐めまわしながら、ねだるような目で%CALLNAME:MASTER%を見つめている…
+							W:K = 1
+							KSTR:(K++) = %CALLNAME:MASTER%が少し苦笑しながら、頭を撫でてやると、%CALLNAME:TARGET%は嬉しそうに目を細めた…
+						ELSEIF RAND:2
+							KSTR:(K++) = 「%CSTR:일인칭%、口でするのも好きだよ」
+							W:K = 1
+							KSTR:(K++) = 「頑張ってるときに、上を見ると、%CSTR:이인칭%が可愛い顔してるのが見えるから…%UNICODE(0x2661)%」
+						ELSE
+							KSTR:(K++) = 「ふふ、今日も元気だね」
+							W:K = 1
+							KSTR:(K++) = 「じゃあ、今から%CSTR:일인칭%がいっぱいいっぱい可愛がってあげる…んっ…じゅる…」
+						ENDIF
+					ELSE
+						IF RAND:3
+							KSTR:(K++) = 「そうだ。上手く出来たら、頭を撫でてよ」
+							W:K = 1
+							KSTR:(K++) = 「%CSTR:일인칭%、がんばるからいいでしょ。ふふ」
+						ELSEIF RAND:2
+							KSTR:(K++) = 「もう、こんなことさせたがるって絶対変態だよね」
+							W:K = 1
+							KSTR:(K++) = 「でも、いいよ…%CSTR:일인칭%、%CSTR:이인칭%のためなら嫌じゃないから…はむ…ん…」
+						ELSE
+							KSTR:(K++) = 「ん…じゅぷ…んっ…」
+							W:K = 1
+							KSTR:(K++) = 熱心にペニスを愛撫する%CALLNAME:TARGET%の頭を軽く撫でてやる…
+							W:K = 1
+							KSTR:(K++) = すると、%CALLNAME:TARGET%は微かに体を震わせ、より一層に熱心に愛撫を続けた…
+						ENDIF
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2836,30 +3329,30 @@ SELECTCASE SELECTCOM
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:345 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				IF ABL:봉사정신 > 2
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「ちゅ…ん、ふ、んんっ…ふぅ…」
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:TARGET%は熱心にペニスを舐めまわしながら、ねだるような目で%CALLNAME:MASTER%を見つめている…
 						W:K = 1
 						KSTR:(K++) = %CALLNAME:MASTER%が少し苦笑しながら、頭を撫でてやると、%CALLNAME:TARGET%は嬉しそうに目を細めた…
 					ELSEIF RAND:2
-						KSTR:(K++) = 「あかり、口でするのも好きだよ」
+						KSTR:(K++) = 「%CSTR:일인칭%、口でするのも好きだよ」
 						W:K = 1
-						KSTR:(K++) = 「頑張ってるときに、上を見ると、ご主人様が可愛い顔してるのが見えるから…%UNICODE(0x2661)%」
+						KSTR:(K++) = 「頑張ってるときに、上を見ると、%CSTR:이인칭%が可愛い顔してるのが見えるから…%UNICODE(0x2661)%」
 					ELSE
 						KSTR:(K++) = 「ふふ、今日も元気だね」
 						W:K = 1
-						KSTR:(K++) = 「じゃあ、今からあかりがいっぱいいっぱい可愛がってあげる…んっ…じゅる…」
+						KSTR:(K++) = 「じゃあ、今から%CSTR:일인칭%がいっぱいいっぱい可愛がってあげる…んっ…じゅる…」
 					ENDIF
 				ELSE
-					IF !RAND:3
+					IF RAND:3
 						KSTR:(K++) = 「そうだ。上手く出来たら、頭を撫でてよ」
 						W:K = 1
-						KSTR:(K++) = 「あかり、がんばるからいいでしょ。ふふ」
+						KSTR:(K++) = 「%CSTR:일인칭%、がんばるからいいでしょ。ふふ」
 					ELSEIF RAND:2
 						KSTR:(K++) = 「もう、こんなことさせたがるって絶対変態だよね」
 						W:K = 1
-						KSTR:(K++) = 「でも、いいよ…あかり、ご主人様のためなら嫌じゃないから…はむ…ん…」
+						KSTR:(K++) = 「でも、いいよ…%CSTR:일인칭%、%CSTR:이인칭%のためなら嫌じゃないから…はむ…ん…」
 					ELSE
 						KSTR:(K++) = 「ん…じゅぷ…んっ…」
 						W:K = 1
@@ -2872,10 +3365,10 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:345 || FLAG:7 == 2) && KSTR:0 == ""
-				IF !RAND:3
+				IF RAND:3
 					KSTR:(K++) = 「……ぷ、はぁ、気持よさそうな顔して」
 					W:K = 1
-					KSTR:(K++) = 「あかり、こんなことに慣れるの嫌だよ……」
+					KSTR:(K++) = 「%CSTR:일인칭%、こんなことに慣れるの嫌だよ……」
 				ELSEIF RAND:2
 					KSTR:(K++) = 「ん…ぷは…まだ…？　疲れてきたよ……」
 				ELSE
@@ -2897,13 +3390,13 @@ SELECTCASE SELECTCOM
 		;처음
 		IF CFLAG:346 == 0
 			IF MARK:굴복각인 == 3
-				KSTR:(K++) = 「え、胸で…？　でも、あかりのは……はぁ……」
+				KSTR:(K++) = 「え、胸で…？　でも、%CSTR:일인칭%のは……はぁ……」
 				W:K = 1
 				KSTR:(K++) = %CALLNAME:TARGET%は自分の平らな胸を見て、ため息を付いた
 				W:K = 1
-				KSTR:(K++) = 「あ、でも、こういうことして欲しいってことはあかりの胸で興奮したってことだよね」
+				KSTR:(K++) = 「あ、でも、こういうことして欲しいってことは%CSTR:일인칭%の胸で興奮したってことだよね」
 				W:K = 1
-				KSTR:(K++) = 「そっか、あかりでも気持ちよく出来るんだ。うん、がんばろっ」
+				KSTR:(K++) = 「そっか、%CSTR:일인칭%でも気持ちよく出来るんだ。うん、がんばろっ」
 				W:K = 1
 				KSTR:(K++) = %CALLNAME:TARGET%は顔を輝かせると、%CALLNAME:MASTER%の指示に従って愛撫を始めた…
 			ELSE
@@ -2922,6 +3415,19 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 3 || FLAG:7 == 2)
 				;연모, 친애
 				IF (TALENT:3 || TALENT:6)
+					IF RAND:3
+						KSTR:(K++) = 「あっ、やだ、動かないで」
+						W:K = 1
+						KSTR:(K++) = 「そんな風に擦り付けられたら、%CSTR:일인칭%も変な気分になっちゃうよぉ…%UNICODE(0x2661)%」
+					ELSEIF RAND:2
+						KSTR:(K++) = 「んっ…はぁ、おちんちんが胸にあたってっ…なんだかっ…」
+						W:K = 1
+						KSTR:(K++) = 「くっ、んんっ、はぁっ、%CSTR:이인칭%も、%CSTR:이인칭%も気持ちいいよねッ？」
+					ELSE
+						KSTR:(K++) = 「んしょ…、んしょ…、どんどん硬くなってきてる…」
+						W:K = 1
+						KSTR:(K++) = 「こんな小さな胸なのに…んふ…」
+					ENDIF
 					KSTR:(K++) = 
 				;음란, 창부	
 				ELSEIF (TALENT:4 || TALENT:7)
@@ -2931,21 +3437,21 @@ SELECTCASE SELECTCOM
 					KSTR:(K++) = 
 				ENDIF
 				;함락완료 공통
-				IF KSTR:0 == ""
+					IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF
 				CFLAG:346 = 4
 			ENDIF
 			;굴복각인Lv3
 			IF MARK:2 == 3 && (CFLAG:346 < 2 || FLAG:7 == 2) && KSTR:0 == ""
-				IF !RAND:3
+				IF RAND:3
 					KSTR:(K++) = 「あっ、やだ、動かないで」
 					W:K = 1
-					KSTR:(K++) = 「そんな風に擦り付けられたら、あかりも変な気分になっちゃうよぉ…%UNICODE(0x2661)%」
+					KSTR:(K++) = 「そんな風に擦り付けられたら、%CSTR:일인칭%も変な気分になっちゃうよぉ…%UNICODE(0x2661)%」
 				ELSEIF RAND:2
 					KSTR:(K++) = 「んっ…はぁ、おちんちんが胸にあたってっ…なんだかっ…」
 					W:K = 1
-					KSTR:(K++) = 「くっ、んんっ、はぁっ、ご主人様も、ご主人様も気持ちいいよねッ？」
+					KSTR:(K++) = 「くっ、んんっ、はぁっ、%CSTR:이인칭%も、%CSTR:이인칭%も気持ちいいよねッ？」
 				ELSE
 					KSTR:(K++) = 「んしょ…、んしょ…、どんどん硬くなってきてる…」
 					W:K = 1
@@ -2955,12 +3461,12 @@ SELECTCASE SELECTCOM
 			ENDIF
 			;그 이외
 			IF (CFLAG:346 || FLAG:7 == 2) && KSTR:0 == ""
-				IF !RAND:3
+				IF RAND:3
 					KSTR:(K++) = 「はぁ…よくわからないけど、こういうのっておっきなひとにやってもらうもんじゃないの？」
 					W:K = 1
 					KSTR:(K++) = 「小さいほうがいいとか、気持ち悪いというか、いい迷惑だよ……」
 				ELSEIF RAND:2
-					KSTR:(K++) = 「ん…しょ…はぁ…もうやだ…なんであかりこんなことしてるんだろ…」
+					KSTR:(K++) = 「ん…しょ…はぁ…もうやだ…なんで%CSTR:일인칭%こんなことしてるんだろ…」
 				ELSE
 					KSTR:(K++) = 「はぁ…ほんとにこんなのできもちいいの？」
 					W:K = 1
@@ -3468,322 +3974,322 @@ IF CFLAG:106
 	CALL PALAM_MESSAGE_A
 	;머리카락
 	IF CFLAG:106 == 1				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:221= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:221= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:221= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:221= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:221 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:221 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:221= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:221 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:221 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:221= 1	
 		ENDIF		
 	;얼굴
 	ELSEIF CFLAG:106 == 2				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:222 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:222 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:222= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:222= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:222= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:222= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:222 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:222 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:222= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:222 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:222 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:222= 1	
 		ENDIF		
 	;가슴
 	ELSEIF CFLAG:106 == 3				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:223 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:223 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:223= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:223= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:223= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:223= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:223 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:223 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:223= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:223 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:223 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:223= 1	
 		ENDIF		
 	;배
 	ELSEIF CFLAG:106 == 4				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:224 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:224 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:224= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:224= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:224= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:224= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:224 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:224 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:224= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:224 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:224 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:224= 1	
 		ENDIF		
 	;겨드랑이
 	ELSEIF CFLAG:106 == 5				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:225 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:225 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:225= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:225= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:225= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:225= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:225 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:225 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:225= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:225 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:225 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:225= 1	
 		ENDIF		
 	;허벅지
 	ELSEIF CFLAG:106 == 6				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:226 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:226 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:226= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:226= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:226= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:226= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:226 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:226 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:226= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:226 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:226 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:226= 1	
 		ENDIF		
 	;가랑이
 	ELSEIF CFLAG:106 == 7				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:227 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:227 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:227= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:227= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:227= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:227= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:227 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:227 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:227= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:227 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:227 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:227= 1	
 		ENDIF		
 	;엉덩이
 	ELSEIF CFLAG:106 == 8				
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:228 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:228 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:228= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:228= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:228= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:228= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:228 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:228 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:228= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:228 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:228 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:228= 1	
 		ENDIF		
 	;콘돔
 	ELSEIF CFLAG:106 == 9
 		;섹스로 사정하고, 애널섹스 이외를 실행 시
-		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)					
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)		
+		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72 , 504 , 505 , 506 , 507)
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:229= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:229= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:229= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:229= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:229= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:229 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:229 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:229= 1	
 			ENDIF		
 		ELSE					
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:230= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:230= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:230= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:230= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:230= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:230= 1	
 			ENDIF		
@@ -3801,66 +4307,66 @@ IF TFLAG:9 > 0
 	CALL PALAM_MESSAGE_A
 	;대량사정				
 	IF TFLAG:9 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:230= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:230= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:230= 1	
 		ENDIF		
 	ENDIF
 	;통상				
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:230 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:230= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:230= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:230 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:230= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:230 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:230= 1	
 		ENDIF		
@@ -3875,66 +4381,66 @@ IF TFLAG:7 > 0
 	CALL PALAM_MESSAGE_A			
 	;대량사정					
 	IF TFLAG:7 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:232= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:232= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:232 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:232 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:232= 1	
 		ENDIF		
 	ENDIF	
 	;통상					
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:232 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:232= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:232= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:232 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:232= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:232 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:232 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:232= 1	
 		ENDIF		
@@ -3951,66 +4457,66 @@ IF TFLAG:0 > 0
 	IF SELECTCOM == 140			
 		;대량사정						
 		IF TFLAG:0 > 1
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:233= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
 		;통상						
 		IF KSTR:0 == ""
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:233= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:233= 1	
 			ENDIF		
@@ -4019,66 +4525,66 @@ IF TFLAG:0 > 0
 	ELSE
 		;대량사정						
 		IF TFLAG:0 > 1
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:233= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 1	
 			ENDIF		
 		ENDIF	
 		;통상						
 		IF KSTR:0 == ""
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:233 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:233= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:233= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:233 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:233= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:233 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:233= 1	
 			ENDIF		
@@ -4094,66 +4600,66 @@ IF TFLAG:1 > 0
 	CALL PALAM_MESSAGE_A	
 	;대량사정					
 	IF TFLAG:1 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:234= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:234= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:234 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:234 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:234= 1	
 		ENDIF		
 	ENDIF	
 	;통상					
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:234= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:234= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:234 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:234= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:234 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:234 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:234= 1	
 		ENDIF		
@@ -4168,66 +4674,66 @@ IF TFLAG:34 > 0
 	CALL PALAM_MESSAGE_A		
 	;대량사정					
 	IF TFLAG:34 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:235= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:235 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:235 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:235= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:235 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:235 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:235= 1	
 		ENDIF		
 	ENDIF	
 	;통상					
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:235= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:235= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:235 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:235 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:235= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:235 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:235 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:235= 1	
 		ENDIF		
@@ -4241,66 +4747,66 @@ IF TFLAG:16 == 1
 	CALL PALAM_MESSAGE_A		
 	;대량사정					
 	IF TFLAG:16 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:236= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:236 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:236 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:236= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:236 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:236 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:236= 1	
 		ENDIF		
 	ENDIF	
 	;통상					
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:236 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:236= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:236= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:236 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:236 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:236= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:236 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:236 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:236= 1	
 		ENDIF		
@@ -4317,66 +4823,66 @@ IF TFLAG:2 > 0
 	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 512
 		;대량사정						
 		IF TFLAG:2 > 1
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:237= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:237= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:237 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:237 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:237= 1	
 			ENDIF		
 		ENDIF	
 		;통상						
 		IF KSTR:0 == ""
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:237= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:237= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:237 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:237= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:237 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:237 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:237= 1	
 			ENDIF		
@@ -4385,66 +4891,66 @@ IF TFLAG:2 > 0
 	ELSEIF SELECTCOM == 506 || SELECTCOM == 507
 		;대량사정						
 		IF TFLAG:2 > 1
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:238= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:238= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:238 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:238 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:238= 1	
 			ENDIF		
 		ENDIF	
 		;통상						
 		IF KSTR:0 == ""
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:238= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:238= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:238 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:238= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:238 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:238 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:238= 1	
 			ENDIF		
@@ -4453,66 +4959,66 @@ IF TFLAG:2 > 0
 	ELSE
 		;대량사정						
 		IF TFLAG:2 > 1
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:239= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:239= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:239 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:239 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:239= 1	
 			ENDIF		
 		ENDIF	
 		;통상						
 		IF KSTR:0 == ""
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)		
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:239 < 3 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 					CFLAG:239= 4
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 					CFLAG:239= 3
 				ENDIF	
 			ENDIF		
 			;굴복각인Lv3		
-			IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF MARK:2 == 3 && (CFLAG:239 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) = 	
 				CFLAG:239= 2	
 			ENDIF		
 			;그 이외		
-			IF (CFLAG:239 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+			IF (CFLAG:239 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 				KSTR:(K++) =
 				CFLAG:239= 1	
 			ENDIF		
@@ -4528,66 +5034,66 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 	CALL PALAM_MESSAGE_A		
 	;대량사정					
 	IF TFLAG:10 > 1
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:240= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:240= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:240 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:240 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:240= 1	
 		ENDIF		
 	ENDIF	
 	;통상					
 	IF KSTR:0 == ""
-		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)		
+		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:240 < 3 || FLAG:7 == 2)
 			;연모, 친애	
-			IF (TALENT:3 || TALENT:6)	
+			IF (TALENT:3 || TALENT:6)
 				KSTR:(K++) = 
 				CFLAG:240= 4
 			;음란, 창부	
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			;복종, 예속	
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) = 
 				CFLAG:240= 3
 			ENDIF	
 		ENDIF		
 		;굴복각인Lv3		
-		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF MARK:2 == 3 && (CFLAG:240 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) = 	
 			CFLAG:240= 2	
 		ENDIF		
 		;그 이외		
-		IF (CFLAG:240 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+		IF (CFLAG:240 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 			KSTR:(K++) =
 			CFLAG:240= 1	
 		ENDIF		
@@ -4647,33 +5153,33 @@ VARSET W
 ;-------------------------------------------------
 IF TFLAG:15 >0
 	CALL PALAM_MESSAGE_E			
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:241 < 3 || FLAG:7 == 2)		
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:241 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:241= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:241= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:241= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:241= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:241 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:241 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:241= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:241 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:241 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) =
 		CFLAG:241= 1	
 	ENDIF		
@@ -4765,66 +5271,66 @@ VARSET W
 ;강절정
 IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B			
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)		
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:246= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:246= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:246 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:246 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:246= 1	
 	ENDIF		
 ;절정
 ELSEIF TFLAG:29 > 0
 	CALL PALAM_MESSAGE_B			
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)		
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:246 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:246= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:246= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:246 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:246= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:246 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:246 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) =
 		CFLAG:246= 1	
 	ENDIF		
@@ -4836,33 +5342,33 @@ W:K = 1
 ;-------------------------------------------------
 ;사정하고 있다
 IF TFLAG:10 > 0				
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:247 < 3 || FLAG:7 == 2)		
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:247 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:247= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:247= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:247= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:247= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:247 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:247 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:247= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:247 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:247 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) =
 		CFLAG:247= 1	
 	ENDIF		
@@ -4874,33 +5380,33 @@ W:K = 1
 ;-------------------------------------------------
 ;분유하고 있다
 IF TFLAG:11 > 0			
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:248 < 3 || FLAG:7 == 2)		
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:248 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:248= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:248= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:248= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:248= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:248 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:248 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:248= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:248 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:248 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) =
 		CFLAG:248= 1	
 	ENDIF		
@@ -4911,34 +5417,34 @@ W:K = 1
 ;방뇨
 ;-------------------------------------------------
 ;방뇨하고 있다
-IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)			
-	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:249 < 3 || FLAG:7 == 2)		
+IF TFLAG:29 > 0 && (TEQUIP:27 || TALENT:57)
+	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:249 < 3 || FLAG:7 == 2)
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 			CFLAG:249= 4
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 			CFLAG:249= 3
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 			CFLAG:249= 3
 		ENDIF	
 		;함락완료 공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) = 
 			CFLAG:249= 3
 		ENDIF	
 	ENDIF		
 	;굴복각인Lv3		
-	IF MARK:2 == 3 && (CFLAG:249 < 2 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF MARK:2 == 3 && (CFLAG:249 < 2 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) = 	
 		CFLAG:249= 2	
 	ENDIF		
 	;그 이외		
-	IF (CFLAG:249 < 1 || FLAG:7 == 2) && KSTR:0 == ""		
+	IF (CFLAG:249 < 1 || FLAG:7 == 2) && KSTR:0 == ""
 		KSTR:(K++) =
 		CFLAG:249= 1	
 	ENDIF		
@@ -5003,13 +5509,13 @@ IF TFLAG:3 > 0
 	;그 이외의 때에 처녀상실
 	ELSE			
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 		ENDIF	
 		;굴복각인Lv3
@@ -5017,7 +5523,7 @@ IF TFLAG:3 > 0
 			KSTR:(K++) = 
 		ENDIF
 		;공통	
-		IF KSTR:0 == ""	
+		IF KSTR:0 == ""
 			KSTR:(K++) =
 		ENDIF	
 	ENDIF
@@ -5201,17 +5707,17 @@ VARSET W
 IF TFLAG:22 == 3
 	CALL MARK_MESSAGE_A	
 	;연모, 친애	
-	IF (TALENT:3 || TALENT:6)	
+	IF (TALENT:3 || TALENT:6)
 		KSTR:(K++) = 
 	;음란, 창부	
-	ELSEIF (TALENT:4 || TALENT:7)	
+	ELSEIF (TALENT:4 || TALENT:7)
 		KSTR:(K++) = 
 	;복종, 예속	
-	ELSEIF (TALENT:5 || TALENT:8)	
+	ELSEIF (TALENT:5 || TALENT:8)
 		KSTR:(K++) = 
 	ENDIF	
 	;공통
-	IF KSTR:0 == ""		
+	IF KSTR:0 == ""
 		KSTR:(K++) = 
 	ENDIF		
 ENDIF
@@ -5223,14 +5729,14 @@ ENDIF
 IF TFLAG:23 == 3
 	CALL MARK_MESSAGE_P
 	;연모, 친애	
-	IF (TALENT:3 || TALENT:6)	
+	IF (TALENT:3 || TALENT:6)
 		KSTR:(K++) = 
 	;복종, 예속	
-	ELSEIF (TALENT:5 || TALENT:8)	
+	ELSEIF (TALENT:5 || TALENT:8)
 		KSTR:(K++) = 
 	ENDIF	
 	;공통
-	IF KSTR:0 == ""		
+	IF KSTR:0 == ""
 		KSTR:(K++) = 
 	ENDIF		
 ENDIF
@@ -5259,7 +5765,7 @@ SELECTCASE TFLAG:24
 		CASE 33
 			KSTR:(K++) = 「ん、まだ終わりじゃないよね？」
 			W:K = 1
-			KSTR:(K++) = 「あかりにできる事ならなんでもするよ…だから、遠慮なんてしないでね…」
+			KSTR:(K++) = 「%CSTR:일인칭%にできる事ならなんでもするよ…だから、遠慮なんてしないでね…」
 			W:K = 1
 			KSTR:(K++) = %CALLNAME:TARGET%は妙に熱のこもった目をして、そう呟いた…
 			W:K = 1
@@ -5322,13 +5828,13 @@ IF TFLAG:21 == 3
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		;연모, 친애	
-		IF (TALENT:3 || TALENT:6)	
+		IF (TALENT:3 || TALENT:6)
 			KSTR:(K++) = 
 		;음란, 창부	
-		ELSEIF (TALENT:4 || TALENT:7)	
+		ELSEIF (TALENT:4 || TALENT:7)
 			KSTR:(K++) = 
 		;복종, 예속	
-		ELSEIF (TALENT:5 || TALENT:8)	
+		ELSEIF (TALENT:5 || TALENT:8)
 			KSTR:(K++) = 
 		ENDIF	
 		;함락완료 공통	
@@ -5383,17 +5889,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					KSTR:(K++) = 「ん…じゅぷ…んっ…」
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:261 = 1
@@ -5406,37 +5912,37 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;모유체질
-				IF TALENT:149						
+				;母乳体質
+				IF TALENT:149
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 				ENDIF
 				;모유체질이 아니다
 				IF KSTR:0 == ""
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) =
 					ENDIF	
 				ENDIF
@@ -5451,17 +5957,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					KSTR:(K++) = 「んっんんっ……%CSTR:이인칭%の、朝から大っきい……」
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:263 = 1
@@ -5473,19 +5979,19 @@ SELECTCASE TFLAG:13
 	CASE 24
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:263 = 1
@@ -5497,7 +6003,8 @@ SELECTCASE TFLAG:13
 	CASE 25
 			CALL EVENT_MESSAGE
 			IF CFLAG:263 < 1 || FLAG:7 == 2
-				KSTR:(K++) =
+				KSTR:(K++) =「えへへ……%CSTR:이인칭%、おはよ」
+				KSTR:(K++) =イタズラっぽく%CALLNAME:TARGET%は微笑んだ。
 				CFLAG:263 = 1
 			ENDIF
 
@@ -5509,36 +6016,37 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;노래 부르면서
-				IF (TALENT:25 || TALENT:28) && ABL:14 >= 2						
+				IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
-						KSTR:(K++) = 
+					IF (TALENT:3 || TALENT:6)
+						KSTR:(K++) = 「～～♪」
+						KSTR:(K++) = 「あ、%CSTR:이인칭%。ごはんできてるよ！」
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 				ENDIF
 				;노래 부르지 않음
 				IF KSTR:0 == ""
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
-						KSTR:(K++) = 
+					IF (TALENT:3 || TALENT:6)
+						KSTR:(K++) = 「%CSTR:이인칭%、おはよう！　ごはんできてるよ」
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) =
 					ENDIF	
 				ENDIF
@@ -5551,7 +6059,8 @@ SELECTCASE TFLAG:13
 	CASE 27
 			CALL EVENT_MESSAGE
 			IF CFLAG:263 < 1 || FLAG:7 == 2
-				KSTR:(K++) =
+				KSTR:(K++) =「すぅ……すぅ……」
+				KSTR:(K++) =%CALLNAME:TARGET%は気持ちよさそうに大の字で眠っている。
 				CFLAG:263 = 1
 			ENDIF
 
@@ -5561,19 +6070,19 @@ SELECTCASE TFLAG:13
 	CASE 28
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					KSTR:(K++) = 「あ、%CSTR:이인칭%、起きた？　やっぱりコレむずかしいね」
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:263 = 1
@@ -5585,19 +6094,19 @@ SELECTCASE TFLAG:13
 	CASE 29
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					KSTR:(K++) = 「%CSTR:이인칭%専用ミルクだよ！」
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:263 = 1
@@ -5609,19 +6118,19 @@ SELECTCASE TFLAG:13
 	CASE 30
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:263 = 1
@@ -5648,19 +6157,19 @@ SELECTCASE TFLAG:13
 	CASE 5
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:265 = 1
@@ -5672,19 +6181,19 @@ SELECTCASE TFLAG:13
 	CASE 6
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:266 < 2 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:266 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:266 = 2
@@ -5700,19 +6209,19 @@ SELECTCASE TFLAG:13
 	CASE 7
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:267 < 2 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:267 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					KSTR:(K++) = 「なんか……ウシさんみたいだね」
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:267 = 2
@@ -5728,19 +6237,23 @@ SELECTCASE TFLAG:13
 	CASE 8
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:268 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+				IF RAND:2 == 0
+					KSTR:(K++) = 「ん…はぁ…ふぁ…んんっ…」
+				ELSE
+					KSTR:(K++) = 「あっ…んんっ…ん…はぁ…」
+				ENDIF
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:268 = 2
@@ -5756,19 +6269,23 @@ SELECTCASE TFLAG:13
 	CASE 9
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+					IF RAND:2
+						KSTR:(K++) = 「あ、んん…ィ……あぁっ…」
+					ELSE
+						KSTR:(K++) = 「んん…あっ、もっとぉ……ふぁっ……」
+					ENDIF
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5780,19 +6297,19 @@ SELECTCASE TFLAG:13
 	CASE 31
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5804,19 +6321,19 @@ SELECTCASE TFLAG:13
 	CASE 32
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5828,19 +6345,19 @@ SELECTCASE TFLAG:13
 	CASE 33
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5852,19 +6369,19 @@ SELECTCASE TFLAG:13
 	CASE 34
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5876,19 +6393,23 @@ SELECTCASE TFLAG:13
 	CASE 35
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
-					KSTR:(K++) = 
+				IF (TALENT:3 || TALENT:6)
+				IF RAND:2 == 0
+					KSTR:(K++) = 「ん…はぁ…ふぁ…んんっ…」
+				ELSE
+					KSTR:(K++) = 「あっ…んんっ…ん…はぁ…」
+				ENDIF
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:269 = 1
@@ -5900,7 +6421,11 @@ SELECTCASE TFLAG:13
 	CASE 36
 			CALL EVENT_MESSAGE
 			IF CFLAG:269 < 1 || FLAG:7 == 2
-				KSTR:(K++) =
+				IF RAND:2 == 0
+					KSTR:(K++) = 「%CSTR:이인칭%……寝ちゃってる、よね」
+				ELSE
+					KSTR:(K++) = %CALLNAME:TARGET%は赤子のように丸くなって瞼を閉じた。
+				ENDIF
 				CFLAG:269 = 1
 			ENDIF
 
@@ -5910,19 +6435,19 @@ SELECTCASE TFLAG:13
 	CASE 10
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:270 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:270 = 2
@@ -5971,19 +6496,19 @@ SELECTCASE TFLAG:13
 	CASE 12
 			CALL EVENT_MESSAGE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)					
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:272 = 2
@@ -6003,17 +6528,17 @@ SELECTCASE TFLAG:13
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 2 || FLAG:7 == 2)
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 					CFLAG:273 = 2
@@ -6027,17 +6552,17 @@ SELECTCASE TFLAG:13
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:273 < 4 || FLAG:7 == 2)
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 					CFLAG:273 = 4
@@ -6056,17 +6581,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:274 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:274 = 2
@@ -6147,17 +6672,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && MARK:3 < 3 && KSTR:0 == ""
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 			ENDIF
@@ -6174,17 +6699,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:278 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:278 = 2
@@ -6247,17 +6772,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:282 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:282 = 2
@@ -6275,17 +6800,17 @@ SELECTCASE TFLAG:13
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 2 || FLAG:7 == 2)
 				;연모, 친애	
-				IF (TALENT:3 || TALENT:6)	
+				IF (TALENT:3 || TALENT:6)
 					KSTR:(K++) = 
 				;음란, 창부	
-				ELSEIF (TALENT:4 || TALENT:7)	
+				ELSEIF (TALENT:4 || TALENT:7)
 					KSTR:(K++) = 
 				;복종, 예속	
-				ELSEIF (TALENT:5 || TALENT:8)	
+				ELSEIF (TALENT:5 || TALENT:8)
 					KSTR:(K++) = 
 				ENDIF	
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) = 
 				ENDIF	
 				CFLAG:283 = 2
@@ -6332,22 +6857,22 @@ SELECTCASE TFLAG:13
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 				ENDIF
 				;그 외
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:285 = 1
@@ -6356,22 +6881,22 @@ SELECTCASE TFLAG:13
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:285 < 1 || FLAG:7 == 2)
 					;연모, 친애	
-					IF (TALENT:3 || TALENT:6)	
+					IF (TALENT:3 || TALENT:6)
 						KSTR:(K++) = 
 					;음란, 창부	
-					ELSEIF (TALENT:4 || TALENT:7)	
+					ELSEIF (TALENT:4 || TALENT:7)
 						KSTR:(K++) = 
 					;복종, 예속	
-					ELSEIF (TALENT:5 || TALENT:8)	
+					ELSEIF (TALENT:5 || TALENT:8)
 						KSTR:(K++) = 
 					ENDIF	
 					;함락완료 공통	
-					IF KSTR:0 == ""	
+					IF KSTR:0 == ""
 						KSTR:(K++) = 
 					ENDIF	
 				ENDIF
 				;그 외
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					KSTR:(K++) =
 				ENDIF	
 				CFLAG:287 = 1
@@ -6426,7 +6951,7 @@ SELECTCASE TFLAG:13
 					ENDIF	
 				ENDIF
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					;진행도 분기
 					;초회
 					IF CFLAG:애ＮＴＲ진행도 == 0
@@ -6492,7 +7017,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				ENDIF
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					;진행도 분기
 					;초회
 					IF CFLAG:음ＮＴＲ진행도 == 0
@@ -6571,7 +7096,7 @@ SELECTCASE TFLAG:13
 					ENDIF
 				ENDIF
 				;함락완료 공통	
-				IF KSTR:0 == ""	
+				IF KSTR:0 == ""
 					;진행도 분기
 					;초회
 					IF CFLAG:예ＮＴＲ진행도 == 0
@@ -6666,16 +7191,16 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 51
 		CALL EVENT_MESSAGE
-		IF (CFLAG:294 < 1 || FLAG:7 == 2)				
-			IF (TALENT:3 || TALENT:6)	
+		IF (CFLAG:294 < 1 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:6)
 				;이전에 연모 루트였던 경우
 				KSTR:(K++) =
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				;이전에 복종 루트였던 경우
 				KSTR:(K++) = 
 			ENDIF	
 			;음란, 함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:294 = 1
@@ -6686,16 +7211,16 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 52
 		CALL EVENT_MESSAGE
-		IF (CFLAG:295 < 1 || FLAG:7 == 2)				
-			IF (TALENT:3 || TALENT:6)	
+		IF (CFLAG:295 < 1 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:6)
 				;이전에 연모 루트였던 경우
 				KSTR:(K++) =
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				;이전에 복종 루트였던 경우
 				KSTR:(K++) = 
 			ENDIF	
 			;음란, 함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:295 = 1
@@ -6706,16 +7231,16 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 53
 		CALL EVENT_MESSAGE
-		IF (CFLAG:296 < 1 || FLAG:7 == 2)				
-			IF (TALENT:3 || TALENT:6)	
+		IF (CFLAG:296 < 1 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:6)
 				;이전에 연모 루트였던 경우
 				KSTR:(K++) =
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				;이전에 복종 루트였던 경우
 				KSTR:(K++) = 
 			ENDIF	
 			;음란, 함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:296 = 1
@@ -6726,16 +7251,16 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 54
 		CALL EVENT_MESSAGE
-		IF (CFLAG:296 < 1 || FLAG:7 == 2)				
-			IF (TALENT:3 || TALENT:6)	
+		IF (CFLAG:296 < 1 || FLAG:7 == 2)
+			IF (TALENT:3 || TALENT:6)
 				;이전에 연모 루트였던 경우
 				KSTR:(K++) =
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 				;이전에 복종 루트였던 경우
 				KSTR:(K++) = 
 			ENDIF	
 			;음란, 함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:296 = 1
@@ -6746,22 +7271,22 @@ SELECTCASE TFLAG:13
 		;-------------------------------------------------
 	CASE 55
 		CALL EVENT_MESSAGE
-		IF (CFLAG:297 < 1 || FLAG:7 == 2)				
+		IF (CFLAG:297 < 1 || FLAG:7 == 2)
 			IF CFLAG:함락캐릭터 != 0
 			;	;주인 이외에 함락되어 있는 경우
 				KSTR:(K++) = 
-			ELSEIF (TALENT:3 || TALENT:6)	
+			ELSEIF (TALENT:3 || TALENT:6)
 			;	;연모 루트
 				KSTR:(K++) = 
-			ELSEIF (TALENT:4 || TALENT:7)	
+			ELSEIF (TALENT:4 || TALENT:7)
 			;	;음란 루트
 				KSTR:(K++) = 
-			ELSEIF (TALENT:5 || TALENT:8)	
+			ELSEIF (TALENT:5 || TALENT:8)
 			;	;복종 루트
 				KSTR:(K++) = 
 			ENDIF	
 			;함락완료 공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:297 = 1
@@ -6782,7 +7307,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:298 = 1
@@ -6802,7 +7327,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:299 = 1
@@ -6823,7 +7348,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:601 = 1
@@ -6844,7 +7369,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:602 = 1
@@ -6866,7 +7391,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:603 = 1
@@ -6887,7 +7412,7 @@ SELECTCASE TFLAG:13
 				KSTR:(K++) = 
 			ENDIF	
 			;공통	
-			IF KSTR:0 == ""	
+			IF KSTR:0 == ""
 				KSTR:(K++) =
 			ENDIF	
 			CFLAG:604 = 1
@@ -7412,12 +7937,39 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 1
 		IF RAND:3 == 0
 			LOCALS = チョメチョメターイム！
-		ELSEIF !RAND:2
-			LOCALS = みんな！　あかりにつづけー！
+		ELSEIF RAND:2 == 0
+			LOCALS = みんな！　%CSTR:ARG:일인칭%につづけー！
 		ELSE
 			LOCALS = 悪は必ず滅びる定めにあるのだー！
 		ENDIF
+	;COOP참가
 	CASE 2
+		;주인이 COOP발동
+		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
+			IF RAND:2 == 0
+				LOCALS = %CSTR:일인칭%もつづくよ！
+			ELSE
+				LOCALS = %CSTR:이인칭%と一緒にチョメチョメターイム！
+			ENDIF
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 223
+		;ベルフェゴールが発動した場合。原作でセットで出てきたので。
+			IF RAND:3 == 0
+				LOCALS = いっつもこーならゆーのーなのに！
+			ELSEIF RAND:3 == 0
+				LOCALS = 転生戦士のぶかとしてこれくらいはとーぜんなんだから！
+			ELSE
+				LOCALS = あ、あれはまだ習ってない漢字だったってだけだもん！
+			ENDIF
+		;그 이외
+		ELSE
+			IF RAND:3 == 0
+				LOCALS = チョメチョメしてやるー！
+			ELSEIF RAND:2 == 0
+				LOCALS = あー！　%CSTR:일인칭%をおいて一斉攻撃なんてさせないからねー！
+			ELSE
+				LOCALS = みんなの力でおまえをたおーす！
+			ENDIF
+		ENDIF
 	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		;潜在反撃対策
@@ -7429,9 +7981,9 @@ SELECTCASE TFLAG:전투이벤트
 		;상대가 죽었다
 		IF BASE:(ARG:1):ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
-				LOCALS = %CSTR:ARG:이인칭%っ、やったよ！　みててくれたっ！？
+				LOCALS = %CSTR:이인칭%っ、やったよ！　みててくれたっ！？
 			ELSE
-				IF RAND:2
+				IF RAND:2 == 0
 					LOCALS = ふっふっふ、正義は必ずの勝つのだ！
 				ELSE
 					LOCALS = 転生戦士イシュキックの力、思い知ったかー！
@@ -7440,7 +7992,7 @@ SELECTCASE TFLAG:전투이벤트
 		;약점을 찔렀다. 즉 COOP
 		ELSEIF LOCAL > 100 && LOCAL < 999
 			IF CFLAG:(ARG:1):방어플래그
-				IF RAND:2
+				IF RAND:2 == 0
 					LOCALS = よーし！　いまだ！　でびるくーっ…あれ？
 				ELSE
 					LOCALS = あー、せっかくのチョメチョメタイムなのに防御なんかしてずるいぞー！
@@ -7451,34 +8003,34 @@ SELECTCASE TFLAG:전투이벤트
 			ENDIF
 		;대 데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = どーだ！　これが転生戦士の力だ！
 			ELSE
 				LOCALS = ふっふっふ、すぐにチョメチョメしてあげるんだから
 			ENDIF
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 20
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = まだまだ、こんなもんじゃないからね！
 			ELSE
 				LOCALS = どーだ！
 			ENDIF
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = あれ？　あんま効いてない？
 			ELSE
 				LOCALS = うー、手応えがいまいちだー
 			ENDIF
 		ELSEIF ARG:2 == 0
-			IF 함락(ARG) && RAND:2
-				LOCALS = %CSTR:ARG:이인칭%、効いてないよ。どうしよう！？
+			IF 함락(ARG) && RAND:2 == 0
+				LOCALS = %CSTR:이인칭%、効いてないよ。どうしよう！？
 			ELSE
 				LOCALS = あぅぅ、全然効いてないー
 			ENDIF
 		ELSEIF ARG:2 < 0
-			IF 함락(ARG) && RAND:2
-				LOCALS = あぅぅ、ミスっちゃった…ごめんなさい、%CSTR:ARG:이인칭%
+			IF 함락(ARG) && RAND:2 == 0
+				LOCALS = あぅぅ、ミスっちゃった…ごめんなさい、%CSTR:이인칭%
 			ELSE
-				LOCALS = こらー！　あかりの攻撃なのに回復するなんてずるいぞー
+				LOCALS = こらー！　%CSTR:ARG:일인칭%の攻撃なのに回復するなんてずるいぞー！
 			ENDIF
 		ENDIF
 	;피데미지
@@ -7487,68 +8039,68 @@ SELECTCASE TFLAG:전투이벤트
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
 			IF 함락(ARG) && RAND:2
-				LOCALS = %CSTR:ARG:이인칭%…ごめんね…あかり、もうダメみたい…
+				LOCALS = %CSTR:이인칭%…ごめんね…%CSTR:ARG:일인칭%、もうダメみたい…
 			ELSE
-				IF RAND:2
+				IF RAND:2 == 0
 					LOCALS = うう…正義が負けるなんて…
 				ELSE
-					LOCALS = ま…、まだあかりは…うぐぅ…
+					LOCALS = ま…、まだ%CSTR:ARG:일인칭%は…うぐぅ…
 				ENDIF
 			ENDIF
 		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
-			IF 함락(ARG) && RAND:2
-				LOCALS = 助けて…、%CSTR:ARG:이인칭%
+			IF 함락(ARG) && RAND:2 == 0
+				LOCALS = 助けて…、%CSTR:이인칭%
 			ELSE
-				LOCALS = やだぁ…あかり、こんなところで死にたくないよぉ…
+				LOCALS = やだぁ…%CSTR:ARG:일인칭%、こんなところで死にたくないよぉ…
 			ENDIF
 		ELSEIF 데미지비율(ARG, ARG:2) > 20
-			IF RAND:2
-				LOCALS = いたーい
+			IF RAND:2 == 0
+				LOCALS = いたーい！
 			ELSE
-				LOCALS = きゃあー
+				LOCALS = きゃあー！
 			ENDIF
 		ELSEIF 데미지비율(ARG, ARG:2) > 0
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = いたっ……？、ん、あんま痛くないや
 			ELSE
 				LOCALS = ふふ、全然効いてないよー
 			ENDIF
 		;무효
 		ELSEIF ARG:2 == 0
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = へへーん、こんな攻撃無駄だぞー
 			ELSE
-				LOCALS = このイシュキックにそんな攻撃は無駄だー
+				LOCALS = このイシュキックにそんな攻撃は無駄だー！
 			ENDIF
 		;흡수
 		ELSEIF ARG:2 < 0
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = 回復してくれるなんてありがとー
 			ELSE
-				LOCALS = 回復してくれても、悪には容赦はしないからなー
+				LOCALS = 回復してくれても、悪には容赦はしないからなー！
 			ENDIF
 		ENDIF
 	CASE 15
-		IF RAND:2
+		IF RAND:2 == 0
 			LOCALS = うわ、はねかえしてくるなんてっ
 		ELSE
 			LOCALS = やるなー！　でもはねかしたって無駄なんだから！
 		ENDIF
 	CASE 16
-		IF RAND:2
+		IF RAND:2 == 0
 			LOCALS = そんな攻撃をこのイシュキックにするのがまちがいだー
 		ELSE
 			LOCALS = カキーン！　なんちゃって
 		ENDIF
 	CASE 17
-		IF RAND:2
+		IF RAND:2 == 0
 			LOCALS = くー、生意気なやつめー！
 		ELSE
 			LOCALS = ちくしょー！　次ははずさないぞー！
 		ENDIF
 	CASE 18
-		IF RAND:2
+		IF RAND:2 == 0
 			LOCALS = このイシュキックに攻撃を当てるなんて百億光年はやい！
 		ELSE
 			LOCALS = そんな攻撃になんかあたらないぞー
@@ -7568,51 +8120,59 @@ CALLFORM SKILL_EFECT_{LOCAL}
 IF LOCAL == 0
 	IF RAND:3 == 0
 		LOCALS = やぁっ！
-	ELSEIF !RAND:2
+	ELSEIF RAND:2 == 0
 		LOCALS = てぇぃっ！
 	ELSE
-		IF RESULT == 0
+		IF RESULT == 4
 			LOCALS = 天真爛漫斬りっ！
-		ELSEIF RESULT == 1
+		ELSEIF RESULT == 3
 			LOCALS = あたれー！
 		ELSEIF RESULT == 2
 			LOCALS = いしゅきっくぱーんちっ！
-		ELSEIF RESULT == 3
+		ELSE
 			LOCALS = うりゃーっ！
 		ENDIF
 	ENDIF
 ELSEIF LOCAL == [[스킬:ＧＵＮ]]
-	LOCALS = えっと…ここをこうして…撃つよっ！
+	IF RAND:3 == 0
+		LOCALS = 両手で……しっかりにぎって……！
+	ELSEIF RAND:2 == 0
+		LOCALS = あいてをちゃんと見て……撃つ！
+	ELSE
+		LOCALS = えっと…ここをこうして…撃つよっ！
+	ENDIF
 ;攻撃
-ELSEIF RESULT == 1 && RAND:3 == 0
+ELSEIF RESULT == 1 && RAND:2 == 0
 	CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
 	SELECTCASE RESULT
 		;검격
 		CASE 0
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = 食らえっ！　必殺剣天真爛漫斬りっ！
 			ELSE
-				LOCALS = 正義の刃を食らえー
+				LOCALS = 正義の刃を食らえー！
 			ENDIF
 		;비구
 		CASE 1
-			LOCALS = %GET_PERSONA_NAME(ARG)%！　うちおとしちゃって！
+			;ペルソナがイシュキックになると違和感があったので修正
+			;LOCALS = %GET_PERSONA_NAME(ARG)%！　うちおとしちゃって！
+			LOCALS = うちおとすよ！
 		;타격
 		CASE 2
 			LOCALS = 正義の鉄拳をくらえーっ！！
 		;전술
 		CASE 3
-			LOCALS = ぼっこぼこのめっためたにしてやるー
+			LOCALS = ぼっこぼこのめっためたにしてやるー！
 		;화염
 		CASE 4
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = 燃え尽きちゃえっ！
 			ELSE
 				LOCALS = 炎よ！　燃やし尽くせー！
 			ENDIF
 		;빙결
 		CASE 5
-			IF RAND:2
+			IF RAND:2 == 0
 				LOCALS = 凍えちゃえー！
 			ELSE
 				LOCALS = とらんすまいぐれーしょんぶりざーどっ！
@@ -7622,17 +8182,29 @@ ELSEIF RESULT == 1 && RAND:3 == 0
 			LOCALS = イシュキックサンダー！
 		;충격
 		CASE 7
-			LOCALS = 吹き飛ばしてやるー
+			;素質に持っているので加筆。
+			IF RAND:5 == 0
+				LOCALS = 吹き飛ばしてやるー！
+			ELSEIF RAND:4 == 0
+				LOCALS = ぶっとべぇー！
+			ELSEIF RAND:3 == 0
+				LOCALS = いっけぇー！
+			ELSEIF RAND:2 == 0
+				LOCALS = バイバイ！
+			ELSE
+				;完全にネタ（しかも分かりづらい）
+				LOCALS = %CSTR:ARG:일인칭%を、なめるなぁぁぁ！！！
+			ENDIF
 		;신경
 		;CASE 8	
 		;정신
 		;CASE 9
 		;파마
 		CASE 10
-			LOCALS = 邪悪な悪魔めー！　このイシュキックが浄化してやるー
+			LOCALS = 邪悪な悪魔めー！　このイシュキックが浄化してやるー！
 		;주살
 		CASE 11
-			LOCALS = このイシュキックが、えーと…そうだ！　のろころしてやるー
+			LOCALS = このイシュキックが、えーと…そうだ！　のろころしてやるー！
 		;지변
 		CASE 12
 			LOCALS = 大地よ！　震えろー！
@@ -7640,8 +8212,23 @@ ELSEIF RESULT == 1 && RAND:3 == 0
 		CASE 13
 			LOCALS = イシュキックアクアスプラーッシュ！
 		;질풍
+		;素質に持っているので加筆。
 		CASE 14
-			LOCALS = 風の刃よ！ 切り刻め！
+			;レベルで覚える最終技のガルバリオンと一応マハ・ガルバリオン
+			IF RANGE(CFLAG:ARG:입력행동, 1739, 1740)
+				IF RAND:2 == 0
+					LOCALS = ぜんぶチリになれぇー！
+				ELSE
+					LOCALS = 大風よ！　のみこめ！
+				ENDIF
+			ELSEIF RAND:3 == 0
+				;このセリフ言う人すでに実装されてる気がしますが気にしない。
+				LOCALS = 風だー！
+			ELSEIF RAND:2 == 0
+				LOCALS = 風の刃よ！　切り刻め！
+			ELSE
+				LOCALS = いっけー！　切り裂けー！
+			ENDIF
 		;중력
 		CASE 15
 			LOCALS = ぐらびーしょんあたっく！
@@ -7650,8 +8237,10 @@ ELSEIF RESULT == 1 && RAND:3 == 0
 			LOCALS = 跡形もなく、吹き飛ばしてやるー！
 		;만능
 		CASE 17
-			IF RAND:2
-				LOCALS = %GET_PERSONA_NAME(ARG)%！　みんなやっつけちゃって！
+			IF RAND:2 == 0
+				;ペルソナがイシュキックになると違和感があったので修正
+				;LOCALS = %GET_PERSONA_NAME(ARG)%！　みんなやっつけちゃって！
+				LOCALS = みんなやっつけちゃうんだから！
 			ELSE
 				CALLFORM SKILL_NAME_{LOCAL}
 				LOCALS = こうなったら最終手段だ！ %RESULTS%!
@@ -7659,26 +8248,26 @@ ELSEIF RESULT == 1 && RAND:3 == 0
 		;サイコ
 		;CASE 18
 		CASEELSE
-			LOCALS = これでもくらえー
+			LOCALS = これでもくらえ！
 	ENDSELECT
 ;회복
-ELSEIF RESULT == 2 && RAND:3 == 0
+ELSEIF RESULT == 2 && RAND:2 == 0
 	IF CFLAG:ARG:타겟 > 6
-		IF RAND:2
+		IF RAND:2 == 0
 			LOCALS = みんな！　だいじょうぶ！？
 		ELSE
-			LOCALS = %GET_PERSONA_NAME(ARG)%！　みんなをお願いっ！
+			LOCALS = ペルソナ！　みんなをお願いっ！
 		ENDIF
 	ELSE
 		IF FLAG:(CFLAG:ARG:타겟) == 0 && 함락(ARG)
-			IF RAND:2
-				LOCALS = %CSTR:ARG:이인칭%はあかりが守るんだから
+			IF RAND:2 == 0
+				LOCALS = %CSTR:이인칭%は%CSTR:ARG:일인칭%が守るんだから
 			ELSE
-				LOCALS = %CSTR:ARG:이인칭%！　だいじょうぶ！？
+				LOCALS = %CSTR:이인칭%！　だいじょうぶ！？
 			ENDIF
 		ELSE
-			IF RAND:2
-				LOCALS = いやしの力よー
+			IF RAND:2 == 0
+				LOCALS = いやしの力よ！
 			ELSE
 				LOCALS = だいじょうぶ！？
 			ENDIF
@@ -7687,18 +8276,33 @@ ELSEIF RESULT == 2 && RAND:3 == 0
 ;状態変化
 ;ELSEIF RESULT == 3
 ;特殊
-;ELSEIF RESULT == 4
+ELSEIF RESULT == 4 && RAND:2 == 0
+	;気合、コンセ
+	IF RANGE(CFLAG:ARG:입력행동, 511, 512)
+		IF RAND:2 == 0
+			LOCALS = しゅーちゅーしないと……
+		ELSE
+			LOCALS = 正義のチカラを……！
+		ENDIF
+	ENDIF
 ;状態回復
 ;ELSEIF RESULT == 5
 ELSE
-	IF RAND:3 == 0
+	IF RAND:5 == 0
+		LOCALS = やっちゃうよ！
+	ELSEIF RAND:4 == 0
+		LOCALS = これでぇ！
+	ELSEIF RAND:3 == 0
 		LOCALS = いっくぞー！
-	ELSEIF RAND:2
+	ELSEIF RAND:2 == 0
 		LOCALS = ペルソナー！
 	ELSE
-		LOCALS = 任せたよ！　%GET_PERSONA_NAME(ARG)%！
+		;ペルソナがイシュキックになると違和感があったので修正
+		;LOCALS = 任せたよ！　%GET_PERSONA_NAME(ARG)%！
+		LOCALS = 任せたよ！
 	ENDIF
 ENDIF
+
 SIF LOCALS != "EMPTY"
 	CALL MESSAGE_B(LOCAL:1, LOCALS, LOCALS:1, LOCALS:2, LOCALS:3, LOCALS:4)
 	

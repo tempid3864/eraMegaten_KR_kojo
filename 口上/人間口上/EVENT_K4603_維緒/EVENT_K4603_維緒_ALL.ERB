@@ -45,6 +45,7 @@
 ;															定食屋台時１ヵ所
 ;	007		2013/06/16		午後6時くらい					調教開始時・乳首責め・ローション・裸エプロン・セックスで射精・絶頂時を加筆
 ;	008		2013/06/19		午後6時くらい					手淫・朝フェラ・朝パイズリ・朝食・起きたら隣で寝てる・一緒に寝る・オープン/クローズオブオッパイを加筆
+;	009		2022/07/21		名無し							挿入Ｇスポ責めにクリ愛撫の口上が入っていたため削除 恋慕時胸揉み・胸愛撫の一人称、二人称を正常に変更 戦闘口上加筆
 ;
 ;	◆使用CFLAGに関して
 ;800	恋慕時読書勉強回数
@@ -1117,10 +1118,10 @@ SELECTCASE SELECTCOM
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「응… 앗♡ 아앙……♡」
-				PRINTFORMW 「저… 저기, %CSTR:이인칭%의 가슴… 이상하지 않, 으려나?」
+				PRINTFORMW 「저… 저기, %CSTR:일인칭%의 가슴… 이상하지 않, 으려나?」
 				PRINTFORML %마스터가% %CALLNAME:TARGET%의 격하게 자기주장을 하는 부드러운 가슴의 감촉을 즐기고 있자, 
 				PRINTFORMW 갑자기 %타겟이% 눈을 내리깐 채 그렇게 물어왔다.
-				PRINTFORML 「%CSTR:이인칭%, 어렸을 때부터 다른 애들보다 발육이 좋아서… 주변에서 곧잘 빤히 보고 그랬어」
+				PRINTFORML 「%CSTR:일인칭%, 어렸을 때부터 다른 애들보다 발육이 좋아서… 주변에서 곧잘 빤히 보고 그랬어」
 				PRINTFORMW 「그래서… 조금, 싫었어. 이 가슴이」
 				PRINTFORMW 「…그래도, 지금은 반대야. %조사처리(CSTR:이인칭,"가")% 좋아해주니까… 후후♡」
 			;음란, 창부
@@ -1154,7 +1155,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
 					PRINTFORMW 「앙♡ 후후… %CSTR:이인칭%, %CSTR:일인칭%의 가슴… 기분 좋아?」
-					PRINTFORMW 「%조사처리(CSTR:이인칭,"가")% 얼마든지 좋다면, 원하는만큼 주물러도 돼♡」
+					PRINTFORMW 「%조사처리(CSTR:일인칭,"가")% 얼마든지 좋다면, 원하는만큼 주물러도 돼♡」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「후후후… 부디, %CSTR:이인칭%. %CALLNAME:TARGET%의 젖가슴… 듬ー뿍 드세요♡」
@@ -1241,10 +1242,10 @@ SELECTCASE SELECTCOM
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「응…앗♡ 아앙……♡」
-				PRINTFORMW 「저…저기, %CSTR:이인칭%의 가슴… 이상하지 않, 으려나?」
+				PRINTFORMW 「저…저기, %CSTR:일인칭%의 가슴… 이상하지 않, 으려나?」
 				PRINTFORML %마스터가% %CALLNAME:TARGET%의 격하게 자기주장을 하는 부드러운 가슴을 애무하고 있자, 
 				PRINTFORMW 갑자기 %타겟이% 눈을 내리깐 채 그렇게 물어왔다.
-				PRINTFORML 「%CSTR:이인칭%, 어렸을 때부터 다른 애들보다 발육이 좋아서… 주변에서 곧잘 빤히 보고 그랬어」
+				PRINTFORML 「%CSTR:일인칭%, 어렸을 때부터 다른 애들보다 발육이 좋아서… 주변에서 곧잘 빤히 보고 그랬어」
 				PRINTFORMW 「그래서… 조금, 싫었어. 이 가슴이」
 				PRINTFORMW 「…그래도, 지금은 반대야. %조사처리(CSTR:이인칭,"가")% 좋아해주니까… 후후♡」
 			;음란, 창부
@@ -6868,11 +6869,7 @@ CASE 14
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:413 == 0
-			PRINTFORMW 「힉!? 응아아아아아아아앗!!」
-			PRINTFORMW %마스터가% 빨갛게 충혈된 클리토리스를 혀로 자극하자, %타겟은% 바들바들 몸 전체를 떨면서 비명을 지르면서 신음했다.
-			PRINTFORMW 「…하아, 하아…에, 어째서… 이렇게… 응힉! ……읏♡ 읏♡」
-			PRINTFORMW %타겟은% 급작스러운 강한 자극에 눈을 희번덕거린 채 신음하고 있다.
-			PRINTFORMW 아무래도 %CALLNAME:TARGET%의 약점은 여기인 것 같다……
+			PRINTFORMW 
 			CFLAG:413 = 1
 		;2번째 이후
 		ELSE
@@ -7497,7 +7494,8 @@ IF TFLAG:2 > 0
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
+				PRINTFORMW 「흐아앙%UNICODE(0x2661)% 움찔움찔, 내 안에서 무언가 따뜻한 게 느껴져…%UNICODE(0x2661)%」
+				PRINTFORMW 「듬뿍 싸버렸네…%CSTR:일인칭%도 %CSTR:이인칭%의 아기라면 갖고 싶을지도…%UNICODE(0x2661)%」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -10241,94 +10239,428 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-@BATTLE_EVENT_K4603, ARG, ARG:1, ARG:2
-IF TFLAG:전투이벤트 == 1
-;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ENDIF
-IF TFLAG:전투이벤트 == 2
-;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%"",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-ENDIF
+;ななみさんと古代さんから分岐を拝借
 
+@BATTLE_EVENT_K4603, ARG, ARG:1, ARG:2
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
+
+SIF ARG < 0 && NO:ARG != 4603
+	RETURN 0
+VARSET LOCALS
+
+SELECTCASE TFLAG:전투이벤트
+	;COOP발동 ARG는 발동자
+	CASE 1
+		IF RAND:2 == 0
+			LOCALS:10 = 隙が出来ました！
+		ELSE
+			LOCALS:10 = 追撃お願いします！
+		ENDIF
+	;COOP참가
+	CASE 2
+			LOCALS:10 = お手伝いします！
+	;피소환시
+	CASE 3
+			LOCALS:10 = 
+	;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
+	CASE 11
+		CALLFORM SKILL_TYPE_{CFLAG:ARG:입력행동}
+		LOCAL = MAXBASE:(ARG:1):GET_TYPE(RESULT)
+		;상대가 죽었다
+		IF BASE:(ARG:1):ＨＰ <= 0
+			LOCALS:10 = 
+		;약점을 찔렀다. 즉 COOP
+		ELSEIF LOCAL > 100 && LOCAL < 999
+			IF CFLAG:(ARG:1):방어플래그
+				LOCALS:10 = 
+			ELSE
+				;이쪽은 COOP발동으로 돌리기 위해서 CUT
+				RETURN 0
+			ENDIF
+		;대 데미지
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 50
+			LOCALS:10 = 
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 25
+			LOCALS:10 = 
+		ELSEIF 데미지비율(ARG:1, ARG:2) > 0
+			LOCALS:10 = 
+		;무효되었다
+		ELSEIF 데미지비율(ARG:1, ARG:2) <= 0
+			LOCALS:10 = 
+		ENDIF
+	;피데미지
+	;ARG가 공격을 받는 동료마, ARG:1이 적, ARG:2가 데미지량
+	CASE 12
+		;죽었다
+		IF BASE:ARG:ＨＰ <= 0
+			LOCALS:10 = ごめんなさい……少し、休みます
+		;대 데미지
+		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
+			IF RAND:2 == 0
+				LOCALS:10 = 
+			ELSE
+				LOCALS:10 = 
+			ENDIF
+		;무효
+		ELSEIF ARG:2 == 0
+			LOCALS:10 = 
+		;흡수
+		ELSEIF ARG:2 < 0
+			LOCALS:10 = 
+		ENDIF
+	;반사당했다
+	CASE 15
+			LOCALS:10 = 
+	;반사했다
+	CASE 16
+			LOCALS:10 = 
+	;회피당했다
+	CASE 17
+			LOCALS:10 = ええっ！
+	;회피했다
+	CASE 18
+			LOCALS:10 = 
+
+	;반격스킬 발동했다
+	CASE 20
+			LOCALS:10 = 
+	;배틀에서 승리했다
+	CASE 90
+			LOCALS:10 = どうにかなりました、ね
+	;레벨 업했다
+	CASE 91
+			LOCALS:10 = 少しは強くなれたのかな
+	;도주에 성공했다
+	CASE 92
+			LOCALS:10 = 
+	;도주에 실패했다
+	CASE 93
+			LOCALS:10 = 
+	;전투 개시시
+	CASE 94
+		IF FLAG:선제공격플래그
+			LOCALS:10 = まだ、気づかれてないみたいですね……
+		ELSEIF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = ちょっと危ないかも……
+		ELSE
+			LOCALS:10 = 敵が来ました！
+		ENDIF
+	;백어택을 당했다
+	CASE 95
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = 
+		ELSE
+			LOCALS:10 = 
+		ENDIF
+	;적에게 선제공격을 당했다
+	CASE 96
+		IF 현HP비율(ARG) < 25
+			;빈사
+			LOCALS:10 = 
+		ELSE
+			LOCALS:10 = 
+		ENDIF
+ENDSELECT
+SIF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 
 @BATTLE_MESSAGE_K4603,ARG,ARG:1 = 0
 
-;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
-;IF CFLAG:ARG:입력행동 == 
-;	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;	PRINTFORML ┃%"",72,LEFT%┃
-;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-;ELSEIF ARG:1 > 0
-	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
+;■대사의 행 수를 늘리고 싶을 때는
+;			LOCALS:10 = 1행째
+;			LOCALS:11 = 2행째
+;			LOCALS:12 = 3행째
+;			LOCALS:13 = 4행째
+;			LOCALS:14 = 5행째
+;로 늘려나간다
+VARSET LOCALS
+;사용한 스킬의 이름을 LOCALS에 대입
+CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+LOCALS = %RESULTS%
 
-;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	;사용한 스킬의 이름을 LOCALS에 대입
-;	LOCALS = %RESULTS%
+;FLAG:ARG:타겟
 
-;	SELECTCASE ARG:1
-;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"영맹")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"교활")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"잔학")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"현명")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"타천사")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"우애")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;상태변화로는 교만 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"교만")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;특수로는 냉정 보유자의 충성도가 상승
-;		CASE GETNUM(TALENT,"냉정")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
-;		CASE GETNUM(TALENT,"우둔")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		;허심 보유자는 최저 ２만큼 충성도가 상승
-;		CASE GETNUM(TALENT,"허심")
-;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
-;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;	ENDSELECT
-;ELSE
-;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
-;ENDIF
+;붕괴된 경우에는 구상 표시하지 않도록 할 수 있다
+;SIF TALENT:ARG:9
+;	RETURN 0
+
+CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
+;주석처리하기 쉽도록
+
+IF 1 == 0
+
+;-------------------------------------------------
+;悪魔変身
+;-------------------------------------------------
+ELSEIF CFLAG:ARG:입력행동 == 2310
+	;変身解除
+	IF CFLAG:ARG:악마변신
+		LOCALS:10 = 変身、解除するね
+	;ルーグに変身
+	ELSEIF CFLAG:ARG:링크악마 == 1522 || (CFLAG:ARG:링크악마 == -1 && CFLAG:ARG:초기링크악마 == 1522)
+		LOCALS:10 = 力を貸して……ルーグ！
+	;ルーグ=ラウファーダに変身
+	ELSEIF CFLAG:ARG:링크악마 == 3823 || (CFLAG:ARG:링크악마 == -1 && CFLAG:ARG:초기링크악마 == 3823)
+		LOCALS:10 = 来て……ルーグ！
+	;그 이외(兼業シフターのため、ないと思われるが念のため)
+	ELSE
+		LOCALS:10 = 行くよ……変身！
+	ENDIF
+
+;-------------------------------------------------
+;変身時用セリフ
+;-------------------------------------------------
+
+;ルーグorルーグ=ラウファーダかつブリューナク使用時
+ELSEIF CFLAG:ARG:입력행동 == 2085 && (((CFLAG:링크악마 >= 0 && NO:FINDCHARA_ID(CFLAG:링크악마) == 1522) || (CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 1522) ||(CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 3823))) && CFLAG:ARG:악마변신
+	LOCALS:10 = 貫いて、ブリューナク！
+
+;ルーグ=ラウファーダかつタスラムの魔弾使用時
+ELSEIF CFLAG:ARG:입력행동 == 3904 && (CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 3823) && CFLAG:ARG:악마변신
+	LOCALS:10 = 【タスラムの魔弾】！
+
+
+;-------------------------------------------------
+;상태이상시
+;-------------------------------------------------
+;매료시
+ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
+	;행동불능（헤롱헤롱 거리고 있다）
+	IF CFLAG:ARG:입력행동 == 2314
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;혼란시
+ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("PANIC")
+	;금전뿌리기
+	IF CFLAG:ARG:입력행동 == 2315
+		LOCALS:10 = 
+	;행동불능（멍하니 멈춰 있다）
+	ELSEIF CFLAG:ARG:입력행동 == 2314
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;특정스킬
+;-------------------------------------------------
+;이쪽은 통상공격
+ELSEIF CFLAG:ARG:입력행동 == 0
+	LOCALS:10 = 
+;ELSEIF CFLAG:ARG:입력행동 == (스킬번호)
+;	LOCALS:10 = 
+;섹시댄스
+ELSEIF CFLAG:ARG:입력행동 == 1212
+	LOCALS:10 = 
+;캔디보이스
+ELSEIF CFLAG:ARG:입력행동 == 1213
+	LOCALS:10 = 
+;파이널누드
+ELSEIF CFLAG:ARG:입력행동 == 1214
+	LOCALS:10 = 
+;-------------------------------------------------
+;총공격（특수탄환 포함）
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2200)
+	;GUN
+	IF CFLAG:ARG:입력행동 == 2101
+		IF RAND:2 == 0
+			LOCALS:10 = よーく狙って……
+		ELSE
+			LOCALS:10 = お願い、当たって！
+		ENDIF	
+	;그 외（특수탄환）
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;기본행동
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
+	;ＣＨＡＮＧＥ
+	IF CFLAG:ARG:입력행동 == 2301
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+
+;-------------------------------------------------
+;아이템
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3500)
+	LOCALS:10 = 【%LOCALS%】を使います！
+;-------------------------------------------------
+;링케이지
+;-------------------------------------------------
+ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
+	;메시아라이저
+	IF CFLAG:ARG:입력행동 == 4160
+		LOCALS:10 = 
+	;L히트라이저
+	ELSEIF CFLAG:ARG:입력행동 == 4200
+		LOCALS:10 = 
+	;사망유희
+	ELSEIF CFLAG:ARG:입력행동 == 4800
+		LOCALS:10 = 
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;-------------------------------------------------
+;범용스킬
+;-------------------------------------------------
+;검격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1, 99)
+	LOCALS:10 = 【%LOCALS%】！
+;비구
+ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
+	LOCALS:10 = 【%LOCALS%】！
+;타격
+ELSEIF RANGE(CFLAG:ARG:입력행동,201, 299)
+	LOCALS:10 = 【%LOCALS%】！
+;전술
+ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
+	;물어뜯기계
+	IF RANGE(CFLAG:ARG:입력행동,321, 326)
+		LOCALS:10 = 【%LOCALS%】！
+	;그 외
+	ELSE
+		LOCALS:10 = 【%LOCALS%】！
+	ENDIF
+;회복
+ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
+	;전체회복
+	IF CFLAG:ARG:타겟 > 6
+		LOCALS:10 = 集まってください、回復します！
+	ELSE
+		IF RAND:2 == 0
+			LOCALS:10 = 回復します！
+		ELSE
+			LOCALS:10 = 【%LOCALS%】！
+		ENDIF
+	ENDIF
+;지원
+ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
+	;강화계
+	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 558
+		IF RAND:2 == 0
+			LOCALS:10 = 頑張って！【%LOCALS%】！
+		ELSE
+			LOCALS:10 = 【%LOCALS%】！
+		ENDIF
+	;약체계
+	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
+			LOCALS:10 = 力を削ぎます！【%LOCALS%】！
+	;도발
+	ELSEIF CFLAG:ARG:입력행동 == 515
+		LOCALS:10 = 
+	;気合
+	ELSEIF CFLAG:ARG:입력행동 == 511
+		LOCALS:10 = 
+	;그 외
+	ELSE
+		LOCALS:10 = 
+	ENDIF
+;방어
+ELSEIF RANGE(CFLAG:ARG:입력행동,601, 699)
+		LOCALS:10 = 【%LOCALS%】！
+;화염
+ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
+	IF RAND:2 == 0
+		LOCALS:10 = 【%LOCALS%】！
+	ELSE
+		LOCALS:10 = 燃えて！
+	ENDIF
+;빙결
+ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
+	IF RAND:2 == 0
+		LOCALS:10 = 凍って！
+	ELSE
+		LOCALS:10 = 【%LOCALS%】！
+	ENDIF
+;전격
+ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
+	IF RAND:2 == 0
+		LOCALS:10 = 行きます、【%LOCALS%】！
+	ELSE
+		LOCALS:10 = 感電して！
+	ENDIF
+;충격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
+		LOCALS:10 = 【%LOCALS%】！
+;신경
+ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199)
+		LOCALS:10 = 【%LOCALS%】！
+;정신
+ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
+		LOCALS:10 = 【%LOCALS%】！
+;파마
+ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
+		LOCALS:10 = 【%LOCALS%】！
+;주살
+ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
+	IF RAND:2 == 0
+		LOCALS:10 = えっと、【%LOCALS%】！
+	ELSE
+		LOCALS:10 = 【%LOCALS%】！
+	ENDIF
+;지변
+ELSEIF RANGE(CFLAG:ARG:입력행동,1501, 1599)
+		LOCALS:10 = 【%LOCALS%】！
+;수격
+ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
+		LOCALS:10 = 【%LOCALS%】！
+;질풍
+ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
+	IF RAND:2 == 0
+		LOCALS:10 = 吹き飛んで！
+	ELSE
+		LOCALS:10 = 【%LOCALS%】！
+	ENDIF
+;중력
+ELSEIF RANGE(CFLAG:ARG:입력행동,1801, 1899)
+		LOCALS:10 = 【%LOCALS%】！
+;핵열
+ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
+		LOCALS:10 = 【%LOCALS%】！
+;만능
+ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
+	;자폭계
+	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
+		LOCALS:10 = 【%LOCALS%】！
+	ELSE
+		LOCALS:10 = えっと、【%LOCALS%】！
+	ENDIF
+;마법소녀계
+ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
+	LOCALS:10 = 【%LOCALS%】！
+
+;-------------------------------------------------
+;그 외
+;-------------------------------------------------
+ELSE
+	LOCALS:10 = 
+ENDIF
+;-------------------------------------------------
+;진・그 외
+;-------------------------------------------------
+IF LOCALS:10 == ""
+	IF RAND:2 == 0
+		LOCALS:10 = えいっ！
+	ELSE
+		LOCALS:10 = 行きます！
+	ENDIF
+ENDIF
+
+SIF !(LOCALS:10 == "")
+	CALL MESSAGE_B2(CALLNAME:ARG,1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 

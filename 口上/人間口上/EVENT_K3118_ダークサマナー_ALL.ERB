@@ -13,19 +13,35 @@
 ;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
 ;마지막으로 read me를 건드려 보시는 것도 추천드립니다
 ;-------------------------------------------------
+;更新履歴
+;	Modification Data:
+;	Date			Author		Reason
+;	2019/5/29---　　　楽中　　　新規作成ではなく、変わった悪魔の売買から切り離したもの　エンディングを追加、あとはちょこちょこ加筆
 
+;	2020/5/10---　　　楽中　　　一年ぶりの更新　オペレート口上を追加　ちょこちょこ加筆
+
+;	2020/7/22---　　　楽中　　　オペレートでバグあり　おいは恥ずかしか！　ちょい加筆　
+
+;	2020/11/18--　　　楽中　　　人称変化イベントを追加、何もしないコマンドから選べます　ホーム画面でも設定できるけど味気ないので恋慕専用コマンドを加筆
+
+;	2020/12/1---　　　楽中　　　交流イベント、恋慕専用コマンド、絶頂、妻取得、戦闘口上等加筆
+
+;	2020/2/18---　　　楽中　　　交流イベントの行先を選べるように　戦闘口上加筆　4凶の方がコラボしてくれたのでこちらもコラボ返ししました　              ちょこちょこ加筆　
+
+;	2020/4/21---　　　楽中　　　戦闘口上加筆　クラスチェンジ技が中心の加筆です
+
+;	2021/8/17---　表示ミスの修正　調教開始口上の加筆　コマンドをちょくちょく加筆　　
 ;-------------------------------------------------
 ;범용 구상의 작성에 사용하는 경우는, 4998→캐릭터번호가 아니라,
 ;K3118→PUB회화타입번호　로 변경해서 사용해주세요
 ;-------------------------------------------------
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:EVENT_K3118_ASSI.ERB
-;	Facility	:회화타입：助手時口上
-;
-;	Modification Data:
-;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		Jガン					新規作成
+;	Module		:EVENT_K3118_.ERB
+;	Facility	:変わった悪魔の売買所店長口上
+
+
+
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
@@ -116,11 +132,33 @@ PRINTFORML    동기인 서머너다운 말투입니다。
 ;조교 개시시（1회만） CFLAG201
 ;-------------------------------------------------
 DRAWLINE
+IF CFLAG:201 == 0
+		TALENT:처녀 = 1
+		TALENT:영매체질 = 1
+		TALENT:중독되기쉬움 = 1
+		TALENT:겁쟁이 = 1
+		TALENT:부끄럼쟁이 = 1
+		TALENT:호기심 = 1
+				
+				
+		TALENT:부끄럼없음 = 0
+		TALENT:무관심 = 0
+		TALENT:교활 = 0
+		TALENT:아픔에강함 = 0
+				
+				
+		EXP:Ｖ경험 = 0
+		EXP:펠라경험 = 0
+		EXP:성교경험 = 0
+		EXP:정액경험 = 0
+		ABL:4 = 0
+		
 		CSTR:일인칭 = 나
 		CSTR:이인칭 = 너
+		
+ENDIF
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	CFLAG:201 = 1
 	PRINTFORMW 소녀처럼 보이는 여자다. 교복을 입으면 학생처럼 보이겠지.
 	PRINTFORMW 하지만, 내용은 흉포한 다크서머너이다. 방심은 금물이다.
 	PRINTFORMW 「조교인가, 그렇군, %CSTR:이인칭%의 일인가. 뭘 하면 되지」
@@ -129,6 +167,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTFORMW 「아아, %CSTR:일인칭%의 상점, %CSTR:일인칭%의 악마, %조사처리(CSTR:일인칭,"는")% 그렇게 열심히 했는데……」
 	PRINTFORMW 그렇게 중얼거리곤 %타겟은% 크게 한숨을 쉬었다. 이미 한풀 꺾인거 같다.
 	PRINTFORMW 팬텀의 동기에다, 이미 정신이 너덜너덜 하지만, %CALLNAME:MASTER%의 조교는 타협할 생각은 없다.
+	CFLAG:201 = 1
 	RETURN 0
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
@@ -178,6 +217,13 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 			PRINTFORMW 「지참금으로서 받아줘」
 			MONEY:1 += 10000
 			PRINTFORMW 어쩐지 모르게 10000마카가 주어졌다……
+			IF TALENT:0
+				PRINTFORMW 「그리고、이런 일은 처음이니까、저기、상냥해게 해줬으면、좋겠、습니다」
+			ELSE
+			;現状は死んでる分岐です。
+				PRINTFORMW 「저기、말하기 껄끄럽긴 하지만、처음이 아니야、이런 일」
+				PRINTFORMW 「그래서、소중한 것을 바치지는 못해서、미안해……」
+			ENDIF
 		ELSE
 		CSTR:이인칭 = 주인님
 			PRINTFORMW 「뭐, 기다리고, 있어줘. 잠깐만 시간을, 주겠어?」
@@ -294,6 +340,26 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 				PRINTFORMW 「本当に、今日は駄目なんだからな……」
 				PRINTFORMW 駄目の言葉とは逆に、%CALLNAME:TARGET%の回された腕は熱く、%CALLNAME:MASTER%を離そうとはしなかった。
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
+		ELSEIF RAND:12 == 0
+			IF TALENT:0
+				PRINTFORMW 「なあ、何時になったら抱いてくれるんだ？」
+				PRINTFORMW 「心の方は%CSTR:이인칭%に向いたんだから、そろそろ身体も奪って、ほしい……」
+				PRINTFORMW %CALLNAME:TARGET%はそう言うと、仰向けにベッドに倒れ、胸をはだけ始めた。
+				PRINTFORMW 「覚悟は、できているから、お願い、女に恥を、かかせ、ないで……」
+			ELSE
+				PRINTFORMW 「あ……今日、来るなんて思ってなかったな……」
+				PRINTFORMW 「いや、来てほしくない訳じゃなくて、その、えっと、今日は……」
+				PRINTFORMW 朱をまとった頬、荒い息、興奮した身体は発情したかのように震えている。
+				PRINTFORMW 部屋に漂う淫臭は、%CALLNAME:TARGET%が先ほどまで激しく自慰をしていたことをはっきり示していた。
+				PRINTFORMW 「……今日は、とても気分だから……抱いて、ください……」
+			ENDIF
+		ELSEIF RAND:11 == 0
+			PRINTFORMW 「えっ、えっ、今日、調教だったけ？」
+			PRINTFORMW %CALLNAME:MASTER%が扉を開いた時、%CALLNAME:TARGET%はベッドに横たわっていた。
+			PRINTFORMW %CALLNAME:TARGET%の頬は紅潮し、服がはだけ、左手は胸に、右手は下半身に伸びていた。
+			PRINTFORMW 「な、なんだよ！　一人でしたい時くらい、あ、あるだろ！」
+			PRINTFORMW 「ああ、もうちょっとだったのに……%CSTR:이인칭%！　責任取ってくれ！」
+					EXP:자위경험 += 1
 		ELSEIF RAND:10 == 0
 			PRINTFORMW 「ちょっと我儘言っていいか？」
 			PRINTFORMW 「いつかでいいから、二人でデートに行きたい」
@@ -451,10 +517,17 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			PRINTFORMW 「……시간이 있으면 필로톡 정도는 어울려줘。좋지? 좋은거지?」
 			PRINTFORMW 그대로 %조사처리(CALLNAME:MASTER,"와")% %조사처리(CALLNAME:TARGET,"는")%、침대에 누운채、멋쩍은 대화를 가능한 만큼 계속했다……
 		ELSE
-			PRINTFORMW 「자신의 여자를 만족시키지 못하면 뒤가 두렵다구?」
-			PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 토라진 듯한 눈으로 %조사처리(CALLNAME:MASTER,"를")% 바라보고 있다。즉、만족스러운 말이나 행동을 원한다는 뜻일 것이다
-			PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME:TARGET,"를")% 부둥켜안고 정열적인 사랑을 속삭였다
-			PRINTFORMW 「싫、멈춰、그런 거 하지 마……이러면 점점 더 떨어지기 힘들어지니까……」
+			IF TALENT:0
+				PRINTFORMW 「え、終わり？　ちょっと待ってくれ！　大切なこと忘れてないか！？」
+				PRINTFORMW 「わたし！　まだ！　処女なんだが！」
+				PRINTFORMW 「ロマンチックにとか贅沢言わないから！　もういい加減に奪ってくれよ！　こんなの生殺しだ！」
+				PRINTFORMW 「くそぅ！　笑うなぁ！　笑ってないで抱けえ！」
+			ELSE
+				PRINTFORMW 「자신의 여자를 만족시키지 못하면 뒤가 두렵다구?」
+				PRINTFORMW %조사처리(CALLNAME:TARGET,"는")% 토라진 듯한 눈으로 %조사처리(CALLNAME:MASTER,"를")% 바라보고 있다。즉、만족스러운 말이나 행동을 원한다는 뜻일 것이다
+				PRINTFORMW %조사처리(CALLNAME:MASTER,"는")% %조사처리(CALLNAME:TARGET,"를")% 부둥켜안고 정열적인 사랑을 속삭였다
+				PRINTFORMW 「싫、멈춰、그런 거 하지 마……이러면 점점 더 떨어지기 힘들어지니까……」
+			ENDIF
 		ENDIF
 		
 	;음란, 창부
@@ -1050,6 +1123,8 @@ SELECTCASE SELECTCOM
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:309 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「이봐, 보일까, %CSTR:이인칭%의 물건을 집어넣고 싶어서 떨고 있는 게?」
 					PRINTFORMW 「%CSTR:이인칭%도 보고만 있어도 될까?  이봐……」
+					PRINTFORMW %CALLNAME:TARGET%はねだるように指を淫らに動かし、自身の秘所を開いた。
+					PRINTFORMW 目を細め、淫蕩な笑みを浮かべる%CALLNAME:TARGET%の姿に%CALLNAME:MASTER%は欲情を覚えている……
 					CFLAG:309= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:309 < 4 || FLAG:7 == 2)	
@@ -1495,7 +1570,7 @@ CASE 15
 							
 							CSTR:일인칭 = 나
 						ELSEIF RESULT == 2
-							PRINTFORMW 「엣、%CSTR:일인칭%?」
+							PRINTFORMW 「엣、보통의 아이?」
 							PRINTFORMW 「겉보기는 예쁘니까、좀 더 여자다운 느낌을 가져라、고?」
 							PRINTFORMW 「아、알았어。노력할게、나(私)……」
 							PRINTFORML
@@ -1570,10 +1645,22 @@ CASE 15
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
 
 		
-			IF RAND:8 == 0
+			IF RAND:11 == 0
 				PRINTFORMW 「악마의 분석치를 올린다면, 조교보다 싸우게 하는 게 효율이 좋다」
 				PRINTFORMW 「아무 것도 생각하지 않고, 판매하거나 합체하면 후회할 거다」
 				PRINTFORMW 「라고 엘리고르라는 악마가 말했지」
+			ELSEIF RAND:10 == 0
+				PRINTFORMW 「調教師について？」
+				PRINTFORMW 「店のお得意様ではあるけど、まああんまり関わりたくない人種だな……」
+				PRINTFORMW 「ただ、まさか、店を潰されるほどひどいのがいるとは思わなかったが……」
+			ELSEIF RAND:9 == 0
+				PRINTFORMW 「好きなもの？」
+				PRINTFORMW 「オカルトと、かわいい恰好の悪魔かな……」
+				PRINTFORMW 「あっ、もちろん%CSTR:이인칭%も好きだからな！」
+			ELSEIF RAND:8 == 0
+				PRINTFORMW 「嫌いなもの？」
+				PRINTFORMW 「ふりかかる理不尽、賄賂をせびる幹部は嫌いだ……」
+				PRINTFORMW 「マヨーネは……研修時代にされたことを思い出すと苦手だ…」
 			ELSEIF RAND:7 == 0
 				PRINTFORMW 「悪魔の売買所について？」
 				PRINTFORMW 「ああ、あれは一応、半独立の店だったぞ、食堂とかコンサート会場みたいのものだな」
@@ -1832,6 +1919,7 @@ CASE 15
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「あ、ここぶれてるぞ、編集で直した方がいいな。あっ、そこは環境音がひどい、撮りなおした方がいいな……」
+				PRINTFORMW 「編集目線で見るな？　恥じらえ？　いやだね！」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -1895,6 +1983,7 @@ CASE 15
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:322 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「싫어하지는 않지만, 가능하면 손이 좋겠어」
+					PRINTFORMW 「こういうのを使う時は一人で……いや、なんでもない……」
 					CFLAG:322= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:322 < 4 || FLAG:7 == 2)	
@@ -2010,7 +2099,8 @@ CASE 15
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:325 == 0
-				PRINTFORMW 
+				PRINTFORMW 「付けるけど、そんなにじっくりと見ないでくれるか？」
+				PRINTFORMW 「恥じらいぐらいはあるんだからさ……」
 				CFLAG:325 = 1
 			;2번째 이후					
 		ELSE			
@@ -2018,9 +2108,10 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:325 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:325 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:325= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:325 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「屈辱的だ……生やされて、オナホール使わされて……でもそんなことするやつを好きになって……」
+					PRINTFORMW 「ああ、やだやだ！　こんな状態にも興奮してしまうのが一番くやしいなあ、もう！」
+					CFLAG:325= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:325 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -2118,7 +2209,8 @@ CASE 15
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:327 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:327 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+					PRINTFORMW 「これを入れると、変態になってしまったとしみじみ思うな……」
+					PRINTFORMW 「尻で感じるなんて、知り合いに合わせる顔がない……」
 					CFLAG:327= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:327 < 4 || FLAG:7 == 2)	
@@ -2199,7 +2291,7 @@ CASE 15
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:329 == 0
-				PRINTFORMW 
+				PRINTFORMW 「まあ、直接触られるよりはいいか……」
 				CFLAG:329 = 1
 			;2번째 이후					
 			ELSE			
@@ -2207,9 +2299,10 @@ CASE 15
 					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:329 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
-					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:329 < 4 || FLAG:7 == 2)	
-					;	PRINTFORMW 
-					;	CFLAG:329= 4
+					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:329 < 4 || FLAG:7 == 2)	
+						PRINTFORMW 「そんなの使わなくたって、直接触ればいいだろ」
+						PRINTFORMW 「こんだけ開発しといて、機械に頼るのはどうなんだ？」
+						CFLAG:329= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:329 < 4 || FLAG:7 == 2)	
 					;	PRINTFORMW 
@@ -2374,7 +2467,7 @@ CASE 15
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:454 == 0
-				PRINTFORMW 
+				PRINTFORMW 「調教中にオナホールを使うのか……何がしたいんだ？」
 				CFLAG:454 = 1
 			;2번째 이후					
 			ELSE			
@@ -2382,9 +2475,10 @@ CASE 15
 					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:454 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
-					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:454 < 4 || FLAG:7 == 2)	
-					;	PRINTFORMW 
-					;	CFLAG:454= 4
+					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:454 < 4 || FLAG:7 == 2)	
+						PRINTFORMW 「現物が前にいるのにどういうつもりなんだ？」
+						PRINTFORMW 「まあ、いいけど。情けない姿を見られたいならそういうプレイとして見ていてやる」
+						CFLAG:454= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:454 < 4 || FLAG:7 == 2)	
 					;	PRINTFORMW 
@@ -2392,7 +2486,7 @@ CASE 15
 					;복종, 예속	
 					;ELSEIF TALENT:5 || TALENT:8 && (CFLAG:454 < 4 || FLAG:7 == 2)	
 					;	PRINTFORMW 
-					;	CFLAG:454= 4
+					;	CFLAG:454= 
 					;굴복각인Lv3	
 					ELSE	
 						PRINTFORMW 
@@ -2606,6 +2700,7 @@ CASE 15
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:459 < 4 || FLAG:7 == 2)	
 						PRINTFORMW 「それにしてもよく出るな……」
+						PRINTFORMW 「なんなら手伝ってやろうか？　フフフ……」
 						CFLAG:459= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:459 < 4 || FLAG:7 == 2)	
@@ -2688,7 +2783,8 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:332 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「응……」
 					PRINTFORMW 키스를 하면서 %타겟은% %CALLNAME:MASTER%의 몸에 팔을 얽혔다
-					PRINTFORMW 「후후, 기분 좋아?  기분 좋다면 안에 사정해줘」
+					PRINTFORMW 「후후, 기분 좋아?  기분 좋다면 안에 싸는건가？」
+					PRINTFORMW 「……責任とれるなら、出しても、いいよ……」
 					
 					CFLAG:332= 4
 				;음란, 창부	
@@ -2874,7 +2970,7 @@ CASE 15
 		;처음
 		IF CFLAG:336 == 0
 			PRINTFORMW 「기, 기다려, 과연 이쪽에서 범해지는 건 생각지도 못했어」
-			PRINTFORMW 「여기까지 업이 깊은 변태라니 오히려 존경스러워, 정말로」
+			PRINTFORMW 「여기까지 업이 깊은 변태라니 오히려 존경스러워, 정말로……」
 			CFLAG:336 = 1
 		;2번째 이후					
 		ELSE			
@@ -2924,6 +3020,7 @@ CASE 15
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:337 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「なんでも肯定的にやると思うなよ！　止めろ！　そこは挿入するとこじゃない！」
+					PRINTFORMW 「やめ、やめ、やめろおおおおおお！」
 					CFLAG:337= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:337 < 4 || FLAG:7 == 2)	
@@ -3117,6 +3214,8 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:340 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「이 체위는 좋아. 몸뿐만 아니라, 마음도 이어진 것 같은 기분이 들어서……」
 					PRINTFORMW 「이대로 시간이 멈추면 좋을 텐데……」
+					PRINTFORMW そう言いながら、照れているのを隠すように%CALLNAME:TARGET%は%CALLNAME:MASTER%に抱き着く。
+					PRINTFORMW %CALLNAME:MASTER%が囁き返すと、%CALLNAME:TARGET%は、バカと小さく言ってキスを求めるのだった。
 					CFLAG:340= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:340 < 4 || FLAG:7 == 2)	
@@ -3192,6 +3291,7 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:341 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「この体位、%CSTR:일인칭%、結構好きかもしれない」
 					PRINTFORMW 「なんかこう、後ろからの充実感とか熱が伝わって、興奮する……」
+					PRINTFORMW そう言って、%CALLNAME:TARGET%は頬を赤らめ、目を潤ませながら%CALLNAME:MASTER%の唇を求めた。
 					CFLAG:341= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:341 < 4 || FLAG:7 == 2)	
@@ -3370,7 +3470,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:421 == 0
-			PRINTFORMW 
+			PRINTFORMW 「待て、待って！　そっちは違う！　痛い！　止めろ！　止めて！」
 			CFLAG:421 = 1
 		;2번째 이후					
 		ELSE			
@@ -3412,7 +3512,7 @@ CASE 15
 			IF TALENT:0
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「その処女性を奴隷に求めるのは、止めにしないか？」
+					PRINTFORMW 「その、処女性を奴隷に求めるのは、止めにしないか？」
 					PRINTFORMW 「前に言ったように、%CSTR:이인칭%には%CSTR:일인칭%の居場所になってもらう」
 					PRINTFORMW 言うが早いか、%CALLNAME:TARGET%は%CALLNAME:MASTER%を押し倒し、貪るように唇を奪った。
 					PRINTFORMW 突然のことに呆然としている%CALLNAME:MASTER%を見ながら、%CALLNAME:TARGET%はニヤリと笑った。
@@ -3459,7 +3559,8 @@ CASE 15
 				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:460 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「さあて、たまには犯される気分も味わってもらおうか」
 					PRINTFORMW 「嫌なら抵抗しろよ？　その方が興奮するからなあ！」
-					PRINTFORMW %CALLNAME:TARGET%の強気な態度は数分と続かない。10往復もしない内に%CALLNAME:TARGET%の甘い声が漏れ始め、逆レイプは%CALLNAME:MASTER%手動の騎乗位に切り替わっていった。
+					PRINTFORMW %CALLNAME:TARGET%の強気な態度は数分と続かない。
+					PRINTFORMW 10往復もしない内に%CALLNAME:TARGET%の甘い声が漏れ始め、逆レイプは%CALLNAME:MASTER%手動の騎乗位に切り替わっていった。
 					CFLAG:460= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:460 < 4 || FLAG:7 == 2)	
@@ -3502,6 +3603,7 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:344 < 4 || FLAG:7 == 2)	
 					PRINTFORMW %타겟은% 요염한 미소를 띠며 %CALLNAME:MASTER%의 페니스를 훑어올리고 있다.
 					PRINTFORMW 「자, 격렬하게 가거나, 상냥하게 가거나, 어느 쪽이 좋아?」
+					PRINTFORMW 「無理に答えなくていいぞ、好きにやらせてもらうからな……」
 					CFLAG:344= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:344 < 4 || FLAG:7 == 2)	
@@ -3531,6 +3633,7 @@ CASE 15
 		;처음
 		IF CFLAG:345 == 0
 			PRINTFORMW 「언젠가는 올 것이라고 생각했지만, 패스해도 좋을까. 안 되나……」
+			PRINTFORMW 「噛んでも文句は言うなよ？」
 			CFLAG:345 = 1
 		;2번째 이후					
 		ELSE			
@@ -3698,6 +3801,8 @@ CASE 15
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:349 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「그렇게나 발이 좋은가?  전보다는 잘될 거라고는 생각하지만, 왠지 복잡하네」
+					PRINTFORMW 「もっと普通に、いや普通ってなんだ？　そもそも今まで普通だったことなんて……」
+					PRINTFORMW それ以上、いけない
 					CFLAG:349= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:349 < 4 || FLAG:7 == 2)	
@@ -3737,6 +3842,7 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:350 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「있잖아, 좋아하는 사람이더라도 핥기 싫은 곳 같은게 있다고?」
 					PRINTFORMW 「그런 점은 반성하라고. 우물우물」
+					PRINTFORMW 「……まじゅい……」
 					CFLAG:350= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:350 < 4 || FLAG:7 == 2)	
@@ -3776,6 +3882,7 @@ CASE 15
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:351 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「이것만은 몇 번을 해도 익숙해지지 않는데、왠지 구도가 멍청해서、정말로、네」
+					PRINTFORMW 「巨乳の特権？　ああそうかい、そんなの知るか！　さっさと終わらせてくれよ？」
 					CFLAG:351= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:351 < 4 || FLAG:7 == 2)	
@@ -3931,8 +4038,8 @@ CASE 15
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:423 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:423 < 4 || FLAG:7 == 2)	
-						PRINTFORMW 「과연、이렇게 봉사하게 하는 것도 멋이 있구나……」
-						PRINTFORMW 「이봐、스스로 문지르는 거랑 어느 쪽이 기분 좋아?」
+						PRINTFORMW 「과연、이렇게 봉사하게 하는 것도 재미가 있구나……」
+						PRINTFORMW 「조교하는 쪽에 서는 것도 나쁘지 않을지도……」
 						CFLAG:423= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:423 < 4 || FLAG:7 == 2)	
@@ -4049,6 +4156,7 @@ CASE 15
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:425 < 4 || FLAG:7 == 2)	
 					PRINTFORMW 「여느 때와는 반대로지만 어때?　기분이 좋으냐？」
 					PRINTFORMW 「……물어볼 것도 없었는데. 좀더 그 녹은 표정을 보여줘」
+					PRINTFORMW %CALLNAME:TARGET%はそう言って、腰の勢いを強くしていく……%CALLNAME:MASTER%は押し寄せる快楽に抗えず、調教者のプライドを捨て喘ぎ続けた。
 					CFLAG:425= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:425 < 4 || FLAG:7 == 2)	
@@ -4284,6 +4392,7 @@ CASE 15
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「아아、왠지 성벽이 뒤틀릴 것 같다。싫지 않은게 너무 싫어」
 				PRINTFORMW 「그렇다면 입을 떼라？　무슨 소리를 하는거야、어리광을 부릴 때쯤 어리광을 부리게 해줘」
+				PRINTFORMW そう言って%CALLNAME:TARGET%は少し強く乳首を噛んだ。その姿に%CALLNAME:MASTER%は母性を刺激され、さらに母乳を溢れさせ続けるのだった。
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -4804,9 +4913,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:362 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:362 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:362= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:362 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 
+					CFLAG:362= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:362 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -4844,7 +4953,7 @@ CASE 15
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:363 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:363 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+					PRINTFORMW 「うう……%CSTR:일인칭%にレズの素質があったとは……後悔はないけど、なんか複雑だな……」
 					CFLAG:363= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:363 < 4 || FLAG:7 == 2)	
@@ -4873,7 +4982,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:364 == 0
-			PRINTFORMW 
+			PRINTFORMW 「ええ……奴隷に奴隷を抱かせるのか……」
 			CFLAG:364 = 1
 		;2번째 이후					
 		ELSE			
@@ -4881,9 +4990,10 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:364 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:364 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:364= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:364 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「本当はやりたくないんだけどなー、命令だから仕方ないよなー」
+					PRINTFORMW 「うっかり、寝取っちゃっても知らないからな？　じゃあ、いただきます」
+					CFLAG:364= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:364 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -4928,7 +5038,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:365 == 0
-			PRINTFORMW 
+			PRINTFORMW 「せめて手でしてくれない？　気持ちは、いいけど……潰されそうで怖い……」
 			CFLAG:365 = 1
 		;2번째 이후					
 		ELSE			
@@ -4936,9 +5046,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:365 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:365 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:365= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:365 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「ううっ、お願いだから、普通に弄ってくれよ……こんなのやだぁ……」
+					CFLAG:365= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:365 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -4966,7 +5076,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:366 == 0
-			PRINTFORMW 
+			PRINTFORMW 「え、二人で舐めろだと、助手一人に任せた方が気持ちいいと思うぞ」
 			CFLAG:366 = 1
 		;2번째 이후					
 		ELSE			
@@ -4974,9 +5084,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:366 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:366 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:366= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:366 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「コラッ、一人占めするな！　%CSTR:이인칭%は%CSTR:일인칭%のなんだからな！」
+					CFLAG:366= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:366 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -5022,7 +5132,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:367 == 0
-			PRINTFORMW 
+			PRINTFORMW 「協力してパイズリしろって？　助手の方もよくこんな命令に従うな……」
 			CFLAG:367 = 1
 		;2번째 이후					
 		ELSE			
@@ -5030,9 +5140,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:367 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:367 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:367= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:367 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「フフフ……どっちの胸が気持ちいい？」
+					CFLAG:367= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:367 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -5080,7 +5190,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:368 == 0
-			PRINTFORMW 
+			PRINTFORMW 「胸を揉めって、奇妙なことをさせるな……」
 			CFLAG:368 = 1
 		;2번째 이후					
 		ELSE			
@@ -5088,9 +5198,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:368 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:368 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:368= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:368 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「これはこれでおもしろいな……」
+					CFLAG:368= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:368 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -5157,7 +5267,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:465 == 0
-			PRINTFORMW 
+			PRINTFORMW 「……あんまり近づけないでくれないか？　グロい…」
 			CFLAG:465 = 1
 		;2번째 이후					
 		ELSE			
@@ -5165,9 +5275,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:465 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:465 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:465= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:465 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「はー、こういう風になってるのか……自ら教材になるとかやはりプロは違うな……」
+					CFLAG:465= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:465 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -6551,7 +6661,7 @@ CASE 15
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:395 == 0
-				PRINTFORMW 
+				PRINTFORMW 「え、ビデオ撮影？　AVを撮るのか……勘弁してくれよ……」
 				CFLAG:395 = 1
 			;2번째 이후					
 			ELSE			
@@ -6559,9 +6669,10 @@ CASE 15
 					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:395 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
-					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:395 < 4 || FLAG:7 == 2)	
-					;	PRINTFORMW 
-					;	CFLAG:395= 4
+					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:395 < 4 || FLAG:7 == 2)	
+						PRINTFORMW 「……思うんだが、本当に需要あるのか？　人間なんか撮るより、綺麗な悪魔を撮った方がよくないか？」
+						PRINTFORMW 「こんなご時世だから人間を撮る方が珍しい、だと？　くそっ、なんて時代だ！」
+						CFLAG:395= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:395 < 4 || FLAG:7 == 2)	
 					;	PRINTFORMW 
@@ -6727,7 +6838,7 @@ CASE 15
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:398 == 0
-				PRINTFORMW 
+				PRINTFORMW 「え、なんだこのでかい鏡！？　は？　自分の痴態を観察しろ？　悪趣味がすぎるぞ！」
 				CFLAG:398 = 1
 			;2번째 이후						
 			ELSE			
@@ -6735,9 +6846,10 @@ CASE 15
 					;통과	
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:398 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
-					;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:398 < 4 || FLAG:7 == 2)	
-					;	PRINTFORMW 
-					;	CFLAG:398= 4
+					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:398 < 4 || FLAG:7 == 2)	
+						PRINTFORMW 「この鏡、後で貸してくれないか？」
+						PRINTFORMW 「何に使うか？　うちの看板娘達を着せ替えに使うんだよ……あ、おい！　笑うな！」
+						CFLAG:398= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:398 < 4 || FLAG:7 == 2)	
 					;	PRINTFORMW 
@@ -6829,7 +6941,7 @@ CASE 15
 					IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:400 < 3 || FLAG:7 == 2)	
 					;연모, 친애	
 					ELSEIF TALENT:3 || TALENT:6 && (CFLAG:400 < 4 || FLAG:7 == 2)	
-						PRINTFORMW 
+						PRINTFORMW 「シャワーぐらい一人で浴びさせてくれないか？　ダメ？」
 						CFLAG:400= 4
 					;음란, 창부	
 					;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:400 < 4 || FLAG:7 == 2)	
@@ -6872,6 +6984,7 @@ CASE 15
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
 				PRINTFORMW 「어울려?　아니 %CSTR:일인칭%에게는 어울리지 않겠네……」
 				PRINTFORMW 「뭐、어느 쪽이든 상관없어、이걸 붙이고 있는 동안은 네가 가장 사랑하는 사람이라는 거지?」
+				PRINTFORMW そう言って%CALLNAME:TARGET%は頬を赤らめ、誘うようにクスリと笑った。
 				
 				CFLAG:401 = 2
 			ENDIF
@@ -7535,7 +7648,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:410 == 0
-			PRINTFORMW 
+			PRINTFORMW 「な、何、何これ？　気持ちいいけど、いや、なんか、怖い！　止めて！」
 			CFLAG:410 = 1
 		;2번째 이후					
 		ELSE			
@@ -7543,9 +7656,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:410 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:410 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:410= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:410 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「そこ……弄らないでぇ……もう、気持ちいいのやだぁ……普通にしてぇ……」
+					CFLAG:410= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:410 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -7774,7 +7887,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:416 == 0
-			PRINTFORMW 
+			PRINTFORMW 「乳を搾るって……気が狂いそうだ……」
 			CFLAG:416 = 1
 		;2번째 이후					
 		ELSE			
@@ -7782,9 +7895,9 @@ CASE 15
 				;통과	
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:416 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
-				;ELSEIF TALENT:3 || TALENT:6 && (CFLAG:416 < 4 || FLAG:7 == 2)	
-				;	PRINTFORMW 
-				;	CFLAG:416= 4
+				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:416 < 4 || FLAG:7 == 2)	
+					PRINTFORMW 「絞られたらすっきりするけど……慣れないな、本当に慣れない……」
+					CFLAG:416= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:416 < 4 || FLAG:7 == 2)	
 				;	PRINTFORMW 
@@ -7876,7 +7989,7 @@ CASE 15
 				IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:418 < 3 || FLAG:7 == 2)	
 				;연모, 친애	
 				ELSEIF TALENT:3 || TALENT:6 && (CFLAG:418 < 4 || FLAG:7 == 2)	
-					PRINTFORMW 
+					PRINTFORMW 「悪趣味だな……はいはい舐めますよ、どっちも嘗めればいいんでしょ、全く……」
 					CFLAG:418= 4
 				;음란, 창부	
 				;ELSEIF TALENT:4 || TALENT:7 && (CFLAG:418 < 4 || FLAG:7 == 2)	
@@ -8387,7 +8500,7 @@ IF CFLAG:106
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 2 || FLAG:7 == 2)	
 			;함락완료	
 			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:222 < 3 || FLAG:7 == 2)	
-				PRINTFORMW 
+				PRINTFORMW 「うへえ、べとべと……顔洗いたい……」
 				CFLAG:222= 3
 			;굴복각인Lv3	
 			ELSE	
@@ -8405,9 +8518,9 @@ IF CFLAG:106
 			;통과	
 			IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 2 || FLAG:7 == 2)	
 			;함락완료	
-			;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 3 || FLAG:7 == 2)	
-			;	PRINTFORMW 
-			;	CFLAG:223= 3
+			ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:223 < 3 || FLAG:7 == 2)	
+				PRINTFORMW 
+			CFLAG:223= 3
 			;굴복각인Lv3	
 			ELSE	
 				PRINTFORMW 
@@ -8873,9 +8986,9 @@ IF SELECTCOM == 64 && TFLAG:10 > 0
 		;통과	
 		IF 0 == (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 2 || FLAG:7 == 2)	
 		;함락완료	
-		;ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 3 || FLAG:7 == 2)	
-		;	PRINTFORMW 
-		;	CFLAG:240= 3
+		ELSEIF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || MARK:2 == 3) && (CFLAG:240 < 3 || FLAG:7 == 2)	
+			PRINTFORMW 
+			CFLAG:240= 3
 		;굴복각인Lv3	
 		ELSE	
 			PRINTFORMW 
@@ -9393,7 +9506,8 @@ IF TFLAG:21 == 3
 		IF 1 == 0
 		;연모, 친애
 		ELSEIF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「親しき仲にも礼儀はいるんだぞ？」
+			PRINTFORMW 「絶対、許さんからな……」
 		;음란, 창부
 		;ELSEIF TALENT:4 || TALENT:7
 		;	PRINTFORMW 
@@ -9685,7 +9799,7 @@ SELECTCASE TFLAG:13
 			ELSEIF CFLAG:264 < 1 || FLAG:7 == 2
 				PRINTFORMW 「これも一種の浮気、なのか？」
 				PRINTFORMW 「いや、しかし、%CSTR:이인칭%が連れてきた子と遊んでいるから、寝取らせ？」
-				PRINTFORMW 「まあ、いいか、割り切って楽しもう、嫌なら止めるだろ」
+				PRINTFORMW 「まあ、いいか、割り切って楽しもう、嫌なら止めるだろ、うひひ……」
 				CFLAG:264 = 1
 			ENDIF
 
@@ -9753,7 +9867,10 @@ SELECTCASE TFLAG:13
 				IF 1 == 0
 				;연모, 친애
 				ELSEIF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「変な身体にしやがって……」
+					PRINTFORMW 「胸が苦しい！　絞ってくれ！　お願いだから！」
+					PRINTFORMW 「もっと、丁寧に言え？　ううう、お願いです、どうか卑しい私めの乳を絞ってください……」
+					PRINTFORMW 「わ、笑うなよ！　なんで笑うんだ、チクショウ……」
 				;음란, 창부
 				;ELSEIF TALENT:4 || TALENT:7
 				;	PRINTFORMW 
@@ -9891,8 +10008,10 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				IF 1 == 0
 				;연모, 친애
-				;ELSEIF TALENT:3 || TALENT:6
-				;	PRINTFORMW 
+				ELSEIF TALENT:3 || TALENT:6
+					PRINTFORMW 「こういうことされたいから、変な身体にしたんだろ？」
+					PRINTFORMW そう言って%CALLNAME:TARGET%は%CALLNAME:MASTER%を押し倒す。その息は荒く、目は正気を失っている。
+					PRINTFORMW %CALLNAME:MASTER%が制止しようと口を開く前に唇は奪われる。さらに容赦ない尻穴への挿入が始まり、%CALLNAME:MASTER%は一晩中犯され続けた。
 				;음란, 창부
 				;ELSEIF TALENT:4 || TALENT:7
 				;	PRINTFORMW 
@@ -10343,11 +10462,11 @@ SELECTCASE TFLAG:13
 			CALL EVENT_MESSAGE
 			;처음
 			IF CFLAG:281 == 0
-				PRINTFORMW 
+				PRINTFORMW 「なんで……どうして……こんな……」
 				CFLAG:281 = 1
 			;그 이외
 			ELSEIF CFLAG:281 < 1 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「どうでもいい……もう……どうでも……」
 				CFLAG:281 = 1
 			ENDIF
 
@@ -11680,13 +11799,13 @@ RETURN 1
 @ENEMY_BATTLE_EVENT_K3118, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"꺼져버려! ",72,LEFT% ┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;적에서의 데밀ＣＯ－ＯＰ 참가시의 대사
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"계속해서 간다! ",72,LEFT% ┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
@@ -11694,20 +11813,24 @@ ENDIF
 @BATTLE_EVENT_K3118, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-		IF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		IF RAND:5 == 0
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"仕留める！　続け！！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ELSEIF RAND:4 == 0
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"その隙が命取りだ！",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"崩したぞ！　畳みかけろ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"人間を、舐めるな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"꺼져버려! ",72,LEFT% ┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -11717,71 +11840,75 @@ IF TFLAG:전투이벤트 == 2
 		;あなたが発動
 		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
 			IF RAND:3 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"いい判断だ！　援護するぞ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"やるな！　手を貸すぞ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"さすがだな！　追撃する！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		;四凶が発動
 		ELSEIF FLAG:행동순1 != -1 && (NO:(FLAG:행동순1) == 844 || NO:(FLAG:행동순1) == 846 || NO:(FLAG:행동순1) == 849 || NO:(FLAG:행동순1) == 1625 )
 			IF RAND:3 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"さすが四凶だな！　頼りになる",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"えげつない一撃を……四凶、すさまじい奴らだ……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"うーん、売れ筋だった理由がよく分かるな……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
+		ELSEIF RAND:11 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"みんなで仕留めてやる！",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:10 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"強敵でも、皆で叩けば怖かない！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:9 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"いい流れだ！　追撃する！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:8 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"くたばれ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:7 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"もう一撃！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:6 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よし！　援護だ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"もう、起き上がらないでくれ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"この機会は見逃せないな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"手を貸すぞ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"せーーー、のっ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"계속해서 간다! ",72,LEFT% ┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -11790,74 +11917,73 @@ ENDIF
 
 IF TFLAG:전투이벤트 == 3
 ;아군 파티에서의 피소환시의 대사	
-;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┏＠%CALLNAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%"この人でなし！",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
 
-@BATTLE_MESSAGE_K3118,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;攻撃して殺害した
 IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 		IF RAND:9 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"え、倒した？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:8 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"あわわわ、トドメは慣れてないのに……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:7 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"うわあ……感触が……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:6 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よ、よし！　とりあえずよし！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"倒した？　やった？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"倒した！　サマナーだってやれるんだ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よし！　最低限の仕事はできたな！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"悪魔を殺して平気な訳があるか！　辛い……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"やらなきゃやられる……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ;攻撃したけど吸収された
 ELSEIF TFLAG:전투이벤트 == 11 && ARG:2 < 0
 		IF RAND:5 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"しまった……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"うわあ……吸い込まれた……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"あのまま吸い込ませたら爆発しないかな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"インチキ耐性め……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"げっ！　元気になりやがった",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -11865,85 +11991,85 @@ ENDIF
 ;被弾（死亡）
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ぐぁっ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"後は頼んだ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"やだぁ……役に立たないまま死ぬのはやだぁ……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ううっ、痛ってぇ……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
 ;食いしばり（擬似的に無理やり動かしてます）
 ELSEIF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ == 1
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"死にたくない……死んでたまるか……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;残り１５％以下
 ELSEIF TFLAG:전투이벤트 == 12 && 현HP비율(ARG) < 15
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"痛いけど、まだ戦える……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ひい、ひい、これ、だから、現場は、嫌なんだ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ははは……死にそう……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ;被弾
 ELSEIF TFLAG:전투이벤트 == 12
 		IF RAND:10 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ぐああ、痛え！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:9 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ぐあ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:8 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"畜生！　やりやがったな！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:7 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"あとでお返ししてやる……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:6 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"乙女の肌に傷つけやがって……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"くそっ、油断した！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ぐえ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"痛いだろ！　この野郎！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"こいつめ……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"くぁっ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -11951,31 +12077,31 @@ ENDIF
 ;外した
 IF TFLAG:전투이벤트 == 17
 		IF RAND:7 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"早いな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:6 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"なんだあの避け方……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"うわ、外した、すまん",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"嘘だろ……外した？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"スクカジャかスクンダが欲しいな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"外した……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"むむむ、当たらん……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -11983,73 +12109,73 @@ ENDIF
 ;回避
 IF TFLAG:전투이벤트 == 18
 		IF RAND:11 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"うわあ！　危なっ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:10 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ヒエッ、ぎりぎりだ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:9 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"見える！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:8 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"牽制か？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:7 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よし、避けた！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:6 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"踏み込みが足りん！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"狙いが定まっていないな？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"おっと、残念",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ノーコンの敵もいるんだな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"お客さんは雑魚のようだな",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ステップ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ENDIF
 ;반사당했다
 IF TFLAG:전투이벤트 == 15
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"反射？　そんな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 ;反射
 IF TFLAG:전투이벤트 == 16
 	IF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"おっと間抜けめ！　装備を舐めたな？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"直撃と思ったか？　お返しだ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"さあ、自滅してもらおうかな？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"その攻撃は効かないぞ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
@@ -12057,19 +12183,19 @@ ENDIF
 ;배틀에서 승리했다
 IF TFLAG:전투이벤트 == 90
 	IF RAND:4 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ああ、勝った、勝った……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"乗り切ったか？　ふう、助かった……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"勝ったな？　全く心臓に悪いよ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"ひとまず、勝利か、よし！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
@@ -12077,20 +12203,20 @@ ENDIF
 ;레벨 업했다
 IF TFLAG:전투이벤트 == 91
 	IF RAND:4 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"まだ成長できるなんて……",72,LEFT%┃
 			PRINTFORML ┃%"これは純粋に嬉しいな、助かる",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"また人の枠を外れてしまった……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よし！　これで少しは動けるようになるな",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏┓>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"できるなら、速か運に振ってくれ、逃走力を高めたい",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
@@ -12118,19 +12244,19 @@ ENDIF
 ;도주에 실패했다
 IF TFLAG:전투이벤트 == 93
 	IF RAND:4 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"うえ、回り込むの早すぎだろ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"畜生！　振り切れない！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"トラポートでないと無理か……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"まずいな、非常にまずい……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
@@ -12139,55 +12265,55 @@ ENDIF
 IF TFLAG:전투이벤트 == 94
 	IF FLAG:선제공격플래그
 		IF RAND:4 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"あいつら寝ぼけてるな……介錯してやろう",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"よし！　奇襲だ！　くらえ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"先制を許す辺り、雑魚いな……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"さて、どう料理する？",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	ELSEIF 현HP비율(ARG) < 25
 		IF RAND:4 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"せめて回復させて……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"フラフラなのにこき使いやがって……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"連戦とか勘弁してくれ……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"辛い！　だからさっさと倒すぞ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	ELSE
 		IF RAND:4 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"さてさて、どうするかな……",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"アナライズ開始……で、どうする？",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"今日も～悪魔退治～MAGを～寄越せ～",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"よし！　やってやる！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -12196,19 +12322,19 @@ ENDIF
 ;전투 개시시・バックアタックを受けた
 IF TFLAG:전투이벤트 == 95
 	IF RAND:4 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"後ろ！　まずいまずいまずい！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"バックアタック！　百太郎ぐらい入れとけよ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"後ろから攻撃だ！　ああああまずい！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"とにかく立て直そう、指示を回せ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
@@ -12216,88 +12342,514 @@ ENDIF
 ;전투 개시시・先制攻撃を受けた
 IF TFLAG:전투이벤트 == 96
 	IF RAND:4 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"奇襲！　あああああまずい！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:3 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"攻撃されてる？　しのげるか？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"百太郎入れてないとか、死にたいのか？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
-			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"運がないな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ENDIF
 
 
+@BATTLE_MESSAGE_K3118,ARG,ARG:1 = 0
+;사용한 스킬의 이름을 LOCALS에 대입
+LOCALS = %RESULTS%
+;ターゲット先のポジションを参照するための変数。FLAG:とあわせて使う。
+LOCALS:1 = 포지션{(CFLAG:ARG:타겟)}
+
 IF CFLAG:ARG:입력행동 == 0 || CFLAG:ARG:입력행동 == 2101
 		IF CFLAG:ARG:입력행동 == 0
 			IF RAND:5 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"寄るな、寄るな、寄らんでも切る！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:4 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"しつこい！　倒れろ！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"거치적거리는 불똥은 털어내야겠지!",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"하아앗!",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"약하다고 생각하지 마!",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ELSE
 		
 			IF RAND:5 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"牽制ぐらいにはなるか",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:4 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"ばぁーん！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:3 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"꿰뚫어라!",72,LEFT%┃
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"꿰뚫어라！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"잡았다! 맞추겠어!",72,LEFT%┃
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"잡았다！　맞추겠어！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"맞아라!",72,LEFT%┃
+				PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"맞아라！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ENDIF
 ELSEIF CFLAG:ARG:입력행동 == 2303
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	PRINTFORML ┃%"자, 덤벼라! 너의 힘을 보여주는거다!",72,LEFT%┃
+	PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"자、덤벼라！　너의 힘을 보여주는거다！",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;회복아이템사용
+	
+	
+ELSEIF CFLAG:ARG:입력행동 == 18
+;ランダ招来
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"行くぞ、ランダ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ランダ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"了解なのじゃご主人！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ランダ！　突っ込むぞ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ランダ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"どーんと任せるのじゃ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ランダ！　今こそ駆け抜ける時だ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ランダ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"我らに倒せぬ者はないのじゃ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>ランダ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ご主人！　妾に任せるのじゃ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ランダ！　頼んだぞ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 1043
+;ティターニア旋風
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"衝撃波だ！　ティターニア！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ティターニア ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"任せてください！　マスター！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ティニ！　やっつけるぞ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ティターニア ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"はい！　行きますよ、衝撃波！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ティターニア、妖精女王の力を見せてやれ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ティターニア ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"期待には応えますよ、マスター！！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>ティターニア ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"私に任せてください！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ティニ！　頼んだぞ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 1310
+;ジャンヌダルクの御旗
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ジャンヌ！　旗を掲げろ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ジャンヌダルク ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"この御旗に続け！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ジャンヌ、頼んだぞ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ジャンヌダルク ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"マスターの御心のままに！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ジャンヌ、昇天させてやれ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ジャンヌダルク ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"はい！　マスター！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>ジャンヌダルク ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"全て姉さんに任せてよいのですよ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お前は、姉じゃない！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 1112
+;タマモ殺生石
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"タマモ！　殺生石だ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>タマモ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"いざや散れ、常世咲き裂く怨天の花……ヒガンバナ殺生石！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"タマモ、頼りにしているからな？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>タマモ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"マスタ～一生ついて行きます",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"タマモ、やれるな？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>タマモ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"聞くのは無粋ですよ、マスター？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>タマモ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"たまには、母に甘えてもいいのですよ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お前は、母さんじゃない！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 207
+;アラハバキスタンプ
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"パンチだ！　アラハバキ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>アラハバキ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ノシカカリ……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"行け！　アラハバキ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>アラハバキ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ご主人のためだ……潰す",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"今だ！　アラハバキやれるな？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>アラハバキ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"狂った朝、二人は青インク、飲み干す……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>アラハバキ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ご主人！　私に任せて！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"あ、ああ（急に正気になると面食らうな……）",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+
+ELSEIF CFLAG:ARG:입력행동 == 2087
+;4聖獣解放
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"よし！　暴れてこい！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>セイリュウ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"四聖獣の力、みせてやるのじゃ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"切り札を見せてやる……行ってこい四聖獣！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ゲンブ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ん……さまなーのためなら頑張る……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"今こそ、俺たちに力を貸せ！　四聖獣！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ビャッコ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"我らは主のため、勝利のため、道を開く！　どけぇ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>スザク ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"サマナー、私達を最後まで温存する気かしら？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"そんな余裕はない！　しっかり暴れてこい四聖獣！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 1215
+;SQテンプテーション
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"サキュバス、出番だぞ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>サキュバス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"チップは弾んでね、ご主人様？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お前のステージだ、頼んだぞサキュバス！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>サキュバス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"好きなようにやらせてもらうわよ、ご主人様？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"くれぐれも、味方を誘惑するなよ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>サキュバス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"それはご主人様のご主人様に釘を刺すべきじゃないかしら？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>サキュバス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"たまには、ご主人様が脱がしてくれない？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"じょ、冗談言ってないで、さっさとやれ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 1514
+;ドライアド樹撃
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ドライアド、叩きつけてやれ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ドリアード ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ドリアードなんですけど！　主様！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ドライアド、あいつを埋めてやれ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ドリアード ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"大地に帰してあげます！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"固い奴だな……削れドリアード！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ドリアード ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"分かりました、主様。これが私のできること！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>ドリアード ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"実に苗床日和ですね……",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"恐ろしいことを言うんじゃない！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 723
+;イヌガミインヘルノ
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"できるな、イヌガミ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>イヌガミ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"僕に任せてサマナー、焼き尽くせ……インヘルノ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"さあ、出番だイヌガミ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>イヌガミ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"跡形もなく燃やすよ……インヘルノ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お前の力を見せてやれ、イヌガミ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>イヌガミ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"この忠義の炎……マスターに捧げるよ、インヘルノ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>イヌガミ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"上手くいったら撫でてね、サマナー？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"いいぞ、いくらでも撫でてやる！　頼んだぞ、イヌガミ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 105
+;ナイトメア針連射
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ナイトメアの恐ろしさを見せてやれ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ナイトメア ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"れんしゃ！　れんしゃ！　すごいれんしゃ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ナイトメア、あいつを仕留めてくれ",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ナイトメア ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"わかった！　穴ぼこにしちゃうね！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"よし、舞い上がれナイトメア！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>ナイトメア ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"くうちゅうしゃげき！　れんしゃ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>ナイトメア ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"お姉ちゃん、わたしがやっていい？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"いいぞ！　頼んだナイトメア！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 61
+;一斉召喚
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"1.2.3……召喚……いけっ！　生かして返すな！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ランダ！　タマモ！　ティターニア！　アラハバキ！　ジャンヌ！　やるぞ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"イヌガミ！　ドリアード！　ナイトメア！　サキュバス！　いけるな？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"マグネタイト急速転換！　さあ出番だぞ、みんな！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+ELSEIF CFLAG:ARG:입력행동 == 2092
+;理破壊の刃
+	IF RAND:4 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"邪神、創造神たるデミウルゴスよ、命ずる、理を打ち破れ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>デミウルゴス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"いいだろう契約者……我が力を見せてやろう……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"邪神デミウルゴス、契約に従い、今こそ力を見せろ！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>デミウルゴス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"よかろう契約者……見届けるがいい……これが理を破る刃だ……！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"命ずる、理を破る力をここに！",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏>デミウルゴス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"契約者……マグネタイトを用意しておけ……十分にな……！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>デミウルゴス ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"さて、そろそろ出番か、契約者よ？",72,LEFT%┃
+		PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		PRINTFORML ┏＠%NAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"マグネタイトはいくらでもくれてやる！　やれ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+	
+;지원
+ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
+	;気合、コンセントレイト
+	IF RANGE(CFLAG:ARG:입력행동,511, 512)
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"落ち着いて……集中……",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;도발
+	ELSEIF CFLAG:ARG:입력행동 == 515
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ざ～こざこざこざこ敵さん、悔しかったら捕まえてみろ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;그 외
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"【" + LOCALS + "】！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+;파마
+ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
+	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"さあ、昇天の時間だ！　天へ帰れ！",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;주살
+ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
+	;視線系
+	IF RANGE(CFLAG:ARG:입력행동,1404, 1405)
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"さあ、俺の目を見ろ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;그 외
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"さて、強烈な呪いを見せてやろうか",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+	
+;메시아라이저
+ELSEIF CFLAG:ARG:입력행동 == 4160
+	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"愛とか恋とか関係ない！　お前との絆を信じる！",72,LEFT%┃
+	PRINTFORML ┃%"皆を癒せ！　メシア、ライザー！",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	
+;회복アイテム使用
 ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3007)
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"よく我慢したな、偉いぞ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"攻撃するより、こっちの方が性に合うな……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"괜찮나?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -12305,31 +12857,31 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3007)
 ;蘇生アイテム使用
 ELSEIF RANGE(CFLAG:ARG:입력행동,3008, 3009)
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"甦れ！　そして、働け！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"あわわわ、早く起きてくれ……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"자, 조금 더 더 분발해볼까",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 
-;공격아이템사용
+ ;攻撃アイテム使用
 ELSEIF RANGE(CFLAG:ARG:입력행동,3101, 3119)
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"危険物をくらえ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"こいつはおつりだ！　とっとけ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"이것이 인간의 지혜! 돈의 힘!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -12337,10 +12889,74 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,3101, 3119)
 
 ;崖っ緑粉末
 ELSEIF CFLAG:ARG:입력행동 == 3016
-	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┏＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━━┓
 	PRINTFORML ┃%"한 사람의 목숨으로 모두를 살릴 수 있다면 대가는 값싼거다……",72,LEFT%┃
 	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ELSEIF CFLAG:ARG:입력행동 == 2301
+	;空白地
+	IF FLAG:(LOCALS:1) == -1
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"移動か？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;相手が"あなた"
+	ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"さあ選手交代といこうか",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
+	;後ろに下がる
+	ELSEIF RANGE((CFLAG:ARG:포지션),1,3) && RANGE((CFLAG:ARG:타겟),4,6)
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"ちょっと下がらせてくれ",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;前に出る
+	ELSEIF RANGE((CFLAG:ARG:포지션),4,6) && RANGE((CFLAG:ARG:타겟),1,3)
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"前衛と交代か？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	;左右を替わる
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"交代か？　了解だ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
+;行動不能
+ELSEIF CFLAG:ARG:입력행동 == 2314
+	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"あらららられろろろろろろろ？",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;金ばらまき
+ELSEIF CFLAG:ARG:입력행동 == 2315
+	PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	PRINTFORML ┃%"ありがたやまぶきいろ、たーのしー",72,LEFT%┃
+	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;그 이외ぜんぶ
+ELSE
+	IF RAND:6 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"【" + LOCALS + "】！！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:5 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"こういうこともできる！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:4 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"これでいいか？",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"分かったよ、指示通り動きますよ",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSEIF RAND:2 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"念には及ばずってな！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ELSE
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"了解だ！　やるぞ！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	ENDIF
 ENDIF
 
 
@@ -12371,118 +12987,118 @@ SELECTCASE ARG
 	;전투개시・아군의 레벨이 적의 레벨보다 １０이상 높다
 	CASE 0
 		IF ARG:1 == 4
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"4체나 온다、송사리지만 방심하지 마",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:1 == 3
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"3체가 온다、잘 처리해",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:1 == 2
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"송사리가 2체야、순살시켜 버리자!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:1 == 1
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"송사리가 하나밖에 없어、뭔가 함정인 걸까?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"다수의 반응!　송사리들이지만、이만큼 있으면 귀찮다구……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투개시・아군의 레벨이 적의 레벨보다 １０이상 낮다
 	CASE 1
 		IF ARG:1 == 1
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"쿠읏、상당한 강적이네…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"안 좋은데、흉악한 손님이 찾아온 모양이야、철수도 고려하고 행동하자……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투개시・동레벨대
 	CASE 2
 		IF ARG:1 == 2
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적2체、엇비슷한 실력의 녀석들이다、지지 마!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:1 == 1
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적은 1체、수로는 이쪽이 이기고 있어、갈 수 있어！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"그런대로 수를 모아 왔군、밀리지 마!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투개시・선제공격
 	CASE 3
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"찬스야!　멍청한 놈들에게 한방 먹여 주자!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"좋아、선수를 잡았네!　해치워버려!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"운이 트였군!　속공으로 죽여라!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투개시・백어택
 	CASE 4
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"미안!　뒤에서 와버렸다!　조심해라!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투개시・백어택（하쿠타로우）
 	CASE 5
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"하쿠타로가 있었나!　다행이야!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투개시・기습
 	CASE 6
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"미안!　기습이다!　태세를 재정비해 줘!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투개시・기습（하쿠타로우）
 	CASE 7
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"하쿠타로가 있었구나!　살았다……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투종료・아군의 레벨이 적의 레벨보다 １０이상 높다
 	CASE 8
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적、침묵과、송사리 상대라고는 하지만 수고했다",72,LEFT%┃
 			PRINTFORML ┃%"자아、다음 가자、방심하지 말자고",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"반응 없음、수고 많았어",72,LEFT%┃
 			PRINTFORML ┃%"자、당장 거기서 떨어져 줘、송사리와 연전 따윈 싫을 거 아니야?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"거의 학살이로군……나무아미타불~",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투종료・아군의 레벨이 적의 레벨보다 １０이상 낮다
 	CASE 9
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적、침묵……이런 심장에 나쁜 싸움은 그만둬……",72,LEFT%┃
 			PRINTFORML ┃%"분명히 말하지만、지금의 전투、무모하고 자살행위니까 보통은",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"반응없음……하아ーーー이겨 줬구나……",72,LEFT%┃
 			PRINTFORML ┃%"전술?　연계?　아무튼 대단하네……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"무사해?　무사한거지?　무사한거 맞지?",72,LEFT%┃
 			PRINTFORML ┃%"다행이다……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -12490,149 +13106,149 @@ SELECTCASE ARG
 	;전투종료・동레벨대
 	CASE 10
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적、침묵이다。수고많았어",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"반응없음、방심하지 않았다면 이길 수 있는 상대였지",72,LEFT%┃
 			PRINTFORML ┃%"자아、다음이야、다음!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"전투 종료、자아、다음이야!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투종료・전멸
 	CASE 11
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"아군 반응、0?",72,LEFT%┃
 		PRINTFORML ┃%"거짓말이지?!　이봐, 대답해!　어이!　대답해!　그런……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투중・사망한 아군이 복수 있다・도주불가
 	CASE 12
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"또 당했나?",72,LEFT%┃
 		PRINTFORML ┃%"도주는 무리인가……너무 무모하게 굴었군……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투중・사망한 아군이 복수 있다・도주가능
 	CASE 13
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"이거 위험하군",72,LEFT%┃
 		PRINTFORML ┃%"곧바로 도주경로를 구축하게、도망쳐!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・死亡している味方が一人いる（%CALLNAME:MASTER%）
 	CASE 14
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"왜 이 녀석의 파티는 무너지지 않았지?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"솔선해서 먼저 죽어버리다니 대체 뭐하자는 거야……아ー、누군가 서포트해 줘어",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;戦闘中・死亡している味方が一人いる（%CALLNAME:MASTER%以外）
 	CASE 15
 		IF ARG:8 == [[キャラ:마요네]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"마요네를 잡았다!　좋아!　가 아니라 소생해야 해!!",72,LEFT%┃
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"마요네를 쓰러졌다!　좋아!　가 아니라 소생해야 해!!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:티타니아]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"티타니아가 Return했어!　더 소중히 해 줘!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:란다]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"란다가 Return했어!　벽이 없어졌어、조심해!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:타마모]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"타마모가 Return했어!　소중한 동물귀가……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CALLNAME:(ARG:8) + "(이)가 당했다! 소생할 수 있을까?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CALLNAME:(ARG:8) + "이)가 당했어、곤란한데……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주불가
 	CASE 16
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"사、살아있어?　조、좋아 살았다!　지지 마?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"간신히 견딘 느낌이군……회복 아이템을 신중히 써!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"지금、엄청난 충격이었는데、살아있어?　좋、좋아、그렇다면 다시 일어서는 거야!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・ＨＰ를 25% 밑도는 아군이 복수 있다・도주가능
 	CASE 17
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"밀리고 있군……회복역은 없는 건가?",72,LEFT%┃
 			PRINTFORML ┃%"일단은 도주 루트를 구축할게、나머지는 그쪽에서 판단해 줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"어이!　상당한 충격이었어、지금!",72,LEFT%┃
 			PRINTFORML ┃%"승산이 없으면 철수하자!　살아남아야 해!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"일단은、도망치는 게 좋다고 생각해",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;戦闘中・ＨＰを25%切った味方が一人いる（%CALLNAME:MASTER%）
 	CASE 18
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"왜 지휘관이 혼자 죽어 가고 있는 거야?　혹시 마조야?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"엔도르핀이라도 나오는 것 같군、장난치지 말고 빨리 회복이나 해줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;戦闘中・ＨＰを25%切った味方が一人いる（%CALLNAME:MASTER%以外）
 	CASE 19
 		IF ARG:8 == [[キャラ:코시로]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"코시로쨩이 곤란해졌어!　너무 어린아이에게 무리를 주지 마!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:란다]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"란다가 꽤 곤란한 상황이야!　방어에 전념하자!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:티타니아]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"티타니아가 총을 맞고 있어!　빨리 회복을!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:타마모]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"타마모가 곤란해졌군……방어하거나 회복을 시켜줘!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CALLNAME:(ARG:8) + "(이)가 죽어가고 있어、얼른 회복을!",72,LEFT%┃
-			PRINTFORML ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・상태이상인 아군이 복수 있다
 	CASE 20
 		IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"어이어이、전선이 붕괴되고 있다고、빨리 복구시켜야 해!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"곤란해、움직일 수 있는 놈은 회복 행동에 전념해줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
@@ -12642,59 +13258,59 @@ SELECTCASE ARG
 		ENDIF
 	;戦闘中・POISON状態の味方がいる
 	CASE 21
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"독이、꽤 괴로우니까 회복하는 것이 좋을 거야",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・PALYZE状態の味方がいる
 	CASE 22
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"마비는 곤란한데, 당장 회복시켜 줘",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・STONE状態の味方がいる
 	CASE 23
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"석화!　엉뚱한 놈과 싸우는군……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・HAPPY状態の味方がいる
 	CASE 24
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"저 상태、정말로 행복하다니까……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・PANIC状態の味方がいる
 	CASE 25
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"안 좋은데!　혼란스러워!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・SLEEP状態の味方がいる
 	CASE 26
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"수면을 확인!　이 이상、잠자는 녀석을 늘리지 마!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;戦闘中・CHARM状態の味方がいる
 	CASE 27
-		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"매료되었잖아? 제정신으로 돌아와!",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;전투중・ＨＰ를 50% 밑도는 아군이 있다
 	CASE 28
 		IF ARG:8 == [[キャラ:코시로]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"코시로쨩이 피탄……보고만 있어야 한다니 답답할 따름이야……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:란다]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"란다가 총을 맞고 있어!　방어로 전환시켜줘!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:티타니아]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"티타니아가 약해져있네……무리시키지 마?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF ARG:8 == [[キャラ:타마모]]
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"타마모가 부상당했어、좀더 배려해 줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%CALLNAME:(ARG:8) + "(이)가 점점 당하고 있어!　좀 도와줘!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
@@ -12702,88 +13318,88 @@ SELECTCASE ARG
 	CASE 29
 		IF RAND:7 == 0
 			IF FLAG:경과턴수 < 3
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"여유롭군、그냥 밀고 가!",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF FLAG:경과턴수 < 10
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"방어 중시로 가는구나、좋은 판단이다",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%LOCALS:1 + "턴 경과……",72,LEFT%┃
 				PRINTFORML ┃%"위험하지는 않지만、적이 터프하군、조급히 굴지 말고 가",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ELSEIF RAND:6 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"턱없는 짓은 하지 마?　여기엔 기다리는 사람들이 꽤 있다구",72,LEFT%┃
 			PRINTFORML ┃%"……적어도 한 명은 여기 있으니까",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:5 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"무리하거나 무모한 짓은 그만둬?",72,LEFT%┃
 			PRINTFORML ┃%"나를 노예로 만든 책임을 다해줘",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:4 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"회복 아이템의 잔량은 괜찮아?　힘들 것 같으면 철퇴도 생각하라구?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"애널라이즈 잊지 마?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"여유가 있는 건 좋지만 집중해라!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"적은 아직 건재해!　방심하지 마!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・위험한 상태의 아군은 없다・전투 개시시보다 적의 수가 적다
 	CASE 30
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"이쪽이 잘 나가고 있어、그냥 이대로 갈아서 없애 버리자!",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"좋은 지시다!　역시 전투 센스가 있네…",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"（이 전투를 녹화하면 팔릴까…?）",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・위험한 상태의 아군은 없다・전투 개시시부터 적의 수가 변하지 않는다
 	CASE 31
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"교착되어 있군、적군도 제법 하는군",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"한 사람에게 화력을 집중하는 게 어때?　교착되어 있어",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"터프한 상대인가……최대 화력으로 가볼까?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;전투중・전투 개시시보다 아군의 수가 적다
 	CASE 32
 		IF RAND:3 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"밀리고 있군……재정비가 가능할까?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSEIF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"분하지만、적 쪽이 한 수 위다……재정비가 가능할까?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┏>MESSAGE┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 			PRINTFORML ┃%"조급하게 굴지 마、지금、도주 경로를 확인할게、그러니까 무리한 짓은 하지 말라구?",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF

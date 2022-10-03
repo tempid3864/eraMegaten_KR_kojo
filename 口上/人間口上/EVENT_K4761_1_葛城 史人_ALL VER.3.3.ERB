@@ -6,13 +6,13 @@
 ;まずは恋慕陥落のみ埋めていきます。
 ;屈服3→変に気になるし放っておきたくないしなんだこれ
 ;연모→この人は、まるで…。
-;친애→君のことが好きだから、離れたくないんだ。
-;남편→未定
+;親愛→君のことが好きだから、離れたくないんだ。
+;夫→未定
 ;--------------------------------------------------
 ;口上メモ
 ;葛城クンの口調について
 ;未陥落:敬語(距離を置いてる)　陥落後:ため口(距離感近め)
-;일인칭:俺　이인칭：あなた(君)　三人称：あの人
+;一人称:俺　二人称：あなた(君)　三人称：あの人
 ;【更新履歴】
 ;口上作成者　490メモリー
 ;21.09.23～　新規作成 更新開始。/同上
@@ -185,7 +185,7 @@ ENDIF
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K4761_1
-;助手
+;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
 ;	IF CFLAG:203 == 0
@@ -391,7 +391,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -8856,15 +8856,15 @@ SELECTCASE SELECTCOM
 			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
-			;ABL:初期リンク悪魔공격상성
-			;ABL:初期リンク悪魔최저공격횟수
-			;ABL:初期リンク悪魔최대공격횟수
-			;ABL:初期リンク悪魔사거리
-			;ABL:初期リンク悪魔공격범위
-			;ABL:初期リンク悪魔추가효과
-			;ABL:初期リンク悪魔추가효과상성
-			;ABL:初期リンク悪魔추가효과명중률
-			;ABL:初期リンク悪魔추가효과최대명중률
+			;ABL:초기링크악마공격상성
+			;ABL:초기링크악마최저공격횟수
+			;ABL:초기링크악마최대공격횟수
+			;ABL:초기링크악마사거리
+			;ABL:초기링크악마공격범위
+			;ABL:초기링크악마추가효과
+			;ABL:초기링크악마추가효과상성
+			;ABL:초기링크악마추가효과명중률
+			;ABL:초기링크악마추가효과최대명중률
 		ENDIF
 ;-------------------------------------------------
 ;606,개조수술
@@ -10321,7 +10321,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
@@ -10468,7 +10468,7 @@ IF TFLAG:10 > 0
 	IF (함락( ) > 0) && (CFLAG:247 < 3 || FLAG:7 == 2)		
 		;연모, 친애	
 		IF 함락(TARGET,PLAYER) > 0 && RESULTS == "연모"	
-			;COM「펠라한다」
+			;COM「フェラする」
 			IF SELECTCOM == 2
 				IF RAND:3 == 0
 					WSTR:(K++) = 「ひぁ、ご、めなさっ…も、でる…ッ」
@@ -10478,7 +10478,7 @@ IF TFLAG:10 > 0
 					WSTR:(K++) = 「ぃあッぁ、……ぁ%UNICODE(0x2661)%」
 				ENDIF
 				WSTR:(K++) = %CALLNAME%はがくりと腰を反らし、%CALLNAME:MASTER%の咥内へ白濁を放った。
-			;COM「가슴주무르기・乳首攻め・가슴애무」
+			;COM「胸揉み・乳首攻め・胸愛撫」
 			ELSEIF SELECTCOM == 6 || SELECTCOM == 7 || SELECTCOM == 8
 				IF RAND:3 == 0
 					WSTR:(K++) = 「ひぃ、ぁあ、や…ひっぱら、ないで…ッ」
@@ -10491,7 +10491,7 @@ IF TFLAG:10 > 0
 					WSTR:(K++) = 「ぁ……っ、ぁあ…」
 				ENDIF
 				WSTR:(K++) = %CALLNAME%はぶるぶると激しく震え、乳首への刺激だけで射精した。
-			;COM「정상위시킨다、후배위시킨다、기승위한다」
+			;COM「正常位させる、後背位させる、騎乗位する」
 			ELSEIF SELECTCOM == 92 || SELECTCOM == 93 || SELECTCOM == 94
 				IF RAND:4 == 0
 					IF TEQUIP:주도권 == 1
@@ -10515,7 +10515,7 @@ IF TFLAG:10 > 0
 					WSTR:(K++) = 「んぅ、ん、んん…ッ%UNICODE(0x2661)%」
 				ENDIF
 				WSTR:(K++) = %CALLNAME%は、幸せそうに%CALLNAME:MASTER%の膣内へ吐精した。
-			;그 이외(연모・親愛汎用)
+			;그 이외(恋慕・親愛汎用)
 			ELSE
 				IF RAND:3 == 0
 					WSTR:(K++) = 「ぁ、あ……～～っ%UNICODE(0x2661)%」
@@ -10721,7 +10721,7 @@ IF SELECTCOM == 21
 			WSTR:(K++) =
 		ENDIF
 	ENDIF	
-	;欲情LV3以上 + 미약
+	;欲情LV3以上 + 媚薬
 	IF !구상유무확인(0) && PALAM:5 >= PALAMLV:3 && TEQUIP:26
 		;함락완료
 		IF 함락()
@@ -11135,7 +11135,7 @@ SELECTCASE TFLAG:13
 ;　　32:요바이 V/C
 ;　　33:요바이 A/C
 ;　　34:요바이 C/C
-;　　35:밤자위
+;　　35:밤 자위
 ;　　36:같이잔다
 ;　　37:起きたら隣で寝てる
 ;　　38:朝の足コキ
@@ -11173,9 +11173,9 @@ SELECTCASE TFLAG:13
 ;　　73:陰唇出(調教対象)
 ;　　74:음순노출(主人)
 ;　　75:음순노출(助手)
-;　　76:胸露出(調教対象)
-;　　77:胸露出(主人)
-;　　78:胸露出(助手)
+;　　76:가슴露出(調教対象)
+;　　77:가슴露出(主人)
+;　　78:가슴露出(助手)
 ;　　79:던전내 성욕처리：동료마와 섹스(당하는 측)
 ;　　80:던전내 성욕처리：동료마에게 봉사시킨다(봉사측)
 ;　　81:던전내 성욕처리：그 장소에서 자위
@@ -11218,7 +11218,7 @@ SELECTCASE TFLAG:13
 			K_CALL:K = EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;모유체질
+				;母乳体質
 				IF TALENT:149						
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
@@ -13389,7 +13389,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2101
 	ELSE
 		LOCALS:10 = ちょこまかしても無駄ってね
 	ENDIF 
-;파워샷
+;パワーショット
 ELSEIF CFLAG:ARG:입력행동 == 2102
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13397,15 +13397,15 @@ ELSEIF CFLAG:ARG:입력행동 == 2102
 	ELSE
 		LOCALS:10 = 撃ち抜け!
 	ENDIF 
-;약장탄
+;弱装弾
 ELSEIF CFLAG:ARG:입력행동 == 2103
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	LOCALS:10 = かなり心もとないけど…
-;정밀사격
+;精密射撃
 ELSEIF CFLAG:ARG:입력행동 == 2104
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	LOCALS:10 = こんなのもあるんだよな
-;성스러운탄환
+;聖なる弾丸
 ELSEIF CFLAG:ARG:입력행동 == 2105
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13413,7 +13413,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2105
 	ELSE
 		LOCALS:10 = お祈りは済んだだろ?
 	ENDIF 
-;저주의탄환
+;呪いの弾丸
 ELSEIF CFLAG:ARG:입력행동 == 2106
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13421,15 +13421,15 @@ ELSEIF CFLAG:ARG:입력행동 == 2106
 	ELSE
 		LOCALS:10 = 悪意に喰われろ!
 	ENDIF 
-;베놈샷
+;ベノンショット
 ELSEIF CFLAG:ARG:입력행동 == 2107
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	LOCALS:10 = さーて、仕込みは…
-;디스펠샷
+;デスペルショット
 ELSEIF CFLAG:ARG:입력행동 == 2110
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	LOCALS:10 = おっと、変な事するなよ?
-;그레이트풀원
+;グレイトフルワン
 ELSEIF CFLAG:ARG:입력행동 == 2111
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13437,7 +13437,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2111
 	ELSE
 		LOCALS:10 = 装填完了!　イけ!
 	ENDIF 
-;코로나샷
+;コロナショット
 ELSEIF CFLAG:ARG:입력행동 == 2113
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13445,7 +13445,7 @@ ELSEIF CFLAG:ARG:입력행동 == 2113
 	ELSE
 		LOCALS:10 = …しばらく動けないかもな
 	ENDIF
-;랜턴샷
+;ランタンショット
 ELSEIF CFLAG:ARG:입력행동 == 2115
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0
@@ -13453,11 +13453,11 @@ ELSEIF CFLAG:ARG:입력행동 == 2115
 	ELSE
 		LOCALS:10 = ほら、お待ちかねの火種だよ
 	ENDIF 
-;프로스트샷
+;フロストショット
 ELSEIF CFLAG:ARG:입력행동 == 2116
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	LOCALS:10 = 凍てつけ!
-;回復アイテム使用
+;회복アイテム使用
 ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3007)
 	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
 	IF RAND:2 == 0

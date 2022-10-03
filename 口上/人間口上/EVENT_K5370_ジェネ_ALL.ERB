@@ -152,7 +152,7 @@ ENDIF
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K5370
-;助手
+;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
 ;	IF CFLAG:203 == 0
@@ -357,7 +357,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL TRAIN_MESSAGE
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 699
 	RETURN 0
 ENDIF
@@ -1128,19 +1128,19 @@ SELECTCASE SELECTCOM
 					KCOLOR:K = 0xFF69B4
 					KSTR:(K++) = 口上の変化が起こらないようにします。
 					KSTR:(K++) = 
-					CFLAG:804 == 0
+					CFLAG:804 = 0
 					KCOLOR:K = GETDEFCOLOR()
 					GOTO gene_mainmenu
 				ELSEIF RESULT == 1
 					KCOLOR:K = 0xFF69B4
 					KSTR:(K++) = 口上が変化するようにします。
 					KSTR:(K++) = 
-					CFLAG:804 == 1
+					CFLAG:804 = 1
 					KCOLOR:K = GETDEFCOLOR()
 					GOTO gene_mainmenu
 				ELSEIF RESULT == 2
 					KSTR:(K++) = %CALLNAME:TARGET%の口上は特殊な処理が行われています。
-					KSTR:(K++) = 通常の口上は陥落した後、恋慕系/淫乱系/服従系に分かれてその後変化しませんが、この口上は陥落後も、特定の行為を続けさせることで、연모/음란/服従が変化します。
+					KSTR:(K++) = 通常の口上は陥落した後、恋慕系/淫乱系/服従系に分かれてその後変化しませんが、この口上は陥落後も、特定の行為を続けさせることで、恋慕/淫乱/服従が変化します。
 					KSTR:(K++) = ただし変化するのは口上だけで、実際の陥落素質や、陥落によって得たコマンドなどは変化しません。
 					KSTR:(K++) = \n
 					KSTR:(K++) = 主に以下のプレイによって口上が変化します。
@@ -8882,7 +8882,7 @@ SELECTCASE SELECTCOM
 			;ABL:페르소나1데이터／스킬1 =
 			
 			;ABL:페르소나1데이터／습득스킬1 =
-			;ABL:ペルソナ1データ／습득LV1 =
+			;ABL:페르소나1데이터／습득LV1 =
  
 		ENDIF
 ;-------------------------------------------------
@@ -8923,15 +8923,15 @@ SELECTCASE SELECTCOM
 			;ABL:초기변신악마습득스킬1
 			;ABL:초기변신악마습득LV1
 			
-			;ABL:初期リンク悪魔공격상성
-			;ABL:初期リンク悪魔최저공격횟수
-			;ABL:初期リンク悪魔최대공격횟수
-			;ABL:初期リンク悪魔사거리
-			;ABL:初期リンク悪魔공격범위
-			;ABL:初期リンク悪魔추가효과
-			;ABL:初期リンク悪魔추가효과상성
-			;ABL:初期リンク悪魔추가효과명중률
-			;ABL:初期リンク悪魔추가효과최대명중률
+			;ABL:초기링크악마공격상성
+			;ABL:초기링크악마최저공격횟수
+			;ABL:초기링크악마최대공격횟수
+			;ABL:초기링크악마사거리
+			;ABL:초기링크악마공격범위
+			;ABL:초기링크악마추가효과
+			;ABL:초기링크악마추가효과상성
+			;ABL:초기링크악마추가효과명중률
+			;ABL:초기링크악마추가효과최대명중률
 		ENDIF
 ;-------------------------------------------------
 ;606,개조수술
@@ -10388,7 +10388,7 @@ IF TEQUIP:20 &&  SELECTCOM != 107
 	CALL PALAM_MESSAGE_B
 	RETURN 0
 ENDIF
-;상정외의 구상이라면 스킵(이거 지우면 버그난다)
+;상정외의 구상이라면 스킵(이거 지우면 버그)
 IF SELECTCOM < 0 || SELECTCOM > 700
 	RETURN 0
 ENDIF
@@ -10727,7 +10727,7 @@ IF SELECTCOM == 21
 			WSTR:(K++) =
 		ENDIF
 	ENDIF	
-	;欲情LV3以上 + 미약
+	;欲情LV3以上 + 媚薬
 	IF !구상유무확인(0) && PALAM:5 >= PALAMLV:3 && TEQUIP:26
 		;함락완료
 		IF 함락()
@@ -11149,7 +11149,7 @@ SELECTCASE TFLAG:13
 ;　　32:요바이 V/C
 ;　　33:요바이 A/C
 ;　　34:요바이 C/C
-;　　35:밤자위
+;　　35:밤 자위
 ;　　36:같이잔다
 ;　　37:起きたら隣で寝てる
 ;　　38:朝の足コキ
@@ -11187,9 +11187,9 @@ SELECTCASE TFLAG:13
 ;　　73:陰唇出(調教対象)
 ;　　74:음순노출(主人)
 ;　　75:음순노출(助手)
-;　　76:胸露出(調教対象)
-;　　77:胸露出(主人)
-;　　78:胸露出(助手)
+;　　76:가슴露出(調教対象)
+;　　77:가슴露出(主人)
+;　　78:가슴露出(助手)
 ;　　79:던전내 성욕처리：동료마와 섹스(당하는 측)
 ;　　80:던전내 성욕처리：동료마에게 봉사시킨다(봉사측)
 ;　　81:던전내 성욕처리：그 장소에서 자위
@@ -11232,7 +11232,7 @@ SELECTCASE TFLAG:13
 			K_CALL:K = EVENT_MESSAGE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:262 < 1 || FLAG:7 == 2)
-				;모유체질
+				;母乳体質
 				IF TALENT:149						
 					;연모, 친애	
 					IF (TALENT:3 || TALENT:6)	
@@ -13236,7 +13236,7 @@ ENDIF
 	IF CFLAG:ARG:상태이상 != GET_STATE_NUM("CHARM")
 	;CLAG:890（戦闘中オナニー値）を毎ターン参照、チャームが解けたらいったんすっきりします。
 	;本当は戦闘終了後のみ解消とかにしたいものよのぉ
-		CFLAG:890 == 0
+		CFLAG:890 = 0
 	ENDIF
 ;■대사의 행 수를 늘리고 싶을 때는
 ;			LOCALS:10 = 1행째
@@ -13321,7 +13321,7 @@ SELECTCASE TFLAG:전투이벤트
 		ENDIF
 	;반사당했다
 	CASE 15
-			LOCALS:10 = きゃっ！　は、반사…！？
+			LOCALS:10 = きゃっ！　は、反射…！？
 	;반사했다
 	CASE 16
 			LOCALS:10 = その攻撃、そのまま返しちゃいます！
@@ -13428,7 +13428,7 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 	;행동불능（헤롱헤롱 거리고 있다）
 	IF CFLAG:ARG:입력행동 == 2314
 		IF RAND:(10 - CFLAG:890 - (ABL:TARGET:자위중독)) == 0 || RAND:10 == 0
-		;ムラムラしたときに乱数（15-자위중독+気分（CFLAG890））が0でオナニー。気分が高まれば高まるほど更にオナニーしやすくなり、絶頂で解消。
+		;ムラムラしたときに乱数（15-自慰中毒+気分（CFLAG890））が0でオナニー。気分が高まれば高まるほど更にオナニーしやすくなり、絶頂で解消。
 			IF CFLAG:890 >= 5
 			;イく
 				IF CFLAG:800 == 1 || CFLAG:800 == 2
@@ -13446,7 +13446,7 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 				ENDIF
 				EXP:TARGET:자위경험 += 1
 				EXP:TARGET:절정경험 += 1
-				CFLAG:890 == 0
+				CFLAG:890 = 0
 			ELSEIF CFLAG:890 >= 3
 			;盛り上がってまいりました
 				IF CFLAG:800 == 1 || CFLAG:800 == 2
@@ -13484,7 +13484,7 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 			ENDIF
 		ELSE
 			IF CFLAG:437 >=1 && RAND:4 == 0
-				LOCALS:10 = こ、これ…미약…っ%ハート()%
+				LOCALS:10 = こ、これ…媚薬…っ%ハート()%
 			ELSEIF RAND:3 == 0
 				LOCALS:10 = うっ、んんっ…%ハート()%　…！　す、すみません、ぼーっとしてました！
 			ELSEIF RAND:2 == 0
@@ -13510,7 +13510,7 @@ ELSEIF CFLAG:ARG:상태이상 == GET_STATE_NUM("CHARM")
 ;			EXP:TARGET:절정경험 += 1
 ;		ELSE
 ;			IF CFLAG:437 >=1 && RAND:4 == 0
-;				LOCALS:10 = こ、これ…미약…っ%ハート()%
+;				LOCALS:10 = こ、これ…媚薬…っ%ハート()%
 ;			ELSEIF RAND:3 == 0
 ;				LOCALS:10 = うっ、んんっ…%ハート()%　…！　す、すみません、ぼーっとしてました！
 ;			ELSEIF RAND:2 == 0
@@ -13698,7 +13698,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 		ELSE
 			LOCALS:10 = 蘇生します！　%LOCALS%！
 		ENDIF
-	;리캄도라
+	;リカームドラ
 	ELSEIF CFLAG:ARG:입력행동 == 419
 		LOCALS:10 = %CSTR:일인칭%の命と引き換えにしてでも…みんな…立ち上がってください！
 	ELSE
@@ -13740,7 +13740,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		ENDIF
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
 		LOCALS:10 = 弱体魔法を使います！
-	;기합、컨센트레이트
+	;気合、コンセントレイト
 	ELSEIF CFLAG:ARG:입력행동 == 511 || CFLAG:ARG:입력행동 == 512
 		LOCALS:10 = ちょっと集中しますね…
 		LOCALS:11 = ＞%CALLNAME:TARGET%はパンティのバックの食い込みを治した
@@ -13749,7 +13749,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 		LOCALS:10 = えっへへ、私が相手ですよ。鬼さんこちらです！
 		LOCALS:11 = ＞%CALLNAME:TARGET%はパンティが食い込んでほとんど丸出しになっている尻を突き出し、挑発的に振った！
 		EXP:TARGET:야외노출경험 += 1
-	;리벨리온、레볼루션
+	;リベリオン、レボリューション
 	ELSEIF CFLAG:ARG:입력행동 == 516 || CFLAG:ARG:입력행동 == 517
 		LOCALS:10 = みんなー、ファイトですよ！
 		LOCALS:11 = ＞%CALLNAME:TARGET%はぴょんぴょんと跳ねて全員を応援している…胸が跳ね回って服からこぼれそうだ！
@@ -13795,11 +13795,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199)
 	LOCALS:10 = バッドステータス、つけちゃいますよ！
 ;정신
 ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
-	;절세의육체
+	;絶世の肉体
 	IF CFLAG:ARG:입력행동 == 1215
 		LOCALS:10 = あんまり見ちゃいやです…
 		LOCALS:11 = ＞%CALLNAME:TARGET%はそう言いながら、全身を隠すことなく視線に晒している！
-	;유혹의안개
+	;誘惑の霧
 	ELSEIF CFLAG:ARG:입력행동 == 1227
 		LOCALS:10 = うふふ、『イイコト』したいんですか？
 		LOCALS:11 = ＞濃霧がかかると同時、そこかしこから喘ぎ声や淫らな水音が響きはじめた…
@@ -13817,7 +13817,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
 	IF RAND:10 == 0
-		LOCALS:10 = 메기도！　…あっ、違う！　%LOCALS%！
+		LOCALS:10 = メギド！　…あっ、違う！　%LOCALS%！
 	ELSE
 		LOCALS:10 = %LOCALS%！　…ダークファルスの力じゃないですよね、これ
 	ENDIF
@@ -13831,7 +13831,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
 ;질풍
 ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
 	IF RAND:10 == 0
-		LOCALS:10 = 잔！　…あっ、違った！　%LOCALS%でした！
+		LOCALS:10 = ザン！　…あっ、違った！　%LOCALS%でした！
 	ELSE
 		LOCALS:10 = 風よ…%LOCALS%！
 	ENDIF

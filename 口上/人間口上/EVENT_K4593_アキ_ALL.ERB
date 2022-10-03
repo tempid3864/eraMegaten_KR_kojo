@@ -1,30 +1,12 @@
-﻿
-;-------------------------------------------------
-;女・子供口上魔法少女版（キャラクターの名前を入れる、下にコンセプトなど一言あれば入れる）
-;。
-;ひらがな多様とですですぅ口調とか難しいなオイ。
-;途中で力尽きた。だれかこの志を受け継いでくれ…
-;초회なにするですかは俺の中では鉄板。
-;
-;別人A(確か7/15なんとか引き継いでいきたいが早くも力尽きそうだわ。
-;別人A(7/19ポツポツ微加筆修正。従属のところ「ごしゅじんさま」とか書いてしまったがやっぱり%CSTR:12%で書いた方がいいのかな？
-;別人B(@名無し)(午後6時くらい氏が作成したeraTYPE-MOONのキャス狐口上 k132を、三咲氏がeramegaten仕様に変更追記したものから魔法少女部分を移植改変追記。
-;-------------------------------------------------
-;-------------------------------------------------
-;eratohoA 및 eratohoA계열 전용 구상 템플릿
-;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
-;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
-;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
-;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
-;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
-;마지막으로 read me를 건드려 보시는 것도 추천드립니다
-;-------------------------------------------------
-
-;-------------------------------------------------
-;범용 구상의 작성에 사용하는 경우는, X1→캐릭터번호가 아니라,
-;K4903→PUB会話タイプ番号へと変換してご使用ください
-;-------------------------------------------------
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;Module:EVENT_K4593_アキ_ALL.ERB
+;Licence:ライセンスフリー。お好きなように再利用・再配布してください。
+;Modification Data:
+;	Edit	Date			Author					Reason
+;	002		2021/11/23		名無し					一応完成
+;	001		2011/10/19		名無し					神取あき口上（悪魔子供汎用口上＋ツンデレ口上ベース）
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;------------------------------------------------------------------------------------
 ;ライセンスについて
 ;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
 ;	+----+----+-------------------------------+
@@ -45,32 +27,40 @@
 ;	|   7| ○ | 口上内容の転載                |
 ;	+----+----+-------------------------------+
 
+;=====================================================================
+;コンセプト
+;神取あき口上。保護者を目の前で殺して拉致監禁調教とかあなたマジ外道。
+;それ前提で書き始めたらキーの進む事進む事。
+;=====================================================================;-------------------------------------------------
+;eratohoA 및 eratohoA계열 전용 구상 템플릿
+;X1과 X2를 캐릭터 번호로 치환하고, Y1을 조수의 캐릭터 번호로 치환해주세요
+;단, 캐릭터번호가 한자리인 캐릭터의 경우, X1, Y1은 1, X2는 01과 같이 바꿔주세요
+;그리고 커맨드 내의 적당한 조건 아래의 PRINTFORMW의 뒤에 반각 공백을 두고 대사를 추가해주세요
+;구상을 추가하지 않는 커맨드는 무기입하셔도 상관없습니다만, CFLAG:XXX의 앞에『;』를 붙여서 주석처리를 하시면 더욱 좋습니다
+;엑스트라 구문 등, 주석처리가 되어 있는 구문을 사용할 때는,『;』를 제거해 주석처리를 해제할 필요가 있습니다
+;마지막으로 read me를 건드려 보시는 것도 추천드립니다
+;-------------------------------------------------
+
+;-------------------------------------------------
+;범용 구상의 작성에 사용하는 경우는, X1→캐릭터번호가 아니라,
+;K4593→PUB회화타입번호　로 변경해서 사용해주세요
+;-------------------------------------------------
 
 ;--------------------------------------------------
-;구상셀렉트 기능：구상설명
+;口上ファイルの存在判定（X2을 캐릭터번호로 치환）
 ;--------------------------------------------------
-@셀렉트구상설명_K4903,ARG = 0
-SIF ARG == 1
-	RETURN 0
-;구상명
-PRINTFORML 無名の小学生魔法少女版
-;구상설명문 
-PRINTFORML 汎用女・子供口上に、キャス狐口上の魔法少女部分移植 したものですが
-PRINTFORML この専用口上はあなたの中のイメージと大きく食い違う可能性があります。
-PRINTFORML 口上と被るので、愛称は「魔法少女」を含まないものに変更してください
-
 
 ;--------------------------------------------------
 ;EVENTTRAIN 관련（X1을 캐릭터번호로 치환）
 ;조교 개시시의 대화 CFLAG 201～219를 사용
 ;--------------------------------------------------
-@EVENTTRAIN_K4903
+@EVENTTRAIN_K4593
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF NO:TARGET != 302
 ;	RETURN 0
 ;--------------------------------------------------
-;エキストラモード構文CFLAG:220を使用
+;엑스트라모드 구문　CFLAG:220을 사용
 ;네 를 선택시 첫조교시 구상설정용 소질로 변경 가능합니다
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
@@ -96,12 +86,12 @@ PRINTFORML 口上と被るので、愛称は「魔法少女」を含まないも
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL EVENTTRAIN_PY1_K4903
+;	CALL EVENTTRAIN_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL EVENTTRAIN_PY1_K4903
+;		CALL EVENTTRAIN_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -119,135 +109,76 @@ PRINTFORML 口上と被るので、愛称は「魔法少女」を含まないも
 DRAWLINE
 ;첫조교시
 IF CFLAG:201 == 0 && TALENT:연모 == 0
-	PRINTFORML 「魔法少女 %CALLNAME% ！ここに降臨！」
-	PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-	PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）なのだ。
-	PRINTFORML しかし……
-	PRINTFORMW ……
-	PRINTFORMW 「う……ここは？」
-	PRINTFORML 敵を洗脳調教し支配する、邪悪な組織に囚われてしまった%CALLNAME%は悪の調教部屋に監禁されてしまった。
-	PRINTFORMW 果たして無事脱出することは出来るのだろうか。
-	PRINTFORMW 「近寄らないでください！貴方のような悪党が何をすると言うのですか！？」
-	PRINTFORML
-	PRINTFORMW ……敗れた魔法少女の末路など、決まりきっているが……
+	PRINTFORMW 「……パパを殺した%CSTR:이인칭%が……%CSTR:일인칭%をこんな処に閉じ込めて……なによ、何か用？」
+	PRINTFORMW 「……？ちょう……きょう？」
+	PRINTFORMW %CALLNAME%の顔がみるみる蒼褪めていく。そんな%CALLNAME%の手を取りベッドへ導くと、そっと押し倒した。
+	PRINTFORMW 「な、何よっ……%CSTR:일인칭%に何すんのよっ！パパの仇の%CSTR:이인칭%に、そんな事されるなんてっ！！」
+	PRINTFORMW 「エッチ！すけべ！ヘンタイ！ロリコン！このペドフェリア！！！」
 	CFLAG:201 = 1
 	RETURN 0
 ;굴복각인Lv1
 ELSEIF CFLAG:201 < 2 && MARK:2 == 1
-	PRINTFORML 「こんなことぜったいに、ゆるさないだから！」
-	PRINTFORMW %CALLNAME%は可愛いく口を尖らせる
+	PRINTFORMW %CALLNAME%は怒りで顔を真っ赤にしながら怒鳴りつけてくる。
+	PRINTFORMW 「……パパを殺しただけじゃなくて……%CSTR:일인칭%をこんな処に閉じ込めて……無理矢理エッチな事して……」
+	PRINTFORMW 「殺人者！誘拐犯！監禁犯！強姦魔！未成年性略取犯！%CSTR:이인칭%、バカじゃないの！？こんな事続けてたらどうなるかも分からない訳！？」
+	PRINTFORMW こちらより、自身の心配をまずすべきだと思うが……。
 	CFLAG:201 = 2
 	RETURN 0
 ;굴복각인Lv2
 ELSEIF CFLAG:201 < 3 && MARK:2 == 2
-	PRINTFORML 「うぅぅ、もうやめてくださいよぅ…！」
-	PRINTFORML %CALLNAME%は%CALLNAME:MASTER%を見つめている。
-	PRINTFORMW だいぶん諦めてきたようだ。
+	PRINTFORMW 「触らないで！この、パパの仇がっ！！やめて、気持ち悪いのよ！！このヘンタイ！！」
+	PRINTFORMW 抵抗する%CALLNAME%をベッドへと突き飛ばした。
+	PRINTFORMW ……まだまだ活きは良いようだ。
 	CFLAG:201 = 3
 	RETURN 0
 ;굴복각인Lv3
 ELSEIF CFLAG:201 < 4 && MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORML 「%CSTR:12%に呼ばれると、%CSTR:11%…」
-	PRINTFORML 「い、いえなんでもないですぅ。早く終わらせくださいよぅ」
-	PRINTFORMW 一瞬だけ態度がしおらしかったような気がする。
+	PRINTFORMW %CALLNAME:MASTER%の姿を見た%CALLNAME%は、溜息を吐いて自分からベッドへ腰かけた。
+	PRINTFORMW %CALLNAME%の顔をしげしげと見ると、彼女は真っ赤になって叫んだ。
+	PRINTFORMW 「……じ、自分からベットに座ったからって勘違いしないでよね！」
+	PRINTFORMW 「毎度毎度、%CSTR:이인칭%が暴力をふるうから……それだけなんだから！」
+	PRINTFORMW そう言いつつ、%CALLNAME%は聞き取れないほどの小声で呟いた。
+	PRINTFORMW 「……ふん、パパの仇の……%CSTR:이인칭%の事は……絶対、ゼッタイ許さないんだから！」
 	CFLAG:201 = 4
 	RETURN 0
 ;함락
 ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;연모
-	IF TALENT:3		
-		PRINTFORML 「魔法少女 %CALLNAME% ！ここに降臨！」
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）なのだ。
-		PRINTFORML しかし……
-		PRINTFORMW 「あなたの……その……精……をわたしにください！！」
-		PRINTFORML %CALLNAME%の力も無限ではなかった。彼女が戦い続けるためには補給が必要だ。
-		PRINTFORML 補給に最も適しているのは命の素、すなわち精……。特に彼女が恋思う相手のものが理想的。
-		PRINTFORML 恥じらいながらも主張した%CALLNAME%と、淫らで愛しい共同生活を送る事になる。
-		PRINTFORML 「た……たくさん、くださいね？あなたのだったら……うれしいですから %UNICODE(0x2661)% 」
-		PRINTFORMW 洗脳調教の成果が出てきたようだが、さらなる深みに沈めやる必要がある。
-		PRINTFORML ただし、その前にたっぷりと精を注いでやらねばなるまい、%CALLNAME:MASTER%は魔法少女抱き上げベットに運んだ
-		PRINTFORML
-		PRINTFORMW ……恋人魔法少女と愛欲の夜が幕を開ける……
+	IF TALENT:3
+		PRINTFORMW いつも通りに%CALLNAME%の部屋に入ると、今日はどこか様子がおかしい。
+		PRINTFORMW %CALLNAME%はうつむいて、顔を真っ赤にしていたが、やがてぽつぽつと喋りだした
+		PRINTFORMW 「あの、あのね。えぇと、あの、その。%CSTR:일인칭%、おかしいの……」
+		PRINTFORMW 「……パパを殺して……%CSTR:일인칭%を連れ去って……こんな処に閉じ込めて……無理矢理エッチな事して……」
+		PRINTFORMW 「%CSTR:이인칭%なんて、殺人犯で誘拐犯で監禁犯で強姦魔で未成年性犯罪者で最悪のペドフェリア野郎なのに……」
+		PRINTFORMW 「%CSTR:이인칭%の顔がまともに見れなくて、目が合うとムネがどきどきして……」
+		PRINTFORMW 「パパの仇なのに……でも、%CSTR:이인칭%から離れたくなくて、ずっとそばに居たくて」
+		PRINTFORMW 顔を上げ、真正面から%CALLNAME:MASTER%を見つめる%CALLNAME%
+		PRINTFORMW 「……ねぇ、%CSTR:일인칭%、ココに居ても……いい……？」
 	;음란
 	ELSEIF TALENT:4
-		PRINTFORML 「魔法少女 %CALLNAME%  %UNICODE(0x2661)% ここに降臨 %UNICODE(0x2661)% 」
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）なのだが。
-		PRINTFORML しかし……
 		PRINTFORMW いつも通りに呼び出したはずの%CALLNAME%だが、今日はどこか様子がおかしい。
-		PRINTFORML 「%CSTR:12%がイケナイんですよぉ… %UNICODE(0x2661)% 」舌なめずりしながら近付いてくる%CALLNAME%。
-		PRINTFORML 「あなたの精をわたしにくださぁい%UNICODE(0x2661)% %UNICODE(0x2661)%… %CSTR:11%をこぉんなんにしちゃったんですからぁ %UNICODE(0x2661)% 」
-		PRINTFORMW 
-		PRINTFORML 愛と正義の魔法少女は、早くも肉欲に溺れたようだ、本番はこれからだというのに。
-		PRINTFORML
-		PRINTFORMW ……淫乱魔法少女と淫欲の夜が幕を開ける……
+		PRINTFORMW 「%CSTR:12%がイケナイんですよぉ…%UNICODE(0x2661)%」
+		PRINTFORMW 舌なめずりしながら近付いてくる%CALLNAME%。
+		PRINTFORMW 「%CSTR:11%をこぉんなえっちにしちゃったんですからぁ%UNICODE(0x2661)%」
+		PRINTFORMW %CALLNAME:MASTER%の体をいやらしい手つきで撫で回す%CALLNAME%。
+		PRINTFORMW 「%CSTR:12%、もっともーっと、%CSTR:11%とえっち…しましょう？」
+		PRINTFORMW 体を擦り付け、%CALLNAME:MASTER%を見上げる%CALLNAME%はまさに発情した雌の顔だった。
 	;복종
 	ELSEIF TALENT:5
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）なのだが。
-		PRINTFORML しかし……。
-		PRINTFORML 呼び出したに%CALLNAME%の瞳にに、最初の頃のような光はない。
-		PRINTFORMW 「…………」
-		PRINTFORML 愛と正義の魔法少女の心は折れたようだ
-		PRINTFORMW 暗い情欲を見せる%CALLNAME%に%CALLNAME:MASTER%はいつもの挨拶がまだだ、と促がした。
-		PRINTFORML 「ご、ごめんなさい。」%CALLNAME%は慌て、急いで下がると、
-		PRINTFORML 「魔法少女 %CALLNAME% ここに降臨」
-		PRINTFORML 精一杯叫んだ。
-		PRINTFORMW まあ、いいだろう、愚鈍な肉奴隷に価値はない、愛と正義の魔法少女として屈することに意味がある。
-		PRINTFORML この少女奴隷には、その辺のことを教え込む調教がまだまだ必要なようだ。
-		PRINTFORML
-		PRINTFORMW ……奴隷魔法少女、凌辱の夜が幕を開ける…………。
+		PRINTFORMW 　いつも通りに呼び出したはずの%CALLNAME%だが、今日はどこか様子がおかしい。
+		PRINTFORMW 　その瞳には最初の頃のような光はなく、どこか熱の帯びた闇のみが存在していた。
+		PRINTFORMW 「おまちしておりましたぁ」
+		PRINTFORMW 　%CALLNAME%はそう言いながら%CALLNAME:MASTER%の足に縋り付き、懇願するように%CALLNAME:MASTER%の顔を見上げる。
+		PRINTFORMW 　そして%CALLNAME:MASTER%の興奮した一部を嗅ぎ取ったのか、%CALLNAME%はその部分に顔を寄せる。
+		PRINTFORMW 　暗い情欲を見せ、急く%CALLNAME%に%CALLNAME:MASTER%は挨拶がまだだ、と促がした。
+		PRINTFORMW 　そして促がされた%CALLNAME%は慌て、急いで下がると、
+		PRINTFORMW 「ご、ごめんなさいですぅ。%CSTR:11%はごしゅじんさまのニクドレイですぅ。もしよろしければきょうもどうぞすきかってにおつかいくださぁい」
+		PRINTFORMW 　正座し、精一杯の媚を含んだ懇願をした。
+		PRINTFORMW 　%CALLNAME:MASTER%はその懇願を聴きうけるように、傅く%CALLNAME%の前へ行き、自身の爪先を突き出した。
+		PRINTFORMW 　それを見た%CALLNAME%は嬉しそうに、爪先の直前で舌を出し、突き出された爪先を舌で這うように舐めだす。
+		PRINTFORMW 　%CALLNAME:MASTER%はそれを満足そうに見下すと、今日はこの服従した奴隷をどう扱うか、とそんな思考を巡らせた。
 	ENDIF
 	CFLAG:201 = 5
-	RETURN 0
-ELSEIF CFLAG:201 < 6 && (TALENT:6 || TALENT:7 || TALENT:8)
-	;親愛
-	IF TALENT:6
-		PRINTFORML 「魔法少女 %CALLNAME% ！ここに降臨！」
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）なのだ。
-		PRINTFORML しかし……
-		PRINTFORMW 「あなたの精をもっとをわたしにください！！」 %CALLNAME% はハッキリ主張した。
-		PRINTFORML 魔法少女 %CALLNAME% 力も無限ではなかった。彼女が戦い続けるためには補給が必要だ。
-		PRINTFORMW 補給に最も適しているのは命の素、すなわち精……。特に彼女が恋思う相手のものが理想的。
-		PRINTFORML
-		PRINTFORML 淫らで愛しい共同生活により、洗脳調教が成功たようだ、これで身も心もこちらの思いのままだ。
-		PRINTFORMW 彼女が思っている愛と正義の恋人魔法少女として、これからもいろいろ尽くしてもらおう。
-		PRINTFORML
-		PRINTFORMW ……%CALLNAME:MASTER%は期待に震える魔法少女抱き上げベットに運んだ……
-	;娼婦
-	ELSEIF TALENT:7
-		PRINTFORML 「魔法少女 %CALLNAME%  %UNICODE(0x2661)% ここに降臨 %UNICODE(0x2661)% 」
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）だったのだが。
-		PRINTFORML しかし……
-		PRINTFORMW いつも通りに呼び出したはずの%CALLNAME%だが、今日はどこか様子がおかしい。
-		PRINTFORML 「%CSTR:12%がイケナイんですよぉ… %UNICODE(0x2661)% %CSTR:11%をこぉんなんにしちゃったんですからぁ %UNICODE(0x2661)% 」
-		PRINTFORMW 「もっともーっと、%CSTR:11%と…しましょう……%UNICODE(0x2661)% %UNICODE(0x2661)%… 」%CALLNAME:MASTER%の体をいやらしい手つきで撫で回す%CALLNAME%。
-		PRINTFORML
-		PRINTFORML 愛と正義の魔法少女は、完全に肉欲の虜なったようだ
-		PRINTFORMW 体を擦り付け、%CALLNAME:MASTER%を見上げる%CALLNAME%はまさに発情した雌の顔だった。
-		PRINTFORML
-		PRINTFORMW ……%CALLNAME:MASTER%は期待に震える魔法少女抱き上げベットに運んだ……
-	;隷属
-	ELSEIF TALENT:8
-		PRINTFORML 「魔法少女 %CALLNAME% ここに降臨」
-		PRINTFORML 魔法少女 %CALLNAME% は悪をくじく正義の魔法少女である。
-		PRINTFORMW 世にはびこる悪の根を絶やすべく日夜戦う心優しい少女（とても重要）だったのだが。
-		PRINTFORML しかし……
-		PRINTFORMW いつも通りに呼び出したはずの%CALLNAME%だが、今日はどこか様子がおかしい。
-		PRINTFORML その瞳には最初の頃のような光はなく、どこか熱の帯びた闇のみが存在していた。
-		PRINTFORMW 「…………」
-		PRINTFORMW 暗い情欲を見せる%CALLNAME%に%CALLNAME:MASTER%は「どうした」と促がした。
-		PRINTFORML %CALLNAME%は慌て、急いで下がると、
-		PRINTFORMW 「ご、ごめんなさい。%CSTR:11%は%CSTR:12%のドレイですぅ。もしよろしければきょうもどうぞすきかってにおつかいくださぁい」
-		PRINTFORML 、精一杯の媚を含んだ懇願をした。
-		PRINTFORMW 愛と正義の魔法少女の心は完全に屈したようだ
-		PRINTFORML
-		PRINTFORMW ……%CALLNAME:MASTER%は期待に震える魔法少女抱き上げベットに運んだ……
-	ENDIF
-	CFLAG:201 = 6
 	RETURN 0
 ENDIF
 
@@ -257,7 +188,7 @@ ENDIF
 ;-------------------------------------------------
 ;조수의 유무를 체크（없을 경우는 2번째 이후로 건너뛴다）
 IF ASSI < 0 
-	CALL EVENTTRAIN_SECOND_K4903
+	CALL EVENTTRAIN_SECOND_K4593
 ;조수
 ;ELSEIF NO:ASSI == Y1
 	;처음
@@ -283,95 +214,138 @@ IF ASSI < 0
 ;	ENDIF
 ;구상이 있는 조수가 없을 경우, 통상의 2번째 이후의 구상으로 건너뛴다
 ELSE
-	CALL EVENTTRAIN_SECOND_K4903
+	CALL EVENTTRAIN_SECOND_K4593
 ENDIF
 
 ;-------------------------------------------------
 ;조교 개시시（2번째 이후, X1을 캐릭터번호로 변경한다）
 ;-------------------------------------------------
-@EVENTTRAIN_SECOND_K4903
+@EVENTTRAIN_SECOND_K4593
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:202 < 4 || FLAG:7 == 2)
-	PRINTFORMl 魔法少女は敵意丸出しでこちらを睨んでいる
-	PRINTFORMW …それも可愛いかもしれない…
+	PRINTFORMW 「寄るな！　触るな！　この‥‥！」
+	PRINTFORMW 思いつく限りの罵声を浴びせかけ、火の付いたような勢いで暴れまわる%CALLNAME%を取り押さえるのは随分な手間だった。
 	CFLAG:202 = 4
 ;굴복각인Lv0
 ELSEIF MARK:2 == 0 && (CFLAG:202 < 1 || FLAG:7 == 2)
-	PRINTFORML 「こんなことぜったいに、ゆるさないだから！」
-	PRINTFORMW 魔法少女は可愛いく口を尖らせる。
+	PRINTFORMW 「ちょ、ちょっと、なに女の子の部屋に、ノックもなしに入ってきてるのよ！」
+	PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の登場に腹を立てているようだ。
+	A = RAND:3
+		IF A == 0
+			PRINTFORMW 「%CSTR:이인칭%がパパを殺した最低の下衆なのは知ってるけど、それにしても非常識よ！」
+		ELSEIF A == 1
+			PRINTFORMW 「この犯罪者！女の子をこんな目に合わせて、どうなるか分かってるわね！！」
+		ELSEIF A == 2
+			PRINTFORMW 「触らないでよ！%CSTR:이인칭%、すっごく口臭いわ！不潔！」
+		ELSE
+			PRINTFORMW 「生憎だけど、%CSTR:일인칭%は絶対に%CSTR:이인칭%の思い通りにはならないわ！」
+		ENDIF
 	CFLAG:202 = 1
 ;굴복각인Lv1
 ELSEIF MARK:2 == 1 && (CFLAG:202 < 2 || FLAG:7 == 2)
-	PRINTFORML 「うぅ……っどうして、こんな、こんなぁ……？」
-	PRINTFORMW しおらしくなってきた魔法少女もまたいいものだ。
+	A = RAND:3
+		IF A == 0
+			PRINTFORMW 「もう！%CSTR:일인칭%みたいな可愛い女の子捕まえて、こんな事ばかりして！」
+			PRINTFORMW 「少しは『お話しようか』とか、『楽しいところに連れていこう』とか考えないの！」
+		ELSEIF A == 1
+			PRINTFORMW 「ちょっと、何勝手に服脱がそうとしてるのよ！」
+			PRINTFORMW 「あんまりふざけたことしてるとひっぱたくわよ！」
+		ELSE
+			PRINTFORMW 「っきゃー！何女の子の寝室に入ってきてるのよ！この犯罪者！」
+			PRINTFORMW 「ほんっと信じられない！デリカシーのデの字ぐらい覚えなさいよ！！」
+		ENDIF
 	CFLAG:202 = 2
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
-	PRINTFORML 「いやじゃないですけどぉ…もう少しやさしくしてほしいですぅ…」
-	PRINTFORMW 魔法少女は瞳を潤ませて%CALLNAME:MASTER%を見つめている。
+	A = RAND:4
+		IF A == 0
+			PRINTFORMW 「今日も%CSTR:일인칭%みたいな可愛い女の子に、イタズラできる幸福を噛みしめなさいこの犯罪者！」
+		ELSEIF A == 1
+			PRINTFORMW 「うう、なんだか最近、取り返しが付かないことになってる気がする……」
+			PRINTFORMW 「%CSTR:이인칭%、何とかしなさいよ！」
+		ELSEIF A == 2
+			PRINTFORMW 「解放しなさいよ！%CSTR:일인칭%は%CSTR:이인칭%に復讐してやるんだから！」
+			PRINTFORMW 「パパの仇の%CSTR:이인칭%に、こんな事されて、楽しいはず無いじゃない！」
+		ELSE
+			PRINTFORMW 「脱ぐわよ！脱いでやるわよ！イーっだ！」
+			PRINTFORMW 「そのかわり、%CSTR:일인칭%を気持ち良くさせなかったら、承知しないからね！」
+		ENDIF
 	CFLAG:202 = 3
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0) && (CFLAG:202 < 4 || FLAG:7 == 2)
-	PRINTFORML 「あ、あのあのっ」
-	PRINTFORML 「さいきんはその、こういう事もいいかなぁって…」
-	PRINTFORMW 好奇心を湛えた瞳でこんな事を言ってくれる魔法少女。随分と可愛くなったものだ。
+	A = RAND:5
+		IF A == 0
+			PRINTFORMW 「『黙っていれば可愛いのに』ですって！！」
+			PRINTFORMW 「しゃべってる時は可愛くないみたいな誤解を与える発言は慎みなさい！」
+		ELSEIF A == 1
+			PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%にいつもやってるような嫌らしいことを、他の娘にもやってるのよね」
+			PRINTFORMW 「なんでかわからないけど、無性にイライラするわ」
+		ELSEIF A == 2
+			PRINTFORMW 「%CSTR:일인칭%ってかわいいわよね」
+			PRINTFORMW 「……なんでもないわ、ただの事実の確認よ！」
+		ELSEIF A == 3
+			PRINTFORMW 「もうちょっと何とかならないの！？」
+			PRINTFORMW 「そのおちんちん！もっと%CSTR:일인칭%向きの形に整形しなさいよ！半分くらい切ってきなさい！」
+		ELSE
+			PRINTFORMW 「…もしかして、%CSTR:일인칭%のこと好きなの？」
+			PRINTFORMW 「……！！ば、バカじゃないの！好きでもないのに、殺した男の娘にこんなイタズラしてるの？？」
+			PRINTFORMW 「もー、信じられない！」
+		ENDIF
 	CFLAG:202 = 4
 ;함락완료
 ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
-		K:1 = RAND:3
-		IF K:1 == 0
-			PRINTFORML 「魔法少女 %CALLNAME% ！ここに降臨！」
-			PRINTFORMW 「えへへ、今日もたくさん精…を注いでほしいですぅ！」
-		ELSEIF K:1 == 1
-			PRINTFORML 「魔法少女 %CALLNAME% ！ここに降臨！」
-			PRINTFORMW 「え、えと、出来ればチューからはじめて欲しいですぅ」
-			PRINTFORMW %CALLNAME%は目を瞑り、んー、とこちらに唇を突き出している。
+		PRINTFORMW いつも通りに%CALLNAME%の部屋に入ると、%CALLNAME%は微笑みながら出迎えてくれた。
+		PRINTFORMW 「%CSTR:이인칭%、また来たの……？もう、ホント最悪の殺人犯で誘拐犯で監禁犯で強姦魔で未成年性犯罪者でペド野郎なんだから……」
+		A = RAND:5
+		IF A == 0
+			PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%はいいとして、他の子は家に返してあげなさいよ。家族だってきっと心配してるわ。可哀想よ」
+			PRINTFORMW 「え？なんで%CSTR:일인칭%はいいのかって？う、うるさいわね。そんな事どうでもいいでしょ！キーッ！」
+		ELSEIF A == 1
+			PRINTFORMW 「%CSTR:이인칭%、これ以上被害者増やすと、いい加減捕まるわよ？世界中の女の子のために、%CSTR:일인칭%が犠牲になったげるから、%CSTR:이인칭%も%CSTR:일인칭%で満足しときなさい？」
+		ELSEIF A == 2
+			PRINTFORMW 「でも%CSTR:일인칭%……パパの仇にイタズラされて……それでも悦んじゃってて……」
+			PRINTFORMW 「パパも草葉の陰で泣いてると思うけど。」
+			PRINTFORMW 「でも、%CSTR:이인칭%から離れたくなくて、ずっと一緒に居たいから……仕方ないよね」
+		ELSEIF A == 3
+			PRINTFORMW 「何よ、またこんなちっちゃい女の子にイタズラしに来たの？」
+			PRINTFORMW %CALLNAME%は弾けるような笑顔でいつもの文句を言った……
+		ELSEIF A == 4
+			PRINTFORMW 「%CSTR:이인칭%がペドで良かった、ってちょっと思っちゃう、%CSTR:일인칭%も末期なんだけどね」
 		ELSE
-			PRINTFORMW 「あ…%CSTR:이인칭%…えへへ、」なにやら少しもじもじもしている
-			PRINTFORMW 「あ、あの…魔法少女のお勉強しとこうとおもって…それで…」
-			PRINTFORML ベッドの近くにノートＰＣが置いてある、画面を見ると「魔法少女シブリール」。
-			PRINTFORMW どうやらこのゲームにあることを実践する…もしくはされることを想像して頭が一杯になってしまったらしい。
+			PRINTFORMW 「いいよ……%CSTR:일인칭%に、いっぱいイタズラして……」
 		ENDIF
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
-			PRINTFORMW 「魔法少女 %CALLNAME% %UNICODE(0x2661)%ここに降臨 %UNICODE(0x2661)%」
-			PRINTFORML 「えへ、これでおべんきょうしましたです」と「魔法少女シブリール」のコミックを広げて見せた
-			PRINTFORMW 「えへへ、%CSTR:11%のおまんこもうじゅんびできてますから、グチュグチュにしてくださいですぅ」
+			PRINTFORMW 「えへへ、今日も%CSTR:11%のロリロリおまんこグチュグチュしてくださいですぅ」
 		ELSEIF K:1 == 1
-			PRINTFORMW 「魔法少女%CALLNAME% %UNICODE(0x2661)%ここに降臨 %UNICODE(0x2661)%」
-			PRINTFORML 「もう、ちこくですよー。ばつとして今日は%CSTR:12%の精…をひからびるまでしぼりとってあげますぅ。
+			PRINTFORMW 「もう、ちこくですよー。ばつとして今日は%CSTR:12%のMAGをひからびるまでしぼりとってあげますぅ。
 			PRINTFORMW かくごしてくださいですぅ」
 		ELSE
-			PRINTFORML 「ん……はぁ……ぴちゃぴちゃ、はぁん、ん……ぺろ」
-			PRINTFORMW %CALLNAME:MASTER%が調教部屋に着いたところ、どうやら%CALLNAME%は%CALLNAME:MASTER%を待ちきれず自身を慰めていたらしい。
-			PRINTFORML しばらくその光景を見物していた%CALLNAME:MASTER%だったが、
-			PRINTFORML その途中、%CALLNAME%がこちらに見えやすいように体の位置をずらしていた事に気が付いた。どうやらこちらに気付いていたらしい。
-			PRINTFORMW この状況により夢中になっていたのはどちらか、そのことに気付いた%CALLNAME:MASTER%は苦笑を浮かべた。
-			PRINTFORMW 「魔法少女 %CALLNAME%  %UNICODE(0x2661)%ここに降臨 %UNICODE(0x2661)%」
-			PRINTFORMW 「見てるだけでいいですかぁ？%CSTR:12%には%CSTR:11%のからだをきもちよくするぎむがあるですよぅ？」
+			PRINTFORMW 「ん……はぁ……ぴちゃぴちゃ、はぁん、ん……ぺろ」
+			PRINTFORMW 　%CALLNAME:MASTER%が調教部屋に着いたところ、どうやら%CALLNAME%は%CALLNAME:MASTER%を待ちきれず自身を慰めていたらしい。
+			PRINTFORMW 　しばらくその光景を見物していた%CALLNAME:MASTER%だったが、
+			PRINTFORMW 　その途中、%CALLNAME%がこちらに見えやすいように体の位置をずらしていた事に気が付いた。どうやらこちらに気付いていたらしい。
+			PRINTFORMW 　この状況により夢中になっていたのはどちらか、そのことに気付いた%CALLNAME:MASTER%は苦笑を浮かべた。その表情に%CALLNAME%は、
+			PRINTFORMW 「見てるだけでいいですかぁ？　%CSTR:12%には%CSTR:11%のからだをきもちよくするぎむがあるですよぅ？」
+			PRINTFORMW 　義務か、確かに%CALLNAME%の体をこんなにした責任がある。%CALLNAME:MASTER%は%CALLNAME%の言葉に頷き%CALLNAME%を押し倒した。
 		ENDIF
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
 		;랜덤으로 구상을 변경한다（사용하지 않을 경우는 전부 같게 하면 된다）
 		K:1 = RAND:3
 		IF K:1 == 0
-			PRINTFORML 「ぺろ、ぴちゃ、あしのゆびの、ん、いっぽんいっぽんまで、ちゅっちゅ、キレイキレイにするですぅ」
-			PRINTFORMW 「えへへ、あそこもキレイキレイするですかぁ…」
+			PRINTFORMW 「ぺろ、ぴちゃ、あしのゆびの、ん、いっぽんいっぽんまで、ちゅっちゅ、キレイキレイにするですぅ」
 		ELSEIF K:1 == 1
-			PRINTFORML 「%CSTR:12%ー。%CSTR:11%はおいいつけをまもれず、%CSTR:12%のことをおもってじぶんでしてしまいましたぁ。
+			PRINTFORMW 「ごしゅじんさまー。%CSTR:11%はおいいつけをまもれず、ごしゅじんさまのことをおもってオナニーしてしまいましたぁ。
 			PRINTFORMW どうぞあるじのめいれいもまもれないだめなドレイにおしおきしてくださぁい」
 		ELSE
-			PRINTFORML 調教部屋につくと%CALLNAME%は「魔法少女シブリール」のビデオを食い入るように見ている。
-			PRINTFORMW %CSTR:12%がいるのに気が付くと慌てて姿勢を正すが、なにやら少しもじもじもしている。
-			PRINTFORMW どうやら%CALLNAME%は魔法少女が凌辱される場面で下着を濡らしてしまったようだ。
-			PRINTFORML 「してないですぅ、じぶんでなんかしてないですぅ、だけど……だけどあれを見てたら……」慌てて言い訳をする。
-			PRINTFORMW はしたない奴隷魔法少女には、お仕置きが必要だろう。
+			PRINTFORMW 「んしょ、んしょ、あ、ごしゅじんさまー。え、なにしてるんだって？
+			PRINTFORMW えへへ、ごしゅじんさまがつかいやすいようにからだをほぐしてたんですぅ」
 		ENDIF
 	ENDIF
 	CFLAG:202 = 5
@@ -382,7 +356,7 @@ RETURN 0
 ;EVENTEND 관련（X1을 캐릭터번호로 치환）
 ;조교 종료시의 대사
 ;-------------------------------------------------
-@EVENTEND_K4903
+@EVENTEND_K4593
 ;SIF FLAG:7 <= 0
 ;	RETURN 0
 ;SIF TCVAR:0 == 1
@@ -407,113 +381,72 @@ RETURN 0
 DRAWLINE
 ;반발각인Lv3
 IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
-	PRINTFORML 「%CSTR:12%なんてだいっきらい！」
-	PRINTFORMW 「こんなことぜったいに、ゆるさない！」
+	PRINTFORMW 「もう……殺して……よ……パパみたいに……」
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	PRINTFORML 「やっと………」
-	PRINTFORMW 「ゆるさない、ゆるさないんっだからっ！」
+	PRINTFORMW 「やっと終わったの？」
+	PRINTFORMW 「%CSTR:일인칭%、へとへと……」
 	CFLAG:219 = 1
 ;굴복각인Lv2
 ELSEIF MARK:2 == 2
-	PRINTFORML 「…もう少しやさしくしてほしいですぅ…………」
-	PRINTFORMW 「もう…あぅ、なんでもないです」
+	PRINTFORMW 「あうぅ、もう終わりなの？」
+	PRINTFORMW 「もうちょっと…あぅ、なんでもない……」
 	CFLAG:219 = 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
-	PRINTFORML 「あうぅ、もうおわりですか？」
-	PRINTFORMW 「もうちょっと…あぅ、なんでもないです」
+	PRINTFORMW 「%CSTR:일인칭%、気持ち良かった……♪」
+	PRINTFORMW 「%CSTR:이인칭%は気持ち良かった？」
 	CFLAG:219 = 3
 ;함락완료＋체력 500미만
 ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		PRINTFORML どうやら恋人魔法少女は疲れ果てているようだ。
-		PRINTFORMW 仰向けになり目を瞑りながら呼吸を整えている。それに色気を感じ、唇をつい凝視してしまった。
-		PRINTFORMl そして衝動的に%CALLNAME%の唇を自身の唇で塞いだ。
-		PRINTFORMW 「んっ！んむっ、ん、はむ……チュ……チュ」
-		PRINTFORML %CALLNAME%は最初は驚いていたものの、途中からこちらの頭を腕で抑え、積極的に唾液を交換してきた。
-		PRINTFORML 「んちゅ、はふぅ、えへへ、どうしたですかぁ？はむ、まだシ足りないんですかぁ、はぁん……チュ……チュ」
-		PRINTFORMW その後、三十分に亘り口付けを交し合った。
+		PRINTFORMW 　どうやら%CALLNAME%は疲れ果てているようだ。
+		PRINTFORMW 　仰向けになり目を瞑りながら呼吸を整えている。それに色気を感じ、唇をつい凝視してしまった。
+		PRINTFORMW 　そして衝動的に%CALLNAME%の唇を自身の唇で塞いだ。
+		PRINTFORMW 「んっ！　んむっ、ん、はむ……チュ……チュ」
+		PRINTFORMW 　%CALLNAME%は最初は驚いていたものの、途中からこちらの頭を腕で抑え、積極的に唾液を交換してきた。
+		PRINTFORMW 「んちゅ、はふぅ、えへ、どうしたの？　はむ、まだイタズラし足りないの、このペド野郎……はぁん……チュ……チュ」
+		PRINTFORMW 　その後、三十分に亘り口付けを交し合った。
 	;음란, 창부
 	ELSEIF TALENT:4 || TALENT:7
-		PRINTFORML 「はぁはぁはぁ、すごーい、%CSTR:11%もうからだにちからはいんないですぅ」
-		PRINTFORMW 淫乱魔法少女は満足そうにそう言うと、%CALLNAME:MASTER%に抱きつき、顔を擦りつけた。
-		PRINTFORML 「えへへ、%CSTR:12%はどうですぅ？%CSTR:11%のからだでまんぞくしてくれましたかぁ？」
-		PRINTFORMW その質問に%CALLNAME:MASTER%は頷く。それを見た%CALLNAME%は嬉しそうに笑みを浮かべ、
-		PRINTFORML 「よかったですぅ。えへへ、やっぱり%CSTR:11%と%CSTR:12%はからだのあいしょうがいいんですぅ。
+		PRINTFORMW 「はぁはぁはぁ、すごーい、%CSTR:11%もうからだにちからはいんないですぅ」
+		PRINTFORMW 　%CALLNAME%は満足そうにそう言うと、%CALLNAME:MASTER%に抱きつき、顔を擦りつけた。
+		PRINTFORMW 「えへへ、%CSTR:12%はどうですぅ？　%CSTR:11%のからだでまんぞくしてくれましたかぁ？」
+		PRINTFORMW 　その質問に%CALLNAME:MASTER%は頷く。それを見た%CALLNAME%は嬉しそうに笑みを浮かべ、
+		PRINTFORMW 「よかったですぅ。えへへ、やっぱり%CSTR:11%と%CSTR:12%はからだのあいしょうがいいんですぅ。
 		PRINTFORMW これからは、もっともーっと%CSTR:11%とエッチするですぅ。そうすればおたがいきもちよくてしあわせですぅ」
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		PRINTFORMW %CALLNAME:MASTER%の行為の汚れを拭き取ろうと、近寄ろうとした奴隷魔法少女を制止した。
-		PRINTFORML 「はぁはぁ、あぅ、もうしわけありませんですぅ」
-		PRINTFORMW どうやら疲れ果てて奉仕どころではないらしい。%CALLNAME:MASTER%は自身がやりすぎた事に気付いたが反省はしなかった。
+		PRINTFORMW 　%CALLNAME:MASTER%はタオルを持って、%CALLNAME:MASTER%の行為の汚れを拭き取ろうと近寄ろうとした%CALLNAME%を制止した。
+		PRINTFORMW 「はぁはぁ、あぅ、もうしわけありませんですぅ」
+		PRINTFORMW 　どうやら疲れ果てて奉仕どころではないらしい。%CALLNAME:MASTER%は自身がやりすぎた事に気付いたが反省はしなかった。
 	ENDIF
 	CFLAG:218 = 1
 ;함락완료
 ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 	;연모, 친애
 	IF TALENT:3 || TALENT:6
-		PRINTFORML  「えへへ、%CSTR:12%」
-		PRINTFORMW 自身を呼ぶ声に、なんだ、と聞くと、
-		PRINTFORML 「なぁんでもなぁいですよー。ふふふ」
-		PRINTFORMW という答えが返ってきた。とりあえず頭を撫でてみる。
-		PRINTFORML 「はふぅ。んー、すりすり」
-		PRINTFORMW すると恋人魔法少女はこちらの腕を取り、それに自身の顔を埋めるとすりすりし始めた。
-		PRINTFORML 「えへへ、愛してるですよ、%CSTR:12%」
-		PRINTFORMW 小声で言ったつもりだろうがしっかり聞こえてる。
-		PRINTFORMW こちらも、愛してる、と返答すると顔を真っ赤にして抱きついてきた。
-	;음란
-	ELSEIF TALENT:4
-		PRINTFORML 終わりを告げると%CALLNAME%は不満そうに、頬を膨らまし、%CALLNAME:MASTER%に抗議してきた。
-		PRINTFORMW 「えー、もうおわりですかぁ？%CSTR:11%はまだまだイきたりないですぅ」
-		PRINTFORML
-		IF BASE:0 > 800
-			PRINTFORMW 淫乱魔法少女は違うナニかを想像しながら自慰に没頭し始めた
-			PRINTFORML
-			K:1 = RAND:3
-			IF K:1 == 0
-				PRINTFORMW (オルトロス、おかおが二つ、あそこも二つ、二つのおちんちんでうしろからいっぺんに……)
-			ELSEIF K:1 == 1
-				PRINTFORMW (ピクシーちゃんのようせいバイブとか、びりびり きてすごそうてすぅ、おしりに……)
-			ELSE
-				PRINTFORMW (サキュバスおねえさんのおっきなおっぱいに、おかおうずめて、おねえさんのおちんちんで……)
-			ENDIF
-		ENDIF
-	;娼婦
-	ELSEIF TALENT:7
-		PRINTFORML 終わりを告げると%CALLNAME%は不満そうに、頬を膨らまし、%CALLNAME:MASTER%に抗議してきた。
-		PRINTFORMW 「えー、もうおわりですかぁ？%CSTR:11%はまだまだイきたりないですぅ」
-		PRINTFORMl しばらくグチグチと不満を垂れ流していたが、それにも飽きたのか、今度は自身の体を弄りながらこう言った。
-		PRINTFORMW 「うー、あんまりなさけないとうわきしますですよぉ？ふふふ、」
-		PRINTFORML
-		PRINTFORMW 淫乱魔法少女は違うナニかを想像しながら自慰に没頭し始めたた。
-		PRINTFORML
-		K:1 = RAND:4
-		IF K:1 == 0
-			PRINTFORML (ヘカーテおばさん、おかおが三つ、おくすりつかってみつなりに、えへへ、)
-			PRINTFORMW 　　　　　　　　　　　　ムチでしばかれながらいっぺんに……おねえさんとおよび、ビシッ…………)
-		ELSEIF K:1 == 1
-			PRINTFORMW (アリスちゃんのかわいいおててが、わたしのあそこにずこずこ……)
-			PRINTFORMW 　アリスちゃんが、ふたり、かわいいおててが、わたしのあそことおしりに……
-			PRINTFORMW 　 アリスちゃんが、さんにん、かわいいおててが、わたしのあそことおしりと……)
-		ELSEIF K:1 == 2
-			PRINTFORML (まほうのバイブがうえでおどっているとかいう、あくまのなくテーブル…………
-			PRINTFORMW 　　　　　　　　　　　　　　　　　　　そのうえですれば、%CSTR:12%のだけでなく…………)
-		ELSE
-			PRINTFORMW (%CSTR:12%のドッペルゲンガーとかもよびだせば、二倍いけそうですぅ……)
-		ENDIF
-	;복종
-	ELSEIF TALENT:5
-		PRINTFORML 「%CSTR:12%ー、からだをおふきしますですぅ」
-		PRINTFORMW 行為が終わった後、奴隷魔法少女はティシュを手に取り%CALLNAME:MASTER%の体の汚れを嬉しそうに拭い始めた。
-		PRINTFORMW 「ふきふき、えへへ、%CSTR:12%、いたくないですぅ？」
-	;隷属
-	ELSEIF TALENT:8
-		PRINTFORML 「%CSTR:12%ー、あそこきれいにしますですぅ」
-		PRINTFORMW 行為が終わった後、奴隷魔法少女はひざまずき%CALLNAME:MASTER%のペニスを嬉しそうになめ始めた。
-		PRINTFORMW 「えへへ、%CSTR:12%、きれい　きれい　きもちいいですぅ？」
+		PRINTFORMW 「……えへへ、%CSTR:이인칭%……」なんだ、と聞くと、
+		PRINTFORMW 「なぁんでもなぁーいー……えへへ、今日もいっぱいイタズラしたねーこのヘンタイ%UNICODE(0x2661)%ふふふ」
+		PRINTFORMW 小憎らしくも甘く濡れた%CALLNAME%の声に、とりあえず頭を撫でてみる。
+		PRINTFORMW 「はふぅ。いやーんオモチャにされてるーすりすり」
+		PRINTFORMW %CALLNAME%はその腕を取ると、自分の顔を埋めて頬擦りをし始めた。
+		PRINTFORMW 「えへへ、愛してる、よ%CSTR:이인칭%」%CALLNAME%は小声で言ったつもりだろうがしっかり聞こえてる。
+		PRINTFORMW 「愛してる」と返答すると、%CALLNAME%は顔を真っ赤にして抱きついてきた。
+	;음란, 창부
+	ELSEIF TALENT:4 || TALENT:7
+		PRINTFORMW 　終わりを告げると%CALLNAME%は不満そうに、頬を膨らまし、%CALLNAME:MASTER%に抗議してきた。
+		PRINTFORMW 「えー、もうおわりですかぁ？　%CSTR:11%はまだまだイきたりないですぅ」
+		PRINTFORMW 　しばらくグチグチと不満を垂れ流していたが、それにも飽きたのか、今度は自身の体を弄りながらこう言った。
+		PRINTFORMW 「うー、あんまりなさけないとうわきしますですよぉ？　ふふ、オニのおちんちんとかもっと持続力ありそうですぅ」
+		PRINTFORMW 　%CALLNAME%は%CALLNAME:MASTER%を見るのをやめ、違うナニかを想像しながら自慰に没頭し始めた。
+	;복종, 예속
+	ELSEIF TALENT:5 || TALENT:8
+		PRINTFORMW 「ごしゅじんさまー、からだをおふきしますですぅ」
+		PRINTFORMW 　行為が終わった後、%CALLNAME%はタオルを手に取り%CALLNAME:MASTER%の体の汚れを嬉しそうに拭い始めた。
+		PRINTFORMW 「ふきふき、えへへ、ごしゅじんさまぁ、いたくないですぅ？」
 	ENDIF
 	CFLAG:219 = 4
 ENDIF
@@ -523,7 +456,7 @@ RETURN 0
 ;@KOJO_MESSAGE_COM 관련（X1을 캐릭터번호로 치환）
 ;커맨드 실행시에 출력됩니다
 ;--------------------------------------------------
-@KOJO_MESSAGE_COM_K4903
+@KOJO_MESSAGE_COM_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0
@@ -536,12 +469,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_COM_PY1_K4903
+;	CALL KOJO_MESSAGE_COM_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_COM_PY1_K4903
+;		CALL KOJO_MESSAGE_COM_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -559,41 +492,39 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:300 == 0
-			PRINTFORML 「やっ、やめてください！さわらないで！このっ！」
-			PRINTFORML 淫らな格好にされた魔法少女の身体を手で探り、性感帯をいじってやる。
-			PRINTFORMW 「んっ……こんなことぜったいに、ひぅ %UNICODE(0x2661)% ゆるさない、ゆるさないんっだからっ！」
+			PRINTFORMW 「ちょ、どこ触って‥‥離して、離せッ！」
+			PRINTFORMW 真っ赤になって抵抗する%CALLNAME%の唇を無理矢理奪い、身体を弄ぶ。
+			PRINTFORMW %CALLNAME%の罵声混じりの抵抗はなかなか止まなかった。
 			CFLAG:300 = 1
 		;2번째 이후
 		ELSE
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:300 < 4 || FLAG:7 == 2)
 				;연모, 친애
-					IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふわぁ %UNICODE(0x2661)% や、やさしくおねがいします……やっ、んぅ %UNICODE(0x2661)% 」
-					PRINTFORMW 美しいく柔らかい少女の身体を手で弄っていく。
-					PRINTFORML 恋人魔法少女の身体はどこを撫でられても気持ち良いらしく、体を震わせて喘いだ……
-					PRINTFORMW 「やだ、あっ %UNICODE(0x2661)% あなたのて、あったかくて、きもちいいですっ %UNICODE(0x2661)% 」
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 「チュ……チュ……はぁん」
+					PRINTFORMW 「いいのぉ……もっと、もっとぉ……%CSTR:일인칭%に、イタズラしてぇ%UNICODE(0x2661)%」
+					PRINTFORMW 「おっきな%CSTR:이인칭%の手で、ちっちゃな%CSTR:일인칭%のカラダ、弄り回してぇ%UNICODE(0x2661)%」
+					PRINTFORMW 　%CALLNAME%は潤んだ瞳でこちらを見上げつつ、%CALLNAME:MASTER%の体に全身を擦りつけてくる。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 美しいく柔らかい少女の身体を手で弄っていく。
 					PRINTFORMW 「やぁん、いやらしいてつきですぅ。ん、はぁん、い、いいですぅ、もっとぉ」
-					PRINTFORMW 淫乱魔法少女の身体はどこを撫でられても気持ち良いらしく、体を震わせて喘いだ……
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 美しいく柔らかい少女の身体を手で弄っていく。
-					PRINTFORMW 「あくぅっ、はぁ、はぁ、えへへ、%CSTR:12%のてがたがついてますぅ」
-					PRINTFORMW 「はぁはぁ、あぁ、つよくてまっかならくいんがついてますぅ。%CSTR:12%の物だってしるしもっとつけてくださいですぅ」
+					PRINTFORMW 「あくぅっ、はぁ、はぁ、えへへ、ごしゅじんさまのてがたがついてますぅ」
+					PRINTFORMW 「はぁはぁ、あぁ、つよくてまっかならくいんがついてますぅ。ごしゅじんさまの物だってしるしもっとつけてくださいですぅ」
 				ENDIF
 				CFLAG:300 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:300 < 3 || FLAG:7 == 2)
-					PRINTFORML 「あはっ、そこきもちいぃです、もっとしてくださぁい♪」
-					PRINTFORMW 火照った身体を撫で回されるたびに魔法少女は甘い声を上げるようになってきた。
+					PRINTFORML 「く、く‥‥ぅ‥‥」
+					PRINTFORML %CALLNAME%は喘ぎを堪えながら、悔しそうに涙眼でこちらを睨んでくる。
+					PRINTFORMW しかし、%CALLNAME:MASTER%が動くたび、%CALLNAME%の身体は確実に反応している。
 				CFLAG:300 = 3
 			;그 이외
 			ELSEIF CFLAG:300 < 2 || FLAG:7 == 2
-				PRINTFORML 「やっ、やめてください！さわらないで！このっ！」
-				PRINTFORMW 性感帯をいじってやると、魔法少女は小さな体を揺らして必死に快楽に耐えている……
+				PRINTFORML 「う…ぅ……ふん…」
+				PRINTFORMW %CALLNAME%は恨みがましげにこっちを睨み付けている
 				CFLAG:300 = 2
 			ENDIF
 		ENDIF
@@ -605,10 +536,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:301 == 0
-			PRINTFORML 「ひやぁっ！？なにを、このへんたい！やめっ、やめてっ！ふひいっ！」
-			PRINTFORMW 抵抗を続ける%CALLNAME%の秘貝に舌を這わせ、唾液と共にじっくりと愛撫してやる。
-			PRINTFORML 悲鳴を上げて逃れようとするが、拘束された魔法少女は羞恥と快楽を拒む事は許されなかった……
-			PRINTFORMW 「いや、いやぁ！こんなやつに、なめられるなんていやですぅ！ひっ %UNICODE(0x2661)% ああっ %UNICODE(0x2661)% 」
+			PRINTFORMW 「え、なにするの？」
+			PRINTFORMW 「%CSTR:이인칭%どこなめて…やぁぁんっ！」
 			CFLAG:301 = 1
 		;2번째 이후
 		ELSE
@@ -616,30 +545,28 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:301 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ひゃんっ %UNICODE(0x2661)% は、はずかしいですけど、…精…もらうじゅんびしないと……やぁっ %UNICODE(0x2661)% 」
-					PRINTFORMW 羞恥に身を震わせる%CALLNAME%の秘貝を、唾液をたっぷり絡めた舌で舐めほぐしていく。
-					PRINTFORML 恋する魔法少女の肉体は、舌愛撫の与える快楽を受け入れて小さな尻を震わせた……
-					PRINTFORMW 「あっ %UNICODE(0x2661)% あっ %UNICODE(0x2661)% ていねいになめちゃいやですっ %UNICODE(0x2661)% おなかのおくきゅうってなるのぉ %UNICODE(0x2661)% 」
+					PRINTFORMW 「ん、ひゃん、%CSTR:이인칭%のおっきな口で、あん、%CSTR:일인칭%のちっちゃいアソコ、食べられてるのぉ……%UNICODE(0x2661)%」
+					PRINTFORMW 舌で陰阜が覆い尽くせるほど小さなソコは、舐めても舐めても蜜が奥から溢れ出てくる。蜜壷とはよく言ったものだ。
+					PRINTFORMW 小豆より小さな突起を優しく舐めると、さらに蜜が溢れだす。
+					PRINTFORMW 「あ、くぅんっ、クリトリスまで、弄っちゃ、やぁぁぁん%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「はぁん、いい、いいのぉ。もっとぉ、もっと%CSTR:11%のぼっきクリちゃんすってぇ！」
-					PRINTFORMW 淫乱魔法少女の肉体は、舌愛撫の与える快楽を受け入れて小さな尻を震わせた……
+					PRINTFORMW 「はぁん、いい、いいのぉ。もっとぉ、もっと%CSTR:11%のぼっきクリちゃんすってぇ！」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「ああん、%CSTR:12%が%CSTR:11%のオマメさんなめてくれてるですぅ」
-					PRINTFORMW 「あ、あ、んぅ、%CSTR:12%のしたが、はぁん、かわムキムキって、ひやぁぁぁん、すわれてるですぅ！」
+					PRINTFORMW 「ああん、ごしゅじんさまが%CSTR:11%のオマメさんなめてくれてるですぅ」
+					PRINTFORMW 「あ、あ、んぅ、ごしゅじんさまのしたが、はぁん、かわムキムキって、ひやぁぁぁん、すわれてるですぅ！」
 				ENDIF
 				CFLAG:301 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:301 < 3 || FLAG:7 == 2)
-				PRINTFORML 「いやです、ダメですぅ！」抵抗を続ける魔法少女だが、じっくりと舌で愛撫してやると、
-				PRINTFORMW 「そんなになめないでくださぁい…ひゃぁんっ♪」甘い声を上げるようになってきた
+				PRINTFORMW 「嫌、恥ずかしい！」
+				PRINTFORMW 「そんなに見ないで……ひゃぁんっ♪」
 				CFLAG:301 = 3
 			;그 이외
 			ELSEIF CFLAG:301 < 2 || FLAG:7 == 2
-				PRINTFORML 「ひやぁっ！？なにを、このへんたい！やめっ、やめなさい！ふひいっ！」
-				PRINTFORMW 抵抗を続ける魔法少女の秘貝に舌を這わせ、唾液と共にじっくりと愛撫してやる。
-				CFLAG:301 = 2
+			PRINTFORMW 「変態！変態！変態！見るな舐めるな嗅ぐなー！！」
+			CFLAG:301 = 2
 			ENDIF
 		ENDIF
 
@@ -685,9 +612,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:303 == 0
-			PRINTFORML 逃げ場のない%CALLNAME%の膣内に遠慮なく指を挿入し、秘肉をかき回す。
-			PRINTFORML 「やだやだぁ！やめててくださいっ！そこはダメなんですから！やめてぇ！ひぎっ %UNICODE(0x2661)% やぁぁ %UNICODE(0x2661)% 」
-			PRINTFORMW 女の恥部を一方的に弄られて悲鳴を上げる魔法少女は、敗者の屈辱に身を犯されていく……
+			PRINTFORMW 「ふえぇ！？な、なにすんのよ！？」
+			PRINTFORMW 「やぁぁ、ゆびがぁ……%CSTR:이인칭%のゆびが入ってくる……っ」
 			CFLAG:303 = 1
 		;2번째 이후
 		ELSE
@@ -695,34 +621,29 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:303 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「んふぁ･･･なかっ、もっと、してくださいっ」
-					PRINTFORMW 「あったかくてやさしくて、きもちいいですぅ…。%CSTR:12%･･･♪」
-					PRINTFORML 「あっ、やぁっ %UNICODE(0x2661)% 貴方の指が、なかでうごいてますっ %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%の膣内を指で刺激し、補給のための慣らしを手伝ってやる。
-					PRINTFORML 恋人魔法少女の期待を表すように、絡み付く膣肉は指先を歓迎した……
-					PRINTFORMW 「んくぅ %UNICODE(0x2661)% おなか、キュンってしちゃいます……貴方が欲しくなっちゃう %UNICODE(0x2661)% 」
+					PRINTFORMW 「いやぁぁん%UNICODE(0x2661)%そんな……太い、指で、なかっ、いじったら%UNICODE(0x2661)%」
+					PRINTFORMW 「ヘンタイぃぃ、あったかくてやさしくて、きもちいいよぅ……%CSTR:이인칭%%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「はぁんっ♪ %CSTR:12%のゆびで…%CSTR:11%をおかしてくださぁい♪」
-					PRINTFORMW 淫乱魔法少女は%CALLNAME:MASTER%の指の感触だけで愛液を溢れさせている…
-					PRINTFORML 「ふあぁ…きもちいいですぅ♪」
+					PRINTFORMW 「はぁんっ♪ %CSTR:12%のゆびで…%CSTR:11%をおかしてくださぁい♪」
+					PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の指の感触だけで愛液を溢れさせている…
+					PRINTFORMW 「ふあぁ…きもちいいですぅ♪」
 					PRINTFORMW 「もっとつよくしても良いんですよぉ？…ふぁぁぁ♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
 					PRINTFORMW 「%CSTR:12%の…スキにして、いじってぇ…っ…おかしくしてぇ…♪」
-					PRINTFORML 奴隷魔法少女の期待を表すように、絡み付く膣肉は指先を歓迎した……
 					PRINTFORMW 「そこらめぇっ！そこいじられたら、あああ～っ♪イっちゃいますぅぅぅ…♪」
 				ENDIF
 				CFLAG:303 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:303 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ふぁあぁ…%CSTR:12%のゆびがぁ…ゆぅっくりはいってくぅ♪」
-				PRINTFORMW 「はぁん…%CSTR:12%のゆび、きもちいいですぅ…っ %UNICODE(0x2661)% 」だいぶん感じるようになってきた
+				PRINTFORMW 「ふぁあぁ…%CSTR:이인칭%のゆびがぁ…ゆぅっくりはいってくぅ♪」
+				PRINTFORMW 「はぁん…%CSTR:이인칭%のゆび、きもちいい…っ%UNICODE(0x2661)%」
 				CFLAG:303 = 3
 			;그 이외
 			ELSEIF CFLAG:303 < 2 || FLAG:7 == 2
-				PRINTFORML 「うぅぅ、やめてください…」一方的に弄られて悲鳴を上げる魔法少女だったか……
-				PRINTFORMW 「そこは…やめてください……はぅぅん…」
+				PRINTFORMW 「バカバカバカバカ、やめなさいよぅ……」
+				PRINTFORMW 「オンナノコのソコに、汚い指入れないでよ！！！」
 				CFLAG:303 = 2
 			ENDIF
 		ENDIF
@@ -734,9 +655,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:304 == 0
-			PRINTFORML 「なにをして、ひぃっ！？や、いや……そんな、そこはイヤぁ！」
-			PRINTFORML 悲鳴を上げてもがく%CALLNAME%の小さな尻を鷲掴みにし、肛門を舌でほじってやる。
-			PRINTFORMW 「や……ぅあ……！こんなことやめて……おねがいですから……ひゃう！あっ %UNICODE(0x2661)% やだ、やなのぉっ %UNICODE(0x2661)% 」
+			PRINTFORMW 「ひゃんっ、な、なにすんのよ！？」
+			PRINTFORMW 「だめぇ、そこ汚いぃっ！？」
 			CFLAG:304 = 1
 		;2번째 이후
 		ELSE
@@ -744,31 +664,30 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:304 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ココでも、ほきゅうはできますけど……んひっ %UNICODE(0x2661)% そんなにになめちゃ、ダメですよぉ %UNICODE(0x2661)% 」
-					PRINTFORML %CALLNAME%の桃尻を掴み、すぼまったアナルに舌を這わせる。
-					PRINTFORML じっくり舐めほぐしてやる内に、恋人魔法少女の声が甘さを増していく……
-					PRINTFORMW 「うぁぁ…… %UNICODE(0x2661)% 舌が、あなたのがおしりにぃ……こ、こんなのでかんじちゃうなんて…… %UNICODE(0x2661)% 」
+					PRINTFORMW 「ぁん…こんなとこまでキスするなんて……%CSTR:이인칭%、ホントヘンタイなんだからぁ%UNICODE(0x2661)%」
+					PRINTFORMW 「ヘンタイの%CSTR:이인칭%に、こんなトコまでイタズラされて、%CSTR:일인칭%、とっても嬉しいのぉ%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:일인칭%……%CSTR:이인칭%の舌でイかせてもらいたいから……」
+					PRINTFORMW 「だからもっとペロペロしてぇ%UNICODE(0x2661)%ひゃうぅぅん%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「ふぁぁ♪%CSTR:12%の舌がぁ…にゅぐにゅぐしてますぅ♪」
-					PRINTFORML 「あっ、はぁ♪ %CSTR:12%のおかげでココをなめられるの大好きになっちゃったですぅ♪」
+					PRINTFORMW 「ふぁぁ♪%CSTR:12%の舌がぁ…にゅぐにゅぐしてますぅ♪」
+					PRINTFORMW 「あっ、はぁ♪ %CSTR:12%のおかげでココをなめられるの大好きになっちゃったですぅ♪」
 					PRINTFORMW 「あぁぁ…はぁぁ♪ もっとしてぇ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「%CSTR:11%のココ…なめてもらえるですか？」
+					PRINTFORMW 「%CSTR:11%のココ…なめてもらえるですか？」
 					PRINTFORMW 「あ…ふぁぁ……、%CSTR:11%、うれしいですぅ♪あひゃぁん♪」
 				ENDIF
 				CFLAG:304 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:304 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ひゃうぅん♪おしりきもちいいですぅ♪」
-				PRINTFORMW 「%CSTR:12%の、あったかくてにゅるんにゅるんしてきもちいぃ %UNICODE(0x2661)% 」
+				PRINTFORMW 「ひゃうぅん♪おしりきもちいい♪」
+				PRINTFORMW 「%CSTR:이인칭%の舌、あったかくてにゅるんにゅるんしてきもちいぃ%UNICODE(0x2661)%」
 				CFLAG:304 = 3
 			;그 이외
 			ELSEIF CFLAG:304 < 2 || FLAG:7 == 2
-				PRINTFORML 「何をして、ひぃっ！？や、いや……そんな、そこはイヤぁ！」
-				PRINTFORML アナルを舐められる感覚に魔法少女は打ちのめされ、徐々に腰の力が抜けて行く……
-				PRINTFORMW 「や……ぅあ……！こんなことやめて……おねがいですから……ひゃう！あっ %UNICODE(0x2661)% やだ、やなのぉっ %UNICODE(0x2661)% 」
+				PRINTFORMW 「汚いって言ってるのにぃ…」
+				PRINTFORMW 「%CSTR:이인칭%、ホントにヘンタイね！？　うぅぅ…」
 				CFLAG:304 = 2
 			ENDIF
 		ENDIF
@@ -780,9 +699,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:305 == 0
-			PRINTFORMW 「そんなとこっ…！だめですぅ…」
-			PRINTFORML 無駄な抵抗を続ける魔法少女の尻を広げ、ひくつくアナルを愛撫してやる。
-			PRINTFORMW 「ぃぐ、うぅ……！イヤなの、そこはいやぁ……！あぐ、ひぃっ %UNICODE(0x2661)% ふぐぅ %UNICODE(0x2661)% 」
+			PRINTFORMW 「……んんっ……」
+			PRINTFORMW 「そんなとこっ……！だめぇ……」
 			CFLAG:305 = 1
 		;2번째 이후
 		ELSE
@@ -790,34 +708,31 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:305 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「らめぇ…らめ…ですぅ…♪そんな、おしりのあななんて、おしりでエッチになっちゃうなんてぇ %UNICODE(0x2661)% 」
-					PRINTFORMW 桃尻をくねらせる%CALLNAME%の尻穴を、少しずつ開発していく。
-					PRINTFORML 肛門を弄られる感覚に悶える恋人魔法少女は、刺激に合わせて小さな体を揺らしている……
-					PRINTFORMW 「んひっ %UNICODE(0x2661)% あ、あっ……おしりなのに、おまんこじゃないのに、ほきゅうのじゅんびできちゃいますよぉ %UNICODE(0x2661)% 」
+					PRINTFORMW 「らめぇ…らめ…ぇ…%UNICODE(0x2661)%」
+					PRINTFORMW 「おしり、ヘンタイの、%CSTR:이인칭%に、いっぱい、イタズラされて、敏感に、なっちゃったから、さわっちゃ……や、はぁん…%UNICODE(0x2661)%」
+					PRINTFORMW 「あっ、はぁ♪おっ、おしりのあなぁっ！ごしごしされて、アタマぼあーってなるぅっ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「いっ……ひぃぃぃぃぃっ♪」
+					PRINTFORMW 「いっ……ひぃぃぃぃぃっ♪」
 					PRINTFORMW 「%CSTR:11%のおしりっ、おかしくなっちゃいましたぁ♪」
-					PRINTFORML 淫乱魔法少女の菊門が妖しく蠢き、愛撫する%CALLNAME:MASTER%の指を呑み込んできゅうきゅうと締め付ける…
+					PRINTFORML %CALLNAME%の菊門が妖しく蠢き、愛撫する%CALLNAME:MASTER%の指を呑み込んできゅうきゅうと締め付ける…
 					PRINTFORMW 「んくぅ♪ もっといぢめてくださいぃっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あーっ♪あぁーっ♪」
+					PRINTFORMW 「あーっ♪あぁーっ♪」
 					PRINTFORMW 「もっとぉっ♪ ほじほじしてくださいぃ♪」
-					PRINTFORML 「おひりもっとずぼずぼしてぇっ♪ きゃうぅっ♪」
-					PRINTFORMW %CALLNAME:MASTER%の指が出し入れされるたび、奴隷魔法少女は歓喜の声を上げている。
+					PRINTFORMW 「おひりもっとずぼずぼしてぇっ♪ きゃうぅっ♪」
+					PRINTFORMW %CALLNAME:MASTER%の指が出し入れされるたび、%CALLNAME%は歓喜の声を上げている。
 				ENDIF
 				CFLAG:305 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:305 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ひゃうぅ…っ、おしりダメぇっ！」
-				PRINTFORMW 「%CSTR:12%のゆびでずぼずぼってされるとぉ、ぞくぞくってきちゃうですぅっ♪」
+				PRINTFORMW 「ひゃうぅ…っ、おしりダメぇっ！」
+				PRINTFORMW 「%CSTR:이인칭%のゆびでずぼずぼされるとぉ、ゾクゾクってきちゃうぅっ♪」
 				CFLAG:305 = 3
 			;그 이외
 			ELSEIF CFLAG:305 < 2 || FLAG:7 == 2
-				PRINTFORML 「ひぎっ！やだ、もうやめてください！おしりになにかするのやめてぇ！」
-				PRINTFORML 肛門を開発される感覚から逃れる事が出来ず、魔法少女は歯を食いしばって耐えるしかない……
-				PRINTFORMW 「ぃぐ、うぅ……！イヤなの、おしりはいやぁ……！あぐ、ひぃっ %UNICODE(0x2661)% ふぐぅ %UNICODE(0x2661)% 」
+				PRINTFORMW 「んんっ…ちょっといたいのにっ……」
 				CFLAG:305 = 2
 			ENDIF
 		ENDIF
@@ -829,9 +744,9 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:306 == 0
-			PRINTFORML 「やん、そこおっぱい…だめっやっ、この……はなして！イヤぁ！」
-			PRINTFORML 無駄なあがきを軽くあしらい、魔法少女の胸を揉みしだく。
-			PRINTFORMW 「やだ、こんなの……きもちよくない、よくないんだからぁ……ひっ %UNICODE(0x2661)% あぅ %UNICODE(0x2661)% 」
+			PRINTFORMW 「えぇ、な、なにするの？」
+			PRINTFORMW 「やん、そこおっぱい…だめ……っ」
+			PRINTFORMW %CALLNAME%はくすぐったそうにしている。
 			CFLAG:306 = 1
 		;2번째 이후
 		ELSE
@@ -839,31 +754,29 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふぁ、ふぁぁぁあ！きもちいいですぅ♪もっとしてくださいぃ♪あぁぁ！」
-					PRINTFORMW %CALLNAME%の胸を優しく揉むと、敏感な反応が返ってくる。
-					PRINTFORML 揉めば揉むだけ恋人魔法少女の声は甘くなり、小さな体を揺らして喘いでいる……
-					PRINTFORMW 「んっ %UNICODE(0x2661)% やぁ……あなたにもまれると、どんどんきもち良くなっちゃいます %UNICODE(0x2661)% 」
+					PRINTFORMW 「ふぁ、ふぁぁぁあ！きもちいいぃ%UNICODE(0x2661)%もっとしてぇ%UNICODE(0x2661)%あぁぁ！」
+					PRINTFORMW 「きゅぅぅん%UNICODE(0x2661)%すごいぃぃぃ！！！もっとぉ…もっとしてぇぇ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「む、むねぇっ♪ おっぱいぃぃっ♪ おっぱい、しゅごいですぅっ♪」
-					PRINTFORML 淫乱魔法少女は 叫びにも似た大きな声で あえぎ続ける…
+					PRINTFORML %CALLNAME%は 叫びにも似た大きな声で あえぎ続ける…
 					PRINTFORMW 「あ゛ぁぁっ♪ んひぃぃっ♪ おかしくなっちゃうれしゅぅっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「んん、あん、%CSTR:12%。どうです、%CSTR:11%のおっぱいのもみごこちはぁ？」
+					PRINTFORMW 「んん、あん、ごしゅじんさまぁ。どうです、%CSTR:11%のおっぱいのもみごこちはぁ？」
 				ENDIF
 				CFLAG:306 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
-				PRINTFORML 「%CSTR:12%のてのひらが、おっぱいにぴったりくっついて…」
-				PRINTFORML 「とてもあったかいですぅ…♪あはぁ…♪」
-				PRINTFORMW 「きもちいいですぅ…ふわーってなっちゃいますぅ…♪」
+				PRINTFORMW 「%CSTR:이인칭%のてのひらが、おっぱいにぴったりくっついて…」
+				PRINTFORMW 「とてもあったかい……♪あはぁ…♪」
+				PRINTFORMW 「きもちいい……ふわーってなっちゃうぅ……♪」
 				CFLAG:306 = 3
 			;그 이외
 			ELSEIF CFLAG:306 < 2 || FLAG:7 == 2
-				PRINTFORML 「ふにふにしないで！やっ、この……はなして！イヤぁ！」
-				PRINTFORML 胸を手で包みこね回してやると、徐々に魔法少女の息が上がっていく…………
-				PRINTFORMW 「やだ、こんなの……気持ち良くない、良くないんだからぁ……ひっ %UNICODE(0x2661)% あぅ %UNICODE(0x2661)% 」
+				PRINTFORMW 「またおっぱいふにふにするの？」
+				PRINTFORMW 「楽しいの？バカなの…？んふっ…」
+				PRINTFORMW 「き、きもちよくなんかなってないわよ！くすぐったいだけよ！」
 				CFLAG:306 = 2
 			ENDIF
 		ENDIF
@@ -875,9 +788,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:307 == 0
-			PRINTFORML 「くひぃ！やっ、はなして！さきっぽダメぇ！あっ！」
-			PRINTFORML 魔法少女の無駄な静止を振り払い、可愛らしい乳首を容赦なく弄んでやる。
-			PRINTFORMW 「やめて、ください……！こねるのも、すうのもイヤぁ！もう、こんな……ひぅ %UNICODE(0x2661)% やだぁ %UNICODE(0x2661)% 」
+			PRINTFORMW 「ふぇ、なにするの？」
+			PRINTFORMW 「やぁ、さきっぽ、くすぐったいぃぃ」
 			CFLAG:307 = 1
 		;2번째 이후
 		ELSE
@@ -885,31 +797,27 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:307 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふぁぁああ！？あはぁああああああ！？おいたしちゃだめですぅ♪」
-					PRINTFORMW %CALLNAME%の可愛らしい乳首を弄ってやると、甘い声を上げて震える。
-					PRINTFORML 指や口で丹念に愛撫する事で、恋人魔法少女を胸快楽の虜にしてやった……
-					PRINTFORMW 「んっ、やぁっ %UNICODE(0x2661)% むねがどんどん、きもち良くなっちゃいます %UNICODE(0x2661)% あなたできもちよくなっちゃう %UNICODE(0x2661)% 」
+					PRINTFORMW 「ふぁぁああ！？あはぁああああああ！？おいたしちゃだめぇ%UNICODE(0x2661)%」
+					PRINTFORMW 「赤ちゃんみたい%UNICODE(0x2661)%うふふ、もっと吸ってぇ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「んきゅううぅぅっ♪ おっぱいっ、おっぱいきもちいいですぅぅっ♪」
-					PRINTFORML 桃色の乳首を摘まむたびに淫乱魔法少女はびくびくと身体を震わせる
+					PRINTFORMW 「んきゅううぅぅっ♪ おっぱいっ、おっぱいきもちいいですぅぅっ♪」
+					PRINTFORMW 桃色の乳首を摘まむたびに%CALLNAME:TARGET%はびくびくと身体を震わせる
 					PRINTFORMW 「おっぱいのさきっぽがっ、ピリピリしますぅ♪ ひゃうぅぅっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あぅ、ひぃんっ♪ ふあああん♪」
+					PRINTFORMW 「あぅ、ひぃんっ♪ ふあああん♪」
 					PRINTFORMW 「そんなにギュってしたらはれちゃいますぅっ♪ ひぐぅっ♪」
 				ENDIF
 				CFLAG:307 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:307 < 3 || FLAG:7 == 2)
-				PRINTFORML 「やぁ、…さきっぽ…♪」甘い声を上げて震えるようになってきた。
-				PRINTFORMW 「あはっ、くすぐったいけど…たまにふわってするですぅ」
+				PRINTFORMW 「やぁ、…ちくびぃ…♪」
+				PRINTFORMW 「いじり…まわさないで…ひゃうぅ♪だめぇ…っ♪」
 				CFLAG:307 = 3
 			;그 이외
 			ELSEIF CFLAG:307 < 2 || FLAG:7 == 2
-				PRINTFORMW 「やぁ、…さきっぽやぁ…♪」
-				PRINTFORML 刺激を受けて徐々に硬さを増していく乳首を味わい、敗北魔法少女に胸快楽を刻みこんでいく……
-				PRINTFORMW 「いじり…まわさないで…ひゃうぅ♪くださぁい…っ♪」
+				PRINTFORMW 「なによ、気持ち良くなんてなってないわよ！くすぐったいだけよ！」
 				CFLAG:307 = 2
 			ENDIF
 		ENDIF
@@ -921,9 +829,9 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:308 == 0
-			PRINTFORMW 「いやぁ！はなして、このぉ！あくとう！ひっぅ！」
-			PRINTFORML 暴れようとする魔法少女を捻じ伏せ一方的に胸を弄り回す。
-			PRINTFORMW 「いっ、やぁ %UNICODE(0x2661)% こんなの、ぜったいうそです！んあっ！もう、やめてぇっ %UNICODE(0x2661)% 」
+			PRINTFORMW 「えぇ、な、なにするの？」
+			PRINTFORMW 「やん、そこおっぱい…だめ……っ」
+			PRINTFORMW %CALLNAME%はくすぐったそうにしている。
 			CFLAG:308 = 1
 		;2번째 이후
 		ELSE
@@ -931,34 +839,30 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:306 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふぁ、ふぁぁぁあ！きもちいいですぅ♪もっとしてくださいぃ♪あぁぁ！」
-					PRINTFORML 「そんな、貴方に揉んだり吸ったりされたらぁ %UNICODE(0x2661)% どんどん気持ち良くなっちゃいます %UNICODE(0x2661)% 」
-					PRINTFORMW 甘い声で誘う%CALLNAME%の胸を欲望のままに愛撫し、快楽を与え続ける。
-					PRINTFORML 柔らかい胸も硬くなった乳首も手と口で思う存分味わわれ、恋人魔法少女は体を震わせた……
-					PRINTFORMW 「あっ %UNICODE(0x2661)% んっ %UNICODE(0x2661)% おっぱいで準備整っちゃいます……気持ち良くって身体が熱くて、蕩けちゃう %UNICODE(0x2661)% 」
+					PRINTFORMW 「ふぁ、ふぁぁぁあ！きもちいいぃ%UNICODE(0x2661)%もっとしてぇ%UNICODE(0x2661)%あぁぁ！」
+					PRINTFORMW 「きゅぅぅん%UNICODE(0x2661)%すごいぃぃぃ！！！もっとぉ…もっとしてぇぇ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「きゅぅぅん♪すごいぃぃぃ！！！もっとぉ…もっとしてくださぁぃ♪」
 					PRINTFORMW 「む、むねぇっ♪ おっぱいぃぃっ♪ おっぱい、しゅごいですぅっ♪」
-					PRINTFORML 淫乱魔法少女は 叫びにも似た大きな声で あえぎ続ける…
+					PRINTFORML %CALLNAME%は 叫びにも似た大きな声で あえぎ続ける…
 					PRINTFORMW 「あ゛ぁぁっ♪ んひぃぃっ♪ おかしくなっちゃうれしゅぅっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「ああん、%CSTR:12%。%CSTR:11%のおっぱいおいしいですかぁ？」
+					PRINTFORMW 「ああん、ごしゅじんさまぁ。%CSTR:11%のおっぱいおいしいですかぁ？」
 					PRINTFORMW 「もし気に入っていただけたなら、どうぞいっぱいもんで、すって、さわってくださいぃ」
 				ENDIF
 				CFLAG:308 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:306 < 3 || FLAG:7 == 2)
-				PRINTFORML 「%CSTR:12%のてのひらが、おっぱいにぴったりくっついて…」
-				PRINTFORML 「とてもあったかいですぅ…♪あはぁ…♪」
-				PRINTFORMW 「きもちいいですぅ…ふわーってなっちゃいますぅ…♪」
+				PRINTFORMW 「%CSTR:12%のてのひらが、おっぱいにぴったりくっついて…」
+				PRINTFORMW 「とてもあったかい…♪あはぁ…♪」
+				PRINTFORMW 「きもちいい…ふわーってなっちゃうぅ…♪」
 				CFLAG:308 = 3
 			;그 이외
 			ELSEIF CFLAG:308 < 2 || FLAG:7 == 2
-				PRINTFORML 「またおっぱいふにふにするですか？、感じたりしないんですからっ！ひっぅ！」
-				PRINTFORMW 本人の意志とは裏腹に魔法少女の身体は媚びを覚えつつあり、声には艶が混じっている……
-				PRINTFORMW 「いっ、やぁ %UNICODE(0x2661)% こんなの、んあっ！もう、やめてぇっ %UNICODE(0x2661)% 」
+				PRINTFORMW 「またおっぱい触るの？」
+				PRINTFORMW 「楽しいの？バカなの…？んふっ…」
+				PRINTFORMW 「き、きもちよくなんかなってないわよ！くすぐったいだけよ！」
 				CFLAG:308 = 2
 			ENDIF
 		ENDIF
@@ -970,10 +874,9 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:309 == 0
-			PRINTFORML 「やめてっ！いや、見ないで！見なないでぇ！！」
-			PRINTFORMW あがいた所で逃れられる筈もなく、%CALLNAME%の恥部が顕になった。
-			PRINTFORML 女の奥まで覗かれた魔法少女は涙を流し、屈辱に耐えている……
-			PRINTFORMW 「いや、いやぁ……こんな奴に、中まで見られるなんてぇ……！うう……！」
+			PRINTFORMW 「ふえぇ！？ここをひろげるの！？」
+			PRINTFORMW 「バカ!変態！変質者！ペド！ぃやぁぁぁぁ、はずかしいぃぃっ…！」
+			PRINTFORMW 
 			CFLAG:309 = 1
 		;2번째 이후
 		ELSE
@@ -981,33 +884,41 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「どうしてもですか……？わ、わかりました…… %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%はこちらのお願いに応じて、恥じらいながら自らの秘部を顕にしている。
-					PRINTFORML 恋人魔法少女の羞恥に染まった表情と合わせて、興奮を誘った……
-					PRINTFORMW 「そんなにじっと見ないでください……恥ずかしいです……っ%UNICODE(0x2661)%」
+					IF TALENT:1 == 0
+						PRINTFORMW 「%CSTR:이인칭%のヘンタイ！ロリコン！ペドフェリア！」
+						PRINTFORMW 「こんな小さな女の子の『くぱぁ』を生で何度も見たいなんて、末期よ末期！」
+						PRINTFORMW 「いいから%CSTR:이인칭%が喜んでる見てるこの処女膜を、ガチガチに興奮させてるそのデッカイので、さっさとブチ抜きなさいこの処女厨！」
+					ELSE
+						PRINTFORMW 「%CSTR:이인칭%のヘンタイ！ロリコン！ペドフェリア！」
+						PRINTFORMW %CALLNAME%はそう言うと自身の両足を左右に広げ、股間に手を添えた。
+						PRINTFORMW 「どう？よく見える？%CSTR:일인칭%のちっちゃなオマンコ。」
+						PRINTFORMW 「%CSTR:이인칭%がさんざんイタズラして、%CSTR:일인칭%が痛いって泣き叫んでるのにかまわずにぶっといのでレイプして、くっさいセーエキどぷどぷ注ぎ込んで、血が止まらずに痛いのに何度も何度もほじくって、%CSTR:이인칭%のキョーアクなのを覚え込まされちゃった、%CSTR:이인칭%専用の精液注入口よ！」
+						PRINTFORMW 「分かったらさっさとレイプしなさいよ！%CSTR:이인칭%に見られてるだけで、疼くんだから！」
+					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「ああん、%CSTR:12%が%CSTR:11%のロリマンコみてるですぅ」
-					PRINTFORMW 指で広げられた淫乱魔法少女の秘部は、テラテラとこちらを誘うように光っていた。
-					PRINTFORMW 「ん、%CSTR:11%のマンコどうですかぁ？ふふ、%CSTR:12%にせめられたくてパクパクしてますぅ」
+					PRINTFORMW 「ああん、%CSTR:12%が%CSTR:11%のロリマンコみてるですぅ」
+					PRINTFORMW 「ん、%CSTR:11%のマンコどうですかぁ？　ふふ、%CSTR:12%にせめられたくてパクパクしてますぅ」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「%CSTR:12%、みえるですかぁ？%CSTR:11%のドレイマンコ」
-					PRINTFORMW %CALLNAME:MASTER%は頷くとともに、今の気分を聞いた。
-					PRINTFORML 「はい、%CSTR:12%のしせんつきささるたびに、%CSTR:11%のドレイマンコあつくなるですぅ」
-					PRINTFORMW 奴隷魔法少女はそう言いながら自身の花びらを抑える指を動かそうとする。その浅ましさを%CALLNAME:MASTER%は罵った。
-					PRINTFORMW 「はぁはぁ、ごめんなさいですぅ。みられただけでヒクヒクするダメマンコでごめんなさいですぅ」
+					PRINTFORMW 「ごしゅじんさまぁ、みえるですかぁ？　%CSTR:11%のドレイマンコ」
+					PRINTFORMW 　%CALLNAME:MASTER%は頷くとともに、今の気分を聞いた。
+					PRINTFORMW 「はい、ごしゅじんさまのしせんつきささるたびに、%CSTR:11%のドレイマンコあつくなるですぅ」
+					PRINTFORMW 　%CALLNAME%はそう言いながら自身の花びらを抑える指を動かそうとする。
+					PRINTFORMW 　%CALLNAME:MASTER%はそれを止め、指ではなく風を使えと言った。
+					PRINTFORMW 　すると%CALLNAME%はそれに従い、よっぽど触りたかったのか、急いで手を使って股間を仰いだ。
+					PRINTFORMW 　%CSTR:11%は腰を突き出しながら口を半開きにし片手で股間を仰ぐ、その浅ましさを%CALLNAME:MASTER%は罵った。
+					PRINTFORMW 「はぁはぁ、ごめんなさいですぅ。少し風に当たっただけでヒクヒクするダメマンコでごめんなさいですぅ」
+					PRINTFORMW 　%CALLNAME%はそう謝りながらも仰ぐのを止めず、%CALLNAME:MASTER%が次の命令を告げるまで自らの股間に風を送り続けた。
 				ENDIF
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
-				PRINTFORML 「うぅ、ここみたいですかぁ？ヘンタイですぅ」
-				PRINTFORMW 魔法少女は羞恥に染まった顔を背けている。
+				PRINTFORMW 「うぅ、ここ見たいの？　もう、%CSTR:이인칭%はほんとにヘンタイねぇ」
 				CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
-				PRINTFORML 「いや、いやぁ……こんな奴に、うぅ、そんなにじっとみないで、みないで！。」
-				PRINTFORMW 魔法少女は涙を流し、屈辱に耐えている……「
+				PRINTFORMW 「うぅ、そんなにじっとみないで、はずかしいわよ、%CSTR:이인칭%のバカァ」
 				CFLAG:309 = 2
 			ENDIF
 		ENDIF
@@ -1019,10 +930,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:310 == 0
-			PRINTFORML 「じ、じぶんでいじるですぅ？そんなことおもいつくなんて、ヘンタイですぅ！」
-			PRINTFORMW 断る事を許されない%CALLNAME%は、胸を自ら弄り始める。
-			PRINTFORML 少しずつ声に艶が篭もってきた事を指摘してやると、魔法少女は懸命にそれを否定しようとした……
-			PRINTFORMW 「んっ、んぅ……っ！感じてなんか、ないです……じぶんでいじって、見られて……よくなるわけ……」
+			PRINTFORMW 「ムネをじぶんで弄れって？　そんなコト思い付くなんて、やっぱり%CSTR:이인칭%はヘンタイね！！」
 			CFLAG:310 = 1
 		;2번째 이후
 		ELSE
@@ -1030,32 +938,26 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「んっ %UNICODE(0x2661)% がおっぱいできもち良くなるところ……見られちゃってます……あっ %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%はこちらのお願いに応え、自ら胸を弄り始めた。
-					PRINTFORML 恋人魔法少女自身の手で胸がいやらしく形を変え、快楽に酔いしれた甘い声を漏らしている……
-					PRINTFORMW 「はぁ……%UNICODE(0x2661)%　胸が感じちゃって……貴方の視線が熱くて……そんなに見ないでくださいっ%UNICODE(0x2661)%」
+					PRINTFORMW 「はぁはぁ、%CSTR:이인칭%に見られてると思うと、からだがポカポカしてムネもジンジンするのぉ」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「はふぅ、ん、あん。えへへ、%CSTR:12%、見てくださいですぅ。%CSTR:11%の乳首こんなにカチカチですぅ。はぁん」
-					PRINTFORMW そう言うと淫乱魔法少女は自らの頂点を指で摘むようにグニグニと弄り始めた。
+					PRINTFORMW 「はふぅ、ん、あん。えへへ、%CSTR:12%、見てくださいですぅ。%CSTR:11%の乳首こんなにカチカチですぅ。はぁん」
+					PRINTFORMW 　そう言うと%CALLNAME%は自らの頂点を指で摘むようにグニグニと弄り始めた。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%は素直に胸を揉み始める奴隷魔法少女にもっと激しく、と要求した。
-					PRINTFORMW %CALLNAME%はそれを引き受けると自らの乳房を赤く、痕が付くまで押し潰し、乳首に爪を立てると引っかくように弄りだした。
-					PRINTFORML 「んっく、はぁはぁ、ふぅ、ふぅ、あぁ、つめがくいこんでちくびジンジンするですぅ」
-					PRINTFORMW 乳首に爪を立てるとき、わずかに苦痛の色が見えたがすぐに快楽を見出し、瞳を濁しながらも快楽を貪っている。
+					PRINTFORMW 　%CALLNAME:MASTER%は素直に胸を揉み始める%CALLNAME%にもっと激しく、と要求した。
+					PRINTFORMW 　%CALLNAME%はそれを引き受けると自らの乳房を赤く、痕が付くまで押し潰し、乳首に爪を立てると引っかくように弄りだした。
+					PRINTFORMW 「んっく、はぁはぁ、ふぅ、ふぅ、あぁ、つめがくいこんでちくびジンジンするですぅ」
+					PRINTFORMW 　乳首に爪を立てるとき、わずかに苦痛の色が見えたがすぐに快楽を見出し、瞳を濁しながらも快楽を貪っている。
 				ENDIF
 				CFLAG:310 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ん、はぁん、つぎはちくびですぅ？あん、ビリビリするですぅ」
-				PRINTFORMW 魔法少女は、快楽を感じだし、甘い声を漏らしている
+				PRINTFORMW 「ん、はぁん、つぎは乳首？　うぅ、ビリビリするぅ……」
 				CFLAG:310 = 3
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
-				PRINTFORMW 「あん、いやぁ、みるなですぅ。ちくびなんてたってないですぅ」
-				PRINTFORML 少しずつ声に艶が篭もってきた事を指摘してやると、魔法少女は懸命にそれを否定しようとした……
-				PRINTFORMW 「んっ、んぅ……っ！感じてなんか、ないです……」
+				PRINTFORMW 「あぁん、いやぁ、みるなぁ！乳首なんて勃ってないぃ！」
 				CFLAG:310 = 2
 			ENDIF
 		ENDIF
@@ -1067,10 +969,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:311 == 0
-			PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:TARGET%をうしろから抱きすくめると、無理矢理足を開かせた。
-			PRINTFORMW 「うぅ……っ！どうして、こんな、こんなぁ……んく、うっ……！」
-			PRINTFORML 魔法少女はこちらの命令に従うしかなく、秘部を愛撫するところを凝視され、涙を流した……
-			PRINTFORMW 「こんな……もうゆるして……ぅあ、んっ %UNICODE(0x2661)% もうイヤぁ…… %UNICODE(0x2661)% 」
+			PRINTFORML 「自分で！？　……いいわよ、やれば良いんでしょう！？」
+			PRINTFORMW 「……んッ、こんなの……見てて、楽しいの？　……このヘンタイ……ッ」
 			CFLAG:311 = 1
 		;2번째 이후
 		ELSE
@@ -1078,119 +978,34 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:311 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-						PRINTFORML 「あっ %UNICODE(0x2661)% んっ %UNICODE(0x2661)% はずかしいから、あまり見ないでください…… %UNICODE(0x2661)% 」
-						PRINTFORMW %CALLNAME:TARGET%は潤んだ瞳で%CALLNAME:MASTER%を見つめながら、うっとりとしながらも激しく自慰をしている。
-						PRINTFORML 恋人魔法少女の声は徐々に甘く艶を帯び、こちらに痴態を晒してしまっている……
-						PRINTFORMW 「あ、やぁ %UNICODE(0x2661)% そんなじっと見ないで……、すごくいやらしいです…… %UNICODE(0x2661)% 」
+					PRINTFORMW 「ふわぁぁっ%UNICODE(0x2661)% あうっ%UNICODE(0x2661)% はあっ%UNICODE(0x2661)% んあぁっ%UNICODE(0x2661)%」
+					PRINTFORMW 「はっ…はぁ…%CSTR:이인칭%、%CSTR:일인칭%もうこんなにびしょびしょなのぉ……%UNICODE(0x2661)%」
+					PRINTFORMW %CALLNAME:TARGET%は潤んだ瞳で%CALLNAME:MASTER%を見つめながら、うっとりとしながらも激しく自慰をしている。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「ぁひゅぅっ♪ しゅきっ♪ だいしゅきぃぃ♪」
+					PRINTFORMW 「ぁひゅぅっ♪ しゅきっ♪ だいしゅきぃぃ♪」
 					PRINTFORMW 「クリちゃんをいじるのがキモチよくてぇっ♪ はひっ、やめられないでしゅぅぅっ♪」
-					PRINTFORML 淫乱魔法少女は涎が口元から垂れるのにも構わず、自らの性器を扱きたてる行為に没頭している…
+					PRINTFORML %CALLNAME%は涎が口元から垂れるのにも構わず、自らの性器を扱きたてる行為に没頭している…
 					PRINTFORMW 「あひっ♪ ひあぁんっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「%CSTR:12%…♪みててくださいね♪」
-					PRINTFORMW 奴隷魔法少女は恥部を見せつけるようにして涎をたらしながら自慰を開始した。
+					PRINTFORMW 「%CSTR:12%…♪みててくださいね♪」
+					PRINTFORML %CALLNAME:TARGET%は恥部を見せつけるようにして涎をたらしながら自慰を開始した。
 					PRINTFORMW 「お%CSTR:2%さぁん…こんなにえっちな…%CSTR:11%でも…きらいにならないでくださぁい…ふぁぁあぁん♪」
 				ENDIF
 				CFLAG:311 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:311 < 3 || FLAG:7 == 2)
-				PRINTFORML 「みないでください………ぽわぽわしてくるんですぅ♪きゃぅぅん♪」
-				PRINTFORMW 魔法少女は羞恥に染まりながらも、快楽を求めている
+				PRINTFORMW 「うううぅぅ……%CSTR:이인칭%なんかに……見られながらするなんて……」
+				PRINTFORMW 「……やってやるからさっさと満足しなさいよ！このペドフェリア！！」
 				CFLAG:311 = 3
 			;그 이외
 			ELSEIF CFLAG:311 < 2 || FLAG:7 == 2
-				PRINTFORML 「うぅ……っ！どうして、こんな、こんなぁ……んく、うっ……！」
-				PRINTFORMW 魔法少女はこちらの命令に従うしかなく、自分に快楽を与える行為を見せている。
+				PRINTFORMW 「変態！ロリコン！見るな!見るなあぁっ！！」
 				CFLAG:311 = 2
 			ENDIF
 		ENDIF
 
-;-------------------------------------------------
-;14,클리애무
-;-------------------------------------------------
-	CASE 14
-		CALL TRAIN_MESSAGE
-		;처음
-		IF CFLAG:422 == 0
-			PRINTFORMW 「え、なにするの？いやぁ！はなして、このぉ！」
-			PRINTFORML 魔法少女のワレメを開き小さな突起を撫で回す。
-			PRINTFORMW 「いっ、やぁ %UNICODE(0x2661)% こんなのもう、やめてぇっ %UNICODE(0x2661)% 」
-			CFLAG:422 = 1
-		;2번째 이후
-		ELSE
-			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:445 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORML 「%CSTR:12%のゆびで、%CSTR:11%のそこをかわいがってくださぁい」
-					PRINTFORMW 恋人魔法少女は潤んだ瞳でこちらを見上げつつ、%CALLNAME:MASTER%の体に腰を押しつけてくる。
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「やぁん、いやらしいゆびですぅ。ん、はぁん、い、いいですぅ、もっとぉ」
-					PRINTFORMW 「もっと、もっとぉ。%CSTR:11%のそこぐにぐにしてほしいですぅ」
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あくぅっ、はぁ、はぁ、えへへ、%CSTR:12%のゆびいいですぅ」
-					PRINTFORMW 「はぁはぁ、あぁ、もっとつよくしてくださいですぅ」
-				ENDIF
-				CFLAG:422 = 4
-			;굴복각인Lv3
-			ELSEIF MARK:2 == 3 && (CFLAG:445 < 3 || FLAG:7 == 2)
-					PRINTFORML 「あはっ、そこきもちいぃ♪」
-					PRINTFORMW 小さな突起をを撫で回されるたびに魔法少女は甘い声を上げるようになった。
-				CFLAG:422 = 3
-			;그 이외
-			ELSEIF CFLAG:445 < 2 || FLAG:7 == 2
-				PRINTFORML 抵抗を続ける魔法少女の小さな突起を撫で回す
-				PRINTFORMW 「はなして、このぉ！、いやらしい…」
-				CFLAG:422 = 2
-			ENDIF
-		ENDIF
-
-;-------------------------------------------------
-;15,엉덩이애무
-;-------------------------------------------------
-	CASE 15
-		CALL TRAIN_MESSAGE
-		;처음
-		IF CFLAG:445 == 0
-			PRINTFORMW 「え、なにするの？いやぁ！はなして、このぉ！」
-			PRINTFORML 魔法少女の尻をさらにじっくりとを撫で回す。
-			PRINTFORMW 「いっ、やぁ %UNICODE(0x2661)% こんなのもう、やめてぇっ %UNICODE(0x2661)% 」
-			CFLAG:445 = 1
-		;2번째 이후
-		ELSE
-			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:445 < 4 || FLAG:7 == 2)
-				;연모, 친애
-				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「もっと、もっとぉ。%CSTR:11%のおしりなでなでしてほしいですぅ」
-					PRINTFORML 「%CSTR:12%のおててで、%CSTR:11%のおしりをかわいがってくださぁい」
-					PRINTFORMW 恋人魔法少女は潤んだ瞳でこちらを見上げつつ、%CALLNAME:MASTER%の体に全身を擦りつけてくる。
-				;음란, 창부
-				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「やぁん、いやらしいてつきですぅ。ん、はぁん、い、いいですぅ、もっとぉ」
-				;복종, 예속
-				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あくぅっ、はぁ、はぁ、えへへ、%CSTR:12%のてがたがついてますぅ」
-					PRINTFORMW 「はぁはぁ、あぁ、つよくてまっかならくいんがついてますぅ。%CSTR:12%の物だってしるしもっとつけてくださいですぅ」
-				ENDIF
-				CFLAG:445 = 4
-			;굴복각인Lv3
-			ELSEIF MARK:2 == 3 && (CFLAG:445 < 3 || FLAG:7 == 2)
-					PRINTFORML 「あはっ、そこきもちいぃ♪」
-					PRINTFORMW 小さな尻を撫で回されるたびに魔法少女は甘い声を上げるようになった。
-				CFLAG:445 = 3
-			;그 이외
-			ELSEIF CFLAG:445 < 2 || FLAG:7 == 2
-				PRINTFORML 抵抗を続ける魔法少女の尻を尻を撫で回す
-				PRINTFORMW 「はなして、このぉ！、いやらしい…」
-				CFLAG:445 = 2
-			ENDIF
-		ENDIF
 
 ;=================================================
 ;커뮤니케이션계 커맨드
@@ -1202,9 +1017,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:312 == 0
-			PRINTFORMW 「それだけはイヤ……やめて！はなして！イヤ、イヤぁ！むぐっ、んぅーっ！！」
-			PRINTFORML 魔法少女は激しくもがき逃れようとするが、無理矢理抑えこんで唇を奪う。
-			PRINTFORMW 「んっ……んぅ、ん……じゅるっ %UNICODE(0x2661)% いやなのに、こんなのいやなのに、さからえないなんてぇ %UNICODE(0x2661)% んむっ %UNICODE(0x2661)% 」
+			PRINTFORMW 「%CSTR:이인칭%……顔近いわよ？なにするの？」
+			PRINTFORMW 戸惑っている%CALLNAME%の唇に、%CALLNAME:MASTER%はそっと口付けをした。
+			PRINTFORMW 「えっ…あっ…あのあのっ…」
+			PRINTFORMW %CALLNAME%の顔がぼぅっと赤くなる。
+			PRINTFORMW 可愛い。
 			CFLAG:312 = 1
 		;2번째 이후
 		ELSE
@@ -1212,34 +1029,32 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:312 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ん……ちゅ、ちゅぅ……あなたとちゅー、たくさんちゅーしたいの……ちゅ %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%がキスを求め、抱き締めながらキスで応える。
-					PRINTFORML 唇を重ね、舌を絡め合い、恋人魔法少女との甘いキスを堪能した……
-					PRINTFORMW 「%CSTR:11%、%CSTR:12%のちゅーがないとだめな子になっちゃったですぅ…♪もっとちゅー……ちゅ %UNICODE(0x2661)% 」
+					PRINTFORMW 「うむ、ちゅ%UNICODE(0x2661)% ちゅうう、くちゅっ……ぷあっ%UNICODE(0x2661)%」
+					PRINTFORMW 「ふふっ、%CSTR:12%、だぁい好き%UNICODE(0x2661)% んちゅっ%UNICODE(0x2661)% ちゅ～っ%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:일인칭%、ヘンタイの%CSTR:이인칭%に、おくちまでイタズラされて、それが大好きな、ダメな子になっちゃった……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「んじゅぶぶっ♪ んむ、んちゅぅっ♪」
+					PRINTFORMW PRINTFORMW 「んじゅぶぶっ♪ んむ、んちゅぅっ♪」
 					PRINTFORMW 「んはぁっ♪ %CSTR:12%の舌ぁ、%CSTR:11%のおくちいっぱいにあばれまわってぇ、ステキですぅ♪」
-					PRINTFORMW 「ぅん…もっとぉ……んちゅううぅ♪」恋人のように口で交わった……
-					PRINTFORML 淫乱魔法少女は 息継ぎする間も惜しむように ただひたすら%CALLNAME:MASTER%と舌を絡めあう…
+					PRINTFORMW 「ぅん…もっとぉ……んちゅううぅ♪」
+					PRINTFORML %CALLNAME%は 息継ぎする間も惜しむように ただひたすら%CALLNAME:MASTER%と舌を絡めあう…
 					PRINTFORMW 「キスすきぃっ♪ んちゅっ♪ ちゅぶっ♪ んちゅ～～っ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「クスッ♪%CSTR:11%とキスしたいんですかぁ？」
-					PRINTFORML 「いいですよぉ、んっ、んちゅっ……」
+					PRINTFORMW 「クスッ♪%CSTR:11%とキスしたいんですかぁ？」
+					PRINTFORMW 「いいですよぉ、んっ、んちゅっ……」
 					PRINTFORMW 「いつまでも%CSTR:12%とキスしていたいですぅっ♪ うんっ♪ ちゅ…んむっ♪」
 				ENDIF
 				CFLAG:312 = 4
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3 && (CFLAG:312 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ちゅうぅ……はぁ、じゅるぅぅっ！…ぷはぁ♪」
-				PRINTFORMW 魔法少女は積極的に舌を吸うようになってきた…
+				PRINTFORMW 「ちゅうぅ……はぁ、じゅるぅぅっ！…ぷはぁ♪」
+				PRINTFORMW %CALLNAME%は積極的に舌を吸っている…
 				CFLAG:312 = 3
 			;그 이외
 			ELSEIF CFLAG:312 < 2 || FLAG:7 == 2
-				PRINTFORML 「イヤ……やめて！はなして！イヤ、イヤぁ！むぐっ、んぅーっ！！」
-				PRINTFORMW 時間をかけて何度もキスする内に、屈服した肉体が舌を差し出してきた、
-				PRINTFORMW 「んっ……んぅ、ん……じゅるっ %UNICODE(0x2661)% いやなのに、こんなのいやなのに、さからえないなんてぇ %UNICODE(0x2661)% んむっ %UNICODE(0x2661)% 」
+				PRINTFORMW 「キス、ね……んっ、ちゅっ、ちゅぱっ」
+				PRINTFORMW 「はうぅ……あたまふわーってなるぅ……」
 				CFLAG:312 = 2
 			ENDIF
 		ENDIF
@@ -1251,8 +1066,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:313 == 0
-			PRINTFORML 「何ですか……見ないでください」
-			PRINTFORMW %CALLNAME%は縮こまり、こちらの視線から少しでも肌を隠そうとしている……
+			PRINTFORMW 「なにもしないの？」
+			PRINTFORMW %CALLNAME%は怪訝な表情を浮かべ首を傾げた
 			CFLAG:313 = 1
 		;2번째 이후
 		ELSE
@@ -1260,8 +1075,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:313 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「はずかしいから……そんなにジッと見ないでください……」
-					PRINTFORMW 恋人魔法少女はこちらの視線を受けて頬を染めている……
+					PRINTFORMW 「……イタズラされずに、のんびりするのがいいなんて、%CSTR:일인칭%もホント末期だわ……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「んんっ…焦らさないでくださぃ♪%CSTR:11%のオマンコ、とろとろなんですぅ…♪」
@@ -1272,106 +1086,101 @@ SELECTCASE SELECTCOM
 				CFLAG:313 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:313 < 3 || FLAG:7 == 2)
-				PRINTFORML 「何ですか……」」
-				PRINTFORMW 魔法少女はリラックスしているようだ。
+				PRINTFORMW 「～♪」
+				PRINTFORMW %CALLNAME%はリラックスしているようで、のんきに鼻歌を歌っている。
 				CFLAG:313 = 3
 			;그 이외
 			ELSEIF CFLAG:313 < 2 || FLAG:7 == 2
-				PRINTFORML 「何ですか……見ないでください」
-				PRINTFORMW 魔法少女は縮こまり、こちらの視線から少しでも肌を隠そうとしている……
+				PRINTFORMW 「……ナニたくらんでるのよ？」
 				CFLAG:313 = 2
 			ENDIF
 		ENDIF
 
 ;-------------------------------------------------
-;22,会話恋慕、親愛のみ
+;22,회화　연모, 친애만
 ;-------------------------------------------------
 	CASE 22
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:314 == 0
-			PRINTFORML 「わたし……今とってもしあわせなんです。あなたのとなりにいられて、あなたとむすばれて…… %UNICODE(0x2661)% 」
-			PRINTFORMW %CALLNAME%は真っ赤に頬を染めながらも、こちらへの好意を口にしている。
-			PRINTFORML こちらからも恋人魔法少女への想いを告げると、耳から首まで赤くなってしまった……
-			PRINTFORMW 「はわぁ…… %UNICODE(0x2661)% りょうおもいだなんて、ユメみたい…… %UNICODE(0x2661)% もっともっとスキになっちゃいます %UNICODE(0x2661)% 」
+			PRINTFORMW 「おはなし？」
+			PRINTFORMW 「どんなおはなしきかせてくれるの？」
 			CFLAG:314 = 1
 		;2번째 이후
 		ELSEIF CFLAG:314 < 2 || FLAG:7 == 2
-			PRINTFORMW %CALLNAME:MASTER%と恋人魔法少女は、他愛も無い話で盛り上がった。
+			PRINTFORMW %CALLNAME:MASTER%と%CALLNAME%は、他愛も無い話で盛り上がった。
 			CFLAG:314 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;23,プレゼント恋慕、親愛のみ
+;23,프레젠트　연모, 친애만
 ;-------------------------------------------------
 	CASE 23
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:315 == 0
-			PRINTFORML 「え、これを%CSTR:11%にですかぁ？」
-			PRINTFORMW 「う、うれしいですぅ！今日のことは絶対に忘れませんです」
+			PRINTFORMW 「え、これを%CSTR:일인칭%に？」
+			PRINTFORMW 「う、うれしい！　今日の事は絶対に忘れない！」
 			CFLAG:315 = 1
 		;2번째 이후
 		ELSEIF CFLAG:315 < 2 || FLAG:7 == 2
-			PRINTFORML 「えへへ、また%CSTR:12%にプレゼント貰ったですぅ」
-			PRINTFORMW 「絶対に大切にしますぅ」
+			PRINTFORMW 「えへへ、また%CSTR:이인칭%にプレゼント貰っちゃった%UNICODE(0x2661)%」
+			PRINTFORMW 「絶対に大切にするからね%UNICODE(0x2661)%」
 			CFLAG:315 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;24,スキンシップ恋慕、親愛のみ
+;24,스킨쉽　연모, 친애만
 ;-------------------------------------------------
 	CASE 24
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:316 == 0
-			PRINTFORMW 「えへへ、やぁんダメですぅ。そんなところ触っちゃあ」
-			PRINTFORML 撫で続けると恋人魔法少女の声が甘く艶を帯びていく……
-			PRINTFORMW 「んぅ……はぁ、はぁ…… %UNICODE(0x2661)% あなたのて、すごくここちよいです…… %UNICODE(0x2661)% 」
+			PRINTFORMW 「えへへ、やぁんダメぇ、そんなところ触っちゃぁ%UNICODE(0x2661)%」
+			PRINTFORMW 　イチャイチャした。
 			CFLAG:316 = 1
 		;2번째 이후
 		ELSEIF CFLAG:316 < 2 || FLAG:7 == 2
-			PRINTFORMW 手櫛で恋人魔法少女の髪を梳いてやった。
-			PRINTFORML 「えへへ、%CSTR:12%、だぁいすきぃ」
-			PRINTFORMW イチャイチャした。
+			PRINTFORMW 　手櫛で髪を梳いてやった。
+			PRINTFORMW 「えへへ、%CSTR:이인칭%、だぁいすきぃ%UNICODE(0x2661)%」
+			PRINTFORMW 　イチャイチャした。
 			CFLAG:316 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;25,まったりする恋慕、親愛のみ
+;25,느긋하게있는다　연모, 친애만
 ;-------------------------------------------------
 	CASE 25
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:317 == 0
-			PRINTFORMW 「こんなに幸せでいいんでしょうか……あったかい……」
-			PRINTFORML 恋人魔法少女を正面から抱き締め、鼓動と体温を重ね合う。
-			PRINTFORMW 「やん %UNICODE(0x2661)% 貴方の手、くすぐったいですよぉ %UNICODE(0x2661)% 」
+			PRINTFORMW 「次は反対側よ」
+			PRINTFORMW 　耳掻きしてもらった。
 			CFLAG:317 = 1
 		;2번째 이후
 		ELSEIF CFLAG:317 < 2 || FLAG:7 == 2
-			PRINTFORML 「はい、あ～ん」
-			PRINTFORMW ミカンを食べさせあった。
+			PRINTFORMW 「はい、あ～ん」
+			PRINTFORMW 　ミカンを食べさせあった。
 			CFLAG:317 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;26,家事恋慕、親愛のみ
+;26,가사　연모, 친애만
 ;-------------------------------------------------
 	CASE 26
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:318 == 0
-			PRINTFORMW 「あぅ、お皿割ってしまいました」
+			PRINTFORMW 「あぅ、お皿割っちゃったぁ」
 			CFLAG:318 = 1
 		;2번째 이후
 		ELSEIF CFLAG:318 < 2 || FLAG:7 == 2
-			PRINTFORMW 「今日は洗濯日和ですぅ」
+			PRINTFORMW 「今日は洗濯日和ねぇ」
 			CFLAG:318 = 2
 		ENDIF
 
 ;-------------------------------------------------
-;27,歌の練習恋慕、親愛のみ
+;27,노래연습　연모, 친애만
 ;-------------------------------------------------
 	CASE 27
 		CALL TRAIN_MESSAGE
@@ -1381,7 +1190,7 @@ SELECTCASE SELECTCOM
 			CFLAG:319 = 1
 		;2번째 이후
 		ELSEIF CFLAG:319 < 2 || FLAG:7 == 2
-			PRINTFORMW 「はるうらら～」
+			PRINTFORMW 「れれれ～」
 			CFLAG:319 = 2
 		ENDIF
 
@@ -1392,9 +1201,9 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:320 == 0
-			PRINTFORML 「えぇ？えぇ？ええぇ！？」
-			PRINTFORMW 「きゅ、きゅうになにを言うんですか…？」
-			PRINTFORMW 魔法少女は何がなんだかと分からずといった面持ちで、目に涙を浮かべている。
+			PRINTFORMW 「えぇ？えぇ？ええぇ！？」
+			PRINTFORMW 「きゅ、急にナニ言うの……？」
+			PRINTFORMW %CALLNAME%は何がなんだかと分からずといった面持ちで、目に涙を浮かべている。
 			CFLAG:320 = 1
 		;2번째 이후
 		ELSE
@@ -1402,9 +1211,8 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:320 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「あ、あぅ、えと、%CSTR:11%何か悪いことしましたか？ひっく、いけない所があったら、ひっく、言ってください」
-					PRINTFORMW 「%CSTR:12%に嫌われたら……%CSTR:11%、%CSTR:11%。ふぇぇぇん」
-					PRINTFORMW 泣き出した恋人魔法少女の頭を撫でながら謝罪した。
+					PRINTFORMW 「あ、あぅ、えと、%CSTR:일인칭%何か悪いことした？　ひっく、いけない所があったら、ひっく、言ってください」
+					PRINTFORMW 「%CSTR:이인칭%に嫌われたら……%CSTR:일인칭%、%CSTR:일인칭%……ふぇぇぇん」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -1419,13 +1227,13 @@ SELECTCASE SELECTCOM
 				CFLAG:320 = 3
 			;그 이외
 			ELSEIF CFLAG:320 < 2 || FLAG:7 == 2
-				PRINTFORMW 「な、なんでそんなひどいこと言うんですか…？」
+				PRINTFORMW 「な、なんでそんなひどいこと言うのよ……！？」
 				CFLAG:320 = 2
 			ENDIF
 		ENDIF
 
 ;-------------------------------------------------
-;29,ビデオ鑑賞陥落済みのみ
+;29,비디오감상　함락완료만
 ;-------------------------------------------------
 	CASE 29
 		CALL TRAIN_MESSAGE
@@ -1433,12 +1241,12 @@ SELECTCASE SELECTCOM
 		IF CFLAG:321 == 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 「は、はぅ、%CSTR:11%はこんなにこえだしてたですかぁ」
-				PRINTFORMW 「うぅ、すごいかおしてますぅ。これほんとに%CSTR:11%ですかぁ？」
+				PRINTFORMW 「は、はぅ、%CSTR:일인칭%、こんなに声出してたんだぁ……」
+				PRINTFORMW 「うぅ、凄い顔してるぅ……これホントに%CSTR:일인칭%……？」
 				
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORMW 「うぅ、すごいぅ。これまたしてくれますかぁ？」
+				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
 				PRINTFORMW 
@@ -1448,7 +1256,8 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:321 < 2 || FLAG:7 == 2
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 
+				PRINTFORMW 「うぅぅぅぅ……%CSTR:일인칭%、ホントにケダモノみたい……」
+				PRINTFORMW 「うぅ、%CSTR:일인칭%、凄い声出して、凄い顔して、凄いコトされてるぅ……」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -1469,11 +1278,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:322 == 0
-			PRINTFORML %CALLNAME:MASTER%はローターを作動させると、クリトリスをゆっくりと撫でた。
-			PRINTFORMW  「なにをして、ひぃっ！？や、いや……そんな、そんなのはイヤぁ！」
-			PRINTFORML %CALLNAME%悲鳴を上げて逃れようとするが、拘束された魔法少女は羞恥と快楽を拒む事は許されなかった
-			PRINTFORMW 「や……ぅあ……！こんなことやめて……おねがいですから……ひゃう！あっ %UNICODE(0x2661)% やだ、やなのぉっ %UNICODE(0x2661)% 」
-			CFLAG:304 = 1
+			PRINTFORMW 「%CSTR:이인칭%、何よソレ？」
+			PRINTFORMW 「ろーたー？ピンクでまるくて可愛いケド……」
+			PRINTFORMW 「え？え？何するの……？」
+			PRINTFORMW %CALLNAME:MASTER%はローターを作動させると、クリトリスを優しく撫でた。
+			PRINTFORMW 「ひゃあぁっ！？いまおマメがびりびりってぇぇぇっ！？」
 			CFLAG:322 = 1
 		;2번째 이후
 		ELSE
@@ -1481,27 +1290,26 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:322 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「%CSTR:11%のピンピンになってるクリちゃんっ、そんなにいじめちゃ…！！」
-					PRINTFORMW 「んはぁっ♪ んあ゛あ゛っ♪ んきゅううぅぅ♪」
+					PRINTFORMW 「%CSTR:일인칭%のピンピンになってるクリちゃんっ、そんなにいじめちゃ…！！」
+					PRINTFORMW 「んはぁっ%UNICODE(0x2661)% んあ゛あ゛っ%UNICODE(0x2661)% んきゅううぅぅ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 「ふわあぁっ♪ やめぇっ♪ %CSTR:11%っ、おかしくなっちゃいますぅっ♪」
-					PRINTFORML その言動とは裏腹に 淫乱魔法少女は抵抗するそぶりを見せず 快楽の波に身を委ねている…
+					PRINTFORML その言動とは裏腹に %CALLNAME:TARGET%は抵抗するそぶりを見せず 快楽の波に身を委ねている…
 					PRINTFORMW 「それダメぇっ♪ ローターでビリビリされるの、らめなんれしゅぅっ♪」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「%CSTR:11%のピンピンになってるクリちゃんっ、そんなにいじめちゃ…！！」
+					PRINTFORMW 「%CSTR:11%のピンピンになってるクリちゃんっ、そんなにいじめちゃ…！！」
 					PRINTFORMW 「んはぁっ♪ んあ゛あ゛っ♪ んきゅううぅぅ♪」
 				ENDIF
 				CFLAG:322 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:322 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「いやっ！あんっ♪ぶるぶるされるとあたまほわってなるですぅ♪」
+				PRINTFORMW 「そんなに押し付けられると……っ！！ ふきゅうぅぅっ♪」
 				CFLAG:322 = 3
 			;그 이외
 			ELSEIF CFLAG:322 < 2 || FLAG:7 == 2
-				PRINTFORML 「そんなに押し付けられると……っ！！ ふきゅうぅぅっ♪」
-				PRINTFORMW 拘束された魔法少女は羞恥と快楽を拒む事は許されない
+				PRINTFORMW 「あんっ♪ぶるぶるされるとあたまほわってなるぅ♪」
 				CFLAG:322 = 2
 			ENDIF
 		ENDIF
@@ -1513,8 +1321,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:323 == 0
-			PRINTFORMW 「%CSTR:12%、やめてぇ！ひぎっ！これ…あぁぁぁぁぁ～っ！？」
-			PRINTFORMW 説明もせずに起動した瞬間魔法少女は振動の波に飲まれた…
+			PRINTFORMW 「%CSTR:이인칭%、これ…あぁぁぁぁぁ～っ！？」
+			PRINTFORMW 説明もせずに起動した瞬間、%CALLNAME%は快楽の波に飲まれた…
 			CFLAG:323 = 1
 		;2번째 이후
 		ELSE
@@ -1522,32 +1330,32 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:323 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「きゅぅ！ふぁああああぁぁぁ～っ♪ら、らめええぇぇ～っ！ゆるしてぇぇ♪」
-					PRINTFORMW クリトリスを襲う振動に、恋人魔法少女はビクビクと体を痙攣させている。
-					PRINTFORMW 「と、とめてぇ！！ひゃぁぁぁあああ！！♪とけちゃ、とけちゃいますぅ…きゅゅ～っ！♪」
+					PRINTFORMW 「きゅぅ！ふぁああああぁぁぁ～っ%UNICODE(0x2661)%ら、らめええぇぇ～っ！ゆるしてぇぇ%UNICODE(0x2661)%」
+					PRINTFORMW クリトリスを襲う振動に、%CALLNAME%はビクビクと体を痙攣させている。
+					PRINTFORMW 「と、とめてぇ！！ひゃぁぁぁあああ！！%UNICODE(0x2661)%とけちゃ、とけちゃううぅ…きゅゅ～っ！%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「ひゃぁぁぁ！んはぁぁっ！こわれちゃうぅ～っ♪」
-					PRINTFORMW マッサージャが当たると、淫乱魔法少女は頭をブンブン振り回しながら悶えた。
-					PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の嬌声を聞きながらマッサージャを当てている。
-					PRINTFORML 「ひあぁぁ！ゆる、ゆるひてぇ…はぁぁん♪」
+					PRINTFORMW 「ひゃぁぁぁ！んはぁぁっ！こわれちゃうぅ～っ♪」
+					PRINTFORMW マッサージャが当たると、%CALLNAME%は頭をブンブン振り回しながら悶えた。
+					PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の嬌声が聞きながらマッサージャを当てている。
+					PRINTFORMW 「ひあぁぁ！ゆる、ゆるひてぇ…はぁぁん♪」
 					PRINTFORMW 「も…もうらめれすぅ…あ…あぁはぁぁぁぁ！！♪」
 					PRINTFORMW %CALLNAME:MASTER%に見せ付けるように%CALLNAME%は潮を噴き出した。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「ふぁあ～っ♪あぁ～っ♪イっちゃいますぅ……きゅぅぅぅぅ～っ♪」
+					PRINTFORMW 「ふぁあ～っ♪あぁ～っ♪イっちゃいますぅ……きゅぅぅぅぅ～っ♪」
 					PRINTFORMW 「きゅぅぅぅっ！？すごしゅぎて、イっちゃ、イっちゃう～っ♪」
 				ENDIF
 				CFLAG:323 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:323 < 3 || FLAG:7 == 2)
-				PRINTFORML 「んぶぅ！んむううぅぅう～っ！！ぷあっ、イッぐむうぅーーーっっ♪」
-				PRINTFORMW 魔法少女は股間から湧いてくる快楽に耐えられなくなってきたようだ。
+				PRINTFORMW 「んぶぅ！んむううぅぅう～っ！！ぷあっ、イッぐむうぅーーーっっ♪」
+				PRINTFORMW 「きゃあああぁん！！からだふるえてぇっあ、あたまばかになっちゃうう゛ぅう゛ぅぅっ♪」
 				CFLAG:323 = 3
 			;그 이외
 			ELSEIF CFLAG:323 < 2 || FLAG:7 == 2
-				PRINTFORML 「ねぇ、ゆるして、そ、それはゆるしてぅ…ひあぁぁぁっ」
-				PRINTFORMW 魔法少女は涙を流し、快楽に耐えている……
+				PRINTFORMW 「ねぇ%CSTR:이인칭%、それゼッタイ使い方違あああぁぁぁぁぁぁぁ！！」
+				PRINTFORMW 「あ゛ぁあううぅうっ！からだぜんぶぶるぶるしてるぅ～っ♪」
 				CFLAG:323 = 2
 			ENDIF
 		ENDIF
@@ -1560,9 +1368,8 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:324 == 0
-			PRINTFORMW 「それはなにを、ひぃっ！？や、いや……そんな、そんなのはイヤぁ！」
-			PRINTFORML %CALLNAME%は逃れようとするが、拘束された魔法少女は装着を拒む事は許されなかった
-			PRINTFORMW 「え、やぁぁ、すいついてぇぇぇぇひゃぁぁぁっ！？」
+			PRINTFORMW 「えぇ、それは何？何するのよ%CSTR:이인칭%？」
+			PRINTFORMW 「え、やぁぁ、おまめにすいついてぇぇぇぇひゃぁぁぁっ！？」
 			CFLAG:324 = 1
 		;2번째 이후
 		ELSE
@@ -1570,8 +1377,8 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:324 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「や、あ、あん、く、ひ、やぁん、ダメれすぅ、そんなにブルブルさせないでくださいぃ」
-					PRINTFORMW 「ひぅ、だめぇ、%CSTR:11%のとれちゃうぅ」
+					PRINTFORMW 「や、あ、あん、く、ひ、やぁん、ダメぇ、ブルブルだめぇぇ%UNICODE(0x2661)%」
+					PRINTFORMW 「ひぅ、だめぇ、%CSTR:일인칭%のクリちゃん、気持ち良すぎてダメぇぇぇ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -1582,11 +1389,11 @@ SELECTCASE SELECTCOM
 				CFLAG:324 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:324 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「ひぅ、だめぇ、やぁん、ダメれすぅ、%CSTR:11%のとれちゃうぅ」
+				PRINTFORMW 
 				CFLAG:324 = 3
 			;그 이외
 			ELSEIF CFLAG:324 < 2 || FLAG:7 == 2
-				PRINTFORMW 「いや……そんな、そんなのはイヤぁ！」
+				PRINTFORMW 
 				CFLAG:324 = 2
 			ENDIF
 		ENDIF
@@ -1647,17 +1454,18 @@ SELECTCASE SELECTCOM
 			IF CFLAG:326 == 0
 				;처녀
 				IF TALENT:0
-					PRINTFORML 「そ、そんなものでどうするですかぁ？嘘ですぅ！やめてぇ！いやぁ！」
-					PRINTFORMW 後ずさる魔法少女を押さえつけ、力一杯に閉じる%CALLNAME%の両足を無理矢理に開く、
-					PRINTFORML そして、その何者にも進入を許さなかった硬く閉ざされたヴァギナに手に持ったバイブをあてがう。
-					PRINTFORMW 「そんなの！グス、お願いですぅ、許してくださぁい」
-					PRINTFORMW 嫌がる%CALLNAME%を無視して無理無理バイブを押し込んでいく。
-					PRINTFORML なかなか奥に進めない。多少は濡れているが強烈な締め付けによりバイブの侵攻が阻害されている。
-					PRINTFORML 「く、うぅ、いやぁ、く、はぁ」
-					PRINTFORMW それでも処女膜らしきものに行き当たるのを感じると、ぐっと一気に押し込め、その最奥へと叩きつけた。
-					PRINTFORML 「――――かっ、はぁっ」
-					PRINTFORMW 絶句する%CALLNAME%を尻目に%CALLNAME:MASTER%は刺さったままのバイブを動かし始める。
-					PRINTFORMW ゆっくり動くバイブの根元からは赤い血が滴り落ち、次々と下に赤い染みを生み出していった。
+					PRINTFORMW 「そ、そんなものどうすんのよ！　嘘ぅ！　やめてぇ！　いやぁ！」
+					PRINTFORMW 　後ずさる%CALLNAME%を押さえつけ、力一杯に閉じる%CALLNAME%の両足を無理矢理に開く、
+					PRINTFORMW 　そして、その何者にも進入を許さなかった硬く閉ざされたヴァギナに手に持ったバイブをあてがう。
+					PRINTFORMW 「入らないわよぉ、そんなの！　グス、お願いぃ、許してぇぇ！！」
+					PRINTFORMW 　嫌がる%CALLNAME%を無視して無理無理バイブを押し込んでいく。
+					PRINTFORMW 　なかなか奥に進めない。多少は濡れているが強烈な締め付けによりバイブの侵攻が阻害されている。
+					PRINTFORMW 「く、うぅ、いやぁ、く、はぁ」
+					PRINTFORMW 　それでも押し進めようやく処女膜らしきものに行き当たった。
+					PRINTFORMW 　そして%CALLNAME%に力を抜け、と声をかけるとバイブを一気に押し込め、その最奥へと叩きつけた。
+					PRINTFORMW 「――――かっ、はぁっ」
+					PRINTFORMW 　絶句する%CALLNAME%を尻目に%CALLNAME:MASTER%は刺さったままのバイブを動かし始める。
+					PRINTFORMW 　ゆっくり動くバイブの根元からは赤い血が滴り落ち、次々と下に赤い染みを生み出していった。
 				;그 이외
 				ELSE
 					PRINTFORMW 
@@ -1669,16 +1477,14 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:326 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「あん、こんなじゃ、こんなじゃくて%CSTR:12%の暖かいのがぁ、あん、いいですぅ」
-						PRINTFORMW 「ああん、グリグリやめてほしいですぅー」
+						PRINTFORMW 「あ……ん、こんな偽物…じゃ、ヤぁ……%CSTR:이인칭%のオチンポぉ、あん、欲しいぃ……」
+						PRINTFORMW 「ああん、グリグリ止めぇぇぇー」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「あん、こんな偽物じゃ、なくて%CSTR:12%の熱いのがぁ、あん、いいですぅ」
-						PRINTFORMW 「ああん、グリグリやめるですぅー」
+						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「あん、こんな偽物じゃ、なくて%CSTR:12%の熱いのがぁ、あん、いいですぅ」
-						PRINTFORMW 「ああん、グリグリやめてくださぁい」
+						PRINTFORMW 
 					ENDIF
 					CFLAG:326 = 4
 				;굴복각인Lv3
@@ -1706,34 +1512,31 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:327 == 0
-				PRINTFORMW 「そんなことっ…！だめですぅ…！」
-				PRINTFORML アナルバイブを押し込まれた、魔法少女の小さな尻が震えている。
-				PRINTFORMW 「うぅ……！イヤなの、そこはいやぁ……！あぐ、ひぃっ %UNICODE(0x2661)% ふぐぅ %UNICODE(0x2661)% 」
+				PRINTFORMW 「いやぁ、無理、無理、入れないでぇぇ！　おしりの穴、裂けちゃうぅ！」
 				CFLAG:327 = 1
 			;2번째 이후
 			ELSE
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:327 < 4 || FLAG:7 == 2)
+					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「あん、こんなんじゃ、だめですぅ…%CSTR:12%の暖かいのじゃないと…」
-						PRINTFORMW 「ああん、グリグリやめてほしいですぅー」
+						PRINTFORMW 「あ……ん、こんな偽物…じゃ、なくて……%CSTR:이인칭%のおっきいのがぁ、あん、いいのにぃ……」
+						PRINTFORMW 「ああん、は、入ってくりゅぅぅぅー」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「あん、こんな偽物じゃ、なくて%CSTR:12%の熱いのがぁ、あん、でも、いいですぅ」
-						PRINTFORMW 「ああん、グリグリもっとですぅー」
+						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「あん、こんなじゃ、なくて%CSTR:12%の熱いのがぁ、あん、いいですぅ」
-						PRINTFORMW 「ああん、グリグリやめてくださぁい」
+						PRINTFORMW 
 					ENDIF
 					CFLAG:327 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:327 < 3 || FLAG:7 == 2)
-					PRINTFORMW 「ああん、グリグリやめるですぅー」
+					PRINTFORMW 
 					CFLAG:327 = 3
 				;그 이외
 				ELSEIF CFLAG:327 < 2 || FLAG:7 == 2
-					PRINTFORMW 「うぅ……！イヤなの、そこはいやぁ……！」
+					PRINTFORMW 
 					CFLAG:327 = 2
 				ENDIF
 			ENDIF
@@ -1803,7 +1606,8 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:329 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
+						PRINTFORMW 「や、あ、あん、く、ひ、やぁん、ダメぇ、ブルブルだめぇぇ%UNICODE(0x2661)%」
+						PRINTFORMW 「ひぅ、だめぇ、%CSTR:일인칭%のちくび、気持ち良すぎてダメぇぇぇ%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -1818,7 +1622,7 @@ SELECTCASE SELECTCOM
 					CFLAG:329 = 3
 				;그 이외
 				ELSEIF CFLAG:329 < 2 || FLAG:7 == 2
-					PRINTFORMW 「んくぅ、うぅ、おむねがジンジンしますぅ」
+					PRINTFORMW 「んくぅ、うぅ、ムネが、ジンジンするぅ……」
 					CFLAG:329 = 2
 				ENDIF
 			ENDIF
@@ -1859,7 +1663,7 @@ SELECTCASE SELECTCOM
 				CFLAG:330 = 3
 			;그 이외
 			ELSEIF CFLAG:330 < 2 || FLAG:7 == 2
-				PRINTFORMW 「ひゃぁ、おむねがブルブルしますぅー」
+				PRINTFORMW 「ひゃぁ、ムネが、ブルブルするうぅ……」
 				CFLAG:330 = 2
 			ENDIF
 		ENDIF
@@ -1872,10 +1676,10 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:331 == 0
-				PRINTFORML 「これをつけるですか？んっしょ」
-				PRINTFORMW %CALLNAME:MASTER%は魔法少女が搾乳機を着けるのを確認すると沈黙を保ったままそれのスイッチを入れた。
-				PRINTFORML 「んぁぁ！すってるぅ、すってますぅ！いやぁ、とってー%CSTR:11%のおむねチュウチュウすわれてるぅ！」
-				PRINTFORMW %CALLNAME%は自らの胸を吸い上げられる感覚に悶絶した。
+				PRINTFORMW 「これをつけるの？　んっ」
+				PRINTFORMW 　%CALLNAME:MASTER%は%CALLNAME%が搾乳機を着けるのを確認すると沈黙を保ったままそれのスイッチを入れた。
+				PRINTFORMW 「んぁぁ！　すってるぅ、すってるぅ！　いやぁ、とってー%CSTR:11%のむねチュウチュウすわれてるぅ！」
+				PRINTFORMW 　%CALLNAME%は自らの胸を吸い上げられる感覚に悶絶した。
 				CFLAG:331 = 1
 			;2번째 이후
 			ELSE
@@ -1883,7 +1687,7 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:331 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 「%CSTR:12%－、これはあかちゃんのためのおっぱいなんですよぉ？」
+						PRINTFORMW 「%CSTR:이인칭%－、コレ、あかちゃんのためのおっぱいなんだけどぉ？」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 
@@ -1924,69 +1728,68 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「%CSTR:12%…ちょっとこわいんですぅ…抱きしめてくださぁい…」
+						PRINTFORMW 「%CSTR:이인칭%……いいよ……レイプ、して……%UNICODE(0x2661)%」
 						PRINTFORMW %CALLNAME%を優しく抱きしめると肩が少し震えているのが分かった。
-						PRINTFORML 「………%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-						PRINTFORML 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-						PRINTFORML 「%CSTR:11%のはじめて…%CSTR:12%にうけとってもらえて…すごくうれしいですぅ…♪」
-						PRINTFORMW 恋人魔法少女は満面の笑みを浮かべ、女となった喜びを示してきた。
-						PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% 」
+						PRINTFORMW 「………%CSTR:이인칭%、あったかい…♪大丈夫、我慢できるから……来て……%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の幼膣へと入っていく。
+						PRINTFORMW 「はぁぁぁぁん%UNICODE(0x2661)%……%CSTR:이인칭%のがぁ…中に入ってくるぅ…%UNICODE(0x2661)%」
+						PRINTFORMW 「%CSTR:일인칭%のバージン……%CSTR:이인칭%にレイプされて……すごく嬉しい…%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%は満面の笑みを浮かべ、女となった喜びを示してきた。
+						PRINTFORMW 「%CSTR:이인칭%…大好き%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
+						PRINTFORMW 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
 						PRINTFORMW 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-						PRINTFORML %CALLNAME%はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
+						PRINTFORMW %CALLNAME%はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
 						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-						PRINTFORMW 淫乱魔法少女は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+						PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
+						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
+						PRINTFORMW %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
 						PRINTFORMW 「あの…なにするですか？」
-						PRINTFORML そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
+						PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
 						PRINTFORMW 「は…はい…」
-						PRINTFORML 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
+						PRINTFORMW 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
 						PRINTFORMW 「おかして…くださぁい…」
 						PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-						PRINTFORML 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
-						PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
-						PRINTFORMW 奴隷魔法少女は涙を浮かべて破瓜の痛みに耐えている。
+						PRINTFORMW 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
+						PRINTFORMW 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
+						PRINTFORMW %CALLNAME%は涙を浮かべて破瓜の痛みに耐えている。
 					ENDIF
 				ELSE
-					PRINTFORML %CALLNAME:MASTER%は圧し掛かるように%CALLNAME%をベッドへと押し倒す。
-					PRINTFORMW 普段と違う雰囲気の%CALLNAME:MASTER%の顔に魔法少女は怯え、竦み上がっている。
-					PRINTFORML 「あ、あのぉ…%CSTR:12%…なんかこわいですぅ…」
-					PRINTFORML 「いったいなにするですか…っ！？」
-					PRINTFORMW まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、%CALLNAME%の顔から血の気が引いた。
-					PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、一気に膣を貫いた。
-					PRINTFORML 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！」
-					PRINTFORMW 魔法少女は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
+					PRINTFORMW %CALLNAME:MASTER%は圧し掛かるように%CALLNAME%を組み伏せ、押し倒す。
+					PRINTFORMW 大の大人の男である%CALLNAME:MASTER%の重さ、力強さ、臭い、そして眼光に、小さな%CALLNAME%は怯え、圧倒され、竦み上がっている。
+					PRINTFORMW 「ナニ……すんのよぅ……！？」
+					PRINTFORMW 当然男を知る筈も無い、小陰唇すら隠れたままの幼気な秘裂に亀頭を押し当てると、その熱と感触に、これから何をされるのかを察した%CALLNAME%の顔から、血の気が引いた。
+					PRINTFORMW 「まさか……！？ウソッ！？いやぁっ！やめて、やめてっ！やだやだやだやだぁっ！！」
+					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%にの姿を見て、嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、サイズの違いも配慮せずに幼膣を一気に貫いた。
+					PRINTFORMW 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！だずげでぇっ、パパァ、パパァ！！」
+					PRINTFORMW %CALLNAME:TARGET%は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
 				ENDIF
 			;그 이외
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「んっ、%CSTR:12%にだかれるなんて、とてもうれしいですぅ♪」
-						PRINTFORMW 恋人魔法少女は目の端に涙をためている。
-						PRINTFORMW 「いっぱいあいして、たくさんそそいででくださいですぅ %UNICODE(0x2661)% 」
+						PRINTFORMW 「んっ、%CSTR:이인칭%、来て%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME:TARGET%は目の端に嬉し涙を浮かべている。
+						PRINTFORMW 「%CSTR:일인칭%のちっちゃなオマンコ、いっぱいレイプしてね%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「ぎゅってして…%CSTR:12%をかんじたいんですぅ…」
-						PRINTFORMW %CALLNAME:MASTER%は淫乱魔法少女をキツく抱きしめながら挿入した
-						PRINTFORMW 「あぁあはぁっ…%CSTR:12%が…%CSTR:12%がきたですぅ… %UNICODE(0x2661)% 」
+						PRINTFORMW 「ぎゅってして…%CSTR:12%をかんじたいんですぅ…」
+						PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%をキツく抱きしめながら挿入した
+						PRINTFORMW 「あぁあはぁっ…%CSTR:12%が…%CSTR:12%がきたですぅ…%UNICODE(0x2661)%」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「ん、はぁ、どうぞすきかってに%CSTR:11%のべんきまんこぐちゃぐちゃにしてくださいぃ」
-						PRINTFORMW %CALLNAME:MASTER%は奴隷魔法少女の願いを叶えるべく縦横無尽に腰を動かした。
-						PRINTFORML 「んはぁ、ありがとう、ございますぅ、くぅ、%CSTR:11%のべんきまんこを、あはぁ、こんなに、つかっていただいて
+						PRINTFORMW 「ん、はぁ、どうぞすきかってに%CSTR:11%のべんきまんこぐちゃぐちゃにしてくださいぃ」
+						PRINTFORMW 　%CALLNAME:MASTER%は%CALLNAME%の願いを叶えるべく縦横無尽に腰を動かした。
+						PRINTFORMW 「んはぁ、ありがとう、ございますぅ、くぅ、%CSTR:11%のべんきまんこを、あはぁ、こんなに、つかっていただいて
 						PRINTFORMW %CSTR:11%はぁあん、と、とてもしあわせですぅ」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -1997,34 +1800,36 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:332 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「はぁっ、んんっ♪きもちいいですぅ、もっといっぱいずんずんしてぇ♪」
-					PRINTFORMW %CALLNAME:MASTER%に突かれながら、恋人魔法少女はうっとりとした顔で快楽に身を震わせている。
-					PRINTFORMW そして%CALLNAME:MASTER%の首に手を回してきた。
-					PRINTFORML 「%CSTR:12%、だいすきですぅ♪ふぁぁぁぁんっ♪」
-					PRINTFORMW 「だいすきっ♪いっぱいせーえきだしてくださぁいっ♪」」
+					PRINTFORMW 「はぁっ、んんっ%UNICODE(0x2661)%きもちいいぃ、%CSTR:일인칭%のちっちゃなオマンコ、もっといっぱいレイプしてぇ%UNICODE(0x2661)%」
+					PRINTFORML %CALLNAME:MASTER%に突かれながら、%CALLNAME%は嬉しそうな顔で快楽に身を震わせている。
+					PRINTFORML そして%CALLNAME:MASTER%の首に手を回してきた。
+					PRINTFORMW 「%CSTR:이인칭%、大好きぃぃ%UNICODE(0x2661)%ふぁぁぁぁんっ%UNICODE(0x2661)%」
+					PRINTFORMW 「だいすきっ%UNICODE(0x2661)%だいすきっ%UNICODE(0x2661)%んんん～っ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「ふぁぁあん♪イっちゃいますぅ～っ♪」
-					PRINTFORMW 淫乱魔法少女は激しくピストンされて、%CALLNAME:MASTER%の腰に脚を絡め逃がさないようにしている。
-					PRINTFORML 「中にぃ…中に…たっぷり…だしてくださぁぃっ♪」
-					PRINTFORMW 「もっとぉ…%CSTR:11%をおかしてぇ…ふぁぁぁあぁぁ♪」
+					PRINTFORMW 「ふぁぁあん♪イっちゃいますぅ～っ♪」
+					PRINTFORML %CALLNAME%は激しくピストンされて、%CALLNAME:MASTER%の腰に脚を絡め逃がさないようにしている。
+					PRINTFORMW 「中にぃ…中に…たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW 「CSTR:11のおまんこに、いっぱいせーえきだしてくださぁいっ♪」
+				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「%CSTR:11%のおまんこ…%CSTR:12%のおちんちんでいっぱいつかってくださいですぅ♪」
-					PRINTFORMW 要望どおり%CALLNAME%の奥を突いてやると、%CALLNAME:TARGET%は%CALLNAME:MASTER%にしがみつく。
-					PRINTFORML 「ひゃゃはぁぁっ♪もうゆるしてくださぃっ♪」
-					PRINTFORMW 言葉とは裏腹に奴隷魔法少女は襲い来る快感に喜び悶えている……
+					PRINTFORMW 「%CSTR:11%のおまんこ…%CSTR:12%のおちんちんでいっぱいつかってくださいですぅ♪」
+					PRINTFORML 要望どおり%CALLNAME%の奥を突いてやると、%CALLNAME:TARGET%は%CALLNAME:MASTER%にしがみつく。
+					PRINTFORMW 「もっとぉ…%CSTR:11%をおかしてぇ…ふぁぁぁあぁぁ♪」
+					PRINTFORMW 「ひゃゃはぁぁっ♪もうゆるしてくださぃっ♪」
+					PRINTFORMW 言葉とは裏腹に%CALLNAME:TARGET%は襲い来る快感に喜び悶えている……
 				ENDIF
 				CFLAG:332 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:332 < 3 || FLAG:7 == 2)
-				PRINTFORML 「%CSTR:11%ヘンですぅ…。%CSTR:12%におまんこずんずんされるとぉ…っ」
-				PRINTFORML 「むねがきゅんきゅんってして、おまんこきゅうきゅうってしちゃうんですぅ♪」
-				PRINTFORMW 「%CSTR:12%、もっとずんずんしてくださぁいっ♪ひゃぁぁぁん♪」
+				PRINTFORMW 「ヘンよっ！……%CSTR:이인칭%にオマンコずんずん犯されてぇ…っ」
+				PRINTFORMW 「ムネがきゅんきゅんってして、オマンコきゅうきゅうってしちゃうのヘンよっ♪」
+				PRINTFORMW 「%CSTR:12%、もっとずんずんしてっ♪ひゃぁぁぁん♪」
 				CFLAG:332 = 3
 			;그 이외
 			ELSEIF CFLAG:332 < 2 || FLAG:7 == 2
-				PRINTFORML 「ひあぁっ…！おちんちんがぁ、なかにぃ…ずぶずぶってぇ…」
-				PRINTFORMW 魔法少女は恥ずかしそうに両手で顔を覆っている。
+				PRINTFORMW 「ひあぁっ…！おちんちんがぁ、なかにぃ…ずぶずぶってぇ…」
+				PRINTFORMW %CALLNAME%は恥ずかしそうに両手で顔を覆っている。
 				CFLAG:332 = 2
 			ENDIF
 		ENDIF
@@ -2041,45 +1846,44 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「え、うしろから…ですか？%CSTR:12%…ちょっとこわいですぅ…」
+						PRINTFORMW 「えぇ、うしろから……？%CSTR:일인칭%……ちょっと怖いけど……」
 						PRINTFORMW %CALLNAME%の耳元で大丈夫だと囁くと、恐る恐るながらも尻を突き出してくる。
-						PRINTFORML 「%CSTR:12%、%CSTR:11%がんばります…♪だいじょうぶです、きてくださぁい…♪」
-						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-						PRINTFORML 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-						PRINTFORML 「%CSTR:11%のはじめて…%CSTR:12%にうけとってもらえて…すごくうれしいですぅ…♪」
-						PRINTFORMW 恋人魔法少女は満面の笑みを浮かべ、女となった喜びを示してきた。
-						PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% 」
+						PRINTFORMW 「%CSTR:이인칭%、%CSTR:일인칭%、頑張る……♪だいじょうぶだから、レイプ、して…%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の幼膣へと入っていく。
+						PRINTFORMW 「はぁぁぁぁん…♪%CSTR:이인칭%のがぁ…中に入ってくるぅ…%UNICODE(0x2661)%」
+						PRINTFORMW 「%CSTR:일인칭%のバージン……%CSTR:이인칭%にレイプされて……すごくうれしいの……%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%は満面の笑みを浮かべ、女となった喜びを示してきた。
+						PRINTFORMW 「%CSTR:이인칭%……だいすき%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
+						PRINTFORMW 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
 						PRINTFORMW 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-						PRINTFORML 四つん這いになった淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
+						PRINTFORMW 四つん這いになった%CALLNAME%はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
 						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-						PRINTFORMW 淫乱魔法少女淫乱魔法少女は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+						PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
+						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい%UNICODE(0x2661)%」
+						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、四つん這いにさせ尻を突き出させる。
-						PRINTFORML 「あの…なにするですか？」
+						PRINTFORMW %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、四つん這いにさせ尻を突き出させる。
+						PRINTFORMW 「あの…なにするですか？」
 						PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-						PRINTFORML 「は…はい…」
-						PRINTFORML 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
-						PRINTFORML 「おかして…くださぁい…」
+						PRINTFORMW 「は…はい…」
+						PRINTFORMW 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
+						PRINTFORMW 「おかして…くださぁい…」
 						PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-						PRINTFORML 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
-						PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
-						PRINTFORMW 奴隷魔法少女は涙を浮かべて破瓜の痛みに耐えている。
+						PRINTFORMW 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
+						PRINTFORMW 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
+						PRINTFORMW %CALLNAME%は涙を浮かべて破瓜の痛みに耐えている。
 					ENDIF
 				ELSE
-					PRINTFORML %CALLNAME:MASTER%は圧し掛かるように%CALLNAME%をベッドへと押し倒し、四つん這いにさせる。
-					PRINTFORMW 普段と違う雰囲気の%CALLNAME:MASTER%の顔に魔法少女は怯え、竦み上がっている。
-					PRINTFORML 「あ、あのぉ…%CSTR:12%…なんかこわいですぅ…」
-					PRINTFORML 「いったいなにするですか…っ！？」
-					PRINTFORMW まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、%CALLNAME%の顔から血の気が引いた。
-					PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、一気に膣を貫いた。
-					PRINTFORML 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！」
+					PRINTFORMW %CALLNAME:MASTER%は圧し掛かるように%CALLNAME%をベッドへと押し倒し、四つん這いにさせる。
+					PRINTFORMW 大の大人の男である%CALLNAME:MASTER%の重さ、力強さ、臭い、そして眼光に、小さな%CALLNAME%は怯え、圧倒され、竦み上がっている。
+					PRINTFORMW 「ナニ……すんのよぅ……！？」
+					PRINTFORMW 当然男を知る筈も無い、小陰唇すら隠れたままの幼気な秘裂に亀頭を押し当てると、その熱と感触に、これから何をされるのかを察した%CALLNAME%の顔から、血の気が引いた。
+					PRINTFORMW 「まさか……！？ウソッ！？いやぁっ！やめて、やめてっ！やだやだやだやだぁっ！！」
+					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%にの姿を見て、嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、サイズの違いも配慮せずに幼膣を一気に貫いた。
+					PRINTFORMW 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！だずげでぇっ、パパァ、パパァ！！」
 					PRINTFORMW %CALLNAME:TARGET%は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
 				ENDIF
 			;그 이외
@@ -2087,29 +1891,27 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「ふぁぁっ…うしろからなんてぇ…♪」
-						PRINTFORMW %CALLNAME:MASTER%が後ろから荒々しく突いてくると恋人魔法少女は優しい笑顔で迎え入れた。
-						PRINTFORML 「ふあぁっ、あ～っ♪すごいぃぃ♪」
-						PRINTFORML 荒々しく突く度に%CALLNAME%の愛液が増していく。
-						PRINTFORMW 愛液が潤滑油代わりになりさらに%CALLNAME:MASTER%のペニスを奥まで招き入れ、%CALLNAME%は絶頂した。
+						PRINTFORMW 「ふぁぁっ…%CSTR:일인칭%のロリマンコ、うしろからレイプなんてぇ…%UNICODE(0x2661)%」
+						PRINTFORML 狭膣口を引き裂くように%CALLNAME:MASTER%が後ろから荒々しく突くと、%CALLNAME%は甘い嬌声を上げた。
+						PRINTFORMW 「ふあぁっ、あ～っ♪すごいぃぃ♪オマンコ、ミチミチいってるぅぅっ%UNICODE(0x2661)%」
+						PRINTFORML 小さな背中に圧し掛かりながら、幼膣を抉る度に%CALLNAME%の愛液が増していく。
+						PRINTFORMW 愛液を潤滑油にして%CALLNAME:MASTER%のペニスを更に奥まで招き入れ、%CALLNAME%は絶頂した。
 						PRINTFORMW 「んっ…ぁん、あぁぁ…ん、ふぁぁぁ～～っ♪」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「あぁん♪このかっこう、まるでどーぶつさんみたいですぅ…♪」
-						PRINTFORML 「ケダモノみたくおかしたいんですよねぇ？」
-						PRINTFORMW 「えっちなめすいぬの%CSTR:11%と、いっぱい『こうび』するですぅ♪」
+						PRINTFORMW 「あぁん♪このかっこう、まるでどーぶつさんみたいですぅ…♪」
+						PRINTFORMW 「ケダモノみたくおかしたいんですよねぇ？」
+						PRINTFORMW 「えっちなめすいぬのCSTR:11と、いっぱい『こうび』するですぅ♪」
 						PRINTFORMW 尻を振って誘ってくる%CALLNAME%の秘裂に、%CALLNAME:MASTER%は躊躇なくペニスを突き入れる。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW %CALLNAME:MASTER%は淫乱魔法少女の尻を掴み、獣のように存分に犯した。
+						PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
+						PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の尻を掴み、獣のように存分に犯した。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「あぁ…%CSTR:12%にうしろからおかされてぇ♪きもちいいですぅ♪」
-						PRINTFORMW 「あっあっあっあっ♪ ひあぁっ！ ああぁんっ♪」
-						PRINTFORML 「も、もっとおかしてぇっ！ %CSTR:11%のことおかしてぇぇぇっ♪」
-						PRINTFORMW 奴隷魔法少女は後ろから突かれて絶頂に達しながら、さらなる快感を求めてきた。
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORMW 
-						PRINTFORMW 
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2120,36 +1922,31 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:333 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふぁぁっ…うしろからなんてぇ…♪」
-					PRINTFORMW %CALLNAME:MASTER%が後ろから荒々しく突いてくると恋人魔法少女は優しい笑顔で迎え入れた。
-					PRINTFORML 「ふあぁっ、あ～っ♪すごいぃぃ♪」
-					PRINTFORMW 荒々しく突く度に%CALLNAME%の愛液が増していく。
-					PRINTFORML 愛液が潤滑油代わりになりさらに%CALLNAME:MASTER%のペニスを奥まで招き入れ、%CALLNAME%は絶頂した。
-					PRINTFORMW 「んっ…ぁん、あぁぁ…ん、ふぁぁぁ～～っ♪」
+					PRINTFORMW 「はぅぅ…！うしろからなんてっ、ホント、レイプッで、すっ…、ふぁあぁっ%UNICODE(0x2661)%」
+					PRINTFORMW 「%CSTR:일인칭%、おっきなケダモノに、押さえつけられて、ちっちゃなオマンコ、レイプされてるぅぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「でもぉっ%UNICODE(0x2661)%、%CSTR:이인칭%のオチンチンと臭いで、%CSTR:일인칭%はつじょーしちゃうぅ、メスこいぬだからぁ、も、もう、イっちゃうぅぅぅっ%UNICODE(0x2661)%」
+					PRINTFORML 絶頂に達すると、%CALLNAME:TARGET%は背中を大きく反らせて痙攣する。そしてわずかに涙を浮かべている。
+					PRINTFORML 「メス仔犬の%CSTR:일인칭%……大きなケダモノの%CSTR:이인칭%の……ごーかん交尾……大好き%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「あぁん♪このかっこう、まるでどーぶつさんみたいですぅ…♪」
-					PRINTFORML 「ケダモノみたくおかしたいんですよねぇ？」
-					PRINTFORMW 「えっちなめすいぬの%CSTR:11%と、いっぱい『こうび』するですぅ♪」
-					PRINTFORMW 尻を振って誘ってくる%CALLNAME%の秘裂に、%CALLNAME:MASTER%は躊躇なくペニスを突き入れる。
-					PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORMW 淫乱魔法少女は後ろから突かれて絶頂に達しながら、さらなる快感を求めてきた
+					PRINTFORMW 「あぁ…%CSTR:12%にうしろからおかされてぇ♪きもちいいですぅ♪」
+					PRINTFORMW 「あっあっあっあっ♪ ひあぁっ！ ああぁんっ♪」
+					PRINTFORMW 「も、もっとおかしてぇっ！ %CSTR:11%のことおかしてぇぇぇっ♪」
+					PRINTFORMW %CALLNAME%は後ろから突かれて絶頂に達しながら、さらなる快感を求めてきた。
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あぁ…%CSTR:12%にうしろからおかされてぇ♪きもちいいですぅ♪」
-					PRINTFORMW 「あっあっあっあっ♪ ひあぁっ！ ああぁんっ♪」
-					PRINTFORML 「も、もっとおかしてぇっ！ %CSTR:11%のことおかしてぇぇぇっ♪」
-					PRINTFORMW %CALLNAME:MASTER%は奴隷魔法少女の尻を掴み、獣のように存分に犯した。
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:333 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:333 < 3 || FLAG:7 == 2)
-				PRINTFORML 「うしろから…ずんずんされてぇ…きもちいいですよぅ…♪」
+				PRINTFORMW 「うしろから…ずんずんされてぇ…きもちいいですよぅ…♪」
 				PRINTFORMW 「%CSTR:12%、すごぃぃ！もっとぉ…もっとぉ…ついてぇ…♪おかしてくださぁいっ♪」
 				CFLAG:333 = 3
 			;그 이외
 			ELSEIF CFLAG:333 < 2 || FLAG:7 == 2
-				PRINTFORML 「ふぁぁ、どーぶつさんみたいで…にがてなんですぅ…」
+				PRINTFORMW 「ふぁぁ、どーぶつさんみたいで…にがてなんですぅ…」
 				PRINTFORMW 「ひっ、やあぁ…そん、なにっ、つい、たらっ、こわれちゃいますぅ…っ！」
 				PRINTFORMW %CALLNAME:MASTER%のピストンが激しくなるのと比例して、快楽に堕ち始めた様だ…
 				CFLAG:333 = 2
@@ -2163,12 +1960,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:334 == 0
-			PRINTFORML 「いったいなにするですか…っ！？」
-			PRINTFORMW まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、%CALLNAME:TARGET%の顔から血の気が引いた。
-			PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-			PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、少しペニスをずらすと一気に尻穴を貫いた。
-			PRINTFORML 「ひあっ、そこは！、ひあ゛あ゛あ゛あぁぁぁっ！！！やめてぇぇぇぇっ！！」
-			PRINTFORMW 魔法少女は初めて尻穴を蹂躙されて叫び声を上げた。
+			PRINTFORMW 
 			CFLAG:334 = 1
 		;2번째 이후
 		ELSE
@@ -2176,35 +1968,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:334 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「ふぁぁあん♪イっちゃいますぅ～っ♪」
-					PRINTFORMW 恋人魔法少女は激しくピストンされて、%CALLNAME:MASTER%の腰に脚を絡め逃がさないようにしている。
-					PRINTFORMW 「おしりにぃ…おしりに…たっぷり…だしてくださぁぃっ♪」
-					PRINTFORML そして%CALLNAME:MASTER%の首に手を回してきた。
-					PRINTFORMW 「%CSTR:12%、だいすきですぅ♪ふぁぁぁぁんっ♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「はぁっ、んんっ♪おしりっ、きもちいいですぅ、もっといっぱいずんずんしてぇ♪」
-					PRINTFORMW %CALLNAME:MASTER%に突かれながら、淫乱魔法少女はうっとりとした顔で快楽に身を震わせている。
-					PRINTFORML 「CSTR:11のおしりに、いっぱいせーえきだしてくださぁいっ♪」
-					PRINTFORMW 「おしりだいすきっ♪おしりだいすきっ♪んんん～っ♪」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「ん、はぁ、どうぞすきかってに%CSTR:11%のけつまんこぐちゃぐちゃにしてくださいぃ」
-					PRINTFORMW %CALLNAME:MASTER%は奴隷魔法少女の願いを叶えるべく縦横無尽に腰を動かした。
-					PRINTFORML 「んはぁ、ありがとう、ございますぅ、くぅ、%CSTR:11%のけつまんこを、あはぁ、こんなに、つかっていただいて
-					PRINTFORMW %CSTR:11%はぁあん、と、とてもしあわせですぅ」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:334 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:334 < 3 || FLAG:7 == 2)
-				PRINTFORML 「ひあぁっ…！、おしりにぃ…ずぶずぶってぇ…」
-				PRINTFORMW アナルで感じてしまった魔法少女は、恥ずかしそうに両手で顔を覆っている。
-				PRINTFORMW 「%CSTR:11%ヘンですぅ…。%CSTR:12%におしりずんずんされるとぉ…っ」
+				PRINTFORMW 
 				CFLAG:334 = 3
 			;그 이외
 			ELSEIF CFLAG:334 < 2 || FLAG:7 == 2
-				PRINTFORML 「ひあっ、そこは！、ひあ゛あ゛あ゛あぁぁぁっ！！！やめてぇぇぇぇっ！！」
-				PRINTFORMW 魔法少女は両手で顔を覆って、アナルを犯された屈辱に耐えている。
+				PRINTFORMW 
 				CFLAG:334 = 2
 			ENDIF
 		ENDIF
@@ -2216,12 +1995,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:335 == 0
-			PRINTFORML 「いったいなにするですか…っ！？」
-			PRINTFORMW %CALLNAME:MASTER%のペニスがアナルに押し当てられるを感じると、魔法少女の顔から血の気が引いた。
-			PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-			PRINTFORMW 懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、ゆっくりとに尻穴を貫いた。
-			PRINTFORML 「ひあっ、そこは！、ひあ゛あ゛あ゛あぁぁぁっ！！！やめてぇぇぇぇっ！！」
-			PRINTFORMW %CALLNAME:TARGET%は初めて尻穴を蹂躙されて叫び声を上げた。
+			PRINTFORMW 
 			CFLAG:335 = 1
 		;2번째 이후
 		ELSE
@@ -2229,36 +2003,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:335 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「はぅぅ…！うしろからなんてっ、だめで、すっ…、ふぁあぁっ♪」
-					PRINTFORMW 「%CSTR:12%のおかおみえないんですぅ、ちょっと…こわいんですぅ」
-					PRINTFORML 「でもぉっ♪きもちよくてぇ、もうイっちゃんですぅぅぅっ♪」
-					PRINTFORMW 絶頂に達すると、恋人魔法少女は背中を大きく反らせて痙攣する。そしてわずかに涙を浮かべている。
-					PRINTFORMW 「こんなえっちな子でも…あいしてくれるですかぁ…？」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「あぁん♪このかっこう、まるでどーぶつさんみたいですぅ…♪」
-					PRINTFORMW 「ケダモノみたくおかしたいんですよねぇ？」
-					PRINTFORML 「えっちなめすいぬの%CSTR:11%と、いっぱい『こうび』するですぅ♪」
-					PRINTFORMW 尻を振って誘ってくる%CALLNAME%の尻穴に、%CALLNAME:MASTER%は躊躇なくペニスを突き入れる。
-					PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORMW %CALLNAME:MASTER%は淫乱魔法少女の尻を掴み、獣のように存分に犯した。
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「あぁ…%CSTR:12%にうしろからおかされてぇ♪きもちいいですぅ♪」
-					PRINTFORMW 「あっあっあっあっ♪ ひあぁっ！ ああぁんっ♪」
-					PRINTFORML 「も、もっとおかしてぇっ！ %CSTR:11%のことおかしてぇぇぇっ♪」
-					PRINTFORMW 奴隷魔法少女は後ろから突かれて絶頂に達しながら、さらなる快感を求めてきた。
+					PRINTFORMW 
 				ENDIF
 				CFLAG:335 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:335 < 3 || FLAG:7 == 2)
-				PRINTFORML 「うしろから…ずんずんしないで…やめてぇぇぇぇっ！」
-				PRINTFORMW アナルで感じてしまった屈辱に、魔法少女は、涙を浮かべている
+				PRINTFORMW
 				CFLAG:335 = 3
 			;그 이외
 			ELSEIF CFLAG:335 < 2 || FLAG:7 == 2
-				PRINTFORML 一挙に奥まで突き入れると、魔法少女は背を反らせて叫んだ。
-				PRINTFORMW 「ひゃあぁん！、そこは！、ひあ゛あ゛あ゛あぁぁぁっ！！！やめてぇぇぇぇっ！！」…」
+				PRINTFORMW 
 				CFLAG:335 = 2
 			ENDIF
 		ENDIF
@@ -2345,45 +2105,44 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上においでと優しく命じた。
-						PRINTFORMW 恋人魔法少女はその意図を察し、%CALLNAME:MASTER%の上に跨った。
-						PRINTFORML 「はい…%CSTR:11%のはじめて、%CSTR:12%にあげるですぅ…♪」
-						PRINTFORMW 「うけとって…くださぁい…あっ…♪」
+						PRINTFORMW %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上においでと優しく命じた。
+						PRINTFORMW %CALLNAME%はその意図を察し、%CALLNAME:MASTER%の上に跨った。
+						PRINTFORMW 「うん……%CSTR:일인칭%のバージン……%CSTR:이인칭%にあげる……あっ…♪」
 						PRINTFORMW %CALLNAME%が腰を落とすと、%CALLNAME:MASTER%のペニスがずぶずぶと膣内へと埋まっていく。
-						PRINTFORML 「あっ、んっ、ああぁぁああんっっ♪%CSTR:12%のがっ、なかにっ、おくまでぇっ♪」
-						PRINTFORML 「はぁぁ、はぁ……はいっちゃった、です…ぅ…っ♪」
-						PRINTFORMW 「おてて…つないでくれますか？」
+						PRINTFORMW 「あっ、んっ、ああぁぁああんっっ♪%CSTR:12%のがっ、なかにっ、おくまでぇっ♪」
+						PRINTFORMW 「はぁぁ、はぁ……はいっちゃっ……っ%UNICODE(0x2661)%」
+						PRINTFORMW 「ねぇ……手……つないで？」
 						PRINTFORMW %CALLNAME:MASTER%は、しっかりと%CALLNAME%の手を握る。
-						PRINTFORML 震えていた%CALLNAME%の手が、しっかりと%CALLNAME:MASTER%の手と繋がった。
-						PRINTFORMW 「あったかぁい…だいすきですぅ、%CSTR:12%… %UNICODE(0x2661)% 」
+						PRINTFORMW 震えていた%CALLNAME%の手が、しっかりと%CALLNAME:MASTER%の手と繋がった。
+						PRINTFORMW 「んっ…だいすき、%CSTR:이인칭%……%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
+						PRINTFORMW %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
 						PRINTFORMW 「はぁい♪やっとお呼びですねぇ♪」
-						PRINTFORMW 淫乱魔法少女は%CALLNAME:MASTER%の上に跨ると、秘裂を広げ%CALLNAME:MASTER%に見せ付けてきた。
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
+						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の上に跨ると、秘裂を広げ%CALLNAME:MASTER%に見せ付けてきた。
+						PRINTFORMW 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
 						PRINTFORMW 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
 						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
+						PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
+						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい%UNICODE(0x2661)%」
 						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
+						PRINTFORMW %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
 						PRINTFORMW 「は、はい…わかりました…ですぅ…」
-						PRINTFORML 奴隷魔法少女は%CALLNAME:MASTER%の上に跨ると、恐る恐る腰を落とす。
+						PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の上に跨ると、恐る恐る腰を落とす。
 						PRINTFORMW 「ひぅっ…！はいって…くるですっ、%CSTR:12%の…ああぁぁっ…」
 						PRINTFORMW %CALLNAME%は中々動こうとしないのでこちらから腰を突き出した…
-						PRINTFORML 「ひゃう！？いたいっ…いたいですよぅ…」
+						PRINTFORMW 「ひゃう！？いたいっ…いたいですよぅ…」
 						PRINTFORMW 「%CSTR:12%のいぢわるぅ…ふぁぁんっ！」
 						PRINTFORMW 何か聞こえた気がしたのでさらに腰を突き出した…
 					ELSE
-						PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと強く命じた。
-						PRINTFORMW 「えっ…やです、そんな…」
-						PRINTFORMW 怯えた顔で嫌がる魔法少女に業を煮やした%CALLNAME:MASTER%は、無理矢理%CALLNAME%を抱え上げ、跨らせた。
-						PRINTFORML 「やだっ！こわっいぃっ…あうぅ…」
-						PRINTFORMW 男を知らない秘裂にペニスが突き刺さり、膣内を侵していく。
-						PRINTFORML 「い…いだいっ…う…うごいちゃ…だめですぅ！！あああああっ！！」
+						PRINTFORMW %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと強く命じた。
+						PRINTFORMW 「ナニ……すんのよぅ……！？」
+						PRINTFORMW 当然男を知る筈も無い、小陰唇すら隠れたままの幼気な秘裂に亀頭を押し当てると、その熱と感触に、これから何をされるのかを察した%CALLNAME%の顔から、血の気が引いた。
+						PRINTFORMW 「まさか……！？ウソッ！？いやぁっ！やめて、やめてっ！やだやだやだやだぁっ！！」
+						PRINTFORMW 泣きじゃくり懇願する%CALLNAME%にの姿を見て、嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、サイズの違いも配慮せずに幼膣を一気に貫いた。
+						PRINTFORMW 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！だずげでぇっ、パパァ、パパァ！！」
 						PRINTFORMW 深々と刺さっている怒張のために逃げられない%CALLNAME%は、ロデオのように翻弄されている。
 					ENDIF
 				ENDIF
@@ -2414,44 +2173,26 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:338 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上においでと優しく命じた。
-					PRINTFORMW 恋人魔法少女はその意図を察し、%CALLNAME:MASTER%の上に跨った。
-					PRINTFORML 「あっ、あっ！したから、ずんずん…っ！ふぁ、ひゃぁぁん♪たっぷり…だしてくださぁぃっ♪」
-					PRINTFORMW %CALLNAME%の腰をがっちりと抑えつけ、容赦なく突き上げていく。
-					PRINTFORML %CALLNAME:MASTER%の激しい攻めに%CALLNAME%言葉も継げず、はしたなく開いた口から涎と嬌声を垂れ流している。
-					PRINTFORMW 「こんなにすごいのぉ♪こわれ、ちゃいますぅ…！もっと、いっぱいこわしてくださぁい♪%CSTR:12%っ！ひぁぁん！」
+					PRINTFORMW 「はぁっ、んんっ%UNICODE(0x2661)%きもちいいぃ、%CSTR:일인칭%のちっちゃなオマンコで、%CSTR:이인칭%レイプしてる%UNICODE(0x2661)%」
+					PRINTFORML 恋人つなぎで手を握り、%CALLNAME:MASTER%に突かれながら、%CALLNAME%は尻をくねらして快楽を貪っている。
+					PRINTFORMW 「%CSTR:이인칭%、キモチいい？%CSTR:일인칭%のコドモおまんこ、キモチいい？」
+					PRINTFORMW 「だいすきっ%UNICODE(0x2661)%だいすきっ%UNICODE(0x2661)%んんん～っ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
-					PRINTFORMW 「はぁい♪やっとお呼びですねぇ♪」
-					PRINTFORML 淫乱魔法少女は%CALLNAME:MASTER%の上に跨ると、秘裂を広げ%CALLNAME:MASTER%に見せ付けてきた。
-					PRINTFORMW 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
-					PRINTFORMW 「は、はい…わかりました…ですぅ…」
-					PRINTFORML 奴隷魔法少女は%CALLNAME:MASTER%の上に跨ると、恐る恐る腰を落とす。
-					PRINTFORMW 「ひぅっ…！はいって…くるですっ、%CSTR:12%の…ああぁぁっ…」
-					PRINTFORML %CALLNAME%は中々動こうとしないのでこちらから腰を突き出した…
-					PRINTFORMW 「ひゃう！？きもちいいっ！…きもちいいですよぅ♪」
-					PRINTFORML 「%CSTR:12%のいぢわるぅ…ふぁぁんっ♪」
-					PRINTFORMW 何か聞こえた気がしたのでさらに腰を突き出した…
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:338 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:338 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あっ、あっ！したから、ずんずん…っ！ふぁ、ひゃぁぁん♪」
-				PRINTFORMW 魔法少女の腰をがっちりと抑えつけ、容赦なく突き上げていく。
-				PRINTFORML %CALLNAME:MASTER%の激しい攻めに%CALLNAME%言葉も継げず、はしたなく開いた口から涎と嬌声を垂れ流している。
-				PRINTFORMW 「こんなにすごいのぉ♪こわれ、ちゃいますぅ…！もっと、いっぱいこわしてくださぁい♪%CSTR:12%っ！ひぁぁん！」
+				PRINTFORMW 
 				CFLAG:338 = 3
 			;그 이외
 			ELSEIF CFLAG:338 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「」
 				CFLAG:338 = 2
 			ENDIF
 		ENDIF
@@ -2471,40 +2212,18 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:339 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上においでと優しく命じた。
-					PRINTFORMW 恋人魔法少女はその意図を察し、%CALLNAME:MASTER%の上に跨った。
-					PRINTFORML 「あっ、あっ！したから、ずんずん…っ！ふぁ、ひゃぁぁん♪」
-					PRINTFORMW %CALLNAME%の腰をがっちりと抑えつけ、容赦なく突き上げていく。
-					PRINTFORML %CALLNAME:MASTER%の激しい攻めに%CALLNAME%言葉も継げず、はしたなく開いた口から涎と嬌声を垂れ流している。
-					PRINTFORMW 「こんなにすごいのぉ♪こわれ、ちゃいますぅ…！もっと、いっぱいこわしてくださぁい♪%CSTR:12%っ！ひぁぁん！」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
-					PRINTFORMW 「はぁい♪やっとお呼びですねぇ♪」
-					PRINTFORML 淫乱魔法少女は%CALLNAME:MASTER%の上に跨ると、尻を広げ%CALLNAME:MASTER%に見せ付けてきた。
-					PRINTFORMW 「%CSTR:11%のおしり、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている尻穴へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はベッドに仰向けになり、勃起した己のペニスを指し上に乗れと命じた。
-					PRINTFORMW 「は、はい…わかりました…ですぅ…」
-					PRINTFORML 奴隷魔法少女は%CALLNAME:MASTER%の上に跨ると、恐る恐る腰を落とす。
-					PRINTFORMW 「あっ、ぁぁぁ…！おしり…はいって…くるですっ、%CSTR:12%の…ああぁぁっ…」
-					PRINTFORML %CALLNAME%は中々動こうとしないのでこちらから腰を突き出した…
-					PRINTFORMW 「ひゃう！？きもちいいっ！…きもちいいですよぅ♪」
-					PRINTFORML 「%CSTR:12%のいぢわるぅ…ふぁぁんっ♪」
-					PRINTFORMW 何か聞こえた気がしたのでさらに腰を突き出した…
+					PRINTFORMW 
 				ENDIF
 				CFLAG:339 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:339 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あっ、あっ！したから、ずんずん…っ！ふぁ、ひゃぁぁん♪」
-				PRINTFORMW 魔法少女の腰をがっちりと抑えつけ、容赦なく突き上げていく。
-				PRINTFORML %CALLNAME:MASTER%の激しい攻めに%CALLNAME%言葉も継げず、はしたなく開いた口から涎と嬌声を垂れ流している。
-				PRINTFORMW 「こんなにすごいのぉ♪こわれ、ちゃいますぅ…！もっと、いっぱいこわしてくださぁい♪%CSTR:12%っ！ひぁぁん！」
+				PRINTFORMW 
 				CFLAG:339 = 3
 			;그 이외
 			ELSEIF CFLAG:339 < 2 || FLAG:7 == 2
@@ -2525,67 +2244,49 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「%CSTR:12%…ちょっとこわいんですぅ…抱きしめてくださぁい…」
-						PRINTFORMW 恋人魔法少女を優しく抱きしめると肩が少し震えているのが分かった。
-						PRINTFORML 「………%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-						PRINTFORML 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-						PRINTFORML 「%CSTR:11%のはじめて…%CSTR:12%にうけとってもらえて…すごくうれしいですぅ…♪」
-						PRINTFORMW %CALLNAME%は満面の笑みを浮かべ、女となった喜びを示してきた。
-						PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% 」
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
+						PRINTFORMW 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
 						PRINTFORMW 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-						PRINTFORML 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
+						PRINTFORMW %CALLNAME%はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
 						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
+						PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
+						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい%UNICODE(0x2661)%」
 						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
+						PRINTFORMW %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
 						PRINTFORMW 「あの…なにするですか？」
 						PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-						PRINTFORML 「は…はい…」
-						PRINTFORML 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
+						PRINTFORMW 「は…はい…」
+						PRINTFORMW 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
 						PRINTFORMW 「おかして…くださぁい…」
 						PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-						PRINTFORML 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
+						PRINTFORMW 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
 						PRINTFORMW 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
-						PRINTFORMW 奴隷魔法少女は涙を浮かべて破瓜の痛みに耐えている。
+						PRINTFORMW %CALLNAME%は涙を浮かべて破瓜の痛みに耐えている。
 					ENDIF
 				ELSE
-					PRINTFORML %CALLNAME:MASTER%は魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORML 「はぅぅん、%CSTR:12%あったかいですぅ♪」
-					PRINTFORMW 「きょうはいったいなにするですか…っ！？」
-					PRINTFORMW まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、それまで和やかだった%CALLNAME%の顔から血の気が引いた。
-					PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、一気に膣を貫いた。
-					PRINTFORML 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！」
-					PRINTFORMW %CALLNAME:TARGET%は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
+					PRINTFORMW 
 				ENDIF
 			;그 이외
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW そして%CALLNAME:MASTER%の首に手を回してきた。
-						PRINTFORML 「%CSTR:12%、だいすきですぅ♪ふぁぁぁぁんっ♪」
-						PRINTFORMW 「だいすきっ♪いっぱいせーえきだしてくださぁいっ♪」」
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 淫乱魔法少女は激しくゆすられて、%CALLNAME:MASTER%の腰に脚を絡め逃がさないようにしている。
-						PRINTFORML 「中にぃ…中に…たっぷり…だしてくださぁぃっ♪」
-						PRINTFORMW 「もっとぉ…%CSTR:11%をおかしてぇ…ふぁぁぁあぁぁ♪」
+						PRINTFORMW 「」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML 「ひゃゃはぁぁっ♪もうゆるしてくださぃっ♪」
-						PRINTFORMW 言葉とは裏腹に奴隷魔法少女は襲い来る快感に喜び悶えている……
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ELSE
-						PRINTFORML 「%CSTR:11%ヘンですぅ…。%CSTR:12%におまんこずんずんされるとぉ…っ」
-						PRINTFORML 「むねがきゅんきゅんってして、おまんこきゅうきゅうってしちゃうんですぅ♪」
-						PRINTFORMW 「%CSTR:12%、もっとずんずんしてくださぁいっ♪ひゃぁぁぁん♪」
+						PRINTFORMW 「」
+						PRINTFORMW 「」
 					ENDIF
 				ENDIF
 			ENDIF
@@ -2596,43 +2297,26 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:340 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、女として扱われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% たっぷり…だしてくださぁぃっ♪」
+						PRINTFORMW 「あぅ、あぁん。あっ、んあぁ♪」
+						PRINTFORMW しっかりと抱き合いながら、腰を叩かれ前後左右に身体を揺らされて、%CALLNAME%は一心不乱に腰を振る。
+						PRINTFORM %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
+					IF TALENT:100
+						PRINT 小柄な
+					ENDIF
+						PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORMW 「あの…するですか？」
-					PRINTFORML そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…こどもまんこを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORMW 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:340 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:340 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 腰を突かれ前後左右に身体を揺られながら、魔法少女は一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
-			IF TALENT:100
-				PRINT 小さな
-			ENDIF
-				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:340 = 3
 			;그 이외
 			ELSEIF CFLAG:340 < 2 || FLAG:7 == 2
@@ -2653,53 +2337,25 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「%CSTR:12%…ちょっとこわいんですぅ…抱きしめてくださぁい…」
-						PRINTFORMW 恋人魔法少女を優しく抱きしめると肩が少し震えているのが分かった。
-						PRINTFORML 「………%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-						PRINTFORML 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-						PRINTFORML 「%CSTR:11%のはじめて…%CSTR:12%にうけとってもらえて…すごくうれしいですぅ…♪」
-						PRINTFORMW %CALLNAME%は満面の笑みを浮かべ、女となった喜びを示してきた。
-						PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% 」
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
-						PRINTFORML 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-						PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
-						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-						PRINTFORML 「あの…なにするですか？」
-						PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-						PRINTFORML 「は…はい…」
-						PRINTFORML 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
-						PRINTFORMW 「おかして…くださぁい…」
-						PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-						PRINTFORML 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
-						PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
-						PRINTFORMW 奴隷魔法少女は涙を浮かべて破瓜の痛みに耐えている。
+						PRINTFORMW %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
+						PRINTFORMW 
 					ENDIF
 				ELSE
-					PRINTFORML %CALLNAME:MASTER%は魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORML 「はぅぅん、%CSTR:12%あったかいですぅ♪」
-					PRINTFORMW 「きょうはいったいなにするですか…っ！？」
-					PRINTFORML まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、それまで和やかだった%CALLNAME%の顔から血の気が引いた。
-					PRINTFORMW 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、一気に膣を貫いた。
-					PRINTFORML 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！」
-					PRINTFORMW %CALLNAME:TARGET%は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
+					PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%を抱きかかえ、そのままベッドの上へと座る。
+					PRINTFORMW 
 				ENDIF
 			;그 이외
 			ELSE
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 「」
-						PRINTFORMW 「」
+						PRINTFORMW
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
 						PRINTFORMW 「」
@@ -2720,41 +2376,29 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:341 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、女として扱われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% おしりに…たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW  「あぅ、あぁん。あっ、んあぁ♪」
+						PRINTFORMW 後ろから抱えられて、腰を叩かれ前後左右に身体を揺られながら、%CALLNAME%は一心不乱に腰を振る。
+						PRINTFORM %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
+					IF TALENT:100
+						PRINT 小柄な
+					ENDIF
+						PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORML 「あの…するですか？」
-					PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…こどもまんこを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORML 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:341 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:341 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 腰を突かれ前後左右に身体を揺られながら、魔法少女一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
+				PRINTFORMW 「あぅ、あぁん。あっ、んあぁ♪」
+				PRINTFORMW 腰を叩かれ前後左右に身体を揺られながら、%CALLNAME%は一心不乱に腰を振る。
+				PRINTFORM %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
 			IF TALENT:100
-				PRINT 小さな
+				PRINT 小柄な
 			ENDIF
 				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
 				CFLAG:341 = 3
@@ -2780,43 +2424,18 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:342 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の尻穴へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、尻を使われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% おしりに…たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおしり、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の尻穴を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている尻へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORML 「あの…するですか？」
-					PRINTFORMW そして尻穴にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…おしりを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORML 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ぬぷっ…ぬぷっ…てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 
 				ENDIF
 				CFLAG:342 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:342 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 尻を突かれ前後左右に身体を揺られながら、魔法少女は一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
-			IF TALENT:100
-				PRINT 小さな
-			ENDIF
-				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
+				PRINTFORMW 
 				CFLAG:342 = 3
 			;그 이외
 			ELSEIF CFLAG:342 < 2 || FLAG:7 == 2
@@ -2840,43 +2459,18 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:343 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の尻穴へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、尻を使われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% おしりに…たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおしり、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の尻穴を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている尻へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORML 「あの…するですか？」
-					PRINTFORMW そして尻穴にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…おしりを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORMW 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ぬぷっ…ぬぷっ…てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 
 				ENDIF
 				CFLAG:343 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:343 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 尻を突かれ前後左右に身体を揺られながら、魔法少女は一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
-			IF TALENT:100
-				PRINT 小さな
-			ENDIF
-				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
+				PRINTFORMW 
 				CFLAG:343 = 3
 			;그 이외
 			ELSEIF CFLAG:343 < 2 || FLAG:7 == 2
@@ -2897,45 +2491,17 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORML 「%CSTR:12%…ちょっとこわいんですぅ…抱きしめてくださぁい…」
-						PRINTFORMW 恋人魔法少女を優しく抱きしめると肩が少し震えているのが分かった。
-						PRINTFORML 「………%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-						PRINTFORMW %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-						PRINTFORMl 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-						PRINTFORML 「%CSTR:11%のはじめて…%CSTR:12%にうけとってもらえて…すごくうれしいですぅ…♪」
-						PRINTFORMW %CALLNAME%は満面の笑みを浮かべ、女となった喜びを示してきた。
-						PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% 」
+						PRINTFORMW 
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORML 「%CSTR:12%、%CSTR:11%のはじめて…やっともらってくれるんですねぇ？」
-						PRINTFORML 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-						PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
-						PRINTFORMW %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-						PRINTFORML 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-						PRINTFORMW 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-						PRINTFORMW %CALLNAME%は処女とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+						PRINTFORMW 
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-						PRINTFORML 「あの…なにするですか？」
-						PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-						PRINTFORML 「は…はい…」
-						PRINTFORML 「%CSTR:11%の…しょじょまんこを…%CSTR:12%の…おちんちん…で…」
-						PRINTFORML 「おかして…くださぁい…」
-						PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-						PRINTFORML 「ぎっ！あぐぁあぁっ！！…ひぃっ…」
-						PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！いたいっ！いたいですぅ…」
-						PRINTFORMW 奴隷魔法少女は涙を浮かべて破瓜の痛みに耐えている。
+						PRINTFORMW 
+						PRINTFORMW %CALLNAME%は涙を浮かべて破瓜の痛みに耐えている。
 					ENDIF
 				ELSE
-					PRINTFORML %CALLNAME:MASTER%は魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%あったかいですぅ♪」
-					PRINTFORML 「きょうはいったいなにするですか…っ！？」
-					PRINTFORMW まだ男を知らない秘裂に押し当てられる%CALLNAME:MASTER%のペニスを見ると、それまで和やかだった%CALLNAME%の顔から血の気が引いた。
-					PRINTFORML 「いやぁっ！やめて、やめてくださいやだやだやだやだぁっ！！」
-					PRINTFORMW 泣きじゃくり懇願する%CALLNAME%に嗜虐的な笑みを浮かべた%CALLNAME:MASTER%は、一気に膣を貫いた。
-					PRINTFORML 「ひあ゛あ゛あ゛あぁぁぁっ！！いだいぃ、いだいぃぃぃぃっ！！やめてぇぇぇぇっ！！」
-					PRINTFORMW %CALLNAME:TARGET%は獣のような叫び声を上げて、破瓜の痛みに蹂躙されている。
+					PRINTFORMW 
 				ENDIF
 			;그 이외
 			ELSE
@@ -2964,43 +2530,21 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:420 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の膣へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、女として扱われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおまんこ、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の秘裂を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている膣へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 「」
+					PRINTFORMW 「」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMl %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORML 「あの…するですか？」
-					PRINTFORMW そして秘裂にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…こどもまんこを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORMW 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ごつんっ……てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 「」
 				ENDIF
 				CFLAG:420 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:420 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 腰を突かれ前後左右に身体を揺られながら、魔法少女は一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
-			IF TALENT:100
-				PRINT 小さな
-			ENDIF
-				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
+				PRINTFORMW 「」
+				PRINTFORMW 「」
 				CFLAG:420 = 3
 			;그 이외
 			ELSEIF CFLAG:420 < 2 || FLAG:7 == 2
@@ -3024,43 +2568,18 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:421 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML %CALLNAME:MASTER%は恋人魔法少女を抱きかかえ、そのままベッドの上へと座る。
-					PRINTFORMW 「はぅぅん、%CSTR:12%、あったかいですぅ…♪だいじょうぶです、きてくださぁい…♪」
-					PRINTFORML %CALLNAME%をそっと撫で、%CALLNAME:MASTER%のペニスがゆっくりと%CALLNAME%の尻穴へと入っていく。
-					PRINTFORMW 「はぁぁぁぁん…♪%CSTR:12%のがぁ…中に入ってくるですぅ…♪」
-					PRINTFORML %CALLNAME%は満面の笑みを浮かべ、尻を使われる喜びを示してきた。
-					PRINTFORMW 「%CSTR:12%…だいすきです %UNICODE(0x2661)% おしりに…たっぷり…だしてくださぁぃっ♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「%CSTR:11%のおしり、ずっとずぅっと%CSTR:12%のおちんちんがほしいほしいって、言ってたんですよぉ？」
-					PRINTFORMW 淫乱魔法少女はすっかり蕩けた雌の顔を浮かべ、自分の尻穴を広げ%CALLNAME:MASTER%を誘う。
-					PRINTFORML %CALLNAME:MASTER%はゴクリと固唾を呑み、物欲しそうにひくついている尻へとペニスを突き入れた。
-					PRINTFORMW 「ひゃぁぁぁぁん♪%CSTR:12%のおちんちんすごいですぅ♪%CSTR:11%のなかであばれまわってますぅぅぅ♪」
-					PRINTFORML 「ずっとほしかったんですぅ♪もっともっとおかしてくださぁい %UNICODE(0x2661)% 」
-					PRINTFORMW %CALLNAME%は子供とは思えないほど乱れきっている。発情した雌のように、腰を擦り付けていた。
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML %CALLNAME:MASTER%はそっと%CALLNAME%をベッドへと押し倒し、脚を開かせる。
-					PRINTFORMW 「あの…するですか？」
-					PRINTFORMW そして尻穴にペニスを宛がうと、自分から哀願するようにと命じた。
-					PRINTFORML 「は…はい…」
-					PRINTFORML 「%CSTR:11%の…おしりを…%CSTR:12%の…おちんちん…で…」
-					PRINTFORMW 「おかして…くださぁい…」
-					PRINTFORMW 真っ赤になっておねだりする%CALLNAME%の姿に、%CALLNAME:MASTER%は舌なめずりをしながらペニスを一気に突き入れた。
-					PRINTFORML 「ひぁっ！あぐぁあぁっ！！…ひぃっ…」
-					PRINTFORML 「ひゃぁんっ！ぬぷっ…ぬぷっ…てぇっ……！きもちいいっ！きもちいいですぅっ！」
-					PRINTFORMW 奴隷魔法少女は涙を浮かべて犯される快楽に耐えている。
+					PRINTFORMW 
 				ENDIF
 				CFLAG:421 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:421 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「あぅ、あぁん。あっ、んあぁ♪」
-				PRINTFORMW 尻を突かれ前後左右に身体を揺られながら、魔法少女は一心不乱に腰を振る。
-				PRINTFORMW %CALLNAME:MASTER%に囚われるようにがっちりと抱かれた
-			IF TALENT:100
-				PRINT 小さな
-			ENDIF
-				PRINTFORMW 身体は完全に脱力し、その一切を%CALLNAME:MASTER%に委ねて喘ぎ続けた……
+				PRINTFORMW 
 				CFLAG:421 = 3
 			;그 이외
 			ELSEIF CFLAG:421 < 2 || FLAG:7 == 2
@@ -3080,9 +2599,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:344 == 0
-			PRINTFORML 「わぁ…ちかくで見ると…ちょっとこわいかもですぅ」
-			PRINTFORMW 「これをにぎるんですかぁ？」
-			PRINTFORMW 「ひゃっ！？ビクンビクンしててあついですぅ」
+			PRINTFORMW 「うわっ……グロっ……」
 			CFLAG:344 = 1
 		;2번째 이후
 		ELSE
@@ -3090,28 +2607,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:344 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「%CSTR:12%のおちんちん、と～ってもくるしそうにびくびくしてますよぅ」
-					PRINTFORMW 「あはっ♪%CSTR:11%がすぐにすっきりさせてあげますぅ♪」
+					PRINTFORMW 「%CSTR:이인칭%のロリコンちんちん、ホント元気よね……%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「たまっているせーえき、たぁくさんしぼってあげますぅ♪」
-					PRINTFORMW 淫乱魔法少女は玉袋に手を添えてやわやわと揉みしだいてくる…
-					PRINTFORMW 「い～っぱい%CSTR:11%にかけてくださぁい♪うふふっ♪」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「はぁい、いっぱいこすってあげるですぅ♪」
-					PRINTFORMW 「%CSTR:12%のおちんちん、ちょっとにぎっただけでビクンビクンはねてますぅ♪」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:344 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:344 < 3 || FLAG:7 == 2)
-				PRINTFORML 「もっとつよくこすった方がいいんですかぁ？」
-				PRINTFORMW 「うふっ♪わかったですぅ♪」
+				PRINTFORMW 「うええ、バッチイ……」
 				CFLAG:344 = 3
 			;그 이외
 			ELSEIF CFLAG:344 < 2 || FLAG:7 == 2
-				PRINTFORML 「こうやってこすればいいんですよねぇ？」
-				PRINTFORMW 「んしょ…んしょ……い、いたくないですぅ？」
+				PRINTFORMW 「うええ、バッチイ……」
 				CFLAG:344 = 2
 			ENDIF
 		ENDIF
@@ -3123,8 +2634,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:345 == 0
-			PRINTFORMW 「ぺろ…ぺろ……んー、へんなあじですぅ…」
-			PRINTFORMW 「%CSTR:12%はこれがきもちいいんですかぁ？よくわからないですぅ」
+			PRINTFORMW 「うえ……気持ち悪い……」
 			CFLAG:345 = 1
 		;2번째 이후
 		ELSE
@@ -3132,31 +2642,23 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:345 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「あぁん…ん、んぶぅ、ちゅぷ、ちゅっ……じゅるるるるっ」
-					PRINTFORMW 「ちゅっ…ぁむっ、んちゅぅ…ちゅぅ、んむぅ…♪ふふっ♪きもちよさそうなおかおですぅ♪たっぷり…だしてくださぁぃっ♪」
-					PRINTFORMW 恋人魔法少女は%CALLNAME:MASTER%のペニスを、口の中で舌を上手く使い愛撫している…
+					PRINTFORMW 「%CSTR:일인칭%のコドモお口、気持ちいいでしょ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「うふふ♪ビクビクしちゃって…♪いっぱいしぼってあげるですぅ♪」
-					PRINTFORMW 「はぶっ、ちゅるるるっ…ぷぁっ…これしゃぶるのすきぃ…ずーっとなめていたいですぅ♪」
-					PRINTFORMW 「いっぱいおせーしのませてくださいですぅ♪」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「お口でごほーしさせていただきますぅ」
-					PRINTFORMW 「はむっ、む、ちゅる、じゅぶぶっ……」
-					PRINTFORMW 「びゅーってっとだしちゃってくださぁい♪はぷっ」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:345 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:345 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あぁん…ん、ちゅぷっ、ちゅぱっ……はぁん」
-				PRINTFORMW 「はふぅ……%CSTR:11%のお口、きもちいいですかぁ？」
+				PRINTFORMW 「ナニガチガチにしてるのよ！ヘンタイ！」
 				
 				CFLAG:345 = 3
 			;그 이외
 			ELSEIF CFLAG:345 < 2 || FLAG:7 == 2
-				PRINTFORML 「んっ、くちゅっ、ちゅばっ、んん……」
-				PRINTFORMW 「お口のなかでびくびくしてますぅ…むちゅ…ちゅるぷっ…」
+				PRINTFORMW 「ナニガチガチにしてるのよ！ヘンタイ！」
 				CFLAG:345 = 2
 			ENDIF
 		ENDIF
@@ -3168,9 +2670,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:346 == 0
-			PRINTFORML 「こんはなにするですか？」
-			PRINTFORMW 「おっぱいでおちんちんはさめって…そんなのたのしいんですかぁ？」
-			PRINTFORMW 「%CSTR:12%のかんがえること、よくわかんないですぅ」
+			PRINTFORMW 
 			CFLAG:346 = 1
 		;2번째 이후
 		ELSE
@@ -3178,27 +2678,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:346 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「こうしてると、%CSTR:12%のあったかいのがつたわってきて、あったかいきもちになるですぅ♪」
-					PRINTFORMW 「いっぱいきもちよくしてあげますね、%CSTR:12%♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML 「おっぱいですりすりしちゃいますぅ♪ だしたくなったら、いつでもすきなときにだしてくださいねぇ♪」
-					PRINTFORMW 「いっぱいピュッピュして すっきりするですぅ♪」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「おっぱいですりすりしちゃいますぅ♪ だしたくなったら、いつでもすきなときにだしてくださいねぇ♪」
-					PRINTFORMW 「いっぱいピュッピュして すっきりするですぅ♪」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:346 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:346 < 3 || FLAG:7 == 2)
-				PRINTFORML 「んっ、%CSTR:11%のおっぱいできもちよさそうにズリズリしてますねぇ♪」
-				PRINTFORMW 「よろこんでくれるとうれしくなるですぅ♪えへへ♪」
+				PRINTFORMW 
 				CFLAG:346 = 3
 			;그 이외
 			ELSEIF CFLAG:346 < 2 || FLAG:7 == 2
-				PRINTFORML 「おちんちんがおっぱいのあいだでびくびくふるえてますぅ」
-				PRINTFORMW 「あついのが伝わってくるですぅ…♪」
+				PRINTFORMW 
 				CFLAG:346 = 2
 			ENDIF
 		ENDIF
@@ -3210,8 +2705,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:347 == 0
-			PRINTFORML 「おちんちんをおまたではさむんですかぁ？」
-			PRINTFORMW 「こんなことでたのしいんですかぁ？よくわかんないですぅ」
+			PRINTFORMW 「%CSTR:일인칭%のつるぷにに擦り付ける？ヘンタイの考える事は理解できないわ……？」
 			CFLAG:347 = 1
 		;2번째 이후
 		ELSE
@@ -3219,32 +2713,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:347 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORML 「あぁん♪%CSTR:11%のおまたはどうですぅ？%CSTR:12%」
-					PRINTFORMW 「んっ、もっとすりつけて、きもちよくなるですぅ、あっ、ふぁぁんっ♪」
-					PRINTFORMW 「あとで、なかにに…たっぷり…だしてくださぁぃっ♪」」
+					PRINTFORMW 「んっ、もっと……%UNICODE(0x2661)%、あっ、ふぁぁんっ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORML %CALLNAME:MASTER%は淫乱魔法少女をベッドに無理矢理組み敷いて股を広げさせ、ペニスを女陰に擦りつけた。
-					PRINTFORMW 「はぅぅん、おちんちんなかにほしいんですぅ……」
-					PRINTFORML 「おまたでするだけなんてもったいないですよぅぅ…」
-					PRINTFORMW 「%CSTR:11%のなかをかきまわしてくださいですぅ…」
-					PRINTFORML %CALLNAME%の願いを無視して%CALLNAME:MASTER%は腰の動きを速める。
-					PRINTFORMW 「ひゃふぅ！…きもちいいですけどぉ…！…やっぱりもったいないですぅ…」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「おまたでごほーしさせていただきますぅ」
-					PRINTFORMW 「もっとぉ…すりつけて、きもちよくなるですぅ…ふぁぁぁあぁぁ♪」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:347 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:347 < 3 || FLAG:7 == 2)
-				PRINTFORML 「んっ…おまめにこすれて…きもちいいかもですぅ」
-				PRINTFORMW 「%CSTR:12%はきもちいいですか？」
+				PRINTFORMW 「んっ……%CSTR:이인칭%、楽しいの？」
 				CFLAG:347 = 3
 			;그 이외
 			ELSEIF CFLAG:347 < 2 || FLAG:7 == 2
-				PRINTFORML 「うーん…こんなのできもちいいんですかぁ？」
-				PRINTFORMW 「%CSTR:11%はあまりたのしくないですぅ」
+				PRINTFORMW 「んっ……%CSTR:이인칭%、楽しいの？」
 				CFLAG:347 = 2
 			ENDIF
 		ENDIF
@@ -3256,13 +2740,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:348 == 0
-			PRINTFORML %CALLNAME:MASTER%は、%CALLNAME%に石鹸を塗りたくった…
-			PRINTFORMW 「あらってくれるんですかぁ？えへへ♪ありがとですぅ♪」
-			PRINTFORML すっかり泡だらけになった%CALLNAME%に、今度は自分を洗えと命じる。
-			PRINTFORMW 「あらいっこですかぁ？いいですよぅ♪」
-			PRINTFORMl %CALLNAME:MASTER%は%CALLNAME%を抱き寄せると、自分の体を擦り付け始める。瞬く間に二人は泡まみれになっていく…
-			PRINTFORMW 「ふえぇぇ？あらいっこってこうやるんでしたっけ？はぅぅ～」
-			PRINTFORMW %CALLNAME%の顔は茹ったように真っ赤になっている。
+			PRINTFORMW 
 			CFLAG:348 = 1
 		;2번째 이후
 		ELSE
@@ -3270,30 +2748,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:348 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「きれいになって、きもちよくなって、にばいおとく！ですぅ♪」
-					PRINTFORML 「うふふ～♪にゅるんにゅるんであわあわで、%CSTR:12%あったかくてぇ」
-					PRINTFORMW 「%CSTR:11%、きもちよくておふろでねちゃいそうですぅ…♪」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「おちんちんはよ～くきれいきれいしないといけないですねぇ♪」
-					PRINTFORML 「あらら～？あらってるだけで何でこんなに大きくしちゃってるんですぅ♪」
-					PRINTFORMW 「いいですよぉ♪よごれちゃってもすぐあらえるですから、ふたりでイっちゃうですぅ～♪」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORML 「はぁい…%CSTR:11%でいっぱいあらっちゃってくださぁい♪」
-					PRINTFORMW 「%CSTR:11%は%CSTR:12%のおふろスポンジですぅ♪」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:348 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:348 < 3 || FLAG:7 == 2)
-				PRINTFORML 「きれいきれいするですぅ～♪」
-				PRINTFORMW 「からだのあちこちがこすれて、きもちいいですぅ♪」
-				PRINTFORMW 「%CSTR:12%もきもちいいんですかぁ？」
+				PRINTFORMW 
 				CFLAG:348 = 3
 			;그 이외
 			ELSEIF CFLAG:348 < 2 || FLAG:7 == 2
-				PRINTFORML 「あらいっこですかぁ？きれいきれいにしてあげるですぅ♪」
-				PRINTFORMW 「ふたりできれいになるですぅ♪」
+				PRINTFORMW 
 				CFLAG:348 = 2
 			ENDIF
 		ENDIF
@@ -3305,7 +2775,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:349 == 0
-			PRINTFORMW 「えー、あしでですかぁ？うー、やっぱり%CSTR:12%はへんたいさんですぅ」
+			PRINTFORMW 「………………変態。」
 			CFLAG:349 = 1
 		;2번째 이후
 		ELSE
@@ -3313,7 +2783,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:349 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「ヘンタイ%UNICODE(0x2661)%ヘンタイ%UNICODE(0x2661)%ヘンタイ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3328,7 +2798,7 @@ SELECTCASE SELECTCOM
 				CFLAG:349 = 3
 			;그 이외
 			ELSEIF CFLAG:349 < 2 || FLAG:7 == 2
-				PRINTFORMW 「あぅぅ、ぬるぬるしますぅ」
+				PRINTFORMW 「ヘンタイ！ナニおっきくしてるのよ！」
 				CFLAG:349 = 2
 			ENDIF
 		ENDIF
@@ -3348,13 +2818,13 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:350 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「ぺろ、ぴちゃ、あしのゆびの、ん、いっぽんいっぽんまで、ちゅっちゅ、キレイキレイにするですぅ」
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「ぺろ、ぴちゃ、あしのゆびの、ん、いっぽんいっぽんまで、ちゅっちゅ、キレイキレイにするですぅ」
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「ぺろ、ぴちゃ、あしのゆびの、ん、いっぽんいっぽんまで、ちゅっちゅ、キレイキレイにするですぅ」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:350 = 4
 			;굴복각인Lv3
@@ -3363,8 +2833,7 @@ SELECTCASE SELECTCOM
 				CFLAG:350 = 3
 			;그 이외
 			ELSEIF CFLAG:350 < 2 || FLAG:7 == 2
-				PRINTFORMW %CALLNAME:MASTER%が足を差し出すと%CALLNAME%は涙を目に溜めつつもこちらを睨み、
-				PRINTFORMW そして舌を足に這わせはじめた。
+				PRINTFORMW 
 				CFLAG:350 = 2
 			ENDIF
 		ENDIF
@@ -3440,7 +2909,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;89,母乳飲み陥落済みのみ
+;89,모유마시기　함락완료만
 ;-------------------------------------------------
 	CASE 89
 		CALL TRAIN_MESSAGE
@@ -3448,7 +2917,7 @@ SELECTCASE SELECTCOM
 		IF CFLAG:353 == 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 「え、おっぱいのみたいですかぁ？うぅ、し、しかたないですぅ」
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -3461,7 +2930,7 @@ SELECTCASE SELECTCOM
 		ELSEIF CFLAG:353 < 2 || FLAG:7 == 2
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 「ふふ、もう%CSTR:12%そんなにせかすなんてこどもみたいですよぉ？」
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -3483,12 +2952,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:423 == 0
-			PRINTFORML 「お、おちんちんにさわるですかぁ？で、でもぉ」
-			PRINTFORMW 引け腰になる%CALLNAME%を無視し、%CALLNAME:MASTER%は%CALLNAME%のペニスを手に取りグニグニと弄りだした。
-			PRINTFORML 「はぅ、や、やめてくださいぃ、ぐ、ぐにぐにしないでくださぁい」
-			PRINTFORMW 口では拒絶しながらもペニスの方は順調に育っている。
-			PRINTFORML それを覚った%CALLNAME:MASTER%は揉むように弄るのを止め、シャフトを扱うように丁寧に、絶妙な力加減でペニスを上下に擦り始めた。
-			PRINTFORMW 「はぅあ、ああん、こ、こすらないでぇ、くぅん、%CSTR:12%のおててあったかいですぅ」
+			PRINTFORMW 
 			CFLAG:423 = 1
 		;2번째 이후
 		ELSE
@@ -4388,7 +3852,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;141,フィストファック服従、隷属のみ
+;141,피스트퍽　복종, 예속만
 ;-------------------------------------------------
 	CASE 141
 		CALL TRAIN_MESSAGE
@@ -4403,7 +3867,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;142,アナルフィスト服従、隷属のみ
+;142,애널피스트　복종, 예속만
 ;-------------------------------------------------
 	CASE 142
 		CALL TRAIN_MESSAGE
@@ -4418,7 +3882,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;143,両穴フィスト服従、隷属のみ
+;143,양구멍피스트　복종, 예속만
 ;-------------------------------------------------
 	CASE 143
 		CALL TRAIN_MESSAGE
@@ -4439,10 +3903,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:373 == 0
-			PRINTFORMW 「う、はぅ……お、おトイレ……行きたい、です……」
-			PRINTFORMW 「え！？ここでですか？…えっと、そのぉ…」
-			PRINTFORMW 「ひぅ……あぁ……。いや、見ないでぇ!!」
-			PRINTFORMW …チョロ、チョロロロロロロ…
+			PRINTFORMW 
 			CFLAG:373 = 1
 		;2번째 이후
 		ELSE
@@ -4450,31 +3911,22 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:373 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「はぁん……おしっこ……おしっこしたいです……。」
-					PRINTFORMW 「あ…あんまり…みないでくださいね……。」
-					PRINTFORMW …チョロ、チョロロロロロロ…
+					PRINTFORMW 
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					PRINTFORMW 「はぁん……おしっこ……おしっこしたいです……。見ててください……」
-					PRINTFORMW 「はい。あはぁん……出ちゃう、出ちゃうよぉ……んッ、やぁ……」
-					PRINTFORMW 「はぁああぁん……。出てるぅ……きもちいい……。おしっこ、ジョボボって……たくさん出てるよぉ」
-					PRINTFORMW …ジョボボボボボボ……
+					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「ひっく……ふぇぇ……。見ないで……こんなの、見ないでぇ……」
+					PRINTFORMW 
 				ENDIF
 				CFLAG:373 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:373 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「あはぁん……出ちゃう、出ちゃうよぉ……んッ、やぁ……」
-				PRINTFORMW 「ひっく……ふぇぇ……。見ないで……こんなの、見ないでぇ……」
-				PRINTFORMW …シャーーーーッ…
+				PRINTFORMW 
 				CFLAG:373 = 3
 			;그 이외
 			ELSEIF CFLAG:373 < 2 || FLAG:7 == 2
-				PRINTFORMW 「う、はぅ……お、おトイレ……行きたい、です……」
-				PRINTFORMW 「ここでですか……う…やっぱり…」
-				PRINTFORMW …チョロ、チョロロロロロロ…
+				PRINTFORMW 
 				CFLAG:373 = 2
 			ENDIF
 		ENDIF
@@ -4633,7 +4085,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;149,アナル電極服従、隷属のみ
+;149,애널전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 149
 		IF TEQUIP:23
@@ -4654,7 +4106,7 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;150,乳房電極服従、隷属のみ
+;150,유방전극　복종, 예속만
 ;-------------------------------------------------
 	CASE 150
 		IF TEQUIP:24
@@ -4676,7 +4128,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;151,鰻風呂服従、隷属のみ
+;151,뱀장어욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 151
 		CALL TRAIN_MESSAGE
@@ -4697,7 +4149,7 @@ SELECTCASE SELECTCOM
 		ENDIF
 
 ;-------------------------------------------------
-;152,蟲風呂服従、隷属のみ
+;152,벌레욕탕　복종, 예속만
 ;-------------------------------------------------
 	CASE 152
 		CALL TRAIN_MESSAGE
@@ -4711,11 +4163,6 @@ SELECTCASE SELECTCOM
 			CFLAG:381 = 2
 		ENDIF
 
-;-------------------------------------------------
-;154,妖精オナホ小人体系のみ
-;-------------------------------------------------
-	CASE 154
-		CALL TRAIN_MESSAGE
 
 ;=================================================
 ;촉수계 커맨드
@@ -5101,7 +4548,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:392 == 0
-			PRINTFORMW 「な、なんですかこれぇ？はぅ、うぅ、つ、つめたいしぬるぬるしますぅ」
+			PRINTFORMW 「な、なんですかこれぇ？　はぅ、うぅ、つ、つめたいしぬるぬるしますぅ」
 			CFLAG:392 = 1
 		;2번째 이후
 		ELSE
@@ -5207,7 +4654,7 @@ SELECTCASE SELECTCOM
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:395 == 0
-				PRINTFORMW 
+				PRINTFORMW 「%CSTR:이인칭%……それビデオ…？ 何撮ってるのよッ！？幼女略取拉致監禁強制猥褻の動かぬ証拠になるわよッ…！」
 				CFLAG:395 = 1
 			;2번째 이후
 			ELSE
@@ -5215,22 +4662,23 @@ SELECTCASE SELECTCOM
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:395 < 4 || FLAG:7 == 2)
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
-						PRINTFORMW 
+						PRINTFORMW 「チャイルドポルノシリーズ『小学生アキちゃん』、はじまりまーす%UNICODE(0x2661)%」
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
-						PRINTFORMW 
+						PRINTFORMW 「もう映ってる？イェーイ！　えへへ…これから小学生とユーカイハンがエッチなことしますよー%UNICODE(0x2661)%」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 
+						PRINTFORMW 「%CALLNAME:TARGET%は淫乱小学生のメスドレイです…　%CALLNAME:TARGET%のいやらしい姿いっぱい撮って下さい…%CSTR:이인칭%…」
+						PRINTFORMW カメラを向けると、%CALLNAME:TARGET%は言いつけどおりの口上を述べた…　その頬は紅潮し自分の口上に興奮しているようだ
 					ENDIF
 					CFLAG:395 = 4
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:395 < 3 || FLAG:7 == 2)
-					PRINTFORMW 
+					PRINTFORMW 「%CSTR:이인칭%……またビデオ…！？チャイルドポルノの法的社会的処罰は、昔も今も重いんだからねッ…！」
 					CFLAG:395 = 3
 				;그 이외
 				ELSEIF CFLAG:395 < 2 || FLAG:7 == 2
-					PRINTFORMW 
+					PRINTFORMW 「%CSTR:이인칭%……またビデオ…！？幼女略取拉致監禁強制猥褻の証拠が増えて、科刑が重くなるわよッ…！」
 					CFLAG:395 = 2
 				ENDIF
 			ENDIF
@@ -5442,14 +4890,14 @@ SELECTCASE SELECTCOM
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
-;189,新妻プレイ,恋慕、親愛のみ
+;189,새댁플레이,　연모, 친애만
 ;-------------------------------------------------
 	CASE 189
 		IF TEQUIP:33
 			CALL TRAIN_MESSAGE
 			;처음
 			IF CFLAG:401 == 0
-				PRINTFORMW 
+				PRINTFORMW 「ばっ、バカじゃないの？！」
 				CFLAG:401 = 1
 			;2번째 이후
 			ELSEIF CFLAG:401 < 2 || FLAG:7 == 2
@@ -5722,10 +5170,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「い、いやぁ！%CSTR:12%、たすけてくださいですぅ！%CSTR:12%いがいにさわられたくないですぅ」
-					PRINTFORMW 泣きながら懇願する%CALLNAME%を見つめていると罪悪感が胸を締め付けてくる。
-					PRINTFORMW だが一方では、%CALLNAME:MASTER%に助けを求め、恐怖に哀願し、
-					PRINTFORMW その末、複数の野獣に蹂躙される%CALLNAME%を思い浮かべ、%CALLNAME:MASTER%は自身の股間が滾るのを感じずにはいられなかった。
+					PRINTFORMW
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5805,7 +5250,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:408 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「えへ、%CSTR:이인칭%のカラダに押さえつけられて、舐め合いっこするの、好き%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -5907,7 +5352,7 @@ SELECTCASE SELECTCOM
 				PRINTFORMW 
 			;그 이외
 			ELSE
-				PRINTFORMW 
+				PRINTFORMW 「%CSTR:일인칭%のコドモおまんこ……%CSTR:이인칭%のオトナおちんちん、美味しそうに食べてる……%UNICODE(0x2661)%」
 			ENDIF
 			CFLAG:411 = 1
 		;2번째 이후
@@ -5916,7 +5361,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:411 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「やあんっ%UNICODE(0x2661)%　%CSTR:일인칭%、コドモなのに、オトナの%CSTR:이인칭%とラブラブセックスしてるの、見えちゃうっ%UNICODE(0x2661)%」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6025,7 +5470,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:413 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 
+					PRINTFORMW 「ひゃんっ！　ソコっ、ゴシゴシっ、ビリビリくるっ！」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6036,11 +5481,11 @@ SELECTCASE SELECTCOM
 				CFLAG:413 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:413 < 3 || FLAG:7 == 2)
-				PRINTFORMW 
+				PRINTFORMW 「ひゃんっ！　ソコっ、ゴシゴシっ、ダメっ！」
 				CFLAG:413 = 3
 			;그 이외
 			ELSEIF CFLAG:413 < 2 || FLAG:7 == 2
-				PRINTFORMW 
+				PRINTFORMW 「ひゃんっ！　ソコっ、ゴシゴシっ、ダメっ！」
 				CFLAG:413 = 2
 			ENDIF
 		ENDIF
@@ -6051,29 +5496,32 @@ SELECTCASE SELECTCOM
 	CASE 507
 		CALL TRAIN_MESSAGE
 		;처음
-		IF CFLAG:414 == 06
-			PRINTFORMW 「あ、あああっ！おく、にぃ…！ごりごり、って…ああ、あああ…あーーっ！」
+		IF CFLAG:414 == 0
+			PRINTFORMW 
 			CFLAG:414 = 1
 		;2번째 이후
 		ELSE
 			;함락완료
-			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:415 < 4 || FLAG:7 == 2)
-				;V感覚
-				IF ABL:4 >= 8
-					PRINTFORMW 「あ、あああっ！おく、だめぇ…！ごりごり、だめぇ…！……ああ、あああ…あーーっ！！、いぃ…、いぃ…！！」
-				;V感覚
-				ELSEIF ABL:4 >= 5
-					PRINTFORMW 「あ、あああっ！おく、いぃ…！ごりごり、って…いぃ…、あああ…あーーっ！！すごぃいこれすごぃですよぅっ！！」
-				;V感覚
-				ELSEIF ABL:4 >= 3
-					PRINTFORML 「あ、あああっ！おく、にぃ…！ごりごり、って…ああ、あああ…あーーっ！」
-				ELSE
-					PRINTFORMW 「あ、あああっ！おく、だめですぅ、…ああ、あああ…あーーっ！」
+			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:414 < 4 || FLAG:7 == 2)
+				;연모, 친애
+				IF TALENT:3 || TALENT:6
+					PRINTFORMW 発情のあまりに下りてきてしまった小さな子宮を、快楽に蠢く幼膣の狭さをものともせずに、剛直の切っ先で熱い子宮口を小突きまわす。
+					PRINTFORMW 「らめぇぇ！すごいぃぃ！それらめぇぇぇ！」
+					PRINTFORMW 「おっきなケダモノの%CSTR:이인칭%にぃ%UNICODE(0x2661)%、押さえつけられて後ろから強姦交尾されてぇ%UNICODE(0x2661)%、発情メス仔犬の%CSTR:일인칭%、種付けされたくてアタマフットーしちゃってりゅぅぅぅ%UNICODE(0x2661)%」
+					PRINTFORMW 「パパァ%UNICODE(0x2661)%、パパァ%UNICODE(0x2661)%、ゴメンなさいぃぃ%UNICODE(0x2661)%、%CSTR:일인칭%、いま、パパの仇の%CALLNAME:MASTER%にぃ、拉致監禁調教凌辱強姦されてぇ、あかちゃんつくるトコまで犯されてもぉ、%CALLNAME:MASTER%のあかちゃん欲しくて大喜びしちゃうぅ、%CALLNAME:MASTER%専用のロリペットなのぉぉぉ%UNICODE(0x2661)%」
+					PRINTFORML 「パパごめんなさいぃぃ、%CSTR:일인칭%、%CALLNAME:MASTER%のたねつけこうびぃ%UNICODE(0x2661)%サイコーにしあわせなのぉぉぉ%UNICODE(0x2661)%おあぁぁぁぁっっ%UNICODE(0x2661)%」
+				;음란, 창부
+				ELSEIF TALENT:4 || TALENT:7
+					PRINTFORMW 
+				;복종, 예속
+				ELSEIF TALENT:5 || TALENT:8
+					PRINTFORMW 
 				ENDIF
 				CFLAG:414 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:414 < 3 || FLAG:7 == 2)
-				PRINTFORML 「あ、あああっ！おく、にぃ…！ごりごり、って…ああ、あああ…あーーっ！！」
+				PRINTFORMW 「あ、あああっ！　おく、にぃ…！　ごりごり、って…ああ、あああ…あーーっ！！　すごぃいこれすごぃですよぅっ！！」
+				PRINTFORMW %CALLNAME%はあまりの快楽に、舌を大きく突き出しながら絶叫している……
 				CFLAG:414 = 3
 			;그 이외
 			ELSEIF CFLAG:414 < 2 || FLAG:7 == 2
@@ -6228,13 +5676,13 @@ ENDSELECT
 
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG 관련（X1을 캐릭터번호로 치환）
-;パラメータ変化などをトリガーにした口上CFLAG 221～260を使用
+;파라미터 변화 등을 트리거로 한 구상　CFLAG 221～260을 사용
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;@KOJO_MESSAGE_PALAMCNG_A（X1을 캐릭터번호로 치환）
 ;조교자의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_A_K4903
+@KOJO_MESSAGE_PALAMCNG_A_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6247,12 +5695,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4903
+;	CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4903
+;		CALL KOJO_MESSAGE_PALAMCNG_A_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6260,7 +5708,7 @@ ENDIF
 ;조교자의 사정시의 텍스트
 ;-------------------------------------------------
 ;-------------------------------------------------
-;사정箇所変更時のテキスト有効時はここで関数終了
+;사정장소 변경시의 텍스트　유효시 여기서 함수 종료
 ;-------------------------------------------------
 IF CFLAG:106
 	CALL PALAM_MESSAGE_A
@@ -6268,33 +5716,31 @@ IF CFLAG:106
 	IF CFLAG:106 == 1
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:221 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「あふぅ、かみがベトベトになっちゃいましたぁ…♪」
-			PRINTFORMW 「ちょっともったいないですぅ」
+			PRINTFORMW
 			CFLAG:221 = 3
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:221 < 2 || FLAG:7 == 2)
-			PRINTFORMW 「あふぅ、かみがベトベトになっちゃいましたぁ…♪」
-			PRINTFORMW 「ちょっともったいないですぅ」
+			PRINTFORMW 
 			CFLAG:221 = 2
 		;그 이외
 		ELSEIF CFLAG:221 < 1 || FLAG:7 == 2
-			PRINTFORMW 「あふぅ、かみがベトベトになっちゃいましたぁ…」
+			PRINTFORMW 
 			CFLAG:221 = 1
 		ENDIF
 	;얼굴
 	ELSEIF CFLAG:106 == 2
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:222 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「おかおがせーえきだらけですぅ…♪」
+			PRINTFORMW 「%CSTR:일인칭%のちっちゃなお顔%UNICODE(0x2661)%%CSTR:이인칭%のロリコンせーえきでドロドロ%UNICODE(0x2661)%」
 			PRINTFORMW %CALLNAME%は顔に付着した精液を指で拭い、舐め取っていく。
 			CFLAG:222 = 3
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:222 < 2 || FLAG:7 == 2)
-			PRINTFORMW 「おかおがせーえきだらけですぅ…♪」
+			PRINTFORMW 「うええ……気持ち悪いし、クサい……」
 			CFLAG:222 = 2
 		;그 이외
 		ELSEIF CFLAG:222 < 1 || FLAG:7 == 2
-			PRINTFORMW 「おかおがせーえきだらけですぅ…」
+			PRINTFORMW 「うええ……気持ち悪いし、クサい……」
 			CFLAG:222 = 1
 		ENDIF
 	;가슴
@@ -6393,7 +5839,7 @@ IF CFLAG:106
 		IF GROUPMATCH(SELECTCOM , 60 , 61 , 66 , 68 , 69 , 72)
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:229 < 3 || FLAG:7 == 2)
-				PRINTFORMW 「それじゃダメないですぅ」
+				PRINTFORMW 
 				CFLAG:229 = 3
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:229 < 2 || FLAG:7 == 2)
@@ -6433,10 +5879,10 @@ IF TFLAG:9 == 1
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:231 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「ああん、もったいないですぅ」
+			PRINTFORMW 「ロリコンせーえき%UNICODE(0x2661)%びゅるびゅる出したわね%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「たくさんでましたねぇ♪えへへ♪」
+			PRINTFORMW 「ああん、もったいないですぅ」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
 			PRINTFORMW 
@@ -6444,11 +5890,11 @@ IF TFLAG:9 == 1
 		CFLAG:231 = 4
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:231 < 3 || FLAG:7 == 2)
-		PRINTFORMW 「ひゃぁんっ？びっくりしたですぅ」
+		PRINTFORMW 「うわっ！」
 		CFLAG:231 = 3
 	;그 이외
 	ELSEIF CFLAG:231 < 2 || FLAG:7 == 2
-		PRINTFORMW 「ひゃぁんっ？びっくりしたですぅ」
+		PRINTFORMW 「ひゃぁっ！」
 		CFLAG:231 = 2
 	ENDIF
 ENDIF
@@ -6509,26 +5955,26 @@ IF TFLAG:0 > 0
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「んぐっ…こくっ…こくっ……ぷはっ」
-				PRINTFORML 「%CSTR:12%の、ぜんぶのんじゃいましたぁ…♪」
-				PRINTFORMW 「はぁ…もう、おおなかいっぱいですぅ…♪」
+				PRINTFORMW 「%CSTR:이인칭%のせーえき、ぜんぶのんじゃった%UNICODE(0x2661)%」
+				PRINTFORMW 「うふふ…%CSTR:일인칭%のお口も喉もオナカも、%CSTR:이인칭%のアツくてクサいので、全部染まってる%UNICODE(0x2661)%」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 「むっ、んっ、んんっ！ ふぁ、すごい…ぁ♪ まだせーえきでてるですぅ、ちゅるっ」
-				PRINTFORML 「もっときもちよくなりたいっておかおをしてるですよぉ♪」
+				PRINTFORMW 「もっときもちよくなりたいっておかおをしてるですよぉ♪」
 				PRINTFORMW %CALLNAME%は口内に溜まった多量の白濁液を舌で愉しんだ後、時間をかけて飲み下した。
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORML 「！？ んっ、けほっ、こほっ、んっ！……ほら、たくさんでましたよぉ？」
+				PRINTFORMW 「！？ んっ、けほっ、こほっ、んっ！……ほら、たくさんでましたよぉ？」
 				PRINTFORMW %CALLNAME%は大きく口を開け、%CALLNAME:PLAYER%の吐き出した欲望の証を見せつけてきた。
 			ENDIF
 			CFLAG:233 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:233 < 3 || FLAG:7 == 2)
-			PRINTFORMW 「んんんっ！ んぐっ、ごくっ、ぷあっ……あぁ、あふれちゃうですぅ♪」
+			PRINTFORMW 「けほっ……コドモに飲ませるには……多すぎるわよヘンタイ！」
 			CFLAG:233 = 3
 		;그 이외
 		ELSEIF CFLAG:233 < 2 || FLAG:7 == 2
-			PRINTFORMW 「んむぅ…あまりおいしくないですぅ…」
+			PRINTFORMW 「ぐふっ……けほっ……」
 			CFLAG:233 = 2
 		ENDIF
 	ENDIF
@@ -6543,7 +5989,7 @@ IF TFLAG:1 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「えへ、%CSTR:일인칭%のちっちゃなお手々、気持ちいいでしょ？%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -6554,11 +6000,11 @@ IF TFLAG:1 > 0
 		CFLAG:234 = 4
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:234 < 3 || FLAG:7 == 2)
-		PRINTFORMW 
+		PRINTFORMW 「ちっちゃなお手々だから興奮するとか、ヘンタイもたいへんね」
 		CFLAG:234 = 3
 	;그 이외
 	ELSEIF CFLAG:234 < 2 || FLAG:7 == 2
-		PRINTFORMW 
+		PRINTFORMW 「ちっちゃなお手々だから興奮するとか、バカじゃないの？」
 		CFLAG:234 = 2
 	ENDIF
 ENDIF
@@ -6572,11 +6018,10 @@ IF TFLAG:34 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「あっ♪あっ♪おっぱいのなかで、びゅくんびゅくんってぇ♪」
-			PRINTFORMW 「ああん、もったいないですぅ…♪」
+			PRINTFORMW 「あっ%UNICODE(0x2661)%あっ%UNICODE(0x2661)%ヘンタイのせーえき%UNICODE(0x2661)%%CSTR:일인칭%のつるぺたにいっぱい出てる%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「%CSTR:11%のおっぱいのなかにせーえきでてるですぅ♪」
+			PRINTFORMW 「CSTR:11のおっぱいのなかにせーえきでてるですぅ♪」
 			PRINTFORMW 「もっとおっぱいおかしてくださいですぅ♪」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
@@ -6585,11 +6030,11 @@ IF TFLAG:34 > 0
 		CFLAG:235 = 4
 	;굴복각인Lv3
 	ELSEIF MARK:2 == 3 && (CFLAG:235 < 3 || FLAG:7 == 2)
-		PRINTFORMW 「あふぅ…おっぱい、きもちよかったですか？」
+		PRINTFORMW 「コドモの胸に出すのがそんなに気持ちいいの？ペドフィリアって救いがたいわね……」
 		CFLAG:235 = 3
 	;그 이외
 	ELSEIF CFLAG:235 < 2 || FLAG:7 == 2
-		PRINTFORMW 「ふぁぁぁんっ！？おっぱいがべとべとですぅ…」
+		PRINTFORMW 「コドモの胸に出すのがそんなに気持ちいいの？このヘンタイ！」
 		CFLAG:235 = 2
 	ENDIF
 ENDIF
@@ -6600,32 +6045,27 @@ ENDIF
 IF TFLAG:2 > 0
 	CALL PALAM_MESSAGE_A
 	;애널섹스계
-	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || SELECTCOM == 73 || SELECTCOM == 512 || SELECTCOM == 515
+	IF SELECTCOM == 62 || SELECTCOM == 63 || SELECTCOM == 67 || SELECTCOM == 70 || SELECTCOM == 71 || (SELECTCOM == 505 && TFLAG:40 == 2)
 		;함락완료
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:237 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORML 「あん♪はぁん♪おしり、%CSTR:12%のせーえきでいっぱいですぅ♪」
-				PRINTFORMW 「もっと注いでください♪えへへ♪」
+				PRINTFORMW 
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORML 「あはぁ♪おしりにせーしあふれてますぅ♪すごいですよぉ♪」
-				PRINTFORMW 「まだまだですぅ♪しぼりとってあげるですぅ♪」
+				PRINTFORMW 
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORML 「はぁぁぁん、いっぱいおしりにでてますぅ…♪」
-				PRINTFORMW 「%CSTR:11%のおしり、きもちよかったですぅ？ 」
+				PRINTFORMW 
 			ENDIF
 			CFLAG:237 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:237 < 3 || FLAG:7 == 2)
-			PRINTFORML 「あっ･･･ゴポゴポって、あふれてぇ･･･いっぱいですぅ…」
-			PRINTFORMW 「おしりのなかにせーえき…しみこんでますぅ…」
+			PRINTFORMW 
 			CFLAG:237 = 3
 		;그 이외
 		ELSEIF CFLAG:237 < 2 || FLAG:7 == 2
-			PRINTFORML 「ひぁぁぁぁっ！？やぁぁ、おしりにせーえきでてますぅ…」
-			PRINTFORMW 「ぐすっ…きもちわるいですぅ…ふぇぇぇぇん…」
+			PRINTFORMW 
 			CFLAG:237 = 2
 		ENDIF
 	;안쪽 자극 섹스계
@@ -6634,27 +6074,28 @@ IF TFLAG:2 > 0
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORML 「あん♪はぁん♪おまんこ、%CSTR:12%のせーえきでいっぱいですぅ♪」
-				PRINTFORMW 「あかちゃんできちゃうですよぅ♪えへへ♪」
+				PRINTFORMW 「ひゃああっ%UNICODE(0x2661)%、すごぃぃぃぃ%UNICODE(0x2661)%、せーえきびゅーびゅーでてるゥッ%UNICODE(0x2661)%、しきゅー溺れちゃうぅぅぅ%UNICODE(0x2661)%あん%UNICODE(0x2661)%はぁん%UNICODE(0x2661)%」
+				PRINTFORMW 「%CSTR:일인칭%のちっちゃな仔犬マンコぉ、%CALLNAME:MASTER%のやじゅーチンポに塞がれてぇ、子宮に種付け強姦されてるぅぅぅ%UNICODE(0x2661)%」
+				PRINTFORMW 「%CSTR:일인칭%、コドモなのにぃぃ%UNICODE(0x2661)%しきゅーゴクゴクせーえきのんでるのぉぉぉ%UNICODE(0x2661)%変態ペドフェリア%CALLNAME:MASTER%のあかちゃんできちゃうぅぅぅ%UNICODE(0x2661)%えへへ%UNICODE(0x2661)%」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORML 「あはぁ♪おまんこにせーしあふれてますぅ♪すごいですよぉ♪」
+				PRINTFORMW 「あはぁ♪おまんこにせーしあふれてますぅ♪すごいですよぉ♪」
 				PRINTFORMW 「まだまだですぅ♪しぼりとってあげるですぅ♪」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORML 「はぁぁぁん、いっぱいおまんこにでてますぅ…♪」
+				PRINTFORMW 「はぁぁぁん、いっぱいおまんこにでてますぅ…♪」
 				PRINTFORMW 「%CSTR:11%のおまんこ、きもちよかったですぅ？ 」
 			ENDIF
 			CFLAG:238 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:238 < 3 || FLAG:7 == 2)
-			PRINTFORML 「あっ･･･ゴポゴポって、あふれてぇ･･･いっぱいですぅ…」
-			PRINTFORMW 「おまんこのなかにせーえき…しみこんでますぅ…」
+			PRINTFORMW 「いやぁぁぁぁっ！？おねがい、それだけは！！やめてぇ！抜いてぇ！奥だけは、ださないでぇぇぇぇ！！！」
+			PRINTFORMW 「……うぇっ……やだよぉ……パパを殺した……変質者に……子宮に種付けされてる……気持ち悪くて……死にたい……」
 			CFLAG:238 = 3
 		;그 이외
 		ELSEIF CFLAG:238 < 2 || FLAG:7 == 2
-		PRINTFORML 「ひぁぁぁぁっ！？やぁぁ、おまんこにせーえきでてますぅ…」
-		PRINTFORMW 「ぐすっ…きもちわるいですぅ…ふぇぇぇぇん…」
+		PRINTFORMW 「いやぁぁぁぁっ！？おねがい、それだけは！！やめてぇ！抜いてぇ！奥だけは、ださないでぇぇぇぇ！！！」
+		PRINTFORMW 「……うぇっ……やだよぉ……パパを殺した……変質者に……子宮に種付けされてる……気持ち悪くて……死にたい……」
 			CFLAG:238 = 2
 		ENDIF
 	;그 외 섹스계
@@ -6663,27 +6104,29 @@ IF TFLAG:2 > 0
 		IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:238 < 4 || FLAG:7 == 2)
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORML 「あん♪はぁん♪おまんこ、%CSTR:12%のせーえきでいっぱいですぅ♪」
-				PRINTFORMW 「あかちゃんできちゃうですよぅ♪えへへ♪」
+				PRINTFORMW 「ビュービュー！せーえき、びゅーびゅー出てるのっっ！！」
+				PRINTFORMW 「%CSTR:일인칭%のちっちゃいオナカに、%CSTR:이인칭%のロリコンせーえき、いっぱい注がれてるゥッ！！」
+				PRINTFORMW 「パパの仇で%CSTR:일인칭%を監禁調教して、コドモマンコをでっかいキョーアクなのでバージンレイプしてびゅーびゅー射精してるヘンタイのせーえき、%CSTR:일인칭%のちっちゃいオマンコに浸み込んで溢れてるぅ%UNICODE(0x2661)%」
+				PRINTFORMW 「やだぁ溢れるなんて勿体無いぃぃ、ぜぇーんぶ、しきゅーでゴクゴクしたいのにぃぃ%UNICODE(0x2661)%」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				PRINTFORML 「あはぁ♪おまんこにせーしあふれてますぅ♪すごいですよぉ♪」
+				PRINTFORMW 「あはぁ♪おまんこにせーしあふれてますぅ♪すごいですよぉ♪」
 				PRINTFORMW 「まだまだですぅ♪しぼりとってあげるですぅ♪」
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				PRINTFORML 「はぁぁぁん、いっぱいおまんこにでてますぅ…♪」
+				PRINTFORMW 「はぁぁぁん、いっぱいおまんこにでてますぅ…♪」
 				PRINTFORMW 「%CSTR:11%のおまんこ、きもちよかったですぅ？ 」
 			ENDIF
 			CFLAG:238 = 4
 		;굴복각인Lv3
 		ELSEIF MARK:2 == 3 && (CFLAG:238 < 3 || FLAG:7 == 2)
-			PRINTFORML 「あっ･･･ゴポゴポって、あふれてぇ･･･いっぱいですぅ…」
-			PRINTFORMW 「おまんこのなかにせーえき…しみこんでますぅ…」
+			PRINTFORMW 「いやぁぁぁぁっ！？やめてぇ！抜いてぇ！ナカにせーえき出さないでぇぇぇぇ！！」
+			PRINTFORMW 「……ぐすっ……やだ……気持ちワルイ……パパを殺した……ヘンタイの……せーえき……おまんこに……だされちゃった……」
 			CFLAG:238 = 3
 		;그 이외
 		ELSEIF CFLAG:238 < 2 || FLAG:7 == 2
-		PRINTFORML 「ひぁぁぁぁっ！？やぁぁ、おまんこにせーえきでてますぅ…」
-		PRINTFORMW 「ぐすっ…きもちわるいですぅ…ふぇぇぇぇん…」
+		PRINTFORMW 「いやぁぁぁぁっ！？やめてぇ！抜いてぇ！ナカにせーえき出さないでぇぇぇぇ！！」
+		PRINTFORMW 「……ぐすっ……やだ……気持ちワルイ……パパを殺した……ヘンタイの……せーえき……おまんこに……だされちゃった……」
 			CFLAG:238 = 2
 		ENDIF
 	ENDIF
@@ -6713,7 +6156,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_E（X1을 캐릭터번호로 치환）
 ;촉수의 사정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_E_K4903
+@KOJO_MESSAGE_PALAMCNG_E_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6726,12 +6169,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4903
+;	CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4903
+;		CALL KOJO_MESSAGE_PALAMCNG_E_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6762,7 +6205,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_B 관련（X1을 캐릭터번호로 치환）
 ;노예의 절정을 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_B_K4903
+@KOJO_MESSAGE_PALAMCNG_B_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6775,12 +6218,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4903
+;	CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4903
+;		CALL KOJO_MESSAGE_PALAMCNG_B_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6939,7 +6382,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_C 관련（X1을 캐릭터번호로 치환）
 ;조교 후의 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_C_K4903
+@KOJO_MESSAGE_PALAMCNG_C_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -6952,12 +6395,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4903
+;	CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4903
+;		CALL KOJO_MESSAGE_PALAMCNG_C_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -6991,7 +6434,7 @@ ENDIF
 ;@KOJO_MESSAGE_PALAMCNG_D 관련（X1을 캐릭터번호로 치환）
 ;파라미터 변화를 트리거로 한 구상
 ;-------------------------------------------------
-@KOJO_MESSAGE_PALAMCNG_D_K4903
+@KOJO_MESSAGE_PALAMCNG_D_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -7004,12 +6447,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4903
+;	CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4903
+;		CALL KOJO_MESSAGE_PALAMCNG_D_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -7027,9 +6470,7 @@ IF P > PALAMLV:4 && CFLAG:245 == 0
 		PRINTFORMW 
 	;그 이외
 	ELSE
-		PRINTFORMW 随分濡れ始めた%CALLNAME%の蜜を指に掬い取り、目の前で見せ付けてやる。
-		PRINTFORMW 「いやぁ、そんなのみせないでくださぁい…」
-		PRINTFORMW %CALLNAME%は首まで赤くし、いやいやとかぶりを振っている。
+		PRINTFORMW 
 	ENDIF
 	CFLAG:245 = 1
 ENDIF
@@ -7046,14 +6487,9 @@ IF P > PALAMLV:3 && CFLAG:246 == 0
 	;그 이외
 	ELSE
 	IF RAND:2 == 0
-		PRINTFORML 魔法少女はこれまで感じた事の無い欲望に戸惑いを覚えている。
-		PRINTFORMW 息を熱に擦れさせながら、潤んだ瞳を%CALLNAME:MASTER%に向けた。
-		PRINTFORML 「%CSTR:일인칭%のからだ、ヘンですぅ…%CSTR:이인칭%っ…なに、したですかぁ…」
-		PRINTFORMW 未知の感覚に戸惑い、身体を震わせながら涙声で懇願している。
-		PRINTFORMW 「…ひどいですよぉ、何とかしてくださぁい…」
+		PRINTFORMW 
 	ELSE
-		PRINTFORML 「おかしいですぅ…あたま、ぼうってなって、からだ、ふにゃってぇ…はあぁ…」
-		PRINTFORMW %CALLNAME:MASTER%の調教によって、魔法少女の身体は確実に性感を目覚めさせられつつあるようだ。
+		PRINTFORMW 
 	ENDIF
 	ENDIF
 	CFLAG:246 = 1
@@ -7112,7 +6548,7 @@ ENDIF
 ;각인 변동을 트리거로 한 구상
 ;각인 변동 후에 구상을 발동합니다
 ;-------------------------------------------------
-@KOJO_MESSAGE_MARKCNG_K4903
+@KOJO_MESSAGE_MARKCNG_K4593
 ;조수가 조교했을시에 구상을 스킵한다（취향에 따라 사용, 행 앞의 ;를 지우면 스킵하게 된다）
 ;SIF ASSI > 0 && ASSIPLAY
 ;	RETURN 0 
@@ -7125,12 +6561,12 @@ ENDIF
 ;특정 캐릭터가 조수, 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4903
+;	CALL KOJO_MESSAGE_MARKCNG_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;IF ASSI > 0 && ASSIPLAY
 ;	IF NO:ASSI == Y1
-;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4903
+;		CALL KOJO_MESSAGE_MARKCNG_PY1_K4593
 ;		RETURN 0
 ;	ENDIF
 ;ENDIF
@@ -7220,12 +6656,12 @@ ENDIF
 ;-------------------------------------------------
 ;이벤트구상 모음（X1、X2을 캐릭터번호로 치환한다） CFLAG 261～299를 사용
 ;-------------------------------------------------
-@KOJO_MESSAGE_EVENT_K4903
+@KOJO_MESSAGE_EVENT_K4593
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_EVENT_PY1_K4903
+;	CALL KOJO_MESSAGE_EVENT_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;-------------------------------------------------
@@ -7238,7 +6674,7 @@ SELECTCASE TFLAG:13
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:261 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「んっ　おはよっ　……ょぅιょのおはようフェラ、ロリコンの夢でしょ？」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7262,7 +6698,7 @@ CASE 2
 			IF TALENT:149
 				PRINTFORMW 
 			ELSE
-				PRINTFORMW 
+				PRINTFORMW 「んっ　おはよっ　……目覚めの貧乳ズリ、ロリコンの夢でしょ？」
 			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
@@ -7293,7 +6729,7 @@ CASE 3
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「んっ　おはよっ　……%CSTR:이인칭%のコレが他のコに使われると思ったら、搾り取りたくなったの！」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7313,7 +6749,7 @@ CASE 24
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「んっ　おはよっ　……%CSTR:이인칭%のコレが他のコに使われると思ったら、搾り取りたくなったの！」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7333,7 +6769,7 @@ CASE 25
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「んちゅー%UNICODE(0x2661)%　おはよう%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7355,9 +6791,9 @@ CASE 26
 		IF TALENT:3 || TALENT:6
 			;노래 부르면서인지 아닌지
 			IF (TALENT:25 || TALENT:28) && ABL:14 >= 2
-				PRINTFORMW 
+				PRINTFORMW 「ちゃんちゃーらちゃりらりら♪」
 			ELSE
-				PRINTFORMW 
+				PRINTFORMW 「料理は愛情！味と見た目と匂いは二の次よ！」
 			ENDIF
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
@@ -7388,7 +6824,7 @@ CASE 27
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「むにゃ……%CSTR:이인칭%……%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7408,7 +6844,7 @@ CASE 28
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:263 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「コドモに踏まれてイクの？ヘ・ン・タ・イ♪」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7483,7 +6919,7 @@ CASE 5
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:265 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「%CSTR:이인칭%まだこんなにガチガチにして……え？%CSTR:일인칭%のカラダだから？バカ／／／」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -7900,70 +7336,26 @@ CASE 17
 ;-------------------------------------------------
 CASE 18
 	CALL EVENT_MESSAGE
-	PRINTFORMW Ｐ・スタッフという人材派遣会社から魔法少女を買いたいと、連絡があった。
-	PRINTFORML 
-	PRINTFORMW 「最近は奴隷売買にも手を出してきたのか」
-	PRINTFORMW %CALLNAME%を査定しに来た営業レディに嫌味を言ってみたが。
-	PRINTFORML 「いやですわ、『人材』と言っていただきたいですわ、『人材』と、それに『最近』だなんて、
-	PRINTFORMW 　当社は、創業当時より派遣という名目で売買を手掛けてきました、由緒ある企業でございます」
-	PRINTFORML 「その辺の新興といっしょにしてほしくありませんわ」
-	PRINTFORMW 「当社、各方面の専門家から何も知らないシロートさんまで、色々と使える『人材』を取り揃えております、
-	PRINTFORML 　ご利用よろしくお願いします。」
-	PRINTFORMW とセールストークとともににこやかに応対された。
-	PRINTFORML 
-	PRINTFORMW 彼女が召喚した悪魔に対して魔法の威力を試させた後、%CALLNAME% を全裸にして体を検分している。、
-	PRINTFORMW さらに足を開かせ、性器の状態を確認してようやく査定が終わったらしく、微笑んで彼女は言った。
-	PRINTFORMW 「いいでしょう、当社で引き取らせていただきます」
-	;음란, 창부
-		IF TALENT:4 || TALENT:7
+;함락완료
+	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
+		;연모, 친애+반발각인Lv3 미만
+		IF (TALENT:3 || TALENT:6) && MARK:3 < 3
 			PRINTFORMW 
-			PRINTFORMW 「さあ、%CALLNAME% ちゃん、明日からお仕事と学校、頑張りましょうね」
-			PRINTFORML 「ほお……」と感心していると
-			PRINTFORML 「さすが本職の調教師さん、女の子の価値をわかっていらっゃる」
-			PRINTFORMW 「なにを売るにしても、現役小学生の魔法少女てところにプレミアがつくんですよねー」
-			PRINTFORMW 「『人材の有効利用』が、当社のポリシーですの」
-		;처녀
-			IF TALENT:0
-				PRINTFORML 「それにしても、いい子ですわねー、程よく色気がでてきた幼い顔、いやらしく仕込まれた小さなからだ」
-				PRINTFORMW 「だけど、あっちの方は未使用、これは高く売れます」
-				PRINTFORMW 「スレてくる前にお薬使ってフォローすれば、何回かいけますわー」
-		;그 이외
-			ELSE
-				PRINTFORMW 「それに、いい子ですわねー、いやらしく仕込まれて、幼い顔と体に程よく色気がでてきおりますわ」
-			ENDIF
+		;음란, 창부+반발각인Lv3 미만
+		ELSEIF (TALENT:4 || TALENT:7) && MARK:3 < 3
 			PRINTFORMW 
-			PRINTFORMW %CALLNAME%の手を引いて彼女は帰っていった。
-	;그 이외で処女
-		ELSEIF TALENT:0
-			PRINTFORML 
-			PRINTFORMW 「さあ、%CALLNAME% ちゃん、明日から品川の修道院でお務めですよ」 
-			PRINTFORML 怪訝そうな顔をしていると
-			PRINTFORMW 「バージンの子はメシアの方が高値が付くんですよねー、どこに捧げるんだか知りませんけど」
-		;巨乳
-			IF TALENT:거유 || TALENT:폭유
-				PRINTFORML 「当面レンタルですが、頑張ってお務めすれば、すぐにでも聖乳テンプルナイトとして完全移籍の話が出てくるでしょう」
-		;그 이외
-			ELSE
-				PRINTFORML 「当面レンタルですが、頑張ってお務めすれば、そのうちテンプルナイトとして買取の話が出てくるでしょう」
-			ENDIF
-			PRINTFORML 「いい子ですから、たっぷりと、移籍金が頂けるかもしれませんわ」
-			PRINTFORMW 「『優秀な人材の発掘』が、当社のポリシーですの」
-			PRINTFORML 
-			PRINTFORMW %CALLNAME%の手を引いて彼女は帰っていった。
-	;그 이외で経験済
-		ELSE
+		;복종, 예속+반발각인Lv3 미만
+		ELSEIF (TALENT:5 || TALENT:8) && MARK:3 < 3
 			PRINTFORMW 
-			PRINTFORMW 「さあ、%CALLNAME% ちゃん、明日から上野でお勉強ですよ」
-			PRINTFORML 怪訝そうな顔をしていると
-			PRINTFORML 「やっぱり、この子の魔法少女の能力と経験を生かすにはガイアですわ」
-			PRINTFORMW 「当社が提携している神社やお寺で研修していただければ、すぐに立派な対魔忍や魅惑のガイアーズになれますわ」
-			PRINTFORMW 「悪魔の湧き出る洞窟とかもありますし、あっちの方は優しいお兄さんお姉さんが手取り足取り指導してくれます」
-			PRINTFORML 「いい子ですが、やっぱりオトコやオンナの扱い方は大切です、魔法とともにそっちのテクも磨いていただければ、より高値で お取引できますもの」
-			PRINTFORMW 「『人材の育成』が、当社のポリシーですの」
-			PRINTFORML 
-			PRINTFORMW %CALLNAME%の手を引いて彼女は帰っていった。
 		ENDIF
-		
+;반발각인Lv3
+	ELSEIF MARK:3 == 3
+		PRINTFORMW 
+;그 이외
+	ELSE
+		PRINTFORMW 
+	ENDIF
+
 ;-------------------------------------------------
 ;비디오 매각시
 ;-------------------------------------------------
@@ -8388,8 +7780,8 @@ CASE 22
 					PRINTFORMW 「おっきなおちんぽは、トクベツに、がんばってしぼってあげますからぁ…」
 					PRINTFORMW 「いっぱいいっぱいお尻ずぽずぽして、いっぱいいっぱいピュッピュしてくださいね%ハート()%」
 				ELSEIF RAND:1 == 0
-					PRINTFORMW 「あはぁああん……!!せーえきぃ、せーえきですぅ……♪」
-					PRINTFORMW 「レロ、チュパ……あはぁん♪えへへー、せーえきぃ……」
+					PRINTFORMW 「あはぁああん……!!　せーえきぃ、せーえきですぅ……♪」
+					PRINTFORMW 「レロ、チュパ……あはぁん♪　えへへー、せーえきぃ……」
 				ENDIF
 		;복종, 예속+반발각인Lv3 미만
 		ELSEIF (TALENT:5 || TALENT:8)
@@ -8409,7 +7801,7 @@ CASE 22
 				PRINTFORMW 「おすきなだけ、あぁんっ、ごりよう、くださぁい……」
 			ELSE
 				PRINTFORMW 「ズッ、みなさまぁ……ジュル、イッて……%CSTR:일인칭%の顔に……はぁ、かけてくださぁい……」
-				PRINTFORMW 「ジュルルルッ……!!顔、ちゅぱ……ご主人様の……せーえき……あびたいれす……！」
+				PRINTFORMW 「ジュルルルッ……!!　顔、ちゅぱ……ご主人様の……せーえき……あびたいれす……！」
 			ENDIF
 		ELSE
 			IF RAND:2 == 0
@@ -8483,7 +7875,9 @@ CASE 40
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:283 < 1 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 
+			PRINTFORMW 「……%CSTR:이인칭%がパパを殺して%CSTR:일인칭%を拉致監禁して調教凌辱したペドフェリアだってのは忘れてないけど。」
+			PRINTFORMW 「まーでも、%CSTR:일인칭%も%CSTR:이인칭%に心まで調教されちゃったから、仕方ないわね。」
+			PRINTFORMW 「%CSTR:일인칭%をオンナにした責任取って、大事にしてね%UNICODE(0x2661)%　でないと、祟るわよ%UNICODE(0x2661)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORMW 
@@ -8542,7 +7936,7 @@ ENDSELECT
 ;-------------------------------------------------
 ;조건설정
 ;-------------------------------------------------
-@EVENTTURNEND_K4903
+@EVENTTURNEND_K4593
 ;#LATER
 ;SIF TARGET < 0
 ;	RETURN 0
@@ -8573,12 +7967,12 @@ ENDSELECT
 ;-------------------------------------------------
 ;엔딩 본문
 ;-------------------------------------------------
-@KOJO_MESSAGE_ENDING_K4903
+@KOJO_MESSAGE_ENDING_K4593
 ;--------------------------------------------------
 ;특정 주인 시에 특수 캐릭터구상을 호출(Y1을 특정 캐릭터, X1을 노예의 캐릭터번호로 치환)
 ;--------------------------------------------------
 ;IF NO:MASTER == Y1
-;	CALL KOJO_MESSAGE_ENDING_PY1_K4903
+;	CALL KOJO_MESSAGE_ENDING_PY1_K4593
 ;	RETURN 0
 ;ENDIF
 ;--------------------------------------------------
@@ -8591,7 +7985,7 @@ ENDSELECT
 	;PRINTFORMW 
 
 	;PRINTFORMW 
-	;PRINTFORMW ―― Ending No.1X2A (○○エンド)
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2A (○○エンド)
 ;음란 1체 엔딩
 ;ELSEIF TALENT:7 && CFLAG:21 == 1
 	;DRAWLINE
@@ -8601,7 +7995,7 @@ ENDSELECT
 	;PRINTFORMW 
 
 	;PRINTFORMW 
-	;PRINTFORMW ―― Ending No.1X2B (○○エンド)
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2B (○○エンド)
 ;복종 1체 엔딩
 ;ELSEIF TALENT:8 && CFLAG:21 == 1
 	;DRAWLINE
@@ -8611,7 +8005,7 @@ ENDSELECT
 	;PRINTFORMW 
 
 	;PRINTFORMW 
-	;PRINTFORMW ―― Ending No.1X2C (○○エンド)
+	;PRINTFORMW 　　　　　　　　―― Ending No.1X2C (○○エンド)
 ;ENDIF
 
 ;특수 하렘엔딩
@@ -8623,14 +8017,14 @@ ENDSELECT
 	;PRINTFORMW 
 
 	;PRINTFORMW 
-	;PRINTFORMW ―― Ending No.2X2 (○○エンド)
+	;PRINTFORMW 　　　　　　　　―― Ending No.2X2 (○○エンド)
 ;ENDIF
 
 ;CALL GAME_CONTINUE
 ;RETURN 0
 
 
-@ENEMY_BATTLE_EVENT_K4903, ARG, ARG:1, ARG:2
+@ENEMY_BATTLE_EVENT_K4593, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;적에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8644,35 +8038,93 @@ IF TFLAG:전투이벤트 == 2
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 
-@BATTLE_EVENT_K4903, ARG, ARG:1, ARG:2
+@BATTLE_EVENT_K4593, ARG, ARG:1, ARG:2
 IF TFLAG:전투이벤트 == 1
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
-;○○ごっこ、的な
-	IF RAND:2 == 0
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"て！ん！ば！つ！てっきめーん！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ELSE
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"ちょめちょめたーいむっ♪",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDIF
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%"",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 IF TFLAG:전투이벤트 == 2
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 참가시의 대사
-	IF RAND:2 == 0
-			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃% CSTR:일인칭 + "におまかせですぅ♪",72,LEFT%┃
+		;あなたが発動
+		IF FLAG:행동순1 != -1 && FLAG:행동순1 == MASTER
+			IF RAND:3 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"惚れた弱味……ってヤツね、続くわ！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ゴメンナサイ！ゴ主人サマがやれって……なんてね♪",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ょぅιょに手伝ってもらって嬉しいでしょ、このロリコン！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;アリスが発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4104
+			IF RAND:3 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"さすが、女神転生界ロリ悪魔の元祖にして頂点……！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"くっ……ロリ度はアタシの方が上なんだから！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"負けられない……和ロリには和ロリの良さがあるのよ！！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;エリカが発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 1012
+			IF RAND:3 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"後輩が、いい格好しようなんて生意気よ！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"ちょっ、アンタ！ランドセルはマズイでしょ！ケーサツ来ちゃうわよ？",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"アンタ被ってるのよ！！！ペルソナ和ロリ中ボスの元祖はアタシよ！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;マイが発動
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 4592
+			IF RAND:3 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"マイ！続くわ！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSEIF RAND:2 == 0
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"トドメはアタシが！！！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ELSE
+				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+				PRINTFORML ┃%"おとなしそうなフリしてても、アンタもアタシよ！",72,LEFT%┃
+				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+			ENDIF
+		;以下汎用
+		ELSEIF RAND:3 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"クスクスクス！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ELSE
-			PRINTFORML ┏┓＠%CALLNAME:ARG,20,LEFT%┏━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%CALLNAME + "あたーっく！！",72,LEFT%┃
+		ELSEIF RAND:2 == 0
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"こいつッ！死んじゃえッ！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDIF
+		ELSE
+			PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
+			PRINTFORML ┃%"幼　児　虐　待！！！",72,LEFT%┃
+			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+		ENDIF
 ENDIF
 
 
-@BATTLE_MESSAGE_K4903,ARG,ARG:1 = 0
+@BATTLE_MESSAGE_K4593,ARG,ARG:1 = 0
 
 ;선택한 커맨드로 분기시키고 싶은 경우, IF문의 조건에 명령어 No를 기입할 것
 ;IF CFLAG:ARG:입력행동 == 
@@ -8680,77 +8132,70 @@ ENDIF
 ;	PRINTFORML ┃%"",72,LEFT%┃
 ;	PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-IF ARG:1 > 0
+;ELSEIF ARG:1 > 0
 	;충성도가 상승하는 행동을 취했을 경우에 표시하는 구상
 
-	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
-;	使用したスキルの名前をLOCALSに代入
-	LOCALS = %RESULTS%
+;	CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
+;	;사용한 스킬의 이름을 LOCALS에 대입
+;	LOCALS = %RESULTS%
 
-	SELECTCASE ARG:1
-;		物理ダメージを与える行動で、獰猛持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"영맹")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "！えぇいっ！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		魔法ダメージを与える行動で、狡猾持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"교활")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"キャハハッ！" + LOCALS + "ッ！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		高威力の行動で、残虐持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"잔학")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "でイッちゃってくださぁい♪",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		相手の弱点を付いた攻撃or行動不能な状態異常の敵に対する攻撃で、賢い持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"현명")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "で泣かせてやるですぅ",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		破魔相性の行動で、天使持ちの忠誠度が上昇
-;		この後COOPに繋げれば…とか妄想してたが、この口上適用される天使いなかったよ…
-		CASE GETNUM(TALENT,"천사")
-			IF RAND:2 == 0
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"てんばちゅてき……" + LOCALS + "っ！！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ELSE
-				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"てんばつてけっ……" + LOCALS + "っ！！！",72,LEFT%┃
-				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-			ENDIF
-;		呪殺相性の行動で、堕天使持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"타천사")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "！" + LOCALS + "！！" + LOCALS + "ッ！！！",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		回復・状態回復行動では友愛持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"우애")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "！これで安心ですぅ",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		状態変化では高慢持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"교만")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "で苦しんでくださぁい",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		特殊では冷静持ちの忠誠度が上昇
-		CASE GETNUM(TALENT,"냉정")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"ここで" + LOCALS + "はトーゼンのセンタクですぅ",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-;		愚鈍持ちは主人とのLv差だけ忠誠度が上昇
-		CASE GETNUM(TALENT,"우둔")
-			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%LOCALS + "？わっかりましたぁ",72,LEFT%┃
-			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;	SELECTCASE ARG:1
+;		;물리데미지를 주는 행동으로, 영맹 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"영맹")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;마법데미지를 주는 행동으로, 교활 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"교활")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;고위력의 행동으로, 잔학 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"잔학")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;상대의 약점을 찌르는 공격 or 행동불능의 상태이상의 적에 대한 공격으로, 현명 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"현명")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;파마 상성의 행동으로, 천사 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"천사")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;주살 상성의 행동으로, 타천사 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"타천사")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;회복・상태회복 행동으로는 우애 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"우애")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;상태변화로는 교만 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"교만")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;특수로는 냉정 보유자의 충성도가 상승
+;		CASE GETNUM(TALENT,"냉정")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+;		;우둔 보유자는 주인과의 Lv차이 만큼 충성도가 상승
+;		CASE GETNUM(TALENT,"우둔")
+;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
+;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ;		;허심 보유자는 최저 ２만큼 충성도가 상승
 ;		CASE GETNUM(TALENT,"허심")
 ;			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;			PRINTFORML ┃%LOCALS + "",72,LEFT%┃
 ;			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	ENDSELECT
+;	ENDSELECT
 ;ELSE
-;	システムによらず忠誠度を上げたいとか他があったらここに記載
-ENDIF
+;	;시스템에 의지하지 않고 충성도를 높이고 싶거나 다른 목표가 있으면 여기에 기재
+;ENDIF
