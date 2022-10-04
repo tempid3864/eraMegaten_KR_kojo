@@ -181,7 +181,7 @@ SELECTCASE TFLAG:전투이벤트
 				CASE 1
 					LOCALS:10 = 잠시 자고 있어
 				CASE 2
-					LOCALS:10 = 여기는 %CALLNAME:ARG%, 타겟을 격파
+					LOCALS:10 = 여기는 ＧＶ, 타겟을 격파
 				ENDSELECT
 			ENDIF
 		;약점을 찔렀다. 즉 COOP
@@ -461,7 +461,7 @@ SELECTCASE TFLAG:전투이벤트
 				CASE 1
 					LOCALS:10 = 잠시 자고 있어
 				CASE 2
-					LOCALS:10 = 여기는 %CALLNAME:ARG%, 타겟을 격파
+					LOCALS:10 = 여기는 ＧＶ, 타겟을 격파
 				ENDSELECT
 			ENDIF
 		ELSE
@@ -585,7 +585,7 @@ SELECTCASE TFLAG:전투이벤트
 			CASE "SLIP"
 				LOCALS:10 = 우왓！？
 			CASE "BRAND"
-				LOCALS:10 = 회복 저해라니, 귀찮게……
+				LOCALS:10 = 회복의 저해？ 귀찮은걸……
 			;그 외 상태이상
 			;CASEELSE
 		ENDSELECT
@@ -600,17 +600,17 @@ SELECTCASE TFLAG:전투이벤트
 			ELSEIF 현HP비율(ARG) < 20
 				SETCOLOR 0x1d9eff
 				IF SKILLGAGE_H_GET(ARG, [[스킬:SONG OF DIVA]]) == 1 || SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
-					LOCALS:10 = わたしの歌じゃ、もうあなたの翼《チカラ》になれないの……？
+					LOCALS:10 = 나의 노래로는, 이젠 너의 날개《힘》가 될 수 없는거야……？
 				ELSE
-					LOCALS:10 = ＧＶ、大丈夫！？　しっかりして！
+					LOCALS:10 = ＧＶ, 괜찮아！？　정신 차려！
 				ENDIF
 				LOCAL = 6500
-				CALL MESSAGE_P_LN("シアン", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
+				CALL MESSAGE_P_LN("시안", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
 				SETCOLOR 0x33ffcc
-				LOCALS:10 = 心配かけてごめん……%CSTR:ARG:일인칭%ならまだ、やれるから……！
+				LOCALS:10 = 걱정하게 해서 미안…… %CSTR:ARG:일인칭%라면 아직, 할 수 있으니까……！
 			;HP50%以下
 			ELSEIF 현HP비율(ARG) < 50
-				LOCALS:10 = 落ち着け……この程度の窮地、何度も切り抜けて来たはずだ……
+				LOCALS:10 = 진정하자…… 이 정도의 궁지, 몇 번이나 헤쳐나왔을 터야……
 			ENDIF
 		ENDIF
 	;배틀에서 승리했다
@@ -618,7 +618,7 @@ SELECTCASE TFLAG:전투이벤트
 		IF CFLAG:ARG:803 == 1
 			LOCALS:10 = 이럴 수밖에는 없었다고는 해도, 견딜 수가 없는걸……
 		ELSEIF CFLAG:ARG:803 == 2
-			LOCALS:10 = 한 번 더, 죽이게 될 줄이야……
+			LOCALS:10 = 한 번 더, 이 손으로 죽이게 될 줄이야……
 			CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 			SETCOLOR 0x1d9eff
 			LOCALS:10 = ＧＶ……
@@ -647,7 +647,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCAL = RAND:3
 				SELECTCASE LOCAL
 				CASE 0
-					LOCALS:10 = 전투 종료…… 자아, 나아가도록 하죠
+					LOCALS:10 = 전투 종료. 자아, 나아가도록 하죠
 				CASE 1
 					LOCALS:10 = 언젠가 너희 곁으로 돌아가기 위해서도, 질 수는 없어
 				CASE 2
@@ -677,35 +677,35 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 92
 		IF RAND:2 == 0
 			SETCOLOR 0x1d9eff
-			LOCALS:10 = あっちからなら逃げられそうだよ、ＧＶ！
+			LOCALS:10 = 저쪽이라면 도망칠 수 있을 것 같아, ＧＶ！
 			LOCAL = 6500
-			CALL MESSAGE_P_LN("シアン", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
+			CALL MESSAGE_P_LN("시안", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
 			SETCOLOR 0x33ffcc
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
-				LOCALS:10 = こちらＧＶ。撤退用のルートを確認しました
+				LOCALS:10 = 여기는 ＧＶ. 철수용 루트를 확인했습니다
 			CASE 1
-				LOCALS:10 = 皆さん、こっちへ。安全なルートが見つかりました！
+				LOCALS:10 = 여러분, 이쪽으로. 안전한 루트를 발견했습니다！
 			CASE 2
-				LOCALS:10 = ありがとう、シアン。助かったよ
+				LOCALS:10 = 고마워, 시안. 도움이 되었어
 			ENDSELECT
 		ELSE
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
-				LOCALS:10 = 지금은 물러나죠
+				LOCALS:10 = 지금은 물러나도록 하죠
 			CASE 1
-				LOCALS:10 = 무리해서 쓰러뜨릴 수도 없다, 는 건가
+				LOCALS:10 = 무리해서 쓰러뜨릴 필요도 없다, 는 건가
 			CASE 2
-				LOCALS:10 = 알겠습니다. 철수합시다
+				LOCALS:10 = 알겠습니다. 철수하겠습니다
 			ENDSELECT
 		ENDIF
 	;도주에 실패했다
 	CASE 93
 		IF RAND:2 == 0
 			SETCOLOR 0x1d9eff
-			LOCALS:10 = もう、何なの！？　本当にしつこいんだからー！
+			LOCALS:10 = 정말, 뭐야！？　진짜 끈질기다니까ー！
 			LOCAL = 6500
 			CALL MESSAGE_P_LN("시안", 1, [[キャラ:GV]], LOCAL, LOCALS:10, LOCALS:11)
 			SETCOLOR 0x33ffcc
@@ -717,7 +717,7 @@ SELECTCASE TFLAG:전투이벤트
 		CASE 1
 			LOCALS:10 = 그리 간단히 놓치지는 않겠다는 건가
 		CASE 2
-			LOCALS:10 = ……끈질겨！
+			LOCALS:10 = 진심인 것은 저쪽도 마찬가지, 라는 건가
 		ENDSELECT
 	;전투 개시시
 	CASE 94
@@ -1055,7 +1055,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,4000, 5000)
 		LOCALS:10 = 네…… %CSTR:ARG:일인칭%가 하겠습니다
 	ELSE
 		IF RAND:2 == 0
-			LOCALS:10 = 여기는 %CALLNAME:ARG%, 지원을 부탁드리겠습니다
+			LOCALS:10 = 여기는 ＧＶ, 지원을 부탁드리겠습니다
 		ELSE
 			LOCALS:10 = 여러분의 힘을, %CSTR:ARG:일인칭%에게 빌려주세요！
 		ENDIF
@@ -1086,7 +1086,7 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:SONG OF DIVA]]
 		ENDIF
 	ELSEIF SKILLGAGE_F_GET(ARG, [[스킬:SONG OF DIVA]]) == 1
 		RESETCOLOR
-		PRINTL ♪ - 藍の運命 -　　　　　
+		PRINTL ♪ - 쪽빛 운명 -　　　　　
 		ALIGNMENT LEFT
 		SETCOLOR 0x1d9eff
 		LOCALS:10 = 나의 노래가, 너의 날개《힘》가 될 거야――
@@ -1152,14 +1152,14 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기1]]
 	SETCOLOR 0x33ffcc
 	IF EQUIP:ARG:악세서리 == 5349
 		IF CFLAG:ARG:기합플래그 > 0
-			LOCALS:10 = 撃ち砕け！　ライトニングスフィア！
+			LOCALS:10 = 부수어라！　라이트닝 스피어！
 		ELSE
-			LOCALS:10 = ライトニングスフィア！
+			LOCALS:10 = 라이트닝 스피어！
 		ENDIF
 	ELSEIF DIVA_F == 1 || DIVA_H == 1
-		LOCALS:10 = ライトニングスフィア！
+		LOCALS:10 = 라이트닝 스피어！
 	ELSE
-		LOCALS:10 = ライトニングスフィア！
+		LOCALS:10 = 라이트닝 스피어！
 		LOCAL = CFLAG:ARG:얼굴이미지 * 100
 		SIF LOCAL == 0
 			LOCAL = 6400
@@ -1176,18 +1176,18 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기2]]
 	PRINTL 　
 	PRINTL 　
 	PRINTL 　
-	PRINTL 　　　　　　　　　　　　　 푸른 우레의 포학이여 적을 꿰뚫어라
+	PRINTW 　　　　　　　　　　　　　 푸른 우레의 포학이여 적을 꿰뚫어라
 	SETCOLOR 0x33ffcc
 	IF EQUIP:ARG:악세서리 == 5349
 		IF CFLAG:ARG:집중플래그 > 0
-			LOCALS:10 = 切り裂け！　スパークカリバー！
+			LOCALS:10 = 찢어발겨라！　스파크 칼리버！
 		ELSE
-			LOCALS:10 = スパークカリバー！
+			LOCALS:10 = 스파크 칼리버！
 		ENDIF
 	ELSEIF DIVA_F == 1 || DIVA_H == 1
-		LOCALS:10 = スパークカリバー！
+		LOCALS:10 = 스파크 칼리버！
 	ELSE
-		LOCALS:10 = スパークカリバー！
+		LOCALS:10 = 스파크 칼리버！
 		LOCAL = CFLAG:ARG:얼굴이미지 * 100
 		SIF LOCAL == 0
 			LOCAL = 6400
@@ -1208,14 +1208,14 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기3]]
 	SETCOLOR 0x33ffcc
 	IF EQUIP:ARG:악세서리 == 5349
 		IF CFLAG:ARG:기합플래그 > 0
-			LOCALS:10 = 絡め取れ！　ヴォルティックチェーン！
+			LOCALS:10 = 휘감아라！　볼틱 체인！
 		ELSE
-			LOCALS:10 = ヴォルティックチェーン！
+			LOCALS:10 = 볼틱 체인！
 		ENDIF
 	ELSEIF DIVA_F == 1 || DIVA_H == 1
-		LOCALS:10 = ヴォルティックチェーン！
+		LOCALS:10 = 볼틱 체인！
 	ELSE
-		LOCALS:10 = ヴォルティックチェーン！
+		LOCALS:10 = 볼틱 체인！
 		LOCAL = CFLAG:ARG:얼굴이미지 * 100
 		SIF LOCAL == 0
 			LOCAL = 6400
@@ -1232,9 +1232,9 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기4]]
 	PRINTL 　　　　　　　　　　　　　　 밤하늘을 개척하는 뇌인의 극점
 	PRINTL 　
 	PRINTL 　
-	PRINTW 　　　　　　　성검을 넘어, 가져오는 영광
+	PRINTW 　　　　　　　 성검을 넘어, 가져오는 영광
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = グロリアスストライザー！
+	LOCALS:10 = 글로리어스 스트라이저！
 	LOCAL = CFLAG:ARG:얼굴이미지 * 100
 	SIF LOCAL == 0
 		LOCAL = 6400
@@ -1252,7 +1252,7 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전용기5]]
 	PRINTL 　
 	PRINTW 　　　　　　　　 총신총구, 뇌신이 되어라
 	SETCOLOR 0x33ffcc
-	LOCALS:10 = アンリミテッドヴォルト！
+	LOCALS:10 = 언리미티드 볼트！
 	LOCAL = CFLAG:ARG:얼굴이미지 * 100
 	SIF LOCAL == 0
 		LOCAL = 6400
@@ -1287,7 +1287,7 @@ ELSEIF CFLAG:ARG:입력행동 == [[스킬:전격가드브레이크]]
 		CASE 0
 			LOCALS:10 = 그런 방어로는, 나의 뇌격을 막을 수 없어
 		CASE 1
-			LOCALS:10 = 맞추어 보일게
+			LOCALS:10 = 반드시 닿게 해보이겠어
 		CASE 2
 			LOCALS:10 = 솟구쳐라！　푸른 뇌정《암드 블루》！！
 		ENDSELECT
