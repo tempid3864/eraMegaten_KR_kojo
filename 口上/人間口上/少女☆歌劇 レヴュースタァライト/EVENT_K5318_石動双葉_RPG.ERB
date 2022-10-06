@@ -49,10 +49,10 @@ LOADGLOBAL
 ;いまの一人称を記録
 ;悪魔変身中（長靴をはいた猫前提）はおいら
 IF CFLAG:ARG:악마변신
-	今の一人称 = おいら
+	今の一人称 = 이몸
 ;素の状態ならあたし
 ELSE
-	今の一人称 = あたし
+	今の一人称 = 나
 ENDIF
 
 
@@ -82,7 +82,7 @@ IF TFLAG:전투이벤트 == 1
 			IF CFLAG:ARG:악마변신
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"성은 장화요, 그 이름은 페로！",72,LEFT%┃
-				PRINTFORML ┃%"Ｐ와 Ｒ의 이름으로, 쩔어주는 우리들을 보도록 하라！",72,LEFT%┃
+				PRINTFORML ┃%"Ｐ와 Ｒ의 이름으로, 쩔어주는 이몸을 보도록 하라！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -254,7 +254,7 @@ IF TFLAG:전투이벤트 == 2
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSEIF RAND:2 == 0
 				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"카오루코！　내 뒤에 숨지 마！",72,LEFT%┃
+				PRINTFORML ┃%"카오루코！　내 뒤에 숨어！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -900,7 +900,7 @@ IF TFLAG:전투이벤트 == 94
 			IF CFLAG:ARG:악마변신
 				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
 				PRINTFORML ┃%"성은 장화요, 그 이름은 페로！",72,LEFT%┃
-				PRINTFORML ┃%"……어때？　나의 통성명이야, 당연하잖아. 흐흥",72,LEFT%┃
+				PRINTFORML ┃%"……어때？　이몸의 통성명이야, 당연하잖아. 흐흥",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏┓＠%NAME:ARG,20,LEFT%　┏━━━━━━━━━━━━━━━━━━━━━━┓
@@ -956,10 +956,10 @@ LOADGLOBAL
 ;いまの일인칭を記録
 ;악마변신中（長신발をはいた猫前提）はおいら
 IF CFLAG:ARG:악마변신
-	今の一人称 = おいら
+	今の一人称 = 이몸
 ;素の상태ならあたし
 ELSE
-	今の一人称 = あたし
+	今の一人称 = 나
 ENDIF
 
 CALLFORM SKILL_NAME_{CFLAG:ARG:입력행동},ARG
@@ -1077,9 +1077,9 @@ ELSEIF CFLAG:ARG:입력행동 == 0
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"……계속 액션 해왔으니까",72,LEFT%┃
-			PRINTFORML ┃%"맞힌다, 라고 해야 하나",72,LEFT%┃
-			PRINTFORML ┃%"이상한 손버릇 들지 않았으면 좋겠는데",72,LEFT%┃
+			PRINTFORML ┃%"……계속 액션씬으로 해왔으니까",72,LEFT%┃
+			PRINTFORML ┃%"맞힌다, 는 것이",72,LEFT%┃
+			PRINTFORML ┃%"이상한 손버릇으로 되지 않았으면 좋겠는데",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	ELSEIF RAND:6 == 0
