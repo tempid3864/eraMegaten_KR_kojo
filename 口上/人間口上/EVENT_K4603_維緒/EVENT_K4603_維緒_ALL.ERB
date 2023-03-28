@@ -10258,13 +10258,13 @@ SELECTCASE TFLAG:전투이벤트
 	;COOP발동 ARG는 발동자
 	CASE 1
 		IF RAND:2 == 0
-			LOCALS:10 = 隙が出来ました！
+			LOCALS:10 = 빈틈이 생겼어요！
 		ELSE
-			LOCALS:10 = 追撃お願いします！
+			LOCALS:10 = 추격 부탁드립니다！
 		ENDIF
 	;COOP참가
 	CASE 2
-			LOCALS:10 = お手伝いします！
+			LOCALS:10 = 도와드리겠습니다！
 	;피소환시
 	CASE 3
 			LOCALS:10 = 
@@ -10299,7 +10299,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 12
 		;죽었다
 		IF BASE:ARG:ＨＰ <= 0
-			LOCALS:10 = ごめんなさい……少し、休みます
+			LOCALS:10 = 미안해요……조금、쉴게요
 		;대 데미지
 		ELSEIF 데미지비율(ARG, ARG:2) > 50 || 현HP비율(ARG) < 25
 			IF RAND:2 == 0
@@ -10322,7 +10322,7 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS:10 = 
 	;회피당했다
 	CASE 17
-			LOCALS:10 = ええっ！
+			LOCALS:10 = 에엣！
 	;회피했다
 	CASE 18
 			LOCALS:10 = 
@@ -10332,10 +10332,10 @@ SELECTCASE TFLAG:전투이벤트
 			LOCALS:10 = 
 	;배틀에서 승리했다
 	CASE 90
-			LOCALS:10 = どうにかなりました、ね
+			LOCALS:10 = 어떻게든 되었、네요
 	;레벨 업했다
 	CASE 91
-			LOCALS:10 = 少しは強くなれたのかな
+			LOCALS:10 = 조금은 강해졌으려나
 	;도주에 성공했다
 	CASE 92
 			LOCALS:10 = 
@@ -10345,12 +10345,12 @@ SELECTCASE TFLAG:전투이벤트
 	;전투 개시시
 	CASE 94
 		IF FLAG:선제공격플래그
-			LOCALS:10 = まだ、気づかれてないみたいですね……
+			LOCALS:10 = 아직、눈치채지 못한 것 같네요……
 		ELSEIF 현HP비율(ARG) < 25
 			;빈사
-			LOCALS:10 = ちょっと危ないかも……
+			LOCALS:10 = 조금 위험할지도……
 		ELSE
-			LOCALS:10 = 敵が来ました！
+			LOCALS:10 = 적이 왔습니다！
 		ENDIF
 	;백어택을 당했다
 	CASE 95
@@ -10399,34 +10399,34 @@ CALLFORM SKILL_EFECT_{CFLAG:ARG:입력행동}
 IF 1 == 0
 
 ;-------------------------------------------------
-;悪魔変身
+;악마변신
 ;-------------------------------------------------
 ELSEIF CFLAG:ARG:입력행동 == 2310
-	;変身解除
+	;변신해제
 	IF CFLAG:ARG:악마변신
-		LOCALS:10 = 変身、解除するね
-	;ルーグに変身
+		LOCALS:10 = 변신、해제할게
+	;루그로 변신
 	ELSEIF CFLAG:ARG:링크악마 == 1522 || (CFLAG:ARG:링크악마 == -1 && CFLAG:ARG:초기링크악마 == 1522)
-		LOCALS:10 = 力を貸して……ルーグ！
-	;ルーグ=ラウファーダに変身
+		LOCALS:10 = 힘을 빌려줘……루그！
+	;루그 = 라우파다로 변신
 	ELSEIF CFLAG:ARG:링크악마 == 3823 || (CFLAG:ARG:링크악마 == -1 && CFLAG:ARG:초기링크악마 == 3823)
-		LOCALS:10 = 来て……ルーグ！
-	;그 이외(兼業シフターのため、ないと思われるが念のため)
+		LOCALS:10 = 와줘……루그！
+	;그 이외(겸업 시프터라、없다고 생각되지만 만약을 위해)
 	ELSE
-		LOCALS:10 = 行くよ……変身！
+		LOCALS:10 = 간다……변신！
 	ENDIF
 
 ;-------------------------------------------------
-;変身時用セリフ
+;변신시 사용 대사
 ;-------------------------------------------------
 
-;ルーグorルーグ=ラウファーダかつブリューナク使用時
+;루그or루그 = 라우파다카 또한 브류나크 사용시
 ELSEIF CFLAG:ARG:입력행동 == 2085 && (((CFLAG:링크악마 >= 0 && NO:FINDCHARA_ID(CFLAG:링크악마) == 1522) || (CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 1522) ||(CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 3823))) && CFLAG:ARG:악마변신
-	LOCALS:10 = 貫いて、ブリューナク！
+	LOCALS:10 = 꿰뚫어라、브류나크！
 
-;ルーグ=ラウファーダかつタスラムの魔弾使用時
+;루그=라우파다 카츠라무의 마탄 사용시
 ELSEIF CFLAG:ARG:입력행동 == 3904 && (CFLAG:링크악마 < 0 && CFLAG:초기링크악마 == 3823) && CFLAG:ARG:악마변신
-	LOCALS:10 = 【タスラムの魔弾】！
+	LOCALS:10 = 【카츠라무의 마탄】！
 
 
 ;-------------------------------------------------
@@ -10475,9 +10475,9 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2101, 2200)
 	;GUN
 	IF CFLAG:ARG:입력행동 == 2101
 		IF RAND:2 == 0
-			LOCALS:10 = よーく狙って……
+			LOCALS:10 = 제대로 조준해서……
 		ELSE
-			LOCALS:10 = お願い、当たって！
+			LOCALS:10 = 제발、맞아줘！
 		ENDIF	
 	;그 외（특수탄환）
 	ELSE
@@ -10498,7 +10498,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 ;아이템
 ;-------------------------------------------------
 ELSEIF RANGE(CFLAG:ARG:입력행동,3001, 3500)
-	LOCALS:10 = 【%LOCALS%】を使います！
+	LOCALS:10 = 【%LOCALS%】을 사용합니다！
 ;-------------------------------------------------
 ;링케이지
 ;-------------------------------------------------
@@ -10540,10 +10540,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 400)
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 	;전체회복
 	IF CFLAG:ARG:타겟 > 6
-		LOCALS:10 = 集まってください、回復します！
+		LOCALS:10 = 모여주세요、회복하겠습니다！
 	ELSE
 		IF RAND:2 == 0
-			LOCALS:10 = 回復します！
+			LOCALS:10 = 회복하겠습니다！
 		ELSE
 			LOCALS:10 = 【%LOCALS%】！
 		ENDIF
@@ -10553,13 +10553,13 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 	;강화계
 	IF RANGE(CFLAG:ARG:입력행동,501, 505) || CFLAG:ARG:입력행동 == 558
 		IF RAND:2 == 0
-			LOCALS:10 = 頑張って！【%LOCALS%】！
+			LOCALS:10 = 힘내！【%LOCALS%】！
 		ELSE
 			LOCALS:10 = 【%LOCALS%】！
 		ENDIF
 	;약체계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,506, 509) || CFLAG:ARG:입력행동 == 541 || CFLAG:ARG:입력행동 == 556
-			LOCALS:10 = 力を削ぎます！【%LOCALS%】！
+			LOCALS:10 = 힘을 약체화 하겠습니다！【%LOCALS%】！
 	;도발
 	ELSEIF CFLAG:ARG:입력행동 == 515
 		LOCALS:10 = 
@@ -10578,21 +10578,21 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
 	IF RAND:2 == 0
 		LOCALS:10 = 【%LOCALS%】！
 	ELSE
-		LOCALS:10 = 燃えて！
+		LOCALS:10 = 불타라
 	ENDIF
 ;빙결
 ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
 	IF RAND:2 == 0
-		LOCALS:10 = 凍って！
+		LOCALS:10 = 얼어라！
 	ELSE
 		LOCALS:10 = 【%LOCALS%】！
 	ENDIF
 ;전격
 ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
 	IF RAND:2 == 0
-		LOCALS:10 = 行きます、【%LOCALS%】！
+		LOCALS:10 = 갑니다、【%LOCALS%】！
 	ELSE
-		LOCALS:10 = 感電して！
+		LOCALS:10 = 감전되라！
 	ENDIF
 ;충격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
@@ -10609,7 +10609,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1301, 1399)
 ;주살
 ELSEIF RANGE(CFLAG:ARG:입력행동,1401, 1499)
 	IF RAND:2 == 0
-		LOCALS:10 = えっと、【%LOCALS%】！
+		LOCALS:10 = 그러니까、【%LOCALS%】！
 	ELSE
 		LOCALS:10 = 【%LOCALS%】！
 	ENDIF
@@ -10622,7 +10622,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1601, 1699)
 ;질풍
 ELSEIF RANGE(CFLAG:ARG:입력행동,1701, 1799)
 	IF RAND:2 == 0
-		LOCALS:10 = 吹き飛んで！
+		LOCALS:10 = 날아가버려！
 	ELSE
 		LOCALS:10 = 【%LOCALS%】！
 	ENDIF
@@ -10638,7 +10638,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 	IF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 		LOCALS:10 = 【%LOCALS%】！
 	ELSE
-		LOCALS:10 = えっと、【%LOCALS%】！
+		LOCALS:10 = 그러니까、【%LOCALS%】！
 	ENDIF
 ;마법소녀계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
@@ -10655,9 +10655,9 @@ ENDIF
 ;-------------------------------------------------
 IF LOCALS:10 == ""
 	IF RAND:2 == 0
-		LOCALS:10 = えいっ！
+		LOCALS:10 = 에잇！
 	ELSE
-		LOCALS:10 = 行きます！
+		LOCALS:10 = 갑니다！
 	ENDIF
 ENDIF
 

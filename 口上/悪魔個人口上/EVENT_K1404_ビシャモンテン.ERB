@@ -222,7 +222,7 @@ ELSEIF CFLAG:201 < 5 && (TALENT:3 || TALENT:4 || TALENT:5)
 	;복종
 	ELSEIF TALENT:5
 		CSTR:이인칭 = 주인님
-		PRINTFORMW 「あの……どうか、よろしくお願い致します……」
+		PRINTFORMW 「저기……아무쪼록、잘 부탁드립니다……」
 	ENDIF
 	CFLAG:201 = 5
 	RETURN 0
@@ -349,13 +349,13 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			CALL PRINT_AA_K1404
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「こんな%CSTR:일인칭%でも、%CSTR:이인칭%のお役に立てて……本当に嬉しいです。」
+			PRINTFORMW 「이런 %조사처리(CSTR:일인칭,"라")%도、%CSTR:이인칭%의 도움이 될 수 있어서……정말 기쁩니다。」
 		ENDIF
 	;통상（陥落済み）
 	ELSE
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 불려나온 %조사처리(CALLNAME,"는")% 앞으로 할 일에 기대해 얼굴을 붉히고 있다.　　　　　　　　　　　　　　　　 ﾄ,| |　 ', """"　　　,!　　　　　　　 ｌ　ｌ　 ｌ　 ｌﾍ.|　　　　　　　　　
+			PRINTFORMW 불려나온 %조사처리(CALLNAME,"는")% 앞으로 할 일에 기대해 얼굴을 붉히고 있다.
 			CSTR:100 = 오늘도, 그… 할 건가?
 			CFLAG:808 = 7103;半裸３
 			CALL PRINT_AA_K1404
@@ -388,7 +388,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			CALL PRINT_AA_K1404
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-				PRINTFORMW 「あの……%CSTR:이인칭%、本日もどうか、よろしくお願い致します……」
+				PRINTFORMW 「저기……%CSTR:이인칭%、오늘도 아무쪼록、잘 부탁드립니다……」
 		ENDIF
 	ENDIF
 	CFLAG:202 = 5
@@ -453,7 +453,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 			CSTR:101 = 조금… 쉬게… 해주세요…%UNICODE(0x2665)%
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「あの……少し、休ませていただきますね……」
+			PRINTFORMW 「저기……조금、쉬도록 하겠습니다……」
 		ENDIF	
 		IF RAND:2 == 0
 			CFLAG:808 = 7106;全裸（事後）
@@ -474,7 +474,7 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 		CSTR:101 = 다음은 언제 불러 주시겠습니까%UNICODE(0x2665)%
 	;복종, 예속
 	ELSEIF TALENT:5 || TALENT:8
-		PRINTFORMW 「まだ……まだ……この%CSTR:일인칭%はお役に立ちます。」
+		PRINTFORMW 「아직……아직……이 %조사처리(CSTR:일인칭,"는")% 도움이 될 수 있습니다。」
 	ENDIF
 	CFLAG:808 = 7108;半裸（事後）
 	CALL PRINT_AA_K1404
@@ -691,7 +691,7 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:302 < 4 || FLAG:7 == 2)
 				PRINTFORMW 「후앙……%UNICODE(0x2665)%、%CSTR:이인칭%에게 핥아지면 승천해버려…♪」
 			ELSE
-				PRINTFORMW 「%CSTR:이인칭%이 그런 곳을 핥다니、굴욕이다…」
+				PRINTFORMW 「%조사처리(CSTR:이인칭,"가")% 그런 곳을 핥다니、굴욕이다…」
 			ENDIF
 			CFLAG:301 = 1
 		;2번째 이후
@@ -708,8 +708,8 @@ SELECTCASE SELECTCOM
 					CSTR:101 = %CSTR:이인칭%에게 핥아지면 승천해버려요…♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あっ、いけません！%CSTR:이인칭%、
-					CSTR:101 = そ、そのような所を…
+					CSTR:100 = 앗、안 돼요！%CSTR:이인칭%、
+					CSTR:101 = 그、그런 곳을…
 				ENDIF
 				CFLAG:808 = 10;クンニ
 				CALL PRINT_AA_K1404
@@ -794,7 +794,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 엉덩이！！찌릿찌릿 거려요%UNICODE(0x2665)%、엉덩잇！！！응하앙！！
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = いけません！%CSTR:이인칭%！、そこは…そこは…
+					CSTR:100 = 안 됩니다！%CSTR:이인칭%！、거기는…거기는…
 				ENDIF
 				CFLAG:808 = 40;アナル舐め
 				CALL PRINT_AA_K1404
@@ -856,7 +856,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 좀 더 엉덩이 괴롭혀서、느끼게 해주세요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = あの…%CSTR:이인칭%、そんなに触られると、%CSTR:일인칭%、……
+						CSTR:100 = 저기…%CSTR:이인칭%、그렇게 만지시면、%CSTR:일인칭%、……
 					ENDIF
 					CFLAG:808 = 51;アナル愛撫2
 					CALL PRINT_AA_K1404
@@ -1117,11 +1117,11 @@ SELECTCASE SELECTCOM
 				ELSE
 					;好感度高い
 					IF FAVORITE_1(TARGET) == ASSI && (CFLAG:306 & 512 || FLAG:7 == 2)
-						PRINTFORMW 「」
+						PRINTFORMW 
 						CFLAG:306 |= 512
 					;그 이외
 					ELSEIF CFLAG:306 & 256 || FLAG:7 == 2
-						PRINTFORMW 「」
+						PRINTFORMW 
 						CFLAG:306 |= 256
 					ENDIF
 				ENDIF
@@ -1298,7 +1298,7 @@ SELECTCASE SELECTCOM
 						ENDIF
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 「はい……%CSTR:이인칭%、ご命令通りに」
+						PRINTFORMW 「네……%CSTR:이인칭%、명령대로」
 					ENDIF
 					CFLAG:808 = 90;秘貝開帳
 					CALL PRINT_AA_K1404
@@ -1314,7 +1314,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 좀 더、%CSTR:일인칭%의 음란한 보○에 %CSTR:이인칭%의 정액… 부어주세요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 「はい……%CSTR:이인칭%、ご命令通りに」
+						PRINTFORMW 「네……%CSTR:이인칭%、명령대로」
 					ENDIF
 					CFLAG:808 = 92;秘貝開帳(with中出し済み）
 					CALL PRINT_AA_K1404
@@ -1360,7 +1360,7 @@ SELECTCASE SELECTCOM
 					CFLAG:808 = 101;가슴自慰2
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 今、濡らします。少し、お待ちください
+					CSTR:100 = 지금、적시겠습니다。잠시만、기다려주세요
 					CFLAG:808 = 100;가슴自慰
 				ENDIF
 				CALL PRINT_AA_K1404
@@ -1410,7 +1410,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 부디、봐주세요…
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 今、濡らします。少し、お待ちください。
+						CSTR:100 = 지금、적시겠습니다。잠시만、기다려주세요。
 					ENDIF
 					CFLAG:808 = 110;自慰(with下着)
 					CALL PRINT_AA_K1404
@@ -1428,7 +1428,7 @@ SELECTCASE SELECTCOM
 						CFLAG:808 = 116;自慰6
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 今、濡らします。少し、お待ちください
+						CSTR:100 = 지금、적시겠습니다。잠시만、기다려주세요
 						CFLAG:808 = 113;自慰3
 					ENDIF
 					CALL PRINT_AA_K1404
@@ -1527,7 +1527,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					CSTR:100 = %CSTR:일인칭%의 엉덩이、마음에 드는건가？
-					CSTR:101 = %CSTR:이인칭%라면、마음껏 만져도 괜찮으니까%UNICODE(0x2665)%
+					CSTR:101 = %조사처리(CSTR:이인칭,"라")%면、마음껏 만져도 괜찮으니까%UNICODE(0x2665)%
 					;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					CSTR:100 = %CSTR:일인칭%의 엉덩이、마음에 들으셨나요？
@@ -1589,7 +1589,7 @@ SELECTCASE SELECTCOM
 					CFLAG:808 = 200;キス3
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:101 = こんな素敵なキス、%CSTR:일인칭%嬉しいです。
+					CSTR:101 = 이런 멋진 키스、%CSTR:일인칭% 기쁩니다。
 					CFLAG:808 = 201;キス2
 				ENDIF
 				CALL PRINT_AA_K1404
@@ -1628,8 +1628,8 @@ SELECTCASE SELECTCOM
 					PRINTFORML 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「%CSTR:이인칭%…、あの、その…」
-					PRINTFORMW 「あの、ごめんなさい、……なんでも、ないです。」
+					PRINTFORMW 「%CSTR:이인칭%…、저기、그게…」
+					PRINTFORMW 「저기、죄송합니다、……아무것도、아닙니다。」
 				ENDIF
 				CFLAG:313 = 4
 			;굴복각인Lv3
@@ -1908,7 +1908,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 후앙、아앙…%UNICODE(0x2665)%　아읏～～%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あっ……び、びっくりしました……
+					CSTR:100 = 앗……깜、깜짝 놀랐습니다……
 				ENDIF
 				CFLAG:808 = 400;ローター
 				CALL PRINT_AA_K1404
@@ -1948,7 +1948,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앙！앙！앗～～～～～～%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「どいういうことでしょう…身体が……」
+					PRINTFORMW 「무슨 말씀이신지…몸이……」
 				ENDIF
 				CFLAG:323 = 4
 			;굴복각인Lv3
@@ -2075,7 +2075,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 후앙、아앙…%UNICODE(0x2665)%。아긋～～%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あっ%UNICODE(0x2665)%、あっ%UNICODE(0x2665)%
+					CSTR:100 = 앗%UNICODE(0x2665)%、앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 440;バイブ
 				CALL PRINT_AA_K1404
@@ -2125,7 +2125,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 드、들어왔어....엉덩이 보〇에 들어가 있어%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ%UNICODE(0x2665)%、あっ%UNICODE(0x2665)%
+					CSTR:100 = 응%UNICODE(0x2665)%、앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 451;アナルバイブ2
 				CALL PRINT_AA_K1404
@@ -2172,7 +2172,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 들어와…、들어오고 있어…%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ…%UNICODE(0x2665)%
+					CSTR:100 = 응…%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 460;アナルビーズ
 				CALL PRINT_AA_K1404
@@ -2389,7 +2389,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 음란무신의 보○…%CSTR:이인칭%의 자○로 휘어저주세요…
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = んっ……奥まで……入って……
+						CSTR:100 = 응……안쪽까지……들어가서……
 					ENDIF
 					CFLAG:808 = 600;正常位
 					CALL PRINT_AA_K1404
@@ -2411,7 +2411,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 대단해에、기분 좋아요오%UNICODE(0x2665)%%UNICODE(0x2665)%！！
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = もっと、もっと…激しく、壊れるくらいに…お願いします…
+					CSTR:100 = 좀 더、좀 더…격렬하게、부서질 정도로…부탁드립니다…
 				ENDIF
 				CFLAG:808 = 601;正常位
 				CALL PRINT_AA_K1404
@@ -2509,7 +2509,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 자○ 기분 좋아요%UNICODE(0x2665)%
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = こんな%CSTR:일인칭%でも、%CSTR:이인칭%のお役に立てて……本当に嬉しいです
+						CSTR:100 = 이런 %조사처리(CSTR:일인칭,"라")%도、%CSTR:이인칭%의 도움이 될 수 있어서……정말 기쁩니다
 					ENDIF
 					CFLAG:808 = 610;後背位(with縄）
 					CALL PRINT_AA_K1404
@@ -2527,7 +2527,7 @@ SELECTCASE SELECTCOM
 							CSTR:101 = %CSTR:이인칭%♪　제 보○로 기분 좋아져주세요♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = こんな%CSTR:일인칭%でも、%CSTR:이인칭%のお役に立てて……本当に嬉しいです
+							CSTR:100 = 이런 %조사처리(CSTR:일인칭,"라")%도、%CSTR:이인칭%의 도움이 될 수 있어서……정말 기쁩니다
 						ENDIF
 					;挿入済み
 					ELSE
@@ -2539,7 +2539,7 @@ SELECTCASE SELECTCOM
 							CSTR:100 = 응아앗%UNICODE(0x2665)%　이 모습…부끄러워서 느껴버려요…
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = %CSTR:이인칭%、ご存分に…お願いします。
+							CSTR:100 = %CSTR:이인칭%、마음껏…부탁드립니다。
 						ENDIF
 					ENDIF
 					;AAをランダムで表示
@@ -2563,7 +2563,7 @@ SELECTCASE SELECTCOM
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
 						CSTR:100 = 앗 앙゛앙゛앙゛앙゛앙゛앙゛
-						CSTR:101 = %CSTR:이인칭%、壊して…、%CSTR:일인칭%を壊してください%UNICODE(0x2665)%%UNICODE(0x2665)%
+						CSTR:101 = %CSTR:이인칭%、부서줘…、%조사처리(CSTR:일인칭,"를")% 부숴주세요%UNICODE(0x2665)%%UNICODE(0x2665)%
 					ENDIF
 					;AA選択
 					;服を着ている
@@ -2648,7 +2648,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:일인칭%의 엉덩이 보〇…%CSTR:이인칭%의 자○ 전용으로  조교해주세요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = %CSTR:이인칭%…そちらは…
+						CSTR:100 = %CSTR:이인칭%…그쪽은…
 					ENDIF	
 					CFLAG:808 = 620;正常位アナル
 					CALL PRINT_AA_K1404
@@ -2665,7 +2665,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 엉덩이 보○！、기분 좋아아%UNICODE(0x2665)%%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ%UNICODE(0x2665)%
+					CSTR:100 = 응%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 621;正常位アナル2
 				CALL PRINT_AA_K1404
@@ -2737,7 +2737,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:일인칭%의 엉덩이 보○、%CSTR:이인칭%의 자○를 삼키고 있어요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = あっ%UNICODE(0x2665)%
+						CSTR:100 = 앗%UNICODE(0x2665)%
 					ENDIF
 					;AA選択
 					IF RAND:2 == 0
@@ -2757,7 +2757,7 @@ SELECTCASE SELECTCOM
 						CSTR:100 = 자○%UNICODE(0x2665)%　　대단해에%UNICODE(0x2665)%
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = んんっ%UNICODE(0x2665)%
+						CSTR:100 = 응읏%UNICODE(0x2665)%
 					ENDIF
 					CFLAG:808 = 632;後背位アナル3
 					CALL PRINT_AA_K1404
@@ -2777,7 +2777,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 가、가버려요…엉덩이 보○…너무 기분 좋아서…%CSTR:일인칭%…가버려요오%UNICODE(0x2665)%%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んあぁ…%UNICODE(0x2665)%
+					CSTR:100 = 응아아…%UNICODE(0x2665)%
 				ENDIF
 				IF RAND:3 == 0
 					CFLAG:808 = 633;後背位アナル（側面）
@@ -2923,10 +2923,10 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 하…앙、응긋…、커다란게 들어오고 있어%UNICODE(0x2665)%
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CSTR:100 = 핫！아앗！！%CSTR:이인칭%、%CSTR:이인칭%ぁ！%UNICODE(0x2665)%
+					CSTR:100 = 핫！아앗！！%CSTR:이인칭%、%CSTR:이인칭%！%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 行かせて頂います
+					CSTR:100 = 가겠습니다
 				ELSE
 					PRINTFORMW 「%CSTR:일인칭%에게 봉사를 강요하다니…、이 무슨 비겁한 남자인가、%조사처리(CSTR:이인칭,"는")% ！」
 					PRINTFORMW %조사처리(CALLNAME,"는")% %조사처리(CALLNAME:MASTER,"를")% 노려보면서 허리를 움직였다。
@@ -2951,7 +2951,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:이인칭%의 자○、%CSTR:일인칭%의 포로로 해드릴께요…♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 行かせていただきます
+						CSTR:100 = 가버리겠습니다
 					ENDIF
 					CFLAG:808 = 661;騎乗位2
 				;挿入済みの場合
@@ -2966,7 +2966,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 후훗…말을 타는건 특기랍니다♪ %CSTR:이인칭%의 자○、%CSTR:일인칭%의 포로로 해드릴께요…♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 乗らせていただきます
+						CSTR:100 = 올라타겠습니다
 					ENDIF
 					CFLAG:808 = 662;騎乗位3
 				ENDIF
@@ -2985,7 +2985,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 조、조아요…。　보○ 기분조아요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あっ%UNICODE(0x2665)%…ああっ%UNICODE(0x2665)%
+					CSTR:100 = 앗%UNICODE(0x2665)%…아앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 663;騎乗位4
 				CALL PRINT_AA_K1404
@@ -3000,7 +3000,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 이제…%CSTR:이인칭%의 자○만 말고는、아무것도 생각할 수 없어…！
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ%UNICODE(0x2665)%…んあっ%UNICODE(0x2665)%
+					CSTR:100 = 응%UNICODE(0x2665)%…응앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 664;騎乗位5
 				CALL PRINT_AA_K1404
@@ -3049,9 +3049,9 @@ SELECTCASE SELECTCOM
 				CSTR:100 = 엉덩이가、벌어져버려요…
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				CSTR:100 = こちらですね…
+				CSTR:100 = 이쪽이네요…
 			ELSE
-				CSTR:100 = %CSTR:이인칭%…っ。%CSTR:일인칭%의 존엄을 빼앗는것으로 모자라
+				CSTR:100 = %CSTR:이인칭%…큿。%CSTR:일인칭%의 존엄을 빼앗는것으로 모자라
 				CSTR:101 = 더욱 더럽히겠다는 것이더냐…
 			ENDIF
 			CFLAG:808 = 630;後背位アナル
@@ -3073,7 +3073,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:일인칭%의 엉덩이 보○、%CSTR:이인칭%의 자○를 삼키고 있어요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = いきます！
+						CSTR:100 = 갑니다！
 					ENDIF
 					CFLAG:808 = 630;後背位アナル
 					CALL PRINT_AA_K1404
@@ -3093,7 +3093,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 상하게 되버려…%UNICODE(0x2665)%　엉덩이가 이상해져버려요…%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あはっ%UNICODE(0x2665)%、ああ%UNICODE(0x2665)%
+					CSTR:100 = 아핫%UNICODE(0x2665)%、아아%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 670;騎乗位アナル
 				CALL PRINT_AA_K1404
@@ -3172,7 +3172,7 @@ SELECTCASE SELECTCOM
 					CALL PRINT_AA_K1404
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ…%CSTR:이인칭%
+					CSTR:100 = 응…%CSTR:이인칭%
 					CFLAG:808 = 681;対面座位（側面）
 					CALL PRINT_AA_K1404
 				ELSE
@@ -3206,7 +3206,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:일인칭%의 야한 보○♪、%CSTR:이인칭%의 자○로 벌을 주세요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = いきます%UNICODE(0x2665)%
+						CSTR:100 = 갑니다%UNICODE(0x2665)%
 					ENDIF
 				ELSE
 					PRINTFORMW 
@@ -3230,7 +3230,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 더는、앙대……머리……이상해저버려……%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あん%UNICODE(0x2665)%、あっ%UNICODE(0x2665)%
+					CSTR:100 = 앙%UNICODE(0x2665)%、앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 681;対面座位（側面）
 				CALL PRINT_AA_K1404
@@ -3292,7 +3292,7 @@ SELECTCASE SELECTCOM
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
 					CSTR:100 = 아앙…、응…、그런데、불안감이 전혀 없는건、
-					CSTR:101 = 상대가 %CSTR:이인칭%라서 그런거겠지…
+					CSTR:101 = 상대가 %조사처리(CSTR:이인칭,"라")%서 그런거겠지…
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -3343,10 +3343,10 @@ SELECTCASE SELECTCOM
 							CSTR:100 = 상대가 %CSTR:이인칭%이기 때문이다…%UNICODE(0x2665)%
 						;음란, 창부
 						ELSEIF TALENT:4 || TALENT:7
-							CSTR:100 = 今度は後ろからですか♪
+							CSTR:100 = 이번에는 뒤에서부터 입니까♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = 来てください…
+							CSTR:100 = 와주세요…
 						ENDIF
 					CFLAG:808 = 692;背面座位（正面2)
 					ENDIF
@@ -3420,7 +3420,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = %CSTR:일인칭%의 엉덩이 보○、%CSTR:이인칭%의 자○ 모양으로 만들어주세요%UNICODE(0x2665)%
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = もっと、%CSTR:일인칭%が壊れるくらいに、お願いします
+						CSTR:100 = 좀 더、%조사처리(CSTR:일인칭,"가")% 부서질 정도로、부탁드립니다
 					ENDIF
 					CFLAG:808 = 700;対面座位アナル
 					CALL PRINT_AA_K1404
@@ -3440,7 +3440,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 망가져버려！　엉덩이 보○ 망가져버려！%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = ああっ%UNICODE(0x2665)%
+					CSTR:100 = 아앗%UNICODE(0x2665)%
 				ENDIF
 				CFLAG:808 = 701;対面座位アナル（側面）
 				CALL PRINT_AA_K1404
@@ -3645,7 +3645,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앙대！！%CSTR:이인칭%！！안대에！！」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「んっ%UNICODE(0x2665)%」
+					PRINTFORMW 「응%UNICODE(0x2665)%」
 				ENDIF
 				CFLAG:421 = 4
 			;굴복각인Lv3
@@ -3751,8 +3751,8 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 기분 좋으신가요 %CSTR:이인칭%♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = こんな%CSTR:일인칭%でも、%CSTR:이인칭%の役に立てて……
-					CSTR:101 = 本当に嬉しいです
+					CSTR:100 = 이런 %조사처리(CSTR:일인칭,"라")%도、%CSTR:이인칭%의 도움이 되서……
+					CSTR:101 = 정말 기쁩니다
 				ENDIF
 				CFLAG:808 = 800;手淫
 				CALL PRINT_AA_K1404
@@ -3768,7 +3768,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 잔뜩 내주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = どうぞ…ご自由に出してください
+					CSTR:100 = 부디…원하시는대로 내 주십시오
 				ENDIF
 				CFLAG:808 = 801;手淫2
 				CALL PRINT_AA_K1404
@@ -3826,7 +3826,7 @@ SELECTCASE SELECTCOM
 						CSTR:100 = %CSTR:이인칭%…깨끗하게 해드리겠습니다♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 舐めさせていただきます…
+						CSTR:100 = 핥아 드리겠습니다…
 					ENDIF
 					CFLAG:808 = 810;フェラ
 					CALL PRINT_AA_K1404
@@ -3856,7 +3856,7 @@ SELECTCASE SELECTCOM
 							CSTR:100 = ……읏…어서 내주세요♪、%CSTR:이인칭%의 정액、마시게 해주세요♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = お任せを
+							CSTR:100 = 맡겨주십시요
 						ENDIF
 						CFLAG:808 = 814;フェラ4
 						CALL PRINT_AA_K1404
@@ -3910,7 +3910,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 잔뜩 내주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = お任せください
+					CSTR:100 = 맡겨만 주십시오
 				ENDIF
 				;AAランダム表示
 				IF RAND:2 == 0
@@ -3970,7 +3970,7 @@ SELECTCASE SELECTCOM
 					CFLAG:808 = 831;素股2
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 喜んで…%CSTR:이인칭%
+					CSTR:100 = 기꺼이…%CSTR:이인칭%
 				ENDIF
 				CALL PRINT_AA_K1404
 				CFLAG:347 = 4
@@ -4057,7 +4057,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 기분 좋으신가요？　%CSTR:이인칭%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = お任せください
+					CSTR:100 = 맡겨만 주십시오
 				ENDIF
 				CFLAG:808 = 850;足扱き
 				CALL PRINT_AA_K1404
@@ -4126,8 +4126,8 @@ SELECTCASE SELECTCOM
 				CSTR:100 = 넣어.....？、이렇게인가？
 			;未陥落
 			ELSE
-				CSTR:100 = く…っ　%CSTR:일인칭%の体は
-				CSTR:101 = %CSTR:이인칭%を喜ばせるためにあるのではない…っ
+				CSTR:100 = 크…읏　%CSTR:일인칭%의 몸은
+				CSTR:101 = %조사처리(CSTR:이인칭,"를")% 기쁘게 하기 위해서 있는 것은 아니다…읏
 			ENDIF
 			CFLAG:808 = 870;縦パイズリ
 			CALL PRINT_AA_K1404	
@@ -4145,7 +4145,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = %CSTR:일인칭%의 가슴 보○…기분 좋으신가요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = %CSTR:이인칭%のご命令のままに
+					CSTR:100 = %CSTR:이인칭%의 명령하신대로
 				ENDIF
 				CFLAG:808 = 870;縦パイズリ
 				CALL PRINT_AA_K1404
@@ -4194,7 +4194,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = %CSTR:이인칭%의 맛과 냄새……굉장해요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 全力で事に当たります。お任せを
+					CSTR:100 = 全力で事に当たります。맡겨주십시요
 				ENDIF
 				CFLAG:808 = 880;パイズリフェラ
 				CALL PRINT_AA_K1404
@@ -4209,7 +4209,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = %CSTR:이인칭%의 쓰고 뜨거운 정액、마시게 해주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = はぶっ…むちゅっ…♪
+					CSTR:100 = 하븟…므쥿…♪
 				ENDIF
 				CFLAG:808 = 881;パイズリフェラ2
 				CALL PRINT_AA_K1404
@@ -4304,7 +4304,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앗%UNICODE(0x2665)%…좀 더…해 줘%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「아팟…でも、まだ！」
+					PRINTFORMW 「아팟…하지만、아직！」
 				ENDIF
 				CFLAG:354 = 4
 			;굴복각인Lv3
@@ -4339,7 +4339,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앗%UNICODE(0x2665)%…좀 더…해 줘%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「あっ…でも、まだ！」
+					PRINTFORMW 「앗…하지만、아직！」
 				ENDIF
 				CFLAG:355 = 4
 			;굴복각인Lv3
@@ -4376,7 +4376,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「앗%UNICODE(0x2665)%…좀 더…해 줘%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「あいっ…でも、まだ！」
+					PRINTFORMW 「아잇…하지만、아직！」
 				ENDIF
 				CFLAG:356 = 4
 			;굴복각인Lv3
@@ -4463,7 +4463,7 @@ SELECTCASE SELECTCOM
 			IF CFLAG:359 == 0
 				;함락완료
 				IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:359 < 4 || FLAG:7 == 2)
-					PRINTFORMW 「視界を閉ざすのか....、何かの訓練なのか？」
+					PRINTFORMW 「시야를 가리는 것인가....、무슨 훈련인가？」
 				ELSE
 					PRINTFORMW 「아、안보여、%CSTR:일인칭%의 앞을 가리고서、뭘 할 생각이냐…」
 				ENDIF
@@ -4480,7 +4480,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:이인칭%、눈가리개한 %조사처리(CSTR:일인칭,"는")% 뭘 하게 되는 건가요♪」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 「だ、大丈夫…？」
+						PRINTFORMW 「괘、괜찮아…？」
 					ENDIF
 					CFLAG:359 = 4
 				;굴복각인Lv3
@@ -4635,13 +4635,13 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:366 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					CSTR:100 = 二人で気持ちよくしてやるからな%UNICODE(0x2665)%
+					CSTR:100 = 둘이서 기분좋게 해줄게%UNICODE(0x2665)%
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CSTR:100 = 二人でオチ〇ポ舐めちゃいます%UNICODE(0x2665)%
+					CSTR:100 = 둘이서 자〇 핥아드릴게요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 共にいかせてい頂きます
+					CSTR:100 = 함께 가겠습니다
 				ENDIF
 				CFLAG:808 = 1240;ダブルフェラ
 				CALL PRINT_AA_K1404
@@ -4678,7 +4678,7 @@ SELECTCASE SELECTCOM
 					CSTR:100 = 기분 좋으신가요？%CSTR:이인칭%？
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = いかがでしょうか？
+					CSTR:100 = 어떠신가요？
 				ENDIF
 				CFLAG:808 = 1250;ダブルパイズリ
 				CALL PRINT_AA_K1404
@@ -4756,11 +4756,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:370 == 0
-			PRINTFORMW 「まだ…いけます…」
+			PRINTFORMW 「아직…할 수 있습니다…」
 			CFLAG:370 = 1
 		;2번째 이후
 		ELSEIF CFLAG:370 < 2 || FLAG:7 == 2
-			PRINTFORMW 「まだ…いけます…」
+			PRINTFORMW 「아직…할 수 있습니다…」
 			CFLAG:370 = 2
 		ENDIF
 
@@ -4771,11 +4771,11 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:371 == 0
-			PRINTFORMW 「これ…からです…」
+			PRINTFORMW 「이제…부터입니다…」
 			CFLAG:371 = 1
 		;2번째 이후
 		ELSEIF CFLAG:371 < 2 || FLAG:7 == 2
-			PRINTFORMW 「これ…からです…」
+			PRINTFORMW 「이제…부터입니다…」
 			CFLAG:371 = 2
 		ENDIF
 
@@ -4790,7 +4790,7 @@ SELECTCASE SELECTCOM
 			CFLAG:372 = 1
 		;2번째 이후
 		ELSEIF CFLAG:372 < 2 || FLAG:7 == 2
-			PRINTFORMW 「あっ…あっ…」
+			PRINTFORMW 「앗…앗…」
 			CFLAG:372 = 2
 		ENDIF
 
@@ -4819,7 +4819,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 봐주세요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = ご覧ください…
+						CSTR:100 = 봐주세요…
 					ENDIF
 					CFLAG:808 = 1440;방뇨（野外）
 					CALL PRINT_AA_K1404
@@ -4834,7 +4834,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 변태 여자가 오줌을 싸는 모습…♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = ご覧ください…
+						CSTR:100 = 봐주세요…
 					ENDIF
 					CFLAG:808 = 1441;방뇨
 					CALL PRINT_AA_K1404
@@ -4897,7 +4897,7 @@ SELECTCASE SELECTCOM
 						CSTR:100 = 읏…엉덩이에 들어오는걸 알 수 있어요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = んっ…お尻に入って…
+						CSTR:100 = 응…엉덩이에 들어가서…
 					ENDIF
 					CFLAG:808 =1460;浣腸
 					CALL PRINT_AA_K1404
@@ -4950,7 +4950,7 @@ SELECTCASE SELECTCOM
 				CFLAG:378 = 1
 			;2번째 이후
 			ELSEIF CFLAG:378 < 2 || FLAG:7 == 2
-				PRINTFORMW 「あ”っ…あ”あ”…」
+				PRINTFORMW 「아”앗…아”아”…」
 				CFLAG:378 = 2
 			ENDIF
 		ELSE
@@ -4972,7 +4972,7 @@ SELECTCASE SELECTCOM
 				CFLAG:379 = 1
 			;2번째 이후
 			ELSEIF CFLAG:379 < 2 || FLAG:7 == 2
-				PRINTFORMW 「か”あ”っ…あ”あ”…」
+				PRINTFORMW 「카”아”앗…아”아”…」
 				CFLAG:379 = 2
 			ENDIF
 		ELSE
@@ -5024,7 +5024,7 @@ SELECTCASE SELECTCOM
 							CSTR:101 = 그 미끈거리는 걸로 %조사처리(CSTR:일인칭,"를")% 기분 좋게 해주세요♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = はい…ご随意に…
+							CSTR:100 = 네…원하시는대로…
 						ENDIF
 					;触手経験低い
 					ELSE
@@ -5038,7 +5038,7 @@ SELECTCASE SELECTCOM
 							CSTR:101 = 싫습니다
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = ひっ…
+							CSTR:100 = 힛…
 						ENDIF
 					ENDIF
 					CFLAG:808 = 1600;触手召喚
@@ -5395,7 +5395,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「身体が…火照ってきてしまいました…」
+					PRINTFORMW 「몸이…뜨겁게 달아올랐습니다…」
 				ENDIF
 				CFLAG:393 = 4
 			;굴복각인Lv3
@@ -5440,7 +5440,7 @@ SELECTCASE SELECTCOM
 							CSTR:101 = %CSTR:일인칭%의 상스러운 모습、기록해주세요♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = はい…どうぞお撮りください…
+							CSTR:100 = 네…부디 찍어주세요…
 						ENDIF
 						CFLAG:808 = 1830;ビデオカメラ(with利尿剤）
 					;利尿剤使用していない
@@ -5454,7 +5454,7 @@ SELECTCASE SELECTCOM
 							CSTR:101 = %CSTR:일인칭%의 상스러운 모습、기록해주세요♪
 						;복종, 예속
 						ELSEIF TALENT:5 || TALENT:8
-							CSTR:100 = はい…どうぞお撮りください…
+							CSTR:100 = 네…부디 찍어주세요…
 						ENDIF
 						CFLAG:808 = 1831;ビデオカメラ
 					ENDIF
@@ -5500,7 +5500,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「%CSTR:이인칭%…♪、%조사처리(CSTR:일인칭,"를")% 산책에 데려와 주셔서 감사합니다♪」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 「出撃いたします！」
+						PRINTFORMW 「출격하겠습니다！」
 					ENDIF
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3 && (CFLAG:396 < 3 || FLAG:7 == 2)
@@ -5620,7 +5620,7 @@ SELECTCASE SELECTCOM
 						CSTR:101 = 딱 좋은 온도네요♪
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						CSTR:100 = 助かります
+						CSTR:100 = 도움을 받았습니다
 					ENDIF
 				CFLAG:808 = 1870;お風呂
 				CALL PRINT_AA_K1404
@@ -5820,7 +5820,7 @@ SELECTCASE SELECTCOM
 			IF ASSIPLAY
 				IF FAVORITE_1(TARGET) == ASSI
 					PRINTFORMW 「%CSTR:일인칭%의 이런 모습이 들켜도 좋은건가」
-					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %CALLNAME:ASSI%로도 충분한데…」
+					PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %조사처리(CALLNAME:ASSI,"로")%도 충분한데…」
 				ELSEIF TALENT:음란 || TALENT:창부
 					PRINTFORMW 「%CSTR:일인칭%의 야한 모습…남들에게 보여주고 싶은 건가」
 					PRINTFORMW 「아아……조금…기다려져」
@@ -6006,7 +6006,7 @@ SELECTCASE SELECTCOM
 				IF CFLAG:매춘인기 >= 100
 					IF FAVORITE_1(TARGET) == ASSI
 						PRINTFORMW 「응…하앙%UNICODE(0x2665)%……아아앙！！」
-						PRINTFORMW 「%조사처리(CALLNAME:ASSI,"는")%…히앙%UNICODE(0x2665)%……이 녀석들이…아읏%UNICODE(0x2665)%……%CSTR:11%를(을) 마음대로 하도록 둬도…으응%UNICODE(0x2665)%…괜찮은가」
+						PRINTFORMW 「%조사처리(CALLNAME:ASSI,"는")%…히앙%UNICODE(0x2665)%……이 녀석들이…아읏%UNICODE(0x2665)%……%조사처리(CSTR:11,"를")% 마음대로 하도록 둬도…으응%UNICODE(0x2665)%…괜찮은가」
 						IF (위험일(TARGET) == 1 || 위험일(TARGET) == 3) && CFLAG:109 >= 1
 							PRINTFORMW 「수정 준비중인…크흥%UNICODE(0x2665)%……변태 보○지에…히읏%UNICODE(0x2665)%질 안에 내줘……아앙%UNICODE(0x2665)%…아버지가 %CALLNAME:ASSI% 이외의 아기…햐앙%UNICODE(0x2665)%임신…해버려」
 						ELSEIF (위험일(TARGET) == 1 || 위험일(TARGET) == 3)
@@ -6198,7 +6198,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = (%CSTR:이인칭%、너무 잘해서 느껴버려…、집중 못해버려%UNICODE(0x2665)%）
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あの…上手く…できているでしょうか？
+					CSTR:100 = 저기…잘…되고 있는것인가요？
 				ENDIF
 				CFLAG:808 = 5010;シックスナイン
 				CALL PRINT_AA_K1404
@@ -6249,7 +6249,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 머리 이상해져버려%UNICODE(0x2665)%…이상해져버려%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = あ、頭が…、おかしくっ…なります
+					CSTR:100 = 아、머리가…、이상해져…버립니다
 				ENDIF
 				IF RAND:2 == 0
 					CFLAG:808 = 5030;Gスポ刺激
@@ -6307,7 +6307,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 전부 보여져서…부끄러워요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = はい…、存分にご覧ください…
+					CSTR:100 = 네…、마음껏 봐 주십시오…
 				ENDIF
 				CFLAG:808 = 5040;乱れ牡丹
 				CALL PRINT_AA_K1404
@@ -6358,7 +6358,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 자궁에 잔뜩 부어주세요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = いきます！
+					CSTR:100 = 갑니다！
 				ENDIF
 				CFLAG:808 = 5050;騎乗乳房自慰
 				CALL PRINT_AA_K1404
@@ -6405,7 +6405,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「%CSTR:일인칭%의 보○에%UNICODE(0x2665)%　잔뜩%UNICODE(0x2665)% 잔뜩%UNICODE(0x2665)%」
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「あっ、ああっ%UNICODE(0x2665)%」
+					PRINTFORMW 「앗、아앗%UNICODE(0x2665)%」
 				ENDIF
 				CFLAG:413 = 4
 			;굴복각인Lv3
@@ -6457,7 +6457,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 음란무신의 아기 만드는곳%UNICODE(0x2665)%%CSTR:이인칭%에게 관철되고 있어요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = （あ、頭が…白く…%UNICODE(0x2665)%）
+					CSTR:100 = （아、머리가…새하얗게…%UNICODE(0x2665)%）
 				ENDIF
 				CFLAG:808 = 5072;挿入子宮口責め(with騎乗位）
 				CALL PRINT_AA_K1404
@@ -6540,7 +6540,7 @@ SELECTCASE SELECTCOM
 						PRINTFORMW 「봐줘어%UNICODE(0x2665)% 소처럼 밀크 쨔는것 봐줘어%UNICODE(0x2665)%」
 					;복종, 예속
 					ELSEIF TALENT:5 || TALENT:8
-						PRINTFORMW 「どうぞ、お飲みください…」
+						PRINTFORMW 「부디、마셔주세요…」
 					ENDIF
 					CFLAG:416 |= 8
 				;굴복각인Lv3
@@ -6606,11 +6606,11 @@ SELECTCASE SELECTCOM
 				ELSE
 					;好感度高い
 					IF FAVORITE_1(TARGET) == ASSI && (CFLAG:416 & 512 || FLAG:7 == 2)
-						PRINTFORMW 「」
+						PRINTFORMW 
 						CFLAG:416 |= 512
 					;그 이외
 					ELSEIF CFLAG:416 & 256 || FLAG:7 == 2
-						PRINTFORMW 「」
+						PRINTFORMW 
 						CFLAG:416 |= 256
 					ENDIF
 				ENDIF
@@ -6672,7 +6672,7 @@ SELECTCASE SELECTCOM
 					PRINTFORMW 「이、이대로…안에…%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「くぅ…、んはぁ…%UNICODE(0x2665)%」
+					PRINTFORMW 「크으…、응하아…%UNICODE(0x2665)%」
 				ENDIF
 				CFLAG:419 = 4
 			;굴복각인Lv3
@@ -6720,7 +6720,7 @@ SELECTCASE SELECTCOM
 					CSTR:101 = 좀 더%UNICODE(0x2665)%　좀 더 해줘%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = %CSTR:일인칭%の恥ずかしいところ…ご覧ください…
+					CSTR:100 = %CSTR:일인칭%의 부끄러운 곳…봐주세요…
 				ENDIF
 				CFLAG:808 = 5150;アナル乱れ牡丹
 				CALL PRINT_AA_K1404
@@ -7057,7 +7057,7 @@ IF TFLAG:0 > 0
 				CSTR:101 = 좀 더어…%UNICODE(0x2665)%%UNICODE(0x2665)%
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				CSTR:100 = んっ…
+				CSTR:100 = 응…
 			ENDIF
 			CFLAG:808 = 8005;사정（飲み込み）
 			CALL PRINT_AA_K1404
@@ -7093,13 +7093,13 @@ IF TFLAG:1 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:234 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			PRINTFORMW 「%CSTR:일인칭%の手は気持ちよかったか%UNICODE(0x2665)%」
+			PRINTFORMW 「%CSTR:일인칭%의 손은 기분 좋았는가%UNICODE(0x2665)%」
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			PRINTFORMW 「%CSTR:일인칭%の手で気持ちよくなって頂けましたか%UNICODE(0x2665)%」
+			PRINTFORMW 「%CSTR:일인칭%의 손으로 기분이 좋아지셨습니까%UNICODE(0x2665)%」
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			PRINTFORMW 「気持ちよくなっていただき、ありがとうございます」
+			PRINTFORMW 「기분이 좋아져 주셔서、감사드립니다」
 		ENDIF
 		CFLAG:234 = 4
 	;굴복각인Lv3
@@ -7122,13 +7122,13 @@ IF TFLAG:34 > 0
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:235 < 4 || FLAG:7 == 2)
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			CSTR:100 = %CSTR:일인칭%の胸は気持ちよかったか%UNICODE(0x2665)%
+			CSTR:100 = %CSTR:일인칭%의 가슴은 기분 좋았는가%UNICODE(0x2665)%
 		;음란, 창부
 		ELSEIF TALENT:4 || TALENT:7
-			CSTR:100 = %CSTR:일인칭%の胸で気持ちよくなって頂けましたか%UNICODE(0x2665)%
+			CSTR:100 = %CSTR:일인칭%의 가슴으로 기분이 좋아지셨습니까%UNICODE(0x2665)%
 		;복종, 예속
 		ELSEIF TALENT:5 || TALENT:8
-			CSTR:100 = 気持ちよくなっていただき、ありがとうございます
+			CSTR:100 = 기분이 좋아져 주셔서、감사드립니다
 		ENDIF
 		CFLAG:808 = 8001;;사정（胸）
 		CALL PRINT_AA_K1404
@@ -7204,11 +7204,11 @@ IF TFLAG:2 > 0
 				CFLAG:808 = 7107
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
-				CSTR:100 = もっともっと、%CSTR:일인칭%で気持ちよくなってくださいね
+				CSTR:100 = 좀 더 좀 더、%조사처리(CSTR:일인칭,"로")% 기분이 좋아져주세요
 				CFLAG:808 = 7102
 			;복종, 예속
 			ELSEIF TALENT:5 || TALENT:8
-				CSTR:100 = お役に立てて、嬉しいです
+				CSTR:100 = 도움이 되어서、기쁩니다
 			ENDIF
 			CALL PRINT_AA_K1404
 			CFLAG:237 = 4
@@ -7426,7 +7426,7 @@ IF TFLAG:2 > 0
 				IF RAND:2 == 0
 					CFLAG:808 = 8010;사정（正常位）
 					CALL PRINT_AA_K1404
-					PRINTFORMW さらに奥まで突き刺し、%CALLNAME%の胎に射精を叩き込んだ。
+					PRINTFORMW 더욱 깊이 찔러넣어、%CALLNAME%의 자궁에 사정을 때려박았다。
 					CFLAG:808 = 8011;사정（正常位2）
 				ELSE
 					CFLAG:808 = 8012;사정（正常位3）
@@ -7447,7 +7447,7 @@ IF TFLAG:2 > 0
 				CALL PRINT_AA_K1404
 			;対面座位
 			ELSEIF SELECTCOM == 68
-				CSTR:100 = （シアワセすぎて…頭…バカになってしまう…%UNICODE(0x2665)%）
+				CSTR:100 = （너무 행복해서…머리…바보가 되어버려…%UNICODE(0x2665)%）
 				CFLAG:808 = 8017;사정（対面座位）
 				CALL PRINT_AA_K1404
 			;背面座位
@@ -7789,14 +7789,14 @@ IF TFLAG:29 > 1
 		ELSE
 			SELECTCASE RAND:4
 				CASE 0
-					CSTR:100 = らめぇ♪　イッれる、%CSTR:일인칭%、イッれる！！
+					CSTR:100 = 앙대에♪　갸버려、%CSTR:일인칭%、갸버려！！
 				CASE 1
-					CSTR:100 = あ…%UNICODE(0x2665)%はあぁ%UNICODE(0x2665)%　んーーひぃ%UNICODE(0x2665)%%UNICODE(0x2665)%
-					CSTR:101 = もうイッてる！！　イッてるからああああ！！
+					CSTR:100 = 아…%UNICODE(0x2665)%하앙%UNICODE(0x2665)%　응ーー히잇%UNICODE(0x2665)%%UNICODE(0x2665)%
+					CSTR:101 = 이제 가버려！！　가버리니까아아아아！！
 				CASE 2
-					CSTR:100 = んっ…んっ…ぁ…イクっ…イっちゃう…っ
+					CSTR:100 = 응…응…아…간닷…간다앗…
 				CASE 3
-					CSTR:100 = あっーー%UNICODE(0x2665)%　ひっーーぐぅうう%UNICODE(0x2665)%%UNICODE(0x2665)%
+					CSTR:100 = 앗ーー%UNICODE(0x2665)%　가ーー버려어어어%UNICODE(0x2665)%%UNICODE(0x2665)%
 			ENDSELECT
 		ENDIF
 		CFLAG:246 = 4
@@ -8329,7 +8329,7 @@ SELECTCASE TFLAG:13
 					CSTR:100 = 응…♪、기분 좋습니까 %CSTR:이인칭%♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					PRINTFORMW 「今朝は%CSTR:일인칭%が、お側に控えさせていただきます」
+					PRINTFORMW 「오늘 아침은 %조사처리(CSTR:일인칭,"가")%、곁에 있겠습니다」
 				ENDIF
 			CFLAG:808 = 810;フェラ
 			CALL PRINT_AA_K1404
@@ -8352,8 +8352,8 @@ SELECTCASE TFLAG:13
 					CSTR:101 = 잔뜩 내주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = この%CSTR:일인칭%が処理しておきますので、
-					CSTR:101 = ゆっくりお休みください
+					CSTR:100 = 이 %조사처리(CSTR:일인칭,"가")% 처리해두겠으니、
+					CSTR:101 = 편히 주무십시요
 				ENDIF
 				CFLAG:808 = 820;パイズリ
 				CALL PRINT_AA_K1404
@@ -8380,7 +8380,7 @@ SELECTCASE TFLAG:13
 					CSTR:101 = 좀 더…좀 더 %CSTR:일인칭% 보○ 기분 좋게 해주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 朝です！総員起こし！
+					CSTR:100 = 아침이니다！전원 기상！
 				ENDIF
 				;AAランダム表示
 				IF RAND:2== 0
@@ -8407,7 +8407,7 @@ SELECTCASE TFLAG:13
 					CSTR:101 = 좀 더…좀 더 엉덩이 보○ 기분 좋게 해주세요♪
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = 朝です！総員起こし！
+					CSTR:100 = 아침이니다！전원 기상！
 				ENDIF
 				;AAランダム表示
 				IF RAND:2== 0
@@ -8464,7 +8464,7 @@ SELECTCASE TFLAG:13
 					;노래 부르면서인지 아닌지
 					SIF (TALENT:25 || TALENT:28) && ABL:14 >= 2
 						PRINTFORMW 「♪～～♪♪、♪～～」
-					PRINTFORMW 「あ、%CSTR:이인칭%。朝食準備はこちらに。お味噌汁です」
+					PRINTFORMW 「아、%CSTR:이인칭%。아침 식사 준비는 이쪽에。된장찌개입니다」
 				ENDIF
 				CFLAG:263 = 1
 			ENDIF
@@ -8672,7 +8672,7 @@ SELECTCASE TFLAG:13
 					CSTR:100 = 야한 %CSTR:일인칭%의 보○에 자비를 베풀어주세요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = %CSTR:이인칭%、本日は大変お疲れさまでした。あとは私に…
+					CSTR:100 = %CSTR:이인칭%、오늘은 고생 많으셨습니다。나머지는 저에게…
 				ENDIF
 				CFLAG:808 = 662;騎乗位3
 				CALL PRINT_AA_K1404	
@@ -8695,7 +8695,7 @@ SELECTCASE TFLAG:13
 					CSTR:101 = 음란무신의 뱃속에、잔뜩 부어주세요%UNICODE(0x2665)%
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = %CSTR:이인칭%、本日は大変お疲れさまでした。あとは私に…
+					CSTR:100 = %CSTR:이인칭%、오늘은 고생 많으셨습니다。나머지는 저에게…
 				ENDIF
 				CFLAG:808 = 670;騎乗位アナル
 				CALL PRINT_AA_K1404	
@@ -8771,13 +8771,13 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					CSTR:100 = %CSTR:이인칭%の剛直...想像するだけで....こんなっ....
+					CSTR:100 = %CSTR:이인칭%의 딱딱한 것...상상하는 것만으로도....이런....
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
-					CSTR:100 = 欲しい……チ○ポ欲しい…
+					CSTR:100 = 갖고 싶어……자○ 갖고 싶어…
 				;복종, 예속
 				ELSEIF TALENT:5 || TALENT:8
-					CSTR:100 = んっ…%CSTR:이인칭%…
+					CSTR:100 = 응…%CSTR:이인칭%…
 				ENDIF
 				CFLAG:808 = 111;自慰
 				CALL PRINT_AA_K1404	
@@ -8966,9 +8966,9 @@ SELECTCASE TFLAG:13
 			ELSEIF (TALENT:5 || TALENT:8)
 				IF CFLAG:102 == 1
 					IF FAVORITE_1(TARGET) == MASTER
-						PRINTFORMW 「」
+						PRINTFORMW 
 					ELSE
-						PRINTFORMW 「」
+						PRINTFORMW 
 						IF CFLAG:TARGET:부친의고유번호부모 >= 0
 							PRINTFORMW 
 						ELSE
@@ -8979,38 +8979,38 @@ SELECTCASE TFLAG:13
 					IF CFLAG:TARGET:부친의고유번호부모 >= 0
 						IF FAVORITE_1(TARGET) == CFLAG:TARGET:부친의고유번호부모
 							IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「｣
+								PRINTFORMW 
 								IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:MASTER:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:MASTER:캐릭터고유번호
-									PRINTFORMW 「｣
+									PRINTFORMW 
 								ELSE
-									PRINTFORMW 「」
+									PRINTFORMW 
 								ENDIF
 							ELSEIF CFLAG:FATHER:딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「」
+								PRINTFORMW 
 							ELSE
-								PRINTFORMW 「｣
+								PRINTFORMW 
 							ENDIF
 						ELSE
 							IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「」
+								PRINTFORMW 
 								IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:MASTER:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:MASTER:캐릭터고유번호
-									PRINTFORMW 「｣
+									PRINTFORMW 
 								ELSE
-									PRINTFORMW 「｣
+									PRINTFORMW 
 								ENDIF
 							ELSEIF CFLAG:FATHER:딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「」
+								PRINTFORMW 
 							ELSE
-								PRINTFORMW 「」
+								PRINTFORMW 
 							ENDIF
 						ENDIF
 					ELSE
 						IF FAVORITE_1(TARGET) < 0 && CFLAG:TARGET:부친의고유번호부모 != -2
-							PRINTFORMW 「｣
+							PRINTFORMW 
 						ELSEIF CFLAG:TARGET:부친의고유번호부모 == -2
-							PRINTFORMW 「｣
+							PRINTFORMW 
 						ELSE
-							PRINTFORMW 「」
+							PRINTFORMW 
 						ENDIF
 					ENDIF
 				ENDIF
@@ -9156,7 +9156,7 @@ SELECTCASE TFLAG:13
 								IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:TARGET:캐릭터고유번호
 									PRINTFORMW 「이 아이도 %CALLNAME:FATHER% 처럼 자라줄 수 있을까요？｣
 									IF CFLAG:FATHER:딸의친부모고유번호딸 == CFLAG:MASTER:캐릭터고유번호 || CFLAG:FATHER:딸의부친고유번호딸 == CFLAG:MASTER:캐릭터고유번호
-										PRINTFORMW 「아니면 %CSTR:이인칭%와 비슷할까？｣
+										PRINTFORMW 「아니면 %조사처리(CSTR:이인칭,"과")% 비슷할까？｣
 										PRINTFORMW 「벌써부터 기대됩니다｣
 									ELSE
 										PRINTFORMW 「벌써부터 기대된다｣
@@ -9172,7 +9172,7 @@ SELECTCASE TFLAG:13
 								ELSEIF CFLAG:FATHER:딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
 									PRINTFORMW 「%CALLNAME:FATHER%도 이 아이도 내 귀여운 아이다｣
 								ELSE
-									PRINTFORMW 「」
+									PRINTFORMW 
 								ENDIF
 							ENDIF
 						ELSE
@@ -9340,11 +9340,11 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「이 몸은 그대에게 바친 몸…、그런데도 %조사처리(CSTR:일인칭,"는")% 이제 그대에겐 불필요한 건가ㄴ…?」
 				;음란, 창부+반발각인Lv3 미만
 				ELSEIF (TALENT:4 || TALENT:7) && MARK:3 < 3
-					PRINTFORMW 「%CSTR:12%…%CSTR:11%는(은) 이제 %CSTR:12%에게 도움이 되지 않는건가요…？」
+					PRINTFORMW 「%CSTR:12%…%조사처리(CSTR:11,"는")% 이제 %CSTR:12%에게 도움이 되지 않는건가요…？」
 					PRINTFORMW 「%CSTR:12%의 원하는 거라면 뭐든 할테니…、부디 곁에 있게 해 주실수는 없나요…」
 				;복종, 예속+반발각인Lv3 미만
 				ELSEIF (TALENT:5 || TALENT:8) && MARK:3 < 3
-					PRINTFORMW 「%CSTR:이인칭%…%CSTR:일인칭%、ご一緒出来て……光栄でした……」
+					PRINTFORMW 「%CSTR:이인칭%…%CSTR:일인칭%、함께 할 수 있어서……영광이었습니다……」
 				ENDIF
 			;반발각인Lv3
 			ELSEIF MARK:3 == 3
@@ -9502,7 +9502,7 @@ SELECTCASE TFLAG:13
 	CASE 42
 			CALL EVENT_MESSAGE
 			IF CFLAG:285 < 1 || FLAG:7 == 2
-				PRINTFORMW 「え？…ホントに？いいの…？」
+				PRINTFORMW 「에？…정말로？괜찮아…？」
 				CFLAG:285 = 1
 			ENDIF
 		;-------------------------------------------------
@@ -9574,11 +9574,11 @@ SELECTCASE TFLAG:13
 								ENDIF
 							ELSEIF CFLAG:(FAVORITE_1(TARGET)):딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
 								PRINTFORMW 「%CALLNAME:(FAVORITE_1(TARGET))%도 엄마에게 버림받았는데 제대로 자라줘서 다행이다｣
-								PRINTFORMW 「%조사처리(CSTR:이인칭,"는")% %조사처리(CSTR:일인칭,"를")% 신경쓰지 않았지만 %CALLNAME:(FAVORITE_1(TARGET))%는(은) %조사처리(CSTR:일인칭,"를")% 사랑해주기도 하고｣
+								PRINTFORMW 「%조사처리(CSTR:이인칭,"는")% %조사처리(CSTR:일인칭,"를")% 신경쓰지 않았지만 %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"는")% %조사처리(CSTR:일인칭,"를")% 사랑해주기도 하고｣
 								PRINTFORMW 「！？、%조사처리(CSTR:일인칭,"는")% 도대체 무슨 생각을 하고 있는 건가｣
 							ELSE
-								PRINTFORMW 「최근 %CALLNAME:(FAVORITE_1(TARGET))%이(가) %CSTR:일인칭%의 상대인데 %조사처리(CSTR:이인칭,"는")% 최근 상대해주지 않네」
-								PRINTFORMW 「%CALLNAME:(FAVORITE_1(TARGET))%랑 하는 편이 기분 좋은데｣
+								PRINTFORMW 「최근 %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"가")% %CSTR:일인칭%의 상대인데 %조사처리(CSTR:이인칭,"는")% 최근 상대해주지 않네」
+								PRINTFORMW 「%조사처리(CALLNAME:(FAVORITE_1(TARGET)),"랑")% 하는 편이 기분 좋은데｣
 								PRINTFORMW 「！？、%조사처리(CSTR:일인칭,"는")% 도대체 무슨 생각을 하고 있는 건가｣
 							ENDIF
 						ELSE
@@ -9598,10 +9598,10 @@ SELECTCASE TFLAG:13
 									PRINTFORMW 「그런 눈으로 그 아이를 바라보다니｣
 								ENDIF
 							ELSEIF CFLAG:(FAVORITE_1(TARGET)):딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「%CALLNAME:(FAVORITE_1(TARGET))%이(가) %조사처리(CSTR:일인칭,"를")% 보는 눈이 최근 이상해｣
+								PRINTFORMW 「%조사처리(CALLNAME:(FAVORITE_1(TARGET)),"가")% %조사처리(CSTR:일인칭,"를")% 보는 눈이 최근 이상해｣
 								PRINTFORMW 「하지만、%CSTR:일인칭%에겐 %조사처리(CSTR:이인칭,"가")% …｣
 							ELSE
-								PRINTFORMW 「%조사처리(CSTR:이인칭,"와")% 달라서 %CALLNAME:(FAVORITE_1(TARGET))%는(은) %조사처리(CSTR:일인칭,"를")% 소중하게 대해준다｣
+								PRINTFORMW 「%조사처리(CSTR:이인칭,"와")% 달라서 %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"는")% %조사처리(CSTR:일인칭,"를")% 소중하게 대해준다｣
 								PRINTFORMW 「그래도 %조사처리(CSTR:일인칭,"는")% %CSTR:이인칭% 쪽이 더｣
 							ENDIF
 						ELSE
@@ -9625,12 +9625,12 @@ SELECTCASE TFLAG:13
 								PRINTFORMW 「이제 이 생각은 거짓 같은게 아니다｣
 								PRINTFORMW (%CSTR:이인칭%、죄송합니다)
 							ELSE
-								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %CALLNAME:(FAVORITE_1(TARGET))%이(가) 좋다｣
+								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"가")% 좋다｣
 								PRINTFORMW 「이제 이 생각은 거짓 같은게 아니다｣
 								PRINTFORMW (%CSTR:이인칭%、죄송합니다)
 							ENDIF
 						ELSE
-							PRINTFORMW 「｣
+							PRINTFORMW 
 						ENDIF
 					ENDIF
 				;음란, 창부
@@ -9672,7 +9672,7 @@ SELECTCASE TFLAG:13
 								PRINTFORMW 「그 아이도 엄마에게 버림받았는데 제대로 자라줘서 다행이다｣
 								PRINTFORMW 「조금 있으면 %CSTR:일인칭%에게서 벗어나게 되는 건가｣
 							ELSE
-								PRINTFORMW 「최근 %CALLNAME:(FAVORITE_1(TARGET))%와(과) 함께 있는 시간이 늘어났다」
+								PRINTFORMW 「최근 %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"과")% 함께 있는 시간이 늘어났다」
 							ENDIF
 						ELSE
 							PRINTFORMW 「그 녀석、꽤 열심히 %CSTR:일인칭%에게 오고 있다｣
@@ -9698,14 +9698,14 @@ SELECTCASE TFLAG:13
 					ELSEIF CFLAG:애ＮＴＲ진행도 == 2
 						IF FAVORITE_1(TARGET )>= 0
 							IF CFLAG:(FAVORITE_1(TARGET)):딸의친부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호 || CFLAG:(FAVORITE_1(TARGET)):딸의부친고유번호딸 == CFLAG:TARGET:캐릭터고유번호
-								PRINTFORMW 「%CALLNAME:(FAVORITE_1(TARGET))%이(가) %CSTR:일인칭%의 아이라도 상관 없다｣
-								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %CALLNAME:(FAVORITE_1(TARGET))%를(을) 사랑하고 있다｣
+								PRINTFORMW 「%조사처리(CALLNAME:(FAVORITE_1(TARGET)),"가")% %CSTR:일인칭%의 아이라도 상관 없다｣
+								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"를")% 사랑하고 있다｣
 							ELSEIF CFLAG:(FAVORITE_1(TARGET)):딸의양부모고유번호딸 == CFLAG:TARGET:캐릭터고유번호
 								PRINTFORMW 「더는 자신을 속일 수 없어｣
-								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %CALLNAME:(FAVORITE_1(TARGET))%를(을) 사랑하고 있다｣
+								PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"를")% 사랑하고 있다｣
 							ELSE
-							PRINTFORMW 「%CALLNAME:(FAVORITE_1(TARGET))%는(은) %조사처리(CSTR:일인칭,"를")% 좋아해줄까｣
-							PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %CALLNAME:(FAVORITE_1(TARGET))%를(을) 좋아한다｣
+							PRINTFORMW 「%조사처리(CALLNAME:(FAVORITE_1(TARGET)),"는")% %조사처리(CSTR:일인칭,"를")% 좋아해줄까｣
+							PRINTFORMW 「%조사처리(CSTR:일인칭,"는")% %조사처리(CALLNAME:(FAVORITE_1(TARGET)),"를")% 좋아한다｣
 							ENDIF
 						ELSE
 							PRINTFORMW 「그 녀석은 %조사처리(CSTR:일인칭,"를")%좋아해줄까｣
@@ -10671,7 +10671,7 @@ IF CFLAG:ARG:입력행동 == 0
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"私と太刀交えるは武門の誉れ、喜ぶがよい！",72,LEFT%┃
+		PRINTFORML ┃%"나와 맞서는 것은 무가의 칭찬으로서、기뻐하는 것이 좋다！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 ;검격
@@ -10947,12 +10947,12 @@ ENDIF
 @BODYTOUCH_K1404_5_8
 SELECTCASE RAND:3
 	CASE 0
-		CSTR:100 = あの…%CSTR:이인칭%、そんなに触られると、
-		CSTR:101 = %CSTR:일인칭%、混乱しちゃいます……
+		CSTR:100 = 저기…%CSTR:이인칭%、그렇게 만지시면、
+		CSTR:101 = %CSTR:일인칭%、혼란스럽습니다……
 	CASE 1
-		CSTR:100 = あっ……び、びっくりしました……
+		CSTR:100 = 앗……깜、깜짝 놀랐습니다……
 	CASE 2
-		CSTR:100 = な、なんでしょうか……？
+		CSTR:100 = 무、무슨 일이신가요……？
 ENDSELECT
 
 
@@ -14010,7 +14010,7 @@ IF CFLAG:809 == 0
 			PRINTL 　　　　　　　　／:::::::::::::≧z。: : :｀'' ー- :::',:::::::::／::::::::::::::::::::::::::::::::::::＼　　　　　　　　 じ　　　ﾚ　⊂ソ　　）ﾉ 　　 ノノ 
 			PRINTL 　　　　　　 ...::::::::::::::::::::::::::::::＞x: : : : : :~: : :Y : ￣￣: : : : : : :==―― --::::.. 
 			PRINTL 　　　　　 ./::::::::::::::::::::::::::::::::::::::::::＼ : : : : :: i : : : : : : : : : : : : : : : --――=::ヽ 
-			PRINTL 　　　　　/::::::::::::::::::::::::::::::::::::::::::::::::::ヽ: : : : !: : : : : : : :＞.:::::´::::::::::::::::::::::::::::::.　　　　あっ、ひぃっ
+			PRINTL 　　　　　/::::::::::::::::::::::::::::::::::::::::::::::::::ヽ: : : : !: : : : : : : :＞.:::::´::::::::::::::::::::::::::::::.　　　　앗、히잇
 			PRINTL 　　　　 ,.::::::::::::::::::::::::::::::::::::::::::::::::::::::::',: : : |: : : : :,,イ::::::::::::::::::::::::::::::::::::::::::::::', 
 			PRINT 　　　　 |:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::',: : |: : ／:::::::::::::::::::::::::::::::::::::::::::::::::::::::', 
 			PRINTFORML 　　　　　%CSTR:100%

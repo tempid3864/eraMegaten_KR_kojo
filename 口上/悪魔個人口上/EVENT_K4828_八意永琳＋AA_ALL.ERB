@@ -129,7 +129,7 @@ IF CFLAG:201 == 0 && TALENT:연모 == 0
 	PRINTW 
 	PRINTFORMW 세 가닥으로 땋은 아름다운 은발을 가진 그녀는、꽤나 인기 있는 노예가 될 것이다
 	CSTR:100 = %일인칭을% 조교한다고！？　무슨 바보같은…
-	CSTR:101 = 안됏……그만두세요……っ
+	CSTR:101 = 안됏……그만두세요……
 	CFLAG:808 = 7003;焦り
 	CALL PRINT_AA_K4828
 	PRINTFORMW 싫어하는 %CALLNAME%이지만、계약으로 묶인 그녀는 당신에게 저항할 수 없다。
@@ -337,7 +337,7 @@ ELSEIF MARK:2 == 2 && (CFLAG:202 < 3 || FLAG:7 == 2)
 	CFLAG:808 = 7101;半裸
 	CALL PRINT_AA_K4828	
 	PRINTFORMW 　%타겟은% 뺨을 붉히면서、당신에게 나체를 드러냈다
-	CSTR:100 = （……%CSTR:일인칭%란 사람이……이렇게나 가슴이 뜨겁게 되다니……っ）
+	CSTR:100 = （……%CSTR:일인칭%란 사람이……이렇게나 가슴이 뜨겁게 되다니……）
 	CFLAG:808 = 7101;半裸2
 	CALL PRINT_AA_K1404	
 	CFLAG:202 = 3
@@ -380,7 +380,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			CALL PRINT_AA_K1404
 			PRINTFORMW 감미로운 목소리는 %마스터를% 자극하고、한층 더 욕정을 돋우었다
 			PRINTFORMW %마스터는% 소리를 내면서 젖꼭지를 빨아올려 도취한 듯 젖꼭지를 몰아세웠다
-			CSTR:100 = 힛！　っ、응아아아앗！%UNICODE(0x2665)%　앗……%UNICODE(0x2665)%
+			CSTR:100 = 힛！　읏、응아아아앗！%UNICODE(0x2665)%　앗……%UNICODE(0x2665)%
 			CFLAG:808 = 8120;강절정（顔２）
 			CALL PRINT_AA_K1404
 			PRINTFORMW 새된 목소리가 사방에 울리다、뚝하고 끊어졌다
@@ -493,7 +493,7 @@ IF MARK:3 == 3 && (CFLAG:217 < 1 || FLAG:7 == 2)
 	CFLAG:217 = 1
 ;굴복각인Lv1 이하
 ELSEIF MARK:2 <= 1 && (CFLAG:219 < 1 || FLAG:7 == 2)
-	CSTR:100 = ……っ、부끄럽지 않은 거야、여성에게 이런 일 하는 게……っ
+	CSTR:100 = ……읏、부끄럽지 않은 거야、여성에게 이런 일 하는 게……
 	CFLAG:808 = 7001;怒り
 	CALL PRINT_AA_K4828
 	CFLAG:219 = 1
@@ -507,7 +507,7 @@ ELSEIF MARK:2 == 2
 ;굴복각인Lv3＋함락소질없음
 ELSEIF MARK:2 == 3 && (TALENT:3 == 0 && TALENT:4 == 0 && TALENT:5 == 0 && TALENT:6 == 0 && TALENT:7 == 0 && TALENT:8 == 0)
 	PRINTFORMW %타겟은% 황홀한 표정으로 가쁜 숨을 내쉬고 있다
-	CSTR:100 = （하아、하아……안 됏、몸이, 마음대로 뜨거워져……っ）
+	CSTR:100 = （하아、하아……안 됏、몸이, 마음대로 뜨거워져……）
 	CSTR:101 = （이대로라면……언젠간……）
 	CFLAG:808 = 7105;全裸
 	CALL PRINT_AA_K1404
@@ -519,7 +519,7 @@ ELSEIF BASE:0 < 500 && (CFLAG:218 < 1 || FLAG:7 == 2)
 		IF RAND:2 == 0
 			CSTR:100 = 미안해요……조금만 잘테니까 나중에 깨워 줘……
 		ELSE
-			CSTR:100 = も、もう　これ以上は…　お願い、だから…、許して…
+			CSTR:100 = 이、이제　더 이상은…　부탁、할게…、용서해줘…
 		ENDIF
 		CFLAG:808 = 7103;全裸（事後）
 		CALL PRINT_AA_K4828
@@ -545,8 +545,8 @@ ELSEIF CFLAG:219 < 4 || FLAG:7 == 2
 			CSTR:101 = %CSTR:이인칭%과 헤어지는 것은 이것이 마지막이 되었으면 하는데……
 			LOCAL = 2
 		ELSE
-			CSTR:100 = 会えない時間を長く感じるわ......
-			CSTR:101 = 永遠から見れば一瞬の出来事の筈なのに……
+			CSTR:100 = 만날 수 없는 시간이 길게 느껴져......
+			CSTR:101 = 영원에서 보면 한순간의 일일텐데……
 		ENDIF
 		CFLAG:808 = 7203;添い寝
 		CALL PRINT_AA_K1404
@@ -694,7 +694,7 @@ SELECTCASE SELECTCOM
 				CSTR:100 = 읏！　들어가고 있어%UNICODE(0x2665)%……느껴져……%CSTR:이인칭%의 손가락……
 				CFLAG:808 = 7111;愛撫
 				CALL PRINT_AA_K4828
-				CSTR:101 = 핫……아응！거깃、기분 좋으니까、좀 더 부탁해……っ
+				CSTR:101 = 핫……아응！거깃、기분 좋으니까、좀 더 부탁해……
 			ELSE
 				CALL BODYTOUCH_K4828_2_1
 			ENDIF
@@ -707,7 +707,7 @@ SELECTCASE SELECTCOM
 				CSTR:100 = 아、아파！　잠깐、　그만 해……
 				CFLAG:808 = 7111;愛撫
 				CALL PRINT_AA_K4828
-				CSTR:100 = 움직이지 말아 줫……っ！
+				CSTR:100 = 움직이지 말아 줫……！
 				CFLAG:808 = 31;指挿入れ2
 				CALL PRINT_AA_K1404
 			ENDIF
@@ -719,17 +719,17 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
-			CSTR:100 = あぁ…%UNICODE(0x2665)%
+			CSTR:100 = 아아…%UNICODE(0x2665)%
 			CFLAG:808 = 7105;愛撫
 			CALL PRINT_AA_K4828
-			CSTR:101 = %CSTR:일인칭%のお尻を舐められてるぅ…%UNICODE(0x2665)%
+			CSTR:101 = %CSTR:일인칭%의 엉덩이를 핥고 있어…%UNICODE(0x2665)%
 			CFLAG:808 = 41;アナル舐め2
 			CALL PRINT_AA_K1404
 		ELSE
-			CSTR:100 = そんなところを舐めるなんて！？、
+			CSTR:100 = 그런 곳을 핥다니！？、
 			CFLAG:808 = 7107;愛撫
 			CALL PRINT_AA_K4828
-			CSTR:101 = %CSTR:이인칭%…正気じゃないわ…
+			CSTR:101 = %CSTR:이인칭%…제정신이 아니야…
 			CFLAG:808 = 41;アナル舐め2
 			CALL PRINT_AA_K1404
 		ENDIF
@@ -743,11 +743,11 @@ SELECTCASE SELECTCOM
 			IF (ABL:Ａ감각 >= 5 && PALAM:쾌Ａ >= 1000) || PALAM:쾌Ａ >= 5000
 				;両穴責め
 				IF PREVCOM == 3
-					PRINTFORMW %CALLNAME%は前後両方を責められ、目を見開き、弓なりに体を反らした
-					CSTR:100 = やっ、駄目っ！　イッちゃう！
+					PRINTFORMW %조사처리(CALLNAME,"는")% 앞뒤 양쪽을 괴롭혀져、눈을 치켜뜨고、활 모양으로 몸을 젖혔다
+					CSTR:100 = 싫、안됏！　가버려！
 					CFLAG:808 = 7110;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = イクぅ！%UNICODE(0x2665)%%UNICODE(0x2665)%
+					CSTR:100 = 간다！%UNICODE(0x2665)%%UNICODE(0x2665)%
 					CFLAG:808 = 53;両穴責め
 					CALL PRINT_AA_K1404
 				ELSE
@@ -918,9 +918,9 @@ SELECTCASE SELECTCOM
 		IF CFLAG:309 == 0
 			;함락완료
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:309 < 4 || FLAG:7 == 2)
-				CSTR:100 = こ、これでいいの？
+				CSTR:100 = 이、이거면 돼？
 			ELSE
-				CSTR:100 = こ、こんなことさせるなんて…、覚えてなさい…
+				CSTR:100 = 이、이런 짓을 시키다니…、기억해둘거야…
 			ENDIF
 			CFLAG:808 = 90;秘貝開帳2
 			CALL PRINT_AA_K1404
@@ -933,15 +933,15 @@ SELECTCASE SELECTCOM
 				IF TALENT:3 || TALENT:6
 					;調教中に膣内していない
 					IF CFLAG:800 == 0
-						CSTR:100 = （ああ%UNICODE(0x2665)%…%CSTR:일인칭%のおまんこ見られてる…恥ずかしい…）
+						CSTR:100 = （아아%UNICODE(0x2665)%…%CSTR:일인칭%의 보지 보여서…부끄러워…）
 						CFLAG:808 = 90;秘貝開帳2
 						CALL PRINT_AA_K4828
 					;調教中に膣内射精した
 					ELSEIF CFLAG:800 >= 1
-						CSTR:100 = あは%UNICODE(0x2665)%…膣内からあふれてる
+						CSTR:100 = 아하%UNICODE(0x2665)%…질내에서 넘치네
 						CFLAG:808 = 7115;表情
 						CALL PRINT_AA_K4828
-						CSTR:101 = いっぱい出してくれたのね%UNICODE(0x2665)%、嬉しい%UNICODE(0x2665)%
+						CSTR:101 = 잔뜩 내어줬구나%UNICODE(0x2665)%、기뻐%UNICODE(0x2665)%
 						CFLAG:808 = 92;秘貝開帳(with中出し済み）
 						CALL PRINT_AA_K1404
 					ENDIF
@@ -955,19 +955,19 @@ SELECTCASE SELECTCOM
 				CFLAG:309 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:309 < 3 || FLAG:7 == 2)
-				CSTR:100 = こんな格好…
+				CSTR:100 = 이런 꼴…
 				CFLAG:808 = 7116;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 =  恥ずかしすぎる…
+				CSTR:100 =  너무 창피해…
 				CFLAG:808 = 90;秘貝開帳2
 				CALL PRINT_AA_K1404
 			CFLAG:309 = 3
 			;그 이외
 			ELSEIF CFLAG:309 < 2 || FLAG:7 == 2
-				CSTR:100 = やめて
+				CSTR:100 = 그만해
 				CFLAG:808 = 7116;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 見ないでっ…
+				CSTR:100 = 보지마…
 				CFLAG:808 = 90;秘貝開帳2
 				CALL PRINT_AA_K1404
 			CFLAG:309 = 2
@@ -981,7 +981,7 @@ SELECTCASE SELECTCOM
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:310 == 0
-			PRINTFORMW 「自分で揉んでもね…」
+			PRINTFORMW 「스스로 주물러도…」
 			CFLAG:310 = 1
 		;2번째 이후
 		ELSE
@@ -989,29 +989,29 @@ SELECTCASE SELECTCOM
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:310 < 4 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					CSTR:100 = う～ん…
+					CSTR:100 = 으～응…
 					CFLAG:808 = 7108;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = できれば、%CSTR:이인칭%に触ってほしいのだけど…
+					CSTR:100 = 가능하면、%CSTR:이인칭%가 만져줬으면 좋겠는데…
 					CFLAG:808 = 100;가슴自慰
 					CALL PRINT_AA_K1404
 				ENDIF
 				CFLAG:310 = 4
 			;굴복각인Lv3
 			ELSEIF MARK:2 == 3 && (CFLAG:310 < 3 || FLAG:7 == 2)
-				CSTR:100 = う～ん…
+				CSTR:100 = 으～응…
 				CFLAG:808 = 7108;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = こんなことをしていると、まるで自分がエッチになったみたい
+				CSTR:100 = 이런 걸 하고 있자니、마치 내 자신이 야한 것 같아
 				CFLAG:808 = 100;가슴自慰
 				CALL PRINT_AA_K1404
 				CFLAG:310 = 3
 			;그 이외
 			ELSEIF CFLAG:310 < 2 || FLAG:7 == 2
-				CSTR:100 = まったく…
+				CSTR:100 = 정말이지…
 				CFLAG:808 = 7107;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = このようなことをさせて、何になるというのかしら？
+				CSTR:100 = 이런 걸 시켜서、뭐가 된다는 걸까？
 				CFLAG:808 = 100;가슴自慰
 				CALL PRINT_AA_K1404
 				CFLAG:310 = 2
@@ -1131,10 +1131,10 @@ CASE 14
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:442 == 0
-			CSTR:100 = そこは敏感だから…
+			CSTR:100 = 거기는 민감하니까…
 			CFLAG:808 = 7111;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = 乱暴にしないで…
+			CSTR:100 = 난폭하게 하지 말아줘…
 			CFLAG:808 = 141;クリ愛撫2
 			CALL PRINT_AA_K1404
 			CFLAG:442 = 1
@@ -1154,20 +1154,20 @@ CASE 14
 			ENDIF
 		;순종Lv3 이상
 		ELSEIF ABL:0 >= 3 && (CFLAG:442 < 3 || FLAG:7 == 2)
-			CSTR:100 = や、優しくしてね…
+			CSTR:100 = 사、상냥하게 해줘…
 			CFLAG:808 = 7114;表情
 			;KR판 임의수정, AA표시 추가
 			CALL PRINT_AA_K1404
-			CSTR:100 = そこは…敏感なんだから…
+			CSTR:100 = 거기는…민감하니까…
 			CFLAG:808 = 141;クリ愛撫2
 			CALL PRINT_AA_K1404
 			CFLAG:442 = 3
 		;그 이외
 		ELSEIF CFLAG:442 < 2 || FLAG:7 == 2
-			CSTR:100 = さっ…触らないで
+			CSTR:100 = 만…만지지 마
 			CFLAG:808 = 7111;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = そこは…敏感なのよ…
+			CSTR:100 = 거기는…민감하다고…
 			CFLAG:808 = 141;クリ愛撫2
 			CALL PRINT_AA_K1404
 			CFLAG:442 = 2
@@ -1180,7 +1180,7 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:444 == 0
-			PRINTFORMW 「はうっ！」
+			PRINTFORMW 「하읏！」
 			CFLAG:808 = 150;尻愛撫
 			CALL PRINT_AA_K1404
 			CFLAG:444 = 1
@@ -1190,10 +1190,10 @@ CASE 15
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8 || ABL:0 >= 3) && (CFLAG:444 < 3 || FLAG:7 == 2)		
 				;연모, 친애	
 				IF TALENT:3 || TALENT:6 && (CFLAG:444 < 4 || FLAG:7 == 2)	
-					CSTR:100 = %CSTR:일인칭%のお尻、気に入ったの？
+					CSTR:100 = %CSTR:일인칭%의 엉덩이、마음에 들어？
 					CFLAG:808 = 7117;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = %CSTR:이인칭%だけは、好きなだけ揉んでいいから%UNICODE(0x2665)%
+					CSTR:100 = %CSTR:이인칭% 만은、원하는 만큼 주물러도 되니까%UNICODE(0x2665)%
 					;AA選択
 					;全裸
 					IF TEQUIP:둔부노출 == -1 && TEQUIP:유방노출 == -1
@@ -1239,7 +1239,7 @@ CASE 15
 			;연모, 친애
 			IF  TALENT:3 || TALENT:6
 				PRINTFORMW 에이린은 부드럽게 미소지으며、혀를 뻗었다。
-				CSTR:100 = んっ……私の唇を奪ったのは、貴方が初めてよ%UNICODE(0x2665)%
+				CSTR:100 = 응……내 입술을 빼앗은 건、당신이 처음이야%UNICODE(0x2665)%
 			;순종Lv3 이상
 			ELSEIF ABL:0 >= 3
 				PRINTFORMW %타겟은% 안색 하나 바꾸지 않고 %마스터와% 입술을 포개였다。
@@ -1271,7 +1271,7 @@ CASE 15
 							CSTR:100 = 응%UNICODE(0x2665)%、츄릅……하아…………%이인칭과% 만나서、다행이야……
 							CFLAG:808 = 7112;表情
 							CALL PRINT_AA_K4828
-							CSTR:101 = 핫%UNICODE(0x2665)%……츄……부탁이야……떨어지지 말아줘……っ
+							CSTR:101 = 핫%UNICODE(0x2665)%……츄……부탁이야……떨어지지 말아줘……
 							CFLAG:808 = 201;キス2
 						CASE 2
 							PRINTFORMW %마스터와% %CALLNAME%의 입술이 떨어지자、아쉬운 듯 실을 길게 남겼다。
@@ -1282,10 +1282,10 @@ CASE 15
 							CFLAG:808 = 201;キス2
 						CASE 3
 							CSTR:100 = 하읏……읏……하아……정말 좋아해%UNICODE(0x2665)%……좀 더 해줘……
-							CSTR:101 = 안 돼、좀 더 격렬히……%이인칭과% 얽히게 해 줘……っ
+							CSTR:101 = 안 돼、좀 더 격렬히……%이인칭과% 얽히게 해 줘……
 							CFLAG:808 = 202;キス3
 						CASE 4
-							PRINTFORMW %CALLNAME%は自然と手を伸ばし、あなたを抱き寄せていた。
+							PRINTFORMW %조사처리(CALLNAME,"는")% 자연스럽게 손을 뻗어、당신을 껴안고 있었다。
 							CSTR:100 = 읏……핫……、안 돼、이런 키스론 부족해……
 							CFLAG:808 = 7114;表情
 							CALL PRINT_AA_K4828
@@ -1331,7 +1331,7 @@ CASE 15
 				ELSEIF RAND:2 == 2
 					CSTR:100 = 읏……여기까지 하죠……
 				ELSE
-					CSTR:100 = 읏、안돼……더 이상은……っ
+					CSTR:100 = 읏、안돼……더 이상은……
 				ENDIF
 					CFLAG:808 = 201;キス2
 					CALL PRINT_AA_K1404
@@ -1689,7 +1689,7 @@ CASE 15
 				IF RAND:2 == 0
 					CSTR:100 = （아차～、설탕과 정력제를 잘못 넣었어……）
 				ELSE
-					CSTR:100 = ……だ、大丈夫よ。味見したけど、お腹を壊したりしなかったから
+					CSTR:100 = ……괘、괜찮아。맛을 봤는데、배탈이 나거나 하지는 않았으니까
 				ENDIF
 				CFLAG:808 = 7009;上半身（笑み）
 				CALL PRINT_AA_K4828
@@ -1697,7 +1697,7 @@ CASE 15
 			ELSEIF ABL:12 > 4
 				SELECTCASE RAND:7
 					CASE 0
-						CSTR:100 = 栄養バランスを考えて作ってあるから、全部食べてもらえると嬉しいわ♪
+						CSTR:100 = 영양 밸런스를 생각해서 만들어놨으니까、다 먹어주면 기쁠거야♪
 						CFLAG:808 = 7009;上半身（笑み）
 						CALL PRINT_AA_K4828
 					CASE 1
@@ -1728,9 +1728,9 @@ CASE 15
 						CFLAG:808 = 7009;上半身（笑み）
 						CALL PRINT_AA_K4828
 					CASE 6
-						PRINTFORMW %CALLNAME%が作ってくれた料理には、白いご飯の上にハートマークが描かれていた。
-						CSTR:100 = 前に読んだ本に、こういうのがあったのよ
-						CSTR:101 = 「……は、早く食べて！　そんなに見られたら恥ずかしいわ……
+						PRINTFORMW %CALLNAME%가 해준 요리에는、흰밥 위에 하트 마크가 그려져 있었다。
+						CSTR:100 = 전에 읽었던 책에、이런 게 있었다지
+						CSTR:101 = 「……빠、빨리 먹어！　그렇게 쳐다보면 부끄러워……
 						CFLAG:808 = 7003;焦り
 						CALL PRINT_AA_K4828
 				ENDSELECT
@@ -1744,8 +1744,8 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;처음
 		IF CFLAG:319 == 0
-			CSTR:100 = %CSTR:일인칭%の歌が聞きたいの？
-			CSTR:101 = %CSTR:이인칭%の前で歌うなんて…、恥ずかしいわ……
+			CSTR:100 = %CSTR:일인칭%의 노래를 듣고 싶어？
+			CSTR:101 = %CSTR:이인칭% 앞에서 노래를 부르다니…、부끄럽네……
 			CFLAG:808 = 7003;焦り
 			CALL PRINT_AA_K4828
 			CFLAG:319 = 1
@@ -1813,11 +1813,11 @@ CASE 15
 		ELSE
 			;直前に乳首ローター
 			IF PREVCOM == 48
-				PRINTFORMW %CALLNAME%は胸と秘所を同時に刺激されて、悶えている。
-				CSTR:100 = ふぁ、ぁぁ…%UNICODE(0x2665)%
+				PRINTFORMW %CALLNAME%는 가슴과 비소를 동시에 자극받아、몸부림치고 있다。
+				CSTR:100 = 후아、아아…%UNICODE(0x2665)%
 				CFLAG:808 = 7106;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = あぅっ～～%UNICODE(0x2665)%
+				CSTR:100 = 아읏～～%UNICODE(0x2665)%
 				CFLAG:808 = 401;ローター（with乳首ローター）
 				CALL PRINT_AA_K1404
 			;통상
@@ -1865,7 +1865,7 @@ CASE 15
 			IF CFLAG:324 == 0
 				IF TALENT:3 || TALENT:6
 					PRINTFORMW 「앗、아앗！%UNICODE(0x2665)%%UNICODE(0x2665)%」
-					PRINTFORMW （뭐야 이거……っ！　쾌감이 머리에 직접……っ！）
+					PRINTFORMW （뭐야 이거……！　쾌감이 머리에 직접……！）
 				ELSE
 					PRINTFORMW 「……지상에는 진귀한 게 있네」
 					PRINTFORMW 「그런 장난감、몰랐어」
@@ -2033,7 +2033,7 @@ CASE 15
 				CSTR:100 = 기、기다려！　그런 것 들어가지 않앗！
 				CFLAG:808 = 7109;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 아파、아팟、っ……
+				CSTR:100 = 아파、아팟、읏……
 				CFLAG:808 = 451;アナルバイブ2
 				CALL PRINT_AA_K1404
 				PRINTFORMW %CALLNAME%은 눈동자에 눈물을 글썽이며、바이브를 삼켰다
@@ -2104,7 +2104,7 @@ CASE 15
 			CFLAG:808 = 7109;表情
 			CALL PRINT_AA_K4828
 		ELSE
-			CSTR:100 = 하ー앗、하ー앗……이제, 이런 일은 그만해……っ
+			CSTR:100 = 하ー앗、하ー앗……이제, 이런 일은 그만해……
 			CFLAG:808 = 7109;表情
 			CALL PRINT_AA_K4828
 			PRINTFORMW 흐트러진 호흡을 가다듬으며、%타겟은% 타이르듯 말했다
@@ -2120,14 +2120,14 @@ CASE 15
 		;연모, 친애
 		IF TALENT:3 || TALENT:6
 			IF (ABL:Ａ감각 >= 5 && PALAM:쾌Ａ >= 1000) || PALAM:쾌Ａ >= 5000
-				PRINTFORMW ビーズが押し込まれるたびに、%CALLNAME%のアナルはひくひくと物欲しそうに動いている。
+				PRINTFORMW 구슬이 들어올 때 마다、%CALLNAME%의 애널은 벌금벌름 거리며 원한다는 듯이 움직이고 있다。
 				CALL A_REACTION_K4828_2_2
 			ELSE
 				CALL A_REACTION_K4828_1_2
 			ENDIF
 		ELSE
 			IF (ABL:Ａ감각 >= 5 && PALAM:쾌Ａ >= 1000) || PALAM:쾌Ａ >= 5000
-				PRINTFORMW ビーズが押し込まれるたびに、%CALLNAME%のアナルはひくひくと物欲しそうに動いている。
+				PRINTFORMW 구슬이 들어올 때 마다、%CALLNAME%의 애널은 벌금벌름 거리며 원한다는 듯이 움직이고 있다。
 				CALL A_REACTION_K4828_2_2
 			ELSE
 				CALL A_REACTION_K4828_1_1
@@ -2137,7 +2137,7 @@ CASE 15
 		CALL PRINT_AA_K1404
 	ELSE
 		CALL TRAIN_MESSAGE
-		CSTR:100 = ふひゃあん%UNICODE(0x2665)%
+		CSTR:100 = 후햐아앙%UNICODE(0x2665)%
 		CFLAG:808 = 461;アナルビーズ（出す）
 		CALL PRINT_AA_K1404
 	ENDIF
@@ -2272,7 +2272,7 @@ CASE 15
 					CFLAG:808 = 490;搾乳機
 					CALL PRINT_AA_K1404
 				ELSEIF MARK:2 == 3
-					CSTR:100 = 앗、당장、그만두세요……っ！
+					CSTR:100 = 앗、당장、그만두세요……！
 					CFLAG:808 = 490;搾乳機
 					CALL PRINT_AA_K1404
 				ELSE
@@ -2302,15 +2302,15 @@ CASE 15
 					CALL PRINT_AA_K4828
 				;굴복각인Lv3
 				ELSEIF MARK:2 == 3
-					CSTR:100 = 쿠우……아무리 그래도、모유를 판다니……っ
+					CSTR:100 = 쿠우……아무리 그래도、모유를 판다니……
 					CFLAG:808 = 7114;表情
 					CALL PRINT_AA_K4828
 				;그 이외
 				ELSE
-					CSTR:100 = 하ー아、하ー아……이제、그만둬……っ
+					CSTR:100 = 하ー아、하ー아……이제、그만둬……
 					CFLAG:808 = 7114;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 이거…、제법、체력…쓰는 거니까……っ
+					CSTR:100 = 이거…、제법、체력…쓰는 거니까……
 					CFLAG:808 = 7109;表情
 					CALL PRINT_AA_K4828
 				ENDIF
@@ -2461,7 +2461,7 @@ CASE 15
 				CSTR:100 = 아쿳！　웃……
 				CFLAG:808 = 7111;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 좀 더 천천히 움직여……っ！
+				CSTR:100 = 좀 더 천천히 움직여……！
 				CFLAG:808 = 7150;表情(怒り)
 				CALL PRINT_AA_K4828
 			ENDIF
@@ -2476,7 +2476,7 @@ CASE 15
 					CALL PRINT_AA_K1404
 				;挿入し場合ていない場合
 				ELSEIF TFLAG:60 == 0 
-					CSTR:100 = んんっ%UNICODE(0x2665)%…来た、そこ…そのまま奥にっ…
+					CSTR:100 = 응읏%UNICODE(0x2665)%…왔어、거기…그대로 안쪽으로…
 					CFLAG:808 = 600;正常位
 					CALL PRINT_AA_K4828
 				ELSE
@@ -2581,13 +2581,13 @@ CASE 15
 					CALL PRINT_AA_K1404
 				;緊縛されていない
 				ELSEIF TFLAG:60 == 0 
-					CSTR:100 = ああっんぅ%UNICODE(0x2665)%、挿入って…っ
-					CSTR:101 = （チ○ポ%UNICODE(0x2665)%、おチ○ポ入ってるぅ%UNICODE(0x2665)%）
+					CSTR:100 = 아아응%UNICODE(0x2665)%、삽입이라니…
+					CSTR:101 = （자○%UNICODE(0x2665)%、자○ 들어갔어어%UNICODE(0x2665)%）
 					CFLAG:808 = 612;後背位2
 					CALL PRINT_AA_K1404
 				;挿入済み
 				ELSE
-					CSTR:100 = くぅ…、んはぁ…%UNICODE(0x2665)%、今度は後ろからシテくれるの♪
+					CSTR:100 = 크으…、응하아…%UNICODE(0x2665)%、이번에는 뒤에서 해주는구나♪
 					CFLAG:808 = 612;後背位2
 					CALL PRINT_AA_K1404
 				ENDIF
@@ -2596,7 +2596,7 @@ CASE 15
 				;V感覚Lv5以上
 				SIF (ABL:Ｖ감각 >= 5 && PALAM:쾌Ｖ >= 1000) || PALAM:쾌Ｖ >= 5000
 					PRINTFORMW %마스터가% %CALLNAME%의 허리를 붙들자、%CALLNAME%은 조건 반사처럼 허리를 앞뒤로 움직였다
-				PRINTFORMW 壁に手をつかせて奥まで何度も突き上げると、%CALLNAME%は大きな胸を震わせ、だらしなく開いた口から嬌声を上げた。
+				PRINTFORMW 벽에 손을 얹고 안쪽으로 몇 번이나 밀어올리자、%CALLNAME%는 큰 가슴을 떨며、칠칠치 못하게 벌어진 입에서 교성을 질렀다。
 				;V感覚表現
 				CALL ABL4_K4828
 				
@@ -2644,11 +2644,11 @@ CASE 15
 		IF TALENT:3 || TALENT:6
 			IF (ABL:Ａ감각 >= 5 && PALAM:쾌Ａ >= 1000) || PALAM:쾌Ａ >= 5000
 				IF RAND:2 == 0
-					PRINTFORMW 奥まで何度も突き上げると、%CALLNAME%は大きな胸をたゆたゆと震わせ、尻穴でペニスを絞りながら嬌声を上げた。
-					CSTR:100 = ふぁぁぁぁぁぁ――%UNICODE(0x2665)%おチ○ポぉ%UNICODE(0x2665)%　
+					PRINTFORMW 안쪽까지 몇 번이나 밀어올리자、%CALLNAME%는 큰 가슴을 부들부들 떨었고、엉덩이 구멍으로 페니스를 쥐어짜며 교성을 질렀다。
+					CSTR:100 = 후아아아아아아――%UNICODE(0x2665)%자○%UNICODE(0x2665)%　
 					CFLAG:808 = 7106;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = おくまでいっぱぁい%UNICODE(0x2665)%
+					CSTR:100 = 안쪽까지 자안뜩%UNICODE(0x2665)%
 					CFLAG:808 = 621;正常位アナル2
 					CALL PRINT_AA_K1404
 				ELSE
@@ -2688,10 +2688,10 @@ CASE 15
 					CALL PRINT_AA_K1404
 				;挿入済み
 				ELSE
-					CSTR:100 = ひゃっ…
+					CSTR:100 = 햣…
 					CFLAG:808 = 7105;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = しゅ…ごぉい%UNICODE(0x2665)%
+					CSTR:100 = 데…다네에%UNICODE(0x2665)%
 					CFLAG:808 = 632;後背位アナル3
 					CALL PRINT_AA_K1404
 				ENDIF
@@ -2703,10 +2703,10 @@ CASE 15
 						PRINTFORMW 육봉이 안쪽에 닿을 때마다、%타겟은% 완급을 붙이면서 항문을 조였다。
 						CFLAG:808 = 633;後背位アナル（側面）
 					CASE 1
-						PRINTFORMW %CALLNAME%の臀部をつかみ、奥まで肉棒を押し込んだ。
+						PRINTFORMW %CALLNAME%의 엉덩이를 잡고、안쪽까지 육봉을 밀어 넣었다。
 						CFLAG:808 = 634;後背位アナル（正面）
 					CASE 2
-						PRINTFORMW 腕を掴まれた%CALLNAME%は腰を叩き付けられるたびに、嬌声を上げた。
+						PRINTFORMW 팔을 붙잡힌 %CALLNAME%는 허리를 부딪힐 때마다、교성을 질렀다。
 						CFLAG:808 = 635;後背位アナル（側面2）
 				ENDSELECT
 				CALL PRINT_AA_K1404
@@ -2776,11 +2776,11 @@ CASE 15
 					CSTR:100 = ……넣는다……
 					CFLAG:808 = 7150;表情(怒り）
 					CALL PRINT_AA_K4828
-					CSTR:100 = （카구야……미안해……っ）
+					CSTR:100 = （카구야……미안해……）
 					CFLAG:808 = 660;騎乗位
 					CALL PRINT_AA_K1404
 				ELSE
-					CSTR:100 = 우우……%CSTR:일인칭%에게 넣게 하다니……っ
+					CSTR:100 = 우우……%CSTR:일인칭%에게 넣게 하다니……
 					CFLAG:808 = 7114;表情(怒り）
 					CALL PRINT_AA_K4828
 					CSTR:101 = 이러니 부정한 지상인은……
@@ -2799,10 +2799,10 @@ CASE 15
 				;妊娠中
 				IF TALENT:임신
 					PRINTFORMW %CALLNAME:MASTER%에게 올라탄 %타겟은%、엉덩이를 흔들면서 엉망진창으로 흐트러졌다
-					CSTR:100 = 하아、하아……싫어、멈출 수 없엇……っ
+					CSTR:100 = 하아、하아……싫어、멈출 수 없엇……
 					CFLAG:808 = 7105;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 아기가 있는데、멈출 수가 없엇……っ
+					CSTR:100 = 아기가 있는데、멈출 수가 없엇……
 					CFLAG:808 = 663;騎乗位4
 					CALL PRINT_AA_K1404
 				ELSE
@@ -2891,7 +2891,7 @@ CASE 15
 					CSTR:100 = 응핫%UNICODE(0x2665)% 이렇게 가까이、앗、핫……핫%UNICODE(0x2665)%
 					CFLAG:808 = 7112;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 앗、거기……っ、뜨거워……っ
+					CSTR:100 = 앗、거기……、뜨거워……
 					CFLAG:808 = 683;対面座位(側面2）
 					CALL PRINT_AA_K1404
 				ENDIF
@@ -2916,10 +2916,10 @@ CASE 15
 		ELSE
 			;연모, 친애
 			IF TALENT:3 || TALENT:6 
-				CSTR:100 = んッ…大丈夫？%CSTR:일인칭%重くないかしら？
+				CSTR:100 = 읏…괜찮아？%CSTR:일인칭% 무겁지 않으려나？
 				CFLAG:808 = 7109;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = （繋がりながらのキス、感じすぎちゃう%UNICODE(0x2665)%）
+				CSTR:100 = （연결되있으면서 키스、너무 느껴버려%UNICODE(0x2665)%）
 				CFLAG:808 = 680;対面座位
 				CALL PRINT_AA_K1404
 					
@@ -2975,7 +2975,7 @@ CASE 15
 					CSTR:100 = 하아、하아……정신을 잃어도、용서해줘
 					CFLAG:808 = 7109;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 한번에 그렇게 괴롭혀지면 어떻게 될 지 모르니까……っ
+					CSTR:100 = 한번에 그렇게 괴롭혀지면 어떻게 될 지 모르니까……
 				ELSE
 					PRINTFORMW %마스터는% 유두와 음핵을 몰아세우며、%타겟을% 쾌락의 소용돌이로 끌어들였다
 					PRINTFORMW 거기에 허리의 움직임도 가세하면서、%CALLNAME%의 이성은 점점 녹아갔다
@@ -2990,14 +2990,14 @@ CASE 15
 				;처녀
 				IF TALENT:0
 					PRINTFORMW 육봉에 찔린 %타겟은%、고통스러운 소리를 내질렀다。
-					CSTR:100 = 쿳、아앗！　커……っ
+					CSTR:100 = 쿳、아앗！　커……
 					CFLAG:808 = 692;背面座位（正面2)
 					CALL PRINT_AA_K1404
 				ELSE
 					CSTR:100 = 핫、아앗……안됏……
 					CFLAG:808 = 7105;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 가슴도、거기도……느껴버려……っ
+					CSTR:100 = 가슴도、거기도……느껴버려……
 					CFLAG:808 = 692;背面座位（正面2)
 					CALL PRINT_AA_K1404
 				ENDIF
@@ -3009,16 +3009,16 @@ CASE 15
 			IF TALENT:3 || TALENT:6
 				;挿入してない
 				IF TFLAG:60 == 0
-					CSTR:100 = あんっ……体が火照って、もう待てないの……っ
+					CSTR:100 = 아앙……몸이 화끈거려서、더는 못기다려……
 					CFLAG:808 = 7115;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 早く、%CSTR:일인칭%のあそこに、突き刺してっ！
+					CSTR:100 = 빨리、%CSTR:일인칭%의 그곳에、찔러줫！
 				;挿入済み
 				ELSE
-					CSTR:100 = はぁ、っはぁ……気を失っても、許してね
+					CSTR:100 = 하아、하아……정신을 잃어도、용서해줘
 					CFLAG:808 = 7116;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 一度にそんなに責められたら、どうなるか分からないから……っ
+					CSTR:100 = 한 번에 그렇게 괴롭히면、어떻게 될지 모르니까……
 				ENDIF
 				CFLAG:808 = 692;背面座位（正面2)
 				CALL PRINT_AA_K1404
@@ -3032,12 +3032,12 @@ CASE 15
 					CSTR:100 = 하아、하아……찔러 줘……、좀 더 %일인칭을%、쳐올려、비벼내려줘……っ……응읏！
 					CFLAG:808 = 7106;表情
 					CALL PRINT_AA_K4828
-					CSTR:101 = ひっ、ああっ！　駄目っ、駄目っ！　変になるぅ！
+					CSTR:101 = 힛、아앗！　안됏、안됏！　이상해져버려！
 					CFLAG:808 = 695;背面座位（正面３）
 				ELSE
 					IF (ABL:Ｖ감각 >= 5 && PALAM:쾌Ｖ >= 1000) || PALAM:쾌Ｖ >= 5000
-						PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の身体を強く抱きしめた。
-						PRINTFORMW 激しい腰の動きによって、%CALLNAME%の理性は次第に蕩けていった
+						PRINTFORMW %CALLNAME:MASTER%는 %CALLNAME%의 몸을 강하게 껴안았다。
+						PRINTFORMW 격렬한 허리 움직임에 의해、%CALLNAME%의 이성은 점차 녹아갔다
 						CALL V_REACTION_K4828_2_2
 					ELSE
 						CALL V_REACTION_K4828_2_1
@@ -3089,13 +3089,13 @@ CASE 15
 		IF TALENT:3 || TALENT:6
 			;挿入していない場合
 			IF TFLAG:60 == 0
-				CSTR:100 = んぅ…、おチ○ポ入ってくる%UNICODE(0x2665)%
+				CSTR:100 = 응…、자○ 들어온다%UNICODE(0x2665)%
 				CFLAG:808 = 710;背面座位アナル
 				CALL PRINT_AA_K1404
 			;挿入後
 			ENDIF
 			IF (ABL:Ａ감각 >= 5 && PALAM:쾌Ａ >= 1000) || PALAM:쾌Ａ >= 5000
-				PRINTFORMW さらに、臀部を掴んで腰を動かすと、%CALLNAME%は激しい快感に襲われ、感極まった声を上げた
+				PRINTFORMW 그리고、엉덩이를 잡고 허리를 움직이자、%CALLNAME%는 격렬한 쾌감에 사로잡혀、환희에 겨운 목소리를 냈다
 				CALL A_REACTION_K4828_2_2
 			ELSE
 				CALL A_REACTION_K4828_2_1
@@ -3150,10 +3150,10 @@ CASE 15
 	CASE 74
 		CALL TRAIN_MESSAGE
 		IF TALENT:3 || TALENT:6
-			CSTR:100 = %CSTR:일인칭%からするから…んっ%UNICODE(0x2665)%
+			CSTR:100 = %CSTR:일인칭%가 할테니까…응%UNICODE(0x2665)%
 			CFLAG:808 = 7115;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = %CSTR:이인칭%は楽にしててね%UNICODE(0x2665)%
+			CSTR:100 = %CSTR:이인칭%는 편하게 있어줘%UNICODE(0x2665)%
 			CFLAG:808 = 741;逆レイプされる2
 			CALL PRINT_AA_K1404
 				
@@ -3162,15 +3162,15 @@ CASE 15
 				
 			;挿入後
 			IF RAND:2 == 0
-				CSTR:100 = ほらっ…聞こえる？、んんっ%UNICODE(0x2665)%…
+				CSTR:100 = 봐봐…들려？、응읏%UNICODE(0x2665)%…
 				CFLAG:808 = 7115;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = %CSTR:일인칭%が腰を振るたびにアソコからいやらしい音ががする%UNICODE(0x2665)%
+				CSTR:100 = %CSTR:일인칭%가 허리를 흔들 때마다 그곳에서 추잡한 소리가 난다%UNICODE(0x2665)%
 			ELSE
-				CSTR:100 = あぁっ%UNICODE(0x2665)%だめぇ…、奥に当たって、このままイッちゃう%UNICODE(0x2665)%
+				CSTR:100 = 아앗%UNICODE(0x2665)% 안돼에…、안쪽에 닿아서、이대로 가버려%UNICODE(0x2665)%
 				CFLAG:808 = 7105;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 「%CSTR:이인칭%も早くっ…精子っ膣内にっ%UNICODE(0x2665)%、いっしょ…一緒にイキたい%UNICODE(0x2665)%%UNICODE(0x2665)%
+				CSTR:100 = 「%CSTR:이인칭%도 빨릿…정자 질내엣%UNICODE(0x2665)%、같이이…같이 가고 싶어%UNICODE(0x2665)%%UNICODE(0x2665)%
 			ENDIF
 			CFLAG:808 = 740;逆レイプされる
 			CALL PRINT_AA_K1404
@@ -3246,14 +3246,14 @@ CASE 15
 				;一回以上射精済み
 				IF CFLAG:800 >= 1
 					PRINTFORMW %타겟은% %CALLNAME:MASTER%의 움찔 움찔 떨리는 육봉에 혀를 부드럽게 기었다。
-					CSTR:100 = 今すぐ綺麗に…しますから…
+					CSTR:100 = 지금 바로 깨끗이…할 테니까…
 					CFLAG:808 = 7114;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = （あぁ…駄目…この臭い、嗅いでいるとまともな判断が…%UNICODE(0x2665)%）
+					CSTR:100 = （아아…안돼…이 냄새、맡고 있으면 제대로 된 판단을…%UNICODE(0x2665)%）
 					CFLAG:808 = 816;フェラ6
 					CALL PRINT_AA_K1404
-					PRINTFORMW そして先を咥え、尿道に残った精液を吸い出し、舌で舐めとった。
-					CSTR:100 = あっ…中にまだ残って…%UNICODE(0x2665)%、吸い出すわね%UNICODE(0x2665)%
+					PRINTFORMW 그리고 끝을 물고、요도에 남은 정액을 빨아들여、혀로 핥았다。
+					CSTR:100 = 앗…안에 아직 남아서…%UNICODE(0x2665)%、빨아낼게%UNICODE(0x2665)%
 					CFLAG:808 = 814;フェラ4
 					CALL PRINT_AA_K1404
 					 CFLAG:800 = 0
@@ -3340,7 +3340,7 @@ CASE 15
 				CSTR:100 = 핫、앗、읏！
 				CFLAG:808 = 7111;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 문지르는 걸로 끝내지 말아줘……っ
+				CSTR:100 = 문지르는 걸로 끝내지 말아줘……
 				CFLAG:808 = 832;素股3
 				CALL PRINT_AA_K1404
 			ELSE
@@ -3356,12 +3356,12 @@ CASE 15
 		ELSE
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%を見ながら奉仕を続けた
+				PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%를 보면서 봉사를 계속했다
 				IF RAND:2 == 0
 					CSTR:100 = 핫、앗、읏！
 					CFLAG:808 = 7105;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 문지르는 걸로 끝내지 말아줘……っ
+					CSTR:100 = 문지르는 걸로 끝내지 말아줘……
 				ELSE
 					CSTR:100 = 읏、아앗！　부족해！안에 와줘、앗、안돼앳！　응읏！
 					CFLAG:808 = 7109;表情
@@ -3521,7 +3521,7 @@ CASE 15
 				IF RAND:2 == 0 && ABL:8 >= 5
 					CSTR:100 = 하웃♪　우우웃！
 					;KR판 임의수정, 주석처리
-					;CSTR:100 = ぐっ！　ちょ、ちょっと！　何するのよ！
+					;CSTR:100 = 큿！　자、잠깐！　뭐 하는거야！
 					CFLAG:808 = 7105;表情
 					CALL PRINT_AA_K4828
 					CSTR:100 = 좀 더、때려줘！、어맞아서 느끼는 %일인칭을%、혼내줘♪
@@ -3590,7 +3590,7 @@ CASE 15
 			IF TALENT:3 || TALENT:6
 				;マゾっ気Lv5以上
 				SIF ABL:8 >= 5
-					PRINTFORMW %타겟은% 거친 호흡을 가다듬으며、슬픈 듯한 표정을 지었다。。
+					PRINTFORMW %타겟은% 거친 호흡을 가다듬으며、슬픈 듯한 표정을 지었다。
 				IF ABL:8 >= 5
 					CSTR:100 = 아쿳！
 					CFLAG:808 = 1020;鞭
@@ -3643,7 +3643,7 @@ CASE 15
 				CSTR:100 = 아파……
 				CFLAG:808 = 1040;針
 				CALL PRINT_AA_K1404
-				CSTR:100 = 뭐 하는거야、정말……っ
+				CSTR:100 = 뭐 하는거야、정말……
 				CFLAG:808 = 7111;表情
 				CALL PRINT_AA_K4828
 			ENDIF 
@@ -3665,7 +3665,7 @@ CASE 15
 				CSTR:100 = 아파……
 				CFLAG:808 = 1040;針
 				CALL PRINT_AA_K1404
-				CSTR:100 = 뭐 하는거야、정말……っ
+				CSTR:100 = 뭐 하는거야、정말……
 				CFLAG:808 = 7111;表情
 				CALL PRINT_AA_K4828
 			ENDIF
@@ -3872,11 +3872,11 @@ CASE 15
 ;-------------------------------------------------
 	CASE 121
 		CALL TRAIN_MESSAGE
-		PRINTFORMW %CALLNAME:ASSI%と舌を絡み合わせながら、永琳は乱れ狂った
-		CSTR:100 = んちゅ、んっ、ぶっ……れろ……
+		PRINTFORMW %CALLNAME:ASSI%와 혀를 뒤엉키면서、에이린은 흐트러졌다
+		CSTR:100 = 응츄、응、츗……할짝……
 		CFLAG:808 = 7112;表情
 		CALL PRINT_AA_K4828
-		CSTR:101 = はぁ……はぁ……なかなか、激しいわね……
+		CSTR:101 = 하아……하아……꽤나、격렬하네……
 		CFLAG:808 = 1210;貝あわせ
 		CALL PRINT_AA_K1404
 
@@ -4022,7 +4022,7 @@ CASE 15
 				CSTR:100 = 웃、훗……콜록！
 				CFLAG:808 = 1400;イラマチオ
 				CALL PRINT_AA_K4828
-				CSTR:100 = 하ー앗、하아……할꺼면 좀 더 부드럽게 하세요……っ！
+				CSTR:100 = 하ー앗、하아……할꺼면 좀 더 부드럽게 하세요……！
 				CFLAG:808 = 7150;表情(怒り)
 				CALL PRINT_AA_K4828
 			ENDIF
@@ -4043,18 +4043,18 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;野外プレイの場合
 		IF TEQUIP:29
-			PRINTFORMW さらに四つん這いにさせ、犬のように放尿させた
-			CSTR:100 = は、恥ずかしいわ…
+			PRINTFORMW 네 발로 긴 자세로、개처럼 방뇨시켰다
+			CSTR:100 = 부、부끄러워…
 			CFLAG:808 = 1440;방뇨(野外）
 			CALL PRINT_AA_K1404
 		;ビデオカメラ使用中
 		ELSEIF TEQUIP:28
-			CSTR:100 = は、恥ずかしいわ…
+			CSTR:100 = 부、부끄러워…
 			CFLAG:808 = 1830;ビデオカメラ（with利尿剤）
 			CALL PRINT_AA_K1404
 		;그 이외
 		ELSE
-			CSTR:100 = は、恥ずかし過ぎるわ…
+			CSTR:100 = 너、너무 부끄러워…
 			CFLAG:808 = 7116;表情
 			CALL PRINT_AA_K1404
 		ENDIF
@@ -4137,11 +4137,11 @@ CASE 15
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				IF EXP:TARGET:촉수경험 >= 1000
-					CSTR:100 = あっ…もっと%CSTR:일인칭%を気持ちよくして%UNICODE(0x2665)%
+					CSTR:100 = 앗…좀 더 %CSTR:일인칭%를 기분좋게 해줘%UNICODE(0x2665)%
 				ELSEIF EXP:TARGET:촉수경험 == 0
-					CSTR:100 = な、なにこれ！？
+					CSTR:100 = 뭐、뭐야 이거！？
 				ELSE
-					CSTR:100 = んっ…また、これで遊ぶのね…
+					CSTR:100 = 응…또、이걸로 노는구나…
 				ENDIF
 			ENDIF
 			CFLAG:808 = 1600;触手召喚
@@ -4156,12 +4156,12 @@ CASE 15
 	CASE 161
 		CALL TRAIN_MESSAGE
 		IF EXP:TARGET:촉수경험 >= 1000
-			CSTR:100 = 中に入って！　おマ○コにズブズブ入って…
+			CSTR:100 = 안에 들어가서！　보○지에 찌걱찌걱 들어가서…
 			CFLAG:808 = 7106;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = あぁっ%UNICODE(0x2665)%%UNICODE(0x2665)%
+			CSTR:100 = 아앗%UNICODE(0x2665)%%UNICODE(0x2665)%
 		ELSE
-			CSTR:100 = そ、そんなとこ触ったって%CSTR:일인칭%は…
+			CSTR:100 = 그、그런 데 만진들 %CSTR:일인칭%는…
 		ENDIF
 		CFLAG:808 = 1610;触手挿入
 		CALL PRINT_AA_K1404
@@ -4171,9 +4171,9 @@ CASE 15
 	CASE 162
 		CALL TRAIN_MESSAGE
 		IF EXP:TARGET:촉수경험 >= 1000
-			CSTR:100 = あっ…もっと%CSTR:일인칭%を気持ちよくして%UNICODE(0x2665)%
+			CSTR:100 = 앗…좀 더 %CSTR:일인칭%를 기분좋게 해줘%UNICODE(0x2665)%
 		ELSE
-			CSTR:100 = んぁっ！　お尻ダメぇっ！
+			CSTR:100 = 응앗！　엉덩이 안 됏！
 		ENDIF
 		CFLAG:808 = 1620;アナル触手
 		CALL PRINT_AA_K1404
@@ -4195,7 +4195,7 @@ CASE 15
 ;-------------------------------------------------
 	CASE 164, 165
 		CALL TRAIN_MESSAGE
-		CSTR:100 = あっ%CSTR:일인칭%のおっぱい吸われてる…
+		CSTR:100 = 앗 %CSTR:일인칭%의 가슴을 빨고 있어…
 		CFLAG:808 = 1640;触手乳首責め
 		CALL PRINT_AA_K1404
 
@@ -4279,7 +4279,7 @@ CASE 15
 			CSTR:100 = %CSTR:일인칭%에게 약이、듣다니……
 			CFLAG:808 = 7109;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = 하아、안댓、머리가、더 이상……っ%UNICODE(0x2665)%
+			CSTR:100 = 하아、안댓、머리가、더 이상……%UNICODE(0x2665)%
 			CFLAG:808 = 7100;半裸
 			CALL PRINT_AA_K4828
 			CFLAG:393 = 1
@@ -4294,10 +4294,10 @@ CASE 15
 				CFLAG:808 = 7100;全裸
 				CALL PRINT_AA_K1404
 			ELSE
-				CSTR:100 = 약이라니、%CSTR:일인칭%한테는 듣지 않을텐데……っ
+				CSTR:100 = 약이라니、%CSTR:일인칭%한테는 듣지 않을텐데……
 				CFLAG:808 = 7109;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = 하아、하아……안댓、몸이、뜨거워져……っ
+				CSTR:100 = 하아、하아……안댓、몸이、뜨거워져……
 				CFLAG:808 = 7100;全裸
 				CALL PRINT_AA_K1404
 			ENDIF
@@ -4327,7 +4327,7 @@ CASE 15
 					CALL PRINT_AA_K4828
 				ELSE
 					PRINTFORMW 유방과 성기를 손으로 가리며、%타겟은% 알몸을 드러냈다
-					CSTR:100 = ……아무리 서머너의 명령이라 해도、이건……っ
+					CSTR:100 = ……아무리 서머너의 명령이라 해도、이건……
 					CFLAG:808 = 7107;全裸
 					CALL PRINT_AA_K4828
 				ENDIF
@@ -4483,7 +4483,7 @@ CASE 15
 					CALL PRINT_AA_K4828
 					PRINTFORMW %CALLNAME:MASTER%의 말을 들은 %타겟은%、볼을 붉혔다
 				ELSE
-					CSTR:100 = 거울 앞에서 하다니……っ
+					CSTR:100 = 거울 앞에서 하다니……
 					CFLAG:808 = 7111;表情
 					CALL PRINT_AA_K4828
 					PRINTFORMW %타겟은% 볼을 붉히며、부끄러워했다
@@ -4764,11 +4764,11 @@ CASE 15
 				CSTR:100 = 핫、히양！　거、거깃、쿠우！
 				CFLAG:808 = 7105;表情
 				CALL PRINT_AA_K4828
-				CSTR:100 = (んっ…、おマ○コが気持ちよくて、%CSTR:이인칭%のに集中できない%UNICODE(0x2665)%）
+				CSTR:100 = (응…、보○가 기분 좋아서、%CSTR:이인칭%의 것이 집중할 수 없어%UNICODE(0x2665)%）
 				CFLAG:808 = 5010;シックスナイン
 				CALL PRINT_AA_K1404
 				PRINTFORMW 민감한 부분에 닿았는지、%CALLNAME%의 몸은 들썩거렸다
-				PRINTFORMW %CALLNAME%は腰を上げ、一心不乱に%CALLNAME:MASTER%の一物を咥えはじめた
+				PRINTFORMW %CALLNAME% 허리를 들어、일심불란하게 %CALLNAME:MASTER%의 물건을 물기 시작했다
 				CSTR:100 = 하아、하아……앗、좋아…%UNICODE(0x2665)%
 				CFLAG:808 = 7112;表情
 				CALL PRINT_AA_K4828
@@ -4776,7 +4776,7 @@ CASE 15
 				CFLAG:808 = 5011;シックスナイン2
 				CALL PRINT_AA_K1404
 			ELSE
-				CSTR:100 = 하아……앗……거기、는……っ
+				CSTR:100 = 하아……앗……거기、는……
 			ENDIF
 		ENDIF
 ;-------------------------------------------------
@@ -4859,8 +4859,8 @@ CASE 15
 					PRINTFORMW 격렬한 쾌감에 휩싸인 %타겟은%、몇번이나 교성을 울렸다。
 					PRINTFORMW %CALLNAME%의 발끝은 가늘게 떨려、어쩔 줄을 모르는 것 같다
 				ELSE
-					PRINTFORMW 指を動かすと、クチュクチュといやらしい水音が鳴った。
-					PRINTFORMW 執拗に責めたてると、%CALLNAME%は手足をぴんっと伸ばし、切なげな表情で快感に耐えている。
+					PRINTFORMW 손가락을 움직이자、찌걱찌걱 하고는 추잡한 물소리가 났다。
+					PRINTFORMW 집요하게 괴롭히자、%CALLNAME%는 손 발을 빳빳이 펴고、괴로운 듯한 표정으로 쾌감을 견디고 있다。
 				ENDIF
 				CALL BODYTOUCH_K4828_2_2
 				CFLAG:808 = 5030;Gスポ刺激
@@ -4884,19 +4884,19 @@ CASE 15
 				;처녀
 				IF TALENT:0
 					PRINTFORMW %CALLNAME%의 몸을 들어올려、더럽혀지지 않은 비순을 넓힌다。선명한 분홍색이 거울에 비치자、%타겟은% 견딜 수 없어하며 고개를 돌렸다。
-					CSTR:100 = 아아……그런、이런、부끄러워……っ、이、이런거、부끄러워서 죽어버릴거 같아……っ
+					CSTR:100 = 아아……그런、이런、부끄러워……、이、이런거、부끄러워서 죽어버릴거 같아……っ
 					CFLAG:808 = 7109;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = 넣을꺼면 빨리 넣어줘、부탁이야……っ
+					CSTR:100 = 넣을꺼면 빨리 넣어줘、부탁이야……
 					CFLAG:808 = 5040;乱れ牡丹2
 					CALL PRINT_AA_K1404
 					PRINTFORMW %마스터는% %CALLNAME%의 소원을 들어주기 위해、과시하면서 처녀를 앗아갔다。
 				ELSE
 					PRINTFORMW %타겟은% 황홀한 표정을 지으며、전신에 퍼지는 쾌락에 번민했다
-					CSTR:100 = ……繋がってる
+					CSTR:100 = ……연결되있어
 					CFLAG:808 = 7109;表情
 					CALL PRINT_AA_K4828
-					CSTR:100 = ……%CSTR:이인칭%と、一つになってるわ……%UNICODE(0x2665)%
+					CSTR:100 = ……%CSTR:이인칭%과、하나가 되어있어……%UNICODE(0x2665)%
 					CFLAG:808 = 5040;乱れ牡丹2
 					CALL PRINT_AA_K1404
 				ENDIF
@@ -4926,8 +4926,8 @@ CASE 15
 		ELSE
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
-				PRINTFORMW 顔を背ける%CALLNAME%に鏡を見るように強制させる。
-				PRINTFORMW すると、鏡には情欲に溺れ、フニャフニャになったモノ欲しそうな顔と、玉のような汗を流す卑猥な体が映った。
+				PRINTFORMW 외면하는 %CALLNAME%에게 거울을 보도록 강제시킨다。
+				PRINTFORMW 그러자、거울에는 정욕에 빠져、흐물흐물해진 물건을 탐내는 듯한 얼굴과、구슬땀을 흘리는 추잡한 몸이 비쳤다。
 				PRINTFORMW %타겟은% 당신에게 과시하듯、허리를 몇번이나 부딪쳤다。
 				PRINTFORMW %CALLNAME%의 비렬에서는、애액이 소리를 내며 방울져 떨어졌다。
 				CSTR:100 = 봐 줘！　앗、%이인칭과%！　%이인칭과%、이어진 곳을！
@@ -4948,7 +4948,7 @@ CASE 15
 ;-------------------------------------------------
 	CASE 505
 		CALL TRAIN_MESSAGE
-		CSTR:100 = っはぁ…%UNICODE(0x2665)%…ふあぁ…%UNICODE(0x2665)%
+		CSTR:100 = 하아…%UNICODE(0x2665)%…후앙…%UNICODE(0x2665)%
 		CFLAG:808 = 5050;騎乗乳房自慰
 		CALL PRINT_AA_K1404
 ;-------------------------------------------------
@@ -4980,8 +4980,8 @@ CASE 15
 		CALL TRAIN_MESSAGE
 		;後背位
 		IF PREVCOM == 61
-			CSTR:100 = だめ%UNICODE(0x2665)%これっ%UNICODE(0x2665)%
-			CSTR:101 = きてる%UNICODE(0x2665)%奥まで来てる%UNICODE(0x2665)%%UNICODE(0x2665)%
+			CSTR:100 = 안돼%UNICODE(0x2665)%이거%UNICODE(0x2665)%
+			CSTR:101 = 왔어%UNICODE(0x2665)%안쪽까지 왔어%UNICODE(0x2665)%%UNICODE(0x2665)%
 			CFLAG:808 = 5070;挿入子宮口責め(with 後背位）
 			CALL PRINT_AA_K1404
 		;騎乗位
@@ -4990,8 +4990,8 @@ CASE 15
 			CALL PRINT_AA_K1404
 		ENDIF
 		;挿入後
-		CSTR:100 = かはぁっ！　、し、子宮まで来てる…%UNICODE(0x2665)%
-		CSTR:101 = %CSTR:일인칭%の子宮、%CSTR:이인칭%に征服されてる%UNICODE(0x2665)%
+		CSTR:100 = 하앙！　、자、지궁까지 왔어…%UNICODE(0x2665)%
+		CSTR:101 = %CSTR:일인칭%의 자궁、%CSTR:이인칭%에게 정복당하고 있어%UNICODE(0x2665)%
 		CFLAG:808 = 5071;挿入子宮口責め
 		CALL PRINT_AA_K1404
 
@@ -5140,9 +5140,9 @@ IF TFLAG:29 > 1
 	CALL PALAM_MESSAGE_B
 	SELECTCASE RAND:4
 		CASE 0
-			PRINTFORMW 永琳はだらしなく口を開け、強烈な快楽に染まった。
-			CSTR:100 = ふっ%UNICODE(0x2665)%%UNICODE(0x2665)%、ああっ！？
-			CSTR:101 = （こんな……こんなに、気持ちいいなんて……っ）
+			PRINTFORMW 영림은 칠칠치 못하게 입을 벌리고、강렬한 쾌락에 물들었다。
+			CSTR:100 = 흣%UNICODE(0x2665)%%UNICODE(0x2665)%、아앗！？
+			CSTR:101 = （이런……이렇게、기분이 좋다니……）
 		CASE 1
 			PRINTFORMW %CALLNAME%의 몸이 몇번이나 뛰어올랐다。입가는 느슨해져、상스럽게 침을 질질 흘리고 있다。
 			CSTR:100 = 가버렷、앗%UNICODE(0x2665)%、앗、가버려엇！
@@ -5499,10 +5499,10 @@ IF TFLAG:2 > 0
 					CSTR:100 = 핫、아아앙%UNICODE(0x2665)%！　으읏……
 					CSTR:101 = 굉장해%UNICODE(0x2665)%……%CSTR:이인칭% 께、안에서……꿈틀거리고 있어……
 				CASE 1
-					CSTR:100 = あんっ%UNICODE(0x2665)%……안에서、나오고있어……
+					CSTR:100 = 응앗%UNICODE(0x2665)%……안에서、나오고있어……
 					CSTR:101 = 그래도、부족해……다음은、앞쪽에 줘%UNICODE(0x2665)%……
 				CASE 2
-					PRINTFORMW ペニスの震えを感じた%CALLNAME%は待ち望んだモノを受け取ろうと、尻穴全部で%CALLNAME:MASTER%に奉仕した。
+					PRINTFORMW 페니스의 떨림을 느낀 %CALLNAME%는 기다리던 물건을 받기위해、엉덩이 구멍 전부로 %CALLNAME:MASTER%에게 봉사했다。
 					CSTR:100 = 하아、하아%UNICODE(0x2665)%……뜨거워%UNICODE(0x2665)%……
 					CSTR:101 = 엉덩이가、타는 것 같아……
 				CASE 3
@@ -5521,13 +5521,13 @@ IF TFLAG:2 > 0
 					CFLAG:808 = 8007;사정（with後背位アナル）
 				;그 외
 				ELSE
-					CSTR:100 = あっ%UNICODE(0x2665)%　凄い…%UNICODE(0x2665)%　
-					CSTR:101 = 精子…お腹に入りきらない%UNICODE(0x2665)%
+					CSTR:100 = 앗%UNICODE(0x2665)%　대단해…%UNICODE(0x2665)%　
+					CSTR:101 = 정자…배에 다 들어가지도 않아%UNICODE(0x2665)%
 					CFLAG:808 = 8008;사정（withアナル大量射精）
 				ENDIF
 			ENDIF
 		ELSE
-			PRINTFORMW 「읏、아앗！　っ……」
+			PRINTFORMW 「읏、아앗！　읏……」
 			PRINTFORMW 「엉덩이에 내다니、무슨 생각이야……정말！」
 		ENDIF
 		;尻穴射精カウント上昇
@@ -5580,7 +5580,7 @@ IF TFLAG:2 > 0
 						CSTR:100 = 하아、하아%UNICODE(0x2665)%……당신의 정액…
 						CSTR:101 = 정말 뜨거워서、버릇이 될 거 같아%UNICODE(0x2665)%……
 					CASE 2
-						CSTR:100 = （シアワセすぎて…頭…バカになりそう…%UNICODE(0x2665)%）
+						CSTR:100 = （너무 행복해서…머리…바보가 될 것 같아…%UNICODE(0x2665)%）
 				ENDSELECT
 			ENDIF
 			;AA選択
@@ -5640,8 +5640,8 @@ ENDIF
 ;-------------------------------------------------
 ;분유하고 있다
 IF TFLAG:11 > 0
-	PRINTFORMW %CALLNAME%の乳首から白濁した液体がぴゅーっと溢れ出た。
-	CSTR:100 = ああぁ%UNICODE(0x2665)%、む胸から…出ちゃう%UNICODE(0x2665)%
+	PRINTFORMW %CALLNAME%의 젖꼭지에서 백탁진 액체가 퓻 하고 쏟아져 나왔다。
+	CSTR:100 = 아앙%UNICODE(0x2665)%、가슴에서…나와 버려%UNICODE(0x2665)%
 	CFLAG:808 = 8200;;분유
 	CALL PRINT_AA_K1404
 ENDIF
@@ -5764,7 +5764,7 @@ IF P > PALAMLV:3&& CFLAG:250 == 0
 			IF RAND:2 == 0
 				CSTR:100 = 하아、하아……제발、여기에、%CSTR:이인칭%껄%UNICODE(0x2665)%……
 			ELSE
-				CSTR:100 = んっ%UNICODE(0x2665)%……もう焦らさないで%UNICODE(0x2665)%……
+				CSTR:100 = 읏%UNICODE(0x2665)%……너무 조급하게 굴지 마%UNICODE(0x2665)%……
 			ENDIF
 			CFLAG:808 = 7101;尻出し
 			CALL PRINT_AA_K1404
@@ -5786,7 +5786,7 @@ IF P > PALAMLV:3 && CFLAG:251 == 0
 	;미약을 사용한 경우
 	IF SELECTCOM == 181
 		PRINTFORMW 「약이、듣다니……」
-		PRINTFORMW 「하아、안 돼、머리가、더 이상……っ」
+		PRINTFORMW 「하아、안 돼、머리가、더 이상……」
 	;그 이외
 	ELSE
 		PRINTFORMW %타겟은% 얼굴을 붉히며 자신의 욕정에 버티고 있다。
@@ -5831,7 +5831,7 @@ IF P > PALAMLV:3 && CFLAG:254 == 0
 	;함락완료
 	IF TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8
 		PRINTFORMW 「무서워……」
-		PRINTFORMW 「부탁이야、곁에 있어줘……っ」
+		PRINTFORMW 「부탁이야、곁에 있어줘……」
 	;그 이외
 	ELSE
 		PRINTFORMW 「나、%조사처리(CSTR:11,"가")% 기가 죽는 일은 없어요！」
@@ -5903,7 +5903,7 @@ IF TFLAG:23 == 3
 		PRINTFORMW 
 	ELSE
 		PRINTFORMW 「훗、아앗！？」
-		PRINTFORMW （이런……이렇게、기분좋다니……っ）
+		PRINTFORMW （이런……이렇게、기분좋다니……）
 		PRINTFORMW %타겟은% 상스럽게 입을 열어、강렬한 쾌락에 물든 것을 표현했다
 	ENDIF
 ENDIF
@@ -6018,7 +6018,7 @@ SELECTCASE TFLAG:13
 						CSTR:101 = 슬슬、아침 밥을 만들지 않으면……
 						CFLAG:808 = 820;パイズリ
 						CALL PRINT_AA_K4828
-						PRINTFORMW %타겟은% 자제하는 듯이 말했지만、좀처럼 끝을 보이지 않았다					ENDIF
+						PRINTFORMW %타겟은% 자제하는 듯이 말했지만、좀처럼 끝을 보이지 않았다
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -6230,17 +6230,17 @@ SELECTCASE TFLAG:13
 							PRINTFORMW 「읏%UNICODE(0x2665)%、핫%UNICODE(0x2665)%、어、때？　이대로、핫、아침까지、짜내、버릴까？」
 							PRINTFORMW 결국、%조사처리(CALLNAME,"가")% 끝낼 때까지 행위는 계속됐다
 						CASE 1
-							PRINTFORMW 「んっ、あぁんっ！　もっと、激しくぅ！%UNICODE(0x2665)%」
-							PRINTFORMW 髪を振り乱しながら、永琳は何度も腰を打ち付けた
+							PRINTFORMW 「읏、아응！　좀 더、격렬하게에！%UNICODE(0x2665)%」
+							PRINTFORMW 머리를 흐트러뜨리며、에이린은 몇 번이나 허리를 부딪쳤다
 						CASE 2
-							PRINTFORMW 「やっ%UNICODE(0x2665)%、駄目ぇ！　こんな、馬鹿になっちゃうぅ%UNICODE(0x2665)%！」
-							PRINTFORMW 脚を%CALLNAME:MASTER%に絡ませながら、永琳は性交の快楽に酔いしれた
+							PRINTFORMW 「싫%UNICODE(0x2665)%、안돼에！　이런、바보가 되어버려어%UNICODE(0x2665)%！」
+							PRINTFORMW 다리를 %CALLNAME:MASTER%에게 얽히면서、에이린은 성교의 쾌락에 취해 있었다
 						CASE 3
-							PRINTFORMW 「はあっ、いいっ、いいのっ%UNICODE(0x2665)%%UNICODE(0x2665)%！」
-							PRINTFORMW 「熱くて、もう何も考えられなくなってぇ！」
+							PRINTFORMW 「하앗、좋앗、좋아앗%UNICODE(0x2665)%%UNICODE(0x2665)%！」
+							PRINTFORMW 「뜨거워서、이제 아무 생각도 할 수 없게 되버려어！」
 						CASE 4
-							PRINTFORMW 「はっ、そう、そこが、いいのっ%UNICODE(0x2665)%！」
-							PRINTFORMW 「はくっ、もっと、強く、突き上げてっ%UNICODE(0x2665)%！」
+							PRINTFORMW 「핫、거기、거기가、좋앗%UNICODE(0x2665)%！」
+							PRINTFORMW 「하긋、좀 더、세게、찔러올려줫%UNICODE(0x2665)%！」
 						ENDSELECT
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -6272,7 +6272,7 @@ SELECTCASE TFLAG:13
 			;연모, 친애
 			IF TALENT:3 || TALENT:6
 				PRINTFORMW 「핫%UNICODE(0x2665)%……앗%UNICODE(0x2665)%……」
-				PRINTFORMW 「이런 걸 해도, 충족되지 않는데……っ」
+				PRINTFORMW 「이런 걸 해도, 충족되지 않는데……」
 			;음란, 창부
 			ELSEIF TALENT:4 || TALENT:7
 				PRINTFORMW 
@@ -6300,7 +6300,7 @@ SELECTCASE TFLAG:13
 					CALL PRINT_AA_K4828
 					PRINTFORMW 갑작스러운 사건에、%마스터는% 놀라 소리를 냈다
 					PRINTFORMW 그러나 열려고 한 %CALLNAME:MASTER%의 입은 %CALLNAME%의 입술로 막혔다
-					PRINTFORMW 「읏%UNICODE(0x2665)%……훗%UNICODE(0x2665)%……좋지、핫、계속 해 줘……っ%UNICODE(0x2665)%」
+					PRINTFORMW 「읏%UNICODE(0x2665)%……훗%UNICODE(0x2665)%……좋지、핫、계속 해 줘……%UNICODE(0x2665)%」
 					PRINTFORMW 결국、%조사처리(CALLNAME,"가")% 끝낼 때까지 행위는 계속됐다
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -6326,7 +6326,7 @@ SELECTCASE TFLAG:13
 					CALL PRINT_AA_K4828
 					PRINTFORMW 갑작스러운 사건에、%마스터는% 놀라 소리를 냈다
 					PRINTFORMW 그러나 열려고 한 %CALLNAME:MASTER%의 입은 %CALLNAME%의 입술로 막혔다
-					PRINTFORMW 「읏……훗……좋지?、핫、계속 해 줘……っ」
+					PRINTFORMW 「읏……훗……좋지?、핫、계속 해 줘……」
 					PRINTFORMW 결국、%조사처리(CALLNAME,"가")% 끝낼 때까지 행위는 계속됐다
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -6387,7 +6387,7 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:269 < 1 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					CSTR:100 = はっ%UNICODE(0x2665)%……んっ%UNICODE(0x2665)%……どう……かしら？
+					CSTR:100 = 핫%UNICODE(0x2665)%……응%UNICODE(0x2665)%……어떠……려나？
 					CFLAG:808 = 7100;半裸
 					CALL PRINT_AA_K4828
 				;음란, 창부
@@ -6412,7 +6412,7 @@ SELECTCASE TFLAG:13
 					IF RAND:2 == 0
 						PRINTFORMW 「앗%UNICODE(0x2665)%、안됏！　부족햇！」
 						PRINTFORMW %타겟은% 때때로 %CALLNAME:MASTER%의 이름을 외치며 음핵을 심하게 몰아세웠다
-						CSTR:100 = 읏%UNICODE(0x2665)%……이런 짓 해도、어떻게 되는 것도 아닌데……っ
+						CSTR:100 = 읏%UNICODE(0x2665)%……이런 짓 해도、어떻게 되는 것도 아닌데……
 						LOCAL = 1
 					ELSE
 						PRINTFORMW 「명령된 것도 아닌데、이젠……っ」
@@ -6425,7 +6425,7 @@ SELECTCASE TFLAG:13
 					IF LOCAL == 1	
 						PRINTFORMW 점차 거세게 몰아붙이면서、%타겟은% %마스터를% 생각했다
 					ELSEIF LOCAL == 2
-						PRINTFORMW 声を押し殺しながら、%CALLNAME%は満たされない欲求を発散していった
+						PRINTFORMW 목소리를 억누르면서、%CALLNAME%는 충족되지 않는 욕구를 발산해 나갔다
 					ENDIF
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
@@ -6475,12 +6475,12 @@ SELECTCASE TFLAG:13
 				PRINTFORMW 
 			;부친이 주인이고 모친이 연모나 친애 보유
 			ELSEIF (TALENT:3 || TALENT:6) && CFLAG:102 == 1
-				PRINTFORMW 「不老不死でも…子供ってできるのね…」
-				PRINTFORMW 蓬莱の薬で…不老不死となったのだから…子供は大丈夫なはず…
-				PRINTFORMW 「でも…そんな事例見たこともないし…断言なんかできない…わね。」
-				PRINTFORMW 悩んだ末、永琳は意を決した……
-				PRINTFORMW 「この子は、あの人との子供…なら、私は母親として、この子を支えていけばいいのよ…」
-				PRINTFORMW 永琳は、お腹の子を産む決心をした。
+				PRINTFORMW 「불로불사라도…아이는 생기는구나…」
+				PRINTFORMW 봉래의 약으로…불로불사가 되었으니까…아이는 괜찮을 거야…
+				PRINTFORMW 「하지만…그런 사례를 본 적도 없고…단언 따위는 할 수 없…으니까。」
+				PRINTFORMW 고민 끝에、에이린은 마음을 정했다……
+				PRINTFORMW 「이 아이는、그 사람과의 아이…그렇다면、나는 엄마로서、이 아이를 지탱해 나가면 돼…」
+				PRINTFORMW 에이린은、뱃속의 아이를 낳을 결심을 했다。
 			;부친이 노예나 조수고 모친이 음란이나 창부 보유
 			ELSEIF (TALENT:4 || TALENT:7) && (CFLAG:102 == 2 || CFLAG:102 == 3)
 				;부친(조수）과의 상성이 125보다 큰 경우
@@ -6509,11 +6509,11 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:272 < 2 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「私も、ついにお母さんか…姫が聞いたら…どんな顔をするかしら…
-					PRINTFORMW 喜んでもらえるのが……嬉しいけど…」
-					PRINTFORMW 永琳は、断続的に来る陣痛の痛みを感じながら…天井を見る
-					PRINTFORMW 「でも、どんな結果になろうとも…この子は私が……
-					PRINTFORMW 守らなくちゃね…私は、この子の母親なんだから…」
+					PRINTFORMW 「나도、드디어 엄마구나…공주가 들으면…무슨 얼굴을 해오려나…
+					PRINTFORMW 기뻐해주면……좋겠지만…」
+					PRINTFORMW 에이린은、간헐적으로 오는 진통의 아픔을 느끼며…천장을 본다
+					PRINTFORMW 「하지만、어떤 결과가 되더라도…이 아이는 내가……
+					PRINTFORMW 지켜야하겠지…나는、이 아이의 엄마니까…」
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6539,15 +6539,15 @@ SELECTCASE TFLAG:13
 					;연모, 친애
 					IF TALENT:3 || TALENT:6
 						IF RAND:2 == 0
-							PRINTFORMW 永琳は大きくなったお腹を撫でながら…
-							PRINTFORMW 「このお腹じゃ…%CALLNAME:MASTER%の手伝いはできないわね。心苦しいけど…」
-							PRINTFORMW 永琳は少し申し訳なさそうに言った。
-							PRINTFORMW 「でも私のことは安心して。私も、医者なんだから…自分の体ぐらい分かるわよ。」
-							PRINTFORMW 永琳は、微笑みながら言った。
+							PRINTFORMW 에이린은 커다래진 배를 쓰다듬으며…
+							PRINTFORMW 「이런 배로는…%CALLNAME:MASTER%의 도움이 못 되네。마음이 불편한데…」
+							PRINTFORMW 에이린은 조금 미안하다는 듯이 말했다。
+							PRINTFORMW 「그래도 나는 안심해도 돼。나도、의사니까…내 몸 정도는 알아。」
+							PRINTFORMW 에이린은、미소를 지으며 말했다。
 						ELSE
-							PRINTFORMW 「そう…あ、ねぇ。さっきお腹の赤ちゃんが動いたのよ。
-							PRINTFORMW きっと元気な赤ちゃんが生まれると思うわ。」
-							PRINTFORMW 「え？それは医者としての見解？　ふふふ…いいえ。母親としての直感よ。」
+							PRINTFORMW 「그렇지…아、저기。아까 뱃속의 아기가 움직였어。
+							PRINTFORMW 분명 건강한 아기가 태어날 거라고 생각해。」
+							PRINTFORMW 「에？그건 의사로서의 견해？　후후후…아니。엄마로서의 직감이야。」
 						ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
@@ -6569,15 +6569,15 @@ SELECTCASE TFLAG:13
 					IF TALENT:3 || TALENT:6
 					;夜
 					IF TIME == 3
-						PRINTFORMW 「あら、いらっしゃい。今寝付いたところよ。
-						PRINTFORMW 寝顔を見ていく？%CALLNAME:MASTER%にそっくりよ。ふふふ。」
+						PRINTFORMW 「어머、어서와。지금 막 잠들었어。
+						PRINTFORMW 자는 얼굴 보고 갈래？%CALLNAME:MASTER%를 쏙 빼닮았어。후후후。」
 					ELSE
-						PRINTFORMW %CALLNAME:MASTER%が部屋に入った時、永琳は、子供にお乳
-						PRINTFORMW を飲ませているところであった。
-						PRINTFORMW 「あら、%CALLNAME:MASTER%。」
-						PRINTFORMW 永琳は微笑みながら言った後、子供に…
-						PRINTFORMW 「パパがきましたよ。挨拶しよっか。」
-						PRINTFORMW 3人で水入らずの時を過ごした…
+						PRINTFORMW %CALLNAME:MASTER%가 방에 들어갔을 때、에이린은、아이에게
+						PRINTFORMW 젖을 먹이고 있는 중이었다。
+						PRINTFORMW 「어머、%CALLNAME:MASTER%。」
+						PRINTFORMW 에이린은 미소를 지으며 말한 뒤、아이에게…
+						PRINTFORMW 「파파가 왔네요。인사해볼까。」
+						PRINTFORMW 3인이서 한가로운 시간을 보냈다…
 					ENDIF
 					;음란, 창부
 					ELSEIF TALENT:4 || TALENT:7
@@ -6602,13 +6602,13 @@ SELECTCASE TFLAG:13
 			IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && (CFLAG:274 < 2 || FLAG:7 == 2)
 				;연모, 친애
 				IF TALENT:3 || TALENT:6
-					PRINTFORMW 「ごめんなさい。%CALLNAME:MASTER%…ちょっとだけ…」
-					PRINTFORMW 永琳は、%CALLNAME:MASTER%に体を預け、頭を垂れた。表情は綺麗な銀の長い髪で
-					PRINTFORMW 読み取ることが出来なかった…
-					PRINTFORMW しかし…肩の振るえ…時々聞こえる声を殺した泣き声…
-					PRINTFORMW この涙は…悲しみの涙ではない。ずっとそばにいた愛する者を送り出したときの
-					PRINTFORMW 寂しさ…からくる涙…
-					PRINTFORMW しかし、子供は…その親の寂しさを背で感じることなく成長していく。
+					PRINTFORMW 「미안해요。%CALLNAME:MASTER%…잠깐만…」
+					PRINTFORMW 에이린은、%CALLNAME:MASTER%에게 몸을 맡기고、고개를 숙였다。표정은 예쁜 은빛 긴머리로 인해
+					PRINTFORMW 읽을 수가 없었다…
+					PRINTFORMW 그러나…어깨의 흔들림…가끔 들리는 소리 죽인 울음소리…
+					PRINTFORMW 이 눈물은…슬픔의 눈물이 아니다。줄곧 곁에 있던 사랑하는 자를 보냈을 때의
+					PRINTFORMW 외로움…에서 오는 눈물…
+					PRINTFORMW 그러나、아이는…그 부모의 외로움을 등으로 느끼지 않고 성장해 간다。
 				;음란, 창부
 				ELSEIF TALENT:4 || TALENT:7
 					PRINTFORMW 
@@ -6804,74 +6804,74 @@ SELECTCASE TSTR:END종별
 			PRINTFORML ………
 			PRINTFORML ……
 			PRINTFORMW 
-			PRINTFORML 永琳
-			PRINTFORMW 「ねぇ…%CALLNAME:MASTER%。永遠亭で、一緒に暮さない？」
-			PRINTFORMW 永琳の突然の申し出に%CALLNAME:MASTER%は言葉に詰まる。
+			PRINTFORML 에이린
+			PRINTFORMW 「저기…%CALLNAME:MASTER%。영원정에서、같이 살지 않을래？」
+			PRINTFORMW 에이린의 갑작스러운 제의에 %CALLNAME:MASTER%는 말문이 막힌다。
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「%CALLNAME:MASTER%の戸惑いはよくわかるわ…でも……私は、あなたとずっといたいのよ。」
+			PRINTFORML 에이린
+			PRINTFORMW 「%CALLNAME:MASTER%의 당혹감은 잘 알아…하지만……나는、당신과 계속 있고 싶어。」
 			PRINTL 
-			PRINTFORMW ＞すでに、日が落ち…空には綺麗な満月が輝いていた。永琳はその満月を見ながら…
+			PRINTFORMW ＞이미、해가 지고…하늘에는 예쁜 보름달이 빛나고 있었다。에이린은 그 보름달을 보면서…
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORML 「私は、蓬莱人となってから無限とも言えるような時間を過ごしてきたわ…
-			PRINTFORMW 　その間に…今のような気持ちに…ならなかったといえば嘘になるわ…」
+			PRINTFORML 에이린
+			PRINTFORML 「나는、래인이 된 이후로 무한하다고 말할 수 있는 시간을 보내왔어…
+			PRINTFORMW 　그 사이에…지금과 같은 기분으로…되지 않았다고 하면 거짓말이 돼…」
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「でも、一緒に時を過ごした事はなかった。」
+			PRINTFORML 에이린
+			PRINTFORMW 「하지만、함께 시간을 보낸적은 없었어。」
 			PRINTL 
-			PRINTFORML 「永琳」
-			PRINTFORMW 「輪廻にとらわれると者とそうでない者が…ともいる事なんて…あり得ないと思ってた。」
+			PRINTFORML 「에이린」
+			PRINTFORMW 윤회에 사로잡히면 사람과 그렇지 않은 사람이…함께 있는다니…있을 수 없다고 생각했어。」
 			PRINTL 
-			PRINTFORMW ＞%CALLNAME:MASTER%は、黙って永琳の話を聞いている。
+			PRINTFORMW ＞%CALLNAME:MASTER%는、잠자코 에이린의 이야기를 듣고 있다。
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「でも…その長い時間の中で、寂寥感に襲われた事は…幾度もあるわ。後悔もした…有限でも…それでも…一緒にいれば…
-			PRINTFORMW （何かが変わったのではないかしら…）
-			PRINTFORMW ……。その寂しさも少しは軽くなったのかってね。」
+			PRINTFORML 에이린
+			PRINTFORMW 「하지만…그 긴 시간 속에서、적막감에 사로잡힌 적은…여러 번 있어。후회도 했지…유한해도…그래도…같이 있으면…
+			PRINTFORMW （뭔가가 달라지지는 않을까…）
+			PRINTFORMW ……。그 외로움도 조금은 가벼워질 것 같으니까。」
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「だから……」
+			PRINTFORML 에이린
+			PRINTFORMW 「그러니까……」
 			PRINTL 
-			PRINTFORMW ＞永琳は、%CALLNAME:MASTER%の方を振り向く…それはとても真剣なまなざし…
+			PRINTFORMW ＞에이린은、%CALLNAME:MASTER% 쪽을 돌아본다…그것은 매우 진지한 눈빛…
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「私は…もう、迷わないわ。%CALLNAME:MASTER%は有限の時を過ごし、私は無限の時を過ごす…
-			PRINTFORMW %CALLNAME:MASTER%が老い…そして死んでいく時も私は…変わらない。それでも、その時に悲しみに暮れても…
-			PRINTFORMW 私は、%CALLNAME:MASTER%とずっと一緒にいたいわ。」
+			PRINTFORML 에이린
+			PRINTFORMW 「나는…이제、망설이지 않아。%CALLNAME:MASTER%는 유한한 시간을 보내고、나는 무한한 시간을 보낸다…
+			PRINTFORMW %CALLNAME:MASTER%가 늙고…그리고 죽을때도 난…변치않아。그래도、그 때 슬픔에 잠겨도…
+			PRINTFORMW 나는、%CALLNAME:MASTER%와 계속 함께 있고 싶어。」
 			PRINTL 
-			PRINTFORMW ＞永琳は、%CALLNAME:MASTER%に抱きついた…離したくない…という気持ちか…
+			PRINTFORMW ＞에이린은、%CALLNAME:MASTER%를 껴안았다…떨어지고 싶지 않다…는 기분인가…
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「お、お願い…一緒に時が来るその日まで…一緒に…いましょ…。」
+			PRINTFORML 에이린
+			PRINTFORMW 「부、부탁해…함께 때가 오는 그날까지…함께…있자…。」
 			PRINTL 
-			PRINTFORMW ＞震える声…いつも毅然としている永琳…
-			PRINTFORMW ＞%CALLNAME:MASTER%は、永琳を抱きしめた…そして…
+			PRINTFORMW ＞떨리는 목소리…언제나의 의연한 목소리인 에이린…
+			PRINTFORMW ＞%CALLNAME:MASTER%는、에이린을 껴안았다…그리고…
 			PRINTL 
 			PRINTFORML ……
 			PRINTFORML …
 			PRINTL 
-			PRINTFORML 永琳
+			PRINTFORML 에이린
 			PRINTFORMW 「！？」
 			PRINTL 
-			PRINTFORMW ＞永琳はその言葉を聞き、顔をあげた。その目は涙を浮かべ…赤くなってる…
+			PRINTFORMW ＞에이린은 그 말을 듣고、고개를 들었다。.그 눈은 눈물을 글썽이며…빨개져있다…
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「う、嬉しいわ…良かった…言って。恐れずに言ってよかったわ…」
-			PRINTFORMW 「これから…末永くよろしくね。%CALLNAME:MASTER%…ずっと一緒…」
-			PRINTFORMW 「たとえ…時が来ても私は、貴方を忘れないし…思いつづけるわ…」
-			PRINTFORMW 「そして…輪廻の輪を巡って…生まれ変わった%CALLNAME:MASTER%を…
-			PRINTFORMW かならず…見つけ出して。また、私の所へ…」
+			PRINTFORML 에이린
+			PRINTFORMW 「기、기뻐…다행이야…말해서。두려워하지 말고 말해서 다행이야…」
+			PRINTFORMW 「앞으로…오래도록 잘 부탁해。%CALLNAME:MASTER%…계속 함께…」
+			PRINTFORMW 「비록…때가 와도 나는、당신을 잊지 않을 거고…계속 생각할거야…」
+			PRINTFORMW 「그리고…윤회의 고리를 돌아서…다시 태어난 %CALLNAME:MASTER%를…
+			PRINTFORMW 꼭…찾아내서。다시、내 곁에…」
 			PRINTL 
-			PRINTFORMW ＞と、永琳は%CALLNAME:MASTER%に口づけをした…
+			PRINTFORMW ＞라며、에이린은 %CALLNAME:MASTER%에게 입을 맞추었다…
 			PRINTL 
-			PRINTFORML 永琳
-			PRINTFORMW 「ん…」
+			PRINTFORML 에이린
+			PRINTFORMW 「응…」
 			PRINTL 
 			PRINTFORML ……
 			PRINTFORML …
 			PRINTFORMW 
-			PRINTFORMW 　　　　　　　　―― Extra Ending　（永琳エンド）
+			PRINTFORMW 　　　　　　　　―― Extra Ending　（에이린엔딩）
 		;음란 1체 엔딩
 		;ELSEIF TALENT:음마 && CFLAG:21 == 1
 			;DRAWLINE
@@ -6929,11 +6929,11 @@ SELECTCASE TFLAG:전투이벤트
 ;아군 파티에서의 데빌ＣＯ－ＯＰ 발동시의 대사
 	CASE 1
 		IF RAND:2 == 0
-			CSTR:100 = "強力な技を使うことも大切だけど、連携も重要よ
+			CSTR:100 = "강력한 기술을 사용하는 것도 중요하지만、연계도 중요해
 			CFLAG:808 = 7011
 			CALL PRINT_AA_K4828
 		ELSE
-			CSTR:100 = 貴方が傍にいてくれるんだもの、負ける筈がないわ
+			CSTR:100 = 당신이 곁에 있어 준다면야、질 리가 없어
 			CFLAG:808 = 7009
 			CALL PRINT_AA_K4828
 		ENDIF
@@ -6941,98 +6941,98 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 2
 		IF RAND:2 == 0
 			PRINTFORML ┏＠%NAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"あら、やるじゃない",72,LEFT%┃
+			PRINTFORML ┃%"어머、꽤 하잖아",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏＠%NAME:ARG,20,LEFT%━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"いい動きよ、流石ね",72,LEFT%┃
+			PRINTFORML ┃%"좋은 움직임이야、역시나네",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ;공격　ARG가 공격하는 동료마, ARG:1이 적, ARG:2가 데미지량
 	CASE 11
 		IF BASE:(ARG:1):ＨＰ <= 0;攻撃して倒した
 			IF RAND:2 == 0
-				CSTR:100 = ふふっ、話にならないわね
+				CSTR:100 = 후훗、시시하네
 			ELSE
-				CSTR:100 = まさか、もう動けなくなったのかしら？
+				CSTR:100 = 설마、더는 움직일 수 없게 된거야？
 			ENDIF
 			CFLAG:808 = 7000
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 50;대 데미지
-			CSTR:100 = この程度の相手、私一人でも十分だわ
+			CSTR:100 = 이 정도의 상대、나 혼자라도 충분해
 			CFLAG:808 = 7000
-		;小ダメージ
+		;소데미지
 		ELSEIF 데미지비율(ARG:1, ARG:2) > 10
 			IF RAND:2 == 0
-				CSTR:100 = 少しは骨のある相手が出てきたわね
+				CSTR:100 = 조금은 튼튼한 상대가 나왔네
 			ELSE
-				CSTR:100 = 雑魚では無いけど、勝てない相手ではないわね
+				CSTR:100 = 송사리는 아니지만、이길 수 없는 상대는 아니네
 			ENDIF
 			CFLAG:808 = 7011
-		;무효化された
+		;무효화했다
 		ELSEIF 데미지비율(ARG:1, ARG:2) == 0
-			CSTR:100 = これでも結構本気で戦ったんだけど……
+			CSTR:100 = 이래뵈도 꽤 진심으로 싸웠는데……
 			CFLAG:808 = 7010
 		ENDIF
 		CALL PRINT_AA_K4828
-;被弾
+;피탄
 	CASE 12
 		;死亡
 		IF BASE:ARG:ＨＰ <= 0
-			CSTR:100 = 駄目っ……体が……っ！
+			CSTR:100 = 안됏……몸이……큿！
 			CFLAG:808 = 7003
-		;残り１５％以下
+		;나머지１５％이하
 		ELSEIF 현HP비율(ARG) < 15
-			CSTR:100 = これ以上は危険ね……
+			CSTR:100 = 이 이상한 위험하네……
 			CFLAG:808 = 7003
-		;무효 or 吸収
+		;무효 or 흡수
 		ELSEIF ARG:2 == 0 || ARG:2 < 0
-			CSTR:100 = あら、もう終わり？　お粗末ね
+			CSTR:100 = 어머、벌써 끝이야？　서투른걸
 			CFLAG:808 = 7010
 		ENDIF
 	CALL PRINT_AA_K4828
-;範囲攻撃
+;범위 공격
 	CASE 13
-		CSTR:100 = さあ、これを避けられるかしら？
+		CSTR:100 = 글쎄、이걸 피할 수 있을까？
 		CFLAG:808 = 7012
 		CALL PRINT_AA_K4828
-;攻撃ミス
+;공격미스
 	CASE 17
-		CSTR:100 = この私が遅れを取るなんて…
+		CSTR:100 = 이 내가 밀리다니…
 		CFLAG:808 = 7003
 		CALL PRINT_AA_K4828
-;回避
+;회피
 	CASE 18
-		CSTR:100 = 遅いわね
+		CSTR:100 = 느리네
 		CFLAG:808 = 7004
 		CALL PRINT_AA_K4828
-;食いしばり、不屈の闘志
+;이악물기、불굴의 투지
 	CASE 24
-		CSTR:100 = この程度では、私達に勝つ事なんて出来ないわよ
+		CSTR:100 = 이 정도로는、우리를 이길 수 없어
 		CFLAG:808 = 7013
 		CALL PRINT_AA_K4828
-;勝利
+;승리
 	CASE 90
 		IF RAND:5 == 0
-			CSTR:100 = 終わったようね、皆、怪我はない？
+			CSTR:100 = 끝난 것 같네、모두들、다친데 없어？
 			CFLAG:808 = 7005
 			CALL PRINT_AA_K4828
 		ENDIF
-;レベルアップ
+;레벨업
 	CASE 91
-		CSTR:100 = あら、すこし勘が戻ってきたかしら？
+		CSTR:100 = 어머、조금 감이 돌아온건가？
 		CFLAG:808 = 7010
 		CALL PRINT_AA_K4828
-;戦闘開始
+;전투개시
 	CASE 94
 		IF RAND:5 == 0
-			CSTR:100 = 敵襲よ！気を付けて！
+			CSTR:100 = 적습이야！조심해！
 			CFLAG:808 = 7001
 			CALL PRINT_AA_K1404
 		ENDIF
-;奇襲された
+;기습당했다
 	CASE 95, 96
 			CSTR:100 = ！
-			CSTR:101 = 攻撃が来るわ！気を付けて！
+			CSTR:101 = 공격이 올 거야！조심해！
 			CFLAG:808 = 7003
 			CALL PRINT_AA_K1404
 ENDSELECT
@@ -7049,7 +7049,7 @@ LOCALS = %RESULTS%
 IF RANGE(CFLAG:ARG:입력행동,101, 199)
 	;刹那五月雨撃
 	IF CFLAG:ARG:입력행동 == 108
-		CSTR:100 = さあ、これが避けられるかしら？
+		CSTR:100 = 자、이걸 피할 수 있을까？
 		CSTR:101 = %LOCALS%！
 		CFLAG:808 = 7013
 		CALL PRINT_AA_K4828
@@ -7063,14 +7063,14 @@ ELSEIF CFLAG:ARG:입력행동 >= 401 && CFLAG:ARG:입력행동 < 407
 		CFLAG:808 = 7009
 	ELSE
 		CSTR:100 = %LOCALS%！
-		CSTR:101 = 体は大丈夫？、あんまり無理しちゃ駄目よ？
+		CSTR:101 = 몸은 괜찮아？、너무 무리하면 안된다고？
 		CFLAG:808 = 7014
 	ENDIF
 	CALL PRINT_AA_K4828
-;状態異常回復
+;상태 이상 회복
 ELSEIF CFLAG:ARG:입력행동 >=408 && CFLAG:ARG:입력행동 <= 414
 	CSTR:100 = "정말……너무 걱정시키지 말라고……
-	CSTR:101 = はい、%LOCALS%よ
+	CSTR:101 = 자、%LOCALS% 이야
 	CFLAG:808 = 7014
 	CALL PRINT_AA_K4828
 ;만능
@@ -7085,21 +7085,21 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 		CFLAG:808 = 7011
 	ELSE
 		CSTR:100 = 하아……송사리를 상대하는건 귀찮네
-		CSTR:101 = %LOCALS%でいいかしら
+		CSTR:101 = %LOCALS% 정도면 충분하려나
 		CFLAG:808 = 7010
 	ENDIF
 	CALL PRINT_AA_K4828
 ELSEIF RANGE(CFLAG:ARG:입력행동,1, 2099)
 	IF RAND:2 == 0
-		CSTR:100 = ふふっ、少し遊んであげるわ
+		CSTR:100 = 후훗、조금 놀아줄게
 		CSTR:101 = %LOCALS%！
 		CFLAG:808 = 7000
 		CALL PRINT_AA_K4828
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"%CALLNAME%は軽く溜め息を吐き、スペルカードを取り出した",72,LEFT%┃
+		PRINTFORML ┃%"%CALLNAME%는 가볍게 한숨을 내쉬고、스펠카드를 꺼냈다",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-		CSTR:100 = 行くわよ、%LOCALS%！
+		CSTR:100 = 간다、%LOCALS%！
 		CFLAG:808 = 7013
 		CALL PRINT_AA_K4828
 	ENDIF
@@ -7127,9 +7127,9 @@ ENDIF
 IF CFLAG:809 == 1
 
 ELSE
-	CHKFONT "ＭＳ Ｐゴシック"
+	CHKFONT "MS PGothic"
 	SIF RESULT
-		SETFONT "ＭＳ Ｐゴシック"
+		SETFONT "MS PGothic"
 	;AAと本文の間に一行スペースを入れる
 	PRINTL 　
 	SELECTCASE CFLAG:808
@@ -8532,7 +8532,7 @@ PRINTFORM  %UNICODE(0x2665)%
 RESETCOLOR
 SETFONT
 ;======================================
-;愛撫系
+;애무계
 ;=====================================
 ;●1-1
 @BODYTOUCH_K4828_1_1
@@ -8541,7 +8541,7 @@ SELECTCASE RAND:3
 		CSTR:100 = 쿳……
 		CFLAG:808 = 7107;表情3
 		CALL PRINT_AA_K4828
-		CSTR:100 = 좀 더 상냥하게……っ
+		CSTR:100 = 좀 더 상냥하게……
 	CASE 1
 		CSTR:100 = ……그렇게、비벼대면
 		CFLAG:808 = 7108;表情3
@@ -8638,7 +8638,7 @@ ENDSELECT
 
 
 ;=============================================
-;A反応
+;A반응
 ;==============================================
 
 ;A反応２－２
@@ -8662,16 +8662,16 @@ SELECTCASE RAND:5
 		CSTR:100 = 엉덩이로 느껴버려어！
 	CASE 3
 		IF SELECTCOM == 63 || SELECTCOM == 70;(後背位アナル、対面座位アナル）
-			PRINTFORMW 臀部を揉み、そのやわらかさ堪能しながら、腰を動かすと、%CALLNAME%は突き入れるリズムに合わせて尻穴を締め付けてきた
-			CSTR:100 = もっと強く抱いて…%UNICODE(0x2665)%
+			PRINTFORMW 엉덩이를 주물러、그 부드러움을 만끽하면서、허리를 움직이자、%CALLNAME%는 밀어 넣는 리듬에 맞춰 엉덩이 구멍을 꽉 조여 왔다
+			CSTR:100 = 좀 더 세게 안아줘…%UNICODE(0x2665)%
 			CFLAG:808 = 7111;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = %CSTR:일인칭%のお尻の穴、%CSTR:이인칭%のおチ○ポの形にして…%UNICODE(0x2665)%
+			CSTR:100 = %CSTR:일인칭%의 엉덩이 구멍、%CSTR:이인칭%의 자○ 형태로 해줘…%UNICODE(0x2665)%
 		ELSE
-			CSTR:100 = ひっ…　あっは%UNICODE(0x2665)%…　
+			CSTR:100 = 힛…　아핫%UNICODE(0x2665)%…　
 			CFLAG:808 = 7106;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = あぁぁん%UNICODE(0x2665)%
+			CSTR:100 = 아아앙%UNICODE(0x2665)%
 		ENDIF
 	CASE 4
 		CSTR:100 = 하앗！
@@ -8679,10 +8679,10 @@ SELECTCASE RAND:5
 		CALL PRINT_AA_K4828
 		CSTR:100 = 엉덩이갓、이렇게 기분이 좋다니！
 	CASE 5
-		CSTR:100 = あっあっ%UNICODE(0x2665)%いいの
+		CSTR:100 = 앗앗%UNICODE(0x2665)%좋아
 		CFLAG:808 = 7106;表情
 		CALL PRINT_AA_K4828
-		CSTR:100 = もっと突っ込んでぇ%UNICODE(0x2665)%
+		CSTR:100 = 좀 더 후벼줘어%UNICODE(0x2665)%
 ENDSELECT
 
 ;●A系反応２－１
@@ -8737,7 +8737,7 @@ SELECTCASE RAND:3
 		CSTR:100 = 아쿳……
 		CFLAG:808 = 7108;表情
 		CALL PRINT_AA_K4828
-		CSTR:100 = 엉덩이로、느껴버리다니……っ！
+		CSTR:100 = 엉덩이로、느껴버리다니……！
 	CASE 1
 		PRINTFORMW %타겟은% 때때로 고통스러운 목소리를 내면서도、평정을 가장했다。
 		CSTR:100 = 앗、핫……격렬하、구나
@@ -8805,7 +8805,7 @@ SELECTCASE RAND:5
 			CSTR:101 = 아읏%UNICODE(0x2665)%……굉장해、전기가 흐르는 것 같아……
 		ENDIF
 	CASE 2
-		CSTR:100 = 아아……안대애……기분 좋아져서……っ！
+		CSTR:100 = 아아……안대애……기분 좋아져서……！
 		CFLAG:808 = 7112;表情
 		CALL PRINT_AA_K4828
 		CSTR:100 = 아앗！
@@ -8816,7 +8816,7 @@ SELECTCASE RAND:5
 		CSTR:100 = 거기가 좋아앗！
 	CASE 4
 		PRINTFORMW %CALLNAME%의 몸은 부들부들 떨며、온몸에 쾌감을 전달시켰다。
-		CSTR:100 = 핫、아쿳！　이런、걸、앗……당하면……っ！
+		CSTR:100 = 핫、아쿳！　이런、걸、앗……당하면……！
 		CFLAG:808 = 7106;表情
 		CALL PRINT_AA_K4828
 		CSTR:100 = 앗、이거、좀 더！　쿳、아앙！
@@ -8865,16 +8865,16 @@ SELECTCASE RAND:4
 			CALL PRINT_AA_K4828
 			CSTR:100 = 범해줘%UNICODE(0x2665)%！　안쪽까지、범해줫！
 		ELSE
-			CSTR:100 = ふぁぁぁぁぁぁ――%UNICODE(0x2665)%おチ○ポぉ%UNICODE(0x2665)%
+			CSTR:100 = 후아아아아아아――%UNICODE(0x2665)%자○%UNICODE(0x2665)%
 			CFLAG:808 = 7106;表情
 			CALL PRINT_AA_K4828
-			CSTR:100 = おくまでいっぱぁい%UNICODE(0x2665)%
+			CSTR:100 = 안쪽까지 자안뜩%UNICODE(0x2665)%
 		ENDIF
 	CASE 1
-		CSTR:100 = ふあぁ%UNICODE(0x2665)%、かたいのはいってくるぅ%UNICODE(0x2665)%
+		CSTR:100 = 후앙%UNICODE(0x2665)%、딱딱한게 오고있어어%UNICODE(0x2665)%
 		CFLAG:808 = 7106;表情
 		CALL PRINT_AA_K4828
-		CSTR:100 = 感じるぅ%UNICODE(0x2665)%…おチ○ポ…奥まできてるぅ%UNICODE(0x2665)%
+		CSTR:100 = 느껴져어%UNICODE(0x2665)%…자○…안쪽까지 왔어어%UNICODE(0x2665)%
 	CASE 2
 		PRINTFORMW %타겟은% 쾌락에 잠기면서、당신을 요구했다。
 		CSTR:100 = 앗%UNICODE(0x2665)%、아앗！
@@ -8916,7 +8916,7 @@ SELECTCASE RAND:3
 		CSTR:100 = 하아、하아……좋아……
 		CFLAG:808 = 7114;表情
 		CALL PRINT_AA_K4828
-		CSTR:100 = %이인칭을% 안쪽까지 느껴……っ
+		CSTR:100 = %이인칭을% 안쪽까지 느껴……
 	CASE 1
 		CSTR:100 = 하아、하아……좋앗！
 		CFLAG:808 = 7109;表情
@@ -8970,7 +8970,7 @@ SELECTCASE RAND:5
 		CALL PRINT_AA_K4828
 		CSTR:100 = 후훗、좀 더 기분 좋게 해줄테니까♪
 	CASE 2
-		CSTR:100 = 出したくなったら、そのまま出して%UNICODE(0x2665)%
+		CSTR:100 = 내고 싶어지면、그대로 내어줘%UNICODE(0x2665)%
 		CFLAG:808 = 7113;表情
 		CALL PRINT_AA_K4828
 		CSTR:100 = 大丈夫だから……
@@ -9035,30 +9035,30 @@ ENDSELECT
 IF ABL:4 >= 8
 	SELECTCASE RAND:3
 		CASE 0
-			PRINTFORMW 完全に%CALLNAME:MASTER%の男根の形状を覚え込んだ膣内が、絶妙にフィットして吸い付いてくる。
-			PRINTFORMW その隅々まで己の物と化した肉穴の心地良さに%CALLNAME:MASTER%は容赦なく腰を動かし、熱くぬめる感触をじっくり堪能する。
+			PRINTFORMW 완전히 %CALLNAME:MASTER%의 남근 형상을 을 기억한 질내가、절묘하게 달라붙어 온다。
+			PRINTFORMW 그 구석구석까지 자기 것으로 변화한 육벽의 기분 좋음에 %조사처리(CALLNAME:MASTER,"는")% 가차없이 허리를 움직여、뜨겁게 달구는 감촉을 차분히 만끽했다。
 		CASE 1
-			PRINTFORMW %CALLNAME:MASTER%の弱点を知り尽くした肉襞が、みみずのように絡み付いてくる。
-			PRINTFORMW  根元から先端まで、みっちりと接着する柔らかな肉が蠢き、男根を心地良く絞り上げる。
-			PRINTFORMW 裏筋を無数の舌で舐められるような感覚。
-			PRINTFORMW 背筋を震わせながら、無心に腰を打ちつけていく。
+			PRINTFORMW %CALLNAME:MASTER%의 약점을 다 아는 주름이、지렁이처럼 얽혀온다。
+			PRINTFORML 뿌리부터 끝까지、빈틈없이 접착하는 부드러운 고기가 움직이며、남근을 기분 좋게 쥐어짜낸다。
+			PRINTFORMW 뒷줄기를 무수한 혀로 핥는 듯한 느낌。
+			PRINTFORMW 등줄기를 떨면서、무심하게 허리를 부딪쳐 간다。
 		CASE 2
-			PRINTFORMW これまで幾度も味わった肉穴は、まるで飽きを感じさせない。
-			PRINTFORMW 繋がれば繋がるほど%CALLNAME:MASTER%のペニスを覚え込んで変化し、専用の名器に変わろうとしているようだった。
-			PRINTFORMW 秘肉それ自体が男根の弱点を知り尽くしたように蠢動し、熱く柔らかく包み込んでくる……
+			PRINTFORMW 그동안 여러 번 맛본 고기 구멍은、전혀 질리지 않는다。
+			PRINTFORMW 이어지면 이어질수록 %CALLNAME:MASTER%의 페니스를 기억하고 변화해、전용 명기로 바뀌려는 듯했다。
+			PRINTFORMW 비육 그 자체가 남근의 약점을 다 알고 꿈틀거리며、뜨겁고 부드럽게 감싸 온다……
 	ENDSELECT
 ;Ｖ感覚Lv5以上
 ELSEIF ABL:4 >= 5
 	IF RAND:2 == 0
-		PRINTFORMW %CALLNAME%の膣肉が、随分とスムーズに絡み付いてくるようになった。
-		PRINTFORMW 徐々に%CALLNAME:MASTER%のペニスに馴染んできたようだ。
+		PRINTFORMW %CALLNAME%의 질육이、상당히 부드럽게 얽혀들고 있다。
+		PRINTFORMW 서서히 %CALLNAME:MASTER%의 페니스에 익숙해진 것 같다。
 	ELSE
-		PRINTFORMW 緩く、激しく。深く、浅く。%CALLNAME:MASTER%の動きが多彩に変化するたび、%CALLNAME%の悲鳴が迸り
-		PRINTFORMW 穿つ男根をキツく締め上げる。
-		PRINTFORMW すっかり欲望を開花させた%CALLNAME%の様子に煽られ、腰の動きは更に執拗なものとなっていく……
+		PRINTFORMW 느긋하게、격렬하게。깊게、얕게。%CALLNAME:MASTER%의 움직임이 다채롭게 변화할 때마다、%CALLNAME%의 비명이 울리며
+		PRINTFORMW 파고드는 남근을 단단히 조른다。
+		PRINTFORMW 완전히 욕망을 개화시킨 %CALLNAME%의 모습에 선동되어、허리의 움직임은 더욱 집요해져 간다……
 	ENDIF
 ;Ｖ感覚Lv3以上
 ELSEIF ABL:4 >= 3
-	PRINTFORMW %CALLNAME%の膣内は、以前に比べて心なしか男根に馴染み始めているようだ。
-	PRINTFORMW 背後から揺さぶりあげて、まだまだたっぷりと開発の余地のある膣内を嬲り上げていく。
+	PRINTFORMW %CALLNAME%의 질 내부는、예전에 비해 기분 탓인지 남근과 친숙해지기 시작한 것 같다。
+	PRINTFORMW 뒤에서 흔들면서、아직도 충분히 개발의 여지가 있는 질내를 괴롭혀간다。
 ENDIF
