@@ -65,18 +65,18 @@ PRINTFORML    　명랑하고 적극적인 노예의 딸 대사. 현행은 여�
 ;아래에 처녀화할 경우의 구문을 샘플로 올려두겠습니다
 ;--------------------------------------------------
 ;IF CFLAG:220 == 0
-;	PRINTL 処女モードに移行しますか？
-;	PRINTL [0] はい
-;	PRINTL [1] いいえ
+;	PRINTL 처녀 모드로 조교 합니까？
+;	PRINTL [0] 네
+;	PRINTL [1] 아니오
 ;	$INPUT_LOOP
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―処女モードに素質、能力を変更します―
+;		PRINTFORMW ―처녀 모드로 조교、능력을 변경합니다―
 ;		TALENT:TARGET:0 = 1
 ;		ABL:TARGET:4 = 0
 ;		EXP:TARGET:0 = 0
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―通常モードで調教を開始します―
+;		PRINTFORMW ―통상 모드로 조교합니다―
 ;	ELSE
 ;		GOTO INPUT_LOOP
 ;	ENDIF
@@ -8527,14 +8527,14 @@ IF TFLAG:전투이벤트 == 11 && BASE:(ARG:1):ＨＰ <= 0
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"%CSTR:일인칭%의 승리！",72,LEFT%┃
+			PRINTFORML ┃%CSTR:일인칭 + "의 승리！",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 ENDIF
 ;被弾（死亡）
 IF TFLAG:전투이벤트 == 12 && BASE:ARG:ＨＰ <= 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"%CSTR:이인칭%……살려줘……",72,LEFT%┃
+			PRINTFORML ┃%CSTR:이인칭 + "……살려줘……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ENDIF
 ;食いしばり（擬似的に無理やり動かしてます）
@@ -8608,7 +8608,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,101, 199)
 	IF CFLAG:ARG:입력행동 == 229
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"%CSTR:일인칭% 이상해 뭔가 애틋한 마음이……다른거야？",72,LEFT%┃
+			PRINTFORML ┃%CSTR:일인칭 + "이상해 뭔가 애틋한 마음이……다른거야？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8675,7 +8675,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
 		ENDIF
 	ELSEIF RAND:2 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"【" + LOCALS + "】！　%CSTR:일인칭%의 기술을 받아봐랏ー！",72,LEFT%┃
+		PRINTFORML ┃%"【" + LOCALS + "】！　" + CSTR:일인칭 + "의 기술을 받아봐랏ー！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8685,12 +8685,12 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,301, 399)
 
 ;회복
 ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
-	;ディア系
+	;디아계
 	IF RANGE(CFLAG:ARG:입력행동,401, 406)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"아픔아 아픔아 나아랏ー！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;状態回復系
+	;상태회복계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,408, 414)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"언제까지고 상태 나쁘면 곤란하다고",72,LEFT%┃
@@ -8700,7 +8700,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,401, 499)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"뭐든 고쳐진다！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	;リカーム、サマリカーム
+	;리캄、사마리캄
 	ELSEIF RANGE(CFLAG:ARG:입력행동,417, 418)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"부탁이야……돌아와줫！",72,LEFT%┃
@@ -8749,7 +8749,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,501, 599)
 
 ;화염
 ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
-	;アギ系呪文
+	;아기계주문
 	IF RANGE(CFLAG:ARG:입력행동,701, 706)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8760,7 +8760,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
 			PRINTFORML ┃%"아기라니 어떤 의미인거야？",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
-	;ファイアブレス系
+	;파이어브레스계
 	ELSEIF RANGE(CFLAG:ARG:입력행동,708, 711)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8777,14 +8777,14 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,701, 799)
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"헤헤, 불탔징？　%CSTR:일인칭%한테",72,LEFT%┃
+		PRINTFORML ┃%"헤헤, 불탔징？　" + CSTR:일인칭 + "한테",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
 
 ;빙결
 ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
-	;ブフ系呪文
+	;부흐계주문
 	IF RANGE(CFLAG:ARG:입력행동,801, 806)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8806,6 +8806,10 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
 			PRINTFORML ┃%"비야 어ー서ー주륵주륵 쏟아져라ー♪",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
+	ELSEIF RAND:3 == 0
+		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+		PRINTFORML ┃%"【" + LOCALS + "】！　얼어라！",72,LEFT%┃
+		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSEIF RAND:2 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 		PRINTFORML ┃%"얼음 땡！",72,LEFT%┃
@@ -8818,7 +8822,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,801, 899)
 
 ;전격
 ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
-	;ジオ系呪文
+	;지오 계통 주문
 	IF RANGE(CFLAG:ARG:입력행동,901, 906)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8852,7 +8856,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,901, 999)
 
 ;충격
 ELSEIF RANGE(CFLAG:ARG:입력행동,1001, 1099)
-	;ザン系呪文
+	;잔계주문
 	IF RANGE(CFLAG:ARG:입력행동,1001, 1005)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -8894,7 +8898,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1101, 1199)
 	;마계의조사
 	ELSEIF CFLAG:ARG:입력행동 == 1132
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"%CSTR:일인칭%의 노래를 들어봐―！",72,LEFT%┃
+		PRINTFORML ┃%CSTR:일인칭 + "의 노래를 들어봐―！",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;그 외
 	ELSE
@@ -8914,16 +8918,16 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"%CSTR:이인칭%도 사로잡을 거라고！",72,LEFT%┃
+				PRINTFORML ┃%CSTR:이인칭 + "도 사로잡을 거라고！",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"봐줘……%CSTR:일인칭%의 야한 춤……",72,LEFT%┃
+			PRINTFORML ┃%"봐줘……" + CSTR:일인칭 + "의 야한 춤……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"자아。잘 봐줘、%CSTR:일인칭%의 춤",72,LEFT%┃
+			PRINTFORML ┃%"자아。잘 봐줘、" + CSTR:일인칭 + "의 춤",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ENDIF
 	;파이널누드
@@ -8935,12 +8939,12 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1201, 1299)
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ELSE
 				PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-				PRINTFORML ┃%"%CSTR:이인칭% 외에 보여주는건 싫지만 말이지",72,LEFT%┃
+				PRINTFORML ┃%CSTR:일인칭 + "외에 보여주는건 싫지만 말이지",72,LEFT%┃
 				PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 			ENDIF
 		ELSEIF TALENT:4 || TALENT:7
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-			PRINTFORML ┃%"봐줘……%CSTR:일인칭%의 야한 곳……",72,LEFT%┃
+			PRINTFORML ┃%"봐줘……" + CSTR:일인칭 + "의 야한 곳……",72,LEFT%┃
 			PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 		ELSE
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9028,7 +9032,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,1901, 1999)
 
 ;만능
 ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
-	;메기도系呪文
+	;메기도계주문
 	IF RANGE(CFLAG:ARG:입력행동,2001, 2002)
 		IF RAND:2 == 0
 			PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9053,7 +9057,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 	;자폭공격系
 	ELSEIF RANGE(CFLAG:ARG:입력행동,2005, 2007)
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"꼭 이겨야 해、%CSTR:이인칭%……",72,LEFT%┃
+		PRINTFORML ┃%"꼭 이겨야 해、" + CSTR:이인칭 + "……",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	;그 외
 	ELSEIF RAND:2 == 0
@@ -9066,7 +9070,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2001, 2099)
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;魔法%CALLNAME%系
+;마법%CALLNAME%계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 	IF RAND:2 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -9074,11 +9078,11 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2989, 2999)
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ELSE
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-		PRINTFORML ┃%"%CSTR:일인칭%도 마법소녀가 되고 싶네. …엣、그만 두라고？",72,LEFT%┃
+		PRINTFORML ┃%CSTR:일인칭 + "도 마법소녀가 되고 싶네. …엣、그만 두라고？",72,LEFT%┃
 		PRINTFORMW ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	ENDIF
 
-;幻想郷系
+;환상향계
 ELSEIF RANGE(CFLAG:ARG:입력행동,2800, 2999)
 	IF RAND:3 == 0
 		PRINTFORML ┏>MESSAGE━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
