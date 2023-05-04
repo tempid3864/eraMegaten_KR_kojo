@@ -19426,7 +19426,7 @@ SELECTCASE TFLAG:13
 			;あなたがハム子を非処女だと思ってるフラグオン
 			CFLAG:801 = 1
 		;초회 통상
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 1
+		ELSEIF CFLAG:상사이벤트진행도 == 1
 			PRINTFORML 「……%CSTR:이인칭%……。」
 			PRINTFORML 「%CSTR:일인칭%、열심히 했으니까……많이 칭찬해……줄 거죠……？」
 			PRINTFORMW 돌아오는 차 안에서 중얼거리는 %CALLNAME:TARGET%。
@@ -19435,13 +19435,13 @@ SELECTCASE TFLAG:13
 			;上司イベント隷ＮＴＲチェックオフに
 			CFLAG:819 = 0
 		;제 2단계
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 >= 2 && CFLAG:COUNT:상사이벤트진행도 < 9
+		ELSEIF CFLAG:상사이벤트진행도 >= 2 && CFLAG:상사이벤트진행도 < 9
 			;발정중
 			IF (위험일()) == 2
 				PRINTFORML 
 			;위험일
 			ELSEIF (위험일()) == 1
-				IF CFLAG:COUNT:상사이벤트진행도 >= 5
+				IF CFLAG:상사이벤트진행도 >= 5
 					;あなたとＨ済みフラグオフ
 					IF RAND:3 == 0 && CFLAG:802 == 0
 						PRINTFORML 「아앗……%조사처리(CSTR:이인칭,"랑")% 한 적도 없는데……응……임신해버려요……。」
@@ -19474,13 +19474,13 @@ SELECTCASE TFLAG:13
 				ENDIF
 			;통상
 			ELSE
-				IF CFLAG:COUNT:상사이벤트진행도 == 4
+				IF CFLAG:상사이벤트진행도 == 4
 					PRINTFORML 「%CSTR:이인칭%……%CSTR:일인칭%、익숙해졌어요……。」
 					PRINTFORML 「우으……훌쩍……。」
 					PRINTFORML 도구처럼 쓰이는 것에 익숙해져 가는 마음과 몸。
 					PRINTFORMW 그 일에 %조사처리(CALLNAME:TARGET,"는")% 눈물을 흘리며 중얼거렸다。
 				;進行度5,6,7,8を想定
-				ELSEIF CFLAG:COUNT:상사이벤트진행도 >= 6
+				ELSEIF CFLAG:상사이벤트진행도 >= 6
 					IF RAND:2 == 0
 						PRINTFORML 「하앗……하앗……。」
 						PRINTFORML 「읏……아앙……너무……격렬해……。」
@@ -19517,7 +19517,7 @@ SELECTCASE TFLAG:13
 				ENDIF
 			ENDIF
 		;제 3단계:여자를 건넸을 경우의 밤
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 9 && CFLAG:COUNT:상사내습 == 1
+		ELSEIF CFLAG:상사이벤트진행도 == 9 && CFLAG:상사내습 == 1
 			;발정중
 			IF (위험일()) == 2
 				PRINTFORML 
@@ -19568,7 +19568,7 @@ SELECTCASE TFLAG:13
 				ENDIF
 			ENDIF
 		;제 3단계:호출된 밤
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 9 && CFLAG:COUNT:상사내습 == 2
+		ELSEIF CFLAG:상사이벤트진행도 == 9 && CFLAG:상사내습 == 2
 			;발정중
 			IF (위험일()) == 2
 				PRINTFORML 
@@ -19619,17 +19619,17 @@ SELECTCASE TFLAG:13
 				ENDIF
 			ENDIF
 		;제 3단계:발정 한방에 떨어짐
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 15
+		ELSEIF CFLAG:상사이벤트진행도 == 15
 			PRINTFORML 「응힛%UNICODE(0x2661)%　아앙……아ー앗%UNICODE(0x2661)%」
 			PRINTFORML 「기분 좋아요오……히읏！　후아……응흣%UNICODE(0x2661)%」
 			PRINTFORMW 「히앗！　당신의 것이……될테니까！　좀 더、기분 좋게……아앙%UNICODE(0x2661)%」
 		;최종단계
 		;견딘다：사랑은 기적이니까 저확률
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 11 && CFLAG:COUNT:상사내습 == 1
+		ELSEIF CFLAG:상사이벤트진행도 == 11 && CFLAG:상사내습 == 1
 			PRINTFORML 「하앗……하앗……。　끝난거……에요……？」
 			PRINTFORMW 「조금만 있으면 돌아가니까……기다려줘요……%CSTR:이인칭%……。」
 		;떨어진다：현실은 엄격하다고？
-		ELSEIF CFLAG:COUNT:상사이벤트진행도 == 12
+		ELSEIF CFLAG:상사이벤트진행도 == 12
 			PRINTFORML 「아흣……할짝……할짝……。」
 			PRINTFORML 「츄릅……츄팟……。　주인니임%UNICODE(0x2661)%」
 			PRINTFORML 간부 남자에게 충성을 맹세한 %조사처리(CALLNAME:TARGET,"는")%、침대 끝에 앉은 남자의 다리 사이에 무릎을 꿇고 정액과 애액에 더러워진 육봉에 혀를 감고 있었다。
@@ -20193,7 +20193,7 @@ SELECTCASE TFLAG:13
 						;上司イベント隷ＮＴＲチェックオン
 						IF CFLAG:819 == 1
 						
-						;IF CFLAG:COUNT:상사이벤트진행도 == 12 || CFLAG:COUNT:상사이벤트진행도 == 15
+						;IF CFLAG:상사이벤트진행도 == 12 || CFLAG:상사이벤트진행도 == 15
 							
 							PRINTFORML 「이제부터는、바빠질 테니까……。」
 							PRINTFORML 「지금까지 처럼……도와주지 못 할지도……。」
