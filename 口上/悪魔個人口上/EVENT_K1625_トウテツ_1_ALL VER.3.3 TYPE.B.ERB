@@ -449,7 +449,7 @@ ENDIF
 
 IF ASSI < 0 
 	CALL EVENTTRAIN_SECOND_K1625_1
-ELSEIF NO:ASSI == [[キャラ:도올]] && CFLAG:ASSI:811
+ELSEIF NO:ASSI == [[캐릭터:도올]] && CFLAG:ASSI:811
 	;함락완료＋함락시 첫 구상이 발생완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 		WSTR:(K++) = 「어라？　오늘은 %CALLNAME:ASSI%도 함께 하는 거야？」
@@ -480,7 +480,7 @@ ELSEIF NO:ASSI == [[キャラ:도올]] && CFLAG:ASSI:811
 			WSTR:(K++) = 『그렇다니까…… 왜 이렇게 되어버렸는지』
 		ENDIF
 	ENDIF
-ELSEIF NO:ASSI == [[キャラ:궁기]] && CFLAG:ASSI:812
+ELSEIF NO:ASSI == [[캐릭터:궁기]] && CFLAG:ASSI:812
 	;함락완료＋함락시 첫 구상이 발생완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 		WSTR:(K++) = 「%CALLNAME:ASSI%다ー. 둘이서 놀러 온 거야？」
@@ -520,7 +520,7 @@ ELSEIF NO:ASSI == [[キャラ:궁기]] && CFLAG:ASSI:812
 			WSTR:(K++) = 『그보다, 지금은 %CALLNAME%의 차례이니까요. 신경쓰지 말아주세요』
 		ENDIF
 	ENDIF
-ELSEIF NO:ASSI == [[キャラ:혼돈]] && CFLAG:ASSI:813
+ELSEIF NO:ASSI == [[캐릭터:혼돈]] && CFLAG:ASSI:813
 	;함락완료＋함락시 첫 구상이 발생완료
 	IF (TALENT:3 || TALENT:4 || TALENT:5 || TALENT:6 || TALENT:7 || TALENT:8) && CFLAG:201 >= 5
 		WSTR:(K++) = 「%CSTR:이인칭%, 어서 와ー. 아, %CALLNAME:ASSI%이 오는 건 드문 일이네」
@@ -670,7 +670,7 @@ ELSEIF CFLAG:202 < 5 || FLAG:7 == 2
 			WSTR:(K++) = 「이…… 이건, 역시, 조금……」
 			KSTR:(K++) = 　
 			WSTR:(K++) = 지금 %CALLNAME%은, 뱀을 몸에 두른 것 외에는, 실오라기 하나 걸치지 않았다.
-			IF FLAG:(20000+[[キャラ:리리스]]) > 100
+			IF FLAG:(20000+[[캐릭터:리리스]]) > 100
 				WSTR:(K++) = 리리스의 충격적인 모습을 흉내내보았는데…… 역시 그 %CALLNAME%도, 이건 부끄러운 듯 했다.
 			ELSE
 				WSTR:(K++) = 몸에 뱀을 감기만 한 악마가 있다고 들어서 한번 해봤는데…… 역시 그 %CALLNAME%도, 이건 부끄러운 듯 했다.
@@ -1900,7 +1900,7 @@ SELECTCASE SELECTCOM
 			CFLAG:823 = 0
 			;ＴＳ四凶存在確認
 			FOR LOCAL, 0, CHARANUM
-				IF NO:LOCAL == [[キャラ:도올]]
+				IF NO:LOCAL == [[캐릭터:도올]]
 					SIF CFLAG:LOCAL:이자리에없는플래그 == 1
 						CONTINUE
 					IF CFLAG:LOCAL:811 == 1
@@ -1908,7 +1908,7 @@ SELECTCASE SELECTCOM
 						CFLAG:821 = LOCAL
 					ENDIF
 				ENDIF
-				IF NO:LOCAL == [[キャラ:궁기]]
+				IF NO:LOCAL == [[캐릭터:궁기]]
 					SIF CFLAG:LOCAL:이자리에없는플래그 == 1
 						CONTINUE
 					IF CFLAG:LOCAL:812 == 1
@@ -1916,7 +1916,7 @@ SELECTCASE SELECTCOM
 						CFLAG:822 = LOCAL
 					ENDIF
 				ENDIF
-				IF NO:LOCAL == [[キャラ:혼돈]]
+				IF NO:LOCAL == [[캐릭터:혼돈]]
 					SIF CFLAG:LOCAL:이자리에없는플래그 == 1
 						CONTINUE
 					IF CFLAG:LOCAL:813 == 1
@@ -9333,7 +9333,7 @@ SELECTCASE SELECTCOM
 				IF MARK:2 == 3 && (CFLAG:399 < 2 || FLAG:7 == 2) && !구상유무확인(0)
 					;ＴＳ四凶存在確認
 					FOR LOCAL, 0, CHARANUM
-						IF NO:LOCAL == [[キャラ:도올]]
+						IF NO:LOCAL == [[캐릭터:도올]]
 							SIF CFLAG:LOCAL:이자리에없는플래그 == 1
 								CONTINUE
 							SIF CFLAG:LOCAL:811 == 1
@@ -15996,7 +15996,7 @@ SELECTCASE TFLAG:전투이벤트
 	CASE 2
 		;ＴＳ四凶存在確認
 		FOR LOCAL, 0, CHARANUM
-			IF NO:LOCAL == [[キャラ:궁기]]
+			IF NO:LOCAL == [[캐릭터:궁기]]
 				SIF CFLAG:LOCAL:이자리에없는플래그 == 1
 					CONTINUE
 				SIF CFLAG:LOCAL:812 == 1
@@ -16015,7 +16015,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 소환해준 이상, 이정도는 할거얏
 			ENDSELECT
 		;トウコツがCOOP発動
-		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:도올]] && CFLAG:(FLAG:행동순1):811
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[캐릭터:도올]] && CFLAG:(FLAG:행동순1):811
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -16026,7 +16026,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = %CSTR:ARG:이인칭%가 보고 있으니까 힘을 내는거야？
 			ENDSELECT
 		;キュウキがCOOP発動
-		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:궁기]] && CFLAG:(FLAG:행동순1):812
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[캐릭터:궁기]] && CFLAG:(FLAG:행동순1):812
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -16037,7 +16037,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = 변함없는 칼맛이었네, %CALLNAME:(FLAG:행동순1)%
 			ENDSELECT
 		;コントンがCOOP発動
-		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:혼돈]] && CFLAG:(FLAG:행동순1):813
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[캐릭터:혼돈]] && CFLAG:(FLAG:행동순1):813
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -16073,7 +16073,7 @@ SELECTCASE TFLAG:전투이벤트
 			ENDSELECT
 		;ダークサマナーがCOOP発動
 		;購入した時限定にしようかと思ったけどやめた　こんなところの整合性を気にするものなどいない
-		;Renameにキャラ:다크서머너が二つあったので数字指定
+		;Renameに캐릭터:다크서머너が二つあったので数字指定
 		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == 3118
 			LOCAL = RAND:3
 			IF TALENT:(FLAG:행동순1):달인
@@ -16648,9 +16648,9 @@ SELECTCASE TFLAG:전투이벤트
 		;다크서머너
 		ELSEIF NO:(ARG:1) == 3118
 			LOCALS:10 = 고마워, 점장님. %CSTR:ARG:일인칭% 힘낼게！
-		ELSEIF NO:(ARG:1) == [[キャラ:도올]] && CFLAG:(ARG:1):811
+		ELSEIF NO:(ARG:1) == [[캐릭터:도올]] && CFLAG:(ARG:1):811
 			LOCALS:10 = 우우…… 역시 그렇게 생각해？
-		ELSEIF NO:(ARG:1) == [[キャラ:궁기]] && CFLAG:(ARG:1):812
+		ELSEIF NO:(ARG:1) == [[캐릭터:궁기]] && CFLAG:(ARG:1):812
 			LOCALS:10 = 도움 받았네. 고마워, %CALLNAME:(ARG:1)%！
 		;50%以上 & HPほぼ満タン
 		ELSEIF LOCAL > 50 && 현HP비율(ARG) > 90
@@ -16789,11 +16789,11 @@ SELECTCASE TFLAG:전투이벤트
 				CONTINUE
 			SIF GET_STATE(CFLAG:(FLAG:LOCALS):상태이상) == "DYING"
 				CONTINUE
-			SIF NO:(FLAG:LOCALS) == [[キャラ:도올]] && CFLAG:(FLAG:LOCALS):811
+			SIF NO:(FLAG:LOCALS) == [[캐릭터:도올]] && CFLAG:(FLAG:LOCALS):811
 				CFLAG:ARG:831 = LOCAL
-			SIF NO:(FLAG:LOCALS) == [[キャラ:궁기]] && CFLAG:(FLAG:LOCALS):812
+			SIF NO:(FLAG:LOCALS) == [[캐릭터:궁기]] && CFLAG:(FLAG:LOCALS):812
 				CFLAG:ARG:832 = LOCAL
-			SIF NO:(FLAG:LOCALS) == [[キャラ:혼돈]] && CFLAG:(FLAG:LOCALS):813
+			SIF NO:(FLAG:LOCALS) == [[캐릭터:혼돈]] && CFLAG:(FLAG:LOCALS):813
 				CFLAG:ARG:833 = LOCAL
 			;ダークサマナー
 			SIF NO:(FLAG:LOCALS) == 3118
@@ -16902,19 +16902,19 @@ SELECTCASE TFLAG:전투이벤트
 				LOCAL = RAND:掛け合い用添字
 				POSITION = 掛け合い用配列:LOCAL
 				LOCALS = 포지션{POSITION}
-				IF NO:(FLAG:LOCALS) == [[キャラ:도올]] && CFLAG:(FLAG:LOCALS):811
+				IF NO:(FLAG:LOCALS) == [[캐릭터:도올]] && CFLAG:(FLAG:LOCALS):811
 					;トウコツと掛け合い
 					LOCALS:10 = 그래도 뭐어, 언제 봐도 감탄할만한 식사인걸
 					CALL MESSAGE_B2(CALLNAME:(FLAG:LOCALS), 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 					LOCALS:10 = 우후후, 칭찬받아도 더 먹는 것밖에 못하는걸？
 					CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-				ELSEIF NO:(FLAG:LOCALS) == [[キャラ:궁기]] && CFLAG:(FLAG:LOCALS):812
+				ELSEIF NO:(FLAG:LOCALS) == [[캐릭터:궁기]] && CFLAG:(FLAG:LOCALS):812
 					;キュウキと掛け合い
 					LOCALS:10 = 으～～～응…… 완식. 그럼, 다음 밥은 어디 있으려나～
 					CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 					LOCALS:10 = ……그 몸 어디에 먹은 게 들어가는 걸까요. 가슴인가요？
 					CALL MESSAGE_B2(CALLNAME:(FLAG:LOCALS), 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-				ELSEIF NO:(FLAG:LOCALS) == [[キャラ:혼돈]] && CFLAG:(FLAG:LOCALS):813
+				ELSEIF NO:(FLAG:LOCALS) == [[캐릭터:혼돈]] && CFLAG:(FLAG:LOCALS):813
 					;コントンと掛け合い
 					LOCALS:10 = 멋진 기세였습니다. 그야말로 대식가, 로군요？
 					CALL MESSAGE_B2(CALLNAME:(FLAG:LOCALS), 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
@@ -16930,17 +16930,17 @@ SELECTCASE TFLAG:전투이벤트
 			ENDSELECT
 		;1/3の確率で最後の行動者に応じて掛け合い
 		ELSEIF FLAG:행동순1 > -1 && RAND:3 == 0
-			IF NO:(FLAG:행동순1) == [[キャラ:도올]] && CFLAG:(FLAG:행동순1):811
+			IF NO:(FLAG:행동순1) == [[캐릭터:도올]] && CFLAG:(FLAG:행동순1):811
 				LOCALS:10 = ……뭐야, 이걸로 끝？
 				CALL MESSAGE_B2(CALLNAME:(FLAG:행동순1), 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 				LOCALS:10 = 그치～、뭔가 부족하지. 그 맘 알아～
 				CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-			ELSEIF NO:(FLAG:행동순1) == [[キャラ:궁기]] && CFLAG:(FLAG:행동순1):812
+			ELSEIF NO:(FLAG:행동순1) == [[캐릭터:궁기]] && CFLAG:(FLAG:행동순1):812
 				LOCALS:10 = 미안하네요 %CALLNAME:ARG%, 맛있는 부분은 가져가버렸어요
 				CALL MESSAGE_B2(CALLNAME:(FLAG:행동순1), 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 				LOCALS:10 = 므～……。다음에는 안 질거야, %CALLNAME:(FLAG:행동순1)%！
 				CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-			ELSEIF NO:(FLAG:행동순1) == [[キャラ:혼돈]] && CFLAG:(FLAG:행동순1):813
+			ELSEIF NO:(FLAG:행동순1) == [[캐릭터:혼돈]] && CFLAG:(FLAG:행동순1):813
 				LOCALS:10 = %CSTR:ARG:일인칭%도 따라해볼까나아？　잔뜩 배부르게 먹는 꿈을 꾸는 거야
 				CALL MESSAGE_B2(CALLNAME:ARG, 1, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 				LOCALS:10 = 그럼, %CALLNAME:ARG%도 수행해보실래요？　길고 험난한 길이 되겠습니다만
@@ -17118,7 +17118,7 @@ SELECTCASE TFLAG:전투이벤트
 					ENDIF
 				ENDIF
 			ENDSELECT
-		ELSEIF NO:(FLAG:행동순1) == [[キャラ:도올]] && CFLAG:(FLAG:행동순1):811
+		ELSEIF NO:(FLAG:행동순1) == [[캐릭터:도올]] && CFLAG:(FLAG:행동순1):811
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -17128,7 +17128,7 @@ SELECTCASE TFLAG:전투이벤트
 			CASE 2
 				LOCALS:10 = 엄청 대단한 거, 기대하고 있을게？
 			ENDSELECT
-		ELSEIF NO:(FLAG:행동순1) == [[キャラ:궁기]] && CFLAG:(FLAG:행동순1):812
+		ELSEIF NO:(FLAG:행동순1) == [[캐릭터:궁기]] && CFLAG:(FLAG:행동순1):812
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -17138,7 +17138,7 @@ SELECTCASE TFLAG:전투이벤트
 			CASE 2
 				LOCALS:10 = 엄청 대단한 거, 기대하고 있을게？
 			ENDSELECT
-		ELSEIF NO:(FLAG:행동순1) == [[キャラ:혼돈]] && CFLAG:(FLAG:행동순1):813
+		ELSEIF NO:(FLAG:행동순1) == [[캐릭터:혼돈]] && CFLAG:(FLAG:행동순1):813
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
@@ -17272,7 +17272,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 		IF FLAG:(LOCALS:1) == -1
 			LOCALS:10 = %CSTR:ARG:이인칭%, 위치에 도착했다구ー？
 			CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[キャラ:당신]]
+		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[캐릭터:당신]]
 			;後ろに下がる
 			IF RANGE((CFLAG:ARG:포지션), 1, 3) && RANGE((CFLAG:ARG:타겟), 4, 6)
 				LOCALS:10 = 앞에 나서는 거야？　알겠어, 맡겨둘게
@@ -17284,7 +17284,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 				LOCALS:10 = 네에, 바통 터치
 			ENDIF
 			CALL MESSAGE_B2(CALLNAME:ARG, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
-		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[キャラ:도올]] && CFLAG:(FLAG:(LOCALS:1)):811
+		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[캐릭터:도올]] && CFLAG:(FLAG:(LOCALS:1)):811
 			LOCAL = FLAG:(LOCALS:1)
 			;後ろに下がる
 			IF RANGE((CFLAG:ARG:포지션), 1, 3) && RANGE((CFLAG:ARG:타겟), 4, 6)
@@ -17305,7 +17305,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 				LOCALS:10 = 그럼, 그쪽은 맡길게
 				CALL MESSAGE_B2(CALLNAME:LOCAL, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 			ENDIF
-		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[キャラ:궁기]] && CFLAG:(FLAG:(LOCALS:1)):812
+		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[캐릭터:궁기]] && CFLAG:(FLAG:(LOCALS:1)):812
 			LOCAL = FLAG:(LOCALS:1)
 			;後ろに下がる
 			IF RANGE((CFLAG:ARG:포지션), 1, 3) && RANGE((CFLAG:ARG:타겟), 4, 6)
@@ -17326,7 +17326,7 @@ ELSEIF RANGE(CFLAG:ARG:입력행동,2301, 2400)
 				LOCALS:10 = 누구에게 하는 말인가요, 언제라도 오케이라구요
 				CALL MESSAGE_B2(CALLNAME:LOCAL, 0, LOCALS:10, LOCALS:11, LOCALS:12, LOCALS:13, LOCALS:14)
 			ENDIF
-		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[キャラ:혼돈]] && CFLAG:(FLAG:(LOCALS:1)):813
+		ELSEIF FLAG:(LOCALS:1) != -1 && NO:(FLAG:(LOCALS:1)) == [[캐릭터:혼돈]] && CFLAG:(FLAG:(LOCALS:1)):813
 			LOCAL = FLAG:(LOCALS:1)
 			;後ろに下がる
 			IF RANGE((CFLAG:ARG:포지션), 1, 3) && RANGE((CFLAG:ARG:타겟), 4, 6)
@@ -18106,13 +18106,13 @@ SELECTCASE ARG
 	;전투중ㆍ사망한 아군이 1명 있다（아나타 이외）
 	CASE 15
 		IF 0
-		ELSEIF NO:(ARG:8) == [[キャラ:혼돈]] && CFLAG:ASSI:813
+		ELSEIF NO:(ARG:8) == [[캐릭터:혼돈]] && CFLAG:ASSI:813
 			LOCALS:1 = %CALLNAME:(ARG:8)%이 당했어
 			LOCALS:2 = 전투 중에 망상하는 건 위험하다고 했는데, 진짜……
-		ELSEIF NO:(ARG:8) == [[キャラ:궁기]] && CFLAG:ASSI:812
+		ELSEIF NO:(ARG:8) == [[캐릭터:궁기]] && CFLAG:ASSI:812
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 전투불능이야
 			LOCALS:2 = 상대는 피래미가 아닌 모양이니까, 조심해
-		ELSEIF NO:(ARG:8) == [[キャラ:도올]] && CFLAG:ASSI:811
+		ELSEIF NO:(ARG:8) == [[캐릭터:도올]] && CFLAG:ASSI:811
 			LOCALS:1 = %CALLNAME:(ARG:8)%의 반응이 없어……
 			LOCALS:2 = 분명 아직 싸움이 부족할 거 같으니까, 일으켜줘？
 		ELSEIF RAND:2 == 0
@@ -18155,7 +18155,7 @@ SELECTCASE ARG
 	;전투중ㆍＨＰ를 25% 밑도는 아군이 1명 있다（아나타 이외）
 	CASE 19
 		IF 0
-		ELSEIF NO:(ARG:8) == [[キャラ:혼돈]] && CFLAG:ASSI:813
+		ELSEIF NO:(ARG:8) == [[캐릭터:혼돈]] && CFLAG:ASSI:813
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 들린다면 제정신 차려주라？
 			LOCALS:2 = 이제 현실은 망상에서 꽤나 벗어났다구？
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
@@ -18166,7 +18166,7 @@ SELECTCASE ARG
 			LOCALS = %CALLNAME:(ARG:8)%
 			LOCALS:1 = 이미 제정신이예요！　벌써 정신 차리고 있다구요！
 			CALL MESSAGE_B2(LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
-		ELSEIF NO:(ARG:8) == [[キャラ:궁기]] && CFLAG:ASSI:812
+		ELSEIF NO:(ARG:8) == [[캐릭터:궁기]] && CFLAG:ASSI:812
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 그 상처로는 이제 무리같아
 			LOCALS:2 = 솔직하게 지원 받도록 하자？　응？
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
@@ -18177,7 +18177,7 @@ SELECTCASE ARG
 			LOCALS = %CALLNAME:(ARG:8)%
 			LOCALS:1 = 그누누누누…… %CSTR:(ARG:8):일인칭%가 여기까지 몰리게 되다니……！
 			CALL MESSAGE_B2(LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
-		ELSEIF NO:(ARG:8) == [[キャラ:도올]] && CFLAG:ASSI:811
+		ELSEIF NO:(ARG:8) == [[캐릭터:도올]] && CFLAG:ASSI:811
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 이제 한계라는 걸 알고 있지？
 			LOCALS:2 = 소생할 수 있다 해서 무리만 하는 건 금물이야
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
@@ -18211,9 +18211,9 @@ SELECTCASE ARG
 			;HAPPY　행복
 			CASE 1
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 행복해보이네. 원래대로 돌려놓는 것도 차마 하기 그렇다……일지도？
@@ -18222,9 +18222,9 @@ SELECTCASE ARG
 			;PANIC　혼란
 			CASE 3
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 혼란중인 아군이 있어, 돈 뿌려대면 큰일이야！
@@ -18233,9 +18233,9 @@ SELECTCASE ARG
 			;SLEEP　수면
 			CASE 4
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 아차ー, 잠들어버렸어. 공격당하지 않게 빌어둬？
@@ -18244,9 +18244,9 @@ SELECTCASE ARG
 			;BIND　긴박
 			CASE 6
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 묶여서 행동할 수가 없네, 치료할 수 있겠어？
@@ -18255,9 +18255,9 @@ SELECTCASE ARG
 			;CLOSE　침묵
 			CASE 7
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 마법이 봉인당했네, 곤란해지기 전에 치료하자
@@ -18266,9 +18266,9 @@ SELECTCASE ARG
 			;POISON　독
 			CASE 8
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 독만이라면 별 거 아닌데……
@@ -18278,9 +18278,9 @@ SELECTCASE ARG
 			;BOMB　폭탄화
 			CASE 9
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 폭탄상태는 위험해！　최악의 경우 폭파되어도 버틸 수 있게 회복해！
@@ -18289,9 +18289,9 @@ SELECTCASE ARG
 			;CHARM　매료
 			CASE 10
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 매료는 위험해, 바로 제정신으로 돌려놔야 해！
@@ -18300,9 +18300,9 @@ SELECTCASE ARG
 			;PALYZE　마비
 			CASE 11
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 마비네, 자연회복을 기다릴 틈은 없을 거 같은데？
@@ -18311,9 +18311,9 @@ SELECTCASE ARG
 			;CURSE　저주
 			CASE 12
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 저주받은 멤버는 되도록 방어하게 해야 해
@@ -18323,9 +18323,9 @@ SELECTCASE ARG
 			;FLY　파리화
 			CASE 13
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 파리 모습에서 한 발이라도 맞아버리면 끝이야, 조심해
@@ -18334,9 +18334,9 @@ SELECTCASE ARG
 			;STONE　석화
 			CASE 14
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 석화당한 멤버가 있어, 해주하기 전까지는 저 상태 그대로니까！
@@ -18345,9 +18345,9 @@ SELECTCASE ARG
 			;FLAME　염상
 			CASE 18
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 우와, 타고 있어. 물 뿌려서 진화할 수 없으려나……？
@@ -18356,9 +18356,9 @@ SELECTCASE ARG
 			;SLIP　전도
 			CASE 19
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 넘어진 사람이 있어, 빨리 일어나ー！
@@ -18367,9 +18367,9 @@ SELECTCASE ARG
 			;BRAND　낙인
 			CASE 20
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 낙인 때문에 회복할 수 없게 되었으니 주의해？
@@ -18378,9 +18378,9 @@ SELECTCASE ARG
 			;그 외 상태이상
 			CASEELSE
 				IF 0
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
-;				ELSEIF NO:(ARG:8) == [[キャラ:○○]]
+;				ELSEIF NO:(ARG:8) == [[캐릭터:○○]]
 ;					LOCALS:1 = 
 				ELSE
 					LOCALS:1 = 
@@ -18389,7 +18389,7 @@ SELECTCASE ARG
 	;전투중ㆍＨＰ를 50% 밑도는 아군이 있다
 	CASE 28
 		IF 0
-		ELSEIF NO:(ARG:8) == [[キャラ:혼돈]] && CFLAG:ASSI:813
+		ELSEIF NO:(ARG:8) == [[캐릭터:혼돈]] && CFLAG:ASSI:813
 			LOCALS:1 = %CALLNAME:(ARG:8)%？　피해가 집중되어있으니, 일단 눈 뜨도록 해
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
 			;ここからコントンのセリフ
@@ -18399,7 +18399,7 @@ SELECTCASE ARG
 			LOCALS = %CALLNAME:(ARG:8)%
 			LOCALS:1 = 도대체 언제부터―― 망상하고 있다고 착각하셨나요？
 			CALL MESSAGE_B2(LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
-		ELSEIF NO:(ARG:8) == [[キャラ:궁기]] && CFLAG:ASSI:812
+		ELSEIF NO:(ARG:8) == [[캐릭터:궁기]] && CFLAG:ASSI:812
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 아까부터 계속 피탄 중이야！　조심해！
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
 			;ここからキュウキのセリフ
@@ -18409,7 +18409,7 @@ SELECTCASE ARG
 			LOCALS = %CALLNAME:(ARG:8)%
 			LOCALS:1 = 이건 핸디캡이예요, 이 정도는 해주지 않으면 상대가 불쌍하잖아요？
 			CALL MESSAGE_B2(LOCALS,0, LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++), LOCALS:(行++))
-		ELSEIF NO:(ARG:8) == [[キャラ:도올]] && CFLAG:ASSI:811
+		ELSEIF NO:(ARG:8) == [[캐릭터:도올]] && CFLAG:ASSI:811
 			LOCALS:1 = %CALLNAME:(ARG:8)%, 데미지가 쌓여 움직임이 둔해져있어
 			CALL MESSAGE_B2_1625_1(LOCALS,0, LOCALS:1, LOCALS:2)
 			;ここからトウコツのセリフ

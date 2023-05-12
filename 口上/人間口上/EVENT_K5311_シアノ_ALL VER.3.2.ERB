@@ -7247,10 +7247,10 @@ SELECTCASE TFLAG:13
 		VARSET LOCAL
 		LOCAL:10 ++
 		;古代がいて、掛け合いイベント1を見てる
-		SIF MATCH(T,GETCHARA([[キャラ:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,6)
+		SIF MATCH(T,GETCHARA([[캐릭터:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,6)
 			LOCAL:(LOCAL:10 ++) = 1
 		;古代がいて、掛け合いイベント3を見てる
-		SIF MATCH(T,GETCHARA([[キャラ:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,8)
+		SIF MATCH(T,GETCHARA([[캐릭터:코시로]])) > 0 && GETBIT(이벤트플래그:10:19,8)
 			LOCAL:(LOCAL:10 ++) = 2
 		SIF LOCAL:10 > 0
 			LOCAL:11 = LOCAL:(RAND:(LOCAL:10))
@@ -7296,7 +7296,7 @@ SELECTCASE TFLAG:13
 					PRINTFORMW 「%CSTR:일인칭%、怪獣のフィギュア集めるのが趣味なんだ」
 				ENDIF
 		ELSEIF LOCAL:11 == 1
-			LOCAL:12 = GETCHARA([[キャラ:코시로]])
+			LOCAL:12 = GETCHARA([[캐릭터:코시로]])
 			IF !RAND:2
 				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
 				PRINTFORMW %CALLNAME%「君のその能力っていつからできるようになったの」
@@ -7312,7 +7312,7 @@ SELECTCASE TFLAG:13
 				PRINTFORMW %CALLNAME:(LOCAL:12)%「おーすごい」
 			ENDIF
 		ELSEIF LOCAL:11 == 2
-			LOCAL:12 = GETCHARA([[キャラ:코시로]])
+			LOCAL:12 = GETCHARA([[캐릭터:코시로]])
 			IF !RAND:2
 				PRINTFORMW %CALLNAME%と%CALLNAME:(LOCAL:12)%が話し合っている
 				PRINTFORMW %CALLNAME:(LOCAL:12)%「シアノちゃんの水着姿、本当に可愛かったですよね」

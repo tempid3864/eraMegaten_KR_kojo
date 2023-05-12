@@ -98,7 +98,7 @@ SELECTCASE TFLAG:전투이벤트
 				LOCALS:10 = ハッ、狩ってやるぜ！
 			ENDIF
 		;ジョーカーがCOOP発動
-		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[キャラ:P5주인공]]
+		ELSEIF FLAG:행동순1 != -1 && NO:(FLAG:행동순1) == [[캐릭터:P5주인공]]
 			IF RAND:3 == 0
 				LOCALS:10 = アッハッハ！　殺しの時間だッ！
 			ELSEIF RAND:2 == 0
@@ -309,7 +309,7 @@ SELECTCASE TFLAG:전투이벤트
 		;LOCAL　回復量割合
 		IF 0
 		;キャラ分岐
-		ELSEIF NO:(ARG:1) == [[キャラ:P5주인공]]
+		ELSEIF NO:(ARG:1) == [[캐릭터:P5주인공]]
 			LOCALS:10 = 余計な真似を……
 		;50%以上 & HPほぼ満タン
 		ELSEIF LOCAL > 50 && 현HP비율(ARG) > 90
@@ -417,7 +417,7 @@ SELECTCASE TFLAG:전투이벤트
 			CASE 2
 				LOCALS:10 = 行くぞ、用意はいいな？
 			ENDSELECT
-		ELSEIF NO:(FLAG:행동순1) == [[キャラ:P5주인공]]
+		ELSEIF NO:(FLAG:행동순1) == [[캐릭터:P5주인공]]
 			LOCAL = RAND:3
 			SELECTCASE LOCAL
 			CASE 0
